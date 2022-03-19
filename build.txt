@@ -1,0 +1,8 @@
+displayName = Bosses As NPCs
+author = Rijam
+version = 0.1.4
+homepage = https://discord.gg/t63JzNHzvu
+buildIgnore = .vs\*, obj\*, bin\*, *.xcf, .git\*, git\*, Effects\fxcompiler
+hideCode = false
+hideResources = false
+includeSource = true

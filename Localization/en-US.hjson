@@ -1,0 +1,405 @@
+Mods: {
+	BossesAsNPCs: {
+
+		BiomeName: {
+			GraveyardBiome: Graveyard
+			SkyBiome: Sky
+			UnderworldBiome: Underworld
+		}
+		
+		#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
+		TownNPCMood: {
+			KingSlime: {
+				Content: I feel content.
+				NoHome: A king like myself needs a home!
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			EyeOfCthulhu: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			EaterOfWorlds: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "{BiomeName} isn't suitable for housing."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			BrainOfCthulhu: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "{BiomeName} isn't suitable for housing."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			QueenBee: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Skeletron: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "{BiomeName} isn't suitable for housing."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Deerclops: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			WallOfFlesh: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			QueenSlime: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			TheDestroyer: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Retinazer: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Spazmatism: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			SkeletronPrime: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Plantera: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Golem: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			EmpressOfLight: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			DukeFishron: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Betsy: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			LunaticCultist: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			MoonLord: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Pumpking: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			IceQueen: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			MartianSaucer: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+		}
+	}
+}
