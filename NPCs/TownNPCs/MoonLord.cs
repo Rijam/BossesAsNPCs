@@ -238,21 +238,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxLunarBoss);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWMoonLord);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxLunarBoss);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWMoonLord);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ItemID.MoonLordLegs);
+				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
+				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ItemID.MoonLordLegs);
-			shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

@@ -25,4 +25,36 @@ namespace BossesAsNPCs.Items.Vanity.MartianSaucer
 			Item.vanity = true;
 		}
 	}
+	[AutoloadEquip(EquipType.Body)]
+	public class MSCostumeBodypiece : ModItem
+	{
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("Martian Saucer Costume Bodypiece");
+		}
+		public override void SetDefaults()
+		{
+			Item.width = 20;
+			Item.height = 20;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Blue;
+			Item.vanity = true;
+		}
+	}
+	[AutoloadEquip(EquipType.Legs)]
+	public class MSCostumeLegpiece : ModItem
+	{
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("Martian Saucer Costume Legpiece");
+		}
+		public override void SetDefaults()
+		{
+			Item.width = 20;
+			Item.height = 20;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Blue;
+			Item.vanity = true;
+		}
+	}
 }

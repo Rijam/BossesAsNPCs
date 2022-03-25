@@ -47,6 +47,17 @@ namespace BossesAsNPCs
 		[DefaultValue(false)]
 		public bool SellMasterMode { get; set; }
 
+		[Label("[i:1309]   Sell Extra Items")]
+		[Tooltip("This option toggles if the NPCs will sell extra non-boss drop\n" +
+			"items such as vanity items, music boxes, and other materials.\n" +
+			"For example: the King Slime NPC will sell Gel and the Slime Staff.\n" +
+			"  When On: Extra items WILL be sold.\n" +
+			"  When Off: Extra items WILL NOT be sold.\n" +
+			"    Turn Off to remove extra items from the shop.\n" +
+			"Default value: On")]
+		[DefaultValue(true)]
+		public bool SellExtraItems { get; set; }
+
 		[Label("[i:87]   Shop Price Scaling")]
 		[Tooltip("This option sets the scaling for the prices in the Town NPCs' shops.\n" +
 			"  25 means 1/4 (quarter) the normal price.\n" +

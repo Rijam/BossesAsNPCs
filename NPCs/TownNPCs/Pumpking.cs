@@ -256,24 +256,33 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPumpkinMoon);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPumpkinMoon);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ItemID.GoodieBag);
+				shop.item[nextSlot].shopCustomPrice = 5000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ItemID.GoodieBag);
-			shop.item[nextSlot].shopCustomPrice = 5000;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

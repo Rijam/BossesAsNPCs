@@ -218,32 +218,35 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss5);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss5);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.Hive);
-			shop.item[nextSlot].shopCustomPrice = 100;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Stinger);
-			shop.item[nextSlot].shopCustomPrice = 40 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Bezoar);
-			shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-			nextSlot++;
-			if (Main.player[Main.myPlayer].ZoneGraveyard)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BeeHive);
-				shop.item[nextSlot].shopCustomPrice = 50 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.Hive);
+				shop.item[nextSlot].shopCustomPrice = 100;
 				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Stinger);
+				shop.item[nextSlot].shopCustomPrice = 40 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Bezoar);
+				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
+				nextSlot++;
+				if (Main.player[Main.myPlayer].ZoneGraveyard)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BeeHive);
+					shop.item[nextSlot].shopCustomPrice = 50 * 5;
+					nextSlot++;
+				}
 			}
 		}
 

@@ -25,4 +25,40 @@ namespace BossesAsNPCs.Items.Vanity.KingSlime
 			Item.vanity = true;
 		}
 	}
+	[AutoloadEquip(EquipType.HandsOn, EquipType.HandsOff)]
+	public class KSCostumeGloves : ModItem
+	{
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("King Slime Costume Gloves");
+			Tooltip.SetDefault("Vanity Accessory");
+		}
+		public override void SetDefaults()
+		{
+			Item.width = 20;
+			Item.height = 20;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Blue;
+			Item.vanity = true;
+			Item.accessory = true;
+		}
+	}
+	[AutoloadEquip(EquipType.HandsOn, EquipType.HandsOff)]
+	public class KSAltCostumeGloves : ModItem
+	{
+		public override void SetStaticDefaults()
+		{
+			DisplayName.SetDefault("King Slime Alternate Costume Gloves");
+			Tooltip.SetDefault("Vanity Accessory");
+		}
+		public override void SetDefaults()
+		{
+			Item.width = 20;
+			Item.height = 20;
+			Item.value = 10000;
+			Item.rare = ItemRarityID.Blue;
+			Item.vanity = true;
+			Item.accessory = true;
+		}
+	}
 }

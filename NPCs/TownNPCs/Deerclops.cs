@@ -205,62 +205,65 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDeerclops);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDeerclops);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
-			}
-			Player player = Main.player[Main.myPlayer];
-			bool theConstant = Main.dontStarveWorld || WorldGen.dontStarveWorldGen;
-			if (player.ZoneGraveyard)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.AbigailsFlower);
-				shop.item[nextSlot].shopCustomPrice = 500 * 5;
+				Player player = Main.player[Main.myPlayer];
+				bool theConstant = Main.dontStarveWorld || WorldGen.dontStarveWorldGen;
+				if (player.ZoneGraveyard)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.AbigailsFlower);
+					shop.item[nextSlot].shopCustomPrice = 500 * 5;
+					nextSlot++;
+				}
+				if (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BatBat);
+					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(2500 / 0.01) : (int)Math.Round(2500 / 0.004);
+					nextSlot++;
+				}
+				if (player.ZoneSnow && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight) && (player.ZoneHallow || player.ZoneCorrupt || player.ZoneCrimson))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.HamBat);
+					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.1) : (int)Math.Round(10000 / 0.04);
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.PigPetItem); //Monster Meat
+				shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.005) : (int)Math.Round(10000 / 0.001);
 				nextSlot++;
-			}
-			if (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || Main.hardMode)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.BatBat);
-				shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(2500 / 0.01) : (int)Math.Round(2500 / 0.004);
-				nextSlot++;
-			}
-			if (player.ZoneSnow && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight) && (player.ZoneHallow || player.ZoneCorrupt || player.ZoneCrimson))
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.HamBat);
-				shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.1) : (int)Math.Round(10000 / 0.04);
-				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.PigPetItem); //Monster Meat
-			shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.005) : (int)Math.Round(10000 / 0.001);
-			nextSlot++;
-			if (Main.hardMode && player.ZoneJungle)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.GlommerPetItem); //Glommer's Flower
-				shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(50000 / 0.025) : (int)Math.Round(50000 / 0.01);
-				nextSlot++;
-			}
-			int travelingMerchant = NPC.FindFirstNPC(NPCID.TravellingMerchant);
-			if (travelingMerchant >= 0)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.PaintingWendy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PaintingWillow);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PaintingWilson);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PaintingWolfgang);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
+				if (Main.hardMode && player.ZoneJungle)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.GlommerPetItem); //Glommer's Flower
+					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(50000 / 0.025) : (int)Math.Round(50000 / 0.01);
+					nextSlot++;
+				}
+				int travelingMerchant = NPC.FindFirstNPC(NPCID.TravellingMerchant);
+				if (travelingMerchant >= 0)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.PaintingWendy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PaintingWillow);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PaintingWilson);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PaintingWolfgang);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
 			}
 		}
 

@@ -197,37 +197,40 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.VilePowder);
-			shop.item[nextSlot].shopCustomPrice = 100;
-			nextSlot++;
-			if (Main.hardMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.UnholyWater);
+				shop.item[nextSlot].SetDefaults(ItemID.VilePowder);
 				shop.item[nextSlot].shopCustomPrice = 100;
 				nextSlot++;
-			}
-			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-			if (steampunker >= 0 && NPC.downedMechBossAny)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.PurpleSolution);
-				shop.item[nextSlot].shopCustomPrice = 2500;
+				if (Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.UnholyWater);
+					shop.item[nextSlot].shopCustomPrice = 100;
+					nextSlot++;
+				}
+				int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
+				if (steampunker >= 0 && NPC.downedMechBossAny)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.PurpleSolution);
+					shop.item[nextSlot].shopCustomPrice = 2500;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.WormTooth);
+				shop.item[nextSlot].shopCustomPrice = 20 * 5;
 				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ItemID.WormTooth);
-			shop.item[nextSlot].shopCustomPrice = 20 * 5;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

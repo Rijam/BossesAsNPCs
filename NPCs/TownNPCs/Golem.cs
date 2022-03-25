@@ -216,17 +216,32 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ItemID.LihzahrdBrick);
+				shop.item[nextSlot].shopCustomPrice = 2500;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.LihzahrdAltar);
+				shop.item[nextSlot].shopCustomPrice = 60 * 5 * 1000; //sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
 		}
 

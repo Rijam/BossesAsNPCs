@@ -202,38 +202,41 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
-			}
-			if (BossesAsNPCsWorld.downedDungeonGuardian)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BoneKey);
-				shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.BoneWand);
-			shop.item[nextSlot].shopCustomPrice = 50 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Bone);
-			shop.item[nextSlot].shopCustomPrice = 10 * 5;
-			nextSlot++;
-			if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC))
-			{
-				int fisherman = NPC.FindFirstNPC(fishermanNPC.Find<ModNPC>("Fisherman").Type);
-				if (fisherman >= 0)
+				if (BossesAsNPCsWorld.downedDungeonGuardian)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.LockBox);
-					shop.item[nextSlot].shopCustomPrice = 4000 * 5;
+					shop.item[nextSlot].SetDefaults(ItemID.BoneKey);
+					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
 					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.BoneWand);
+				shop.item[nextSlot].shopCustomPrice = 50 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Bone);
+				shop.item[nextSlot].shopCustomPrice = 10 * 5;
+				nextSlot++;
+				if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC))
+				{
+					int fisherman = NPC.FindFirstNPC(fishermanNPC.Find<ModNPC>("Fisherman").Type);
+					if (fisherman >= 0)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.LockBox);
+						shop.item[nextSlot].shopCustomPrice = 4000 * 5;
+						nextSlot++;
+					}
 				}
 			}
 		}

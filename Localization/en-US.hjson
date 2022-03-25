@@ -6,9 +6,20 @@ Mods: {
 			SkyBiome: Sky
 			UnderworldBiome: Underworld
 		}
+
+		TownNPCMoodBiomes: {
+			GraveyardBiome: Graveyard
+			SkyBiome: Sky
+			UnderworldBiome: Underworld
+		}
 		
-		#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
 		TownNPCMood: {
+			Biomes: {
+				GraveyardBiome: Graveyard
+				SkyBiome: Sky
+				UnderworldBiome: Underworld
+			}
+			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
 			KingSlime: {
 				Content: I feel content.
 				NoHome: A king like myself needs a home!

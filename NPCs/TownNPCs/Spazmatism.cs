@@ -191,21 +191,27 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss2);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss2);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EyeCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

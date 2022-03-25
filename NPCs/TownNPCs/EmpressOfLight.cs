@@ -242,40 +242,43 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEmpressOfLight);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEmpressOfLight);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
-			}
-			if (Main.hardMode)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.HolyWater);
-				shop.item[nextSlot].shopCustomPrice = 200; //For some reason Holy Water is double as valuable than Unholy/Blood Water.
+				if (Main.hardMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.HolyWater);
+					shop.item[nextSlot].shopCustomPrice = 200; //For some reason Holy Water is double as valuable than Unholy/Blood Water.
+					nextSlot++;
+				}
+				int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
+				if (steampunker >= 0 && NPC.downedMechBossAny)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BlueSolution);
+					shop.item[nextSlot].shopCustomPrice = 2500;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
 				nextSlot++;
 			}
-			int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-			if (steampunker >= 0 && NPC.downedMechBossAny)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.BlueSolution);
-				shop.item[nextSlot].shopCustomPrice = 2500;
-				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

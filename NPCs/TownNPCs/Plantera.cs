@@ -230,21 +230,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPlantera);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+            {
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWPlantera);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPlantera);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWPlantera);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ItemID.JungleGrassSeeds);
+				shop.item[nextSlot].shopCustomPrice = 30 * 5;
+				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ItemID.JungleGrassSeeds);
-			shop.item[nextSlot].shopCustomPrice = 30 * 5;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)
@@ -266,7 +269,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
 		{
-			projType = ProjectileID.TiedEighthNote;
+			projType = ModContent.ProjectileType<Projectiles.DoubleEighthNote>();
 			attackDelay = 1;
 		}
 		

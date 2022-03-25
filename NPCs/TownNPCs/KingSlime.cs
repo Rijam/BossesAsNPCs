@@ -211,27 +211,48 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 				nextSlot++;
 			}
-			if (NPC.savedWizard)
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
             {
-				shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-				nextSlot++;
-				if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+				if (NPC.savedWizard)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+					}
 				}
+				shop.item[nextSlot].SetDefaults(ItemID.Gel);
+				shop.item[nextSlot].shopCustomPrice = 1 * 10;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SlimeStaff);
+				shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				if (NPC.CountNPCS(NPCID.Princess) > 0)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.PrinceUniform);
+					shop.item[nextSlot].shopCustomPrice = 500000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PrincePants);
+					shop.item[nextSlot].shopCustomPrice = 500000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PrinceCape);
+					shop.item[nextSlot].shopCustomPrice = 500000;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeGloves>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSAltCostumeGloves>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
-			shop.item[nextSlot].SetDefaults(ItemID.Gel);
-			shop.item[nextSlot].shopCustomPrice = 1 * 10;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SlimeStaff);
-			shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>());
-			shop.item[nextSlot].shopCustomPrice = 50000;
-			nextSlot++;
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)
