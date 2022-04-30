@@ -66,7 +66,7 @@ namespace BossesAsNPCs.Projectiles
 					direction.Normalize();
 					Projectile.rotation = direction.ToRotation() + MathHelper.PiOver2;
 					direction *= speed;
-					Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.position, direction, ProjectileID.MiniRetinaLaser, 40, 2f, Projectile.owner);
+					Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, direction, ProjectileID.MiniRetinaLaser, 40, 2f, Projectile.owner);
 					Projectile.netUpdate = true;
 				}
 				else
@@ -103,9 +103,9 @@ namespace BossesAsNPCs.Projectiles
 		}
 		public override void Kill(int timeLeft)
 		{
-			Gore.NewGore(Projectile.position, Projectile.velocity * 0.5f, GoreID.Smoke1, 1f);
-			Gore.NewGore(Projectile.position, Projectile.velocity * 0.4f, GoreID.Smoke2, 1f);
-			Gore.NewGore(Projectile.position, Projectile.velocity * 0.6f, GoreID.Smoke3, 1f);
+			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity * 0.5f, GoreID.Smoke1, 1f);
+			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity * 0.4f, GoreID.Smoke2, 1f);
+			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity * 0.6f, GoreID.Smoke3, 1f);
 			SoundEngine.PlaySound(SoundID.NPCDeath14, Projectile.position);
 		}
 	}

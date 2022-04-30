@@ -6,14 +6,16 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class WallOfFlesh : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -25,7 +27,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackType[Type] = 0;
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
-			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.HatOffsetY[Type] = 0;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -78,21 +80,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Guide\nLike: Caverns, Eater of Worlds, Brain of Cthulhu, Tax Collector, Goblin Tinkerer\nDislike: Forest, Queen Bee\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Head").Type, 1f);
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity * (k + 1), ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Flesh").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity * (k + 1), ModContent.Find<ModGore>("BossesAsNPCs/WallOfFlesh_Gore_Flesh").Type, 1f);
 				}
 			}
 		}
@@ -109,10 +107,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
-		}
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new WallOfFleshProfile();
+        }
 
 		public override string GetChat()
 		{
@@ -287,5 +285,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
+	}
+	public class WallOfFleshProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh_Head");
 	}
 }

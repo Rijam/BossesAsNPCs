@@ -6,14 +6,16 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class Skeletron : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/QueenBee";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/QueenBee_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -78,22 +80,18 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Graveyard, Clothier\nLike: Forest, Lunatic Cultist, Skeletron Prime, Eye of Cthulhu, Brain of Cthulhu, Moon Lord, Merchant\nDislike: Angler\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Head").Type, 1f);
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Jaw").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Jaw").Type, 1f);
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Skeletron_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -110,10 +108,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
-		}
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new SkeletronProfile();
+        }
 
 		public override string GetChat()
 		{
@@ -238,6 +236,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						nextSlot++;
 					}
 				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
 		}
 
@@ -268,5 +272,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
+	}
+	public class SkeletronProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Skeletron");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Skeletron_Head");
 	}
 }

@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using BossesAsNPCs.NPCs.TownNPCs;
 
 namespace BossesAsNPCs
 { 

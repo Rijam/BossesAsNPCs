@@ -1,4 +1,5 @@
 using BossesAsNPCs.NPCs.TownNPCs;
+using System;
 using System.IO;
 using Terraria;
 using Terraria.ID;
@@ -42,6 +43,74 @@ namespace BossesAsNPCs
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<Pumpking>(), "Defeat the Pumpking");
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), "Defeat the Ice Queen");
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), "Defeat the Martian Saucer");
+			}
+		}
+		public override void PostAddRecipes()
+		{
+			//Doesn't seem to work anymore
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<KingSlime>()] = 2;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EyeOfCthulhu>()] = 2;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EaterOfWorlds>()] = 3;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<BrainOfCthulhu>()] = 3;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenBee>()] = 3;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Skeletron>()] = 3;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Deerclops>()] = 3;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<WallOfFlesh>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenSlime>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<TheDestroyer>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Retinazer>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Spazmatism>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<SkeletronPrime>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Plantera>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Golem>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenSlime>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EmpressOfLight>()] = 5;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<DukeFishron>()] = 5;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Betsy>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<LunaticCultist>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MoonLord>()] = 5;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Pumpking>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<IceQueen>()] = 4;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MartianSaucer>()] = 4;
+		}
+
+		//Adapted from absoluteAquarian's GraphicsLib
+		public override object Call(params object[] args)
+		{
+			if (args is null)
+				throw new ArgumentNullException(nameof(args));
+
+			if (args[0] is not string function)
+				throw new ArgumentException("Expected a function name for the first argument");
+
+			switch (function)
+			{
+				case "downedBetsy":
+					return BossesAsNPCsWorld.downedBetsy;
+				case "downedDungeonGuardian":
+					return BossesAsNPCsWorld.downedDungeonGuardian;
+				case "downedDarkMage":
+					return BossesAsNPCsWorld.downedDarkMage;
+				case "downedOgre":
+					return BossesAsNPCsWorld.downedOgre;
+				case "downedGoblinSummoner":
+					return BossesAsNPCsWorld.downedGoblinSummoner;
+				case "SellExpertMode":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode;
+				case "SellMasterMode":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode;
+				case "SellExtraItems":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems;
+				case "shopMulti":
+					return (ModContent.GetInstance<BossesAsNPCsConfigServer>().ShopPriceScaling / 100f);
+				case "CatchNPCs":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
+				case "GoblinSellInvasionItems":
+                    return ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
+				case "PirateSellInvasionItems":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
+				default:
+					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}
 		}
 	}

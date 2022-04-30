@@ -6,14 +6,17 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria.GameContent;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class Pumpking : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/WallOfFlesh_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -77,21 +80,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Graveyard, Ice Queen\nLike: Desert, Betsy, Martian Saucer, King Slime, Duke Fishron\nDislike: Snow, Party Girl\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Head").Type, 1f);
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -108,12 +107,44 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new PumpkingProfile();
+        }
+
+		//PostDraw taken from Torch Merchant by cace#7129
+		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
+		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Pumpking_Glow");
+		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        {
+			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
+			if (Main.drawToScreen)
+			{
+				screenOffset = Vector2.Zero;
+			}
+			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
+			Color color = new(255, 255, 255, 0);
+			int spriteWidth = 56;
+			int spriteHeight = 56;
+			int x = NPC.frame.X;
+			int y = NPC.frame.Y;
+			for (int i = 0; i < 10; i++)
+			{
+				float random1 = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
+				float random2 = Utils.RandomInt(ref seed, -5, 1) * 0.15f;
+				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 204f);
+				if (NPC.direction == 1)
+				{
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
+				}
+				else
+                {
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
+				}
+			}
 		}
 
-		public override string GetChat()
+        public override string GetChat()
 		{
 			WeightedRandom<string> chat = new ();
 			chat.Add("I am the Pumpking.");
@@ -312,5 +343,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
+	}
+	public class PumpkingProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Pumpking");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Pumpking_Head");
 	}
 }

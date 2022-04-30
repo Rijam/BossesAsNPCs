@@ -6,14 +6,17 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Microsoft.Xna.Framework;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class Betsy : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -25,7 +28,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackType[Type] = 2;
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 70;
-			NPCID.Sets.HatOffsetY[Type] = 1;
+			NPCID.Sets.HatOffsetY[Type] = 0;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -78,20 +81,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Forest, Duke Fishron, Deerclops\nLike: Hallow, Ice Queen, Pumpking, Martian Saucer, Zoologist\nDislike: Caverns, Merchant\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -108,9 +107,43 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
+		public override ITownNPCProfile TownNPCProfile()
 		{
-			return "";
+			return new BetsyProfile();
+		}
+		//SetNPCNameList is not needed for these Town NPCs because they don't have a name
+		/*public override List<string> SetNPCNameList()
+		{
+			return new List<string>() { };
+		}*/
+
+		//PostDraw taken from Torch Merchant by cace#7129
+		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
+		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Betsy_Glow");
+		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
+			if (Main.drawToScreen)
+			{
+				screenOffset = Vector2.Zero;
+			}
+			Color color = new(100, 100, 100, 100);
+			int spriteWidth = 40;
+			int spriteHeight = 56;
+			int x = NPC.frame.X;
+			int y = NPC.frame.Y;
+			for (int i = 0; i < 10; i++)
+			{
+				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+				if (NPC.direction == 1)
+				{
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
+				}
+				else
+				{
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
+				}
+			}
 		}
 
 		public override string GetChat()
@@ -300,6 +333,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						nextSlot++;
 					}
 				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
 		}
 
@@ -330,5 +369,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 16f;
 		}
+	}
+	public class BetsyProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+
+		//Normally you'd want to choose a random name, but these Town NPCs have no name.
+		//public string GetNameForVariant(NPC npc) => npc.getNewNPCName();
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Betsy");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Betsy_Head");
 	}
 }

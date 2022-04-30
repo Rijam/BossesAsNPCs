@@ -7,14 +7,16 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Terraria.GameContent;
+using System.Collections.Generic;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class Deerclops : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/QueenBee";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/QueenBee_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -77,23 +79,19 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Snow, Betsy\nLike: Forest, Ice Queen, Eye of Cthulhu, Zoologist, Santa\nDislike: Tax Collector\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Head").Type, 1f);
-				Gore.NewGore(NPC.position, NPC.velocity * 0.925f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler1").Type, 1f);
-				Gore.NewGore(NPC.position, NPC.velocity * 1.1f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler2").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity * 0.925f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler1").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity * 1.1f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler2").Type, 1f);
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -110,10 +108,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
-		}
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new DeerclopsProfile();
+        }
 
 		public override string GetChat()
 		{
@@ -294,5 +292,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
+	}
+	public class DeerclopsProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Deerclops");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Deerclops_Head");
 	}
 }

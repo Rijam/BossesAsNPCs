@@ -6,14 +6,17 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using Microsoft.Xna.Framework;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class EmpressOfLight : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -81,10 +84,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Hallow, Dryad, Queen Slime\nLike: Forest, Plantera, Golem, Lunatic Cultist, Wizard, Party Girl, Stylist\nDislike: Caverns, Eater of Worlds, Brain of Cthulhu\nHate: Graveyard")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
@@ -92,16 +91,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head_alt").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head_alt").Type, 1f);
 				}
 				else
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head").Type, 1f);
 				}
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -118,9 +117,79 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new EmpressOfLightProfile();
+        }
+
+		//PostDraw taken from Torch Merchant by cace#7129
+		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
+		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/EmpressOfLight_Wings");
+		private int colorIndex = 0;
+		private Color color = new(255, 255, 255, 0);
+		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			return "";
+			NPC.ai[2] += 3;
+
+			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
+			if (Main.drawToScreen)
+			{
+				screenOffset = Vector2.Zero;
+			}
+
+			Color colorMagenta = new(207, 0, 151, 100);
+			Color colorYellow = new(241, 240, 161, 100);
+			Color colorLBlue = new(0, 241, 255, 100);
+			Color colorDBlue = new(82, 123, 239, 100);
+
+
+			if (colorIndex == 0)
+			{
+				color = colorMagenta;
+			}
+			else if (colorIndex == 1)
+			{
+				color = Color.Lerp(colorMagenta, colorYellow, NPC.ai[2] / 100f);
+			}
+			else if (colorIndex == 2)
+			{
+				color = Color.Lerp(colorYellow, colorLBlue, NPC.ai[2] / 100f);
+			}
+			else if (colorIndex == 3)
+			{
+				color = Color.Lerp(colorLBlue, colorDBlue, NPC.ai[2] / 100f);
+			}
+			else if (colorIndex == 4)
+			{
+				color = Color.Lerp(colorDBlue, colorMagenta, NPC.ai[2] / 100f);
+			}
+
+			int spriteWidth = 40;
+			int spriteHeight = 56;
+			int x = NPC.frame.X;
+			int y = NPC.frame.Y;
+			for (int i = 0; i < 10; i++)
+			{
+				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+				if (NPC.direction == 1)
+				{
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
+				}
+				else
+				{
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
+				}
+			}
+
+			if (NPC.ai[2] > 100)
+            {
+				colorIndex++;
+				NPC.ai[2] = 0;
+				if (colorIndex > 4)
+				{
+					colorIndex = 1;
+				}
+			}
 		}
 
 		public override string GetChat()
@@ -308,5 +377,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 16f;
 		}
+	}
+	public class EmpressOfLightProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
+		{
+			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
+				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight");
+
+			if (npc.altTexture == 1)
+				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Alt_1");
+
+			return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight");
+		}
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Head");
 	}
 }

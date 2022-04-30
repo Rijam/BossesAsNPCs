@@ -6,14 +6,16 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class LunaticCultist : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -25,7 +27,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackType[Type] = 2;
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 70;
-			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.HatOffsetY[Type] = 1;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -77,20 +79,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Graveyard, Moon Lord\nLike: Ocean, Skeletron, Plantra, Golem, Empress of Light, Clothier\nDislike: Witch Doctor \nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
 			if (NPC.life <= 0)
 			{
-				Gore.NewGore(NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
-				Gore.NewGore(NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
 				}
 			}
 		}
@@ -107,10 +105,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
-		}
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new LunaticCultistProfile();
+        }
 
 		public override string GetChat()
 		{
@@ -250,5 +248,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 16f;
 		}
+	}
+	public class LunaticCultistProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/LunaticCultist");
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/LunaticCultist_Head");
 	}
 }

@@ -1,5 +1,384 @@
+// Language: en-US (English)
+
+
 Mods: {
 	BossesAsNPCs: {
+		Config: {
+			Server: {
+				LabelBig: Bosses As NPCs Server Options
+				HeaderGeneral: "[c/00FF00:General Options]"
+				HeaderSpawn: "[c/00FF00:Spawn Options]"
+				LabelGeneral1: "[i:4080]   Boost Town NPC Spawn Rates"
+				TooltipGeneral1:
+					'''
+					This option toggles if the Town NPC spawn rates will be boosted
+					  When On: Town NPC spawn rates WILL be boosted.
+					  When Off: Town NPC spawn rates WILL NOT be boosted.
+					    Turn On to boost Town NPC spawn rates.
+					Default value: Off
+					'''
+				LabelGeneral2: "[i:3090]   Sell Expert Mode Items in Non-Expert Worlds"
+				TooltipGeneral2:
+					'''
+					This option toggles if the NPCs will sell
+					Expert Mode items in non-Expert Mode and non-Master Mode worlds.
+					  When On: Expert Mode items WILL be sold in ALL modes.
+					  When Off: Expert Mode items WILL ONLY be sold in Expert Mode and Master Mode.
+					    Turn On to get Expert Mode items in all modes.
+					Default value: Off
+					'''
+				LabelGeneral3: "[i:4929]   Sell Master Mode Items in Non-Master Worlds"
+				TooltipGeneral3:
+					'''
+					This option toggles if the NPCs will sell
+					Master Mode items in non-Master Mode worlds.
+					  When On: Master Mode items WILL be sold in ALL modes.
+					  When Off: Master Mode items WILL ONLY be sold in Master Mode.
+					    Turn On to get Master Mode items in all modes.
+					Default value: Off
+					'''
+				LabelGeneral4: "[i:1309]   Sell Extra Items"
+				TooltipGeneral4:
+					'''
+					This option toggles if the NPCs will sell extra non-boss drop
+					items such as vanity items, music boxes, and other materials.
+					For example: the King Slime NPC will sell Gel and the Slime Staff.
+					  When On: Extra items WILL be sold.
+					  When Off: Extra items WILL NOT be sold.
+					    Turn Off to remove extra items from the shop.
+					Default value: On
+					'''
+				LabelGeneral5: "[i:87]   Shop Price Scaling"
+				TooltipGeneral5:
+					'''
+					This option sets the scaling for the prices in the Town NPCs' shops.
+					  25 means 1/4 (quarter) the normal price.
+					  50 means 1/2 (half) the normal price.
+					  100 means normal price.
+					  200 means 2x (double) the normal price.
+					  400 means 4x (quadruple) the normal price.
+					    Change this value if you want the shop to be cheaper or more expensive.
+					Default value: 100
+					'''
+				LabelGeneral6: "[i:1991]   Catch Town NPCs"
+				TooltipGeneral6:
+					'''
+					This option toggles if the Town NPCs added by this mod can be
+					caught with a Bug Net (Fargo's Mutant Mod style)
+					  When On: The Town NPCs CAN be caught.
+					  When Off: The Town NPCs CAN NOT be caught.
+					    Turn On to catch the Town NPCs.
+					Warning: caught NPC items will become unloaded if this option is Off.
+					Default value: Off
+					Requires a Reload.
+					'''
+
+				LabelSpawnKS: "[i:2493]   King Slime Can Spawn"
+				TooltipSpawnKS:
+					'''
+					This option toggles if the King Slime NPC can spawn.
+					  When On: The King Slime NPC WILL spawn.
+					  When Off: The King Slime NPC WILL NOT spawn.
+					    Turn Off to stop the King Slime NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnEoC: "[i:2112]   Eye of Cthulhu Can Spawn"
+				TooltipSpawnEoC:
+					'''
+					This option toggles if the Eye of Cthulhu NPC can spawn.
+					  When On: The Eye of Cthulhu NPC WILL spawn.
+					  When Off: The Eye of Cthulhu NPC WILL NOT spawn.
+					    Turn Off to stop the Eye of Cthulhu NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnEoW: "[i:2111]   Eater of Worlds Can Spawn"
+				TooltipSpawnEoW:
+					'''
+					This option toggles if the Eater of Worlds NPC can spawn.
+					  When On: The Eater of Worlds NPC WILL spawn.
+					  When Off: The Eater of Worlds NPC WILL NOT spawn.
+					    Turn Off to stop the Eater of Worlds NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnBoC: "[i:2104]   Brain of Cthulhu Can Spawn"
+				TooltipSpawnBoC:
+					'''
+					This option toggles if the Brain of Cthulhu NPC can spawn.
+					  When On: The Brain of Cthulhu NPC WILL spawn.
+					  When Off: The Brain of Cthulhu NPC WILL NOT spawn.
+					    Turn Off to stop the Brain of Cthulhu NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnQB: "[i:2108]   Queen Bee Can Spawn"
+				TooltipSpawnQB:
+					'''
+					This option toggles if the Queen Bee NPC can spawn.
+					  When On: The Queen Bee NPC WILL spawn.
+					  When Off: The Queen Bee NPC WILL NOT spawn.
+					    Turn Off to stop the Queen Bee NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnSk: "[i:1281]   Skeletron Can Spawn"
+				TooltipSpawnSk:
+					'''
+					This option toggles if the Skeletron NPC can spawn.
+					  When On: The Skeletron NPC WILL spawn.
+					  When Off: The Skeletron NPC WILL NOT spawn.
+					    Turn Off to stop the Skeletron NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnDc: "[i:5109]   Deerclops Can Spawn"
+				TooltipSpawnDc:
+					'''
+					This option toggles if the Deerclops NPC can spawn.
+					  When On: The Deerclops NPC WILL spawn.
+					  When Off: The Deerclops NPC WILL NOT spawn.
+					    Turn Off to stop the Deerclops NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnWoF: "[i:2105]   Wall of Flesh Can Spawn"
+				TooltipSpawnWoF:
+					'''
+					This option toggles if the Wall of Flesh NPC can spawn.
+					  When On: The Wall of Flesh NPC WILL spawn.
+					  When Off: The Wall of Flesh NPC WILL NOT spawn.
+					    Turn Off to stop the Wall of Flesh NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnQS: "[i:4959]   Queen Slime Can Spawn"
+				TooltipSpawnQS:
+					'''
+					This option toggles if the Queen Slime NPC can spawn.
+					  When On: The Queen Slime NPC WILL spawn.
+					  When Off: The Queen Slime NPC WILL NOT spawn.
+					    Turn Off to stop the Queen Slime NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnDe: "[i:2113]   The Destroyer Can Spawn"
+				TooltipSpawnDe:
+					'''
+					This option toggles if the Destroyer NPC can spawn.
+					  When On: The Destroyer NPC WILL spawn.
+					  When Off: The Destroyer NPC WILL NOT spawn.
+					    Turn Off to stop the Destroyer NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnTw: "[i:2106]   The Twins Can Spawn"
+				TooltipSpawnTw:
+					'''
+					This option toggles if the Retinazer & Spazmatism NPCs can spawn.
+					  When On: The Twins NPCs WILL spawn.
+					  When Off: The Twins NPCs WILL NOT spawn.
+					    Turn Off to stop the Twins NPCs from spawning.
+					Default value: On
+					'''
+				LabelSpawnSP: "[i:2107]   Skeletron Prime Can Spawn"
+				TooltipSpawnSP:
+					'''
+					This option toggles if the Skeletron Prime NPC can spawn.
+					  When On: The Skeletron Prime NPC WILL spawn.
+					  When Off: The Skeletron Prime NPC WILL NOT spawn.
+					    Turn Off to stop the Skeletron Prime NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnPl: "[i:2109]   Plantera Can Spawn"
+				TooltipSpawnPl:
+					'''
+					This option toggles if the Plantera NPC can spawn.
+					  When On: The Plantera NPC WILL spawn.
+					  When Off: The Plantera NPC WILL NOT spawn.
+					    Turn Off to stop the Plantera NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnGo: "[i:2110]   Golem Can Spawn"
+				TooltipSpawnGo:
+					'''
+					This option toggles if the Golem NPC can spawn.
+					  When On: The Golem NPC WILL spawn.
+					  When Off: The Golem NPC WILL NOT spawn.
+					    Turn Off to stop the Golem NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnEoL: "[i:4784]   Empress of Light Can Spawn"
+				TooltipSpawnEoL:
+					'''
+					This option toggles if the Empress of Light NPC can spawn.
+					  When On: The Empress of Light NPC WILL spawn.
+					  When Off: The Empress of Light NPC WILL NOT spawn.
+					    Turn Off to stop the Empress of Light NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnDF: "[i:2588]   Duke Fishron Can Spawn"
+				TooltipSpawnDF:
+					'''
+					This option toggles if the Duke Fishron NPC can spawn.
+					  When On: The Duke Fishron NPC WILL spawn.
+					  When Off: The Duke Fishron NPC WILL NOT spawn.
+					    Turn Off to stop the Duke Fishron NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnBe: "[i:3863]   Betsy Can Spawn"
+				TooltipSpawnBe:
+					'''
+					This option toggles if the Betsy NPC can spawn.
+					  When On: The Betsy NPC WILL spawn.
+					  When Off: The Betsy NPC WILL NOT spawn.
+					    Turn Off to stop the Betsy NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnLC: "[i:3372]   Lunatic Cultist Can Spawn"
+				TooltipSpawnLC:
+					'''
+					This option toggles if the Lunatic Cultist NPC can spawn.
+					  When On: The Lunatic Cultist NPC WILL spawn.
+					  When Off: The Lunatic Cultist NPC WILL NOT spawn.
+					    Turn Off to stop the Lunatic Cultist NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnML: "[i:3373]   Moon Lord Can Spawn"
+				TooltipSpawnML:
+					'''
+					This option toggles if the Moon Lord NPC can spawn.
+					  When On: The Moon Lord NPC WILL spawn.
+					  When Off: The Moon Lord NPC WILL NOT spawn.
+					    Turn Off to stop the Moon Lord NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnGoblinSell: "[i:361]   Goblin Tinkerer Sells Goblin Army Items"
+				TooltipSpawnGoblinSell:
+					'''
+					This option toggles if the Goblin Tinkerer can sell Goblin Army items.
+					  When On: The Goblin Tinkerer WILL sell Goblin Army items.
+					  When Off: The Goblin Tinkerer WILL NOT sell Goblin Army items.
+					    Turn Off to stop the Goblin Army items from the Goblin Tinkerer's shop.
+					Default value: On
+					'''
+				LabelSpawnPirateSell: "[i:1315]   Pirate Sells Pirate Invasion Items"
+				TooltipSpawnPirateSell:
+					'''
+					This option toggles if the Pirate can sell Pirate Invasion items.
+					  When On: The Pirate WILL sell Pirate Invasion items.
+					  When Off: The Pirate WILL NOT sell Pirate Invasion items.
+					    Turn Off to stop the Pirate Invasion items from the Pirate's shop.
+					Default value: On
+					'''
+				LabelSpawnPk: "[i:1857]   Pumpking Can Spawn"
+				TooltipSpawnPk:
+					'''
+					This option toggles if the Pumpking NPC can spawn.
+					  When On: The Pumpking NPC WILL spawn.
+					  When Off: The Pumpking NPC WILL NOT spawn.
+					    Turn Off to stop the Pumpking NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnIQ: "[i:4814]   Ice Queen Can Spawn"
+				TooltipSpawnIQ:
+					'''
+					This option toggles if the Ice Queen NPC can spawn.
+					  When On: The Ice Queen NPC WILL spawn.
+					  When Off: The Ice Queen NPC WILL NOT spawn.
+					    Turn Off to stop the Ice Queen NPC from spawning.
+					Default value: On
+					'''
+				LabelSpawnMS: "[i:2769]   Martian Saucer Can Spawn"
+				TooltipSpawnMS:
+					'''
+					This option toggles if the Martian Saucer NPC can spawn.
+					  When On: The Martian Saucer NPC WILL spawn.
+					  When Off: The Martian Saucer NPC WILL NOT spawn.
+					    Turn Off to stop the Martian Saucer NPC from spawning.
+					Default value: On
+					'''
+				MultiplayerMessage: You are not the server owner so you can not change this config!
+			}
+		}
+		Common: {
+			VanityAccesssory: Vanity Accessory
+			CaughtNPC: Caught NPC
+		}
+		UI: {
+			CapturedSpawnText1: The
+			CapturedSpawnText2: Town NPC has been spawned!
+		}
+		ItemName: {
+			BeCostumeBodypiece: Betsy Costume Bodypiece
+			BeCostumeLegpiece: Betsy Costume Legpiece
+			BoCCostumeLegpiece: Brain of Cthulhu Costume Legpiece
+			DeCostumeBodypiece: Destroyer Costume Bodypiece
+			DeCostumeLegpiece: Destroyer Costume Legpiece
+			DFCostumeHeadpiece: Duke Fishron Costume Headpiece
+			DFCostumeBodypiece: Duke Fishron Costume Bodypiece
+			DFCostumeLegpiece: Duke Fishron Costume Legpiece
+			EoLCostumeHeadpiece: Empress Costume Headpiece
+			EoLCostumeBodypiece: Empress Costume Bodypiece
+			EoLCostumeLegpiece: Empress Costume Legpiece
+			EoCCostumeHeadpiece: Eye of Cthulhu Costume Headpiece
+			EoCCostumeBodypiece: Eye of Cthulhu Costume Bodypiece
+			EoWCostumeBodypiece: Eater of Worlds Costume Bodypiece
+			EoWCostumeLegpiece: Eater of Worlds Costume Legpiece
+			EyeCostumeLegpiece: Eye Costume Legpiece
+			GolemCostumeBodypiece: Golem Costume Bodypiece
+			GolemCostumeLegpiece: Golem Costume Legpiece
+			IQCostumeHeadpiece: Ice Queen Costume Headpiece
+			IQCostumeBodypiece: Ice Queen Costume Bodypiece
+			IQCostumeLegpiece: Ice Queen Costume Legpiece
+			IQCostumeCape: Ice Queen Costume Cape
+			KSCostumeHeadpiece: King Slime Costume Headpiece
+			KSCostumeGloves: King Slime Costume Gloves
+			KSAltCostumeGloves: King Slime Alternate Costume Gloves
+			LCCostumeBodypiece: Lunatic Cultist Costume Bodypiece
+			MLCostumeBodypiece: Moon Lord Costume Bodypiece
+			MSCostumeHeadpiece: Martian Saucer Costume Headpiece
+			MSCostumeBodypiece: Martian Saucer Costume Bodypiece
+			MSCostumeLegpiece: Martian Saucer Costume Legpiece
+			PkCostumeHeadpiece: Pumpking Costume Headpiece
+			PkCostumeBodypiece: Pumpking Costume Bodypiece
+			PkCostumeLegpiece: Pumpking Costume Legpiece
+			PkCostumeShoes: Pumpking Costume Shoes
+			PlCostumeBodypiece: Plantera Costume Bodypiece
+			PlCostumeLegpiece: Plantera Costume Legpiece
+			PlCostumeBackpiece: Plantera Costume Backpiece
+			QSAltCostumeHeadpiece: Queen Slime Alternate Costume Headpiece
+			QSCostumeBodypiece: Queen Slime Costume Bodypiece
+			QSCostumeGloves: Queen Slime Costume Gloves
+			RetCostumeHeadpiece: Retinazer Costume Headpiece
+			RetCostumeBodypiece: Retinazer Costume Bodypiece
+			SkCostumeBodypiece: Skeletron Costume Bodypiece
+			SkCostumeLegpiece: Skeletron Costume Legpiece
+			SpazCostumeHeadpiece: Spazmatism Costume Headpiece
+			SpazCostumeBodypiece: Spazmatism Costume Bodypiece
+			WoFCostumeHeadpiece: Wall of Flesh Costume Headpiece
+		}
+		ItemTooltip: {
+			IQCostumeCape: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			KSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			KSAltCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			PkCostumeShoes: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			QSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			CaughtKingSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEyeOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEaterOfWorlds: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtBrainOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtQueenBee: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSkeletron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDeerclops: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtWallOfFlesh: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtQueenSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtTheDestroyer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtRetinazer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSpazmatism: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSkeletronPrime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtPlantera: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtGolem: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEmpressOfLight: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDukeFishron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtBetsy: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtLunaticCultist: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMoonLord: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+		}
 
 		BiomeName: {
 			GraveyardBiome: Graveyard

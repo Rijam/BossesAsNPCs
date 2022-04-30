@@ -10,23 +10,11 @@ using System.Linq;
 namespace BossesAsNPCs.Items.Vanity.Pumpking
 {
 	[AutoloadEquip(EquipType.Head)]
-	public class PkCostumeHeadpiece : ModItem
+	public class PkCostumeHeadpiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Pumpking Costume Headpiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Body)]
-	public class PkCostumeBodypiece : ModItem
+	public class PkCostumeBodypiece : VanityBase
 	{
 		//Thanks Exterminator for the help
 		public int LegEquipTexture;
@@ -35,22 +23,14 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, "BossesAsNPCs/Items/Vanity/Pumpking/PkCostumeBodypiece_Legs_Complete");
+				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs_Complete");
 			}
 		}
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Pumpking Costume Bodypiece");
+			base.SetStaticDefaults();
 			ArmorIDs.Body.Sets.HidesTopSkin[Item.bodySlot] = true;
 			ArmorIDs.Body.Sets.HidesArms[Item.bodySlot] = true;
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
 		{
@@ -59,42 +39,22 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 		}
 	}
 	[AutoloadEquip(EquipType.Legs)]
-	public class PkCostumeLegpiece : ModItem
+	public class PkCostumeLegpiece : VanityBase
 	{
-		public override bool IsLoadingEnabled(Mod mod)
-		{
-			return false;
-		}
+		public override bool IsLoadingEnabled(Mod mod) => false;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Pumpking Costume Legpiece");
+			base.SetStaticDefaults();
 			Tooltip.SetDefault("[c/403638:Unobtainable]");
 			ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
 		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Shoes)]
-	public class PkCostumeShoes : ModItem
+	public class PkCostumeShoes : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Pumpking Costume Shoes");
-			Tooltip.SetDefault("Vanity Accessory");
-		}
 		public override void SetDefaults()
 		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
+			base.SetDefaults();
 			Item.accessory = true;
 		}
 	}

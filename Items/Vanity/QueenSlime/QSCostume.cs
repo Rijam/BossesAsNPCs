@@ -10,43 +10,20 @@ using System.Linq;
 namespace BossesAsNPCs.Items.Vanity.QueenSlime
 {
 	[AutoloadEquip(EquipType.Head)]
-	public class QSAltCostumeHeadpiece : ModItem
+	public class QSAltCostumeHeadpiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Queen Slime Alternate Costume Headpiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Body)]
-	public class QSCostumeBodypiece : ModItem
+	public class QSCostumeBodypiece : VanityBase
 	{
+
 		public int LegEquipTexture;
 		public override void Load()
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, "BossesAsNPCs/Items/Vanity/QueenSlime/QSCostumeBodypiece_Legs");
+				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs");
 			}
-		}
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Queen Slime Costume Bodypiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
 		{
@@ -55,20 +32,11 @@ namespace BossesAsNPCs.Items.Vanity.QueenSlime
 		}
 	}
 	[AutoloadEquip(EquipType.HandsOn, EquipType.HandsOff)]
-	public class QSCostumeGloves : ModItem
+	public class QSCostumeGloves : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Queen Slime Costume Gloves");
-			Tooltip.SetDefault("Vanity Accessory");
-		}
 		public override void SetDefaults()
 		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
+			base.SetDefaults();
 			Item.accessory = true;
 		}
 	}

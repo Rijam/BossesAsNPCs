@@ -111,8 +111,8 @@ namespace BossesAsNPCs.Projectiles
 				Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), 1, 1, DustID.RedTorch);
 			}
 			SoundEngine.PlaySound(SoundID.Item, (int)Projectile.position.X, (int)Projectile.position.Y, 47, 0.5f, 0.5f);
-			Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.position, Projectile.velocity * 0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
-			Projectile.NewProjectile(Projectile.GetProjectileSource_FromThis(), Projectile.position, Projectile.velocity * -0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
+			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity * 0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
+			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity * -0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
 		}
 		public override Color? GetAlpha(Color lightColor) => Color.Red; //Fullbright
 	}

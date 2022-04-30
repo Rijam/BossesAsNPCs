@@ -5,6 +5,8 @@ using Terraria.Audio;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System.Collections.Generic;
+using Terraria.DataStructures;
 
 namespace BossesAsNPCs.Projectiles
 {
@@ -83,7 +85,7 @@ namespace BossesAsNPCs.Projectiles
             {
 				Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), 1, 1, DustID.Blood);
 			}
-			Gore.NewGore(Projectile.position, Projectile.velocity, 134, 1f); //Leech Head
+			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity, 134, 1f); //Leech Head
 			SoundEngine.PlaySound(SoundID.NPCDeath12, Projectile.position);
 		}
 	}

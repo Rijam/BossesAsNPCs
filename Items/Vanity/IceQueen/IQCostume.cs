@@ -10,19 +10,41 @@ using System.Linq;
 namespace BossesAsNPCs.Items.Vanity.IceQueen
 {
 	[AutoloadEquip(EquipType.Head)]
-	public class IQCostumeHeadpiece : ModItem
+	public class IQCostumeHeadpiece : VanityBase
 	{
-		public override void SetStaticDefaults()
+	}
+	[AutoloadEquip(EquipType.Body)]
+	public class IQCostumeBodypiece : VanityBase
+	{
+	}
+	[AutoloadEquip(EquipType.Legs)]
+	public class IQCostumeLegpiece : VanityBase
+	{
+		//Thanks Exterminator for the help
+		public int LegEquipTextureMale;
+		public int LegEquipTextureFemale;
+
+		public override void Load()
 		{
-			DisplayName.SetDefault("Ice Queen Costume Headpiece");
+			if (!Main.dedServ)
+			{
+				LegEquipTextureMale = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs");
+				LegEquipTextureFemale = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs");
+			}
 		}
+		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
+		{
+			if (male) equipSlot = LegEquipTextureMale;
+			if (!male) equipSlot = LegEquipTextureFemale;
+		}
+	}
+	[AutoloadEquip(EquipType.Back)]
+	public class IQCostumeCape : VanityBase
+	{
 		public override void SetDefaults()
 		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
+			base.SetDefaults();
+			Item.accessory = true;
 		}
 	}
 }

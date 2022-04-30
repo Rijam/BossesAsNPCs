@@ -1,4 +1,4 @@
-Do you like a huge excess of Town NPCs?
+﻿Do you like a huge excess of Town NPCs?
 Do you enjoy managing the happiness of 23 extra Town NPCs?
 Ever wanted bosses that you have defeated to move in as Town NPCs?
 
@@ -19,24 +19,25 @@ Contains a config file to disable certain Town NPCs from spawning and other opti
 See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 
-Mod version: 0.1.5
-	- Added Queen Slime Costume Bodypiece and Queen Slime Costume Gloves
-	- Added Eye of Cthulhu Costume Bodypiece and Eye Costume Legpiece
-	- King Slime now sells the Prince set if the Princess is present
-	- Added King Slime Costume Gloves and King Slime Alternate Costume Gloves
-	- Added Golem Costume Bodypiece and Golem Costume Legpiece
-	- Added Martian Saucer Costume Bodypiece and Martian Saucer Costume Legpiece
-	- Added Duke Fishron Costume Headpiece, Bodypiece, and Legpiece
-	- Added Brain of Cthulhu Costume Legpiece
-	- Added Pumpking Costume Bodypiece and Pumpking Costume Shoes
-	- Added Lunatic Cultist Costume Bodypiece
-	- Golem now sells Lihzahrd Brick and Lihzahrd Altar.
-	- Updated the sprite for Lunatic Cultist (super minor change)
-	- Added a new config option to turn on/off extra items sold by the NPCs. This includes vanity items, music boxes, and other materials.
-	- Made Plantera's attack more interesting.
-	- Changed homepage to the wiki page.
+Mod version: 0.1.6
+	- Added localization support for item names, item tool tips, config options
+	- Refactored the vanity items (Nothing changes in game, the code is just nicer now)
+	- Translated a few things into Chinese 简体中文 using a translator and the vanilla translations. Join my Discord server if you want to help with translating.
+	- Added Retinazer Costume Bodypiece and Spazmatism Costume Bodypiece
+	- Added Skeletron Costume Bodypiece and Skeletron Costume Legpiece
+	- Added Ice Queen Costume Bodypiece, Ice Queen Costume Legpiece, and Ice Queen Costume Cape
+	- Added Plantera Costume Bodypiece, Plantera Costume Legpiece, and Plantera Costume Backpiece
+	- Added Moon Lord Custome Bodypiece
+	- Added Eater of Worlds Costume Bodypiece and Eater of Worlds Costume Legpiece
+	- Added Destroyer Costume Bodypiece and Destroyer Costume Legpiece
+	- Added Betsy Costume Bodypiece and Betsy Costume Legpiece
+	- King Slime, Queen Slime, and Empress of Light now switch to their hatless sprite during a party!
+	- Adjusted the position of the party hat on a few Town NPCs
+	- Added glow masks for The Destroyer, Skeletron Prime, Golem, Empress of Light, Betsy, Moon Lord, Pumpking, and Martian Saucer.
+	- Decreased the price of the Harpoon
+	- Added some simple Mod.Calls for a few things (see the wiki)
+	- Updated IEntitySources
 
 Known issues:
-	- Some Town NPCs don't change to their hatless sprite for parties (Not implemented in 1.4 tML yet)
 	- Princess has messed up happiness dialog for the Modded Town NPCs (tML bug)
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

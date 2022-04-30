@@ -128,7 +128,7 @@ namespace BossesAsNPCs
                 shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 * shopMulti); //Made up value
                 nextSlot++;
                 shop.item[nextSlot].SetDefaults(ItemID.Harpoon);
-                shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5400 / 0.005 * 0.625 * shopMulti);  //Special case to make it cheaper
+                shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5400 / 0.005 / 5 * shopMulti);  //Special case to make it cheaper
                 nextSlot++;
                 if (BossesAsNPCsWorld.downedGoblinSummoner)
                 {

@@ -6,14 +6,16 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
+using System.Collections.Generic;
+using Terraria.GameContent;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
 	public class QueenSlime : ModNPC
 	{
-		//public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/KingSlime";
-		//public override string[] AltTextures => new[] { "BossesAsNPCs/NPCs/TownNPCs/KingSlime_Alt_1" }; //Not implemented in 1.4 tML yet
 
 		public override void SetStaticDefaults()
 		{
@@ -78,10 +80,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new FlavorTextBestiaryInfoElement("Love: Hallow, King Slime, Empress of Light\nLike: Forest, Queen Bee, Ice Queen, Party Girl, Nurse, Dryad \nDislike: Snow\nHate: None")
 			});
 		}
-		/*public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
-		{
-			return true;
-		}*/
 
 		public override void HitEffect(int hitDirection, double damage)
 		{
@@ -89,14 +87,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Crown").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Crown").Type, 1f);
 				}
-				Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Head").Type, 1f);
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -113,10 +111,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override string TownNPCName()
-		{
-			return "";
-		}
+		public override ITownNPCProfile TownNPCProfile()
+        {
+            return new QueenSlimeProfile();
+        }
 
 		public override string GetChat()
 		{
@@ -258,5 +256,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
+	}
+	public class QueenSlimeProfile : ITownNPCProfile
+	{
+		public int RollVariation() => 0;
+		public string GetNameForVariant(NPC npc) => null;
+
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
+		{
+			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
+				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime");
+
+			if (npc.altTexture == 1)
+				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime_Alt_1");
+
+			return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime");
+		}
+
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/QueenSlime_Head");
 	}
 }

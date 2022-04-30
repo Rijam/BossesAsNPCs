@@ -10,51 +10,15 @@ using System.Linq;
 namespace BossesAsNPCs.Items.Vanity.MartianSaucer
 {
 	[AutoloadEquip(EquipType.Head)]
-	public class MSCostumeHeadpiece : ModItem
-	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Martian Saucer Costume Headpiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
-	}
+    public class MSCostumeHeadpiece : VanityBase
+    {
+    }
 	[AutoloadEquip(EquipType.Body)]
-	public class MSCostumeBodypiece : ModItem
+	public class MSCostumeBodypiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Martian Saucer Costume Bodypiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Legs)]
-	public class MSCostumeLegpiece : ModItem
+	public class MSCostumeLegpiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Martian Saucer Costume Legpiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 }

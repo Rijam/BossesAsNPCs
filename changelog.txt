@@ -1,4 +1,4 @@
-0.1 - Release (December 21, 2021)
+﻿0.1 - Release (December 21, 2021)
 
 0.1.1 - Update 1 (January 17, 2022)
 	* Fixed the price of the Ham Bat while in The Constant world
@@ -48,3 +48,22 @@
 	* Added a new config option to turn on/off extra items sold by the NPCs. This includes vanity items, music boxes, and other materials.
 	* Made Plantera's attack more interesting.
 	* Changed homepage to the wiki page.
+
+0.1.6 - Update 6 (April 30, 2022)
+	* Added localization support for item names, item tool tips, config options
+	* Refactored the vanity items (Nothing changes in game, the code is just nicer now)
+	* Translated a few things into Chinese 简体中文 using a translator and the vanilla translations. Join my Discord server if you want to help with translating.
+	* Added Retinazer Costume Bodypiece and Spazmatism Costume Bodypiece
+	* Added Skeletron Costume Bodypiece and Skeletron Costume Legpiece
+	* Added Ice Queen Costume Bodypiece, Ice Queen Costume Legpiece, and Ice Queen Costume Cape
+	* Added Plantera Costume Bodypiece, Plantera Costume Legpiece, and Plantera Costume Backpiece
+	* Added Moon Lord Custome Bodypiece
+	* Added Eater of Worlds Costume Bodypiece and Eater of Worlds Costume Legpiece
+	* Added Destroyer Costume Bodypiece and Destroyer Costume Legpiece
+	* Added Betsy Costume Bodypiece and Betsy Costume Legpiece
+	* King Slime, Queen Slime, and Empress of Light now switch to their hatless sprite during a party!
+	* Adjusted the position of the party hat on a few Town NPCs
+	* Added glow masks for The Destroyer, Skeletron Prime, Golem, Empress of Light, Betsy, Moon Lord, Pumpking, and Martian Saucer.
+	* Decreased the price of the Harpoon
+	* Added some simple Mod.Calls for a few things (see the wiki)
+	* Updated IEntitySources

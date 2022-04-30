@@ -24,7 +24,6 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault(name);
-			Tooltip.SetDefault("Caught NPC");
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -57,7 +56,7 @@ namespace BossesAsNPCs.Items
 		}
 		internal static void SpawnText(string npcName)
 		{
-			string chatmessage = "The " + npcName + " Town NPC has been spawned!";
+			string chatmessage = Language.GetTextValue("Mods.BossesAsNPCs.UI.CapturedSpawnText1") + " " + npcName + " " + Language.GetTextValue("Mods.BossesAsNPCs.UI.CapturedSpawnText2");
 			if (Main.netMode != NetmodeID.Server)
 			{
 				Main.NewText(chatmessage, 50, 125, 255);

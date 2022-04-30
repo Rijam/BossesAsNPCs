@@ -10,52 +10,20 @@ using System.Linq;
 namespace BossesAsNPCs.Items.Vanity.DukeFishron
 {
 	[AutoloadEquip(EquipType.Head)]
-	public class DFCostumeHeadpiece : ModItem
+	public class DFCostumeHeadpiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Duke Fishron Costume Headpiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Body)]
-	public class DFCostumeBodypiece : ModItem
+	public class DFCostumeBodypiece : VanityBase
 	{
-		public override void SetStaticDefaults()
-		{
-			DisplayName.SetDefault("Duke Fishron Costume Bodypiece");
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
-		}
 	}
 	[AutoloadEquip(EquipType.Legs)]
-	public class DFCostumeLegpiece : ModItem
+	public class DFCostumeLegpiece : VanityBase
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Duke Fishron Costume Legpiece");
+			base.SetStaticDefaults();
 			ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
-		}
-		public override void SetDefaults()
-		{
-			Item.width = 20;
-			Item.height = 20;
-			Item.value = 10000;
-			Item.rare = ItemRarityID.Blue;
-			Item.vanity = true;
 		}
 	}
 }

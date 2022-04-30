@@ -1,0 +1,123 @@
+﻿// Language: zh-Hans (Chinese)
+
+
+Mods: {
+	BossesAsNPCs: {
+		Config: {
+			Server: {
+				LabelGeneral1: "[i:4080]   提升城镇NPC生成率"
+				LabelGeneral2: "[i:3090]   在非专家世界中出售专家模式物品"
+				LabelGeneral3: "[i:4929]   在非主世界中出售主模式物品"
+				LabelGeneral4: "[i:1309]   出售额外物品"
+				LabelGeneral5: "[i:87]   商店价格缩放"
+				LabelGeneral6: "[i:1991]   捕捉城镇 NPC"
+				LabelSpawnKS: "[i:2493]   史莱姆王可以生成"
+				LabelSpawnEoC: "[i:2112]   克苏鲁之眼可以生成"
+				LabelSpawnEoW: "[i:2111]   世界吞噬者可以生成"
+				LabelSpawnBoC: "[i:2104]   克苏鲁之脑可以生成"
+				LabelSpawnQB: "[i:2108]   蜂王可以生成"
+				LabelSpawnSk: "[i:1281]   骷髅可以生成"
+				LabelSpawnDc: "[i:5109]   鹿角怪可以生成"
+				LabelSpawnWoF: "[i:2105]   血肉墙可以生成"
+				LabelSpawnQS: "[i:4959]   史莱姆皇后可以生成"
+				LabelSpawnDe: "[i:2113]   毁灭者可以生成"
+				LabelSpawnTw: "[i:2106]   双子魔眼可以生成"
+				LabelSpawnSP: "[i:2107]   机械骷髅王可以生成"
+				LabelSpawnPl: "[i:2109]   世纪之花可以生成"
+				LabelSpawnGo: "[i:2110]   石巨人可以生成"
+				LabelSpawnEoL: "[i:4784]   光之女皇可以生成"
+				LabelSpawnDF: "[i:2588]   猪龙鱼公爵可以生成"
+				LabelSpawnBe: "[i:3863]   双足翼龙可以生成"
+				LabelSpawnLC: "[i:3372]   拜月教邪教徒可以生成"
+				LabelSpawnML: "[i:3373]   月亮领主可以生成"
+				LabelSpawnGoblinSell: "[i:361]   哥布林修补匠出售哥布林军队物品"
+				LabelSpawnPirateSell: "[i:1315]   海盗出售海盗入侵物品"
+				LabelSpawnPk: "[i:1857]   南瓜王可以生成"
+				LabelSpawnIQ: "[i:4814]   冰雪女王可以生成"
+				LabelSpawnMS: "[i:2769]   火星飞碟可以生成"
+			}
+		}
+		Common: {
+			VanityAccesssory: 梳妆台配件
+			CaughtNPC: 被抓到的NPC
+		}
+		ItemName: {
+			BeCostumeBodypiece: 双足翼龙爵服装车身件
+			BeCostumeLegpiece: 双足翼龙爵服装腿片
+			BoCCostumeLegpiece: 克苏鲁之脑服装腿片
+			DeCostumeBodypiece: 毁灭者爵服装车身件
+			DeCostumeLegpiece: 毁灭者爵服装腿片
+			DFCostumeHeadpiece: 猪龙鱼公爵服装头饰
+			DFCostumeBodypiece: 猪龙鱼公爵服装车身件
+			DFCostumeLegpiece: 猪龙鱼公爵服装腿片
+			EoLCostumeHeadpiece: 女皇服装头饰
+			EoLCostumeBodypiece: 女皇服装车身件
+			EoLCostumeLegpiece: 女皇服装腿片
+			EoCCostumeHeadpiece: 克苏鲁之眼服装头饰
+			EoCCostumeBodypiece: 克苏鲁之眼服装车身件
+			EoWCostumeBodypiece: 世界吞噬者爵服装车身件
+			EoWCostumeLegpiece: 世界吞噬者爵服装腿片
+			EyeCostumeLegpiece: 眼服装腿片
+			GolemCostumeBodypiece: 石巨人服装车身件
+			GolemCostumeLegpiece: 石巨人服装腿片
+			IQCostumeHeadpiece: 冰雪女王服装头饰
+			IQCostumeBodypiece: 冰雪女王服装车身件
+			IQCostumeLegpiece: 冰雪女王服装腿片
+			IQCostumeCape: 冰雪女王服装斗篷
+			KSCostumeHeadpiece: 史莱姆王服装头饰
+			KSCostumeGloves: 史莱姆王服装手套
+			KSAltCostumeGloves: 史莱姆王替代服装手套
+			LCCostumeBodypiece: 拜月教邪教徒服装车身件
+			MLCostumeBodypiece: 月亮领主服装车身件
+			MSCostumeHeadpiece: 火星飞碟服装头饰
+			MSCostumeBodypiece: 火星飞碟服装车身件
+			MSCostumeLegpiece: 火星飞碟服装腿片
+			PkCostumeHeadpiece: 南瓜王服装头饰
+			PkCostumeBodypiece: 南瓜王服装车身件
+			PkCostumeLegpiece: 南瓜王服装腿片
+			PkCostumeShoes: 南瓜王服装鞋
+			PlCostumeBodypiece: 世纪之花服装车身件 
+			PlCostumeLegpiece: 世纪之花服装腿片
+			PlCostumeBackpiece: 世纪之花服装背片
+			QSAltCostumeHeadpiece: 史莱姆皇后替代服装
+			QSCostumeBodypiece: 史莱姆皇后服装车身件
+			QSCostumeGloves: 史莱姆皇后服装手套
+			RetCostumeHeadpiece: 激光眼服装头饰
+			RetCostumeBodypiece: 激光眼服装车身件
+			SkCostumeBodypiece: 骷髅服装车身件
+			SkCostumeLegpiece: 骷髅服装腿片
+			SpazCostumeHeadpiece: 魔焰眼服装头饰
+			SpazCostumeBodypiece: 魔焰眼服装车身件
+			WoFCostumeHeadpiece: 血肉墙服装头饰
+		}
+		ItemTooltip: {
+			KSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			KSAltCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			PkCostumeShoes: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			QSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			CaughtKingSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEyeOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEaterOfWorlds: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtBrainOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtQueenBee: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSkeletron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDeerclops: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtWallOfFlesh: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtQueenSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtTheDestroyer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtRetinazer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSpazmatism: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtSkeletronPrime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtPlantera: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtGolem: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtEmpressOfLight: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDukeFishron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtBetsy: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtLunaticCultist: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMoonLord: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+		}
+	}
+}
