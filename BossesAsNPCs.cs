@@ -48,7 +48,7 @@ namespace BossesAsNPCs
 		public override void PostAddRecipes()
 		{
 			//Doesn't seem to work anymore
-			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<KingSlime>()] = 2;
+			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<KingSlime>()] += 2;
 			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EyeOfCthulhu>()] = 2;
 			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EaterOfWorlds>()] = 3;
 			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<BrainOfCthulhu>()] = 3;
@@ -95,6 +95,10 @@ namespace BossesAsNPCs
 					return BossesAsNPCsWorld.downedOgre;
 				case "downedGoblinSummoner":
 					return BossesAsNPCsWorld.downedGoblinSummoner;
+				case "downedDreadnautilus":
+					return BossesAsNPCsWorld.downedDreadnautilus;
+				case "downedMothron":
+					return BossesAsNPCsWorld.downedMothron;
 				case "SellExpertMode":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode;
 				case "SellMasterMode":
@@ -109,6 +113,10 @@ namespace BossesAsNPCs
                     return ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
 				case "PirateSellInvasionItems":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
+				case "GetStatusShop1":
+					return NPCs.NPCHelper.StatusShop1();
+				case "GetStatusShop2":
+					return NPCs.NPCHelper.StatusShop2();
 				default:
 					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}

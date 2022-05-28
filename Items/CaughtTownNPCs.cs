@@ -40,7 +40,7 @@ namespace BossesAsNPCs.Items
 			Item.noUseGraphic = true;
 			Item.consumable = true;
 			Item.UseSound = SoundID.Item44;
-			Item.makeNPC = (short)ModContent.NPCType<KingSlime>();
+			Item.makeNPC = ModContent.NPCType<KingSlime>();
 			Item.tileBoost += 20;
 		}
 
@@ -84,7 +84,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<EyeOfCthulhu>();
+			Item.makeNPC = ModContent.NPCType<EyeOfCthulhu>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -115,7 +115,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<EaterOfWorlds>();
+			Item.makeNPC = ModContent.NPCType<EaterOfWorlds>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -146,7 +146,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<BrainOfCthulhu>();
+			Item.makeNPC = ModContent.NPCType<BrainOfCthulhu>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -177,7 +177,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<QueenBee>();
+			Item.makeNPC = ModContent.NPCType<QueenBee>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -208,7 +208,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Skeletron>();
+			Item.makeNPC = ModContent.NPCType<Skeletron>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -239,7 +239,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Deerclops>();
+			Item.makeNPC = ModContent.NPCType<Deerclops>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -270,7 +270,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<WallOfFlesh>();
+			Item.makeNPC = ModContent.NPCType<WallOfFlesh>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -301,7 +301,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<QueenSlime>();
+			Item.makeNPC = ModContent.NPCType<QueenSlime>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -332,7 +332,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<TheDestroyer>();
+			Item.makeNPC = ModContent.NPCType<TheDestroyer>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -363,7 +363,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Retinazer>();
+			Item.makeNPC = ModContent.NPCType<Retinazer>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -394,7 +394,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Spazmatism>();
+			Item.makeNPC = ModContent.NPCType<Spazmatism>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -425,7 +425,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<SkeletronPrime>();
+			Item.makeNPC = ModContent.NPCType<SkeletronPrime>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -456,7 +456,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Plantera>();
+			Item.makeNPC = ModContent.NPCType<Plantera>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -487,7 +487,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Golem>();
+			Item.makeNPC = ModContent.NPCType<Golem>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -518,7 +518,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<EmpressOfLight>();
+			Item.makeNPC = ModContent.NPCType<EmpressOfLight>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -549,7 +549,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<DukeFishron>();
+			Item.makeNPC = ModContent.NPCType<DukeFishron>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -580,7 +580,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Betsy>();
+			Item.makeNPC = ModContent.NPCType<Betsy>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -611,7 +611,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<LunaticCultist>();
+			Item.makeNPC = ModContent.NPCType<LunaticCultist>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -642,7 +642,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<MoonLord>();
+			Item.makeNPC = ModContent.NPCType<MoonLord>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -673,7 +673,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<Pumpking>();
+			Item.makeNPC = ModContent.NPCType<Pumpking>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -704,7 +704,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<IceQueen>();
+			Item.makeNPC = ModContent.NPCType<IceQueen>();
 		}
 
 		public override bool CanUseItem(Player player)
@@ -735,7 +735,7 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
-			Item.makeNPC = (short)ModContent.NPCType<MartianSaucer>();
+			Item.makeNPC = ModContent.NPCType<MartianSaucer>();
 		}
 
 		public override bool CanUseItem(Player player)

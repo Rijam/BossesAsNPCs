@@ -57,7 +57,7 @@
 	* Added Skeletron Costume Bodypiece and Skeletron Costume Legpiece
 	* Added Ice Queen Costume Bodypiece, Ice Queen Costume Legpiece, and Ice Queen Costume Cape
 	* Added Plantera Costume Bodypiece, Plantera Costume Legpiece, and Plantera Costume Backpiece
-	* Added Moon Lord Custome Bodypiece
+	* Added Moon Lord Costume Bodypiece
 	* Added Eater of Worlds Costume Bodypiece and Eater of Worlds Costume Legpiece
 	* Added Destroyer Costume Bodypiece and Destroyer Costume Legpiece
 	* Added Betsy Costume Bodypiece and Betsy Costume Legpiece
@@ -67,3 +67,22 @@
 	* Decreased the price of the Harpoon
 	* Added some simple Mod.Calls for a few things (see the wiki)
 	* Updated IEntitySources
+
+0.1.7 - Update 7 (May 28, 2022)
+	* Added Skeletron Prime Costume Bodypiece and Skeletron Prime Costume Legpiece
+	* Added Deerclops Costume Bodypiece and Deerclops Costume Legpiece
+	* Added Wall of Flesh Costume Bodypiece, Wall of Flesh Costume Legpiece, and Wall of Flesh Costume Backpiece
+	* Added Queen Bee Costume Bodypiece and Queen Bee Costume Legpiece
+	* Added Brain of Cthulhu Costume Bodypiece
+	* Added Lunatic Cultist Costume Headpiece
+	* Added a glow mask for Deerclops' eye when attacking
+	* Added glow masks to Pumpking Costume Headpiece and the Martian Saucer Costume set.
+	* Color coded the happiness info in the Bestiary
+	* Split Betsy's, Pumpking's, and Ice Queen's shops into two because they were almost full with all the options enabled.
+	* Added some more dialog to every Town NPC (Mostly just dialog for parties).
+	* Fixed the localization on the Graveyard biome.
+	* Fixed the localization for the Princess.
+	* Added some more Mod.Calls (see the wiki)
+	* Updated AddEquipTexture
+	* Updated NPC.catchItem and Item.makeNPC
+	* Updated PlaySound

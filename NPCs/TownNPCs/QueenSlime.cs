@@ -68,7 +68,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.DyeTrader;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtQueenSlime>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtQueenSlime>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -77,25 +77,26 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
 				new FlavorTextBestiaryInfoElement("This gelatin oligarch has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Hallow, King Slime, Empress of Light\nLike: Forest, Queen Bee, Ice Queen, Party Girl, Nurse, Dryad \nDislike: Snow\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Hallow, King Slime, Empress of Light\n" +
+					NPCHelper.LikeText() + "Forest, Queen Bee, Ice Queen, Party Girl, Nurse, Dryad \n" +
+					NPCHelper.DislikeText() + "Snow\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Crown").Type, 1f);
-				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Head").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Crown").Type, 1f);
+			}
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenSlime_Gore_Leg").Type, 1f);
-				}
+			for (int k = 0; k < 2; k++)
+			{
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -124,6 +125,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("My defeat will not stop my army of slimes!");
 			chat.Add("I would prefer it if you stopped bouncing objects off of me.");
 			chat.Add("Pink Gel may be 'sweet', but get any ideas!", 0.1);
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("I expected this party to be spectacular. I am not disappointed.", 2.0);
+			}
 			if (!NPC.downedSlimeKing)
 			{
 				chat.Add("You may have defeated me, but I'm only one half of the slime oligarchy!");
@@ -207,7 +212,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxQueenSlime);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -265,14 +270,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
 		{
 			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
-				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime");
+				return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
 			if (npc.altTexture == 1)
-				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime_Alt_1");
+				return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Alt_1");
 
-			return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenSlime");
+			return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 		}
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/QueenSlime_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

@@ -69,7 +69,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.25f;
 			AnimationType = NPCID.Clothier;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtBetsy>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtBetsy>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -78,20 +78,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("This vicious dragon has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Forest, Duke Fishron, Deerclops\nLike: Hallow, Ice Queen, Pumpking, Martian Saucer, Zoologist\nDislike: Caverns, Merchant\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Forest, Duke Fishron, Deerclops\n" +
+					NPCHelper.LikeText() + "Hallow, Ice Queen, Pumpking, Martian Saucer, Zoologist\n" +
+					NPCHelper.DislikeText() + "Caverns, Merchant\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Head").Type, 1f);
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Betsy_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -132,7 +133,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
 				if (NPC.direction == 1)
@@ -153,10 +154,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.");
 			chat.Add("I'm a real boss, I promise!");
 			chat.Add("Apply my curse to your enemies. It'll reduce their defense by 40 points!");
-			/*if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Party quote", 2.0);
-			}*/
+				chat.Add("Stick around; we're going to see how many candles I can light with one breath of fire!", 2.0);
+			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
@@ -178,6 +179,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -185,6 +187,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -193,7 +203,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.DD2ElderCrystal);
 			shop.item[nextSlot].shopCustomPrice = 40000;
 			nextSlot++;
-			if (BossesAsNPCsWorld.downedDarkMage)
+			if (BossesAsNPCsWorld.downedDarkMage && NPCHelper.StatusShop2())
             {
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 				{
@@ -229,7 +239,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					nextSlot++;
 				}
 			}
-			if (BossesAsNPCsWorld.downedOgre)
+			if (BossesAsNPCsWorld.downedOgre && NPCHelper.StatusShop2())
             {
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
 				{
@@ -283,62 +293,65 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					nextSlot++;
 				}
 			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3))
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("BetsyEgg").Type);
-				shop.item[nextSlot].shopCustomPrice = 400000; //Match the Abominationn's shop
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3))
+				{
+					shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("BetsyEgg").Type);
+					shop.item[nextSlot].shopCustomPrice = 400000; //Match the Abominationn's shop
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.DD2BetsyBow); //Aerial Bane
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);  //Formula: (Sell value * 2) * ((1/drop chance)/2);
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.DD2BetsyBow); //Aerial Bane
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);  //Formula: (Sell value * 2) * ((1/drop chance)/2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT3); //Sky Dragon's Fury
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ApprenticeStaffT3); //Betsy's Wrath
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DD2SquireBetsySword); //Flying Dragon
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BetsyWings);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BossMaskBetsy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BossTrophyBetsy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.DD2BetsyPetItem);
+				shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT3); //Sky Dragon's Fury
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BetsyMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.ApprenticeStaffT3); //Betsy's Wrath
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				shop.item[nextSlot].SetDefaults(ItemID.DD2SquireBetsySword); //Flying Dragon
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BetsyWings);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BossMaskBetsy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BossTrophyBetsy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDD2);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2BetsyPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					shop.item[nextSlot].SetDefaults(ItemID.BetsyMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDD2);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
 					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
 			}
 		}
 
@@ -378,8 +391,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		//public string GetNameForVariant(NPC npc) => npc.getNewNPCName();
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Betsy");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Betsy_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

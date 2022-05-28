@@ -9,6 +9,11 @@ using System.Linq;
 
 namespace BossesAsNPCs.Items.Vanity.LunaticCultist
 {
+	[AutoloadEquip(EquipType.Head)]
+	public class LCCostumeHeadpiece : VanityBase
+	{
+	}
+
 	[AutoloadEquip(EquipType.Body)]
 	public class LCCostumeBodypiece : VanityBase
 	{
@@ -18,7 +23,7 @@ namespace BossesAsNPCs.Items.Vanity.LunaticCultist
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs");
+				LegEquipTexture = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this);
 			}
 		}
 		public override void SetStaticDefaults()

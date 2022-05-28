@@ -19,25 +19,24 @@ Contains a config file to disable certain Town NPCs from spawning and other opti
 See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 
-Mod version: 0.1.6
-	- Added localization support for item names, item tool tips, config options
-	- Refactored the vanity items (Nothing changes in game, the code is just nicer now)
-	- Translated a few things into Chinese 简体中文 using a translator and the vanilla translations. Join my Discord server if you want to help with translating.
-	- Added Retinazer Costume Bodypiece and Spazmatism Costume Bodypiece
-	- Added Skeletron Costume Bodypiece and Skeletron Costume Legpiece
-	- Added Ice Queen Costume Bodypiece, Ice Queen Costume Legpiece, and Ice Queen Costume Cape
-	- Added Plantera Costume Bodypiece, Plantera Costume Legpiece, and Plantera Costume Backpiece
-	- Added Moon Lord Custome Bodypiece
-	- Added Eater of Worlds Costume Bodypiece and Eater of Worlds Costume Legpiece
-	- Added Destroyer Costume Bodypiece and Destroyer Costume Legpiece
-	- Added Betsy Costume Bodypiece and Betsy Costume Legpiece
-	- King Slime, Queen Slime, and Empress of Light now switch to their hatless sprite during a party!
-	- Adjusted the position of the party hat on a few Town NPCs
-	- Added glow masks for The Destroyer, Skeletron Prime, Golem, Empress of Light, Betsy, Moon Lord, Pumpking, and Martian Saucer.
-	- Decreased the price of the Harpoon
-	- Added some simple Mod.Calls for a few things (see the wiki)
-	- Updated IEntitySources
+Mod version: 0.1.7
+	- Added Skeletron Prime Costume Bodypiece and Skeletron Prime Costume Legpiece
+	- Added Deerclops Costume Bodypiece and Deerclops Costume Legpiece
+	- Added Wall of Flesh Costume Bodypiece, Wall of Flesh Costume Legpiece, and Wall of Flesh Costume Backpiece
+	- Added Queen Bee Costume Bodypiece and Queen Bee Costume Legpiece
+	- Added Brain of Cthulhu Costume Bodypiece
+	- Added Lunatic Cultist Costume Headpiece
+	- Added a glow mask for Deerclops' eye when attacking
+	- Added glow masks to Pumpking Costume Headpiece and the Martian Saucer Costume set.
+	- Color coded the happiness info in the Bestiary
+	- Split Betsy's, Pumpking's, and Ice Queen's shops into two because they were almost full with all the options enabled.
+	- Added some more dialog to every Town NPC (Mostly just dialog for parties).
+	- Fixed the localization on the Graveyard biome.
+	- Fixed the localization for the Princess.
+	- Added some more Mod.Calls (see the wiki)
+	- Updated AddEquipTexture
+	- Updated NPC.catchItem and Item.makeNPC
+	- Updated PlaySound
 
 Known issues:
-	- Princess has messed up happiness dialog for the Modded Town NPCs (tML bug)
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

@@ -69,7 +69,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.25f;
 			AnimationType = NPCID.Clothier;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtDukeFishron>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtDukeFishron>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -78,22 +78,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
 				new FlavorTextBestiaryInfoElement("This aquatic pigron mutation has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Ocean, Betsy, Angler\nLike: Snow, Empress of Light, King Slime, Pumpking, Pirate, Truffle\nDislike: Arms Dealer\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Ocean, Betsy, Angler\n" +
+					NPCHelper.LikeText() + "Snow, Empress of Light, King Slime, Pumpking, Pirate, Truffle\n" +
+					NPCHelper.DislikeText() + "Arms Dealer\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/DukeFishron_Gore_Head").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/DukeFishron_Gore_Arm").Type, 1f);
-				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/DukeFishron_Gore_Leg").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
 			}
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
@@ -122,6 +122,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("Have you ever been to a sewer? I have, met a lot of mutants down there.");
 			chat.Add("How strong does the wind have to be to be able to pick up water and sharks?");
 			chat.Add("A third pig, a third fish, a third dragon, completely awesome!");
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("I'm the only person who can eat like a pig and get away with it!", 2.0);
+			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int mutant = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Mutant").Type);
@@ -130,7 +134,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					chat.Add(Main.npc[mutant].GivenName + " has some pretty nice looking wings.");
 				}
 			}
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+			if (ModLoader.TryGetMod("CalamityMod", out Mod _))
 			{
 				chat.Add("Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.");
 				chat.Add("I haven't seen my father in a long time...");
@@ -207,7 +211,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDukeFishron);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -259,8 +263,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/DukeFishron");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/DukeFishron_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

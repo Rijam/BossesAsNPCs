@@ -12,7 +12,7 @@ namespace BossesAsNPCs.Items.Vanity.DukeFishron
 	[AutoloadEquip(EquipType.Head)]
 	public class DFCostumeHeadpiece : VanityBase
 	{
-	}
+    }
 	[AutoloadEquip(EquipType.Body)]
 	public class DFCostumeBodypiece : VanityBase
 	{

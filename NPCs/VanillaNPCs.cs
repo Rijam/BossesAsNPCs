@@ -16,7 +16,7 @@ namespace BossesAsNPCs.NPCs
 	//This only is for happiness. Shop changes are in BossesAsNPCsNPCs.cs
     public class VanillaNPCs : GlobalNPC
     {
-		public class ExampleNPCHappiness : GlobalNPC
+		public class BossesAsNPCsNPCHappiness : GlobalNPC
 		{
 			public override void SetStaticDefaults()
 			{
@@ -40,6 +40,8 @@ namespace BossesAsNPCs.NPCs
 				int betsy = ModContent.NPCType<Betsy>();
 				int lunaticCultist = ModContent.NPCType<LunaticCultist>();
 				int moonLord = ModContent.NPCType<MoonLord>();
+				int dreadnautilus = ModContent.NPCType<Dreadnautilus>();
+				int mothron = ModContent.NPCType<Mothron>();
 				int pumpking = ModContent.NPCType<Pumpking>();
 				int iceQueen = ModContent.NPCType<IceQueen>();
 				int martianSaucer = ModContent.NPCType<MartianSaucer>();
@@ -212,6 +214,17 @@ namespace BossesAsNPCs.NPCs
 				santa.SetNPCAffection(iceQueen, AffectionLevel.Like);
 				santa.SetNPCAffection(pumpking, AffectionLevel.Dislike);
 				santa.SetNPCAffection(moonLord, AffectionLevel.Hate);
+
+				if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC))
+				{
+					int fishermanType = fishermanNPC.Find<ModNPC>("Fisherman").Type;
+					var fishermanHappiness = NPCHappiness.Get(fishermanNPC.Find<ModNPC>("Fisherman").Type);
+
+					var dreadnautilusHappiness = NPCHappiness.Get(ModContent.NPCType<Dreadnautilus>());
+
+					fishermanHappiness.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
+					dreadnautilusHappiness.SetNPCAffection(fishermanType, AffectionLevel.Love);
+				}
 			}
 		}
 	}

@@ -70,7 +70,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Guide;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtQueenBee>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtQueenBee>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -79,22 +79,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("This highly aggressive monstrosity has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Jungle, Dryad\nLike: Caverns, Planetra, Golem, Queen Slime, Ice Queen, Witch Doctor, Zoologist\nDislike: Graveyard, Demolitionist\nHate: Snow")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Jungle, Dryad\n" +
+					NPCHelper.LikeText() + "Caverns, Planetra, Golem, Queen Slime, Ice Queen, Witch Doctor, Zoologist\n" +
+					NPCHelper.DislikeText() + "Graveyard, Demolitionist\n" +
+					NPCHelper.HateText() + "Snow")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Wing").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenBee_Gore_Head").Type, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenBee_Gore_Wing").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenBee_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/QueenBee_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -125,6 +125,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("I hope you don't have melissophobia.");
 			chat.Add("What? Expecting me to say \"Buzz Buzz\"?");
 			chat.Add("What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.");
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!", 2.0);
+			}
 			if (Main.notTheBeesWorld || WorldGen.notTheBees)
             {
 				chat.Add("I feel very at home in this land.");
@@ -223,7 +227,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss5);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -239,10 +243,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				shop.item[nextSlot].SetDefaults(ItemID.Bezoar);
 				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
 				nextSlot++;
-				if (Main.player[Main.myPlayer].ZoneGraveyard)
+				if (Main.LocalPlayer.ZoneGraveyard)
 				{
 					shop.item[nextSlot].SetDefaults(ItemID.BeeHive);
 					shop.item[nextSlot].shopCustomPrice = 50 * 5;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				if (NPC.downedMechBossAny)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BeeWings);
+					shop.item[nextSlot].shopCustomPrice = 80000 * 5;
 					nextSlot++;
 				}
 			}
@@ -281,8 +297,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenBee");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/QueenBee_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

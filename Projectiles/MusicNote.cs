@@ -53,13 +53,19 @@ namespace BossesAsNPCs.Projectiles
 		{
 			Projectile.Kill();
 		}
-		private readonly float[] pitches = {1f, 1.25f, 1.5f, 1.75f, 2f};
+		public static readonly SoundStyle Guitar1 = new("Terraria/Sounds/Item_47", 47, 1)
+		{
+			Volume = 1f,
+			PitchRange = (1f, 2f)
+		};
+		//private readonly float[] pitches = {1f, 1.25f, 1.5f, 1.75f, 2f};
 		public override void AI()
 		{
 			Projectile.ai[0]++;
 			if (Projectile.ai[0] == 0 || Projectile.ai[0] == 1)
 			{
-				SoundEngine.PlaySound(SoundID.Item, (int)Projectile.position.X, (int)Projectile.position.Y, 47, 1, pitches[Main.rand.Next(0, 4)]);
+				//SoundEngine.PlaySound(SoundID.Item, (int)Projectile.position.X, (int)Projectile.position.Y, 47, 1, pitches[Main.rand.Next(0, 4)]);
+				SoundEngine.PlaySound(Guitar1, Projectile.Center);
 			}
 			if (Projectile.ai[0] == 7) //Update every 2 ticks
 			{
@@ -104,13 +110,19 @@ namespace BossesAsNPCs.Projectiles
 			}
 			return result;
 		}
+		public static readonly SoundStyle Guitar2 = new("Terraria/Sounds/Item_47", 47, 1)
+		{
+			Volume = 0.5f,
+			PitchRange = (0.5f, 0.5f)
+		};
 		public override void Kill(int timeLeft)
 		{
 			for (int i = 0; i < 20; i++)
             {
 				Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), 1, 1, DustID.RedTorch);
 			}
-			SoundEngine.PlaySound(SoundID.Item, (int)Projectile.position.X, (int)Projectile.position.Y, 47, 0.5f, 0.5f);
+			//SoundEngine.PlaySound(SoundID.Item, (int)Projectile.position.X, (int)Projectile.position.Y, 47, 0.5f, 0.5f);
+			SoundEngine.PlaySound(Guitar2, Projectile.Center);
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity * 0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
 			Projectile.NewProjectile(Projectile.GetSource_FromThis(), Projectile.position, Projectile.velocity * -0.5f, ModContent.ProjectileType<SingleEighthNote>(), Projectile.damage / 2, Projectile.knockBack / 2, 0);
 		}

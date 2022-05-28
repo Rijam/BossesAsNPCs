@@ -44,7 +44,10 @@ Mods: {
 		ItemName: {
 			BeCostumeBodypiece: 双足翼龙爵服装车身件
 			BeCostumeLegpiece: 双足翼龙爵服装腿片
+			BoCCostumeBodypiece: 克苏鲁之脑服装车身件
 			BoCCostumeLegpiece: 克苏鲁之脑服装腿片
+			DcCostumeBodypiece: 鹿角怪爵服装车身件
+			DcCostumeLegpiece: 鹿角怪爵服装腿片
 			DeCostumeBodypiece: 毁灭者爵服装车身件
 			DeCostumeLegpiece: 毁灭者爵服装腿片
 			DFCostumeHeadpiece: 猪龙鱼公爵服装头饰
@@ -67,6 +70,7 @@ Mods: {
 			KSCostumeHeadpiece: 史莱姆王服装头饰
 			KSCostumeGloves: 史莱姆王服装手套
 			KSAltCostumeGloves: 史莱姆王替代服装手套
+			LCCostumeHeadpiece: 拜月教邪教徒服装头饰
 			LCCostumeBodypiece: 拜月教邪教徒服装车身件
 			MLCostumeBodypiece: 月亮领主服装车身件
 			MSCostumeHeadpiece: 火星飞碟服装头饰
@@ -79,6 +83,8 @@ Mods: {
 			PlCostumeBodypiece: 世纪之花服装车身件 
 			PlCostumeLegpiece: 世纪之花服装腿片
 			PlCostumeBackpiece: 世纪之花服装背片
+			QBCostumeBodypiece: 蜂王服装车身件
+			QBCostumeLegpiece: 蜂王服装腿片
 			QSAltCostumeHeadpiece: 史莱姆皇后替代服装
 			QSCostumeBodypiece: 史莱姆皇后服装车身件
 			QSCostumeGloves: 史莱姆皇后服装手套
@@ -86,9 +92,14 @@ Mods: {
 			RetCostumeBodypiece: 激光眼服装车身件
 			SkCostumeBodypiece: 骷髅服装车身件
 			SkCostumeLegpiece: 骷髅服装腿片
+			SPCostumeBodypiece: 机械骷髅王服装车身件
+			SPCostumeLegpiece: 机械骷髅王服装腿片
 			SpazCostumeHeadpiece: 魔焰眼服装头饰
 			SpazCostumeBodypiece: 魔焰眼服装车身件
 			WoFCostumeHeadpiece: 血肉墙服装头饰
+			WoFCostumeBodypiece: 血肉墙服装车身件
+			WoFCostumeLegpiece: 血肉墙服装腿片
+			WoFCostumeBackpiece: 血肉墙服装背片
 		}
 		ItemTooltip: {
 			KSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"

@@ -303,7 +303,10 @@ Mods: {
 		ItemName: {
 			BeCostumeBodypiece: Betsy Costume Bodypiece
 			BeCostumeLegpiece: Betsy Costume Legpiece
+			BoCCostumeBodypiece: Brain of Cthulhu Costume Bodypiece
 			BoCCostumeLegpiece: Brain of Cthulhu Costume Legpiece
+			DcCostumeBodypiece: Deerclops Costume Bodypiece
+			DcCostumeLegpiece: Deerclops Costume Legpiece
 			DeCostumeBodypiece: Destroyer Costume Bodypiece
 			DeCostumeLegpiece: Destroyer Costume Legpiece
 			DFCostumeHeadpiece: Duke Fishron Costume Headpiece
@@ -326,6 +329,7 @@ Mods: {
 			KSCostumeHeadpiece: King Slime Costume Headpiece
 			KSCostumeGloves: King Slime Costume Gloves
 			KSAltCostumeGloves: King Slime Alternate Costume Gloves
+			LCCostumeHeadpiece: Lunatic Cultist Costume Headpiece
 			LCCostumeBodypiece: Lunatic Cultist Costume Bodypiece
 			MLCostumeBodypiece: Moon Lord Costume Bodypiece
 			MSCostumeHeadpiece: Martian Saucer Costume Headpiece
@@ -338,6 +342,8 @@ Mods: {
 			PlCostumeBodypiece: Plantera Costume Bodypiece
 			PlCostumeLegpiece: Plantera Costume Legpiece
 			PlCostumeBackpiece: Plantera Costume Backpiece
+			QBCostumeBodypiece: Queen Bee Costume Bodypiece
+			QBCostumeLegpiece: Queen Bee Costume Legpiece
 			QSAltCostumeHeadpiece: Queen Slime Alternate Costume Headpiece
 			QSCostumeBodypiece: Queen Slime Costume Bodypiece
 			QSCostumeGloves: Queen Slime Costume Gloves
@@ -345,9 +351,14 @@ Mods: {
 			RetCostumeBodypiece: Retinazer Costume Bodypiece
 			SkCostumeBodypiece: Skeletron Costume Bodypiece
 			SkCostumeLegpiece: Skeletron Costume Legpiece
+			SPCostumeBodypiece: Skeletron Prime Costume Bodypiece
+			SPCostumeLegpiece: Skeletron Prime Costume Legpiece
 			SpazCostumeHeadpiece: Spazmatism Costume Headpiece
 			SpazCostumeBodypiece: Spazmatism Costume Bodypiece
 			WoFCostumeHeadpiece: Wall of Flesh Costume Headpiece
+			WoFCostumeBodypiece: Wall of Flesh Costume Bodypiece
+			WoFCostumeLegpiece: Wall of Flesh Costume Legpiece
+			WoFCostumeBackpiece: Wall of Flesh Costume Backpiece
 		}
 		ItemTooltip: {
 			IQCostumeCape: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
@@ -739,6 +750,40 @@ Mods: {
 				DislikeNPC: "I dislike {NPCName}."
 				HateNPC: "I hate {NPCName}."
 			}
+			Dreadnautilus: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
+			Mothron: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
 			Pumpking: {
 				Content: I feel content.
 				NoHome: I would like a home.
@@ -792,4 +837,34 @@ Mods: {
 			}
 		}
 	}
+}
+
+TownNPCMoodBiomes.GraveyardBiome: the Graveyard
+
+TownNPCMood_Princess: {
+	LoveNPC_BossesAsNPCs/KingSlime: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/EyeOfCthulhu: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/EaterOfWorlds: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/BrainOfCthulhu: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/QueenBee: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Skeletron: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Deerclops: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/WallOfFlesh: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/QueenSlime: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/TheDestroyer: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Retinazer: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Spazmatism: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/SkeletronPrime: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Plantera: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Golem: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/EmpressOfLight: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/DukeFishron: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Betsy: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/LunaticCultist: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/MoonLord: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Dreadnautilus: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Mothron: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/Pumpking: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/IceQueen: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/MartianSaucer: "I love {NPCName}."
 }

@@ -68,7 +68,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Guide;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtEyeOfCthulhu>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtEyeOfCthulhu>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -77,22 +77,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement("This optical organ has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Forest, Retinazer, Spazmatism \nLike: Desert, Brain of Cthulhu, Skeletron, Moon Lord, Guide, Painter, Party Girl\nDislike: None \nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Forest, Retinazer, Spazmatism\n" +
+					NPCHelper.LikeText() + "Desert, Brain of Cthulhu, Skeletron, Moon Lord, Guide, Painter, Party Girl\n" +
+					NPCHelper.DislikeText() + "None\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EyeOfCthulhu_Gore_Head").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EyeOfCthulhu_Gore_Arm").Type, 1f);
-				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EyeOfCthulhu_Gore_Leg").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
 			}
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 		}
 
 		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
@@ -117,10 +117,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			WeightedRandom<string> chat = new ();
 			chat.Add("I am the Eye of Cthulhu.");
 			chat.Add("I have my eye on you...");
-			chat.Add("Besides that tree, I think I am the mascot of this world.");
+			chat.Add("Besides that tree or that bunny, I think I am the mascot of this world.");
 			chat.Add("Somebody once called me the 'Eye of Terror'.");
 			chat.Add("I have been defeated in three separate universes! How is that fair?");
 			chat.Add("What is your fascination with eyes anyway?");
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("A party! Surely to celebrate my status as the best EYEcon!", 2.0);
+			}
 			int retinazer = NPC.FindFirstNPC(ModContent.NPCType<Retinazer>());
 			int spazmatism = NPC.FindFirstNPC(ModContent.NPCType<Spazmatism>());
 			if (retinazer >= 0 && spazmatism >= 0)
@@ -239,7 +243,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -291,8 +295,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EyeOfCthulhu");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/EyeOfCthulhu_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

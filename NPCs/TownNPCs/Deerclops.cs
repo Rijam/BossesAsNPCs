@@ -67,7 +67,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Guide;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtDeerclops>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtDeerclops>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -76,23 +76,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
 				new FlavorTextBestiaryInfoElement("This cyclopic monstrosity has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Snow, Betsy\nLike: Forest, Ice Queen, Eye of Cthulhu, Zoologist, Santa\nDislike: Tax Collector\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Snow, Betsy\n" +
+					NPCHelper.LikeText() + "Forest, Ice Queen, Eye of Cthulhu, Zoologist, Santa\n" +
+					NPCHelper.DislikeText() + "Tax Collector\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Antler1").Type, 1f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Antler2").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Head").Type, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity * 0.925f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler1").Type, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity * 1.1f, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Antler2").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Deerclops_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -113,7 +113,56 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             return new DeerclopsProfile();
         }
 
-		public override string GetChat()
+		//PostDraw taken from Torch Merchant by cace#7129
+		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
+		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Deerclops_Glow");
+		
+		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			NPC.ai[2]++;
+            if (NPC.ai[2] > 115)
+			{
+				NPC.ai[2] = 0;
+			}
+			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
+			if (Main.drawToScreen)
+			{
+				screenOffset = Vector2.Zero;
+			}
+
+			Color color = new(255, 255, 255, 0);
+
+			int spriteWidth = 42;
+			int spriteHeight = 56;
+			int x = NPC.frame.X;
+			int y = NPC.frame.Y;
+			if (NPC.frame.Y > 20 * spriteHeight) //Only draw while attacking
+            {
+				float sinOffsetY = (float)Math.Sin((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f; //NPC.ai[2] will range from 11 to 34 when attacking. This will produce a sine wave with one period.
+				float sinOffsetX = (float)Math.Cos((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f;
+				for (int i = 0; i < 5; i++)
+				{
+					Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y + sinOffsetY - 204f);
+					Vector2 posOffset2 = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y - sinOffsetY - 204f);
+					if (NPC.direction == 1)
+					{
+						spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
+						spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
+					}
+					else
+					{
+						spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.None, 1f);
+						spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.None, 1f);
+					}
+				}
+			}
+		}
+        public override Color? GetAlpha(Color drawColor)
+        {
+            return NPC.frame.Y > 20 * 56 ? Color.White : null;
+        }
+
+        public override string GetChat()
 		{
 			WeightedRandom<string> chat = new ();
 			chat.Add("I am Deerclops.");
@@ -124,6 +173,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Main.player[Main.myPlayer].ZoneSnow)
             {
 				chat.Add("Are you going to hold a feast of some kind in this winter weather?");
+			}
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("Oh a party! There better be a big feast for all of us!", 2.0);
 			}
 			int betsy = NPC.FindFirstNPC(ModContent.NPCType<Betsy>());
             if (betsy >= 0)
@@ -210,7 +263,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDeerclops);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -262,6 +315,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 					nextSlot++;
 				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeBodypiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeLegpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 			}
 		}
 
@@ -285,7 +344,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
 		{
 			projType = ProjectileID.InsanityShadowFriendly;
-			attackDelay = 1;
+			attackDelay = 10;
 		}
 		
 		public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
@@ -298,8 +357,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Deerclops");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Deerclops_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

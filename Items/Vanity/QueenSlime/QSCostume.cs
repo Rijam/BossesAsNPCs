@@ -22,7 +22,7 @@ namespace BossesAsNPCs.Items.Vanity.QueenSlime
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs");
+				LegEquipTexture = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this);
 			}
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)

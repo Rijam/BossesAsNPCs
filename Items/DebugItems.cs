@@ -44,6 +44,8 @@ namespace BossesAsNPCs.Items
 			Main.NewText("downedDarkMage " + BossesAsNPCsWorld.downedDarkMage);
 			Main.NewText("downedOgre " + BossesAsNPCsWorld.downedOgre);
 			Main.NewText("downedGoblinSummoner " + BossesAsNPCsWorld.downedGoblinSummoner);
+			Main.NewText("downedDreadnautilus " + BossesAsNPCsWorld.downedDreadnautilus);
+			Main.NewText("downedMothron " + BossesAsNPCsWorld.downedMothron);
 			return true;
 		}
 	}
@@ -71,6 +73,8 @@ namespace BossesAsNPCs.Items
 			BossesAsNPCsWorld.downedDarkMage = false;
 			BossesAsNPCsWorld.downedOgre = false;
 			BossesAsNPCsWorld.downedGoblinSummoner = false;
+			BossesAsNPCsWorld.downedDreadnautilus = false;
+			BossesAsNPCsWorld.downedMothron = false;
 			if (Main.netMode == NetmodeID.Server)
 			{
 				NetMessage.SendData(MessageID.WorldData);

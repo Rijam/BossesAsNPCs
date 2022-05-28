@@ -24,6 +24,14 @@ namespace BossesAsNPCs
                     BossesAsNPCsWorld.downedBetsy = true;
                     NetMessage.SendData(MessageID.WorldData);
                 }
+                if (Main.netMode == NetmodeID.Server && !BossesAsNPCsWorld.downedBetsy) //Try again if it didn't work the first time
+				{
+                    if (Terraria.GameContent.Events.DD2Event.DownedInvasionT3)
+					{
+                        BossesAsNPCsWorld.downedBetsy = true;
+                        NetMessage.SendData(MessageID.WorldData);
+                    }
+				}
             }
             if (npc.type == NPCID.DungeonGuardian)
             {
@@ -52,6 +60,22 @@ namespace BossesAsNPCs
             if (npc.type == NPCID.GoblinSummoner)
             {
                 BossesAsNPCsWorld.downedGoblinSummoner = true;
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.WorldData);
+                }
+            }
+            if (npc.type == NPCID.Mothron)
+            {
+                BossesAsNPCsWorld.downedMothron = true;
+                if (Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SendData(MessageID.WorldData);
+                }
+            }
+            if (npc.type == NPCID.BloodNautilus)
+            {
+                BossesAsNPCsWorld.downedDreadnautilus = true;
                 if (Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SendData(MessageID.WorldData);

@@ -68,7 +68,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Merchant;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtPumpking>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtPumpking>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -77,21 +77,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
 				new FlavorTextBestiaryInfoElement("This pumpkin king has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Graveyard, Ice Queen\nLike: Desert, Betsy, Martian Saucer, King Slime, Duke Fishron\nDislike: Snow, Party Girl\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Graveyard, Ice Queen\n" +
+					NPCHelper.LikeText() + "Desert, Betsy, Martian Saucer, King Slime, Duke Fishron\n" +
+					NPCHelper.DislikeText() + "Snow, Party Girl\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Head").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Pumpking_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -128,7 +128,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				float random1 = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
 				float random2 = Utils.RandomInt(ref seed, -5, 1) * 0.15f;
@@ -151,6 +151,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("Don't get on my bad side!");
 			chat.Add("I don't get the whole 'pumpkin spice' craze.");
 			chat.Add("They are scythes, not sickles! Get it right!");
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("Is this the type of party that involves passing out candy? I sure hope it is!", 2.0);
+			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
@@ -164,6 +168,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -171,6 +176,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -179,140 +192,146 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.PumpkinMoonMedallion);
 			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
 			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ScarecrowHat);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033); //Using the highest drop chances
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ScarecrowShirt);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ScarecrowPants);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.JackOLanternMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SpookyWood);
-			shop.item[nextSlot].shopCustomPrice = 5000; //Made up value
-			nextSlot++;
-			if (NPC.downedHalloweenTree)
-            {
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SpookyBranch").Type);
-					shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.SpookyHook);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SpookyTwig);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.StakeLauncher);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Stake);
-				shop.item[nextSlot].shopCustomPrice = 15; //Same price as Arms Dealer/Witch Doctor
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.CursedSapling);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NecromanticScroll);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MourningWoodTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-				nextSlot++;
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.WitchBroom);
-					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.SpookyWoodMountItem); //Hexxed Branch
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.MourningWoodMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
+			if (NPCHelper.StatusShop2())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("SuspiciousLookingScythe").Type);
-				shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
+				shop.item[nextSlot].SetDefaults(ItemID.ScarecrowHat);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033); //Using the highest drop chances
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.TheHorsemansBlade);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BatScepter);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BlackFairyDust);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SpiderEgg);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.RavenStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.CandyCornRifle);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.CandyCorn);
-			shop.item[nextSlot].shopCustomPrice = 5; //Same price as Arms Dealer
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.JackOLanternLauncher);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ExplosiveJackOLantern);
-			shop.item[nextSlot].shopCustomPrice = 15; //Same price as Arms Dealer
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ScytheWhip); //Dark Harvest
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PumpkingTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-			nextSlot++;
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.PumpkingPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+				shop.item[nextSlot].SetDefaults(ItemID.ScarecrowShirt);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PumpkingMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.ScarecrowPants);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033);
 				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				shop.item[nextSlot].SetDefaults(ItemID.JackOLanternMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SpookyWood);
+				shop.item[nextSlot].shopCustomPrice = 5000; //Made up value
+				nextSlot++;
+				if (NPC.downedHalloweenTree)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPumpkinMoon);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SpookyBranch").Type);
+						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.SpookyHook);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SpookyTwig);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.StakeLauncher);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.Stake);
+					shop.item[nextSlot].shopCustomPrice = 15; //Same price as Arms Dealer/Witch Doctor
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.CursedSapling);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.NecromanticScroll);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.MourningWoodTrophy);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
+					nextSlot++;
+					if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.WitchBroom);
+						shop.item[nextSlot].shopCustomPrice = 50000 * 5;
+						nextSlot++;
+					}
+					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.SpookyWoodMountItem); //Hexxed Branch
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.MourningWoodMasterTrophy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 						nextSlot++;
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ItemID.GoodieBag);
-				shop.item[nextSlot].shopCustomPrice = 5000;
+			}
+			if (NPCHelper.StatusShop1())
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
+				{
+					shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("SuspiciousLookingScythe").Type);
+					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.TheHorsemansBlade);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.BatScepter);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.BlackFairyDust);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.125);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.SpiderEgg);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.125);
 				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.RavenStaff);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.CandyCornRifle);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.CandyCorn);
+				shop.item[nextSlot].shopCustomPrice = 5; //Same price as Arms Dealer
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.JackOLanternLauncher);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ExplosiveJackOLantern);
+				shop.item[nextSlot].shopCustomPrice = 15; //Same price as Arms Dealer
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ScytheWhip); //Dark Harvest
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.PumpkingTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
+				nextSlot++;
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.PumpkingPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PumpkingMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPumpkinMoon);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.GoodieBag);
+					shop.item[nextSlot].shopCustomPrice = 5000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
 			}
 		}
 
@@ -349,8 +368,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Pumpking");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Pumpking_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

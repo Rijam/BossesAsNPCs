@@ -70,7 +70,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Guide;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtPlantera>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtPlantera>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -79,21 +79,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("This floral guardian has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Jungle, Witch Doctor, Dryad\nLike: Caverns, Golem, Queen Bee, Empress of Light, Lunatic Cultist, Steampunker\nDislike: Graveyard, Dye Trader\nHate: Snow")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Jungle, Witch Doctor, Dryad\n" +
+					NPCHelper.LikeText() + "Caverns, Golem, Queen Bee, Empress of Light, Lunatic Cultist, Steampunker\n" +
+					NPCHelper.DislikeText() + "Graveyard, Dye Trader\n" +
+					NPCHelper.HateText() + "Snow")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Plantera_Gore_Head").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Plantera_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/Plantera_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -122,24 +122,41 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("I'm very protective of my bulbs, please don't disturb them.");
 			chat.Add("Sorry if I seem snappy... get it?");
 			chat.Add("I grow restless... for you to buy something!");
+			bool party = Terraria.GameContent.Events.BirthdayParty.PartyIsUp;
 			int eol = NPC.FindFirstNPC(ModContent.NPCType<EmpressOfLight>());
 			int golem = NPC.FindFirstNPC(ModContent.NPCType<Golem>());
 			int cultist = NPC.FindFirstNPC(ModContent.NPCType<LunaticCultist>());
 			if (eol <= -1 && golem <= -1 && cultist <= -1 && !NPC.downedMoonlord)
             {
 				chat.Add("I was thinking of starting a band...");
+				if (party)
+				{
+					chat.Add("This party needs a musical performance of some sort!", 2.0f);
+				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist <= -1 && !NPC.downedMoonlord)
 			{
 				chat.Add("I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.");
+				if (party)
+				{
+					chat.Add("My band should play at one these parties in the future...", 2.0f);
+				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist >= 0 && !NPC.downedMoonlord)
 			{
 				chat.Add("The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.");
+				if (party)
+				{
+					chat.Add("I'm trying to get the other villagers to let me host a concert for the next party.", 2.0f);
+				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist >= 0 && NPC.downedMoonlord)
 			{
 				chat.Add("The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!");
+				if (party)
+				{
+					chat.Add("My metal band is playing at tonight's concert! I can't wait to see you there!", 2.0f);
+				}
 			}
 			if (Main.LocalPlayer.HasBuff(BuffID.Plantero))
 			{
@@ -235,7 +252,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPlantera);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWPlantera);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -296,8 +313,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/Plantera");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/Plantera_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

@@ -12,6 +12,14 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 	[AutoloadEquip(EquipType.Head)]
 	public class PkCostumeHeadpiece : VanityBase
 	{
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			if (!Main.dedServ)
+			{
+				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glowmask", "255", "255", "255", "flame" });
+			}
+		}
 	}
 	[AutoloadEquip(EquipType.Body)]
 	public class PkCostumeBodypiece : VanityBase
@@ -23,7 +31,7 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = Mod.AddEquipTexture(new EquipTexture(), this, EquipType.Legs, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs_Complete");
+				LegEquipTexture = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs_Complete", EquipType.Legs, this);
 			}
 		}
 		public override void SetStaticDefaults()

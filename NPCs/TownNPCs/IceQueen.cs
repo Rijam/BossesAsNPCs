@@ -69,7 +69,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.DyeTrader;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtIceQueen>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtIceQueen>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -78,21 +78,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
 				new FlavorTextBestiaryInfoElement("This icy monstrosity has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Snow, Pumpking\nLike: Ocean, Betsy, Martian Saucer, Deerclops, Queen Slime, Queen Bee, Santa,\nDislike: Graveyard, Painter\nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Snow, Pumpking\n" +
+					NPCHelper.LikeText() + "Ocean, Betsy, Martian Saucer, Deerclops, Queen Slime, Queen Bee, Santa,\n" +
+					NPCHelper.DislikeText() + "Graveyard, Painter\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/IceQueen_Gore_Head").Type, 1f);
-
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/IceQueen_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/IceQueen_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -120,6 +120,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			chat.Add("Don't you dare make any cool puns. That would not be nICE.");
 			chat.Add("That snowmen mafia would be no match against me.");
 			chat.Add("How about a friendly snowball fight?");
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!", 2.0);
+			}
 			int santa = NPC.FindFirstNPC(NPCID.SantaClaus);
 			if (santa >= 0)
             {
@@ -131,6 +135,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -138,6 +143,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -146,137 +159,144 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.NaughtyPresent);
 			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
 			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ElfHat);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ElfShirt);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ElfPants);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-			nextSlot++;
-			if (NPC.downedChristmasTree)
+			if (NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3))
+				shop.item[nextSlot].SetDefaults(ItemID.ElfHat);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ElfShirt);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ElfPants);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
+				nextSlot++;
+				if (NPC.downedChristmasTree)
 				{
-					shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("FestiveOrnament").Type);
-					shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.ChristmasTreeSword);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.078);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ChristmasHook);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.078);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Razorpine);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.078);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.FestiveWings);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.017);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EverscreamTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-				nextSlot++;
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.EverscreamPetItem); //Shrub Star
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.EverscreamMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-			}
-			if (NPC.downedChristmasSantank)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("NaughtyList").Type);
-					shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.EldMelter); //Elf Melter, lol Re-Logic misspelled it.
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ChainGun);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.125);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SantaNK1Trophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-				nextSlot++;
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.SantankMountItem); //Toy Tank
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SantankMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("IceKingsRemains").Type);
-				shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
-				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.BlizzardStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SnowmanCannon);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.NorthPole);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BabyGrinchMischiefWhistle);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.017); //Has no value
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ReindeerBells);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.IceQueenTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-			nextSlot++;
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.IceQueenPetItem); //Frozen Crown
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.IceQueenMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxFrostMoon);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3))
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("FestiveOrnament").Type);
+						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.ChristmasTreeSword);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.078);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.ChristmasHook);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.078);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.Razorpine);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.078);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.FestiveWings);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.017);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.EverscreamTrophy);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
+					nextSlot++;
+					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.EverscreamPetItem); //Shrub Star
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.EverscreamMasterTrophy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 						nextSlot++;
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ItemID.Present);
-				shop.item[nextSlot].shopCustomPrice = 5000;
+				if (NPC.downedChristmasSantank)
+				{
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
+					{
+						shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("NaughtyList").Type);
+						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.EldMelter); //Elf Melter, lol Re-Logic misspelled it.
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.ChainGun);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.125);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SantaNK1Trophy);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
+					nextSlot++;
+					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.SantankMountItem); //Toy Tank
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.SantankMasterTrophy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+					}
+				}
+			}
+			
+			if (NPCHelper.StatusShop1())
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("IceKingsRemains").Type);
+					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.BlizzardStaff);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.SnowmanCannon);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.NorthPole);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.BabyGrinchMischiefWhistle);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.017); //Has no value
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
+				shop.item[nextSlot].SetDefaults(ItemID.ReindeerBells);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
 				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.IceQueenTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
+				nextSlot++;
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.IceQueenPetItem); //Frozen Crown
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.IceQueenMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxFrostMoon);
+						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.Present);
+					shop.item[nextSlot].shopCustomPrice = 5000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
 			}
 		}
 
@@ -314,8 +334,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/IceQueen");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/IceQueen_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

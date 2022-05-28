@@ -18,8 +18,8 @@ namespace BossesAsNPCs
         public static bool downedDarkMage = false;
         public static bool downedOgre = false;
         public static bool downedGoblinSummoner = false;
-
-        //internal static bool[] boostTownNPCSpawnRate;
+        public static bool downedMothron = false;
+        public static bool downedDreadnautilus = false;
 
         public override void OnWorldLoad()
         {
@@ -28,8 +28,8 @@ namespace BossesAsNPCs
             downedDarkMage = false;
             downedOgre = false;
             downedGoblinSummoner = false;
-
-            //boostTownNPCSpawnRate = new bool[Main.netMode == NetmodeID.Server ? 255 : 1];
+            downedMothron = false;
+            downedDreadnautilus = false;
         }
 
         public override void OnWorldUnload()
@@ -39,6 +39,8 @@ namespace BossesAsNPCs
             downedDarkMage = false;
             downedOgre = false;
             downedGoblinSummoner = false;
+            downedMothron = false;
+            downedDreadnautilus = false;
         }
 
         public override void SaveWorldData(TagCompound tag)
@@ -63,6 +65,14 @@ namespace BossesAsNPCs
             {
                 tag["downedGoblinSummoner"] = true;
             }
+            if (downedMothron)
+            {
+                tag["downedMothron"] = true;
+            }
+            if (downedDreadnautilus)
+            {
+                tag["downedDreadnautilus"] = true;
+            }
         }
         public override void LoadWorldData(TagCompound tag)
         {
@@ -71,6 +81,8 @@ namespace BossesAsNPCs
             downedDarkMage = tag.ContainsKey("downedDarkMage");
             downedOgre = tag.ContainsKey("downedOgre");
             downedGoblinSummoner = tag.ContainsKey("downedGoblinSummoner");
+            downedMothron = tag.ContainsKey("downedMothron");
+            downedDreadnautilus = tag.ContainsKey("downedDreadnautilus");
         }
 
         public override void NetSend(BinaryWriter writer)
@@ -81,6 +93,8 @@ namespace BossesAsNPCs
             flags[3] = downedDarkMage;
             flags[4] = downedOgre;
             flags[5] = downedGoblinSummoner;
+            flags[6] = downedMothron;
+            flags[7] = downedDreadnautilus;
             writer.Write(flags);
         }
         public override void NetReceive(BinaryReader reader)
@@ -91,6 +105,8 @@ namespace BossesAsNPCs
             downedDarkMage = flags[3];
             downedOgre = flags[4];
             downedGoblinSummoner = flags[5];
+            downedMothron = flags[6];
+            downedDreadnautilus = flags[7];
         }
         public override void PreUpdateWorld()
         {

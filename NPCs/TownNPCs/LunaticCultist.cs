@@ -67,7 +67,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.25f;
 			AnimationType = NPCID.Clothier;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtLunaticCultist>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtLunaticCultist>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -76,20 +76,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
 				new FlavorTextBestiaryInfoElement("This fanatical leader has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Graveyard, Moon Lord\nLike: Ocean, Skeletron, Plantra, Golem, Empress of Light, Clothier\nDislike: Witch Doctor \nHate: None")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Graveyard, Moon Lord\n" +
+					NPCHelper.LikeText() + "Ocean, Skeletron, Plantra, Golem, Empress of Light, Clothier\n" +
+					NPCHelper.DislikeText() + "Witch Doctor\n" +
+					NPCHelper.HateText() + "None")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
+			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
+			for (int k = 0; k < 2; k++)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
 			}
 		}
 
@@ -115,6 +116,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			WeightedRandom<string> chat = new ();
 			chat.Add("I am the Lunatic Cultist.");
 			chat.Add("My defeat will not stop my cult!");
+			chat.Add("Every good cult needs some sort of hooded figure!");
 			if (!NPC.downedMoonlord)
             {
 				chat.Add("You may have defeated me, but soon you'll face of the wrath of Cthulhu!");
@@ -123,10 +125,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add("Not even Cthulhu could stop you? I'm impressed.");
 			}
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add("Is this a costume party? I'm already wearing a mask.", 2.0);
+			}
+			int demolitionist = NPC.FindFirstNPC(NPCID.Demolitionist);
+			if (demolitionist >= 0)
+			{
+				chat.Add(Main.npc[demolitionist].GivenName + " keeps offering me good deals on dynamite and I'm not sure why.");
+			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
 				chat.Add("My mysterious chanting is perfect for Plantera's metal band.");
+			}
+			if (Main.time >= 0 && Main.time < 9000 && !Main.dayTime) //7:30 PM to 10:00 PM
+			{
+				chat.Add("Dusk is my favorite time of the day.");
 			}
 			if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities))
 			{
@@ -208,13 +223,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false)) //Main.TOWMusicUnlocked
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
 					}
 				}
+				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeHeadpiece>());
+				shop.item[nextSlot].shopCustomPrice = 50000;
+				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeBodypiece>());
 				shop.item[nextSlot].shopCustomPrice = 50000;
 				nextSlot++;
@@ -254,8 +272,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public int RollVariation() => 0;
 		public string GetNameForVariant(NPC npc) => null;
 
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/LunaticCultist");
+		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/LunaticCultist_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

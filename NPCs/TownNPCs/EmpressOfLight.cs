@@ -72,7 +72,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.knockBackResist = 0.25f;
 			AnimationType = NPCID.Clothier;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
-			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? (short)ModContent.ItemType<Items.CaughtEmpressOfLight>() : (short)-1;
+			NPC.catchItem = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs ? ModContent.ItemType<Items.CaughtEmpressOfLight>() : -1;
 		}
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
@@ -81,27 +81,28 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
 				new FlavorTextBestiaryInfoElement("This vengeful fae goddess has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement("Love: Hallow, Dryad, Queen Slime\nLike: Forest, Plantera, Golem, Lunatic Cultist, Wizard, Party Girl, Stylist\nDislike: Caverns, Eater of Worlds, Brain of Cthulhu\nHate: Graveyard")
+				new FlavorTextBestiaryInfoElement(
+					NPCHelper.LoveText() + "Hallow, Dryad, Queen Slime\n" +
+					NPCHelper.LikeText() + "Forest, Plantera, Golem, Lunatic Cultist, Wizard, Party Girl, Stylist\n" +
+					NPCHelper.DislikeText() + "Caverns, Eater of Worlds, Brain of Cthulhu\n" +
+					NPCHelper.HateText() + "Graveyard")
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void OnKill()
 		{
-			if (NPC.life <= 0)
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head_alt").Type, 1f);
-				}
-				else
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Head").Type, 1f);
-				}
-				for (int k = 0; k < 2; k++)
-				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>("BossesAsNPCs/EmpressOfLight_Gore_Leg").Type, 1f);
-				}
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head_alt").Type, 1f);
+			}
+			else
+			{
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+			}
+			for (int k = 0; k < 2; k++)
+			{
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 			}
 		}
 
@@ -168,7 +169,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 5; i++)
 			{
 				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
 				if (NPC.direction == 1)
@@ -233,7 +234,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             {
 				chat.Add("That's quite the stunning outfit you have on. Following in my image I see!", 2.0); 
 			}
-			if (ModLoader.TryGetMod("BossChecklist", out Mod bossChecklist))
+			if (ModLoader.TryGetMod("BossChecklist", out Mod _))
 			{
 				chat.Add("Oh, so you have a \'hit list\' of all the powerful creatures in this world? You planned on defeating me all along?", 0.25);
 			}
@@ -318,7 +319,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEmpressOfLight);
 					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || Main.Configuration.Get("UnlockMusicSwap", false))
+					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
 					{
 						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
@@ -386,14 +387,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
 		{
 			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
-				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight");
+				return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 
 			if (npc.altTexture == 1)
-				return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Alt_1");
+				return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Alt_1");
 
-			return ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight");
+			return ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
 		}
 
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot("BossesAsNPCs/NPCs/TownNPCs/EmpressOfLight_Head");
+		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }
