@@ -75,12 +75,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-				new FlavorTextBestiaryInfoElement("This cyclopic monstrosity has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Snow, Betsy\n" +
-					NPCHelper.LikeText() + "Forest, Ice Queen, Eye of Cthulhu, Zoologist, Santa\n" +
-					NPCHelper.DislikeText() + "Tax Collector\n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

@@ -80,12 +80,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
-				new FlavorTextBestiaryInfoElement("This vengeful fae goddess has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Hallow, Dryad, Queen Slime\n" +
-					NPCHelper.LikeText() + "Forest, Plantera, Golem, Lunatic Cultist, Wizard, Party Girl, Stylist\n" +
-					NPCHelper.DislikeText() + "Caverns, Eater of Worlds, Brain of Cthulhu\n" +
-					NPCHelper.HateText() + "Graveyard")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

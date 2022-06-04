@@ -77,12 +77,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-				new FlavorTextBestiaryInfoElement("This icy monstrosity has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Snow, Pumpking\n" +
-					NPCHelper.LikeText() + "Ocean, Betsy, Martian Saucer, Deerclops, Queen Slime, Queen Bee, Santa,\n" +
-					NPCHelper.DislikeText() + "Graveyard, Painter\n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

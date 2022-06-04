@@ -80,10 +80,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement("This highly aggressive monstrosity has decided to become your roommate."),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Jungle, Dryad\n" +
-					NPCHelper.LikeText() + "Caverns, Planetra, Golem, Queen Slime, Ice Queen, Witch Doctor, Zoologist\n" +
-					NPCHelper.DislikeText() + "Graveyard, Demolitionist\n" +
-					NPCHelper.HateText() + "Snow")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

@@ -80,12 +80,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("This eldritch god has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Graveyard, Lunatic Cultist\n" +
-					NPCHelper.LikeText() + "Eye of Cthulhu, Brain of Cthulhu, Skeletron, The Destroyer, Retinazer, Spazmatism, Skeletron Prime, Mechanic\n" +
-					NPCHelper.DislikeText() + "Empress of Light, Dryad \n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

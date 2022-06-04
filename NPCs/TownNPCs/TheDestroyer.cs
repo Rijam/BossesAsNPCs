@@ -78,12 +78,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("This mechanical spine has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Retinazer, Spazmatism, Skeletron Prime, Mechanic\n" +
-					NPCHelper.LikeText() + "Forest, Eater of Worlds, Moon Lord, Steampunker, Cyborg, Goblin Tinkerer\n" +
-					NPCHelper.DislikeText() + "Wizard\n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

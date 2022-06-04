@@ -77,10 +77,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
 				new FlavorTextBestiaryInfoElement("This fanatical leader has decided to become your roommate."),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Graveyard, Moon Lord\n" +
-					NPCHelper.LikeText() + "Ocean, Skeletron, Plantra, Golem, Empress of Light, Clothier\n" +
-					NPCHelper.DislikeText() + "Witch Doctor\n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

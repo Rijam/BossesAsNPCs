@@ -77,12 +77,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("This vile mastermind has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Graveyard, Eater of Worlds\n" +
-					NPCHelper.LikeText() + "Forest, Wall of Flesh, Eye of Cthulhu, Moon Lord, Tavernkeep, Arms Dealer\n" +
-					NPCHelper.DislikeText() + "Jungle, Dryad, Empress of Light\n" +
-					NPCHelper.HateText() + "Hallow")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 

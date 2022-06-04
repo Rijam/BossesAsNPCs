@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace BossesAsNPCs
@@ -20,29 +21,29 @@ namespace BossesAsNPCs
 		{
 			if (ModLoader.TryGetMod("Census", out Mod censusMod))
 			{
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<KingSlime>(), "Defeat King Slime");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EyeOfCthulhu>(), "Defeat the Eye of Cthulhu");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EaterOfWorlds>(), "Defeat the Eater of Worlds in a Corruption world,\nor in a Hardmode in a Crimson world");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<BrainOfCthulhu>(), "Defeat the Brain of Cthulhu in a Crimson world,\nor in a Hardmode in a Corruption world");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenBee>(), "Defeat Queen Bee");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Skeletron>(), "Defeat Skeletron");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Deerclops>(), "Defeat Deerclops");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<WallOfFlesh>(), "Defeat the Wall of Flesh");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenSlime>(), "Defeat Queen Slime");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<TheDestroyer>(), "Defeat The Destroyer");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Retinazer>(), "Defeat The Twins");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Spazmatism>(), "Defeat The Twins");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<SkeletronPrime>(), "Defeat Skeletron Prime");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Plantera>(), "Defeat Plantera");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Golem>(), "Defeat Golem");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EmpressOfLight>(), "Defeat the Empress of Light");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<DukeFishron>(), "Defeat Duke Fishron");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Betsy>(), "Defeat Betsy");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<LunaticCultist>(), "Defeat the Lunatic Cultist");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<MoonLord>(), "Defeat Moon Lord");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Pumpking>(), "Defeat the Pumpking");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), "Defeat the Ice Queen");
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), "Defeat the Martian Saucer");
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<KingSlime>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.KingSlime"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<EyeOfCthulhu>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.EyeOfCthulhu"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<EaterOfWorlds>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.EaterOfWorlds"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<BrainOfCthulhu>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.BrainOfCthulhu"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenBee>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.QueenBee"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Skeletron>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Skeletron"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Deerclops>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Deerclops"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<WallOfFlesh>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.WallOfFlesh"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenSlime>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.QueenSlime"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<TheDestroyer>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.TheDestroyer"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Retinazer>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.TheTwins"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Spazmatism>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.TheTwins"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<SkeletronPrime>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.SkeletronPrime"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Plantera>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Plantera"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Golem>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Golem"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<EmpressOfLight>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.EmpressOfLight"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<DukeFishron>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.DukeFishron"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Betsy>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Betsy"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<LunaticCultist>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.LunaticCultist"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<MoonLord>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.MoonLord"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<Pumpking>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.Pumpking"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.IceQueen"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), Language.GetTextValue("Mods.BossesAsNPCs.CrossMod.Census.MartianSaucer"));
 			}
 		}
 		public override void PostAddRecipes()

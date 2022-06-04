@@ -292,13 +292,61 @@ Mods: {
 				MultiplayerMessage: You are not the server owner so you can not change this config!
 			}
 		}
+		CrossMod: {
+			Census: {
+				KingSlime: Defeat King Slime
+				EyeOfCthulhu: Defeat the Eye of Cthulhu
+				EaterOfWorlds:
+					'''
+					Defeat the Eater of Worlds in a Corruption world,
+					or in a Hardmode in a Crimson world
+					'''
+				BrainOfCthulhu:
+					'''
+					Defeat the Brain of Cthulhu in a Crimson world,
+					or in a Hardmode in a Corruption world
+					'''
+				QueenBee: Defeat Queen Bee
+				Skeletron: Defeat Skeletron
+				Deerclops: Defeat Deerclops
+				WallOfFlesh: Defeat the Wall of Flesh
+				QueenSlime: Defeat Queen Slime
+				TheDestroyer: Defeat The Destroyer
+				TheTwins: Defeat The Twins
+				SkeletronPrime: Defeat Skeletron Prime
+				Plantera: Defeat Plantera
+				Golem: Defeat Golem
+				EmpressOfLight: Defeat the Empress of Light
+				DukeFishron: Defeat Duke Fishron
+				Betsy: Defeat Betsy
+				LunaticCultist: Defeat the Lunatic Cultist
+				MoonLord: Defeat Moon Lord
+				Pumpking: Defeat the Pumpking
+				IceQueen: Defeat the Ice Queen
+				MartianSaucer: Defeat the Martian Saucer
+			}
+		}
 		Common: {
 			VanityAccesssory: Vanity Accessory
 			CaughtNPC: Caught NPC
+			// The following words are used for the Bestiary happiness text.
+			Forest: Forest
+			Hallow: Hallow
+			Jungle: Jungle
+			Snow: Snow
+			Ocean: Ocean
+			Desert: Desert
+			GlowingMushroom: Glowing Mushroom
+			Graveyard: Graveyard
+			Caverns: "{$GameUI.LayerCaverns}" //Set automatically from vanilla's localization
+			None: None
 		}
 		UI: {
 			CapturedSpawnText1: The
 			CapturedSpawnText2: Town NPC has been spawned!
+			// "Love" and "Hate" are already translated from vanilla's random world name generator
+			Like : Like
+			Dislike : Dislike
 		}
 		ItemName: {
 			BeCostumeBodypiece: Betsy Costume Bodypiece
@@ -360,12 +408,16 @@ Mods: {
 			WoFCostumeLegpiece: Wall of Flesh Costume Legpiece
 			WoFCostumeBackpiece: Wall of Flesh Costume Backpiece
 		}
+		
+		// These translations are automatically assigned. Leave as is.
 		ItemTooltip: {
 			IQCostumeCape: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			KSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			KSAltCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			PkCostumeShoes: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			PlCostumeBackpiece: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			QSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			WoFCostumeBackpiece: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			CaughtKingSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtEyeOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtEaterOfWorlds: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
@@ -392,23 +444,12 @@ Mods: {
 		}
 
 		BiomeName: {
-			GraveyardBiome: Graveyard
-			SkyBiome: Sky
-			UnderworldBiome: Underworld
-		}
-
-		TownNPCMoodBiomes: {
-			GraveyardBiome: Graveyard
+			GraveyardBiome: "{$Mods.BossesAsNPCs.Common.Graveyard}"
 			SkyBiome: Sky
 			UnderworldBiome: Underworld
 		}
 		
 		TownNPCMood: {
-			Biomes: {
-				GraveyardBiome: Graveyard
-				SkyBiome: Sky
-				UnderworldBiome: Underworld
-			}
 			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
 			KingSlime: {
 				Content: I feel content.
@@ -834,6 +875,188 @@ Mods: {
 				LoveNPC: "I love {NPCName}."
 				DislikeNPC: "I dislike {NPCName}."
 				HateNPC: "I hate {NPCName}."
+			}
+		}
+		Bestiary: {
+			Description: {
+				KingSlime: This gelatin oligarch has decided to become your roommate.
+				EyeOfCthulhu: This optical organ has decided to become your roommate.
+				EaterOfWorlds: This abyssal worm has decided to become your roommate.
+				BrainOfCthulhu: This vile mastermind has decided to become your roommate.
+				QueenBee: This highly aggressive monstrosity has decided to become your roommate.
+				Skeletron: This disembodied bones has decided to become your roommate.
+				Deerclops: This cyclopic monstrosity has decided to become your roommate.
+				WallOfFlesh: This towering demon lord has decided to become your roommate.
+				QueenSlime: This gelatin oligarch has decided to become your roommate.
+				TheDestroyer: This mechanical spine has decided to become your roommate.
+				Retinazer: This mechanical laser has decided to become your roommate.
+				Spazmatism: This mechanical flamethrower has decided to become your roommate.
+				SkeletronPrime: This mechanical skull has decided to become your roommate.
+				Plantera: This floral guardian has decided to become your roommate. 
+				Golem: This Temple guardian has decided to become your roommate.
+				EmpressOfLight: This vengeful fae goddess has decided to become your roommate.
+				DukeFishron: This aquatic pigron mutation has decided to become your roommate.
+				Betsy: This vicious dragon has decided to become your roommate.
+				LunaticCultist: This fanatical leader has decided to become your roommate.
+				MoonLord: This eldritch god has decided to become your roommate.
+				Dreadnautilus: This enormous shelled water demon has decided to become your roommate.
+				Mothron: This behemoth of an insect has decided to become your roommate.
+				Pumpking: This pumpkin king has decided to become your roommate.
+				IceQueen: This icy monstrosity has decided to become your roommate.
+				MartianSaucer: This advanced flying saucer has decided to become your roommate.
+			}
+			Happiness: {
+				// These are automatically translated from other localization. Leave as is.
+				KingSlime: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenSlimeBoss}, {$NPCName.EyeofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Pumpking}, {$NPCName.DukeFishron}, {$NPCName.Guide}, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EyeOfCthulhu: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.MoonLordHead}, {$NPCName.Guide}, {$NPCName.Painter}, {$NPCName.PartyGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.None}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EaterOfWorlds: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.BrainofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
+				}
+				BrainOfCthulhu: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
+				}
+				QueenBee: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Demolitionist}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Skeletron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Clothier}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
+					Dislike: "{$NPCName.Angler}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Deerclops: {
+					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.DD2Betsy}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
+					Dislike: "{$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				WallOfFlesh: {
+					Love: "{$NPCName.Guide}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				QueenSlime: {
+					Love: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.KingSlime}, {$NPCName.HallowBoss}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}, {$NPCName.IceQueen}, {$NPCName.PartyGirl}, {$NPCName.Nurse}, {$NPCName.Dryad}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				TheDestroyer: {
+					Love: "{$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EaterofWorldsHead}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Wizard}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Retinazer: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Nurse}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Spazmatism: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Nurse}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				SkeletronPrime: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Pirate}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Plantera: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.WitchDoctor}, {$NPCName.Dryad}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Golem}, {$NPCName.QueenBee}, {$NPCName.HallowBoss}, {$NPCName.CultistBoss}, {$NPCName.Steampunker}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DyeTrader}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Golem: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.WitchDoctor}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.QueenBee}, {$NPCName.HallowBoss}, {$NPCName.CultistBoss}, {$NPCName.Dryad}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.GoblinTinkerer}, {$NPCName.Demolitionist}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EmpressOfLight: {
+					Love: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Dryad}, {$NPCName.QueenSlimeBoss}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.CultistBoss}, {$NPCName.Wizard}, {$NPCName.PartyGirl}, {$NPCName.Stylist}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Graveyard}"
+				}
+				DukeFishron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.Angler}"
+					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.Pirate}, {$NPCName.Truffle}"
+					Dislike: "{$NPCName.ArmsDealer}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Betsy: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.DukeFishron}, {$NPCName.Deerclops}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Merchant}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				LunaticCultist: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
+					Dislike: "{$NPCName.WitchDoctor}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				MoonLord: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}"
+					Like: "{$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Dislike: "{$NPCName.HallowBoss}, {$NPCName.Dryad}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Dreadnautilus: {
+					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
+					Dislike: "Underground, {$NPCName.Angler}, {$NPCName.Pirate}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Mothron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.BestiaryGirl}"
+					Dislike: "Underground, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Pumpking: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.IceQueen}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.PartyGirl}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				IceQueen: {
+					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.Pumpking}"
+					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.Deerclops}, {$NPCName.QueenSlimeBoss}, {$NPCName.QueenBee}, {$NPCName.SantaClaus}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Painter}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				MartianSaucer: {
+					Love: "{$NPCName.Cyborg}, {$NPCName.Steampunker}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Mechanic}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Wizard}, {$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
 			}
 		}
 	}

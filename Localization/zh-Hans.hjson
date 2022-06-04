@@ -1,111 +1,423 @@
-﻿// Language: zh-Hans (Chinese)
+// Language: zh-Hans (Chinese)
 
 
 Mods: {
 	BossesAsNPCs: {
 		Config: {
 			Server: {
-				LabelGeneral1: "[i:4080]   提升城镇NPC生成率"
+				LabelBig:BOSS成为常住npc（中文翻译由天辰提供）
+				HeaderGeneral: "[c/00FF00:常规选项]"
+				HeaderSpawn: "[c/00FF00:生成选项]"
+				LabelGeneral1: "[i:4080]  提升城镇 NPC 生成率"
+				TooltipGeneral1:
+					'''
+					此选项切换城镇NPC生成率是否会提高
+					  开启时：城镇NPC生成率将会提升。
+					  关闭时：城镇NPC生成率不会提升。
+					    开启以提高城镇NPC生成率。
+					默认值：关
+					'''
 				LabelGeneral2: "[i:3090]   在非专家世界中出售专家模式物品"
-				LabelGeneral3: "[i:4929]   在非主世界中出售主模式物品"
+				TooltipGeneral2:
+					'''
+					此选项切换 NPC 是否会出售
+					非专家模式和非大师模式世界中的专家模式项目。
+					  开启时：专家模式物品将以所有模式出售。
+					 关闭时：专家模式物品将仅在专家模式和大师模式下出售。
+					    打开以在所有模式下获取专家模式物品。
+					默认值：关
+					'''
+				LabelGeneral3: "[i:4929]   在非大师世界中出售大师模式物品"
+				TooltipGeneral3:
+					'''
+					此选项切换 NPC 是否会出售
+					非大师模式世界中的大师模式物品。
+					  开机时：大师模式物品将在所有模式下出售。
+					  关闭时：大师模式物品将仅在大师模式下出售。
+					    打开以在所有模式下获取大师模式项目。
+					默认值：关
+					'''
 				LabelGeneral4: "[i:1309]   出售额外物品"
-				LabelGeneral5: "[i:87]   商店价格缩放"
+				TooltipGeneral4:
+					'''
+					此选项切换 NPC 是否会出售额外的非BOSS掉落
+					物品，如梳妆台物品，音乐盒和其他材料。
+					例如：史莱姆王NPC会卖凝胶和史莱姆法杖。
+					  开机时：将出售额外商品。
+					  关闭时：不会出售额外商品。
+					    关闭以从商店中移除额外商品。
+					默认值：开
+					'''
+				LabelGeneral5: "[i:87]   商店价格调整"
+				TooltipGeneral5:
+					'''
+					此选项设置城镇 NPC 商店中价格的缩放比例。
+					  25 表示正常价格的 1/4（四分之一）。
+					  50 表示正常价格的 1/2（一半）。
+					  100 表示正常价格。
+					  200 表示正常价格的 2 倍（双倍）。
+					  400 表示正常价格的 4 倍（四倍）。
+					    如果您希望商店更便宜或更昂贵，请更改此值。
+					默认值：100
+					'''
 				LabelGeneral6: "[i:1991]   捕捉城镇 NPC"
+				TooltipGeneral6:
+					'''
+					此选项切换此模组添加的城镇 NPC 是否可以
+					被虫网捕获（法狗的突变Mod风格）
+					  当开启：城镇NPC可以被抓住。
+					  关闭时：无法捕获城镇NPC。
+					    打开以捕捉城镇 NPC。
+					警告：如果此选项为“关”，则捕获的 NPC 项目将被卸载。
+					默认值：关
+					需要重新加载。
+					'''
+
 				LabelSpawnKS: "[i:2493]   史莱姆王可以生成"
+				TooltipSpawnKS:
+					'''
+					此选项切换史莱姆王 NPC 是否可以生成。
+					  当开启：史莱姆王NPC将生成。
+					  关闭时：史莱姆王NPC不会生成。
+					    关闭以阻止史莱姆王NPC生成。
+					默认值：开
+					'''
 				LabelSpawnEoC: "[i:2112]   克苏鲁之眼可以生成"
+				TooltipSpawnEoC:
+					'''
+					此选项切换克苏鲁之眼 NPC 是否可以生成。
+					  当开启：克苏鲁之眼NPC将生成。
+					  关闭时：克苏鲁之眼NPC不会生成。
+					    关闭以阻止克苏鲁之眼NPC生成。
+					默认值：开
+					'''
 				LabelSpawnEoW: "[i:2111]   世界吞噬者可以生成"
+				TooltipSpawnEoW:
+					'''
+					此选项切换世界吞噬者 NPC 是否可以生成。
+					  当开启：世界吞噬者NPC将生成。
+					  关闭时：世界吞噬者NPC不会生成。
+					    关闭以阻止吞噬者NPC生成。
+					默认值：开
+					'''
 				LabelSpawnBoC: "[i:2104]   克苏鲁之脑可以生成"
-				LabelSpawnQB: "[i:2108]   蜂王可以生成"
-				LabelSpawnSk: "[i:1281]   骷髅可以生成"
-				LabelSpawnDc: "[i:5109]   鹿角怪可以生成"
+				TooltipSpawnBoC:
+					'''
+					此选项切换克苏鲁之脑NPC是否可以生成。
+					  当开启：克苏鲁之脑NPC的将生成。
+					  关闭时：克苏鲁之脑NC不会生成。
+					    关闭以阻止克苏鲁之脑NPC生成。
+					默认值：开
+					'''
+				LabelSpawnQB: "[i:2108]   蜂后可以生成"
+				TooltipSpawnQB:
+					'''
+					此选项切换蜂后 NPC 是否可以生成。
+					  当开启时：蜂后NPC将生成。
+					  关闭时：蜂后NPC不会生成。
+					    关闭以阻止蜂后NPC生成。
+					默认值：开
+					'''
+				LabelSpawnSk: "[i:1281]   骷髅王可以生成"
+				TooltipSpawnSk:
+					'''
+					此选项切换骷髅王NPC 是否可以生成。
+					  当开启时：骷髅王NPC将生成。
+					  关闭时：骷髅王NPC不会生成。
+					    关闭以阻止骷髅王NPC生成。
+					默认值：开
+					'''
+				LabelSpawnDc: "[i:5109]   巨鹿怪可以生成"
+				TooltipSpawnDc:
+					'''
+					此选项切换 Deerclops NPC 是否可以生成。
+					  当打开时：巨鹿怪闭 NPC 将生成。
+					  关闭时：巨鹿怪闭 NPC 不会生成。
+					    关闭以阻止巨鹿怪 NPC 生成。
+					默认值：开
+					'''
 				LabelSpawnWoF: "[i:2105]   血肉墙可以生成"
+				TooltipSpawnWoF:
+					'''
+					此选项切换血肉墙NPC 是否可以生成。
+					  当开启时：血肉墙NPC将生成。
+					  关闭时：血肉墙NPC不会生成。
+					    关闭以阻止血肉墙NPC生成。
+					默认值：开
+					'''
 				LabelSpawnQS: "[i:4959]   史莱姆皇后可以生成"
+				TooltipSpawnQS:
+					'''
+					此选项切换史莱姆皇后NPC是否可以生成。
+					  当开启时：史莱姆皇后NPC将生成。
+					  关闭时：史莱姆皇后NPC不会生成。
+					    关闭以阻止史莱姆皇后NPC生成。
+					默认值：开
+					'''
 				LabelSpawnDe: "[i:2113]   毁灭者可以生成"
+				TooltipSpawnDe:
+					'''
+					此选项切换毁灭者 NPC 是否可以生成。
+					  当打开时：毁灭者NPC将生成。
+					  关闭时：毁灭者NPC不会生成。
+					    关闭以阻止毁灭者NPC生成。
+					默认值：开
+					'''
 				LabelSpawnTw: "[i:2106]   双子魔眼可以生成"
+				TooltipSpawnTw:
+					'''
+					此选项切换魔焰眼和激光眼 NPC 是否可以生成。
+					  当开启时：双胞胎NPC将生成。
+					  关闭时：双胞胎NPC不会生成。
+					    关闭以阻止双胞胎 NPC 生成。
+					默认值：开
+					'''
 				LabelSpawnSP: "[i:2107]   机械骷髅王可以生成"
+				TooltipSpawnSP:
+					'''
+					此选项切换机械骷髅王NPC 是否可以生成。
+					  当打开时：机械骷髅王NPC将生成。
+					  关闭时：机械骷髅王NPC 不会生成。
+					    关闭以阻止机械骷髅王NPC生成。
+					默认值：开
+					'''
 				LabelSpawnPl: "[i:2109]   世纪之花可以生成"
+				TooltipSpawnPl:
+					'''
+					此选项切换 世纪之花 NPC 是否可以生成。
+					  当开启时：世纪之花 NPC将生成。
+					  关闭时：世纪之花NPC不会生成。
+					    关闭以阻止世纪之花NPC生成。
+					默认值：开
+					'''
 				LabelSpawnGo: "[i:2110]   石巨人可以生成"
+				TooltipSpawnGo:
+					'''
+					此选项切换石巨人 NPC 是否可以生成。
+					  当打开时：石巨人NPC将生成。
+					  关闭时：石巨人NPC不会生成。
+					    关闭以阻止石巨人NPC生成。
+					默认值：开
+					'''
 				LabelSpawnEoL: "[i:4784]   光之女皇可以生成"
+				TooltipSpawnEoL:
+					'''
+					此选项切换光明女皇 NPC 是否可以生成。
+					  当开启时：光明女皇NPC将生成。
+					  关闭时：光明女皇NPC不会生成。
+					    关闭以阻止光之女皇NPC生成。
+					默认值：开
+					'''
 				LabelSpawnDF: "[i:2588]   猪龙鱼公爵可以生成"
+				TooltipSpawnDF:
+					'''
+					此选项切换猪龙鱼公爵NPC是否可以生成。
+					  当开启时：猪龙鱼公爵NPC将生成。
+					  关闭时：猪龙鱼公爵NPC不会生成。
+					    关闭以阻止猪龙鱼公爵NPC生成。
+					默认值：开
+					'''
 				LabelSpawnBe: "[i:3863]   双足翼龙可以生成"
-				LabelSpawnLC: "[i:3372]   拜月教邪教徒可以生成"
-				LabelSpawnML: "[i:3373]   月亮领主可以生成"
-				LabelSpawnGoblinSell: "[i:361]   哥布林修补匠出售哥布林军队物品"
+				TooltipSpawnBe:
+					'''
+					此选项切换双足翼龙NPC是否可以生成。
+					  当打开时：双足翼龙NPC将生成。
+					  关闭时：双足翼龙NPC不会生成。
+					    关闭以阻止双足翼龙NPC生成。
+					默认值：开
+					'''
+				LabelSpawnLC: "[i:3372]   拜月邪教徒可以生成"
+				TooltipSpawnLC:
+					'''
+					此选项切换拜月邪教徒NPC是否可以生成。
+					  当开启时：拜月邪教徒NPC将生成。
+					  关闭时：拜月邪教徒NPC不会生成。
+					    关闭以阻止拜月邪教徒NPC生成。
+					默认值：开
+					'''
+				LabelSpawnML: "[i:3373]  月亮领主可以生成"
+				TooltipSpawnML:
+					'''
+					此选项切换月亮领主 NPC 是否可以生成。
+					  当开启时：月亮领主NPC将生成。
+					  关闭时：月亮领主NPC不会生成。
+					    关闭以阻止月亮领主NPC生成。
+					默认值：开
+					'''
+				LabelSpawnGoblinSell: "[i:361]   哥布林工匠出售哥布林军队物品"
+				TooltipSpawnGoblinSell:
+					'''
+					此选项切换哥布林工匠是否可以出售哥布林军队物品。
+					  当开机：哥布林工匠会出售哥布林军队的物品。
+					  关闭时：哥布林工匠不会出售哥布林军队的物品。
+					    关掉以阻止哥布林军队的物品从哥布林工匠的商店。
+					默认值：开
+					'''
 				LabelSpawnPirateSell: "[i:1315]   海盗出售海盗入侵物品"
+				TooltipSpawnPirateSell:
+					'''
+					此选项切换海盗是否可以出售海盗入侵物品。
+					  当打开时：海盗将出售海盗入侵物品。
+					  关闭时：海盗不会出售海盗入侵物品。
+					    关闭以阻止海盗商店中的海盗入侵物品。
+					默认值：开
+					'''
 				LabelSpawnPk: "[i:1857]   南瓜王可以生成"
+				TooltipSpawnPk:
+					'''
+					此选项切换南瓜王 NPC 是否可以生成。
+					  当打开时：将生成南瓜王NPC。
+					  关闭时：南瓜王NPC不会生成。
+					    关闭以阻止南瓜王 NPC 生成。
+					默认值：开
+					'''
 				LabelSpawnIQ: "[i:4814]   冰雪女王可以生成"
+				TooltipSpawnIQ:
+					'''
+					此选项切换冰雪女王NPC是否可以生成。
+					  当打开时：冰雪女王NPC将生成。
+					  关闭时：冰雪女王NPC不会生成。
+					    关闭以阻止冰雪女王NPC生成。
+					默认值：开
+					'''
 				LabelSpawnMS: "[i:2769]   火星飞碟可以生成"
+				TooltipSpawnMS:
+					'''
+					此选项切换火星飞碟 NPC 是否可以生成。
+					  当开启时：火星飞碟NPC将生成。
+					  关闭时：火星飞碟NPC不会生成。
+					    关闭以阻止火星飞碟NPC生成。
+					默认值：开
+					'''
+				MultiplayerMessage: 您不是服务器所有者，因此您无法更改此配置！
+			}
+		}
+		CrossMod: {
+			Census: {
+				KingSlime: Defeat King Slime
+				EyeOfCthulhu: Defeat the Eye of Cthulhu
+				EaterOfWorlds:
+					'''
+					Defeat the Eater of Worlds in a Corruption world,
+					or in a Hardmode in a Crimson world
+					'''
+				BrainOfCthulhu:
+					'''
+					Defeat the Brain of Cthulhu in a Crimson world,
+					or in a Hardmode in a Corruption world
+					'''
+				QueenBee: Defeat Queen Bee
+				Skeletron: Defeat Skeletron
+				Deerclops: Defeat Deerclops
+				WallOfFlesh: Defeat the Wall of Flesh
+				QueenSlime: Defeat Queen Slime
+				TheDestroyer: Defeat The Destroyer
+				TheTwins: Defeat The Twins
+				SkeletronPrime: Defeat Skeletron Prime
+				Plantera: Defeat Plantera
+				Golem: Defeat Golem
+				EmpressOfLight: Defeat the Empress of Light
+				DukeFishron: Defeat Duke Fishron
+				Betsy: Defeat Betsy
+				LunaticCultist: Defeat the Lunatic Cultist
+				MoonLord: Defeat Moon Lord
+				Pumpking: Defeat the Pumpking
+				IceQueen: Defeat the Ice Queen
+				MartianSaucer: Defeat the Martian Saucer
 			}
 		}
 		Common: {
 			VanityAccesssory: 梳妆台配件
 			CaughtNPC: 被抓到的NPC
+			// The following words are used for the Bestiary happiness text.
+			Forest: Forest
+			Hallow: Hallow
+			Jungle: Jungle
+			Snow: Snow
+			Ocean: Ocean
+			Desert: Desert
+			GlowingMushroom: Glowing Mushroom
+			Graveyard: Graveyard
+			Caverns: "{$GameUI.LayerCaverns}" //Set automatically from vanilla's localization
+			None: None
+		}
+		UI: {
+			CapturedSpawnText1: 这
+			CapturedSpawnText2: 城镇NPC已经诞生了！
+			// "Love" and "Hate" are already translated from vanilla's random world name generator
+			Like : Like
+			Dislike : Dislike
 		}
 		ItemName: {
-			BeCostumeBodypiece: 双足翼龙爵服装车身件
-			BeCostumeLegpiece: 双足翼龙爵服装腿片
-			BoCCostumeBodypiece: 克苏鲁之脑服装车身件
-			BoCCostumeLegpiece: 克苏鲁之脑服装腿片
-			DcCostumeBodypiece: 鹿角怪爵服装车身件
-			DcCostumeLegpiece: 鹿角怪爵服装腿片
-			DeCostumeBodypiece: 毁灭者爵服装车身件
-			DeCostumeLegpiece: 毁灭者爵服装腿片
-			DFCostumeHeadpiece: 猪龙鱼公爵服装头饰
-			DFCostumeBodypiece: 猪龙鱼公爵服装车身件
-			DFCostumeLegpiece: 猪龙鱼公爵服装腿片
-			EoLCostumeHeadpiece: 女皇服装头饰
-			EoLCostumeBodypiece: 女皇服装车身件
-			EoLCostumeLegpiece: 女皇服装腿片
-			EoCCostumeHeadpiece: 克苏鲁之眼服装头饰
-			EoCCostumeBodypiece: 克苏鲁之眼服装车身件
-			EoWCostumeBodypiece: 世界吞噬者爵服装车身件
-			EoWCostumeLegpiece: 世界吞噬者爵服装腿片
-			EyeCostumeLegpiece: 眼服装腿片
-			GolemCostumeBodypiece: 石巨人服装车身件
-			GolemCostumeLegpiece: 石巨人服装腿片
-			IQCostumeHeadpiece: 冰雪女王服装头饰
-			IQCostumeBodypiece: 冰雪女王服装车身件
-			IQCostumeLegpiece: 冰雪女王服装腿片
-			IQCostumeCape: 冰雪女王服装斗篷
-			KSCostumeHeadpiece: 史莱姆王服装头饰
-			KSCostumeGloves: 史莱姆王服装手套
-			KSAltCostumeGloves: 史莱姆王替代服装手套
-			LCCostumeHeadpiece: 拜月教邪教徒服装头饰
-			LCCostumeBodypiece: 拜月教邪教徒服装车身件
-			MLCostumeBodypiece: 月亮领主服装车身件
-			MSCostumeHeadpiece: 火星飞碟服装头饰
-			MSCostumeBodypiece: 火星飞碟服装车身件
-			MSCostumeLegpiece: 火星飞碟服装腿片
-			PkCostumeHeadpiece: 南瓜王服装头饰
-			PkCostumeBodypiece: 南瓜王服装车身件
-			PkCostumeLegpiece: 南瓜王服装腿片
+			BeCostumeBodypiece: 双足翼龙上衣
+			BeCostumeLegpiece: 双足翼龙裤子
+			BoCCostumeBodypiece: 克苏鲁之脑上衣
+			BoCCostumeLegpiece: 克苏鲁之脑裤子
+			DcCostumeBodypiece: 鹿角怪上衣
+			DcCostumeLegpiece: 鹿角怪裤子
+			DeCostumeBodypiece: 毁灭者上衣
+			DeCostumeLegpiece: 毁灭者裤子
+			DFCostumeHeadpiece: 猪龙鱼公爵头饰
+			DFCostumeBodypiece: 猪龙鱼公爵上衣
+			DFCostumeLegpiece: 猪龙鱼公爵裤子
+			EoLCostumeHeadpiece: 女皇头饰
+			EoLCostumeBodypiece: 女皇上衣
+			EoLCostumeLegpiece: 女皇裤子
+			EoCCostumeHeadpiece: 克苏鲁之眼头饰
+			EoCCostumeBodypiece: 克苏鲁之眼上衣
+			EoWCostumeBodypiece: 世界吞噬者上衣
+			EoWCostumeLegpiece: 世界吞噬者裤子
+			EyeCostumeLegpiece: 克苏鲁之眼裤子
+			GolemCostumeBodypiece: 石巨人上衣
+			GolemCostumeLegpiece: 石巨人裤子
+			IQCostumeHeadpiece: 冰雪女王头饰
+			IQCostumeBodypiece: 冰雪女王上衣
+			IQCostumeLegpiece: 冰雪女王裤子
+			IQCostumeCape: 冰雪女王斗篷
+			KSCostumeHeadpiece: 史莱姆王头饰
+			KSCostumeGloves: 史莱姆王手套
+			KSAltCostumeGloves: 史莱姆王手套替代品
+			LCCostumeHeadpiece: 拜月教邪教徒面具
+			LCCostumeBodypiece: 拜月教邪教徒上衣
+			MLCostumeBodypiece: 月亮领主上衣
+			MSCostumeHeadpiece: 火星飞碟头饰
+			MSCostumeBodypiece: 火星飞碟上衣
+			MSCostumeLegpiece: 火星飞碟裤子
+			PkCostumeHeadpiece: 南瓜王头饰
+			PkCostumeBodypiece: 南瓜王上衣
+			PkCostumeLegpiece: 南瓜王裤子
 			PkCostumeShoes: 南瓜王服装鞋
-			PlCostumeBodypiece: 世纪之花服装车身件 
-			PlCostumeLegpiece: 世纪之花服装腿片
-			PlCostumeBackpiece: 世纪之花服装背片
-			QBCostumeBodypiece: 蜂王服装车身件
-			QBCostumeLegpiece: 蜂王服装腿片
-			QSAltCostumeHeadpiece: 史莱姆皇后替代服装
-			QSCostumeBodypiece: 史莱姆皇后服装车身件
-			QSCostumeGloves: 史莱姆皇后服装手套
-			RetCostumeHeadpiece: 激光眼服装头饰
-			RetCostumeBodypiece: 激光眼服装车身件
-			SkCostumeBodypiece: 骷髅服装车身件
-			SkCostumeLegpiece: 骷髅服装腿片
-			SPCostumeBodypiece: 机械骷髅王服装车身件
-			SPCostumeLegpiece: 机械骷髅王服装腿片
-			SpazCostumeHeadpiece: 魔焰眼服装头饰
-			SpazCostumeBodypiece: 魔焰眼服装车身件
-			WoFCostumeHeadpiece: 血肉墙服装头饰
-			WoFCostumeBodypiece: 血肉墙服装车身件
-			WoFCostumeLegpiece: 血肉墙服装腿片
-			WoFCostumeBackpiece: 血肉墙服装背片
+			PlCostumeBodypiece: 世纪之花上衣 
+			PlCostumeLegpiece: 世纪之花裤子
+			PlCostumeBackpiece: 世纪之花背心
+			QBCostumeBodypiece: 蜂王上衣
+			QBCostumeLegpiece: 蜂王裤子
+			QSAltCostumeHeadpiece: 史莱姆皇后面具替代品
+			QSCostumeBodypiece: 史莱姆皇后上衣
+			QSCostumeGloves: 史莱姆皇后手套
+			RetCostumeHeadpiece: 激光眼头饰
+			RetCostumeBodypiece: 激光眼上衣
+			SkCostumeBodypiece: 骷髅王上衣
+			SkCostumeLegpiece: 骷髅王裤子
+			SPCostumeBodypiece: 机械骷髅王上衣
+			SPCostumeLegpiece: 机械骷髅王裤子
+			SpazCostumeHeadpiece: 魔焰眼头饰
+			SpazCostumeBodypiece: 魔焰眼上衣
+			WoFCostumeHeadpiece: 血肉墙头饰
+			WoFCostumeBodypiece: 血肉墙上衣
+			WoFCostumeLegpiece: 血肉墙裤子
+			WoFCostumeBackpiece: 血肉墙背心
 		}
+
+		// These translations are automatically assigned. Leave as is.
 		ItemTooltip: {
+			IQCostumeCape: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			KSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			KSAltCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			PkCostumeShoes: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			PlCostumeBackpiece: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			QSCostumeGloves: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			WoFCostumeBackpiece: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			CaughtKingSlime: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtEyeOfCthulhu: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtEaterOfWorlds: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
@@ -130,5 +442,652 @@ Mods: {
 			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 		}
+
+		BiomeName: {
+			GraveyardBiome: 墓地
+			SkyBiome: 天空
+			UnderworldBiome: 地下
+		}
+		
+		TownNPCMood: {
+			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
+			KingSlime: {
+				Content: 我感到很满足。
+				NoHome: 像我这样的国王需要一个家！
+				LoveSpace: 我喜欢有这么多空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}。"
+				LoveBiome: "我爱{BiomeName}."
+				DislikeBiome: "我不喜欢{BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			EyeOfCthulhu: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我喜欢有这么多空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}。"
+				LoveBiome: "我爱{BiomeName}."
+				DislikeBiome: "我不喜欢{BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			EaterOfWorlds: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我喜欢有这么多空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}。"
+				LoveBiome: "我爱{BiomeName}."
+				DislikeBiome: "我不喜欢{BiomeName}."
+				HateBiome: "{BiomeName} 不适合住房子。"
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			BrainOfCthulhu: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我喜欢有这么多空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}。"
+				LoveBiome: "我爱{BiomeName}."
+				DislikeBiome: "我不喜欢{BiomeName}."
+				HateBiome: "{BiomeName} 不适合住房子。"
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			QueenBee: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢{NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Skeletron: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "{BiomeName} 不适合住房子。"
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢{NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Deerclops: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢{BiomeName}."
+				HateBiome: "我讨厌{BiomeName}."
+				LikeNPC: "我喜欢{NPCName}."
+				LikeNPC_Princess: "我喜欢{NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢{NPCName}."
+				HateNPC: "我讨厌{NPCName}."
+			}
+			WallOfFlesh: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌{BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			QueenSlime: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢{BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			TheDestroyer: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Retinazer: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Spazmatism: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			SkeletronPrime: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Plantera: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Golem: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			EmpressOfLight: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			DukeFishron: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Betsy: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			LunaticCultist: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			MoonLord: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Dreadnautilus: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Mothron: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			Pumpking: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			IceQueen: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+			MartianSaucer: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
+		}
+		Bestiary: {
+			Description: {
+				KingSlime: This gelatin oligarch has decided to become your roommate.
+				EyeOfCthulhu: This optical organ has decided to become your roommate.
+				EaterOfWorlds: This abyssal worm has decided to become your roommate.
+				BrainOfCthulhu: This vile mastermind has decided to become your roommate.
+				QueenBee: This highly aggressive monstrosity has decided to become your roommate.
+				Skeletron: This disembodied bones has decided to become your roommate.
+				Deerclops: This cyclopic monstrosity has decided to become your roommate.
+				WallOfFlesh: This towering demon lord has decided to become your roommate.
+				QueenSlime: This gelatin oligarch has decided to become your roommate.
+				TheDestroyer: This mechanical spine has decided to become your roommate.
+				Retinazer: This mechanical laser has decided to become your roommate.
+				Spazmatism: This mechanical flamethrower has decided to become your roommate.
+				SkeletronPrime: This mechanical skull has decided to become your roommate.
+				Plantera: This floral guardian has decided to become your roommate. 
+				Golem: This Temple guardian has decided to become your roommate.
+				EmpressOfLight: This vengeful fae goddess has decided to become your roommate.
+				DukeFishron: This aquatic pigron mutation has decided to become your roommate.
+				Betsy: This vicious dragon has decided to become your roommate.
+				LunaticCultist: This fanatical leader has decided to become your roommate.
+				MoonLord: This eldritch god has decided to become your roommate.
+				Dreadnautilus: This enormous shelled water demon has decided to become your roommate.
+				Mothron: This behemoth of an insect has decided to become your roommate.
+				Pumpking: This pumpkin king has decided to become your roommate.
+				IceQueen: This icy monstrosity has decided to become your roommate.
+				MartianSaucer: This advanced flying saucer has decided to become your roommate.
+			}
+			Happiness: {
+				// These are automatically translated from other localization. Leave as is.
+				KingSlime: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenSlimeBoss}, {$NPCName.EyeofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Pumpking}, {$NPCName.DukeFishron}, {$NPCName.Guide}, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EyeOfCthulhu: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.MoonLordHead}, {$NPCName.Guide}, {$NPCName.Painter}, {$NPCName.PartyGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.None}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EaterOfWorlds: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.BrainofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
+				}
+				BrainOfCthulhu: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
+				}
+				QueenBee: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Demolitionist}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Skeletron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Clothier}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
+					Dislike: "{$NPCName.Angler}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Deerclops: {
+					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.DD2Betsy}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
+					Dislike: "{$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				WallOfFlesh: {
+					Love: "{$NPCName.Guide}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				QueenSlime: {
+					Love: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.KingSlime}, {$NPCName.HallowBoss}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}, {$NPCName.IceQueen}, {$NPCName.PartyGirl}, {$NPCName.Nurse}, {$NPCName.Dryad}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				TheDestroyer: {
+					Love: "{$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EaterofWorldsHead}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Wizard}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Retinazer: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Nurse}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Spazmatism: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Nurse}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				SkeletronPrime: {
+					Love: "{$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.Mechanic}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Steampunker}, {$NPCName.Cyborg}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Pirate}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Plantera: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.WitchDoctor}, {$NPCName.Dryad}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Golem}, {$NPCName.QueenBee}, {$NPCName.HallowBoss}, {$NPCName.CultistBoss}, {$NPCName.Steampunker}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DyeTrader}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Golem: {
+					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.WitchDoctor}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.QueenBee}, {$NPCName.HallowBoss}, {$NPCName.CultistBoss}, {$NPCName.Dryad}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.GoblinTinkerer}, {$NPCName.Demolitionist}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				EmpressOfLight: {
+					Love: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Dryad}, {$NPCName.QueenSlimeBoss}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.CultistBoss}, {$NPCName.Wizard}, {$NPCName.PartyGirl}, {$NPCName.Stylist}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Graveyard}"
+				}
+				DukeFishron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.Angler}"
+					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.Pirate}, {$NPCName.Truffle}"
+					Dislike: "{$NPCName.ArmsDealer}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Betsy: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.DukeFishron}, {$NPCName.Deerclops}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Merchant}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				LunaticCultist: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
+					Dislike: "{$NPCName.WitchDoctor}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				MoonLord: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}"
+					Like: "{$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
+					Dislike: "{$NPCName.HallowBoss}, {$NPCName.Dryad}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Dreadnautilus: {
+					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
+					Dislike: "Underground, {$NPCName.Angler}, {$NPCName.Pirate}"
+					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
+				}
+				Mothron: {
+					Love: "{$Mods.BossesAsNPCs.Common.Forest}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.BestiaryGirl}"
+					Dislike: "Underground, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				Pumpking: {
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.IceQueen}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.PartyGirl}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				IceQueen: {
+					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.Pumpking}"
+					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.Deerclops}, {$NPCName.QueenSlimeBoss}, {$NPCName.QueenBee}, {$NPCName.SantaClaus}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Painter}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				MartianSaucer: {
+					Love: "{$NPCName.Cyborg}, {$NPCName.Steampunker}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Mechanic}, {$NPCName.GoblinTinkerer}"
+					Dislike: "{$NPCName.Wizard}, {$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+			}
+		}
 	}
+}
+
+TownNPCMoodBiomes.GraveyardBiome: 墓地
+
+TownNPCMood_Princess: {
+	LoveNPC_BossesAsNPCs/KingSlime: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/EyeOfCthulhu: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/EaterOfWorlds: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/BrainOfCthulhu: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/QueenBee: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Skeletron: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Deerclops: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/WallOfFlesh: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/QueenSlime: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/TheDestroyer: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Retinazer: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Spazmatism: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/SkeletronPrime: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Plantera: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Golem: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/EmpressOfLight: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/DukeFishron: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Betsy: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/LunaticCultist: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/MoonLord: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Dreadnautilus: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Mothron: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/Pumpking: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/IceQueen: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/MartianSaucer: "我爱 {NPCName}."
 }

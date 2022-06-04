@@ -76,12 +76,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
-				new FlavorTextBestiaryInfoElement("This towering demon lord has decided to become your roommate."),
+				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
 				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText() + "Guide\n" +
-					NPCHelper.LikeText() + "Caverns, Eater of Worlds, Brain of Cthulhu, Tax Collector, Goblin Tinkerer\n" +
-					NPCHelper.DislikeText() + "Forest, Queen Bee\n" +
-					NPCHelper.HateText() + "None")
+					NPCHelper.LoveText(GetType().Name) +
+					NPCHelper.LikeText(GetType().Name) +
+					NPCHelper.DislikeText(GetType().Name) +
+					NPCHelper.HateText(GetType().Name))
 			});
 		}
 
@@ -132,7 +132,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("There is plenty of desserts at this party, but is there any meat being served?", 2.0);
+				chat.Add("There are plenty of desserts at this party, but is any meat being served?", 2.0);
 			}
 			int guide = NPC.FindFirstNPC(NPCID.Guide);
 			if (guide >= 0)

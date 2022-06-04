@@ -14,21 +14,21 @@ namespace BossesAsNPCs.NPCs
 {
 	public class NPCHelper
 	{
-		public static string LoveText()
+		public static string LoveText(string npc)
 		{
-			return "[c/b3f2b3:" + Language.GetTextValue("RandomWorldName_Noun.Love") + "]: ";
+			return "[c/b3f2b3:" + Language.GetTextValue("RandomWorldName_Noun.Love") + "]: " + Language.GetTextValue("Mods.BossesAsNPCs.Bestiary.Happiness." + npc + ".Love") + "\n";
 		}
-		public static string LikeText()
+		public static string LikeText(string npc)
 		{
-			return "[c/ddf2b3:Like]: ";
+			return "[c/ddf2b3:" + Language.GetTextValue("Mods.BossesAsNPCs.UI.Like") + "]: " + Language.GetTextValue("Mods.BossesAsNPCs.Bestiary.Happiness." + npc + ".Like") + "\n";
 		}
-		public static string DislikeText()
+		public static string DislikeText(string npc)
 		{
-			return "[c/f2e0b3:Dislike]: ";
+			return "[c/f2e0b3:" + Language.GetTextValue("Mods.BossesAsNPCs.UI.Dislike") + "]: " + Language.GetTextValue("Mods.BossesAsNPCs.Bestiary.Happiness." + npc + ".Dislike") + "\n";
 		}
-		public static string HateText()
+		public static string HateText(string npc)
 		{
-			return "[c/f2b5b3:" + Language.GetTextValue("RandomWorldName_Noun.Hate") + "]: ";
+			return "[c/f2b5b3:" + Language.GetTextValue("RandomWorldName_Noun.Hate") + "]: " + Language.GetTextValue("Mods.BossesAsNPCs.Bestiary.Happiness." + npc + ".Hate");
 		}
 		public static bool UnlockOWMusic()
 		{

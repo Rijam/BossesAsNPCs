@@ -19,24 +19,11 @@ Contains a config file to disable certain Town NPCs from spawning and other opti
 See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 
-Mod version: 0.1.7
-	- Added Skeletron Prime Costume Bodypiece and Skeletron Prime Costume Legpiece
-	- Added Deerclops Costume Bodypiece and Deerclops Costume Legpiece
-	- Added Wall of Flesh Costume Bodypiece, Wall of Flesh Costume Legpiece, and Wall of Flesh Costume Backpiece
-	- Added Queen Bee Costume Bodypiece and Queen Bee Costume Legpiece
-	- Added Brain of Cthulhu Costume Bodypiece
-	- Added Lunatic Cultist Costume Headpiece
-	- Added a glow mask for Deerclops' eye when attacking
-	- Added glow masks to Pumpking Costume Headpiece and the Martian Saucer Costume set.
-	- Color coded the happiness info in the Bestiary
-	- Split Betsy's, Pumpking's, and Ice Queen's shops into two because they were almost full with all the options enabled.
-	- Added some more dialog to every Town NPC (Mostly just dialog for parties).
-	- Fixed the localization on the Graveyard biome.
-	- Fixed the localization for the Princess.
-	- Added some more Mod.Calls (see the wiki)
-	- Updated AddEquipTexture
-	- Updated NPC.catchItem and Item.makeNPC
-	- Updated PlaySound
+Additional credits:
+	- TianChen: Chinese translations
+
+Mod version: 0.1.8
+	wip
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)
