@@ -77,12 +77,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Ocean,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,29 +111,28 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Duke Fishron.");
-			chat.Add("I'm the Duke, baby!");
-			chat.Add("It's time to eat worms and blow bubbles, and I'm all out of bubbles.");
-			chat.Add("Have you ever been to a sewer? I have, met a lot of mutants down there.");
-			chat.Add("How strong does the wind have to be to be able to pick up water and sharks?");
-			chat.Add("A third pig, a third fish, a third dragon, completely awesome!");
+			for (int i = 1; i <= 6; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I'm the only person who can eat like a pig and get away with it!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int mutant = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Mutant").Type);
 				if (mutant >= 0)
 				{
-					chat.Add(Main.npc[mutant].GivenName + " has some pretty nice looking wings.");
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[mutant].GivenName));
 				}
 			}
 			if (ModLoader.TryGetMod("CalamityMod", out Mod _))
 			{
-				chat.Add("Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.");
-				chat.Add("I haven't seen my father in a long time...");
+				chat.Add(Language.GetTextValue(path + "Calamity1"));
+				chat.Add(Language.GetTextValue(path + "Calamity2"));
 			}
 			return chat;
 		}

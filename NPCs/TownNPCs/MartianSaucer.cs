@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Sky,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -145,25 +141,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Martian Saucer.");
-			chat.Add("Do you believe in aliens? Well you should, you're looking right at one.");
-			chat.Add("What? Didn't think a robot could be sentient?");
-			chat.Add("I hope you have your tin-foil hat on.");
-			chat.Add("Don't worry, I'm not going to probe you. That's that job for a Martian Scientist.");
-			chat.Add("Martians are shorter than you Terrarians. As a result, your dwellings large enough for me in this form.");
-			chat.Add("Maybe you Terrarians aren't so bad after all...");
-			chat.Add("This sentence is false.\n...Don't answer that.");
+			for (int i = 1; i <= 8; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Parties entail such strange decor and customs that I am not used to.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod))
 			{
 				int intTrav = NPC.FindFirstNPC(rijamsMod.Find<ModNPC>("InterstellarTraveler").Type);
 				if (intTrav >= 0)
 				{
-					chat.Add("I haven't seen a species like " + Main.npc[intTrav].GivenName + " before.");
+					chat.Add(Language.GetTextValue(path + "RijamsMod").Replace("{0}", Main.npc[intTrav].GivenName));
 				}
 			}
 			return chat;

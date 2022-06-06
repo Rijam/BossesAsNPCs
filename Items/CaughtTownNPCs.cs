@@ -15,12 +15,11 @@ namespace BossesAsNPCs.Items
     public class CaughtKingSlime : ModItem
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.KingSlime");
-		readonly private static string whichNPCString = "KingSlime";
 		public override bool IsLoadingEnabled(Mod mod)
 		{
 			return ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
 		}
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault(name);
@@ -56,7 +55,7 @@ namespace BossesAsNPCs.Items
 		}
 		internal static void SpawnText(string npcName)
 		{
-			string chatmessage = Language.GetTextValue("Mods.BossesAsNPCs.UI.CapturedSpawnText1") + " " + npcName + " " + Language.GetTextValue("Mods.BossesAsNPCs.UI.CapturedSpawnText2");
+			string chatmessage = Language.GetTextValue("Mods." + ModContent.GetInstance<BossesAsNPCs>().Name + ".UI.CapturedSpawnText").Replace("{0}", npcName);
 			if (Main.netMode != NetmodeID.Server)
 			{
 				Main.NewText(chatmessage, 50, 125, 255);
@@ -72,8 +71,7 @@ namespace BossesAsNPCs.Items
     public class CaughtEyeOfCthulhu : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.EyeofCthulhu");
-		readonly private static string whichNPCString = "EyeOfCthulhu";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -103,8 +101,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtEaterOfWorlds : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.EaterofWorldsHead");
-		readonly private static string whichNPCString = "EaterOfWorlds";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -134,8 +131,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtBrainOfCthulhu : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.BrainofCthulhu");
-		readonly private static string whichNPCString = "BrainOfCthulhu";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -165,8 +161,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtQueenBee : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.QueenBee");
-		readonly private static string whichNPCString = "QueenBee";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -196,8 +191,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtSkeletron : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.SkeletronHead");
-		readonly private static string whichNPCString = "Skeletron";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -227,8 +221,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtDeerclops : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Deerclops");
-		readonly private static string whichNPCString = "Deerclops";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -258,8 +251,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtWallOfFlesh : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.WallofFlesh");
-		readonly private static string whichNPCString = "WallOfFlesh";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -289,8 +281,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtQueenSlime : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.QueenSlimeBoss");
-		readonly private static string whichNPCString = "QueenSlime";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -320,8 +311,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtTheDestroyer : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.TheDestroyer");
-		readonly private static string whichNPCString = "TheDestroyer";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -351,8 +341,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtRetinazer : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Retinazer");
-		readonly private static string whichNPCString = "Retinazer";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -382,8 +371,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtSpazmatism : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Spazmatism");
-		readonly private static string whichNPCString = "Spazmatism";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -413,8 +401,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtSkeletronPrime : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.SkeletronPrime");
-		readonly private static string whichNPCString = "SkeletronPrime";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -444,8 +431,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtPlantera : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Plantera");
-		readonly private static string whichNPCString = "Plantera";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -475,8 +461,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtGolem : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Golem");
-		readonly private static string whichNPCString = "Golem";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -506,8 +491,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtEmpressOfLight : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.HallowBoss");
-		readonly private static string whichNPCString = "EmpressOfLight";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -537,8 +521,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtDukeFishron : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.DukeFishron");
-		readonly private static string whichNPCString = "DukeFishron";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -568,8 +551,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtBetsy : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.DD2Betsy");
-		readonly private static string whichNPCString = "Betsy";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -599,8 +581,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtLunaticCultist : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.CultistBoss");
-		readonly private static string whichNPCString = "LunaticCultist";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -630,8 +611,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtMoonLord : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.MoonLordHead");
-		readonly private static string whichNPCString = "MoonLord";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -661,8 +641,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtPumpking : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.Pumpking");
-		readonly private static string whichNPCString = "Pumpking";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -692,8 +671,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtIceQueen : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.IceQueen");
-		readonly private static string whichNPCString = "IceQueen";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
@@ -723,8 +701,7 @@ namespace BossesAsNPCs.Items
 	public class CaughtMartianSaucer : CaughtKingSlime
 	{
 		readonly private static string name = Language.GetTextValue("NPCName.MartianSaucer");
-		readonly private static string whichNPCString = "MartianSaucer";
-		public override string Texture => "BossesAsNPCs/NPCs/TownNPCs/" + whichNPCString;
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();

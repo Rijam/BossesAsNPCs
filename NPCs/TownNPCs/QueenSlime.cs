@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -119,23 +115,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Queen Slime.");
-			chat.Add("Just a reminder that touching living slimes will dissolve your flesh.");
-			chat.Add("My defeat will not stop my army of slimes!");
-			chat.Add("I would prefer it if you stopped bouncing objects off of me.");
-			chat.Add("Pink Gel may be 'sweet', but get any ideas!", 0.1);
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
+			chat.Add(Language.GetTextValue(path + "Rare"), 0.1);
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I expected this party to be spectacular. I am not disappointed.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (!NPC.downedSlimeKing)
 			{
-				chat.Add("You may have defeated me, but I'm only one half of the slime oligarchy!");
+				chat.Add(Language.GetTextValue(path + "KS1"));
 			}
 			if (NPC.downedSlimeKing)
 			{
-				chat.Add("You have bested the slime oligarchy. I commend you.");
+				chat.Add(Language.GetTextValue(path + "KS2"));
 			}
 			return chat;
 		}

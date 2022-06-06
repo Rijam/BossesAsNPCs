@@ -77,12 +77,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,32 +111,32 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Eater of Worlds.");
-			chat.Add("No, I am not Cthulhu's spine. Where did you even hear that?");
-			chat.Add("Which way to the nearest restroom?! I think I'm going to vomit.");
-			chat.Add("Of course piercing weapons are effective -- they go right through you!");
-			chat.Add("A horrible chill goes down your wallet... I think the only solution is to buy something.");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("You might have to start calling the \"Eater of Cake\" after this party!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (Main.expertMode)
             {
-				chat.Add("Your explosives are 80% less effective against me in this world!");
+				chat.Add(Language.GetTextValue(path + "Expert"));
 			}
 			if (WorldGen.tEvil >= 100)
 			{
-				chat.Add("Yes! Let the Corruption spread!");
+				chat.Add(Language.GetTextValue(path + "Evil"));
 			}
 			if (WorldGen.tGood > 0)
 			{
-				chat.Add("That nasty Hallow is ruining my plans of spreading the Corruption!");
+				chat.Add(Language.GetTextValue(path + "Good"));
 			}
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add("I'm not sure if you have noticed, but " + Main.npc[dryad].GivenName + " really hates me.");
+				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
 			}
 
 			return chat;

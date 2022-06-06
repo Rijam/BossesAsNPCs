@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -145,36 +141,38 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Golem.");
-			chat.Add("I am not a push-over. Seriously, try to push me over!");
-			chat.Add("Do you want a Picksaw? Luckily, I have one for sale!");
+			for (int i = 1; i <= 3; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			int witchDoctor = NPC.FindFirstNPC(NPCID.WitchDoctor);
 			if (witchDoctor >= 0)
 			{
-				chat.Add("I shall protect " + Main.npc[witchDoctor].GivenName + " at all costs.");
+				chat.Add(Language.GetTextValue(path + "WitchDoctor").Replace("{0}", Main.npc[witchDoctor].GivenName));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I'm not used to being part of such celebrations. I like it!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (Main.getGoodWorld || WorldGen.getGoodWorldGen)
             {
-				chat.Add("I'm just as big as when I fought you!");
+				chat.Add(Language.GetTextValue(path + "ForTheWorthy"));
 			}
 			if (Main.player[Main.myPlayer].ZoneOverworldHeight)
             {
-				chat.Add("At least there is more sunlight up here.");
+				chat.Add(Language.GetTextValue(path + "Surface"));
 			}
 			if (Main.player[Main.myPlayer].ZoneLihzhardTemple)
 			{
-				chat.Add("Watch out for traps... unless you disabled all of them.");
-				chat.Add("I blend right into these walls!");
+				chat.Add(Language.GetTextValue(path + "Temple1"));
+				chat.Add(Language.GetTextValue(path + "Temple2"));
 			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
-				chat.Add("I am the drummer for Plantera's metal band. I am very good at smacking.");
+				chat.Add(Language.GetTextValue(path + "Plantera"));
 			}
 			return chat;
 		}

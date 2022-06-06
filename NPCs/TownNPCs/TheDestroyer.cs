@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -145,19 +141,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am The Destroyer.");
-			chat.Add("What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!");
-			chat.Add("I guess Cthulhu won't be getting his replacement spine after all.");
-			chat.Add("You feel vibrations deep within your pockets... so buy something!");
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I better be invited to this party! If I'm not, I'll crash this party!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
             if (mechanic >= 0)
 			{
-				chat.Add(Main.npc[mechanic].GivenName + " was the one who built me, you know.");
+				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
 			}
 			return chat;
 		}

@@ -75,12 +75,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -164,29 +160,29 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
         public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Deerclops.");
-			chat.Add("Make sure to eat and keep your sanity up!");
-			chat.Add("Stay out of the darkness, or she'll get you...");
-			chat.Add("Sorry, I'm loud. I have gotten complaints from the other villagers.");
-			chat.Add("Everyone else gets an achievement; where is mine?");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Main.player[Main.myPlayer].ZoneSnow)
             {
-				chat.Add("Are you going to hold a feast of some kind in this winter weather?");
+				chat.Add(Language.GetTextValue(path + "Snow"));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Oh a party! There better be a big feast for all of us!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int betsy = NPC.FindFirstNPC(ModContent.NPCType<Betsy>());
             if (betsy >= 0)
 			{
-				chat.Add("I heard Betsy is from another world, too.");
+				chat.Add(Language.GetTextValue(path + "Betsy"));
 			}
 			if (Main.dontStarveWorld || WorldGen.dontStarveWorldGen)
             {
-				chat.Add("This world reminds of the place where I am from.");
-				chat.Add("Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!");
+				chat.Add(Language.GetTextValue(path + "TheConstant1"));
+				chat.Add(Language.GetTextValue(path + "TheConstant2"));
 			}
 			return chat;
 		}

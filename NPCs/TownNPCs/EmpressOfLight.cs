@@ -80,12 +80,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -195,48 +191,45 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Empress of Light.");
-			chat.Add("The Bestiary describes me as a vengeful fae goddess; I agree with it.");
-			chat.Add("Don't you dare touch those butterflies!");
-			chat.Add("If you want a real challenge, fight me during the day.");
-            chat.Add("\"A beautiful bullet hell\"? I don't use any firearms, but I am beautiful.");
-			chat.Add("I bet you thought all fairies were small, didn't you?");
-			chat.Add("My empire? That's a story for another time.");
-			chat.Add("Don't ask about my tentacles...", 0.5);
-			chat.Add("Is it a mouth or a nose?", 0.1);
-			chat.Add("Don't be silly, there is no Emperor of Night.\n\nIs there?", 0.1);
+			for (int i = 1; i <= 8; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
+			chat.Add(Language.GetTextValue(path + "Rare1"), 0.5);
+			chat.Add(Language.GetTextValue(path + "Rare2"), 0.1);
 			if (WorldGen.tGood >= 100)
             {
-				chat.Add("I applaud you for spreading the Hallow. Good job!");
+				chat.Add(Language.GetTextValue(path + "Good"));
 			}
 			if (WorldGen.tEvil == 0 && WorldGen.tBlood == 0)
 			{
-				chat.Add("I applaud you for removing the evil in this world. Good job!");
+				chat.Add(Language.GetTextValue(path + "NoEvilBlood"));
 			}
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0 && Main.hardMode)
 			{
-				chat.Add("Buy as many Hallow Seeds from " + Main.npc[dryad].GivenName + " as you can!");
+				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
 			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
-				chat.Add("I play my Stellar Tune in Plantera's metal band. You should come have a listen!");
+				chat.Add(Language.GetTextValue(path + "Plantera"));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
             {
-				chat.Add("I can put on real light show for this party!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (Main.LocalPlayer.armor[10].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>() &&
 				Main.LocalPlayer.armor[11].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>() &&
 				Main.LocalPlayer.armor[12].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>())
             {
-				chat.Add("That's quite the stunning outfit you have on. Following in my image I see!", 2.0); 
+				chat.Add(Language.GetTextValue(path + "Costume"), 2.0); 
 			}
 			if (ModLoader.TryGetMod("BossChecklist", out Mod _))
 			{
-				chat.Add("Oh, so you have a \'hit list\' of all the powerful creatures in this world? You planned on defeating me all along?", 0.25);
+				chat.Add(Language.GetTextValue(path + "BossChecklist"), 0.25);
 			}
 			return chat;
 		}

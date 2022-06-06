@@ -77,12 +77,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,33 +111,33 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Brain of Cthulhu.");
-			chat.Add("Cthulhu was an intelligent individual. I know, I was his brain.");
-			chat.Add("My Creepers allow me to see. They also act as good meat shields.");
-			chat.Add("The Crimson is one giant living organism.");
-			chat.Add("Screams echo around you telling you to purchase something.");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (WorldGen.tBlood >= 100)
 			{
-				chat.Add("The hive mind of the Crimson only grows stronger!");
+				chat.Add(Language.GetTextValue(path + "Blood"));
 			}
 			if (WorldGen.tGood > 0)
 			{
-				chat.Add("The Hallow poses a threat to spreading of the Crimson!");
+				chat.Add(Language.GetTextValue(path + "Good"));
 			}
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add(Main.npc[dryad].GivenName + " despises my presence.");
+				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0 && NPC.downedMechBossAny)
 			{
-				chat.Add("Be glad that you rescued " + Main.npc[mechanic].GivenName + " before she could finish building the mechanical version of me.");
+				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
 			}
 			return chat;
 		}

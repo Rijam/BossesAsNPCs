@@ -75,12 +75,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("This fanatical leader has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -113,42 +110,44 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Lunatic Cultist.");
-			chat.Add("My defeat will not stop my cult!");
-			chat.Add("Every good cult needs some sort of hooded figure!");
+			for (int i = 1; i <= 3; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (!NPC.downedMoonlord)
             {
-				chat.Add("You may have defeated me, but soon you'll face of the wrath of Cthulhu!");
+				chat.Add(Language.GetTextValue(path + "PreML"));
 			}
 			if (NPC.downedMoonlord)
 			{
-				chat.Add("Not even Cthulhu could stop you? I'm impressed.");
+				chat.Add(Language.GetTextValue(path + "PostML"));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Is this a costume party? I'm already wearing a mask.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int demolitionist = NPC.FindFirstNPC(NPCID.Demolitionist);
 			if (demolitionist >= 0)
 			{
-				chat.Add(Main.npc[demolitionist].GivenName + " keeps offering me good deals on dynamite and I'm not sure why.");
+				chat.Add(Language.GetTextValue(path + "Demolitionist").Replace("{0}", Main.npc[demolitionist].GivenName));
 			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
-				chat.Add("My mysterious chanting is perfect for Plantera's metal band.");
+				chat.Add(Language.GetTextValue(path + "Plantera"));
 			}
 			if (Main.time >= 0 && Main.time < 9000 && !Main.dayTime) //7:30 PM to 10:00 PM
 			{
-				chat.Add("Dusk is my favorite time of the day.");
+				chat.Add(Language.GetTextValue(path + "Dusk"));
 			}
 			if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities))
 			{
 				int mysteriousTrader = NPC.FindFirstNPC(pbonesUtilities.Find<ModNPC>("MysteriousTrader").Type);
 				if (mysteriousTrader >= 0)
 				{
-					chat.Add("I quite like the look of that Mysterious Trader's attire.");
+					chat.Add(Language.GetTextValue(path + "PbonesUtilities"));
 				}
 			}
 			return chat;

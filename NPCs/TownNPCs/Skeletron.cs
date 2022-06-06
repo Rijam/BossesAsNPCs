@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,38 +111,39 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Skeletron.");
-			chat.Add("I'm the backbone of this world.");
-			chat.Add("I am what is left of Cthulhu's skeleton.");
-			chat.Add("The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.");
-			chat.Add("Sans what? I don't know what you are talking about.", 0.1);
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
+			chat.Add(Language.GetTextValue(path + ".Rare"), 0.1);
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I offered to host this party in the Dungeon but nobody seemed interested.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add("No hard feelings to " + Main.npc[dryad].GivenName + " for ripping me out of Cthulhu.");
+				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
 			}
 			int clothier = NPC.FindFirstNPC(NPCID.Clothier);
 			if (clothier >= 0)
 			{
-				chat.Add(Main.npc[clothier].GivenName + " was such a great host! We should get together again some time!");
+				chat.Add(Language.GetTextValue(path + "Clothier").Replace("{0}", Main.npc[clothier].GivenName));
 			}
 			int skeletronPrime = NPC.FindFirstNPC(ModContent.NPCType<SkeletronPrime>());
 			if (skeletronPrime >= 0)
 			{
-				chat.Add("If you thought I couldn't get any more awesome, check out Skeletron Prime!");
+				chat.Add(Language.GetTextValue(path + "SP"));
 			}
 			if (BossesAsNPCsWorld.downedDungeonGuardian)
             {
-				chat.Add("Impressive, you managed to defeat my Guardian form. Here, have this key. I'm not sure what it does, so you figure it out.");
+				chat.Add(Language.GetTextValue(path + "DG"));
 			}
 			if (Main.LocalPlayer.HasItem(ItemID.SDMG))
 			{
-				chat.Add("Omegatron is such an awesome guy.");
+				chat.Add(Language.GetTextValue(path + "SDMG"));
 			}
 			return chat;
 		}

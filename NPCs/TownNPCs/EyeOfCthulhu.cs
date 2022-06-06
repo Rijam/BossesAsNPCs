@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -114,30 +110,29 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Eye of Cthulhu.");
-			chat.Add("I have my eye on you...");
-			chat.Add("Besides that tree or that bunny, I think I am the mascot of this world.");
-			chat.Add("Somebody once called me the 'Eye of Terror'.");
-			chat.Add("I have been defeated in three separate universes! How is that fair?");
-			chat.Add("What is your fascination with eyes anyway?");
+			for (int i = 1; i <= 6; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("A party! Surely to celebrate my status as the best EYEcon!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int retinazer = NPC.FindFirstNPC(ModContent.NPCType<Retinazer>());
 			int spazmatism = NPC.FindFirstNPC(ModContent.NPCType<Spazmatism>());
 			if (retinazer >= 0 && spazmatism >= 0)
             {
-				chat.Add("Rez, Spaz, and I like to socialize.", 0.5);
+				chat.Add(Language.GetTextValue(path + "RezSpaz"), 0.5);
 			}
 			if (Main.LocalPlayer.HasBuff(BuffID.SuspiciousTentacle) || NPC.downedMoonlord)
 			{
-				chat.Add("There is nothing truer than the original!", 0.5);
+				chat.Add(Language.GetTextValue(path + "ML"), 0.5);
 			}
 			if (Main.LocalPlayer.HasItem(ItemID.TheEyeOfCthulhu))
 			{
-				chat.Add("I'm so popular that they put me on merchandise.");
+				chat.Add(Language.GetTextValue(path + "EoC"));
 			}
 			return chat;
 		}

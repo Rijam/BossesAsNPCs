@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,45 +111,44 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Wall of Flesh.");
-			chat.Add("You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!");
-			chat.Add("Oh, don't look so horrified!");
-			chat.Add("Let me have a little lick. Kidding! I'm just messing with you...");
-			chat.Add("I hope you're prepared for the effects of the \"V\".");
-			chat.Add("Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.");
+			for (int i = 1; i <= 6; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (!Main.player[Main.myPlayer].ZoneUnderworldHeight)
             {
-				chat.Add("You know, it's quite a bit colder here than in the Underworld.");
+				chat.Add(Language.GetTextValue(path + "NotUnderworld"));
 			}
 			if (Main.expertMode)
             {
-				chat.Add("It may be gross for you, but consuming my heart will give you extra strength!");
+				chat.Add(Language.GetTextValue(path + "Expert"));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("There are plenty of desserts at this party, but is any meat being served?", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int guide = NPC.FindFirstNPC(NPCID.Guide);
 			if (guide >= 0)
 			{
-				chat.Add("Are " + Main.npc[guide].GivenName + " and I the same person? It's hard to say...");
-				chat.Add(Main.npc[guide].GivenName + " is certainly no stranger to burns.");
+				chat.Add(Language.GetTextValue(path + "Guide1").Replace("{0}", Main.npc[guide].GivenName));
+				chat.Add(Language.GetTextValue(path + "Guide2").Replace("{0}", Main.npc[guide].GivenName));
 			}
 			if (ModLoader.TryGetMod("CalamityMod", out Mod _))
 			{
-				chat.Add("Can't you read? Smashing Altars won't give you new ores!");
-				chat.Add("Confused about the Altars? Here's a tip: read the label on the Pwnhammer!");
+				chat.Add(Language.GetTextValue(path + "Calamity1"));
+				chat.Add(Language.GetTextValue(path + "Calamity2"));
 			}
 			else
             {
 				if (!WorldGen.crimson)
                 {
-					chat.Add("Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!");
+					chat.Add(Language.GetTextValue(path + "PwnCorruption"));
 				}
 				if (WorldGen.crimson)
 				{
-					chat.Add("Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!");
+					chat.Add(Language.GetTextValue(path + "PwnCrimson"));
 				}
 			}
 			return chat;

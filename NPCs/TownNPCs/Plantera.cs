@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -116,51 +112,51 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Plantera.");
-			chat.Add("Why don't you stop and smell the roses?");
-			chat.Add("I'm very protective of my bulbs, please don't disturb them.");
-			chat.Add("Sorry if I seem snappy... get it?");
-			chat.Add("I grow restless... for you to buy something!");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			bool party = Terraria.GameContent.Events.BirthdayParty.PartyIsUp;
 			int eol = NPC.FindFirstNPC(ModContent.NPCType<EmpressOfLight>());
 			int golem = NPC.FindFirstNPC(ModContent.NPCType<Golem>());
 			int cultist = NPC.FindFirstNPC(ModContent.NPCType<LunaticCultist>());
 			if (eol <= -1 && golem <= -1 && cultist <= -1 && !NPC.downedMoonlord)
             {
-				chat.Add("I was thinking of starting a band...");
+				chat.Add(Language.GetTextValue(path + "Band1"));
 				if (party)
 				{
-					chat.Add("This party needs a musical performance of some sort!", 2.0f);
+					chat.Add(Language.GetTextValue(path + "Band1Party"), 2.0f);
 				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist <= -1 && !NPC.downedMoonlord)
 			{
-				chat.Add("I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.");
+				chat.Add(Language.GetTextValue(path + "Band2"));
 				if (party)
 				{
-					chat.Add("My band should play at one these parties in the future...", 2.0f);
+					chat.Add(Language.GetTextValue(path + "Band2Party"), 2.0f);
 				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist >= 0 && !NPC.downedMoonlord)
 			{
-				chat.Add("The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.");
+				chat.Add(Language.GetTextValue(path + "Band3"));
 				if (party)
 				{
-					chat.Add("I'm trying to get the other villagers to let me host a concert for the next party.", 2.0f);
+					chat.Add(Language.GetTextValue(path + "Band3Party"), 2.0f);
 				}
 			}
 			if (eol >= 0 && golem >= 0 && cultist >= 0 && NPC.downedMoonlord)
 			{
-				chat.Add("The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!");
+				chat.Add(Language.GetTextValue(path + "Band4"));
 				if (party)
 				{
-					chat.Add("My metal band is playing at tonight's concert! I can't wait to see you there!", 2.0f);
+					chat.Add(Language.GetTextValue(path + "Band4Party"), 2.0f);
 				}
 			}
 			if (Main.LocalPlayer.HasBuff(BuffID.Plantero))
 			{
-				chat.Add("Look at that little Plantero go!");
+				chat.Add(Language.GetTextValue(path + "MudBud"));
 			}
 			return chat;
 		}

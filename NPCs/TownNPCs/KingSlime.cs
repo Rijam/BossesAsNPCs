@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -119,31 +115,31 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the King Slime.");
-			chat.Add("Just a reminder that touching living slimes will dissolve your flesh.");
-			chat.Add("My defeat will not stop my army of slimes!");
-			chat.Add("I would prefer it if you kept those torches away from me.");
-			chat.Add("Whatever rumor you heard that all slimes originate from one source is wrong.");
-			chat.Add("Gel may be 'tasty', but don't get any ideas!", 0.1);
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
+			chat.Add(Language.GetTextValue(path + "Rare"), 0.1);
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Slimes are not very good at throwing parties. Luckily, you lot seem to be!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (!NPC.downedQueenSlime)
 			{
-				chat.Add("You may have defeated me, but I'm only one half of the slime oligarchy!");
+				chat.Add(Language.GetTextValue(path + "QS1"));
 			}
 			if (NPC.downedQueenSlime)
 			{
-				chat.Add("You have bested the slime oligarchy. I commend you.");
+				chat.Add(Language.GetTextValue(path + "QS2"));
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller))
 			{
 				int torchMan = NPC.FindFirstNPC(torchSeller.Find<ModNPC>("TorchSellerNPC").Type);
 				if (torchMan >= 0)
 				{
-					chat.Add("I'm very cautious around " + Main.npc[torchMan].GivenName + ". I feel like I'm going to catch an ember.");
+					chat.Add(Language.GetTextValue(path + "TorchMerchant").Replace("{0}", Main.npc[torchMan].GivenName));
 				}
 			}
 			return chat;

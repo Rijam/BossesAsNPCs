@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
-				new FlavorTextBestiaryInfoElement("This highly aggressive monstrosity has decided to become your roommate."),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -117,22 +113,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new();
-			chat.Add("I am the Queen Bee.");
-			chat.Add("My larvae are very delicate, please be careful.");
-			chat.Add("Don't worry, my wings are, in fact, large enough to allow me to fly.");
-			chat.Add("Honey has great healing properties, just don't get stuck in it.");
-			chat.Add("I hope you don't have melissophobia.");
-			chat.Add("What? Expecting me to say \"Buzz Buzz\"?");
-			chat.Add("What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.");
+			for (int i = 1; i <= 7; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (Main.notTheBeesWorld || WorldGen.notTheBees)
             {
-				chat.Add("I feel very at home in this land.");
-				chat.Add("Ah, jungle as far as my compound eyes can see!");
+				chat.Add(Language.GetTextValue(path + "NotTheBees1"));
+				chat.Add(Language.GetTextValue(path + "NotTheBees2"));
 			}
 			return chat;
 		}

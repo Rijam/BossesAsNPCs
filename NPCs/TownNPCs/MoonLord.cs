@@ -80,12 +80,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -147,40 +143,37 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Moon Lord.");
-			chat.Add("I don't know who Steve is, but at least I found my legs.");
-			chat.Add("My plans to take over Terraria have been stopped by you. I commend you for such efforts.");
-			chat.Add("You are quite the fighter. You went out of your way to defeat me.");
-			chat.Add("The Celestial Pillars were sent to conquer your world.");
-			chat.Add("There is only one other God that I fear. Luckily, it only haunts torches.");
-			chat.Add("No, there is no 'Sun Lord'.");
-			chat.Add("Why are you asking me to craft some love?");
+			for (int i = 1; i <= 8; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("You are celebrating my defeat, aren't you? Well, the party food is good at least.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add("I've decided to let " + Main.npc[dryad].GivenName + " live. She is the last of her kind anyway.");
+				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
 			}
 			int lunaticCultist = NPC.FindFirstNPC(ModContent.NPCType<LunaticCultist>());
 			if (lunaticCultist >= 0)
 			{
-				chat.Add("It's nice to have people worship me, as they should be.");
+				chat.Add(Language.GetTextValue(path + "LunaticCultist"));
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0)
 			{
-				chat.Add(Main.npc[mechanic].GivenName + " was doing a fantastic job, until you came along and rescued her.");
+				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller))
 			{
 				int torchMan = NPC.FindFirstNPC(torchSeller.Find<ModNPC>("TorchSellerNPC").Type);
 				if (torchMan >= 0)
 				{
-					chat.Add("Are you sure that " + Main.npc[torchMan].GivenName + " is not... Him?");
+					chat.Add(Language.GetTextValue(path + "TorchMerchant").Replace("{0}", Main.npc[torchMan].GivenName));
 				}
 			}
 			return chat;

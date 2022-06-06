@@ -76,12 +76,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -146,21 +142,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
         public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Pumpking.");
-			chat.Add("Don't get on my bad side!");
-			chat.Add("I don't get the whole 'pumpkin spice' craze.");
-			chat.Add("They are scythes, not sickles! Get it right!");
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Is this the type of party that involves passing out candy? I sure hope it is!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
 				if (abominationn >= 0)
 				{
-					chat.Add(Main.npc[abominationn].GivenName + "'s hat suits him quite nicely.");
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[abominationn].GivenName));
 				}
 			}
 			return chat;

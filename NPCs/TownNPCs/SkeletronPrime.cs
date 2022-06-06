@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -144,24 +140,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		}
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Skeletron Prime.");
-			chat.Add("I am selling my soul to you, literally!");
-			chat.Add("Nope. I'm not sure who Ocram is. Sorry.");
-			chat.Add("Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!");
-			chat.Add("The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0)
 			{
-				chat.Add("I'd like to thank " + Main.npc[mechanic].GivenName + " for giving me such awesome weapons.");
+				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
 			}
 			if (Main.LocalPlayer.HasItem(ItemID.SDMG))
 			{
-				chat.Add("Omegatron is a pretty cool dude.");
+				chat.Add(Language.GetTextValue(path + "SDMG"));
 			}
 			return chat;
 		}

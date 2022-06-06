@@ -77,12 +77,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -115,20 +111,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am the Ice Queen.");
-			chat.Add("Don't you dare make any cool puns. That would not be nICE.");
-			chat.Add("That snowmen mafia would be no match against me.");
-			chat.Add("How about a friendly snowball fight?");
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int santa = NPC.FindFirstNPC(NPCID.SantaClaus);
 			if (santa >= 0)
             {
-				chat.Add("Have you been good this year for Santa Claus?");
-				chat.Add("Instead of getting coal this year, you are getting a beating from me!");
+				chat.Add(Language.GetTextValue(path + "Santa1"));
+				chat.Add(Language.GetTextValue(path + "Santa2"));
 			}
 			return chat;
 		}

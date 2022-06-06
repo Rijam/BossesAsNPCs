@@ -78,12 +78,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -117,30 +113,30 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Spazmatism, one of The Twins.");
-			chat.Add("Uh sorry, I don't know who Sclerepugnant is.");
-			chat.Add("I am fresh out of Ichor, but I have plenty of Cursed Flames!");
-			chat.Add("HEY, it's the Terrarian!");
-			chat.Add("This is going to be a terrible night... if you don't buy something!");
+			for (int i = 1; i <= 5; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			int retinazer = NPC.FindFirstNPC(ModContent.NPCType<Retinazer>());
 			int eoc = NPC.FindFirstNPC(ModContent.NPCType<EyeOfCthulhu>());
 			if (retinazer >= 0 && eoc >= 0)
 			{
-				chat.Add("Eye of Cthulhu, Rez, and I like to talk.", 0.5);
+				chat.Add(Language.GetTextValue(path + "RezEoC"), 0.5);
 			}
 			if (Main.LocalPlayer.HasBuff(BuffID.TwinEyesMinion))
 			{
-				chat.Add("Those mini Spazmatisms are so cute!", 0.5);
+				chat.Add(Language.GetTextValue(path + "OpticStaff"), 0.5);
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0)
 			{
-				chat.Add("Go blame " + Main.npc[mechanic].GivenName + ", she's the one who made me!");
+				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
 			}
 			return chat;
 		}

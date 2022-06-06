@@ -77,12 +77,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
 			{
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
-				new FlavorTextBestiaryInfoElement("Mods.BossesAsNPCs.Bestiary.Description." + GetType().Name),
-				new FlavorTextBestiaryInfoElement(
-					NPCHelper.LoveText(GetType().Name) +
-					NPCHelper.LikeText(GetType().Name) +
-					NPCHelper.DislikeText(GetType().Name) +
-					NPCHelper.HateText(GetType().Name))
+				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
+				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			});
 		}
 
@@ -149,21 +145,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			chat.Add("I am Betsy.");
-			chat.Add("I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.");
-			chat.Add("I'm a real boss, I promise!");
-			chat.Add("Apply my curse to your enemies. It'll reduce their defense by 40 points!");
+			for (int i = 1; i <= 4; i++)
+			{
+				chat.Add(Language.GetTextValue(path + "Default" + i));
+			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
-				chat.Add("Stick around; we're going to see how many candles I can light with one breath of fire!", 2.0);
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
 				if (abominationn >= 0)
 				{
-					chat.Add("Where did " + Main.npc[abominationn].GivenName + " get his wings?");
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[abominationn].GivenName));
 				}
 			}
 			if (ModLoader.TryGetMod("SGAmod", out Mod sGAmod))
@@ -171,7 +168,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int draken = NPC.FindFirstNPC(sGAmod.Find<ModNPC>("Dergon").Type);
 				if (draken >= 0)
 				{
-					chat.Add("Good to see another dragon like " + Main.npc[draken].GivenName + ".");
+					chat.Add(Language.GetTextValue(path + "SGAmod").Replace("{0}", Main.npc[draken].GivenName));
 				}
 			}
 			return chat;

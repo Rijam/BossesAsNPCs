@@ -131,9 +131,9 @@ Mods: {
 				TooltipSpawnDc:
 					'''
 					此选项切换 Deerclops NPC 是否可以生成。
-					  当打开时：巨鹿怪闭 NPC 将生成。
-					  关闭时：巨鹿怪闭 NPC 不会生成。
-					    关闭以阻止巨鹿怪 NPC 生成。
+					  当打开时：巨鹿怪NPC将生成。
+					  关闭时：巨鹿怪闭 NPC不会生成。
+					    关闭以阻止巨鹿怪 NPC生成。
 					默认值：开
 					'''
 				LabelSpawnWoF: "[i:2105]   血肉墙可以生成"
@@ -294,59 +294,58 @@ Mods: {
 		}
 		CrossMod: {
 			Census: {
-				KingSlime: Defeat King Slime
-				EyeOfCthulhu: Defeat the Eye of Cthulhu
+				KingSlime: 打败史莱姆王
+				EyeOfCthulhu: 打败克苏鲁之眼
 				EaterOfWorlds:
 					'''
-					Defeat the Eater of Worlds in a Corruption world,
-					or in a Hardmode in a Crimson world
+					在腐化世界中打败世界吞噬怪，
+					或在猩红世界中的困难模式中
 					'''
 				BrainOfCthulhu:
 					'''
-					Defeat the Brain of Cthulhu in a Crimson world,
-					or in a Hardmode in a Corruption world
+					在猩红世界中击败克苏鲁之脑，
+					或在腐化世界中的困难模式中
 					'''
-				QueenBee: Defeat Queen Bee
-				Skeletron: Defeat Skeletron
-				Deerclops: Defeat Deerclops
-				WallOfFlesh: Defeat the Wall of Flesh
-				QueenSlime: Defeat Queen Slime
-				TheDestroyer: Defeat The Destroyer
-				TheTwins: Defeat The Twins
-				SkeletronPrime: Defeat Skeletron Prime
-				Plantera: Defeat Plantera
-				Golem: Defeat Golem
-				EmpressOfLight: Defeat the Empress of Light
-				DukeFishron: Defeat Duke Fishron
-				Betsy: Defeat Betsy
-				LunaticCultist: Defeat the Lunatic Cultist
-				MoonLord: Defeat Moon Lord
-				Pumpking: Defeat the Pumpking
-				IceQueen: Defeat the Ice Queen
-				MartianSaucer: Defeat the Martian Saucer
+				QueenBee: 打败蜂王
+				Skeletron: 打败骷髅王
+				Deerclops: 打败巨鹿怪
+				WallOfFlesh: 打败血肉墙
+				QueenSlime: 打败史莱姆皇后
+				TheDestroyer: 打败毁灭者
+				TheTwins: 打败双子魔眼
+				SkeletronPrime: 打败机械骷髅王
+				Plantera: 打败世纪之花
+				Golem: 打败石巨人
+				EmpressOfLight: 打败光之女皇
+				DukeFishron: 打败猪龙鱼公爵
+				Betsy: 打败双足翼龙
+				LunaticCultist: 打败拜月教邪教徒
+				MoonLord: 打败月亮领主
+				Pumpking: 打败南瓜王
+				IceQueen: 打败冰雪女王
+				MartianSaucer: 打败火星飞碟
 			}
 		}
 		Common: {
 			VanityAccesssory: 梳妆台配件
 			CaughtNPC: 被抓到的NPC
 			// The following words are used for the Bestiary happiness text.
-			Forest: Forest
-			Hallow: Hallow
-			Jungle: Jungle
-			Snow: Snow
-			Ocean: Ocean
-			Desert: Desert
-			GlowingMushroom: Glowing Mushroom
-			Graveyard: Graveyard
+			Forest:森林
+			Hallow: 天空
+			Jungle: 丛林
+			Snow: 雪原
+			Ocean: 海洋
+			Desert: 沙漠
+			GlowingMushroom: 发光蘑菇
+			Graveyard: 墓地
 			Caverns: "{$GameUI.LayerCaverns}" //Set automatically from vanilla's localization
-			None: None
+			None: 无
 		}
 		UI: {
-			CapturedSpawnText1: 这
-			CapturedSpawnText2: 城镇NPC已经诞生了！
+			CapturedSpawnText: 这 {0} 城镇NPC已经诞生了！
 			// "Love" and "Hate" are already translated from vanilla's random world name generator
-			Like : Like
-			Dislike : Dislike
+			Like : 喜欢
+			Dislike : 讨厌
 		}
 		ItemName: {
 			BeCostumeBodypiece: 双足翼龙上衣
@@ -444,11 +443,312 @@ Mods: {
 		}
 
 		BiomeName: {
-			GraveyardBiome: 墓地
+			GraveyardBiome: "{$Mods.BossesAsNPCs.Common.Graveyard}"
 			SkyBiome: 天空
 			UnderworldBiome: 地下
 		}
 		
+		NPCDialog: {
+			// {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
+			// If a line starts with {0}, the line must be in quotes.
+			KingSlime: {
+				Default1: I am the King Slime.
+				Default2: Just a reminder that touching living slimes will dissolve your flesh.
+				Default3: My defeat will not stop my army of slimes!
+				Default4: I would prefer it if you kept those torches away from me.
+				Default5: Whatever rumor you heard that all slimes originate from one source is wrong.
+				Rare: Gel may be 'tasty', but don't get any ideas!
+				Party: Slimes are not very good at throwing parties. Luckily, you lot seem to be!
+				QS1: You may have defeated me, but I'm only one half of the slime oligarchy!
+				QS2: You have bested the slime oligarchy. I commend you.
+				TorchMerchant: I'm very cautious around {0}. I feel like I'm going to catch an ember.
+			}
+			EyeOfCthulhu: {
+				Default1: I am the Eye of Cthulhu.
+				Default2: I have my eye on you...
+				Default3: Besides that tree or that bunny, I think I am the mascot of this world.
+				Default4: Somebody once called me the 'Eye of Terror'.
+				Default5: I have been defeated in three separate universes! How is that fair?
+				Default6: What is your fascination with eyes anyway?
+				Party: A party! Surely to celebrate my status as the best EYEcon!
+					// Rez and Spaz being Retinazer and Spazmatism.
+				RezSpaz: Rez, Spaz, and I like to socialize.
+				ML: There is nothing truer than the original!
+				EoC: I'm so popular that they put me on merchandise.
+			}
+			EaterOfWorlds: {
+				Default1: I am the Eater of Worlds.
+				Default2: No, I am not Cthulhu's spine. Where did you even hear that?
+				Default3: Which way to the nearest restroom?! I think I'm going to vomit.
+				Default4: Of course piercing weapons are effective -- they go right through you!
+				Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
+				Party: You might have to start calling the "Eater of Cake" after this party!
+				Expert: Your explosives are 80% less effective against me in this world!
+				Evil: Yes! Let the Corruption spread!
+				Good: That nasty Hallow is ruining my plans of spreading the Corruption!
+				Dryad: I'm not sure if you have noticed, but {0} really hates me.
+			}
+			BrainOfCthulhu: {
+				Default1: I am the Brain of Cthulhu.
+				Default2: Cthulhu was an intelligent individual. I know, I was his brain.
+				Default3: My Creepers allow me to see. They also act as good meat shields.
+				Default4: The Crimson is one giant living organism.
+				Default5: Screams echo around you telling you to purchase something.
+				Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
+				Blood: The hive mind of the Crimson only grows stronger!
+				Good: The Hallow poses a threat to spreading of the Crimson!
+				Dryad: "{0} despises my presence." // quotes are important on this one
+				Mechanic: Be glad that you rescued {0} before she could finish building the mechanical version of me.
+			}
+			QueenBee: {
+				Default1: I am the Queen Bee.
+				Default2: My larvae are very delicate, please be careful.
+				Default3: Don't worry, my wings are, in fact, large enough to allow me to fly.
+				Default4: Honey has great healing properties, just don't get stuck in it.
+				Default5: I hope you don't have melissophobia.
+				Default6: What? Expecting me to say "Buzz Buzz"?
+				Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
+				Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
+				NotTheBees1: I feel very at home in this land.
+				NotTheBees2: Ah, jungle as far as my compound eyes can see!
+			}
+			Skeletron: {
+				Default1: I am Skeletron.
+				Default2: I'm the backbone of this world.
+				Default3: I am what is left of Cthulhu's skeleton.
+				Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
+				Rare: Sans what? I don't know what you are talking about.
+				Party: I offered to host this party in the Dungeon but nobody seemed interested.
+				Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
+				Clothier: "{0} was such a great host! We should get together again some time!" // quotes are important on this one
+				SP: If you thought I couldn't get any more awesome, check out Skeletron Prime!
+				DG: Impressive, you managed to defeat my Guardian form. Here, have this key. I'm not sure what it does, so you figure it out.
+					// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+				SDMG: Omegatron is such an awesome guy.
+			}
+			Deerclops: {
+				Default1: I am Deerclops.
+				Default2: Make sure to eat and keep your sanity up!
+				Default3: Stay out of the darkness, or she'll get you...
+				Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
+				Default5: Everyone else gets an achievement; where is mine?
+				Party: Oh a party! There better be a big feast for all of us!
+				Snow: Are you going to hold a feast of some kind in this winter weather?
+				Betsy: I heard Betsy is from another world, too.
+				TheConstant1: This world reminds of the place where I am from.
+				TheConstant2: Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!
+			}
+			WallOfFlesh: {
+				Default1: I am the Wall of Flesh.
+				Default2: You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!
+				Default3: Oh, don't look so horrified!
+				Default4: Let me have a little lick. Kidding! I'm just messing with you...
+				Default5: I hope you're prepared for the effects of the "V".
+				Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
+				Party: There are plenty of desserts at this party, but is any meat being served?
+				NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
+				Expert: It may be gross for you, but consuming my heart will give you extra strength!
+				Guide1: Are {0} and I the same person? It's hard to say...
+				Guide2: "{0} is certainly no stranger to burns." // quotes are important on this one
+				Calamity1: Can't you read? Smashing Altars won't give you new ores!
+				Calamity2: Confused about the Altars? Here's a tip: read the label on the Pwnhammer!
+				PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
+				PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
+			}
+			QueenSlime: {
+				Default1: I am the Queen Slime.
+				Default2: Just a reminder that touching living slimes will dissolve your flesh.
+				Default3: My defeat will not stop my army of slimes!
+				Default4: I would prefer it if you stopped bouncing objects off of me.
+				Rare: Pink Gel may be 'sweet', but get any ideas!
+				Party: I expected this party to be spectacular. I am not disappointed.
+				KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
+				KS2: You have bested the slime oligarchy. I commend you.
+			}
+			TheDestroyer: {
+				Default1: I am The Destroyer.
+				Default2: What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!
+				Default3: I guess Cthulhu won't be getting his replacement spine after all.
+				Default4: You feel vibrations deep within your pockets... so buy something!
+				Party: I better be invited to this party! If I'm not, I'll crash this party!
+				Mechanic: "{0} was the one who built me, you know."
+			}
+			Retinazer: {
+				Default1: I am Retinazer, one of The Twins.
+				Default2: I prefer to say back and watch.
+				Default3: Spazmatism can be a little hyper sometimes.
+				Default4: Greetings, Terrarian.
+				Default5: Did you know that all the mechanical bosses shoot a red laser?
+				Party: Will this party include a laser rave?
+				SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
+				OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
+				Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
+			}
+			Spazmatism: {
+				Default1: I am Spazmatism, one of The Twins.
+					// Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
+				Default2: Uh sorry, I don't know who Sclerepugnant is.
+				Default3: I am fresh out of Ichor, but I have plenty of Cursed Flames!
+				Default4: HEY, it's the Terrarian!
+				Default5: This is going to be a terrible night... if you don't buy something!
+				Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
+				RezEoC: Eye of Cthulhu, Rez, and I like to talk.
+				OpticStaff: Those mini Spazmatisms are so cute!
+				Mechanic: Go blame {0}, she's the one who made me!
+			}
+			SkeletronPrime: {
+				Default1: I am Skeletron Prime.
+				Default2: I am selling my soul to you, literally!
+				Default3: Nope. I'm not sure who Ocram is. Sorry.
+				Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
+				Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
+				Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
+				Mechanic: I'd like to thank {0} for giving me such awesome weapons.
+					// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+				SDMG: Omegatron is a pretty cool dude.
+			}
+			Plantera: {
+				Default1: I am Plantera.
+				Default2: Why don't you stop and smell the roses?
+				Default3: I'm very protective of my bulbs, please don't disturb them.
+				Default4: Sorry if I seem snappy... get it?
+				Default5: I grow restless... for you to buy something!
+				Band1: I was thinking of starting a band...
+				Band1Party: This party needs a musical performance of some sort!
+				Band2: I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.
+				Band2Party: My band should play at one these parties in the future...
+				Band3: The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.
+				Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
+				Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
+				Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
+				MudBud: Look at that little Plantero go!
+			}
+			Golem: {
+				Default1: I am Golem.
+				Default2: I am not a push-over. Seriously, try to push me over!
+				Default3: Do you want a Picksaw? Luckily, I have one for sale!
+				Party: I'm not used to being part of such celebrations. I like it!
+				WitchDoctor: I shall protect {0} at all costs.
+				ForTheWorthy: I'm just as big as when I fought you!
+				Surface: At least there is more sunlight up here.
+				Temple1: Watch out for traps... unless you disabled all of them.
+				Temple2: I blend right into these walls!
+				Plantera: I am the drummer for Plantera's metal band. I am very good at smacking.
+			}
+			EmpressOfLight: {
+				Default1: I am the Empress of Light.
+				Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
+				Default3: Don't you dare touch those butterflies!
+				Default4: If you want a real challenge, fight me during the day.
+				Default5: "\"A beautiful bullet hell\"? I don't use any firearms, but I am beautiful." // quotes and backslashes are important on this one
+				Default6: I bet you thought all fairies were small, didn't you?
+				Default7: My empire? That's a story for another time.
+				Default8:
+					'''
+					Don't be silly, there is no Emperor of Night.
+					
+					Is there?
+					'''
+				Rare1: Don't ask about my tentacles...
+				Rare2: Is it a mouth or a nose?
+				Good: I applaud you for spreading the Hallow. Good job!
+				NoEvilBlood: I applaud you for removing the evil in this world. Good job!
+				Dryad: Buy as many Hallow Seeds from {0} as you can!
+				Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
+				Party: I can put on real light show for this party!
+				Costume: That's quite the stunning outfit you have on. Following in my image I see!
+				BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
+			}
+			DukeFishron: {
+				Default1: I am Duke Fishron.
+				Default2: I'm the Duke, baby!
+				Default3: It's time to eat worms and blow bubbles, and I'm all out of bubbles.
+				Default4: Have you ever been to a sewer? I have, met a lot of mutants down there.
+				Default5: How strong does the wind have to be to be able to pick up water and sharks?
+				Default6: A third pig, a third fish, a third dragon, completely awesome!
+				Party: I'm the only person who can eat like a pig and get away with it!
+				FargosMutantMod: "{0} has some pretty nice looking wings."
+				Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
+				Calamity2: I haven't seen my father in a long time...
+			}
+			Betsy: {
+				Default1: I am Betsy.
+				Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
+				Default3: I'm a real boss, I promise!
+				Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
+				Party: Stick around; we're going to see how many candles I can light with one breath of fire!
+				FargosMutantMod: Where did {0} get his wings?
+				SGAmod: Good to see another dragon like {0}.
+			}
+			LunaticCultist: {
+				Default1: I am the Lunatic Cultist.
+				Default2: My defeat will not stop my cult!
+				Default3: Every good cult needs some sort of hooded figure!
+				PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
+				PostML: Not even Cthulhu could stop you? I'm impressed.
+				Party: Is this a costume party? I'm already wearing a mask.
+				Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
+				Plantera: My mysterious chanting is perfect for Plantera's metal band.
+				Dusk: Dusk is my favorite time of the day.
+				PbonesUtilities: I quite like the look of that Mysterious Trader's attire.
+			}
+			MoonLord: {
+				Default1: I am the Moon Lord.
+				Default2: I don't know who Steve is, but at least I found my legs.
+				Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
+				Default4: You are quite the fighter. You went out of your way to defeat me.
+				Default5: The Celestial Pillars were sent to conquer your world.
+				Default6: There is only one other God that I fear. Luckily, it only haunts torches.
+				Default7: No, there is no 'Sun Lord'.
+				Default8: Why are you asking me to craft some love?
+				Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
+				Dryad: I've decided to let {0} live. She is the last of her kind anyway.
+				LunaticCultist: It's nice to have people worship me, as they should be.
+				Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
+				TorchMerchant: Are you sure that {0} is not... Him?
+			}
+			Dreadnautilus: {
+				Default1: I am Dreadnautilus.
+				Default2: Now we are really stretching the definition of boss!
+			}
+			Mothron: {
+				Default1: I am Mothron.
+			}
+			Pumpking: {
+				Default1: I am the Pumpking.
+				Default2: Don't get on my bad side!
+				Default3: I don't get the whole 'pumpkin spice' craze.
+				Default4: They are scythes, not sickles! Get it right!
+				Party: Is this the type of party that involves passing out candy? I sure hope it is!
+				FargosMutantMod: "{0}'s hat suits him quite nicely."
+			}
+			IceQueen: {
+				Default1: I am the Ice Queen.
+				Default2: Don't you dare make any cool puns. That would not be nICE.
+				Default3: That snowmen mafia would be no match against me.
+				Default4: How about a friendly snowball fight?
+				Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
+				Santa1: Have you been good this year for Santa Claus?
+				Santa2: Instead of getting coal this year, you are getting a beating from me!
+			}
+			MartianSaucer: {
+				Default1: I am the Martian Saucer.
+				Default2: Do you believe in aliens? Well you should, you're looking right at one.
+				Default3: What? Didn't think a robot could be sentient?
+				Default4: I hope you have your tin-foil hat on.
+				Default5: Don't worry, I'm not going to probe you. That's that job for a Martian Scientist.
+				Default6: Martians are shorter than you Terrarians. As a result, your dwellings large enough for me in this form.
+				Default7: Maybe you Terrarians aren't so bad after all...
+				Default8: 
+					'''
+					This sentence is false.
+					...Don't answer that.
+					'''
+				Party: Parties entail such strange decor and customs that I am not used to.
+				RijamsMod: I haven't seen a species like {0} before.
+			}
+		}
+
 		TownNPCMood: {
 			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
 			KingSlime: {
@@ -458,9 +758,9 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}。"
-				LoveBiome: "我爱{BiomeName}."
-				DislikeBiome: "我不喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}。"
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "我讨厌 {BiomeName}."
 				LikeNPC: "我喜欢 {NPCName}."
 				LikeNPC_Princess: "我喜欢 {NPCName}."
@@ -475,8 +775,8 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}。"
-				LoveBiome: "我爱{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}。"
+				LoveBiome: "我爱 {BiomeName}."
 				DislikeBiome: "我不喜欢{BiomeName}."
 				HateBiome: "我讨厌 {BiomeName}."
 				LikeNPC: "我喜欢 {NPCName}."
@@ -492,9 +792,9 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}。"
-				LoveBiome: "我爱{BiomeName}."
-				DislikeBiome: "我不喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}。"
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "{BiomeName} 不适合住房子。"
 				LikeNPC: "我喜欢 {NPCName}."
 				LikeNPC_Princess: "我喜欢 {NPCName}."
@@ -509,9 +809,9 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}。"
-				LoveBiome: "我爱{BiomeName}."
-				DislikeBiome: "我不喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}。"
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "{BiomeName} 不适合住房子。"
 				LikeNPC: "我喜欢 {NPCName}."
 				LikeNPC_Princess: "我喜欢 {NPCName}."
@@ -531,7 +831,7 @@ Mods: {
 				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "我讨厌 {BiomeName}."
 				LikeNPC: "我喜欢 {NPCName}."
-				LikeNPC_Princess: "我喜欢{NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
 				LoveNPC: "我爱 {NPCName}."
 				DislikeNPC: "我不喜欢 {NPCName}."
 				HateNPC: "我讨厌 {NPCName}."
@@ -543,12 +843,12 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}."
 				LoveBiome: "我爱 {BiomeName}."
 				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "{BiomeName} 不适合住房子。"
 				LikeNPC: "我喜欢 {NPCName}."
-				LikeNPC_Princess: "我喜欢{NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
 				LoveNPC: "我爱 {NPCName}."
 				DislikeNPC: "我不喜欢 {NPCName}."
 				HateNPC: "我讨厌 {NPCName}."
@@ -560,15 +860,15 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}."
 				LoveBiome: "我爱 {BiomeName}."
-				DislikeBiome: "我不喜欢{BiomeName}."
-				HateBiome: "我讨厌{BiomeName}."
-				LikeNPC: "我喜欢{NPCName}."
-				LikeNPC_Princess: "我喜欢{NPCName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
 				LoveNPC: "我爱 {NPCName}."
-				DislikeNPC: "我不喜欢{NPCName}."
-				HateNPC: "我讨厌{NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
 			}
 			WallOfFlesh: {
 				Content: 我感到很满足。
@@ -577,10 +877,10 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}."
 				LoveBiome: "我爱 {BiomeName}."
 				DislikeBiome: "我不喜欢 {BiomeName}."
-				HateBiome: "我讨厌{BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
 				LikeNPC: "我喜欢 {NPCName}."
 				LikeNPC_Princess: "我喜欢 {NPCName}."
 				LoveNPC: "我爱 {NPCName}."
@@ -594,7 +894,7 @@ Mods: {
 				FarFromHome: 我离家很远。
 				DislikeCrowded: 我不喜欢这么多人。
 				HateCrowded: 我讨厌这么多人。
-				LikeBiome: "我喜欢{BiomeName}."
+				LikeBiome: "我喜欢 {BiomeName}."
 				LoveBiome: "我爱 {BiomeName}."
 				DislikeBiome: "我不喜欢 {BiomeName}."
 				HateBiome: "我讨厌 {BiomeName}."
@@ -879,31 +1179,31 @@ Mods: {
 		}
 		Bestiary: {
 			Description: {
-				KingSlime: This gelatin oligarch has decided to become your roommate.
-				EyeOfCthulhu: This optical organ has decided to become your roommate.
-				EaterOfWorlds: This abyssal worm has decided to become your roommate.
-				BrainOfCthulhu: This vile mastermind has decided to become your roommate.
-				QueenBee: This highly aggressive monstrosity has decided to become your roommate.
-				Skeletron: This disembodied bones has decided to become your roommate.
-				Deerclops: This cyclopic monstrosity has decided to become your roommate.
-				WallOfFlesh: This towering demon lord has decided to become your roommate.
-				QueenSlime: This gelatin oligarch has decided to become your roommate.
-				TheDestroyer: This mechanical spine has decided to become your roommate.
-				Retinazer: This mechanical laser has decided to become your roommate.
-				Spazmatism: This mechanical flamethrower has decided to become your roommate.
-				SkeletronPrime: This mechanical skull has decided to become your roommate.
-				Plantera: This floral guardian has decided to become your roommate. 
-				Golem: This Temple guardian has decided to become your roommate.
-				EmpressOfLight: This vengeful fae goddess has decided to become your roommate.
-				DukeFishron: This aquatic pigron mutation has decided to become your roommate.
-				Betsy: This vicious dragon has decided to become your roommate.
-				LunaticCultist: This fanatical leader has decided to become your roommate.
-				MoonLord: This eldritch god has decided to become your roommate.
-				Dreadnautilus: This enormous shelled water demon has decided to become your roommate.
-				Mothron: This behemoth of an insect has decided to become your roommate.
-				Pumpking: This pumpkin king has decided to become your roommate.
-				IceQueen: This icy monstrosity has decided to become your roommate.
-				MartianSaucer: This advanced flying saucer has decided to become your roommate.
+				KingSlime: 这个史莱姆的国王决定成为你的室友。
+				EyeOfCthulhu: 这个器官生物决定成为你的室友。
+				EaterOfWorlds: 这个深渊蠕虫决定成为你的室友。
+				BrainOfCthulhu: 这个猩红的罪魁祸首决定成为你的室友。
+				QueenBee: 这个极具侵略性的怪物决定成为你的室友。
+				Skeletron: 这个无形的骷髅决定成为你的室友。
+				Deerclops: 这个独眼巨人决定成为你的室友。
+				WallOfFlesh: 这个高耸的恶魔领主决定成为你的室友。
+				QueenSlime: 这个史莱姆们的王后决定成为你的室友。
+				TheDestroyer: 这个机械脊柱决定成为你的室友。
+				Retinazer: 这个机械激光眼球生物决定成为你的室友。
+				Spazmatism: 这个机械火焰眼球生物决定成为你的室友。
+				SkeletronPrime: 这个机械骷髅决定成为你的室友。
+				Plantera: 这个丛林守护者决定成为你的室友。 
+				Golem:这位神庙守护者决定成为你的室友。
+				EmpressOfLight: 这个复仇的女神决定成为你的室友。
+				DukeFishron:这种水生猪龙突变生物决定成为你的室友。
+				Betsy: 这只恶龙决定成为你的室友。
+				LunaticCultist: 这位狂热的信徒决定成为你的室友。
+				MoonLord: 这个精灵神决定成为你的室友。
+				Dreadnautilus: 这个巨大的带壳水魔决定成为你的室友。
+				Mothron: 这个昆虫的庞然大物决定成为你的室友。
+				Pumpking: 这个南瓜王决定成为你的室友。
+				IceQueen: 这个冰冷的怪物决定成为你的室友。
+				MartianSaucer: 这款先进的飞碟生物决定成为你的室友。
 			}
 			Happiness: {
 				// These are automatically translated from other localization. Leave as is.
