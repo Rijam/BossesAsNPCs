@@ -20,10 +20,11 @@ See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 
 Additional credits:
-	- TianChen: Chinese translations
+	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
 Mod version: 0.1.8
-	wip
+	- Added more things to localization
+	- Updated Chinese Localization (Thanks TianChen!)
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

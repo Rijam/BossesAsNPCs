@@ -1,5 +1,5 @@
 // Language: zh-Hans (Chinese)
-
+// Credit to TianChen / 不呆不是天辰
 
 Mods: {
 	BossesAsNPCs: {
@@ -452,300 +452,300 @@ Mods: {
 			// {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
 			// If a line starts with {0}, the line must be in quotes.
 			KingSlime: {
-				Default1: I am the King Slime.
-				Default2: Just a reminder that touching living slimes will dissolve your flesh.
-				Default3: My defeat will not stop my army of slimes!
-				Default4: I would prefer it if you kept those torches away from me.
-				Default5: Whatever rumor you heard that all slimes originate from one source is wrong.
-				Rare: Gel may be 'tasty', but don't get any ideas!
-				Party: Slimes are not very good at throwing parties. Luckily, you lot seem to be!
-				QS1: You may have defeated me, but I'm only one half of the slime oligarchy!
-				QS2: You have bested the slime oligarchy. I commend you.
-				TorchMerchant: I'm very cautious around {0}. I feel like I'm going to catch an ember.
+				Default1: 我是史莱姆王。
+				Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
+				Default3: 我的失败不会阻止我的史莱姆大军！
+				Default4: 我希望你把那些火把离我远点。
+				Default5: 无论你听到什么谣言说所有的史莱姆都来自一个来源，这都是错误的。
+				Rare: 凝胶可能是“美味的”，但不要有任何想法！
+				Party: 史莱姆不太擅长举办派对。幸运的是，你似乎很多！
+				QS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
+				QS2: 你已经击败了史莱姆王室的统治，我赞扬你。
+				TorchMerchant: 我对{0}非常谨慎，我觉得我要抓住一个余烬。
 			}
 			EyeOfCthulhu: {
-				Default1: I am the Eye of Cthulhu.
-				Default2: I have my eye on you...
-				Default3: Besides that tree or that bunny, I think I am the mascot of this world.
-				Default4: Somebody once called me the 'Eye of Terror'.
-				Default5: I have been defeated in three separate universes! How is that fair?
-				Default6: What is your fascination with eyes anyway?
-				Party: A party! Surely to celebrate my status as the best EYEcon!
-					// Rez and Spaz being Retinazer and Spazmatism.
-				RezSpaz: Rez, Spaz, and I like to socialize.
-				ML: There is nothing truer than the original!
-				EoC: I'm so popular that they put me on merchandise.
+				Default1: 我是克苏鲁之眼。
+				Default2: 我正在看着你...
+				Default3: 除了那棵树或那只兔子，我想我是这个世界的吉祥物。
+				Default4: 有人曾经称我为“恐怖之眼”。
+				Default5: 我在三个独立的宇宙中被打败了！这公平吗？
+				Default6: 你对眼睛的迷恋到底是什么？
+				Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
+					//Rez和Spaz是激光眼和魔焰眼。
+				RezSpaz: 
+				ML: 没有什么比原版更真实了！
+				EoC: 我是如此受欢迎，以至于他们把我放在商品上。
 			}
 			EaterOfWorlds: {
-				Default1: I am the Eater of Worlds.
-				Default2: No, I am not Cthulhu's spine. Where did you even hear that?
-				Default3: Which way to the nearest restroom?! I think I'm going to vomit.
-				Default4: Of course piercing weapons are effective -- they go right through you!
-				Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
-				Party: You might have to start calling the "Eater of Cake" after this party!
-				Expert: Your explosives are 80% less effective against me in this world!
-				Evil: Yes! Let the Corruption spread!
-				Good: That nasty Hallow is ruining my plans of spreading the Corruption!
-				Dryad: I'm not sure if you have noticed, but {0} really hates me.
+				Default1: 我是世界吞噬怪。
+				Default2: 不，我不是克苏鲁的脊椎。你从哪里听说的？
+				Default3: 哪条路到最近的洗手间？！我想我会呕吐的。
+				Default4: 当然，穿刺武器是有效的 - 它们直接穿过你！
+				Default5: 一股可怕的寒意从你的钱包里流下来...我认为唯一的解决方案是买东西。
+				Party:你可能不得不在这次聚会后开始称呼“吃蛋糕的人”！
+				Expert: 在这个世界上，你的炸药对我的作用要低80%！
+				Evil: 是的！让腐败蔓延！
+				Good: 那个讨厌的圣地正在破坏我传播腐败的计划！
+				Dryad: 我不确定你是否注意到了，但{0}真的很讨厌我。
 			}
 			BrainOfCthulhu: {
-				Default1: I am the Brain of Cthulhu.
-				Default2: Cthulhu was an intelligent individual. I know, I was his brain.
-				Default3: My Creepers allow me to see. They also act as good meat shields.
-				Default4: The Crimson is one giant living organism.
-				Default5: Screams echo around you telling you to purchase something.
-				Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
-				Blood: The hive mind of the Crimson only grows stronger!
-				Good: The Hallow poses a threat to spreading of the Crimson!
-				Dryad: "{0} despises my presence." // quotes are important on this one
-				Mechanic: Be glad that you rescued {0} before she could finish building the mechanical version of me.
+				Default1: 我是克苏鲁之脑。
+				Default2: 克苏鲁是一个聪明的人，我知道，我是他的大脑。
+				Default3: 我的爬行者让我看到了，它们也可以作为良好的肉盾。
+				Default4: 猩红地是一个巨大的生物体。
+				Default5: 尖叫声在你周围回荡，告诉你买东西。
+				Party: 生日和周年纪念日是一件如此随意的事情。尽管如此，我喜欢参加这些派对。
+				Blood: 猩红之地的心脏心智只会越来越强大！
+				Good: 圣地对猩红的传播构成了威胁！
+				Dryad: “{0}鄙视我的存在”//引号在这个问题上很重要
+				Mechanic: 很高兴你在{0}完成机械版的建造之前救了我。
 			}
 			QueenBee: {
-				Default1: I am the Queen Bee.
-				Default2: My larvae are very delicate, please be careful.
-				Default3: Don't worry, my wings are, in fact, large enough to allow me to fly.
-				Default4: Honey has great healing properties, just don't get stuck in it.
-				Default5: I hope you don't have melissophobia.
-				Default6: What? Expecting me to say "Buzz Buzz"?
-				Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
-				Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
-				NotTheBees1: I feel very at home in this land.
-				NotTheBees2: Ah, jungle as far as my compound eyes can see!
+				Default1: 我是蜂王。
+				Default2: 我的幼虫非常娇嫩，请小心。
+				Default3: 别担心，事实上，我的翅膀足够大，可以让我飞翔。
+				Default4: 蜂蜜有很好的愈合特性，只是不要陷入其中。
+				Default5: 我希望你没有害怕我。
+				Default6: 什么？期待我说“巴斯 巴斯”？
+				Default7: 大黄蜂、黄蜂和黄色夹克有什么区别？我不知道，我是一只蜜蜂。
+				Party: 我为今天的派对做了一些甜糕点！它们可能是你吃过的最甜的糕点！
+				NotTheBees1: 在这片土地上，我感到非常自由。
+				NotTheBees2: 啊，丛林，就我的双眼所能看到的！
 			}
 			Skeletron: {
-				Default1: I am Skeletron.
-				Default2: I'm the backbone of this world.
-				Default3: I am what is left of Cthulhu's skeleton.
-				Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
-				Rare: Sans what? I don't know what you are talking about.
-				Party: I offered to host this party in the Dungeon but nobody seemed interested.
-				Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
-				Clothier: "{0} was such a great host! We should get together again some time!" // quotes are important on this one
-				SP: If you thought I couldn't get any more awesome, check out Skeletron Prime!
-				DG: Impressive, you managed to defeat my Guardian form. Here, have this key. I'm not sure what it does, so you figure it out.
-					// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron is such an awesome guy.
+				Default1: 我是骷髅王。
+				Default2: 我是这个世界的支柱。
+				Default3: 我是克苏鲁的骨架剩下的。
+				Default4: 地牢上的诅咒已经解除，尽管我想你还会发现它仍然很危险。
+				Rare: 无呢？我不知道你在说什么。
+				Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
+				Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
+				Clothier: "{0}是一个很棒的主人！我们应该再聚一会儿！" // 价格在这一点上很重要
+				SP: 如果您认为我无法再获得任何能力，请看看机械骷髅王！
+				DG: 令人印象深刻的是，你设法击败了我的守护者形态。在这里，有这个钥匙。我不确定它的作用，所以你弄清楚了。
+					// Omegatron是来自Edge of Space的老板，它基于机械骷髅王（S.D.M.G.来自Edge of Space）
+				SDMG: Omegatron是一个很棒的家伙。
 			}
 			Deerclops: {
-				Default1: I am Deerclops.
-				Default2: Make sure to eat and keep your sanity up!
-				Default3: Stay out of the darkness, or she'll get you...
-				Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
-				Default5: Everyone else gets an achievement; where is mine?
-				Party: Oh a party! There better be a big feast for all of us!
-				Snow: Are you going to hold a feast of some kind in this winter weather?
-				Betsy: I heard Betsy is from another world, too.
-				TheConstant1: This world reminds of the place where I am from.
-				TheConstant2: Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!
+				Default1: 我是巨鹿怪。
+				Default2: 一定要吃东西，保持理智！
+				Default3: 远离黑暗，否则它会吞噬你...
+				Default4: 对不起，我声音太大，收到了其他村民的投诉。
+				Default5: 其他人都会获得成就;我的在哪里？
+				Party: 哦，派对！最好为我们所有人举办一场盛宴！
+				Snow: 在这个冬天的天气里，你打算举行某种盛宴吗？
+				Betsy: 我听说双足翼龙也来自另一个世界。
+				TheConstant1: 这个世界让人想起我来自的地方。
+				TheConstant2:好在，你只需要担心你在这个世界上的饥饿。想象一下，如果你也必须控制你的温度！
 			}
 			WallOfFlesh: {
-				Default1: I am the Wall of Flesh.
-				Default2: You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!
-				Default3: Oh, don't look so horrified!
-				Default4: Let me have a little lick. Kidding! I'm just messing with you...
-				Default5: I hope you're prepared for the effects of the "V".
-				Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
-				Party: There are plenty of desserts at this party, but is any meat being served?
-				NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
-				Expert: It may be gross for you, but consuming my heart will give you extra strength!
-				Guide1: Are {0} and I the same person? It's hard to say...
-				Guide2: "{0} is certainly no stranger to burns." // quotes are important on this one
-				Calamity1: Can't you read? Smashing Altars won't give you new ores!
-				Calamity2: Confused about the Altars? Here's a tip: read the label on the Pwnhammer!
-				PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
-				PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
+				Default1: 我是血肉墙。
+				Default2: 你已经打败了世界的守护者，我挡住了所有强大的远古精灵！
+				Default3: 呵呵，别那么惊讶的看我！
+				Default4: 让我舔一舔。开玩笑！我只是在惹你...
+				Default5: 我希望你已经为“V”字形的污染做好了准备。
+				Default6: 没有得到你想要的徽章？别担心，我都有...当然是有价格的。
+				Party: 这个派对上有很多甜点，但是有肉吗？
+				NotUnderworld: 你知道，这里比地狱要冷得多。
+				Expert: 这对你来说可能是粗暴的，但消耗我的心会给你额外的力量！
+				Guide1: "{0}和我是同一个人吗？很难说..."
+				Guide2: "{0}对烧伤当然不陌生。" //价格在这一点上很重要
+				Calamity1: 你看不懂吗？砸碎祭坛不会给你新的矿石！
+				Calamity2: 对祭坛感到困惑？这里有一个提示：阅读神锤上的介绍！
+				PwnCorruption: 用那把锤子砸碎那些腐化地的暗影珠！好事一定会发生！
+				PwnCrimson: 用那把锤子砸碎那些猩红地的心脏！好事一定会发生！
 			}
 			QueenSlime: {
-				Default1: I am the Queen Slime.
-				Default2: Just a reminder that touching living slimes will dissolve your flesh.
-				Default3: My defeat will not stop my army of slimes!
-				Default4: I would prefer it if you stopped bouncing objects off of me.
-				Rare: Pink Gel may be 'sweet', but get any ideas!
-				Party: I expected this party to be spectacular. I am not disappointed.
-				KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
-				KS2: You have bested the slime oligarchy. I commend you.
+				Default1:我是史莱姆皇后。
+				Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
+				Default3: 我的失败不会阻止我的史莱姆大军！
+				Default4: 如果你停止从我身上弹起物体，我会更喜欢它。
+				Rare: 粉红凝胶可能是“甜的”，但不要有任何想法！
+				Party: 我本以为这个派对会很壮观，我没有失望。
+				KS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
+				KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
 			}
 			TheDestroyer: {
-				Default1: I am The Destroyer.
-				Default2: What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!
-				Default3: I guess Cthulhu won't be getting his replacement spine after all.
-				Default4: You feel vibrations deep within your pockets... so buy something!
-				Party: I better be invited to this party! If I'm not, I'll crash this party!
-				Mechanic: "{0} was the one who built me, you know."
+				Default1: 我是毁灭者。
+				Default2: 你的意思是我是机械BOSS中最弱的？我有最多的生命值！
+				Default3: 我猜克苏鲁终究不会得到他的替代脊柱。
+				Default4: 你感觉到口袋深处的振动...所以买点东西！
+				Party: 我最好被邀请参加这个派对！如果我不是，我会摧毁这个派对！
+				Mechanic: "{0}是造就我的人，你知道的。"
 			}
 			Retinazer: {
-				Default1: I am Retinazer, one of The Twins.
-				Default2: I prefer to say back and watch.
-				Default3: Spazmatism can be a little hyper sometimes.
-				Default4: Greetings, Terrarian.
-				Default5: Did you know that all the mechanical bosses shoot a red laser?
-				Party: Will this party include a laser rave?
-				SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
-				OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
-				Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
+				Default1: 我是激光眼，双子魔眼之一。
+				Default2: 我更喜欢说回来，看着。
+				Default3: 魔焰眼有时可能有点亢奋。
+				Default4: 恭喜，泰拉人。
+				Default5: 你知道所有的机械BOSS都发射红色激光吗？
+				Party: 这个派对会包括激光狂欢吗？
+				SpazEoC: 克苏鲁之眼，魔焰眼和我喜欢社交。
+				OpticStaff: 那些迷你眼球怪很帅，如果我自己这么说的话。
+				Mechanic: "{0}机械师被迫建造了机械Boss。这包括我。"
 			}
 			Spazmatism: {
-				Default1: I am Spazmatism, one of The Twins.
-					// Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
-				Default2: Uh sorry, I don't know who Sclerepugnant is.
-				Default3: I am fresh out of Ichor, but I have plenty of Cursed Flames!
-				Default4: HEY, it's the Terrarian!
-				Default5: This is going to be a terrible night... if you don't buy something!
-				Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
-				RezEoC: Eye of Cthulhu, Rez, and I like to talk.
-				OpticStaff: Those mini Spazmatisms are so cute!
-				Mechanic: Go blame {0}, she's the one who made me!
+				Default1: 我是魔焰眼，双子魔眼之一。
+					// Sclerepugnant是一个社区制作的魔焰眼的替代版本，以Crimson/Ichor为主题。
+				Default2: 呃，对不起，我不知道谁是Sclerepugnant。
+				Default3: 我是刚从伊科尔出来的，但我有很多被诅咒的火焰！
+				Default4: 嘿，这是泰拉人！
+				Default5: 这将是一个可怕的夜晚...如果你不买东西！
+				Party: 这个派对是相当壮观的！明白了吗？奇观！喜欢引人注目的东西？是的，你明白了。
+				RezEoC: 克苏鲁之眼，激光眼和我喜欢说话。
+				OpticStaff: 那些迷你眼球怪是如此可爱！
+				Mechanic: 去责怪{0}，是她造就了我！
 			}
 			SkeletronPrime: {
-				Default1: I am Skeletron Prime.
-				Default2: I am selling my soul to you, literally!
-				Default3: Nope. I'm not sure who Ocram is. Sorry.
-				Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
-				Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
-				Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
-				Mechanic: I'd like to thank {0} for giving me such awesome weapons.
-					// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron is a pretty cool dude.
+				Default1: 我是机械骷髅王。
+				Default2: 我真的在把我的灵魂出卖给你！
+				Default3: 不。我不知道奥库瑞姆姆是谁。不好意思。
+				Default4: 现在我们永远不会知道克苏鲁是否会有四只手臂，多谢！
+				Default5: 你周围的空气越来越冷，你觉得自己把手伸进口袋里掏出钱包。
+				Party: 这个派对需要更多的行动！幸运的是，我有合适的wep - 我的意思是工作的工具！
+				Mechanic: 我要感谢{0}给了我这么棒的武器。
+					// Omegatron是来自Edge of Space的老板，它基于机械骷髅王（S.D.M.G.来自Edge of Space）
+				SDMG: Omegatron是一个非常酷的家伙。
 			}
 			Plantera: {
-				Default1: I am Plantera.
-				Default2: Why don't you stop and smell the roses?
-				Default3: I'm very protective of my bulbs, please don't disturb them.
-				Default4: Sorry if I seem snappy... get it?
-				Default5: I grow restless... for you to buy something!
-				Band1: I was thinking of starting a band...
-				Band1Party: This party needs a musical performance of some sort!
-				Band2: I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.
-				Band2Party: My band should play at one these parties in the future...
-				Band3: The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.
-				Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
-				Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
-				Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
-				MudBud: Look at that little Plantero go!
+				Default1: 我是世纪之花。
+				Default2: 你为什么不停下来闻闻玫瑰呢？
+				Default3: 我非常保护我的花苞，请不要打扰它们。
+				Default4: 对不起，如果我看起来很活泼...明白了吗？
+				Default5: 我变得焦躁不安...为你买东西！
+				Band1: 我正在考虑成立一个乐队...
+				Band1Party: 这个派对需要某种音乐表演！
+				Band2: 我要和光之女皇后一起组建一支金属乐队！我们正在努力让石巨人成为我们的鼓手。
+				Band2Party: 我的乐队将来应该在这些派对上演奏......
+				Band3: 光之女皇，石巨人，拜月教邪教徒，和我正在录制我们的第一张专辑！拜月教邪教徒的神秘声音非常适合我们的歌曲。
+				Band3Party: 我试图让其他村民让我为下一个聚会举办一场音乐会。
+				Band4: 光之女皇，石巨人，拜月教邪教徒，我完成了第一张专辑！你应该检查一下！
+				Band4Party: 我的金属乐队将在今晚的音乐会上演奏！我迫不及待地想在那里见到你！
+				MudBud: 看看那个小小的世纪之花去吧！
 			}
 			Golem: {
-				Default1: I am Golem.
-				Default2: I am not a push-over. Seriously, try to push me over!
-				Default3: Do you want a Picksaw? Luckily, I have one for sale!
-				Party: I'm not used to being part of such celebrations. I like it!
-				WitchDoctor: I shall protect {0} at all costs.
-				ForTheWorthy: I'm just as big as when I fought you!
-				Surface: At least there is more sunlight up here.
-				Temple1: Watch out for traps... unless you disabled all of them.
-				Temple2: I blend right into these walls!
-				Plantera: I am the drummer for Plantera's metal band. I am very good at smacking.
+				Default1: 我是石巨人。
+				Default2: 我不是推倒者，说真的，试着把我推过去！
+				Default3: 你想要一个镐锯吗？幸运的是，我有一个出售！
+				Party: 我不习惯参加这样的庆祝活动。我喜欢！
+				WitchDoctor: 我将不惜一切代价保护{0}。
+				ForTheWorthy: 我和我跟你打架时一样大！
+				Surface: 至少这里有更多的阳光。
+				Temple1: 当心陷阱...除非您禁用所有这些。
+				Temple2: 我直接融入这些墙壁！
+				Plantera: 我是世纪之花金属乐队的鼓手，我非常擅长打人。
 			}
 			EmpressOfLight: {
-				Default1: I am the Empress of Light.
-				Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
-				Default3: Don't you dare touch those butterflies!
-				Default4: If you want a real challenge, fight me during the day.
-				Default5: "\"A beautiful bullet hell\"? I don't use any firearms, but I am beautiful." // quotes and backslashes are important on this one
-				Default6: I bet you thought all fairies were small, didn't you?
-				Default7: My empire? That's a story for another time.
+				Default1: 我是光之女皇。
+				Default2: 生物图鉴将我描述为一个复仇的女神;我同意这一点。
+				Default3: 你不敢碰那些蝴蝶吗！
+				Default4: 如果你想要一个真正的挑战，在白天和我战斗。
+				Default5: "\"美丽的子弹炼狱\"? 我不使用任何枪支，但我很漂亮。" // 引号和反斜杠在这个问题上很重要
+				Default6: 我敢打赌，你以为所有的仙女都很小，不是吗？
+				Default7:我的帝国？这是另一个时代的故事。
 				Default8:
 					'''
-					Don't be silly, there is no Emperor of Night.
+					别傻了，没有夜之国王。
 					
-					Is there?
+					有吗？
 					'''
-				Rare1: Don't ask about my tentacles...
-				Rare2: Is it a mouth or a nose?
-				Good: I applaud you for spreading the Hallow. Good job!
-				NoEvilBlood: I applaud you for removing the evil in this world. Good job!
-				Dryad: Buy as many Hallow Seeds from {0} as you can!
-				Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
-				Party: I can put on real light show for this party!
-				Costume: That's quite the stunning outfit you have on. Following in my image I see!
-				BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
+				Rare1: 不要问我的触手...
+				Rare2: 是嘴还是鼻子？
+				Good: 我为你们传播圣地而鼓掌，干得好！
+				NoEvilBlood: 我为你们消除这个世界上的邪恶而鼓掌，干得好！
+				Dryad: 从{0}购买尽可能多的万圣节种子！
+				Plantera: 我在世纪之花的金属乐队演奏我的恒星曲调。你应该来听一听！
+				Party: 我可以为这个派对上演真正的灯光秀！
+				Costume: 这就是你穿的令人惊叹的衣服。跟随我的图像，我看到了！
+				BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
 			}
 			DukeFishron: {
-				Default1: I am Duke Fishron.
-				Default2: I'm the Duke, baby!
-				Default3: It's time to eat worms and blow bubbles, and I'm all out of bubbles.
-				Default4: Have you ever been to a sewer? I have, met a lot of mutants down there.
-				Default5: How strong does the wind have to be to be able to pick up water and sharks?
-				Default6: A third pig, a third fish, a third dragon, completely awesome!
-				Party: I'm the only person who can eat like a pig and get away with it!
-				FargosMutantMod: "{0} has some pretty nice looking wings."
-				Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
-				Calamity2: I haven't seen my father in a long time...
+				Default1: 我是猪龙鱼公爵。
+				Default2:我是公爵，宝贝！
+				Default3: 是时候吃虫子吹泡泡了，我完全没有泡泡了。
+				Default4: 你去过下水道吗？我在那里遇到了很多变种人。
+				Default5: 风必须有多强才能溅起水和鲨鱼？
+				Default6: 第三只猪，第三条鱼，第三条龙，完全真棒！
+				Party: 我是唯一一个可以像猪一样吃东西并逃脱惩罚的人！
+				FargosMutantMod: "{0}有一些漂亮的翅膀。"
+				Calamity1: 嗯。。。对不起，我只是在想一个血腥蠕虫会有多好吃。
+				Calamity2: 我已经很久没见过我的父亲了...
 			}
 			Betsy: {
-				Default1: I am Betsy.
-				Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
-				Default3: I'm a real boss, I promise!
-				Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
-				Party: Stick around; we're going to see how many candles I can light with one breath of fire!
-				FargosMutantMod: Where did {0} get his wings?
-				SGAmod: Good to see another dragon like {0}.
+				Default1: 我是双足翼龙。
+				Default2: 我是飞龙的母亲。不，不是你想的那种飞龙。
+				Default3: 我是一个真正的BOSS，我保证！
+				Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
+				Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
+				FargosMutantMod: "{0}从哪里得到他的翅膀？"
+				SGAmod: 很高兴看到另一条像{0}一样的龙。
 			}
 			LunaticCultist: {
-				Default1: I am the Lunatic Cultist.
-				Default2: My defeat will not stop my cult!
-				Default3: Every good cult needs some sort of hooded figure!
-				PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
-				PostML: Not even Cthulhu could stop you? I'm impressed.
-				Party: Is this a costume party? I'm already wearing a mask.
-				Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
-				Plantera: My mysterious chanting is perfect for Plantera's metal band.
-				Dusk: Dusk is my favorite time of the day.
-				PbonesUtilities: I quite like the look of that Mysterious Trader's attire.
+				Default1: 我是拜月教邪教徒。
+				Default2: 我的失败不会阻止我的崇拜！
+				Default3: 每个好的邪教徒都需要穿着这种连帽衫！
+				PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
+				PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
+				Party: 这是一个化装舞会吗？我已经戴上了口罩。
+				Demolitionist: "{0}一直在为我提供炸药的优惠，我不知道为什么。"
+				Plantera: 我神秘的吟唱非常适合世纪之花的金属乐队。
+				Dusk: 黄昏是我一天中最喜欢的时间。
+				PbonesUtilities: 我非常喜欢那个神秘商人的服装的样子。
 			}
 			MoonLord: {
-				Default1: I am the Moon Lord.
-				Default2: I don't know who Steve is, but at least I found my legs.
-				Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
-				Default4: You are quite the fighter. You went out of your way to defeat me.
-				Default5: The Celestial Pillars were sent to conquer your world.
-				Default6: There is only one other God that I fear. Luckily, it only haunts torches.
-				Default7: No, there is no 'Sun Lord'.
-				Default8: Why are you asking me to craft some love?
-				Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
-				Dryad: I've decided to let {0} live. She is the last of her kind anyway.
-				LunaticCultist: It's nice to have people worship me, as they should be.
-				Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
-				TorchMerchant: Are you sure that {0} is not... Him?
+				Default1: 我是月亮领主。
+				Default2: 我不知道史蒂夫是谁，但至少我找到了我的腿。
+				Default3: 我接管泰拉瑞亚的计划已被你阻止，我称赞你所作的这种努力。
+				Default4: 你是一个战士，你不厌其烦地打败了我。
+				Default5: 天界柱被派去征服你的世界。
+				Default6: 我敬畏的只有一位神。幸运的是，它只会困扰火炬。
+				Default7: 不，没有“太阳领主”。
+				Default8: 你为什么要求我制作一些爱？
+				Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
+				Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
+				LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
+				Mechanic: "{0}做得很好，直到你过来救她。"
+				TorchMerchant: 你确定{0}不是...他？
 			}
 			Dreadnautilus: {
-				Default1: I am Dreadnautilus.
-				Default2: Now we are really stretching the definition of boss!
+				Default1:我是恐惧鹦鹉螺。
+				Default2: 现在我们真的在延伸BOSS的定义！
 			}
 			Mothron: {
-				Default1: I am Mothron.
+				Default1:我是蛾怪。
 			}
 			Pumpking: {
-				Default1: I am the Pumpking.
-				Default2: Don't get on my bad side!
-				Default3: I don't get the whole 'pumpkin spice' craze.
-				Default4: They are scythes, not sickles! Get it right!
-				Party: Is this the type of party that involves passing out candy? I sure hope it is!
-				FargosMutantMod: "{0}'s hat suits him quite nicely."
+				Default1: 我是南瓜王。
+				Default2: 不要站在我不好的一面！
+				Default3: 我不明白整个“南瓜香料”的热潮。
+				Default4: 他们是镰刀，不是镰刀！做对了！
+				Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
+				FargosMutantMod: "{0}的帽子很适合他。"
 			}
 			IceQueen: {
-				Default1: I am the Ice Queen.
-				Default2: Don't you dare make any cool puns. That would not be nICE.
-				Default3: That snowmen mafia would be no match against me.
-				Default4: How about a friendly snowball fight?
-				Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
-				Santa1: Have you been good this year for Santa Claus?
-				Santa2: Instead of getting coal this year, you are getting a beating from me!
+				Default1: 我是冰雪女王。
+				Default2: 你不敢做任何很酷的双关语。那不是很好。
+				Default3: 那个雪人军团不会与我匹敌。
+				Default4: 友谊雪球赛怎么样？
+				Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
+				Santa1: 你今年对圣诞老人很好吗？
+				Santa2: 今年你不会得到煤炭，而是受到我的殴打！
 			}
 			MartianSaucer: {
-				Default1: I am the Martian Saucer.
-				Default2: Do you believe in aliens? Well you should, you're looking right at one.
-				Default3: What? Didn't think a robot could be sentient?
-				Default4: I hope you have your tin-foil hat on.
-				Default5: Don't worry, I'm not going to probe you. That's that job for a Martian Scientist.
-				Default6: Martians are shorter than you Terrarians. As a result, your dwellings large enough for me in this form.
-				Default7: Maybe you Terrarians aren't so bad after all...
+				Default1:我是火星飞碟。
+				Default2: 你相信外星人吗？好吧，你应该，你正在看一个。
+				Default3: 什么？没想到机器人是有知觉的吗？
+				Default4: 我希望你戴上锡箔帽。
+				Default5: 别担心，我不会去探究你，这就是火星科学家的工作。
+				Default6: 火星人比你们这些泰拉瑞人矮；因此，你的住所以这种形式对我来说足够大。
+				Default7: 也许你们这些泰拉瑞人毕竟没有那么糟糕......
 				Default8: 
 					'''
-					This sentence is false.
-					...Don't answer that.
+					这句话是错误的。
+					...不要回答这个问题。
 					'''
-				Party: Parties entail such strange decor and customs that I am not used to.
-				RijamsMod: I haven't seen a species like {0} before.
+				Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
+				RijamsMod: 我以前从未见过像{0}这样的物种。
 			}
 		}
 
@@ -1199,8 +1199,8 @@ Mods: {
 				Betsy: 这只恶龙决定成为你的室友。
 				LunaticCultist: 这位狂热的信徒决定成为你的室友。
 				MoonLord: 这个精灵神决定成为你的室友。
-				Dreadnautilus: 这个巨大的带壳水魔决定成为你的室友。
-				Mothron: 这个昆虫的庞然大物决定成为你的室友。
+				Dreadnautilus: 这个巨型变种带壳海螺决定成为你的室友。
+				Mothron: 这个巨大的昆虫决定成为你的室友。
 				Pumpking: 这个南瓜王决定成为你的室友。
 				IceQueen: 这个冰冷的怪物决定成为你的室友。
 				MartianSaucer: 这款先进的飞碟生物决定成为你的室友。

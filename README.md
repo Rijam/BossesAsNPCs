@@ -1,4 +1,4 @@
-# Bosses As NPCs
+﻿# Bosses As NPCs
 Do you like a huge excess of Town NPCs?
 Do you enjoy managing the happiness of 23 extra Town NPCs?
 Ever wanted bosses that you have defeated to move in as Town NPCs?
@@ -21,3 +21,6 @@ See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 
 Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2689434541
+
+Additional credits:
+	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)

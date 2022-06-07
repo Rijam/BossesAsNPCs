@@ -87,6 +87,6 @@
 	* Updated NPC.catchItem and Item.makeNPC
 	* Updated PlaySound
 
-0.1.8 - Update 8 (June ?, 2022)
+0.1.8 - Update 8 (June 6, 2022)
 	* Added more things to localization
 	* Updated Chinese Localization (Thanks TianChen!)
