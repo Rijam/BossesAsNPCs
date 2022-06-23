@@ -4,7 +4,7 @@ Ever wanted bosses that you have defeated to move in as Town NPCs?
 
 Well this is the mod for you!
 
-[c/008000:Each vanilla boss has their own Town NPC] that will arrive after the respective boss has been killed.
+[b] Each vanilla boss has their own Town NPC that will arrive after the respective boss has been killed. [/b]
 Each Town NPC sells their boss drops. Expert and Master Mode items are included for their respective difficulties.
 
 Prices are based on:

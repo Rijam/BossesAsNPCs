@@ -90,3 +90,6 @@
 0.1.8 - Update 8 (June 6, 2022)
 	* Added more things to localization
 	* Updated Chinese Localization (Thanks TianChen!)
+
+0.1.9 - Updated 9 (June 23, 2022)
+	* Boss Town NPCs now have the same Bestiary stars as their real boss counterpart.

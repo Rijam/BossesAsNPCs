@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.Localization;
+using Terraria.GameContent.Bestiary;
 
 namespace BossesAsNPCs
 {
@@ -168,5 +169,32 @@ namespace BossesAsNPCs
                 }
             }
         }
-    }
+		public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+		{
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<KingSlime>()] = 2;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EyeOfCthulhu>()] = 2;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EaterOfWorlds>()] = 3;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<BrainOfCthulhu>()] = 3;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenBee>()] = 3;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Skeletron>()] = 3;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Deerclops>()] = 3;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<WallOfFlesh>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenSlime>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<TheDestroyer>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Retinazer>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Spazmatism>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<SkeletronPrime>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Plantera>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Golem>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<QueenSlime>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EmpressOfLight>()] = 5;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<DukeFishron>()] = 5;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Betsy>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<LunaticCultist>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MoonLord>()] = 5;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Pumpking>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<IceQueen>()] = 4;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MartianSaucer>()] = 4;
+        }
+	}
 }
