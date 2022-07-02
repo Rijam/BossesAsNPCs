@@ -115,6 +115,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 5; i++)
@@ -134,7 +136,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "QS2"));
 			}
-			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller))
+			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
 				int torchMan = NPC.FindFirstNPC(torchSeller.Find<ModNPC>("TorchSellerNPC").Type);
 				if (torchMan >= 0)
@@ -159,10 +161,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.SlimeCrown);
 			shop.item[nextSlot].shopCustomPrice = 50000; //Made up value since Slime Crown has no value
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SlimyCrown").Type);
 				shop.item[nextSlot].shopCustomPrice = 50000; //Match the Mutant's shop
@@ -195,6 +199,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.KingSlimeTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeKingSlime").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("CrownJewel").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.RoyalGel);

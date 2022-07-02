@@ -111,6 +111,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 6; i++)
@@ -135,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				chat.Add(Language.GetTextValue(path + "Guide1").Replace("{0}", Main.npc[guide].GivenName));
 				chat.Add(Language.GetTextValue(path + "Guide2").Replace("{0}", Main.npc[guide].GivenName));
 			}
-			if (ModLoader.TryGetMod("CalamityMod", out Mod _))
+			if (ModLoader.TryGetMod("CalamityMod", out Mod _) && townNPCsCrossModSupport)
 			{
 				chat.Add(Language.GetTextValue(path + "Calamity1"));
 				chat.Add(Language.GetTextValue(path + "Calamity2"));
@@ -168,10 +170,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.GuideVoodooDoll);
 			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("FleshyDoll").Type);
 				shop.item[nextSlot].shopCustomPrice = 200000; //Match the Mutant's shop
@@ -217,6 +221,32 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.WallofFleshTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeWallofFlesh").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("Carnage").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BlackHawkRemote").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BlastBarrel").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("Meowthrower").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("RogueEmblem").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("HermitsBoxofOneHundredMedicines").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.DemonHeart);

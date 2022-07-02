@@ -141,6 +141,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 8; i++)
@@ -151,7 +153,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
-			if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod))
+			if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod) && townNPCsCrossModSupport)
 			{
 				int intTrav = NPC.FindFirstNPC(rijamsMod.Find<ModNPC>("InterstellarTraveler").Type);
 				if (intTrav >= 0)
@@ -176,7 +178,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("RunawayProbe").Type);
 				shop.item[nextSlot].shopCustomPrice = 500000; //Match the Abominationn's shop
@@ -239,6 +243,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.MartianSaucerTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("NullificationRifle").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+			}
+
 			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
 			{
 				shop.item[nextSlot].SetDefaults(ItemID.MartianPetItem); //Cosmic Skateboard

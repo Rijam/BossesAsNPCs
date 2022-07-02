@@ -125,5 +125,17 @@ namespace BossesAsNPCs.NPCs
 		{
 			return shop2;
 		}
+
+		/// <summary>
+		/// Returns true if all mechanical bosses have been defeated.
+		/// </summary>
+		public static bool DownedMechBossAll()
+		{
+			if (NPC.downedMechBoss1 && NPC.downedBoss2 && NPC.downedBoss3)
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 }

@@ -111,6 +111,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 6; i++)
@@ -121,7 +123,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				int mutant = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Mutant").Type);
 				if (mutant >= 0)
@@ -129,7 +131,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[mutant].GivenName));
 				}
 			}
-			if (ModLoader.TryGetMod("CalamityMod", out Mod _))
+			if (ModLoader.TryGetMod("CalamityMod", out Mod _) && townNPCsCrossModSupport)
 			{
 				chat.Add(Language.GetTextValue(path + "Calamity1"));
 				chat.Add(Language.GetTextValue(path + "Calamity2"));
@@ -151,10 +153,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.TruffleWorm);
 			shop.item[nextSlot].shopCustomPrice = 400000; //Made up value
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("TruffleWorm2").Type);
 				shop.item[nextSlot].shopCustomPrice = 600000; //Match the Mutant's shop
@@ -184,6 +188,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.DukeFishronTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeDukeFishron").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("DukesDecapitator").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BrinyBaron").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.ShrimpyTruffle);

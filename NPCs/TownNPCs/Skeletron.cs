@@ -162,10 +162,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.ClothierVoodooDoll);
 			shop.item[nextSlot].shopCustomPrice = 130000; //Made up value
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SuspiciousSkull").Type);
 				shop.item[nextSlot].shopCustomPrice = 150000; //Match the Mutant's shop
@@ -186,6 +188,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.SkeletronTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeSkeletron").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.BoneGlove);

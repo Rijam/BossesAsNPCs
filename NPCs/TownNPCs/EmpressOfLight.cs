@@ -191,6 +191,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 8; i++)
@@ -227,7 +229,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             {
 				chat.Add(Language.GetTextValue(path + "Costume"), 2.0); 
 			}
-			if (ModLoader.TryGetMod("BossChecklist", out Mod _))
+			if (ModLoader.TryGetMod("BossChecklist", out Mod _) && townNPCsCrossModSupport)
 			{
 				chat.Add(Language.GetTextValue(path + "BossChecklist"), 0.25);
 			}
@@ -248,10 +250,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.EmpressButterfly); //Prismatic Lacewing
 			shop.item[nextSlot].shopCustomPrice = 400000; //Sell value * 5 = 250000
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("PrismaticPrimrose").Type);
 				shop.item[nextSlot].shopCustomPrice = 600000; //Match the Mutant's shop

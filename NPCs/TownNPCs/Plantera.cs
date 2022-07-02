@@ -175,10 +175,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			/*shop.item[nextSlot].SetDefaults(ItemID.PlanteraBulb);
 			shop.item[nextSlot].shopCustomPrice = 300000; //Made up value
 			nextSlot++;*/
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("PlanterasFruit").Type);
 				shop.item[nextSlot].shopCustomPrice = 500000; //Match the Mutant's shop
@@ -226,6 +228,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.PlanteraTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgePlantera").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("LivingShard").Type);
+				shop.item[nextSlot].shopCustomPrice = shop.item[nextSlot].value;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BloomStone").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BlossomFlux").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.SporeSac);

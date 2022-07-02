@@ -60,6 +60,18 @@ Mods: {
 					    Change this value if you want the shop to be cheaper or more expensive.
 					Default value: 100
 					'''
+				LabelGeneral7: "[i:3121]   Town NPCs Cross Mod Support"
+				TooltipGeneral7:
+					'''
+					This option toggles if the Town NPCs will sell items from other mods,
+					if they will have cross mod dialog, and cross mod happiness.
+					  When On: The Town NPCs will sell cross mod items.
+					  When Off: The Town NPCs WILL NOT sell cross mod items.
+					    Turn Off to remove cross mod items from the shops and dialog.
+					Default value: On
+					Reload not required for dialog and shop items.
+					Reload required for happiness.
+					'''
 				LabelGeneral6: "[i:1991]   Catch Town NPCs"
 				TooltipGeneral6:
 					'''

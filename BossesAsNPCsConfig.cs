@@ -53,6 +53,12 @@ namespace BossesAsNPCs
 		[Slider]
 		public int ShopPriceScaling { get; set; }
 
+		//BossesAsNPCs Cross Mod Support
+		[Label("$Mods.BossesAsNPCs.Config.Server.LabelGeneral7")]
+		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipGeneral7")]
+		[DefaultValue(true)]
+		public bool TownNPCsCrossModSupport { get; set; }
+
 		//Catch Town NPCs
 		[Label("$Mods.BossesAsNPCs.Config.Server.LabelGeneral6")]
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipGeneral6")]

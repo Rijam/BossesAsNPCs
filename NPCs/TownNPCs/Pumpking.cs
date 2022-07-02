@@ -142,6 +142,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
         public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 4; i++)
@@ -152,7 +154,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
 				if (abominationn >= 0)
@@ -186,6 +188,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.PumpkinMoonMedallion);
 			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
 			nextSlot++;
@@ -208,7 +212,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				nextSlot++;
 				if (NPC.downedHalloweenTree)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 					{
 						shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SpookyBranch").Type);
 						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
@@ -254,7 +258,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (NPCHelper.StatusShop1())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && townNPCsCrossModSupport)
 				{
 					shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("SuspiciousLookingScythe").Type);
 					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop

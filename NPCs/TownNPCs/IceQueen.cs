@@ -153,6 +153,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.NaughtyPresent);
 			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
 			nextSlot++;
@@ -169,7 +171,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				nextSlot++;
 				if (NPC.downedChristmasTree)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3))
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3) && townNPCsCrossModSupport)
 					{
 						shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("FestiveOrnament").Type);
 						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
@@ -202,7 +204,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				}
 				if (NPC.downedChristmasSantank)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2))
+					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && townNPCsCrossModSupport)
 					{
 						shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("NaughtyList").Type);
 						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
@@ -231,7 +233,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			
 			if (NPCHelper.StatusShop1())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 				{
 					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("IceKingsRemains").Type);
 					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop

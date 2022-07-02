@@ -110,6 +110,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override string GetChat()
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
 			for (int i = 1; i <= 3; i++)
@@ -142,7 +144,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Dusk"));
 			}
-			if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities))
+			if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities) && townNPCsCrossModSupport)
 			{
 				int mysteriousTrader = NPC.FindFirstNPC(pbonesUtilities.Find<ModNPC>("MysteriousTrader").Type);
 				if (mysteriousTrader >= 0)
@@ -167,7 +169,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("CultistSummon").Type);
 				shop.item[nextSlot].shopCustomPrice = 750000; //Match the Mutant's shop
@@ -206,6 +210,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.AncientCultistTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeLunaticCultist").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				if (Main.bloodMoon)
+				{
+					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeBloodMoon").Type);
+					shop.item[nextSlot].shopCustomPrice = 10000;
+					nextSlot++;
+				}
+			}
+
 			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.LunaticCultistPetItem);

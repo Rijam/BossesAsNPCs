@@ -155,10 +155,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
+			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+
 			shop.item[nextSlot].SetDefaults(ItemID.MechanicalEye);
 			shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("MechEye").Type);
 				shop.item[nextSlot].shopCustomPrice = 400000; //Match the Mutant's shop
@@ -176,6 +178,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			shop.item[nextSlot].SetDefaults(ItemID.RetinazerTrophy);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 			nextSlot++;
+
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+			{
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeTwins").Type);
+				shop.item[nextSlot].shopCustomPrice = 10000;
+				nextSlot++;
+				if (NPCHelper.DownedMechBossAll())
+				{
+					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeMechs").Type);
+					shop.item[nextSlot].shopCustomPrice = 10000;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("Arbalest").Type);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+				nextSlot++;
+			}
+
 			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
             {
 				shop.item[nextSlot].SetDefaults(ItemID.MechanicalWheelPiece);

@@ -22,8 +22,9 @@ https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.1.9
-	- Boss Town NPCs now have the same Bestiary stars as their real boss counterpart.
+Mod version: 0.1.10
+	- Added Calamity support. The NPCs now sell the extra drops that Calamity adds to them.
+	- Added a config option to enable/disable the Town NPCs' cross mod dialog and selling cross mod items.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)
