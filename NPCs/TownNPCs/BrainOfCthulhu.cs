@@ -47,6 +47,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<WallOfFlesh>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<EyeOfCthulhu>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<MoonLord>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Dreadnautilus>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.DD2Bartender, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<EmpressOfLight>(), AffectionLevel.Dislike)
@@ -132,18 +133,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
+				chat.Add(Language.GetTextValue(path + "Dryad", Main.npc[dryad].GivenName));
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0 && NPC.downedMechBossAny)
 			{
-				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
+				chat.Add(Language.GetTextValue(path + "Mechanic", Main.npc[mechanic].GivenName));
 			}
 			return chat;
 		}
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -151,6 +156,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -158,92 +171,103 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.BloodySpine);
-			shop.item[nextSlot].shopCustomPrice = 100000; //Made up value since it has no value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("GoreySpine").Type);
-				shop.item[nextSlot].shopCustomPrice = 100000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.BloodySpine);
+				shop.item[nextSlot].shopCustomPrice = 100000; //Made up value since it has no value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.CrimtaneOre);
-			shop.item[nextSlot].shopCustomPrice = 1300 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.TissueSample);
-			shop.item[nextSlot].shopCustomPrice = 150 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BoneRattle);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.05); //Formula: (Sell value / drop chance))
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BrainMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BrainofCthulhuTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.CrimtaneOre);
+				shop.item[nextSlot].shopCustomPrice = 1300 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.TissueSample);
+				shop.item[nextSlot].shopCustomPrice = 150 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BoneRattle);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.05); //Formula: (Sell value / drop chance))
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BrainMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BrainofCthulhuTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeBrainofCthulhu").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeCrimson").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BrainOfConfusion);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BrainOfCthulhuPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BrainofCthulhuMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss3);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.BrainOfConfusion);
+					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.BrainOfCthulhuPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BrainofCthulhuMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss3);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
 					}
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.ViciousPowder);
-				shop.item[nextSlot].shopCustomPrice = 100;
-				nextSlot++;
-				if (Main.hardMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.BloodWater);
+					shop.item[nextSlot].SetDefaults(ItemID.ViciousPowder);
 					shop.item[nextSlot].shopCustomPrice = 100;
 					nextSlot++;
-				}
-				int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-				if (steampunker >= 0 && NPC.downedMechBossAny)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.RedSolution);
-					shop.item[nextSlot].shopCustomPrice = 2500;
+					if (Main.hardMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.BloodWater);
+						shop.item[nextSlot].shopCustomPrice = 100;
+						nextSlot++;
+					}
+					int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
+					if (steampunker >= 0 && NPC.downedMechBossAny)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.RedSolution);
+						shop.item[nextSlot].shopCustomPrice = 2500;
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.BrainOfCthulhu.BoCCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.BrainOfCthulhu.BoCCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.BrainOfCthulhu.BoCCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.BrainOfCthulhu.BoCCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "GoreySpine", shop, ref nextSlot, 100000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeBrainofCthulhu", shop, ref nextSlot, 10000);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeCrimson", shop, ref nextSlot, 10000);
+				}
+
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "BrainStaff", shop, ref nextSlot, 0.1f); //Mind Break
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "CrimetroidEgg", shop, ref nextSlot, 0.04f);
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "GuttedHeart", shop, ref nextSlot);
+					}
+				}
 			}
 		}
 

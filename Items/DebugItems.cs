@@ -39,6 +39,7 @@ namespace BossesAsNPCs.Items
 		public override bool? UseItem(Player player)
 		{
 			Main.NewText("DD2Event.DownedInvasionT3 " + DD2Event.DownedInvasionT3);
+			Main.NewText("daytimeEoLDefeated " + BossesAsNPCsWorld.daytimeEoLDefeated);
 			Main.NewText("downedBetsy " + BossesAsNPCsWorld.downedBetsy);
 			Main.NewText("downedDungeonGuardian " + BossesAsNPCsWorld.downedDungeonGuardian);
 			Main.NewText("downedDarkMage " + BossesAsNPCsWorld.downedDarkMage);
@@ -68,6 +69,7 @@ namespace BossesAsNPCs.Items
 		}
 		public override bool? UseItem(Player player)
 		{
+			BossesAsNPCsWorld.daytimeEoLDefeated = false;
 			BossesAsNPCsWorld.downedBetsy = false;
 			BossesAsNPCsWorld.downedDungeonGuardian = false;
 			BossesAsNPCsWorld.downedDarkMage = false;

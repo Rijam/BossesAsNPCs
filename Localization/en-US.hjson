@@ -85,7 +85,7 @@ Mods: {
 					Requires a Reload.
 					'''
 
-				LabelSpawnKS: "[i:2493]   King Slime Can Spawn"
+				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   King Slime Can Spawn"
 				TooltipSpawnKS:
 					'''
 					This option toggles if the King Slime NPC can spawn.
@@ -94,7 +94,7 @@ Mods: {
 					    Turn Off to stop the King Slime NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnEoC: "[i:2112]   Eye of Cthulhu Can Spawn"
+				LabelSpawnEoC: "[i:BossesAsNPCs/EoCCostumeHeadpiece]   Eye of Cthulhu Can Spawn"
 				TooltipSpawnEoC:
 					'''
 					This option toggles if the Eye of Cthulhu NPC can spawn.
@@ -148,7 +148,7 @@ Mods: {
 					    Turn Off to stop the Deerclops NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnWoF: "[i:2105]   Wall of Flesh Can Spawn"
+				LabelSpawnWoF: "[i:BossesAsNPCs/WoFCostumeHeadpiece]   Wall of Flesh Can Spawn"
 				TooltipSpawnWoF:
 					'''
 					This option toggles if the Wall of Flesh NPC can spawn.
@@ -211,7 +211,7 @@ Mods: {
 					    Turn Off to stop the Golem NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnEoL: "[i:4784]   Empress of Light Can Spawn"
+				LabelSpawnEoL: "[i:BossesAsNPCs/EoLCostumeHeadpiece]   Empress of Light Can Spawn"
 				TooltipSpawnEoL:
 					'''
 					This option toggles if the Empress of Light NPC can spawn.
@@ -220,7 +220,7 @@ Mods: {
 					    Turn Off to stop the Empress of Light NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnDF: "[i:2588]   Duke Fishron Can Spawn"
+				LabelSpawnDF: "[i:BossesAsNPCs/DFCostumeHeadpiece]   Duke Fishron Can Spawn"
 				TooltipSpawnDF:
 					'''
 					This option toggles if the Duke Fishron NPC can spawn.
@@ -238,7 +238,7 @@ Mods: {
 					    Turn Off to stop the Betsy NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnLC: "[i:3372]   Lunatic Cultist Can Spawn"
+				LabelSpawnLC: "[i:BossesAsNPCs/LCCostumeHeadpiece]   Lunatic Cultist Can Spawn"
 				TooltipSpawnLC:
 					'''
 					This option toggles if the Lunatic Cultist NPC can spawn.
@@ -274,7 +274,25 @@ Mods: {
 					    Turn Off to stop the Pirate Invasion items from the Pirate's shop.
 					Default value: On
 					'''
-				LabelSpawnPk: "[i:1857]   Pumpking Can Spawn"
+				LabelSpawnDn: "[i:BossesAsNPCs/DnCostumeHeadpiece]   Dreadnautilus Can Spawn"
+				TooltipSpawnDn:
+					'''
+					This option toggles if the Dreadnautilus NPC can spawn.
+					  When On: The Dreadnautilus NPC WILL spawn.
+					  When Off: The Dreadnautilus NPC WILL NOT spawn.
+					    Turn Off to stop the Dreadnautilus NPC from spawning.
+					Default value: Off
+					'''
+				LabelSpawnMo: "[i:BossesAsNPCs/MoCostumeHeadpiece]   Mothron Can Spawn"
+				TooltipSpawnMo:
+					'''
+					This option toggles if the Mothron NPC can spawn.
+					  When On: The Mothron NPC WILL spawn.
+					  When Off: The Mothron NPC WILL NOT spawn.
+					    Turn Off to stop the Mothron NPC from spawning.
+					Default value: Off
+					'''
+				LabelSpawnPk: "[i:BossesAsNPCs/PkCostumeHeadpiece]   Pumpking Can Spawn"
 				TooltipSpawnPk:
 					'''
 					This option toggles if the Pumpking NPC can spawn.
@@ -283,7 +301,7 @@ Mods: {
 					    Turn Off to stop the Pumpking NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnIQ: "[i:4814]   Ice Queen Can Spawn"
+				LabelSpawnIQ: "[i:BossesAsNPCs/IQCostumeHeadpiece]   Ice Queen Can Spawn"
 				TooltipSpawnIQ:
 					'''
 					This option toggles if the Ice Queen NPC can spawn.
@@ -292,7 +310,7 @@ Mods: {
 					    Turn Off to stop the Ice Queen NPC from spawning.
 					Default value: On
 					'''
-				LabelSpawnMS: "[i:2769]   Martian Saucer Can Spawn"
+				LabelSpawnMS: "[i:BossesAsNPCs/MSCostumeHeadpiece]   Martian Saucer Can Spawn"
 				TooltipSpawnMS:
 					'''
 					This option toggles if the Martian Saucer NPC can spawn.
@@ -333,6 +351,8 @@ Mods: {
 				Betsy: Defeat Betsy
 				LunaticCultist: Defeat the Lunatic Cultist
 				MoonLord: Defeat Moon Lord
+				Dreadnautilus: Defeat Dreadnautilus
+				Mothron: Defeat Mothron
 				Pumpking: Defeat the Pumpking
 				IceQueen: Defeat the Ice Queen
 				MartianSaucer: Defeat the Martian Saucer
@@ -371,6 +391,9 @@ Mods: {
 			DFCostumeHeadpiece: Duke Fishron Costume Headpiece
 			DFCostumeBodypiece: Duke Fishron Costume Bodypiece
 			DFCostumeLegpiece: Duke Fishron Costume Legpiece
+			DnCostumeHeadpiece: Dreadnautilus Costume Headpiece
+			DnCostumeBodypiece: Dreadnautilus Costume Bodypiece
+			DnCostumeLegpiece: Dreadnautilus Costume Legpiece
 			EoLCostumeHeadpiece: Empress Costume Headpiece
 			EoLCostumeBodypiece: Empress Costume Bodypiece
 			EoLCostumeLegpiece: Empress Costume Legpiece
@@ -391,6 +414,9 @@ Mods: {
 			LCCostumeHeadpiece: Lunatic Cultist Costume Headpiece
 			LCCostumeBodypiece: Lunatic Cultist Costume Bodypiece
 			MLCostumeBodypiece: Moon Lord Costume Bodypiece
+			MoCostumeHeadpiece: Mothron Costume Headpiece
+			MoCostumeBodypiece: Mothron Costume Bodypiece
+			MoCostumeLegpiece: Mothron Costume Legpiece
 			MSCostumeHeadpiece: Martian Saucer Costume Headpiece
 			MSCostumeBodypiece: Martian Saucer Costume Bodypiece
 			MSCostumeLegpiece: Martian Saucer Costume Legpiece
@@ -449,6 +475,8 @@ Mods: {
 			CaughtBetsy: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtLunaticCultist: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMoonLord: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDreadnautilus: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMothron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
@@ -721,9 +749,33 @@ Mods: {
 			Dreadnautilus: {
 				Default1: I am Dreadnautilus.
 				Default2: Now we are really stretching the definition of boss!
+				Default3: Some people mistakenly call me "Blood Nautilus". Where did that come from?
+				Default4: Have you seen my trophy? I lost it, unfortunately.
+				Party: The punch bowl at this party reminds me of blood. Tasty!
+				Rare: What even is a "Conch of Fish"?
+				DayNoRain: Ugh, it's so bright out during the day! I wish the clouds would cover the sun.
+				Night: It's easy to see at night, is it not for you?
+				Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, through.
+				BloodMoon1: I don't get what the fuss is all about, I love the Blood Moon!
+				BloodMoon2: "The {$ItemName.Deathweed} bloom tonight. Don't forget to harvest them!"
+				KillCount: "You have slain me {0} times. Have you enjoyed it?"
+				Zoologist: "See, even {0} likes the Blood Moon! She blends in with the red environment, too!"
 			}
 			Mothron: {
 				Default1: I am Mothron.
+				Default2: I'm honored to be considered a boss!
+				Default3: Do you not put your children to work as soon as they are hatched?
+				Default4: A lot of people really want this rusty old sword that I have. What value does it have to you?
+				Default5: I accidentally ate a rusty old sword. I thought it was candy! Do you still want it?
+				Default6: Oh, hello! I hope you brought your dust pan with you!
+				Party: So many fancy lights! I love parties!
+				KillCount: "You defeated me {0} times in this world. What else are you looking for?"
+				Deerclops: "Deerclops' fuzzy hair reminds me of somebody else I know..."
+				WitchDoctor: "{0}'s scales reminds me of somebody else I know..."
+				Merchant: "Do you know if {0} sells any lamps? Lanterns work, too. Just asking."
+				EoC: "Eye of Cthulhu is eying the yoyo that I have. They can have it, I don't even know why I have it in the first place."
+				UndergroundJungle: Why is it that those moths drop butterfly dust?
+				TorchMerchant: "{0} is so bright! They always keep me company at night!"
 			}
 			Pumpking: {
 				Default1: I am the Pumpking.
@@ -1238,13 +1290,13 @@ Mods: {
 				}
 				BrainOfCthulhu: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
 				QueenBee: {
 					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}"
-					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.Mothron}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Demolitionist}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
 				}
@@ -1256,13 +1308,13 @@ Mods: {
 				}
 				Deerclops: {
 					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.DD2Betsy}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
 					Dislike: "{$NPCName.TaxCollector}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				WallOfFlesh: {
 					Love: "{$NPCName.Guide}"
-					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.BloodNautilus}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
@@ -1316,20 +1368,20 @@ Mods: {
 				}
 				DukeFishron: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.Angler}"
-					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.Pirate}, {$NPCName.Truffle}"
+					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.BloodNautilus}, {$NPCName.Pirate}, {$NPCName.Truffle}"
 					Dislike: "{$NPCName.ArmsDealer}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				Betsy: {
 					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.DukeFishron}, {$NPCName.Deerclops}"
-					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.BestiaryGirl}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Merchant}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				LunaticCultist: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
 					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
-					Dislike: "{$NPCName.WitchDoctor}"
+					Dislike: "{$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				MoonLord: {
@@ -1340,26 +1392,26 @@ Mods: {
 				}
 				Dreadnautilus: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
-					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
-					Dislike: "Underground, {$NPCName.Angler}, {$NPCName.Pirate}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}, {$NPCName.DD2Bartender}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Angler}, {$NPCName.Pirate}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
 				}
 				Mothron: {
-					Love: "{$Mods.BossesAsNPCs.Common.Forest}"
-					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.BestiaryGirl}"
-					Dislike: "Underground, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Deerclops}, {$NPCName.WitchDoctor}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.Merchant}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				Pumpking: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.IceQueen}"
-					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}, {$NPCName.Mothron}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.PartyGirl}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				IceQueen: {
 					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.Pumpking}"
 					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.Deerclops}, {$NPCName.QueenSlimeBoss}, {$NPCName.QueenBee}, {$NPCName.SantaClaus}"
-					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Painter}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Mothron}, {$NPCName.Painter}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				MartianSaucer: {

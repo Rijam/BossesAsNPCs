@@ -49,6 +49,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<QueenBee>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<QueenSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Dislike)
 				.SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
@@ -132,7 +133,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
-			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -155,11 +159,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.NaughtyPresent);
-			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
-			nextSlot++;
-			if (NPCHelper.StatusShop2())
+			
+			if (NPCHelper.StatusShop1())
 			{
+				shop.item[nextSlot].SetDefaults(ItemID.NaughtyPresent);
+				shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
+				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.ElfHat);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
 				nextSlot++;
@@ -171,12 +176,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				nextSlot++;
 				if (NPC.downedChristmasTree)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3) && townNPCsCrossModSupport)
-					{
-						shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("FestiveOrnament").Type);
-						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-						nextSlot++;
-					}
 					shop.item[nextSlot].SetDefaults(ItemID.ChristmasTreeSword);
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.078);
 					nextSlot++;
@@ -204,12 +203,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				}
 				if (NPC.downedChristmasSantank)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && townNPCsCrossModSupport)
-					{
-						shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("NaughtyList").Type);
-						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-						nextSlot++;
-					}
 					shop.item[nextSlot].SetDefaults(ItemID.EldMelter); //Elf Melter, lol Re-Logic misspelled it.
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
 					nextSlot++;
@@ -228,16 +221,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
 						nextSlot++;
 					}
-				}
-			}
-			
-			if (NPCHelper.StatusShop1())
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("IceKingsRemains").Type);
-					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
-					nextSlot++;
 				}
 				shop.item[nextSlot].SetDefaults(ItemID.BlizzardStaff);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
@@ -295,6 +278,36 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
+				}
+			}
+			
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+				{
+					if (NPC.downedChristmasTree)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "FestiveOrnament", shop, ref nextSlot, 200000); //Match the Abominationn's shop
+					}
+					if (NPC.downedChristmasSantank)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "NaughtyList", shop, ref nextSlot, 200000); //Match the Abominationn's shop
+					}
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "IceKingsRemains", shop, ref nextSlot, 300000); //Match the Abominationn's shop
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "IceQueensCrown", shop, ref nextSlot, 0.2f);
+					}
+				}
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantankScrap", shop, ref nextSlot); //Mechanical Scrap
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "IceSentry", shop, ref nextSlot, 0.1f); //Frozen Queen's Staff
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FrostCube", shop, ref nextSlot, 0.07f); //Frozen Queen's Core
 				}
 			}
 		}

@@ -47,6 +47,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<EmpressOfLight>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<KingSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Pumpking>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Dreadnautilus>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Truffle, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Pirate, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.ArmsDealer, AffectionLevel.Dislike)
@@ -128,7 +129,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int mutant = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Mutant").Type);
 				if (mutant >= 0)
 				{
-					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[mutant].GivenName));
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[mutant].GivenName));
 				}
 			}
 			if (ModLoader.TryGetMod("CalamityMod", out Mod _) && townNPCsCrossModSupport)
@@ -141,6 +142,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -148,6 +153,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -155,91 +168,104 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.TruffleWorm);
-			shop.item[nextSlot].shopCustomPrice = 400000; //Made up value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("TruffleWorm2").Type);
-				shop.item[nextSlot].shopCustomPrice = 600000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.TruffleWorm);
+				shop.item[nextSlot].shopCustomPrice = 400000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.BubbleGun);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Flairon);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.RazorbladeTyphoon);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.TempestStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Tsunami);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.FishronWings);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DukeFishronMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DukeFishronTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BubbleGun);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Flairon);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.RazorbladeTyphoon);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.TempestStaff);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Tsunami);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.2);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.FishronWings);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DukeFishronMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DukeFishronTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeDukeFishron").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("DukesDecapitator").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BrinyBaron").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
-				nextSlot++;
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.ShrimpyTruffle);
-				shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.DukeFishronPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DukeFishronMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDukeFishron);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.ShrimpyTruffle);
+					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.DukeFishronPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DukeFishronMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDukeFishron);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "TruffleWorm2", shop, ref nextSlot, 600000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeDukeFishron", shop, ref nextSlot, 10000);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "DukesDecapitator", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "BrinyBaron", shop, ref nextSlot, 0.1f);
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "FishStick", shop, ref nextSlot, 0.1f);
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "MutantAntibodies", shop, ref nextSlot);
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod))
+				{
+					NPCHelper.SafelySetCrossModItem(qwertyMod, "BubbleBrewerBaton", shop, ref nextSlot, 0.33f);
+					NPCHelper.SafelySetCrossModItem(qwertyMod, "Cyclone", shop, ref nextSlot, 0.33f);
+					NPCHelper.SafelySetCrossModItem(qwertyMod, "Whirlpool", shop, ref nextSlot, 0.33f);
+				}
 			}
 		}
 

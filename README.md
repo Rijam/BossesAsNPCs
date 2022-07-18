@@ -1,6 +1,6 @@
 ﻿# Bosses As NPCs
 Do you like a huge excess of Town NPCs?
-Do you enjoy managing the happiness of 23 extra Town NPCs?
+Do you enjoy managing the happiness of 25 extra Town NPCs?
 Ever wanted bosses that you have defeated to move in as Town NPCs?
 
 Well this is the mod for you!

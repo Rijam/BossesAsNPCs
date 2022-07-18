@@ -165,17 +165,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
+				spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 			}
 
 			if (NPC.ai[2] > 100)
@@ -212,7 +205,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0 && Main.hardMode)
 			{
-				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
+				chat.Add(Language.GetTextValue(path + "Dryad", Main.npc[dryad].GivenName));
 			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
@@ -238,6 +231,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -245,6 +242,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -252,99 +257,118 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.EmpressButterfly); //Prismatic Lacewing
-			shop.item[nextSlot].shopCustomPrice = 400000; //Sell value * 5 = 250000
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("PrismaticPrimrose").Type);
-				shop.item[nextSlot].shopCustomPrice = 600000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.EmpressButterfly); //Prismatic Lacewing
+				shop.item[nextSlot].shopCustomPrice = 400000; //Sell value * 5 = 250000
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMagicItem); //Nightglow
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);  //Formula: (Sell value / drop chance); It would be 200000 in this case
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PiercingStarlight); //Starlight
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.RainbowWhip); //Kaleidoscope
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.FairyQueenRangedItem); //Eventide
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.RainbowWings); //Empress Wings
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.HallowBossDye); //Prismatic Dye
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SparkleGuitar); //Stellar Tune
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.RainbowCursor); //Rainbow Cursor
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.EmpressBlade); //Terraprisma
-			shop.item[nextSlot].shopCustomPrice = 200000 * 50; //Special case since it is technically a "100% drop chance".
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMask); //Empress of Light Mask
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.FairyQueenTrophy); //Empress of Light Trophy
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.EmpressFlightBooster); //Soaring Insignia
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMagicItem); //Nightglow
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);  //Formula: (Sell value / drop chance); It would be 200000 in this case
 				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenPetItem); //Jewel of Light
+				shop.item[nextSlot].SetDefaults(ItemID.PiercingStarlight); //Starlight
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMasterTrophy); //Empress of Light Relic
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.RainbowWhip); //Kaleidoscope
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenRangedItem); //Eventide
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.RainbowWings); //Empress Wings
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.07);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.HallowBossDye); //Prismatic Dye
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SparkleGuitar); //Stellar Tune
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.RainbowCursor); //Rainbow Cursor
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				if (BossesAsNPCsWorld.daytimeEoLDefeated)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEmpressOfLight);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.EmpressBlade); //Terraprisma
+					shop.item[nextSlot].shopCustomPrice = 200000 * 50; //Special case since it is technically a "100% drop chance".
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMask); //Empress of Light Mask
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.FairyQueenTrophy); //Empress of Light Trophy
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.EmpressFlightBooster); //Soaring Insignia
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.FairyQueenPetItem); //Jewel of Light
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.FairyQueenMasterTrophy); //Empress of Light Relic
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEmpressOfLight);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					if (Main.hardMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.HolyWater);
+						shop.item[nextSlot].shopCustomPrice = 200; //For some reason Holy Water is double as valuable than Unholy/Blood Water.
+						nextSlot++;
+					}
+					int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
+					if (steampunker >= 0 && NPC.downedMechBossAny)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.BlueSolution);
+						shop.item[nextSlot].shopCustomPrice = 2500;
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "PrismaticPrimrose", shop, ref nextSlot, 600000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "PrecisionSeal", shop, ref nextSlot);
 					}
 				}
-				if (Main.hardMode)
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.HolyWater);
-					shop.item[nextSlot].shopCustomPrice = 200; //For some reason Holy Water is double as valuable than Unholy/Blood Water.
-					nextSlot++;
+					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "EmpressSquireMinionItem", shop, ref nextSlot, 0.34f); //Chalice of the Empress
 				}
-				int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-				if (steampunker >= 0 && NPC.downedMechBossAny)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.BlueSolution);
-					shop.item[nextSlot].shopCustomPrice = 2500;
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
 			}
 		}
 

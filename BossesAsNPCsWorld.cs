@@ -13,6 +13,7 @@ namespace BossesAsNPCs
 { 
     public class BossesAsNPCsWorld : ModSystem
     {
+        public static bool daytimeEoLDefeated = false;
         public static bool downedBetsy = false;
         public static bool downedDungeonGuardian = false;
         public static bool downedDarkMage = false;
@@ -23,6 +24,7 @@ namespace BossesAsNPCs
 
         public override void OnWorldLoad()
         {
+            daytimeEoLDefeated = false;
             downedBetsy = false;
             downedDungeonGuardian = false;
             downedDarkMage = false;
@@ -34,6 +36,7 @@ namespace BossesAsNPCs
 
         public override void OnWorldUnload()
         {
+            daytimeEoLDefeated = false;
             downedBetsy = false;
             downedDungeonGuardian = false;
             downedDarkMage = false;
@@ -45,6 +48,10 @@ namespace BossesAsNPCs
 
         public override void SaveWorldData(TagCompound tag)
         {
+            if (daytimeEoLDefeated)
+			{
+                tag["daytimeEoLDefeated"] = true;
+			}
             if (downedBetsy)
             {
                 tag["downedBetsy"] = true;
@@ -76,6 +83,7 @@ namespace BossesAsNPCs
         }
         public override void LoadWorldData(TagCompound tag)
         {
+            daytimeEoLDefeated = tag.ContainsKey("daytimeEoLDefeated");
             downedBetsy = tag.ContainsKey("downedBetsy");
             downedDungeonGuardian = tag.ContainsKey("downedDungeonGuardian");
             downedDarkMage = tag.ContainsKey("downedDarkMage");
@@ -88,6 +96,7 @@ namespace BossesAsNPCs
         public override void NetSend(BinaryWriter writer)
         {
             var flags = new BitsByte();
+            flags[0] = daytimeEoLDefeated;
             flags[1] = downedBetsy;
             flags[2] = downedDungeonGuardian;
             flags[3] = downedDarkMage;
@@ -100,6 +109,7 @@ namespace BossesAsNPCs
         public override void NetReceive(BinaryReader reader)
         {
             BitsByte flags = reader.ReadByte();
+            daytimeEoLDefeated = flags[0];
             downedBetsy = flags[1];
             downedDungeonGuardian = flags[2];
             downedDarkMage = flags[3];

@@ -10,6 +10,8 @@ using Terraria.ModLoader.IO;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.Localization;
 using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.ItemDropRules;
+using BossesAsNPCs.NPCs;
 
 namespace BossesAsNPCs
 {
@@ -82,6 +84,17 @@ namespace BossesAsNPCs
                     NetMessage.SendData(MessageID.WorldData);
                 }
             }
+            if (npc.type == NPCID.HallowBoss)
+			{
+                if (npc.AI_120_HallowBoss_IsGenuinelyEnraged())
+				{
+                    BossesAsNPCsWorld.daytimeEoLDefeated = true;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
+			}
         }
         public override void SetupShop(int type, Chest shop, ref int nextSlot)
         {
@@ -93,8 +106,9 @@ namespace BossesAsNPCs
                 || type == ModContent.NPCType<TheDestroyer>() || type == ModContent.NPCType<Retinazer>() || type == ModContent.NPCType<Spazmatism>()
                 || type == ModContent.NPCType<SkeletronPrime>() || type == ModContent.NPCType<Plantera>() || type == ModContent.NPCType<Golem>()
                 || type == ModContent.NPCType<EmpressOfLight>() || type == ModContent.NPCType<DukeFishron>() || type == ModContent.NPCType<Betsy>()
-                || type == ModContent.NPCType<LunaticCultist>() || type == ModContent.NPCType<MoonLord>() || type == ModContent.NPCType<Pumpking>()
-                || type == ModContent.NPCType<IceQueen>() || type == ModContent.NPCType<MartianSaucer>())
+                || type == ModContent.NPCType<LunaticCultist>() || type == ModContent.NPCType<MoonLord>() || type == ModContent.NPCType<Dreadnautilus>()
+                || type == ModContent.NPCType<Mothron>() || type == ModContent.NPCType<Pumpking>() || type == ModContent.NPCType<IceQueen>()
+                || type == ModContent.NPCType<MartianSaucer>())
             {
                 foreach (Item item in shop.item)
                 {
@@ -107,10 +121,10 @@ namespace BossesAsNPCs
                 shop.item[nextSlot].SetDefaults(ItemID.PirateMap);
                 shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 * shopMulti); //Made up value
                 nextSlot++;
-                if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+                if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
                 {
                     shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("PirateFlag").Type);
-                    shop.item[nextSlot].shopCustomPrice = 150000; //Match the Deviantt's shop
+                    shop.item[nextSlot].shopCustomPrice = (int)Math.Round(150000 * shopMulti); //Match the Deviantt's shop
                     nextSlot++;
                 }
                 shop.item[nextSlot].SetDefaults(ItemID.CoinGun);
@@ -146,6 +160,17 @@ namespace BossesAsNPCs
                     shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 * 5 * shopMulti);
                     nextSlot++;
                 }
+                if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+                {
+                    if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+                    {
+                        bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+                        if (eternityMode)
+                        {
+                            NPCHelper.SafelySetCrossModItem(fargosMutant2, "GoldenDippingVat", shop, ref nextSlot, (0.07f * 5), shopMulti);
+                        }
+                    }
+                }
             }
             if (type == NPCID.GoblinTinkerer && ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems)
             {
@@ -155,6 +180,10 @@ namespace BossesAsNPCs
                 shop.item[nextSlot].SetDefaults(ItemID.Harpoon);
                 shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5400 / 0.005 / 5 * shopMulti);  //Special case to make it cheaper
                 nextSlot++;
+                if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+                {
+                    NPCHelper.SafelySetCrossModItem(calamityMod, "PlasmaRod", shop, ref nextSlot, (0.07f * 5), shopMulti);
+                }
                 if (BossesAsNPCsWorld.downedGoblinSummoner)
                 {
                     shop.item[nextSlot].SetDefaults(ItemID.ShadowFlameHexDoll);
@@ -166,6 +195,37 @@ namespace BossesAsNPCs
                     shop.item[nextSlot].SetDefaults(ItemID.ShadowFlameKnife);
                     shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.17 * shopMulti);
                     nextSlot++;
+
+                    if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+                    {
+                        if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+                        {
+                            NPCHelper.SafelySetCrossModItem(fargosMutant, "ShadowflameIcon", shop, ref nextSlot, 0.01f, shopMulti); //10 gold
+                        }
+                        if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod2))
+                        {
+                            NPCHelper.SafelySetCrossModItem(calamityMod2, "BurningStrife", shop, ref nextSlot, (0.33f * 5), shopMulti);
+                            NPCHelper.SafelySetCrossModItem(calamityMod2, "TheFirstShadowflame", shop, ref nextSlot, (0.33f * 5), shopMulti);
+                        }
+                        if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+                        {
+                            bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+                            if (eternityMode)
+                            {
+                                NPCHelper.SafelySetCrossModItem(fargosSouls, "WretchedPouch", shop, ref nextSlot, (0.2f * 5), shopMulti);
+                            }
+                        }
+                        if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+                        {
+                            NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "GoblinGunnerMinionItem", shop, ref nextSlot, (0.44f * 5), shopMulti); //Goblin Radio Beacon
+                        }
+                        if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+                        {
+                            NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameBMask", shop, ref nextSlot, 1f, shopMulti); //Shadowflare Mask
+                            NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameChestplate", shop, ref nextSlot, 1f, shopMulti); //Shadowflare Robe
+                            NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameGreaves", shop, ref nextSlot, 1f, shopMulti); //Shadowflare Greaves
+                        }
+                    }
                 }
             }
         }
@@ -192,6 +252,8 @@ namespace BossesAsNPCs
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Betsy>()] = 4;
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<LunaticCultist>()] = 4;
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MoonLord>()] = 5;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Dreadnautilus>()] = 5;
+            ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Mothron>()] = 5;
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<Pumpking>()] = 4;
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<IceQueen>()] = 4;
             ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<MartianSaucer>()] = 4;

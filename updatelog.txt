@@ -97,3 +97,13 @@
 0.1.10 - Update 10 (July 1, 2022)
 	* Added Calamity support. The NPCs now sell the extra drops that Calamity adds to them.
 	* Added a config option to enable/disable the Town NPCs' cross mod dialog and selling cross mod items.
+
+0.1.11 - Update 11 (July 18, 2022)
+	* Officially added a Mothron Town NPC. Disabled by default, turn the config on if you want them!
+	* Officially added a Dreadnautilus Town NPC. Disabled by default, turn the config on if you want them!
+	* Updated the icons in the config.
+	* Empress of Light now only sells the Terraprisma if the Empress of Light has been defeated during the day time at least once in the world.
+	* Gave every Town NPC two shops. Now all cross mod items are in the second shop.
+	* Added cross mod support for: Fargo's Souls Mod, Amulet of Many Minions, Storm's Additions Mod, Qwerty's Bosses and Items 2, Echoes of the Ancients, Magic Storage, Dreadnautilus is a Boss.
+	* Cross mod shop items are now much safer. The game will no longer throw an error if the item is not found.
+	* Improved the glow masks on the NPCs who have them.

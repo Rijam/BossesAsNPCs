@@ -84,7 +84,7 @@ Mods: {
 					需要重新加载。
 					'''
 
-				LabelSpawnKS: "[i:2493]   史莱姆王可以生成"
+				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   史莱姆王可以生成"
 				TooltipSpawnKS:
 					'''
 					此选项切换史莱姆王 NPC 是否可以生成。
@@ -93,7 +93,7 @@ Mods: {
 					    关闭以阻止史莱姆王NPC生成。
 					默认值：开
 					'''
-				LabelSpawnEoC: "[i:2112]   克苏鲁之眼可以生成"
+				LabelSpawnEoC: "[i:BossesAsNPCs/EoCCostumeHeadpiece]   克苏鲁之眼可以生成"
 				TooltipSpawnEoC:
 					'''
 					此选项切换克苏鲁之眼 NPC 是否可以生成。
@@ -147,7 +147,7 @@ Mods: {
 					    关闭以阻止巨鹿怪 NPC生成。
 					默认值：开
 					'''
-				LabelSpawnWoF: "[i:2105]   血肉墙可以生成"
+				LabelSpawnWoF: "[i:BossesAsNPCs/WoFCostumeHeadpiece]   血肉墙可以生成"
 				TooltipSpawnWoF:
 					'''
 					此选项切换血肉墙NPC 是否可以生成。
@@ -210,7 +210,7 @@ Mods: {
 					    关闭以阻止石巨人NPC生成。
 					默认值：开
 					'''
-				LabelSpawnEoL: "[i:4784]   光之女皇可以生成"
+				LabelSpawnEoL: "[i:BossesAsNPCs/EoLCostumeHeadpiece]   光之女皇可以生成"
 				TooltipSpawnEoL:
 					'''
 					此选项切换光明女皇 NPC 是否可以生成。
@@ -219,7 +219,7 @@ Mods: {
 					    关闭以阻止光之女皇NPC生成。
 					默认值：开
 					'''
-				LabelSpawnDF: "[i:2588]   猪龙鱼公爵可以生成"
+				LabelSpawnDF: "[i:BossesAsNPCs/DFCostumeHeadpiece]   猪龙鱼公爵可以生成"
 				TooltipSpawnDF:
 					'''
 					此选项切换猪龙鱼公爵NPC是否可以生成。
@@ -237,7 +237,7 @@ Mods: {
 					    关闭以阻止双足翼龙NPC生成。
 					默认值：开
 					'''
-				LabelSpawnLC: "[i:3372]   拜月邪教徒可以生成"
+				LabelSpawnLC: "[i:BossesAsNPCs/LCCostumeHeadpiece]   拜月邪教徒可以生成"
 				TooltipSpawnLC:
 					'''
 					此选项切换拜月邪教徒NPC是否可以生成。
@@ -273,7 +273,25 @@ Mods: {
 					    关闭以阻止海盗商店中的海盗入侵物品。
 					默认值：开
 					'''
-				LabelSpawnPk: "[i:1857]   南瓜王可以生成"
+				LabelSpawnDn: "[i:BossesAsNPCs/DnCostumeHeadpiece]   恐惧鹦鹉螺可以生成"
+				TooltipSpawnDn:
+					'''
+					此选项切换恐惧鹦鹉螺 NPC 是否可以生成。
+					  当打开时：将生成恐惧鹦鹉螺NPC。
+					  关闭时：恐惧鹦鹉螺NPC不会生成。
+					    关闭以阻止恐惧鹦鹉螺 NPC 生成。
+					默认值：关闭
+					'''
+				LabelSpawnMo: "[i:BossesAsNPCs/MoCostumeHeadpiece]   蛾怪可以生成"
+				TooltipSpawnMo:
+					'''
+					此选项切换蛾怪 NPC 是否可以生成。
+					  当打开时：将生成蛾怪NPC。
+					  关闭时：蛾怪NPC不会生成。
+					    关闭以阻止蛾怪 NPC 生成。
+					默认值：关闭
+					'''
+				LabelSpawnPk: "[i:BossesAsNPCs/PkCostumeHeadpiece]   南瓜王可以生成"
 				TooltipSpawnPk:
 					'''
 					此选项切换南瓜王 NPC 是否可以生成。
@@ -282,7 +300,7 @@ Mods: {
 					    关闭以阻止南瓜王 NPC 生成。
 					默认值：开
 					'''
-				LabelSpawnIQ: "[i:4814]   冰雪女王可以生成"
+				LabelSpawnIQ: "[i:BossesAsNPCs/IQCostumeHeadpiece]   冰雪女王可以生成"
 				TooltipSpawnIQ:
 					'''
 					此选项切换冰雪女王NPC是否可以生成。
@@ -291,7 +309,7 @@ Mods: {
 					    关闭以阻止冰雪女王NPC生成。
 					默认值：开
 					'''
-				LabelSpawnMS: "[i:2769]   火星飞碟可以生成"
+				LabelSpawnMS: "[i:BossesAsNPCs/MSCostumeHeadpiece]   火星飞碟可以生成"
 				TooltipSpawnMS:
 					'''
 					此选项切换火星飞碟 NPC 是否可以生成。
@@ -332,6 +350,8 @@ Mods: {
 				Betsy: 打败双足翼龙
 				LunaticCultist: 打败拜月教邪教徒
 				MoonLord: 打败月亮领主
+				Dreadnautilus: 打败恐惧鹦鹉螺
+				Mothron: 打败蛾怪
 				Pumpking: 打败南瓜王
 				IceQueen: 打败冰雪女王
 				MartianSaucer: 打败火星飞碟
@@ -370,6 +390,9 @@ Mods: {
 			DFCostumeHeadpiece: 猪龙鱼公爵头饰
 			DFCostumeBodypiece: 猪龙鱼公爵上衣
 			DFCostumeLegpiece: 猪龙鱼公爵裤子
+			DnCostumeHeadpiece: 恐惧鹦鹉螺头饰
+			DnCostumeBodypiece: 恐惧鹦鹉螺上衣
+			DnCostumeLegpiece: 恐惧鹦鹉螺裤子
 			EoLCostumeHeadpiece: 女皇头饰
 			EoLCostumeBodypiece: 女皇上衣
 			EoLCostumeLegpiece: 女皇裤子
@@ -390,6 +413,9 @@ Mods: {
 			LCCostumeHeadpiece: 拜月教邪教徒面具
 			LCCostumeBodypiece: 拜月教邪教徒上衣
 			MLCostumeBodypiece: 月亮领主上衣
+			MoCostumeHeadpiece: 蛾怪头饰
+			MoCostumeBodypiece: 蛾怪上衣
+			MoCostumeLegpiece: 蛾怪裤子
 			MSCostumeHeadpiece: 火星飞碟头饰
 			MSCostumeBodypiece: 火星飞碟上衣
 			MSCostumeLegpiece: 火星飞碟裤子
@@ -447,6 +473,8 @@ Mods: {
 			CaughtDukeFishron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtBetsy: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtLunaticCultist: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtDreadnautilus: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtMothron: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMoonLord: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
@@ -719,11 +747,35 @@ Mods: {
 				TorchMerchant: 你确定{0}不是...他？
 			}
 			Dreadnautilus: {
-				Default1:我是恐惧鹦鹉螺。
+				Default1: 我是恐惧鹦鹉螺。
 				Default2: 现在我们真的在延伸BOSS的定义！
+				Default3: 有些人误称我为“血鹦鹉螺”。这是从哪里来的？
+				Default4: 你看过我的奖杯吗？不幸的是，我失去了它。
+				Party: 这个派对上的打孔碗让我想起了鲜血。美味！
+				Rare: 什么是“鱼海螺”？
+				DayNoRain: 呃，白天太亮了！我希望云层能遮住太阳。
+				Night: 晚上很容易看到，难道不适合您吗？
+				Rain: 可爱，淡水从天而降。我更像是一个咸水人，通过。
+				BloodMoon1: 我不明白大惊小怪是什么，我喜欢血月！
+				BloodMoon2: "{$ItemName.Deathweed}今晚绽放。别忘了收获它们！"
+				KillCount: "你杀了我{0}次。你喜欢吗？"
+				Zoologist: "看，即使{0}喜欢血月！她也融入了红色的环境！"
 			}
 			Mothron: {
-				Default1:我是蛾怪。
+				Default1: 我是蛾怪。
+				Default2: 我很荣幸被认为是BOSS！
+				Default3: 难道你不让你的孩子一出生就去上班吗？
+				Default4: 很多人真的想要我拥有的这把生锈的旧剑。它对你有什么价值？
+				Default5: 我不小心吃了一把生锈的旧剑。我以为是糖果！你还想要它吗？
+				Default6: 哦，你好！我希望你带上你的簸箕！
+				Party: 这么多花哨的灯！我喜欢派对！
+				KillCount: "你在这个世界上打败了我{0}次。您还在寻找什么？"
+				Deerclops: "鹿角怪 毛茸茸的头发让我想起了我认识的其他人..."
+				WitchDoctor: "{0}的鳞片让我想起了我认识的其他人..."
+				Merchant: "你知道{0}卖什么灯吗？灯笼也有效。只是问。"
+				EoC: "克苏鲁之眼正在盯着我所拥有的溜溜球。他们可以拥有它，我甚至不知道为什么我首先拥有它。"
+				UndergroundJungle: 为什么那些飞蛾会掉落蝴蝶粉尘？
+				TorchMerchant: "{0}太亮了！他们总是在晚上陪伴我！"
 			}
 			Pumpking: {
 				Default1: 我是南瓜王。
@@ -1238,13 +1290,13 @@ Mods: {
 				}
 				BrainOfCthulhu: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
 				QueenBee: {
 					Love: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}"
-					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.QueenSlimeBoss}, {$NPCName.IceQueen}, {$NPCName.Mothron}, {$NPCName.WitchDoctor}, {$NPCName.BestiaryGirl}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Demolitionist}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
 				}
@@ -1256,13 +1308,13 @@ Mods: {
 				}
 				Deerclops: {
 					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.DD2Betsy}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.EyeofCthulhu}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}, {$NPCName.SantaClaus}"
 					Dislike: "{$NPCName.TaxCollector}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				WallOfFlesh: {
 					Love: "{$NPCName.Guide}"
-					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
+					Like: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.EaterofWorldsHead}, {$NPCName.BrainofCthulhu}, {$NPCName.BloodNautilus}, {$NPCName.TaxCollector}, {$NPCName.GoblinTinkerer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
@@ -1316,20 +1368,20 @@ Mods: {
 				}
 				DukeFishron: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.Angler}"
-					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.Pirate}, {$NPCName.Truffle}"
+					Like: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.HallowBoss}, {$NPCName.KingSlime}, {$NPCName.Pumpking}, {$NPCName.BloodNautilus}, {$NPCName.Pirate}, {$NPCName.Truffle}"
 					Dislike: "{$NPCName.ArmsDealer}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				Betsy: {
 					Love: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.DukeFishron}, {$NPCName.Deerclops}"
-					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.BestiaryGirl}"
+					Like: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.MartianSaucer}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Merchant}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				LunaticCultist: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
 					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
-					Dislike: "{$NPCName.WitchDoctor}"
+					Dislike: "{$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				MoonLord: {
@@ -1340,26 +1392,26 @@ Mods: {
 				}
 				Dreadnautilus: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
-					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}"
-					Dislike: "Underground, {$NPCName.Angler}, {$NPCName.Pirate}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.DukeFishron}, {$NPCName.WallofFlesh}, {$NPCName.Mothron}, {$NPCName.BestiaryGirl}, {$NPCName.DD2Bartender}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.Angler}, {$NPCName.Pirate}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Snow}"
 				}
 				Mothron: {
-					Love: "{$Mods.BossesAsNPCs.Common.Forest}"
-					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.BestiaryGirl}"
-					Dislike: "Underground, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
+					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Deerclops}, {$NPCName.WitchDoctor}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.QueenBee}, {$NPCName.DD2Betsy}, {$NPCName.BloodNautilus}, {$NPCName.Merchant}, {$NPCName.BestiaryGirl}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Caverns}, {$NPCName.DyeTrader}, {$NPCName.Golfer}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				Pumpking: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.IceQueen}"
-					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}"
+					Like: "{$Mods.BossesAsNPCs.Common.Desert}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.KingSlime}, {$NPCName.DukeFishron}, {$NPCName.Mothron}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.PartyGirl}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				IceQueen: {
 					Love: "{$Mods.BossesAsNPCs.Common.Snow}, {$NPCName.Pumpking}"
 					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.DD2Betsy}, {$NPCName.MartianSaucer}, {$NPCName.Deerclops}, {$NPCName.QueenSlimeBoss}, {$NPCName.QueenBee}, {$NPCName.SantaClaus}"
-					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Painter}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Mothron}, {$NPCName.Painter}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 				MartianSaucer: {

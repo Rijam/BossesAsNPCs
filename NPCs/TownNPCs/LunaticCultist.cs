@@ -48,6 +48,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<EmpressOfLight>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Clothier, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Dislike)
+				.SetNPCAffection(ModContent.NPCType<Dreadnautilus>(), AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
 		}
@@ -133,7 +134,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int demolitionist = NPC.FindFirstNPC(NPCID.Demolitionist);
 			if (demolitionist >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Demolitionist").Replace("{0}", Main.npc[demolitionist].GivenName));
+				chat.Add(Language.GetTextValue(path + "Demolitionist", Main.npc[demolitionist].GivenName));
 			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
@@ -157,6 +158,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -164,6 +169,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -171,88 +184,112 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("CultistSummon").Type);
-				shop.item[nextSlot].shopCustomPrice = 750000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.LunarCraftingStation); //Ancient Manipulator
+				shop.item[nextSlot].shopCustomPrice = 100000; //made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.LunarCraftingStation); //Ancient Manipulator
-			shop.item[nextSlot].shopCustomPrice = 100000; //made up value
-			nextSlot++;
-			if (NPC.downedTowerSolar)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.FragmentSolar);
-				shop.item[nextSlot].shopCustomPrice = 2000 * 10;
-				nextSlot++;
-			}
-			if (NPC.downedTowerVortex)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.FragmentVortex);
-				shop.item[nextSlot].shopCustomPrice = 2000 * 10;
-				nextSlot++;
-			}
-			if (NPC.downedTowerNebula)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.FragmentNebula);
-				shop.item[nextSlot].shopCustomPrice = 2000 * 10;
-				nextSlot++;
-			}
-			if (NPC.downedTowerStardust)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.FragmentStardust);
-				shop.item[nextSlot].shopCustomPrice = 2000 * 10;
-				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.BossMaskCultist);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.AncientCultistTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
-
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeLunaticCultist").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				if (Main.bloodMoon)
+				if (NPC.downedTowerSolar)
 				{
-					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeBloodMoon").Type);
-					shop.item[nextSlot].shopCustomPrice = 10000;
+					shop.item[nextSlot].SetDefaults(ItemID.FragmentSolar);
+					shop.item[nextSlot].shopCustomPrice = 2000 * 10;
 					nextSlot++;
 				}
-			}
-
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.LunaticCultistPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.LunaticCultistMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (NPC.downedTowerVortex)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.FragmentVortex);
+					shop.item[nextSlot].shopCustomPrice = 2000 * 10;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+				}
+				if (NPC.downedTowerNebula)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.FragmentNebula);
+					shop.item[nextSlot].shopCustomPrice = 2000 * 10;
+					nextSlot++;
+				}
+				if (NPC.downedTowerStardust)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.FragmentStardust);
+					shop.item[nextSlot].shopCustomPrice = 2000 * 10;
+					nextSlot++;
+				}
+				shop.item[nextSlot].SetDefaults(ItemID.BossMaskCultist);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.AncientCultistTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
+
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.LunaticCultistPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.LunaticCultistMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "CultistSummon", shop, ref nextSlot, 750000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeLunaticCultist", shop, ref nextSlot, 10000);
+					if (Main.bloodMoon)
+					{
+						NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeBloodMoon", shop, ref nextSlot, 10000);
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "CelestialRune", shop, ref nextSlot);
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "MutantsPact", shop, ref nextSlot); //Mutant's Pact
+					}
+				}
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistLazor", shop, ref nextSlot, 0.02f); //Mysterious Cultist Hood
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistBow", shop, ref nextSlot, 0.25f); //Lunatic Bow of Ice
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistSpear", shop, ref nextSlot, 0.25f); //Lunatic Spear of Fire
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistTome", shop, ref nextSlot, 0.25f); //Lunatic Spell of Ancient Light
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistStaff", shop, ref nextSlot, 0.25f); //Lunatic Staff of Lightning
+					if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
+					{
+						NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunaticHood", shop, ref nextSlot);  //Lunatic Hood of Command
+					}
+				}
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				{
+					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "LunarSilk", shop, ref nextSlot);
+				}
 			}
 		}
 

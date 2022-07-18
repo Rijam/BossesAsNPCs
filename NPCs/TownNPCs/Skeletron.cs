@@ -125,12 +125,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
 			if (dryad >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Dryad").Replace("{0}", Main.npc[dryad].GivenName));
+				chat.Add(Language.GetTextValue(path + "Dryad", Main.npc[dryad].GivenName));
 			}
 			int clothier = NPC.FindFirstNPC(NPCID.Clothier);
 			if (clothier >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Clothier").Replace("{0}", Main.npc[clothier].GivenName));
+				chat.Add(Language.GetTextValue(path + "Clothier", Main.npc[clothier].GivenName));
 			}
 			int skeletronPrime = NPC.FindFirstNPC(ModContent.NPCType<SkeletronPrime>());
 			if (skeletronPrime >= 0)
@@ -150,6 +150,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -157,6 +161,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -164,95 +176,115 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.ClothierVoodooDoll);
-			shop.item[nextSlot].shopCustomPrice = 130000; //Made up value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SuspiciousSkull").Type);
-				shop.item[nextSlot].shopCustomPrice = 150000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.ClothierVoodooDoll);
+				shop.item[nextSlot].shopCustomPrice = 130000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.SkeletronHand);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(9000 / 0.12); //Formula: (Sell value / drop chance)
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BookofSkulls);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.11);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ChippysCouch);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SkeletronMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SkeletronTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SkeletronHand);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(9000 / 0.12); //Formula: (Sell value / drop chance)
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BookofSkulls);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.11);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ChippysCouch);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SkeletronMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SkeletronTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeSkeletron").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BoneGlove);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.SkeletronPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SkeletronMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.BoneGlove);
+					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.SkeletronPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SkeletronMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
 					}
-				}
-				if (BossesAsNPCsWorld.downedDungeonGuardian)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.BoneKey);
-					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.BoneWand);
-				shop.item[nextSlot].shopCustomPrice = 50 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Bone);
-				shop.item[nextSlot].shopCustomPrice = 10 * 5;
-				nextSlot++;
-				if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC))
-				{
-					int fisherman = NPC.FindFirstNPC(fishermanNPC.Find<ModNPC>("Fisherman").Type);
-					if (fisherman >= 0)
+					if (BossesAsNPCsWorld.downedDungeonGuardian)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.LockBox);
-						shop.item[nextSlot].shopCustomPrice = 4000 * 5;
+						shop.item[nextSlot].SetDefaults(ItemID.BoneKey);
+						shop.item[nextSlot].shopCustomPrice = 50000 * 5;
 						nextSlot++;
 					}
+					shop.item[nextSlot].SetDefaults(ItemID.BoneWand);
+					shop.item[nextSlot].shopCustomPrice = 50 * 5;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.Bone);
+					shop.item[nextSlot].shopCustomPrice = 10 * 5;
+					nextSlot++;
+					if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC)) // I'll leave this here because it's a vanilla item and it's my mod.
+					{
+						int fisherman = NPC.FindFirstNPC(fishermanNPC.Find<ModNPC>("Fisherman").Type);
+						if (fisherman >= 0)
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.LockBox);
+							shop.item[nextSlot].shopCustomPrice = 4000 * 5;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousSkull", shop, ref nextSlot, 150000); //Match the Mutant's shop
+				}
+
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeSkeletron", shop, ref nextSlot, 10000);
+				}
+
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "BoneZone", shop, ref nextSlot, 0.1f); //The Bone Zone
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "NecromanticBrew", shop, ref nextSlot);
+					}
+				}
+
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				{
+					//Skeletal Rod of Minion Guidance
+					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BoneWaypointRod", shop, ref nextSlot, 100); //Normally no value
+					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "SquireSkullAccessory", shop, ref nextSlot, 0.65f);
+				}
 			}
 		}
 

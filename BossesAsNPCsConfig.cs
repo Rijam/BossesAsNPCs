@@ -195,6 +195,18 @@ namespace BossesAsNPCs
 		[DefaultValue(true)]
 		public bool PirateSellInvasionItems { get; set; }
 
+		//Dreadnautilus Can Spawn
+		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnDn")]
+		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnDn")]
+		[DefaultValue(false)]
+		public bool CanSpawnDreadnautilus { get; set; }
+
+		//Mothron Can Spawn
+		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnMo")]
+		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnMo")]
+		[DefaultValue(false)]
+		public bool CanSpawnMothron { get; set; }
+
 		//Pumpking Can Spawn
 		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnPk")]
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnPk")]

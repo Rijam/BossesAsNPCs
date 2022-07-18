@@ -163,6 +163,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -170,6 +174,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -177,115 +189,130 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			/*shop.item[nextSlot].SetDefaults(ItemID.PlanteraBulb);
-			shop.item[nextSlot].shopCustomPrice = 300000; //Made up value
-			nextSlot++;*/
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("PlanterasFruit").Type);
-				shop.item[nextSlot].shopCustomPrice = 500000; //Match the Mutant's shop
+				/*shop.item[nextSlot].SetDefaults(ItemID.PlanteraBulb);
+				shop.item[nextSlot].shopCustomPrice = 300000; //Made up value
+				nextSlot++;*/
+				shop.item[nextSlot].SetDefaults(ItemID.TempleKey);
+				shop.item[nextSlot].shopCustomPrice = 5000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.TempleKey);
-			shop.item[nextSlot].shopCustomPrice = 5000; //Made up value
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.GrenadeLauncher);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.VenusMagnum);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.NettleBurst);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.LeafBlower);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.FlowerPow);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.WaspGun);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Seedler);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PygmyStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ThornHook);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.1);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.TheAxe);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.02);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Seedling);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PlanteraMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PlanteraTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.GrenadeLauncher);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.VenusMagnum);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.NettleBurst);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.LeafBlower);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.FlowerPow);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.WaspGun);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Seedler);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.PygmyStaff);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ThornHook);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.1);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.TheAxe);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.02);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Seedling);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.PlanteraMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.PlanteraTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgePlantera").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("LivingShard").Type);
-				shop.item[nextSlot].shopCustomPrice = shop.item[nextSlot].value;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BloomStone").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("BlossomFlux").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
-				nextSlot++;
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.SporeSac);
-				shop.item[nextSlot].shopCustomPrice = 40000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.PlanteraPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PlanteraMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPlantera);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.SporeSac);
+					shop.item[nextSlot].shopCustomPrice = 40000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.PlanteraPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.PlanteraMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWPlantera);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxPlantera);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWPlantera);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.JungleGrassSeeds);
+					shop.item[nextSlot].shopCustomPrice = 30 * 5;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeBackpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "PlanterasFruit", shop, ref nextSlot, 500000); //Match the Mutant's shop
+				}
+
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgePlantera", shop, ref nextSlot, 10000);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "LivingShard", shop, ref nextSlot);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "BloomStone", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "BlossomFlux", shop, ref nextSlot, 0.1f);
+				}
+
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "Dicer", shop, ref nextSlot, 0.1f); //The Dicer
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "MagicalBulb", shop, ref nextSlot);
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ItemID.JungleGrassSeeds);
-				shop.item[nextSlot].shopCustomPrice = 30 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeBackpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				{
+					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "PottedPalMinionItem", shop, ref nextSlot, 0.44f); //Potted Pal
+				}
+				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod))
+				{
+					NPCHelper.SafelySetCrossModItem(qwertyMod, "VitallumCoreUncharged", shop, ref nextSlot); //Vitallum Core
+				}
 			}
 		}
 

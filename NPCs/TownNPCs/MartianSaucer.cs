@@ -120,23 +120,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				screenOffset = Vector2.Zero;
 			}
-			Color color = new(100, 100, 100, 100);
+			Color color = Color.White;
 			int spriteWidth = 48;
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 5; i++)
-			{
-				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
-			}
+
+			Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+			spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 		}
 
 		public override string GetChat()
@@ -158,7 +149,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int intTrav = NPC.FindFirstNPC(rijamsMod.Find<ModNPC>("InterstellarTraveler").Type);
 				if (intTrav >= 0)
 				{
-					chat.Add(Language.GetTextValue(path + "RijamsMod").Replace("{0}", Main.npc[intTrav].GivenName));
+					chat.Add(Language.GetTextValue(path + "RijamsMod", Main.npc[intTrav].GivenName));
 				}
 			}
 			return chat;
@@ -166,6 +157,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -173,116 +168,150 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("RunawayProbe").Type);
-				shop.item[nextSlot].shopCustomPrice = 500000; //Match the Abominationn's shop
+				shop.item[nextSlot].SetDefaults(ItemID.MartianConduitPlating);
+				shop.item[nextSlot].shopCustomPrice = 100; //Made up value
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("MartianMemoryStick").Type);
-				shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
+				shop.item[nextSlot].SetDefaults(ItemID.MartianCostumeMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.MartianConduitPlating);
-			shop.item[nextSlot].shopCustomPrice = 100; //Made up value
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianCostumeMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianCostumeShirt);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianCostumePants);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianUniformHelmet);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianUniformTorso);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianUniformPants);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BrainScrambler);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.LaserDrill);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.013 / 7); //Special case to make it cheaper
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ChargedBlasterCannon);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.013 / 7); //Special case to make it cheaper
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.AntiGravityHook);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.013 / 7); //Special case to make it cheaper
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Xenopopper);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.XenoStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.LaserMachinegun);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.ElectrosphereLauncher);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.InfluxWaver);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.CosmicCarKey);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.MartianSaucerTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianCostumeShirt);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianCostumePants);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianUniformHelmet);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianUniformTorso);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianUniformPants);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.05);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BrainScrambler);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.LaserDrill);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.013 / 7); //Special case to make it cheaper
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ChargedBlasterCannon);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.013 / 7); //Special case to make it cheaper
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.AntiGravityHook);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.013 / 7); //Special case to make it cheaper
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Xenopopper);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.XenoStaff);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.LaserMachinegun);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.ElectrosphereLauncher);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.InfluxWaver);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.CosmicCarKey);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.167);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.MartianSaucerTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("NullificationRifle").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
-				nextSlot++;
-			}
-
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MartianPetItem); //Cosmic Skateboard
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.UFOMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxMartians);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.MartianPetItem); //Cosmic Skateboard
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+					shop.item[nextSlot].SetDefaults(ItemID.UFOMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxMartians);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("RunawayProbe").Type);
+					shop.item[nextSlot].shopCustomPrice = 500000; //Match the Abominationn's shop
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("MartianMemoryStick").Type);
+					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
+					nextSlot++;
+				}
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
+				{
+					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("ShockGrenade").Type);
+					shop.item[nextSlot].shopCustomPrice = shop.item[nextSlot].value;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("Wingman").Type);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.14);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("NullificationRifle").Type);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
+					nextSlot++;
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						shop.item[nextSlot].SetDefaults(fargosSouls.Find<ModItem>("SaucerControlConsole").Type);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.2);
 						nextSlot++;
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeHeadpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MartianSaucer.MSCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					shop.item[nextSlot].SetDefaults(stormsAdditions.Find<ModItem>("SuperDartLauncher").Type);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.01f / 6);
+					nextSlot++;
+				}
 			}
 		}
 

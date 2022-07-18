@@ -48,6 +48,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<MartianSaucer>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<KingSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<DukeFishron>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
@@ -129,14 +130,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				float random1 = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
 				float random2 = Utils.RandomInt(ref seed, -5, 1) * 0.15f;
 				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-                {
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
+				spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 			}
 		}
 
@@ -159,7 +153,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
 				if (abominationn >= 0)
 				{
-					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[abominationn].GivenName));
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[abominationn].GivenName));
 				}
 			}
 			return chat;
@@ -167,7 +161,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
-			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -190,11 +187,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.PumpkinMoonMedallion);
-			shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
-			nextSlot++;
-			if (NPCHelper.StatusShop2())
+			if (NPCHelper.StatusShop1())
 			{
+				shop.item[nextSlot].SetDefaults(ItemID.PumpkinMoonMedallion);
+				shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
+				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.ScarecrowHat);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.033); //Using the highest drop chances
 				nextSlot++;
@@ -212,12 +209,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				nextSlot++;
 				if (NPC.downedHalloweenTree)
 				{
-					if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
-					{
-						shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("SpookyBranch").Type);
-						shop.item[nextSlot].shopCustomPrice = 200000; //Match the Abominationn's shop
-						nextSlot++;
-					}
 					shop.item[nextSlot].SetDefaults(ItemID.SpookyHook);
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.2);
 					nextSlot++;
@@ -255,15 +246,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						nextSlot++;
 					}
 				}
-			}
-			if (NPCHelper.StatusShop1())
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && townNPCsCrossModSupport)
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("SuspiciousLookingScythe").Type);
-					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
-					nextSlot++;
-				}
+				
 				shop.item[nextSlot].SetDefaults(ItemID.TheHorsemansBlade);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
 				nextSlot++;
@@ -332,6 +315,34 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					if (NPC.downedHalloweenTree)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "SpookyBranch", shop, ref nextSlot, 200000); //Match the Abominationn's shop
+					}
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousLookingScythe", shop, ref nextSlot, 300000); //Match the Abominationn's shop
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "PumpkingsCape", shop, ref nextSlot, 0.2f); //Pumpking's Cape
+					}
+				}
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				{
+					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "GoldenRogueSquireMinionItem", shop, ref nextSlot, 0.13f); //Golden Rogue Crest
+				}
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SpookyCore", shop, ref nextSlot, 0.07f); //Spooky Emblem
 				}
 			}
 		}

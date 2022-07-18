@@ -45,6 +45,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<Betsy>(), AffectionLevel.Love)
 				.SetNPCAffection(ModContent.NPCType<IceQueen>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<EyeOfCthulhu>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.TaxCollector, AffectionLevel.Dislike)
@@ -140,16 +141,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				{
 					Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y + sinOffsetY - 204f);
 					Vector2 posOffset2 = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y - sinOffsetY - 204f);
-					if (NPC.direction == 1)
-					{
-						spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-						spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-					}
-					else
-					{
-						spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.None, 1f);
-						spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, SpriteEffects.None, 1f);
-					}
+					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
+					spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 				}
 			}
 		}
@@ -189,6 +182,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -196,6 +193,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -203,122 +208,135 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.DeerThing);
-			shop.item[nextSlot].shopCustomPrice = 140000; //Made up value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("DeerThing2").Type);
-				shop.item[nextSlot].shopCustomPrice = 120000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.DeerThing);
+				shop.item[nextSlot].shopCustomPrice = 140000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.ChesterPetItem); //Eye Bone
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33); //Formula: (Sell value / drop chance))
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Eyebrella);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.33);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DontStarveShaderItem); //Radio Thing
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.33);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PewMaticHorn);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.WeatherPain);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.HoundiusShootius);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.LucyTheAxe);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DeerclopsMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DeerclopsTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.BoneHelm);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.ChesterPetItem); //Eye Bone
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33); //Formula: (Sell value / drop chance))
 				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.DeerclopsPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+				shop.item[nextSlot].SetDefaults(ItemID.Eyebrella);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.33);
 				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DeerclopsMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+				shop.item[nextSlot].SetDefaults(ItemID.DontStarveShaderItem); //Radio Thing
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.33);
 				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				shop.item[nextSlot].SetDefaults(ItemID.PewMaticHorn);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.WeatherPain);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.HoundiusShootius);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.LucyTheAxe);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DeerclopsMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DeerclopsTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDeerclops);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.BoneHelm);
+					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.DeerclopsPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DeerclopsMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxDeerclops);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					Player player = Main.player[Main.myPlayer];
+					bool theConstant = Main.dontStarveWorld || WorldGen.dontStarveWorldGen;
+					if (player.ZoneGraveyard)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.AbigailsFlower);
+						shop.item[nextSlot].shopCustomPrice = 500 * 5;
+						nextSlot++;
+					}
+					if (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || Main.hardMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.BatBat);
+						shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(2500 / 0.01) : (int)Math.Round(2500 / 0.004);
+						nextSlot++;
+					}
+					if (player.ZoneSnow && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight) && (player.ZoneHallow || player.ZoneCorrupt || player.ZoneCrimson))
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.HamBat);
+						shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.1) : (int)Math.Round(10000 / 0.04);
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.PigPetItem); //Monster Meat
+					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.005) : (int)Math.Round(10000 / 0.001);
+					nextSlot++;
+					if (Main.hardMode && player.ZoneJungle)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.GlommerPetItem); //Glommer's Flower
+						shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(50000 / 0.025) : (int)Math.Round(50000 / 0.01);
+						nextSlot++;
+					}
+					int travelingMerchant = NPC.FindFirstNPC(NPCID.TravellingMerchant);
+					if (travelingMerchant >= 0)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.PaintingWendy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.PaintingWillow);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.PaintingWilson);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.PaintingWolfgang);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "DeerThing2", shop, ref nextSlot, 120000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "Deerclawps", shop, ref nextSlot);
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "DeerSinew", shop, ref nextSlot);
 					}
 				}
-				Player player = Main.player[Main.myPlayer];
-				bool theConstant = Main.dontStarveWorld || WorldGen.dontStarveWorldGen;
-				if (player.ZoneGraveyard)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.AbigailsFlower);
-					shop.item[nextSlot].shopCustomPrice = 500 * 5;
-					nextSlot++;
-				}
-				if (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight || Main.hardMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.BatBat);
-					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(2500 / 0.01) : (int)Math.Round(2500 / 0.004);
-					nextSlot++;
-				}
-				if (player.ZoneSnow && (player.ZoneDirtLayerHeight || player.ZoneRockLayerHeight) && (player.ZoneHallow || player.ZoneCorrupt || player.ZoneCrimson))
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.HamBat);
-					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.1) : (int)Math.Round(10000 / 0.04);
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.PigPetItem); //Monster Meat
-				shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(10000 / 0.005) : (int)Math.Round(10000 / 0.001);
-				nextSlot++;
-				if (Main.hardMode && player.ZoneJungle)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.GlommerPetItem); //Glommer's Flower
-					shop.item[nextSlot].shopCustomPrice = theConstant ? (int)Math.Round(50000 / 0.025) : (int)Math.Round(50000 / 0.01);
-					nextSlot++;
-				}
-				int travelingMerchant = NPC.FindFirstNPC(NPCID.TravellingMerchant);
-				if (travelingMerchant >= 0)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.PaintingWendy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.PaintingWillow);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.PaintingWilson);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.PaintingWolfgang);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
 			}
 		}
 

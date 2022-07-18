@@ -120,23 +120,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				screenOffset = Vector2.Zero;
 			}
-			Color color = new(50, 50, 50, 0);
+			Color color = Color.White;
 			int spriteWidth = 40;
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 5; i++)
-			{
-				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
-			}
+
+			Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+			spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 		}
 
 		public override string GetChat()
@@ -150,7 +141,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int witchDoctor = NPC.FindFirstNPC(NPCID.WitchDoctor);
 			if (witchDoctor >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "WitchDoctor").Replace("{0}", Main.npc[witchDoctor].GivenName));
+				chat.Add(Language.GetTextValue(path + "WitchDoctor", Main.npc[witchDoctor].GivenName));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
@@ -179,6 +170,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -186,6 +181,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -193,103 +196,114 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.LihzahrdPowerCell);
-			shop.item[nextSlot].shopCustomPrice = 350000; //Made up value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("LihzahrdPowerCell2").Type);
-				shop.item[nextSlot].shopCustomPrice = 600000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.LihzahrdPowerCell);
+				shop.item[nextSlot].shopCustomPrice = 350000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.Picksaw);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(43200 / 0.25);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.BeetleHusk);
-			shop.item[nextSlot].shopCustomPrice = 5000 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.Stynger);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.StyngerBolt);
-			shop.item[nextSlot].shopCustomPrice = 75;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.PossessedHatchet);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SunStone);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.EyeoftheGolem);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.HeatRay);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.StaffofEarth);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.GolemFist);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.GolemMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.GolemTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				
+				shop.item[nextSlot].SetDefaults(ItemID.Picksaw);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(43200 / 0.25);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.BeetleHusk);
+				shop.item[nextSlot].shopCustomPrice = 5000 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.Stynger);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.StyngerBolt);
+				shop.item[nextSlot].shopCustomPrice = 75;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.PossessedHatchet);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SunStone);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.EyeoftheGolem);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.HeatRay);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.StaffofEarth);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.GolemFist);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(70000 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.GolemMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.GolemTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeGolem").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("AegisBlade").Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.1);
-				nextSlot++;
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.ShinyStone);
-				shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.GolemPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.GolemMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.ShinyStone);
+					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+				}
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.GolemPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.GolemMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss4);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ItemID.LihzahrdBrick);
+					shop.item[nextSlot].shopCustomPrice = 2500;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.LihzahrdAltar);
+					shop.item[nextSlot].shopCustomPrice = 60 * 5 * 1000; //sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "LihzahrdPowerCell2", shop, ref nextSlot, 600000); //Match the Mutant's shop
+				}
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeGolem", shop, ref nextSlot, 10000);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "AegisBlade", shop, ref nextSlot, 0.1f);
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "RockSlide", shop, ref nextSlot, 0.1f);
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "ComputationOrb", shop, ref nextSlot, 0.1f);
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "LihzahrdTreasureBox", shop, ref nextSlot);
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ItemID.LihzahrdBrick);
-				shop.item[nextSlot].shopCustomPrice = 2500;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.LihzahrdAltar);
-				shop.item[nextSlot].shopCustomPrice = 60 * 5 * 1000; //sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
 			}
 		}
 

@@ -120,23 +120,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				screenOffset = Vector2.Zero;
 			}
-			Color color = new(100, 100, 100, 100);
+			Color color = Color.White;
 			int spriteWidth = 40;
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 5; i++)
-			{
-				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
-			}
+
+			Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+			spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 		}
 
 		public override string GetChat()
@@ -154,13 +145,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
             if (mechanic >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Mechanic").Replace("{0}", Main.npc[mechanic].GivenName));
+				chat.Add(Language.GetTextValue(path + "Mechanic", Main.npc[mechanic].GivenName));
 			}
 			return chat;
 		}
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -168,6 +163,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = true;
+				NPCHelper.SetShop1(true);
+				NPCHelper.SetShop2(false);
+			}
+			if (!firstButton)
+			{
+				shop = true;
+				NPCHelper.SetShop1(false);
+				NPCHelper.SetShop2(true);
 			}
 		}
 
@@ -175,76 +178,98 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.MechanicalWorm);
-			shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
-			nextSlot++;
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
+			if (NPCHelper.StatusShop1())
 			{
-				shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("MechWorm").Type);
-				shop.item[nextSlot].shopCustomPrice = 400000; //Match the Mutant's shop
+				shop.item[nextSlot].SetDefaults(ItemID.MechanicalWorm);
+				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 				nextSlot++;
-			}
-			shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
-			shop.item[nextSlot].shopCustomPrice = 400 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.SoulofMight);
-			shop.item[nextSlot].shopCustomPrice = 800 * 5;
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DestroyerMask);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-			nextSlot++;
-			shop.item[nextSlot].SetDefaults(ItemID.DestroyerTrophy);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-			nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
+				shop.item[nextSlot].shopCustomPrice = 400 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.SoulofMight);
+				shop.item[nextSlot].shopCustomPrice = 800 * 5;
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DestroyerMask);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DestroyerTrophy);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+				nextSlot++;
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
-			{
-				shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeDestroyer").Type);
-				shop.item[nextSlot].shopCustomPrice = 10000;
-				nextSlot++;
-				if (NPCHelper.DownedMechBossAll())
+				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
 				{
-					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("KnowledgeMechs").Type);
-					shop.item[nextSlot].shopCustomPrice = 10000;
+					shop.item[nextSlot].SetDefaults(ItemID.MechanicalWagonPiece);
+					shop.item[nextSlot].shopCustomPrice = 5000 * 5;
 					nextSlot++;
 				}
-			}
-
-			if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.MechanicalWagonPiece);
-				shop.item[nextSlot].shopCustomPrice = 5000 * 5;
-				nextSlot++;
-			}
-			if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-            {
-				shop.item[nextSlot].SetDefaults(ItemID.DestroyerPetItem);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DestroyerMasterTrophy);
-				shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-				nextSlot++;
-			}
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-            {
-				if (NPC.savedWizard)
+				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss3);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+					shop.item[nextSlot].SetDefaults(ItemID.DestroyerPetItem);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
 					nextSlot++;
-					if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+					shop.item[nextSlot].SetDefaults(ItemID.DestroyerMasterTrophy);
+					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+					nextSlot++;
+				}
+				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
+				{
+					if (NPC.savedWizard)
 					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss3);
 						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
 						nextSlot++;
+						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
+						{
+							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
+							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
+							nextSlot++;
+						}
+					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeBodypiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
+				}
+			}
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechWorm", shop, ref nextSlot, 400000);
+
+					if (NPCHelper.DownedMechBossAll())
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, ref nextSlot, 1000000);
 					}
 				}
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeBodypiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>());
-				shop.item[nextSlot].shopCustomPrice = 50000;
-				nextSlot++;
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				{
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeDestroyer", shop, ref nextSlot, 10000);
+
+					if (NPCHelper.DownedMechBossAll())
+					{
+						NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, ref nextSlot, 10000);
+					}
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "DestroyerGun", shop, ref nextSlot, 0.1f);
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "GroundStick", shop, ref nextSlot);
+					}
+				}
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
+					{
+						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot);
+					}
+				}
 			}
 		}
 

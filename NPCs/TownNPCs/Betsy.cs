@@ -48,6 +48,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<IceQueen>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Pumpking>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<MartianSaucer>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Merchant, AffectionLevel.Dislike)
 				//Princess is automatically set
@@ -124,23 +125,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				screenOffset = Vector2.Zero;
 			}
-			Color color = new(100, 100, 100, 100);
+			Color color = Color.White;
 			int spriteWidth = 40;
 			int spriteHeight = 56;
 			int x = NPC.frame.X;
 			int y = NPC.frame.Y;
-			for (int i = 0; i < 5; i++)
-			{
-				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
-				if (NPC.direction == 1)
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.FlipHorizontally, 1f);
-				}
-				else
-				{
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, SpriteEffects.None, 1f);
-				}
-			}
+
+			Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - 191f, NPC.position.Y - Main.screenPosition.Y - 204f);
+			spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
 		}
 
 		public override string GetChat()
@@ -160,7 +152,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
 				if (abominationn >= 0)
 				{
-					chat.Add(Language.GetTextValue(path + "FargosMutantMod").Replace("{0}", Main.npc[abominationn].GivenName));
+					chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[abominationn].GivenName));
 				}
 			}
 			if (ModLoader.TryGetMod("SGAmod", out Mod sGAmod))
@@ -168,7 +160,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				int draken = NPC.FindFirstNPC(sGAmod.Find<ModNPC>("Dergon").Type);
 				if (draken >= 0)
 				{
-					chat.Add(Language.GetTextValue(path + "SGAmod").Replace("{0}", Main.npc[draken].GivenName));
+					chat.Add(Language.GetTextValue(path + "SGAmod", Main.npc[draken].GivenName));
 				}
 			}
 			return chat;
@@ -176,7 +168,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
 			button = Language.GetTextValue("LegacyInterface.28");
-			button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			{
+				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+			}
 		}
 
 		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -199,106 +194,88 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			shop.item[nextSlot].SetDefaults(ItemID.DD2ElderCrystal);
-			shop.item[nextSlot].shopCustomPrice = 40000;
-			nextSlot++;
-			if (BossesAsNPCsWorld.downedDarkMage && NPCHelper.StatusShop2())
-            {
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("ForbiddenTome").Type);
-					shop.item[nextSlot].shopCustomPrice = 50000; //Match the Abominationn's shop
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.WarTable);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.1);  //Formula: (Sell value / drop chance))
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.WarTableBanner);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.1);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DD2PetDragon); //Dragon Egg
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.17);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DD2PetGato); //Gato Egg
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.17);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BossMaskDarkMage);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BossTrophyDarkmage);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.DarkMageBookMountItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.DarkMageMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-			}
-			if (BossesAsNPCsWorld.downedOgre && NPCHelper.StatusShop2())
-            {
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && townNPCsCrossModSupport)
-				{
-					shop.item[nextSlot].SetDefaults(fargosMutant2.Find<ModItem>("BatteredClub").Type);
-					shop.item[nextSlot].shopCustomPrice = 150000; //Match the Abominationn's shop
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.ApprenticeScarf);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SquireShield);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HuntressBuckler);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MonkBelt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BookStaff); //Tome of Infinite Wisdom
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DD2PhoenixBow); //Phantom Phoenix
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DD2SquireDemonSword); //Brand of the Inferno
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT1); //Sleepy Octopod
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT2); //Ghastly Glaive
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DD2PetGhost); //Creeper Egg
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BossMaskOgre);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BossTrophyOgre);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.DD2OgrePetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.OgreMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-			}
 			if (NPCHelper.StatusShop1())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant3) && townNPCsCrossModSupport)
+				shop.item[nextSlot].SetDefaults(ItemID.DD2ElderCrystal);
+				shop.item[nextSlot].shopCustomPrice = 40000;
+				nextSlot++;
+				if (BossesAsNPCsWorld.downedDarkMage)
 				{
-					shop.item[nextSlot].SetDefaults(fargosMutant3.Find<ModItem>("BetsyEgg").Type);
-					shop.item[nextSlot].shopCustomPrice = 400000; //Match the Abominationn's shop
+					shop.item[nextSlot].SetDefaults(ItemID.WarTable);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.1);  //Formula: (Sell value / drop chance))
 					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.WarTableBanner);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.1);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2PetDragon); //Dragon Egg
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.17);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2PetGato); //Gato Egg
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.17);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BossMaskDarkMage);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BossTrophyDarkmage);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+					nextSlot++;
+					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.DarkMageBookMountItem);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.DarkMageMasterTrophy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+					}
+				}
+				if (BossesAsNPCsWorld.downedOgre)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.ApprenticeScarf);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SquireShield);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.HuntressBuckler);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.MonkBelt);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BookStaff); //Tome of Infinite Wisdom
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2PhoenixBow); //Phantom Phoenix
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2SquireDemonSword); //Brand of the Inferno
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT1); //Sleepy Octopod
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT2); //Ghastly Glaive
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.DD2PetGhost); //Creeper Egg
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.2);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BossMaskOgre);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.BossTrophyOgre);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
+					nextSlot++;
+					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
+					{
+						shop.item[nextSlot].SetDefaults(ItemID.DD2OgrePetItem);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
+						nextSlot++;
+						shop.item[nextSlot].SetDefaults(ItemID.OgreMasterTrophy);
+						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
+						nextSlot++;
+					}
 				}
 				shop.item[nextSlot].SetDefaults(ItemID.DD2BetsyBow); //Aerial Bane
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);  //Formula: (Sell value * 2) * ((1/drop chance)/2);
@@ -350,6 +327,49 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
+				}
+			}
+
+			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
+			{
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				{
+					if (BossesAsNPCsWorld.downedDarkMage)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "ForbiddenTome", shop, ref nextSlot, 50000); //Match the Abominationn's shop
+					}
+
+					if (BossesAsNPCsWorld.downedOgre)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosMutant, "BatteredClub", shop, ref nextSlot, 150000); //Match the Abominationn's shop
+					}
+
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "BetsyEgg", shop, ref nextSlot, 400000); //Match the Abominationn's shop
+				}
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				{
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "DragonBreath", shop, ref nextSlot, 0.1f); //Dragon's Breath
+
+					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
+					if (eternityMode)
+					{
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "BetsysHeart", shop, ref nextSlot); //Betsy's Heart
+					}
+				}
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				{
+					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "BetsyScale", shop, ref nextSlot);
+				}
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				{
+					if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
+					{
+						NPCHelper.SafelySetCrossModItem(stormsAdditions, "FlameCore", shop, ref nextSlot); //Betsy's Flame
+					}
+				}
+				if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities))
+				{
+					NPCHelper.SafelySetCrossModItem(pbonesUtilities, "DefendersCrystal", shop, ref nextSlot);
 				}
 			}
 		}

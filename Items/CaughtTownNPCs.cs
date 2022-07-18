@@ -637,6 +637,66 @@ namespace BossesAsNPCs.Items
 		}
 	}
 	#endregion
+	#region Dreadnautilus
+	public class CaughtDreadnautilus : CaughtKingSlime
+	{
+		readonly private static string name = Language.GetTextValue("NPCName.Bloodnautilus");
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			DisplayName.SetDefault(name);
+			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+		}
+
+		public override void SetDefaults()
+		{
+			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
+			Item.makeNPC = ModContent.NPCType<Dreadnautilus>();
+		}
+
+		public override bool CanUseItem(Player player)
+		{
+			Vector2 mousePos = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
+			return (NPC.CountNPCS(ModContent.NPCType<Dreadnautilus>()) < 1 && !Collision.SolidCollision(mousePos, player.width, player.height));
+		}
+
+		public override void OnConsumeItem(Player player)
+		{
+			SpawnText(name);
+		}
+	}
+	#endregion
+	#region Mothron
+	public class CaughtMothron : CaughtKingSlime
+	{
+		readonly private static string name = Language.GetTextValue("NPCName.Mothron");
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			DisplayName.SetDefault(name);
+			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+		}
+
+		public override void SetDefaults()
+		{
+			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
+			Item.makeNPC = ModContent.NPCType<Mothron>();
+		}
+
+		public override bool CanUseItem(Player player)
+		{
+			Vector2 mousePos = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
+			return (NPC.CountNPCS(ModContent.NPCType<Mothron>()) < 1 && !Collision.SolidCollision(mousePos, player.width, player.height));
+		}
+
+		public override void OnConsumeItem(Player player)
+		{
+			SpawnText(name);
+		}
+	}
+	#endregion
 	#region Pumpking
 	public class CaughtPumpking : CaughtKingSlime
 	{
