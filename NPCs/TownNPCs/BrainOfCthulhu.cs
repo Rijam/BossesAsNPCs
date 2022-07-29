@@ -237,6 +237,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						shop.item[nextSlot].shopCustomPrice = 2500;
 						nextSlot++;
 					}
+					if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod) && townNPCsCrossModSupport) // It's my mod lol
+					{
+						NPCHelper.SafelySetCrossModItem(rijamsMod, "CrawlerChelicera", shop, ref nextSlot);
+					}
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.BrainOfCthulhu.BoCCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;

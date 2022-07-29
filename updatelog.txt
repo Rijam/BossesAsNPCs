@@ -107,3 +107,7 @@
 	* Added cross mod support for: Fargo's Souls Mod, Amulet of Many Minions, Storm's Additions Mod, Qwerty's Bosses and Items 2, Echoes of the Ancients, Magic Storage, Dreadnautilus is a Boss.
 	* Cross mod shop items are now much safer. The game will no longer throw an error if the item is not found.
 	* Improved the glow masks on the NPCs who have them.
+
+0.1.12 - Update 12 (July 28, 2022)
+	* Fixed Eye of Cthulhu loving Retinazor twice instead of Spazmatism.
+	* Fixed Queen Bee accidentally liking herself instead of Queen Slime (again).

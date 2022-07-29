@@ -291,7 +291,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "MothronEgg", shop, ref nextSlot, 15000); //Match the Deviantt's shop
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "MothronEgg", shop, ref nextSlot, 150000); //Match the Deviantt's shop
 				}
 				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
 				{

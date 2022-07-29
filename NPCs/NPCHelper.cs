@@ -230,5 +230,77 @@ namespace BossesAsNPCs.NPCs
 				ModContent.GetInstance<BossesAsNPCs>().Logger.WarnFormat("SafelySetCrossModItem(): ModItem type \"{0}\" from \"{1}\" was not found.", itemString, mod);
 			}
 		}
+
+		/// <summary>
+		/// Automatically gets the localized Loved text for the Bestiary.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string LoveText(string npc, string yourMod, string otherMod)
+		{
+			return "[c/b3f2b3:" + Language.GetTextValue("RandomWorldName_Noun.Love") + "]: " + Language.GetTextValue("Mods." + yourMod + ".Bestiary.Happiness." + otherMod + "." + npc + ".Love") + "\n";
+		}
+
+		/// <summary>
+		/// Automatically gets the localized Liked text for the Bestiary.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string LikeText(string npc, string yourMod, string otherMod)
+		{
+			return "[c/ddf2b3:" + Language.GetTextValue("Mods.BossesAsNPCs.UI.Like") + "]: " + Language.GetTextValue("Mods." + yourMod + ".Bestiary.Happiness." + otherMod + "." + npc + ".Like") + "\n";
+		}
+
+		/// <summary>
+		/// Automatically gets the localized Disliked text for the Bestiary.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string DislikeText(string npc, string yourMod, string otherMod)
+		{
+			return "[c/f2e0b3:" + Language.GetTextValue("Mods.BossesAsNPCs.UI.Dislike") + "]: " + Language.GetTextValue("Mods." + yourMod + ".Bestiary.Happiness." + otherMod + "." + npc + ".Dislike") + "\n";
+		}
+
+		/// <summary>
+		/// Automatically gets the localized Hated text for the Bestiary.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string HateText(string npc, string yourMod, string otherMod)
+		{
+			return "[c/f2b5b3:" + Language.GetTextValue("RandomWorldName_Noun.Hate") + "]: " + Language.GetTextValue("Mods." + yourMod + ".Bestiary.Happiness." + otherMod + "." + npc + ".Hate");
+		}
+
+		/// <summary>
+		/// Automatically gets the path to the localized Bestiary Description.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string BestiaryPath(string npc, string yourMod, string otherMod)
+		{
+			return "Mods." + yourMod + ".Bestiary.Description." + otherMod + "." + npc;
+		}
+
+		/// <summary>
+		/// Automatically gets the base path to the localized dialog. Add `+ "Key"` to get the dialog.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="yourMod">The name of your mod.</param>
+		/// <param name="otherMod">The name of the other mod that the NPC is associated with.</param>
+		/// <returns>string</returns>
+		public static string DialogPath(string npc, string yourMod, string otherMod)
+		{
+			return "Mods." + yourMod + ".NPCDialog." + otherMod + "." + npc + ".";
+		}
 	}
 }

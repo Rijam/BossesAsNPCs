@@ -755,7 +755,7 @@ Mods: {
 				Rare: What even is a "Conch of Fish"?
 				DayNoRain: Ugh, it's so bright out during the day! I wish the clouds would cover the sun.
 				Night: It's easy to see at night, is it not for you?
-				Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, through.
+				Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, though.
 				BloodMoon1: I don't get what the fuss is all about, I love the Blood Moon!
 				BloodMoon2: "The {$ItemName.Deathweed} bloom tonight. Don't forget to harvest them!"
 				KillCount: "You have slain me {0} times. Have you enjoyed it?"
@@ -773,7 +773,7 @@ Mods: {
 				Deerclops: "Deerclops' fuzzy hair reminds me of somebody else I know..."
 				WitchDoctor: "{0}'s scales reminds me of somebody else I know..."
 				Merchant: "Do you know if {0} sells any lamps? Lanterns work, too. Just asking."
-				EoC: "Eye of Cthulhu is eying the yoyo that I have. They can have it, I don't even know why I have it in the first place."
+				EoC: "Eye of Cthulhu is eying the yoyo that I have. They can have it; I don't even know why I have it in the first place."
 				UndergroundJungle: Why is it that those moths drop butterfly dust?
 				TorchMerchant: "{0} is so bright! They always keep me company at night!"
 			}

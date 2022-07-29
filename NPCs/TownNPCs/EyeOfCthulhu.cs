@@ -42,7 +42,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetBiomeAffection<ForestBiome>(AffectionLevel.Love)
 				.SetBiomeAffection<DesertBiome>(AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Retinazer>(), AffectionLevel.Love)
-				.SetNPCAffection(ModContent.NPCType<Retinazer>(), AffectionLevel.Love)
+				.SetNPCAffection(ModContent.NPCType<Spazmatism>(), AffectionLevel.Love)
 				.SetNPCAffection(ModContent.NPCType<BrainOfCthulhu>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Skeletron>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<MoonLord>(), AffectionLevel.Like)

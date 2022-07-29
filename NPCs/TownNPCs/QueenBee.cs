@@ -48,7 +48,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<Golem>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.WitchDoctor, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
-				.SetNPCAffection(ModContent.NPCType<QueenBee>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<QueenSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<IceQueen>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Demolitionist, AffectionLevel.Dislike)

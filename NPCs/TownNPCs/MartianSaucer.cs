@@ -277,40 +277,26 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 				{
-					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("RunawayProbe").Type);
-					shop.item[nextSlot].shopCustomPrice = 500000; //Match the Abominationn's shop
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(fargosMutant.Find<ModItem>("MartianMemoryStick").Type);
-					shop.item[nextSlot].shopCustomPrice = 300000; //Match the Abominationn's shop
-					nextSlot++;
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "RunawayProbe", shop, ref nextSlot, 500000); //Match the Abominationn's shop
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "MartianMemoryStick", shop, ref nextSlot, 300000); //Match the Abominationn's shop
 				}
 				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && townNPCsCrossModSupport)
 				{
-					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("ShockGrenade").Type);
-					shop.item[nextSlot].shopCustomPrice = shop.item[nextSlot].value;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("Wingman").Type);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.14);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(calamityMod.Find<ModItem>("NullificationRifle").Type);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.25);
-					nextSlot++;
+					NPCHelper.SafelySetCrossModItem(calamityMod, "ShockGrenade", shop, ref nextSlot);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "Wingman", shop, ref nextSlot, 0.14f);
+					NPCHelper.SafelySetCrossModItem(calamityMod, "NullificationRifle", shop, ref nextSlot, 0.25f);
 				}
 				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
 				{
 					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
 					if (eternityMode)
 					{
-						shop.item[nextSlot].SetDefaults(fargosSouls.Find<ModItem>("SaucerControlConsole").Type);
-						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.2);
-						nextSlot++;
+						NPCHelper.SafelySetCrossModItem(fargosSouls, "SaucerControlConsole", shop, ref nextSlot, 0.2f);
 					}
 				}
 				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
 				{
-					shop.item[nextSlot].SetDefaults(stormsAdditions.Find<ModItem>("SuperDartLauncher").Type);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / 0.01f / 6);
-					nextSlot++;
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SuperDartLauncher", shop, ref nextSlot, 0.01f * 6);
 				}
 			}
 		}
