@@ -22,9 +22,9 @@ https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.1.12
-	- Fixed Eye of Cthulhu loving Retinazor twice instead of Spazmatism.
-	- Fixed Queen Bee accidentally liking herself instead of Queen Slime (again).
+Mod version: 0.1.13
+	- Fixed the Town NPCs' gore in multiplayer.
+	- Fixed Pirate not selling the Security Wallet from Fargo's Souls Mod.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

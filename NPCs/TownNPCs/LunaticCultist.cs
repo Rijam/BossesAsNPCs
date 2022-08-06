@@ -84,11 +84,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void OnKill()
 		{
-			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
-			Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
-			for (int k = 0; k < 2; k++)
+			if (Main.netMode != NetmodeID.Server)
 			{
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
+				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
+				for (int k = 0; k < 2; k++)
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
+				}
 			}
 		}
 

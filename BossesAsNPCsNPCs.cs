@@ -168,6 +168,7 @@ namespace BossesAsNPCs
                         if (eternityMode)
                         {
                             NPCHelper.SafelySetCrossModItem(fargosMutant2, "GoldenDippingVat", shop, ref nextSlot, (0.07f * 5), shopMulti);
+                            NPCHelper.SafelySetCrossModItem(fargosSouls, "SecurityWallet", shop, ref nextSlot, (0.1f * 5), shopMulti);
                         }
                     }
                 }

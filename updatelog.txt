@@ -111,3 +111,7 @@
 0.1.12 - Update 12 (July 28, 2022)
 	* Fixed Eye of Cthulhu loving Retinazor twice instead of Spazmatism.
 	* Fixed Queen Bee accidentally liking herself instead of Queen Slime (again).
+
+0.1.13 - Update 13 (August 6, 2022)
+	* Fixed the Town NPCs' gore in multiplayer.
+	* Fixed Pirate not selling the Security Wallet from Fargo's Souls Mod.
