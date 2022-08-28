@@ -787,4 +787,35 @@ namespace BossesAsNPCs.Items
 		}
 	}
 	#endregion
+
+	#region Torch God
+	public class CaughtTorchGod : CaughtKingSlime
+	{
+		readonly private static string name = Language.GetTextValue("NPCName.TorchGod");
+		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1] + "_Bestiary";
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			DisplayName.SetDefault(name);
+			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
+		}
+
+		public override void SetDefaults()
+		{
+			Item.CloneDefaults(ModContent.ItemType<CaughtKingSlime>());
+			Item.makeNPC = ModContent.NPCType<TorchGod>();
+		}
+
+		public override bool CanUseItem(Player player)
+		{
+			Vector2 mousePos = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
+			return (NPC.CountNPCS(ModContent.NPCType<TorchGod>()) < 1 && !Collision.SolidCollision(mousePos, player.width, player.height));
+		}
+
+		public override void OnConsumeItem(Player player)
+		{
+			SpawnText(name);
+		}
+	}
+	#endregion
 }

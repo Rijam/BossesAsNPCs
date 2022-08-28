@@ -78,7 +78,7 @@ namespace BossesAsNPCs
 
 			ulong seed = 0;
 
-			if (values[4] == "flame")
+			if (values[4] == "flame" || values[4] == "flame2")
 			{
 				numTimesToDraw = 5;
 				seed = Main.TileFrameSeed ^ (ulong)(((long)drawPlayer.position.Y << 32) | (uint)drawPlayer.position.X);
@@ -95,8 +95,19 @@ namespace BossesAsNPCs
 					float random2 = Utils.RandomInt(ref seed, -5, 1) * 0.15f;
 					drawPos += new Vector2(random1, random2);
 				}
+				if (values[4] == "flame2")
+				{
+					float random1 = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
+					float random2 = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
+					drawPos += new Vector2(random1, random2);
+				}
 
 				Color color = drawPlayer.GetImmuneAlphaPure(new Color(int.Parse(values[1]), int.Parse(values[2]), int.Parse(values[3])), drawInfo.shadow);
+
+				if (values[4] == "flame2")
+				{
+					color = drawPlayer.GetImmuneAlphaPure(new Color(int.Parse(values[1]), int.Parse(values[2]), int.Parse(values[3]), 100), drawInfo.shadow);
+				}
 
 				DrawData drawData = new(
 					glowmask.Value, // The texture to render.

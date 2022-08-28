@@ -17,6 +17,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class Spazmatism : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -47,6 +48,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Love)
 				.SetNPCAffection(ModContent.NPCType<EyeOfCthulhu>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<MoonLord>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<TorchGod>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Steampunker, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Cyborg, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.GoblinTinkerer, AffectionLevel.Like)
@@ -83,9 +85,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/Twins_Gore_Tether").Type, 1f);
@@ -170,105 +172,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.MechanicalEye);
-				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
-				shop.item[nextSlot].shopCustomPrice = 400 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SoulofSight);
-				shop.item[nextSlot].shopCustomPrice = 800 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.TwinMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SpazmatismTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.MechanicalWheelPiece);
-					shop.item[nextSlot].shopCustomPrice = 5000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.TwinsPetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.TwinsMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss2);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EyeCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechEye", shop, ref nextSlot, 400000);
-
-					if (NPCHelper.DownedMechBossAll())
-					{
-						NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, ref nextSlot, 1000000);
-					}
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeTwins", shop, ref nextSlot, 10000);
-
-					if (NPCHelper.DownedMechBossAll())
-					{
-						NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, ref nextSlot, 10000);
-					}
-					NPCHelper.SafelySetCrossModItem(calamityMod, "Arbalest", shop, ref nextSlot, 0.1f);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "TwinRangs", shop, ref nextSlot, 0.1f);
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "FusedLens", shop, ref nextSlot);
-					}
-				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
-				{
-					if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-					{
-						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot); //Mechanical Spikes
-					}
-				}
-			}
+			SetupShops.Spazmatism(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

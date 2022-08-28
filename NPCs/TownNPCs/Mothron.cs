@@ -17,6 +17,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class Mothron : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
+
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault(Language.GetTextValue("NPCName.Mothron"));
@@ -47,6 +49,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<QueenBee>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Betsy>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Dreadnautilus>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<TorchGod>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.BestiaryGirl, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Merchant, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.DyeTrader, AffectionLevel.Dislike)
@@ -83,9 +86,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Wing1").Type, 1f);
@@ -198,118 +201,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-			
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.SolarTablet);
-				shop.item[nextSlot].shopCustomPrice = 20000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EyeSpring);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.0667);  //Formula: (Sell value /drop chance);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BrokenBatWing);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(25000 / 0.025 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MoonStone);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.0286 / 4);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NeptunesShell);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.02 / 4);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Steak);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.01 / 6);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DeathSickle);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.025 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ButchersChainsaw);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.025 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ButcherMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.02 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ButcherApron);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.02 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ButcherPants);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.02 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DeadlySphereStaff);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.025 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ToxicFlask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.025 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DrManFlyMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.0396 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DrManFlyLabCoat);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.0396 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NailGun);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.04);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Nail);
-				shop.item[nextSlot].shopCustomPrice = 100; //Match the price of the Arm's Dealer
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PsychoKnife);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.025);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BrokenHeroSword);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.25);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.TheEyeOfCthulhu);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(125000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MothronWings);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.05);
-				nextSlot++;
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEclipse);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBloodMoon);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Mothron.MoCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Mothron.MoCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Mothron.MoCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "MothronEgg", shop, ref nextSlot, 150000); //Match the Deviantt's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "SolarVeil", shop, ref nextSlot);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "DefectiveSphere", shop, ref nextSlot, 0.2f);
-				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
-				{
-					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "SqueyereMinionItem", shop, ref nextSlot, 0.1f); //Crest of Eyes
-				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
-				{
-					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "Broken_Hero_GunParts", shop, ref nextSlot, 0.25f);
-				}
-			}
+			SetupShops.Mothron(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

@@ -45,6 +45,7 @@ namespace BossesAsNPCs.NPCs
 			int pumpking = ModContent.NPCType<Pumpking>();
 			int iceQueen = ModContent.NPCType<IceQueen>();
 			int martianSaucer = ModContent.NPCType<MartianSaucer>();
+			int torchGod = ModContent.NPCType<TorchGod>();
 
 			var guide = NPCHappiness.Get(NPCID.Guide); // Get the key into the NPC's happiness
 			var merchant = NPCHappiness.Get(NPCID.Merchant);
@@ -75,11 +76,13 @@ namespace BossesAsNPCs.NPCs
 
 			guide.SetNPCAffection(kingSlime, AffectionLevel.Like); // Make the Guide like King Slime!
 			guide.SetNPCAffection(eyeOfCthulhu, AffectionLevel.Like);
+			guide.SetNPCAffection(torchGod, AffectionLevel.Like);
 			guide.SetNPCAffection(wallOfFlesh, AffectionLevel.Hate);
 
 			merchant.SetNPCAffection(brainOfCthulhu, AffectionLevel.Like);
 			merchant.SetNPCAffection(iceQueen, AffectionLevel.Like);
 			merchant.SetNPCAffection(mothron, AffectionLevel.Like);
+			merchant.SetNPCAffection(torchGod, AffectionLevel.Dislike);
 
 			nurse.SetNPCAffection(queenSlime, AffectionLevel.Like);
 			nurse.SetNPCAffection(empressOfLight, AffectionLevel.Like);
@@ -91,12 +94,14 @@ namespace BossesAsNPCs.NPCs
 
 			demolitionist.SetNPCAffection(martianSaucer, AffectionLevel.Like);
 			demolitionist.SetNPCAffection(skeletronPrime, AffectionLevel.Like);
+			demolitionist.SetNPCAffection(torchGod, AffectionLevel.Like);
 			demolitionist.SetNPCAffection(eaterOfWorlds, AffectionLevel.Dislike);
 			demolitionist.SetNPCAffection(brainOfCthulhu, AffectionLevel.Dislike);
 
 			dyeTrader.SetNPCAffection(plantera, AffectionLevel.Like);
 			dyeTrader.SetNPCAffection(kingSlime, AffectionLevel.Like);
 			dyeTrader.SetNPCAffection(mothron, AffectionLevel.Like);
+			dyeTrader.SetNPCAffection(torchGod, AffectionLevel.Like);
 			dyeTrader.SetNPCAffection(dreadnautilus, AffectionLevel.Dislike);
 
 			angler.SetNPCAffection(dukeFishron, AffectionLevel.Like);
@@ -139,6 +144,7 @@ namespace BossesAsNPCs.NPCs
 			tavernkeep.SetNPCAffection(brainOfCthulhu, AffectionLevel.Like);
 			tavernkeep.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
 			tavernkeep.SetNPCAffection(lunaticCultist, AffectionLevel.Like);
+			tavernkeep.SetNPCAffection(torchGod, AffectionLevel.Like);
 			tavernkeep.SetNPCAffection(golem, AffectionLevel.Dislike);
 
 			stylist.SetNPCAffection(empressOfLight, AffectionLevel.Love);
@@ -163,6 +169,7 @@ namespace BossesAsNPCs.NPCs
 			goblinTinkerer.SetNPCAffection(spazmatism, AffectionLevel.Like);
 			goblinTinkerer.SetNPCAffection(skeletronPrime, AffectionLevel.Like);
 			goblinTinkerer.SetNPCAffection(martianSaucer, AffectionLevel.Like);
+			goblinTinkerer.SetNPCAffection(torchGod, AffectionLevel.Dislike);
 
 			witchDoctor.SetNPCAffection(golem, AffectionLevel.Love);
 			witchDoctor.SetNPCAffection(queenBee, AffectionLevel.Like);
@@ -203,6 +210,7 @@ namespace BossesAsNPCs.NPCs
 			truffle.SetNPCAffection(skeletron, AffectionLevel.Love);
 			truffle.SetNPCAffection(plantera, AffectionLevel.Like);
 			truffle.SetNPCAffection(dukeFishron, AffectionLevel.Dislike);
+			truffle.SetNPCAffection(torchGod, AffectionLevel.Dislike);
 
 			pirate.SetNPCAffection(dukeFishron, AffectionLevel.Like);
 			pirate.SetNPCAffection(theDestroyer, AffectionLevel.Dislike);
@@ -235,7 +243,7 @@ namespace BossesAsNPCs.NPCs
 				int fishermanType = fishermanNPC.Find<ModNPC>("Fisherman").Type;
 				var fishermanHappiness = NPCHappiness.Get(fishermanNPC.Find<ModNPC>("Fisherman").Type);
 
-				var dreadnautilusHappiness = NPCHappiness.Get(ModContent.NPCType<Dreadnautilus>());
+				var dreadnautilusHappiness = NPCHappiness.Get(dreadnautilus);
 
 				fishermanHappiness.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
 				dreadnautilusHappiness.SetNPCAffection(fishermanType, AffectionLevel.Love);
@@ -244,11 +252,17 @@ namespace BossesAsNPCs.NPCs
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
 				int torchManType = torchSeller.Find<ModNPC>("TorchSellerNPC").Type;
-				var mothronHappiness = NPCHappiness.Get(ModContent.NPCType<Mothron>());
+				var torchManHappiness = NPCHappiness.Get(torchManType);
+
+				var mothronHappiness = NPCHappiness.Get(mothron);
 				mothronHappiness.SetNPCAffection(torchManType, AffectionLevel.Love);
 
-				var moonLordHappiness = NPCHappiness.Get(ModContent.NPCType<MoonLord>());
+				var moonLordHappiness = NPCHappiness.Get(moonLord);
 				moonLordHappiness.SetNPCAffection(torchManType, AffectionLevel.Dislike);
+
+				var torchGodHappiness = NPCHappiness.Get(torchGod);
+				torchGodHappiness.SetNPCAffection(torchManType, AffectionLevel.Love);
+				torchManHappiness.SetNPCAffection(torchGod, AffectionLevel.Love);
 			}
 		}
 	}

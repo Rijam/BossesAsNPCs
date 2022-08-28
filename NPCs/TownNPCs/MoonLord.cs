@@ -17,6 +17,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class MoonLord : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -53,7 +54,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(NPCID.Mechanic, AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<EmpressOfLight>(), AffectionLevel.Dislike)
 				.SetNPCAffection(NPCID.Dryad, AffectionLevel.Dislike)
-				//Princess is automatically set
+				.SetNPCAffection(ModContent.NPCType<TorchGod>(), AffectionLevel.Hate)
+			//Princess is automatically set
 			; // < Mind the semicolon!
 		}
 
@@ -85,9 +87,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Torso").Type, 1f);
@@ -141,7 +143,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 8; i++)
+			for (int i = 1; i <= 7; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -158,6 +160,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (lunaticCultist >= 0)
 			{
 				chat.Add(Language.GetTextValue(path + "LunaticCultist"));
+			}
+			int torchGod = NPC.FindFirstNPC(ModContent.NPCType<TorchGod>());
+			if (torchGod >= 0)
+			{
+				chat.Add(Language.GetTextValue(path + "TorchGod"));
+				int moonLord = NPC.FindFirstNPC(ModContent.NPCType<MoonLord>());
+				NPCHelper.GetNearbyResidentNPCs(Main.npc[moonLord], 3, out List<int> npcTypeListHouse, out List<int> _, out List<int> _, out List<int> _);
+				if (npcTypeListHouse.Contains(ModContent.NPCType<TorchGod>()))
+				{
+					chat.Add(Language.GetTextValue(path + "TorchGodVeryClose"), 10);
+				}
+			}
+			else
+			{
+				chat.Add(Language.GetTextValue(path + "NoTorchGod"));
 			}
 			int mechanic = NPC.FindFirstNPC(NPCID.Mechanic);
 			if (mechanic >= 0)
@@ -201,132 +218,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.CelestialSigil);
-				shop.item[nextSlot].shopCustomPrice = 500000; //made up value
-				nextSlot++;
-				
-				shop.item[nextSlot].SetDefaults(ItemID.PortalGun);
-				shop.item[nextSlot].shopCustomPrice = 100000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.LunarOre);
-				shop.item[nextSlot].shopCustomPrice = 3000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Meowmere);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Terrarian);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.StarWrath);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SDMG);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(150000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.LastPrism);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.LunarFlareBook);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.RainbowCrystalStaff);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MoonlordTurretStaff); //Lunar Portal Staff
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Celeb2); //Celebration Mk2
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MeowmereMinecart);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.1);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BossMaskMoonlord);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MoonLordTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.GravityGlobe);
-					shop.item[nextSlot].shopCustomPrice = 400000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SuspiciousLookingTentacle);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.LongRainbowTrailWings);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.MoonLordPetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.MoonLordMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxLunarBoss);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWMoonLord);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.MoonLordLegs);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "CelestialSigil2", shop, ref nextSlot, 1000000); //Match the Mutant's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMoonLord", shop, ref nextSlot, 10000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "CelestialOnion", shop, ref nextSlot, 100000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "UtensilPoker", shop, ref nextSlot, 0.25f);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "DeviousAestheticus", shop, ref nextSlot, 0.05f);
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "GalacticGlobe", shop, ref nextSlot);
-					}
-				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
-				{
-					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "TrueThirdEye", shop, ref nextSlot, 0.25f);
-					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "Cosmic_Key", shop, ref nextSlot, 100000);
-				}
-				if (ModLoader.TryGetMod("MagicStorage", out Mod magicStorage))
-				{
-					NPCHelper.SafelySetCrossModItem(magicStorage, "RadiantJewel", shop, ref nextSlot, 0.05f);
-				}
-			}
+			SetupShops.MoonLord(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

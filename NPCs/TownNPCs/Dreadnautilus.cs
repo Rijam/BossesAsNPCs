@@ -17,6 +17,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class Dreadnautilus : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
+
 		public override void SetStaticDefaults()
 		{
 			DisplayName.SetDefault(Language.GetTextValue("NPCName.BloodNautilus"));
@@ -83,9 +85,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
@@ -189,155 +191,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-			
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.BloodMoonStarter); //Bloody Tear
-				shop.item[nextSlot].shopCustomPrice = 60000;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BunnyHood);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.0133);  //Formula: (Sell value /drop chance);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PedguinHat);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(3000 / 0.0067 / 3);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PedguinShirt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(3000 / 0.0067 / 3);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.PedguinPants);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(3000 / 0.0067 / 3);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.KiteBunnyCorrupt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.04);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.KiteBunnyCrimson);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.04);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.TopHat);
-				shop.item[nextSlot].shopCustomPrice = 2000 * 5; //Technically a 90% drop chance, but in certain cases you could sell the hat for more than you bought it
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.TheBrideHat);
-				shop.item[nextSlot].shopCustomPrice = 1000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.TheBrideDress);
-				shop.item[nextSlot].shopCustomPrice = 1000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.MoneyTrough);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.005 / 2); //0.5% from Blood Zombies & Dripplers. Not using the 6.67% from Zombie Merman & Wandering Eye Fish
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SharkToothNecklace);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.0067 / 2);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ChumBucket);
-				shop.item[nextSlot].shopCustomPrice = 500 * 5 * 2;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BloodRainBow);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.125);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.VampireFrogStaff);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.125);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BloodFishingRod); //Chum Caster
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.0417);
-				nextSlot++;
-				if (!NPC.combatBookWasUsed)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.CombatBook); //Advanced Combat Techniques
-					shop.item[nextSlot].shopCustomPrice = 500000; //Normally no value
-					nextSlot++;
-				}
-				if (Main.hardMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.KOCannon);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(35000 / 0.01 / 10); //Dropped by ANY enemy during a Blood Moon
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.Bananarang);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.0333);
-					nextSlot++;
-					// No Trifold Map lol
-					shop.item[nextSlot].SetDefaults(ItemID.BloodHamaxe); //Haemorrhaxe
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.125);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SharpTears); //Blood Thorn
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.125);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.DripplerFlail); //Drippler Crippler
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.125);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SanguineStaff);
-					shop.item[nextSlot].shopCustomPrice = 50000 * 5; //50% drop chance in normal mode, but I wanted it to be more expensive
-					nextSlot++;
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.BloodMoonMonolith);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1111);
-				nextSlot++;
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxEerie);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBloodMoon);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Dreadnautilus.DnCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Dreadnautilus.DnCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Dreadnautilus.DnCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousLookingLure", shop, ref nextSlot, 100000); //Match the Deviantt's shop
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "BloodUrchin", shop, ref nextSlot, 100000); //Match the Deviantt's shop
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "HemoclawCrab", shop, ref nextSlot, 100000); //Match the Deviantt's shop
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "BloodSushiPlatter", shop, ref nextSlot, 200000); //Match the Deviantt's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "BloodOrb", shop, ref nextSlot, 1f, 5f);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "BouncingEyeball", shop, ref nextSlot, (0.025f * 2f));
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "SqueakyToy", shop, ref nextSlot, 0.1f);
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "DreadShell", shop, ref nextSlot, 0.2f);
-					}
-				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
-				{
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "BloodDrop", shop, ref nextSlot); //Bloody Drop
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "BloodyRifle", shop, ref nextSlot, 0.125f); //Bloodshot Rifle
-				}
-				if (ModLoader.TryGetMod("ItReallyMustBe", out Mod dreadnautilusIsABoss))
-				{
-					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "FunnyBait", shop, ref nextSlot); //Blood Bait
-					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadPistol", shop, ref nextSlot, 0.25f);
-					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadnautilusTrophy", shop, ref nextSlot, 0.1f);
-
-					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-					{
-						NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "BloodyCarKey", shop, ref nextSlot, 0.25f);
-						NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadnautilusRelic", shop, ref nextSlot, 0.1f);
-					}
-				}
-			}
+			SetupShops.Dreadnautilus(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

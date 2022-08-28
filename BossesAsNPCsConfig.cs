@@ -66,6 +66,16 @@ namespace BossesAsNPCs
 		[DefaultValue(false)]
 		public bool CatchNPCs { get; set; }
 
+		//All In One NPC Mode
+		[BackgroundColor(39, 77, 253)]
+		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnAllInOne")]
+		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnAllInOne")]
+		[DefaultValue(0)]
+		[Range(0, 2)]
+		[Slider]
+		[ReloadRequired]
+		public int AllInOneNPCMode { get; set; }
+
 		//Spawn Options
 		[Header("$Mods.BossesAsNPCs.Config.Server.HeaderSpawn")]
 
@@ -198,13 +208,13 @@ namespace BossesAsNPCs
 		//Dreadnautilus Can Spawn
 		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnDn")]
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnDn")]
-		[DefaultValue(false)]
+		[DefaultValue(true)]
 		public bool CanSpawnDreadnautilus { get; set; }
 
 		//Mothron Can Spawn
 		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnMo")]
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnMo")]
-		[DefaultValue(false)]
+		[DefaultValue(true)]
 		public bool CanSpawnMothron { get; set; }
 
 		//Pumpking Can Spawn

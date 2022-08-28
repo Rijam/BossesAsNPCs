@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class EaterOfWorlds : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -82,9 +83,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
@@ -97,7 +98,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
 		{
-			if ((NPC.downedBoss2 && (!WorldGen.crimson || WorldGen.drunkWorldGen || Main.drunkWorld) || Main.hardMode) && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoW)
+			if (NPC.downedBoss2 && BossesAsNPCsWorld.downedEoW && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoW)
 			{
 				return true;
 			}
@@ -171,107 +172,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.WormFood);
-				shop.item[nextSlot].shopCustomPrice = 100000; //Made up value since it has no value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.DemoniteOre);
-				shop.item[nextSlot].shopCustomPrice = 1000 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ShadowScale);
-				shop.item[nextSlot].shopCustomPrice = 100 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EatersBone);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(75000 / 0.05); //Formula: (Sell value / drop chance))
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EaterMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EaterofWorldsTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.WormScarf);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.EaterOfWorldsPetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.EaterofWorldsMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.VilePowder);
-					shop.item[nextSlot].shopCustomPrice = 100;
-					nextSlot++;
-					if (Main.hardMode)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.UnholyWater);
-						shop.item[nextSlot].shopCustomPrice = 100;
-						nextSlot++;
-					}
-					int steampunker = NPC.FindFirstNPC(NPCID.Steampunker);
-					if (steampunker >= 0 && NPC.downedMechBossAny)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.PurpleSolution);
-						shop.item[nextSlot].shopCustomPrice = 2500;
-						nextSlot++;
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.WormTooth);
-					shop.item[nextSlot].shopCustomPrice = 20 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EaterOfWorlds.EoWCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EaterOfWorlds.EoWCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "WormyFood", shop, ref nextSlot, 100000); //Match the Mutant's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeEaterofWorlds", shop, ref nextSlot, 10000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeCorruption", shop, ref nextSlot, 10000);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "EaterStaff", shop, ref nextSlot, 0.1f); //Eater of Worlds Staff
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "DarkenedHeart", shop, ref nextSlot);
-					}
-				}
-			}
+			SetupShops.EaterOfWorlds(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

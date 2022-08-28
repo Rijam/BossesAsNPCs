@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class IceQueen : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -83,9 +84,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
@@ -160,159 +161,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.NaughtyPresent);
-				shop.item[nextSlot].shopCustomPrice = 150000; //Made up value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ElfHat);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ElfShirt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ElfPants);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(6000 / 0.017);
-				nextSlot++;
-				if (NPC.downedChristmasTree)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.ChristmasTreeSword);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.078);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.ChristmasHook);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40000 / 0.078);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.Razorpine);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.078);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.FestiveWings);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.017);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.EverscreamTrophy);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-					nextSlot++;
-					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.EverscreamPetItem); //Shrub Star
-						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ItemID.EverscreamMasterTrophy);
-						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-						nextSlot++;
-					}
-				}
-				if (NPC.downedChristmasSantank)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.EldMelter); //Elf Melter, lol Re-Logic misspelled it.
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.ChainGun);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.125);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SantaNK1Trophy);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-					nextSlot++;
-					if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.SantankMountItem); //Toy Tank
-						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ItemID.SantankMasterTrophy);
-						shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-						nextSlot++;
-					}
-				}
-				shop.item[nextSlot].SetDefaults(ItemID.BlizzardStaff);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SnowmanCannon);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NorthPole);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(90000 / 0.08);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BabyGrinchMischiefWhistle);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.017); //Has no value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.ReindeerBells);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.IceQueenTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
-				nextSlot++;
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.IceQueenPetItem); //Frozen Crown
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.IceQueenMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxFrostMoon);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWInvasion);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.Present);
-					shop.item[nextSlot].shopCustomPrice = 5000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
-				{
-					if (NPC.downedChristmasTree)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosMutant, "FestiveOrnament", shop, ref nextSlot, 200000); //Match the Abominationn's shop
-					}
-					if (NPC.downedChristmasSantank)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosMutant, "NaughtyList", shop, ref nextSlot, 200000); //Match the Abominationn's shop
-					}
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "IceKingsRemains", shop, ref nextSlot, 300000); //Match the Abominationn's shop
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "IceQueensCrown", shop, ref nextSlot, 0.2f);
-					}
-				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
-				{
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantankScrap", shop, ref nextSlot); //Mechanical Scrap
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "IceSentry", shop, ref nextSlot, 0.1f); //Frozen Queen's Staff
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FrostCube", shop, ref nextSlot, 0.07f); //Frozen Queen's Core
-				}
-			}
+			SetupShops.IceQueen(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

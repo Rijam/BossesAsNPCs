@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class KingSlime : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -81,9 +82,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 				{
@@ -176,122 +177,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-			
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.SlimeCrown);
-				shop.item[nextSlot].shopCustomPrice = 50000; //Made up value since Slime Crown has no value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Solidifier);
-				shop.item[nextSlot].shopCustomPrice = 20000 * 2;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SlimySaddle);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25); //Formula: (Sell value / drop chance)
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NinjaHood);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NinjaShirt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.NinjaPants);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SlimeHook);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(4000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.SlimeGun);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(3000 / 0.67);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.KingSlimeMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.KingSlimeTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.RoyalGel);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.KingSlimePetItem); //Royal Delight
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.KingSlimeMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic())
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.Gel);
-					shop.item[nextSlot].shopCustomPrice = 1 * 10;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SlimeStaff);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					if (NPC.CountNPCS(NPCID.Princess) > 0)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.PrinceUniform);
-						shop.item[nextSlot].shopCustomPrice = 500000;
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ItemID.PrincePants);
-						shop.item[nextSlot].shopCustomPrice = 500000;
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ItemID.PrinceCape);
-						shop.item[nextSlot].shopCustomPrice = 500000;
-						nextSlot++;
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeGloves>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.KingSlime.KSAltCostumeGloves>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "SlimyCrown", shop, ref nextSlot, 50000); //Match the Mutant's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeKingSlime", shop, ref nextSlot, 10000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "CrownJewel", shop, ref nextSlot, 0.1f);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "SlimeKingsSlasher", shop, ref nextSlot, 0.1f);
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "MedallionoftheFallenKing", shop, ref nextSlot, 0.01f);
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "SlimyShield", shop, ref nextSlot);
-					}
-				}
-			}
+			SetupShops.KingSlime(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

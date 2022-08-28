@@ -115,3 +115,13 @@
 0.1.13 - Update 13 (August 6, 2022)
 	* Fixed the Town NPCs' gore in multiplayer.
 	* Fixed Pirate not selling the Security Wallet from Fargo's Souls Mod.
+
+0.1.14 - Update 14 (August 28, 2022)
+	* Actually fixed the Town NPCs' gore in multiplayer.
+	* The Eater of Worlds, Brain of Cthulhu, and Wall of Flesh are now tracked separately. Any existing worlds will need to defeat the bosses again for the NPCs to be able to arrive.
+	* New All-in-One NPC mode!
+	** Mode 0 is normal.
+	** Mode 1 will unload NPCs who configs are off and a new NPC will sell the off configs.
+	** Mode 2 will unload all NPCs and a new NPC will sell all of the on configs.
+	* Important: if you had cross mod support for this mod previously, you need to update your support.
+	* Added more Mod Calls.

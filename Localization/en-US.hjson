@@ -84,6 +84,23 @@ Mods: {
 					Default value: Off
 					Requires a Reload.
 					'''
+				LabelSpawnAllInOne: "[i:5043]   All in One NPC Mode"
+				TooltipSpawnAllInOne:
+					'''
+					This option changes "All in One NPC Mode".
+					  When 0: Standard behavior.
+					  When 1: Unloads the any Boss NPCs who's config is off.
+					    Instead, this new Boss NPC and Boss NPCs who's configs are on will be loaded.
+					    The shops Boss NPCs who's configs are off will now be sold by this new NPC.
+					  When 2: Unloads all of the other Boss NPCs from this mod.
+					    Instead, only this one Boss NPC will be loaded.
+					    It will have shops for each boss' loot when they have been defeated.
+					    The other configs for each Boss NPC will now determine which shops are available.
+
+					  Change this config if you have too many Town NPCs or don't want as many Town NPCs.
+					Default value: 0
+					Requires a Reload.
+					'''
 
 				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   King Slime Can Spawn"
 				TooltipSpawnKS:
@@ -326,16 +343,8 @@ Mods: {
 			Census: {
 				KingSlime: Defeat King Slime
 				EyeOfCthulhu: Defeat the Eye of Cthulhu
-				EaterOfWorlds:
-					'''
-					Defeat the Eater of Worlds in a Corruption world,
-					or in a Hardmode in a Crimson world
-					'''
-				BrainOfCthulhu:
-					'''
-					Defeat the Brain of Cthulhu in a Crimson world,
-					or in a Hardmode in a Corruption world
-					'''
+				EaterOfWorlds: Defeat the Eater of Worlds
+				BrainOfCthulhu: Defeat the Brain of Cthulhu
 				QueenBee: Defeat Queen Bee
 				Skeletron: Defeat Skeletron
 				Deerclops: Defeat Deerclops
@@ -356,6 +365,7 @@ Mods: {
 				Pumpking: Defeat the Pumpking
 				IceQueen: Defeat the Ice Queen
 				MartianSaucer: Defeat the Martian Saucer
+				TorchGod: Defeat any boss with All in One NPC Mode set to 1 or 2.
 			}
 		}
 		Common: {
@@ -378,6 +388,13 @@ Mods: {
 			// "Love" and "Hate" are already translated from vanilla's random world name generator
 			Like : Like
 			Dislike : Dislike
+			TorchGod: {
+				NoShop: No shop selected
+				IncShop: Next shop
+				DecShop: Previous shop
+				FirstShop: First shop
+			}
+
 		}
 		ItemName: {
 			BeCostumeBodypiece: Betsy Costume Bodypiece
@@ -440,6 +457,9 @@ Mods: {
 			SPCostumeLegpiece: Skeletron Prime Costume Legpiece
 			SpazCostumeHeadpiece: Spazmatism Costume Headpiece
 			SpazCostumeBodypiece: Spazmatism Costume Bodypiece
+			TGCostumeHeadpiece: Torch God Costume Headpiece
+			TGCostumeBodypiece: Torch God Costume Bodypiece
+			TGCostumeLegpiece: Torch God Costume Legpiece
 			WoFCostumeHeadpiece: Wall of Flesh Costume Headpiece
 			WoFCostumeBodypiece: Wall of Flesh Costume Bodypiece
 			WoFCostumeLegpiece: Wall of Flesh Costume Legpiece
@@ -480,6 +500,7 @@ Mods: {
 			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtTorchGod: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 		}
 
 		BiomeName: {
@@ -737,14 +758,16 @@ Mods: {
 				Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
 				Default4: You are quite the fighter. You went out of your way to defeat me.
 				Default5: The Celestial Pillars were sent to conquer your world.
-				Default6: There is only one other God that I fear. Luckily, it only haunts torches.
-				Default7: No, there is no 'Sun Lord'.
-				Default8: Why are you asking me to craft some love?
+				Default6: No, there is no 'Sun Lord'.
+				Default7: Why are you asking me to craft some love?
 				Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
 				Dryad: I've decided to let {0} live. She is the last of her kind anyway.
 				LunaticCultist: It's nice to have people worship me, as they should be.
 				Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
 				TorchMerchant: Are you sure that {0} is not... Him?
+				NoTorchGod: There is only one other God that I fear. Luckily, it only haunts torches.
+				TorchGod: Stay away from The Torch God! His power is... inextinguishable.
+				TorchGodVeryClose: Just pretend like we are talking until Torchy leaves.
 			}
 			Dreadnautilus: {
 				Default1: I am Dreadnautilus.
@@ -809,6 +832,27 @@ Mods: {
 					'''
 				Party: Parties entail such strange decor and customs that I am not used to.
 				RijamsMod: I haven't seen a species like {0} before.
+			}
+			TorchGod: {
+				Default1: I am The Torch God.
+				Default2: Your greatest foes drop the greatest loot; buy it here!
+				Default3: Placing the correct torches in their respective biomes will increase your luck! No need to thank me!
+				Default4: Are you concerned about placing open flame torches in a wooden house? Do not fret, the wood will not catch fire!
+				Default5: No fear, mortal, placing the wrong torches in the current biome will not decrease your luck below 0!
+				Default6: Not all flames extinguish with water. Some flames are cursed to be lit forever.
+				Default7: You do know how to stop-drop-and-roll, right?
+				Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
+				Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
+				Rare: Haha! The fire IS shooting at you!
+				HasFavor1: My favor has allowed you to magically change the type of torches you place. Use standard torches for the magic to work.
+				HasFavor2: Did you have a fun time attempting my challenge? I sure did!
+				NoFavor1: You have not proven yourself to me yet. Once you have, I will offer you a favor.
+				NoFavor2: Prove to me that you are worthy by surviving my little challenge. A great reward is waiting for you.
+				Nurse: "Fire is very destructive to your mortal tissues. Luckily, {0} is experienced with treating burns."
+				MoonLord: Hmm.. the Moon Lord seems very cautious around me. Rightfully so.
+				TorchMerchant: "A fellow being of flame. I quite like {0}."
+				NameIsRedigit: "I owe everything I am to you, {0}. You are the true Torch God!"
+				Overhaul: Discard what I previously said about wood not catching fire; The fire seems awfully hungry today...
 			}
 		}
 		
@@ -1239,6 +1283,23 @@ Mods: {
 				DislikeNPC: "I dislike {NPCName}."
 				HateNPC: "I hate {NPCName}."
 			}
+			TorchGod: {
+				Content: I feel content.
+				NoHome: I would like a home.
+				LoveSpace: I love how there is so much space.
+				FarFromHome: I am far from my home.
+				DislikeCrowded: I dislike the crowd.
+				HateCrowded: I hate the crowd.
+				LikeBiome: "I like {BiomeName}."
+				LoveBiome: "I love {BiomeName}."
+				DislikeBiome: "I dislike {BiomeName}."
+				HateBiome: "I hate {BiomeName}."
+				LikeNPC: "I like {NPCName}."
+				LikeNPC_Princess: "I like {NPCName}."
+				LoveNPC: "I love {NPCName}."
+				DislikeNPC: "I dislike {NPCName}."
+				HateNPC: "I hate {NPCName}."
+			}
 		}
 		Bestiary: {
 			Description: {
@@ -1267,6 +1328,7 @@ Mods: {
 				Pumpking: This pumpkin king has decided to become your roommate.
 				IceQueen: This icy monstrosity has decided to become your roommate.
 				MartianSaucer: This advanced flying saucer has decided to become your roommate.
+				TorchGod: This unseen deity has decided to become your roommate.
 			}
 			Happiness: {
 				// These are automatically translated from other localization. Leave as is.
@@ -1388,7 +1450,7 @@ Mods: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}"
 					Like: "{$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
 					Dislike: "{$NPCName.HallowBoss}, {$NPCName.Dryad}"
-					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+					Hate: "{$NPCName.TorchGod}"
 				}
 				Dreadnautilus: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
@@ -1418,6 +1480,12 @@ Mods: {
 					Love: "{$NPCName.Cyborg}, {$NPCName.Steampunker}"
 					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Mechanic}, {$NPCName.GoblinTinkerer}"
 					Dislike: "{$NPCName.Wizard}, {$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				TorchGod: {
+					Love: "{$Mods.BossesAsNPCs.Common.Caverns}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.MoonLordHead}, {$NPCName.Golem}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Guide}, {$NPCName.DD2Bartender}, {$NPCName.Clothier}, {$NPCName.Wizard}, {$NPCName.Steampunker}"
+					Dislike: "{$NPCName.BloodNautilus}, {$NPCName.IceQueen}, {$NPCName.Pirate}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 			}
@@ -1453,4 +1521,5 @@ TownNPCMood_Princess: {
 	LoveNPC_BossesAsNPCs/Pumpking: "I love {NPCName}."
 	LoveNPC_BossesAsNPCs/IceQueen: "I love {NPCName}."
 	LoveNPC_BossesAsNPCs/MartianSaucer: "I love {NPCName}."
+	LoveNPC_BossesAsNPCs/TorchGod: "I love {NPCName}."
 }

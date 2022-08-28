@@ -14,6 +14,7 @@ namespace BossesAsNPCs
 		internal static BossesAsNPCs Instance;
 		public override void Unload()
 		{
+			NPCs.SetupShops.ClearCustomShops();
 			ConfigServer = null;
 			Instance = null;
 		}
@@ -46,6 +47,7 @@ namespace BossesAsNPCs
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<Pumpking>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Pumpking"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.IceQueen"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.MartianSaucer"));
+				censusMod.Call("TownNPCCondition", ModContent.NPCType<TorchGod>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TorchGod"));
 			}
 		}
 
@@ -57,6 +59,12 @@ namespace BossesAsNPCs
 
 			if (args[0] is not string function)
 				throw new ArgumentException("Expected a function name for the first argument");
+
+			void CheckArgsLength(int expected, params string[] argNames)
+			{
+				if (args.Length != expected)
+					throw new ArgumentOutOfRangeException($"Expected {expected} arguments for Mod.Call(\"{function}\", {string.Join(",", argNames)}), got {args.Length} arguments instead");
+			}
 
 			switch (function)
 			{
@@ -86,14 +94,79 @@ namespace BossesAsNPCs
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 				case "CatchNPCs":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
+				case "AllInOneNPCMode":
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
 				case "GoblinSellInvasionItems":
                     return ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
 				case "PirateSellInvasionItems":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
 				case "GetStatusShop1":
+					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
 					return NPCs.NPCHelper.StatusShop1();
 				case "GetStatusShop2":
+					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
 					return NPCs.NPCHelper.StatusShop2();
+				case "CanSpawn":
+					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					return args[1].ToString() switch
+					{
+						"KingSlime" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnKingSlime,
+						"EyeOfCthulhu" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoC,
+						"EoC" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoC,
+						"EaterOfWorlds" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoW,
+						"EoW" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoW,
+						"BrainOfCthulhu" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnBoC,
+						"BoC" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnBoC,
+						"QueenBee" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnQueenBee,
+						"Skeletron" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnSkeletron,
+						"Deerclops" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDeerclops,
+						"WallOfFlesh" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnWoF,
+						"WoF" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnBoC,
+						"QueenSlime" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnQueenSlime,
+						"TheDestroyer" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDestroyer,
+						"Destroyer" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDestroyer,
+						"TheTwins" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnTwins,
+						"Twins" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnTwins,
+						"SkeletronPrime" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnSkeletronPrime,
+						"Plantera" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnPlantera,
+						"Golem" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnGolem,
+						"EmpressOfLight" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoL,
+						"EoL" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoL,
+						"DukeFishron" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDukeFishron,
+						"Betsy" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnBetsy,
+						"LunaticCultist" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnLunaticCultist,
+						"MoonLord" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMoonLord,
+						"Dreadnautilus" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDreadnautilus,
+						"Mothron" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMothron,
+						"Pumpking" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnPumpking,
+						"IceQueen" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnIceQueen,
+						"MartianSaucer" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMartianSaucer,
+						"TorchGod" => ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode > 0,
+						"TheTorchGod" => ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode > 0,
+						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
+					};
+				case "AddToShop":
+					switch (args[1].ToString())
+					{
+						case "DefaultPrice":
+							CheckArgsLength(5, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString() });
+							// string npc, int item, bool condition
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4]);
+						case "CustomPrice":
+							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
+							// string npc, int item, bool condition, int customPrice
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (int)args[5]);
+						case "WithDiv":
+							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
+							// string npc, int item, bool condition, float priceDiv
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5]);
+						case "WithDivAndMulti":
+							CheckArgsLength(7, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString(), args[6].ToString() });
+							// string npc, int item, bool condition, float priceDiv, float priceMulti
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5], (float)args[6]);
+						default:
+							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");
+					}
 				default:
 					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}

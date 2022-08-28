@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class EyeOfCthulhu : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -81,9 +82,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
@@ -166,142 +167,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.SuspiciousLookingEye);
-				shop.item[nextSlot].shopCustomPrice = 75000; //Made up value since it has no value
-				nextSlot++;
-				if (!WorldGen.crimson || Main.hardMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.DemoniteOre);
-					shop.item[nextSlot].shopCustomPrice = 1000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.CorruptSeeds);
-					shop.item[nextSlot].shopCustomPrice = 500 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.UnholyArrow);
-					if (NPC.downedBoss2)
-					{
-						if (Main.hardMode)
-						{
-							shop.item[nextSlot].shopCustomPrice = 40;
-						}
-						else
-						{
-							shop.item[nextSlot].shopCustomPrice = 40 * 2;
-						}
-					}
-					else
-					{
-						shop.item[nextSlot].shopCustomPrice = 40 * 5;
-					}
-					nextSlot++;
-				}
-				if (WorldGen.crimson || Main.hardMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.CrimtaneOre);
-					shop.item[nextSlot].shopCustomPrice = 1300 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.CrimsonSeeds);
-					shop.item[nextSlot].shopCustomPrice = 500 * 5;
-					nextSlot++;
-				}
-
-				shop.item[nextSlot].SetDefaults(ItemID.Binoculars);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.03); //Formula: (Sell value * 3 / drop chance))
-				nextSlot++;
-				int wof = NPC.FindFirstNPC(ModContent.NPCType<WallOfFlesh>());
-				if (wof >= 0)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.BadgersHat);
-					shop.item[nextSlot].shopCustomPrice = 3000 * 20;
-					nextSlot++;
-				}
-
-				shop.item[nextSlot].SetDefaults(ItemID.EyeMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.EyeofCthulhuTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.EoCShield);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.AviatorSunglasses);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.EyeOfCthulhuPetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.EyeofCthulhuMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss1);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EoCCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EoCCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EyeCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousEye", shop, ref nextSlot, 80000); //Match the Mutant's shop
-				}
-
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeEyeofCthulhu", shop, ref nextSlot, 10000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "DeathstareRod", shop, ref nextSlot, 0.25f);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "TeardropCleaver", shop, ref nextSlot, 0.1f);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "LeashOfCthulhu", shop, ref nextSlot, 0.1f);
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "AgitatingLens", shop, ref nextSlot);
-					}
-				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
-				{
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeSword", shop, ref nextSlot, 0.25f); //Eye Sored
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeGun", shop, ref nextSlot, 0.25f); //Eye Rifle
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeStaff", shop, ref nextSlot, 0.25f); //The Eyestalk
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeMinion", shop, ref nextSlot, 0.25f); //Eyeball Staff
-					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeHook", shop, ref nextSlot, 0.25f); //Eyeball Hook
-				}
-			}
+			SetupShops.EyeOfCthulhu(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

@@ -4,6 +4,13 @@ Ever wanted bosses that you have defeated to move in as Town NPCs?
 
 Well this is the mod for you!
 
+—— boss成为npc ——
+你喜欢大量的城镇 NPC 吗？
+ 你喜欢管理 25 个额外城镇 NPC 的快乐吗？
+ 曾经被你击败的boss作为城镇 NPC 搬进来吗？
+ 好吧，这是适合你的模组！
+（模组目前支持灾厄，法狗等模组的boss专属物品，npc也会出售灾厄以及法狗的专属掉落物，不再看脸掉落，完全可以在npc处购买）
+
 [c/008000:Each vanilla boss has their own Town NPC] that will arrive after the respective boss has been killed.
 Each Town NPC sells their boss drops. Expert and Master Mode items are included for their respective difficulties.
 
@@ -22,9 +29,15 @@ https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.1.13
-	- Fixed the Town NPCs' gore in multiplayer.
-	- Fixed Pirate not selling the Security Wallet from Fargo's Souls Mod.
+Mod version: 0.1.14
+	- Actually fixed the Town NPCs' gore in multiplayer.
+	- The Eater of Worlds, Brain of Cthulhu, and Wall of Flesh are now tracked separately. Any existing worlds will need to defeat the bosses again for the NPCs to be able to arrive.
+	- New All-in-One NPC mode!
+	-- Mode 0 is normal.
+	-- Mode 1 will unload NPCs who configs are off and a new NPC will sell the off configs.
+	-- Mode 2 will unload all NPCs and a new NPC will sell all of the on configs.
+	- Important: if you had cross mod support for this mod previously, you need to update your support.
+	- Added more Mod Calls.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

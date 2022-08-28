@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class QueenSlime : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -81,9 +82,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 				{
@@ -166,99 +167,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeCrystal);
-				shop.item[nextSlot].shopCustomPrice = 200000; //Made up value
-				nextSlot++;
-				
-				shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeMountSaddle); //Gelatinous Pillion
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25); //Formula: (Sell value / drop chance)
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.CrystalNinjaHelmet); //Crystal Assassin Hood
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.CrystalNinjaChestplate); //Crystal Assassin Shirt
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.CrystalNinjaLeggings); //Crystal Assassin Pants
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeHook); //Hook of Dissonance
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Smolstar); //Blade Staff
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.GelBalloon);
-				shop.item[nextSlot].shopCustomPrice = 40 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.VolatileGelatin);
-					shop.item[nextSlot].shopCustomPrice = 50000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.QueenSlimePetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.QueenSlimeMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxQueenSlime);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss2);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.PinkGel);
-					shop.item[nextSlot].shopCustomPrice = 3 * 10;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenSlime.QSAltCostumeHeadpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenSlime.QSCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenSlime.QSCostumeGloves>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "JellyCrystal", shop, ref nextSlot, 250000); //Match the Mutant's shop
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "GelicWings", shop, ref nextSlot);
-					}
-				}
-			}
+			SetupShops.QueenSlime(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

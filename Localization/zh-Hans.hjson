@@ -83,6 +83,23 @@ Mods: {
 					默认值：关
 					需要重新加载。
 					'''
+				LabelSpawnAllInOne: "[i:5043]   一体化 NPC 模式"
+				TooltipSpawnAllInOne:
+					'''
+					此选项将更改“全部在一个 NPC 模式下”。
+					  当 0 时：标准模式。
+					  当 1 时：卸载任何配置已关闭的 Boss NPC。
+					    取而代之的是，将加载配置所在的新BOSS NPC 和BOSS NPC。
+					    配置已关闭的商店Boss NPC现在将由这个新的NPC出售。
+					  当 2 时：从这个模组中卸载所有其他Boss NPC。
+					    取而代之的是，只会加载这一个Boss NPC。
+					    当每个Boss被击败时，它的商店会提供每个BOSS的战利品使用。
+					    现在，每个Boss NPC的其他配置将决定哪些商店可用。
+
+					  如果您拥有太多城镇 NPC 或不想拥有那么多城镇 NPC，请更改此配置。
+					默认值：0
+					需要重新加载。
+					'''
 
 				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   史莱姆王可以生成"
 				TooltipSpawnKS:
@@ -325,16 +342,8 @@ Mods: {
 			Census: {
 				KingSlime: 打败史莱姆王
 				EyeOfCthulhu: 打败克苏鲁之眼
-				EaterOfWorlds:
-					'''
-					在腐化世界中打败世界吞噬怪，
-					或在猩红世界中的困难模式中
-					'''
-				BrainOfCthulhu:
-					'''
-					在猩红世界中击败克苏鲁之脑，
-					或在腐化世界中的困难模式中
-					'''
+				EaterOfWorlds: 打败世界吞噬者
+				BrainOfCthulhu: 打败克苏鲁之脑
 				QueenBee: 打败蜂王
 				Skeletron: 打败骷髅王
 				Deerclops: 打败巨鹿怪
@@ -355,6 +364,7 @@ Mods: {
 				Pumpking: 打败南瓜王
 				IceQueen: 打败冰雪女王
 				MartianSaucer: 打败火星飞碟
+				TorchGod: 击败任何头目，将“一体式NPC模式”设置为1或2。
 			}
 		}
 		Common: {
@@ -377,6 +387,12 @@ Mods: {
 			// "Love" and "Hate" are already translated from vanilla's random world name generator
 			Like : 喜欢
 			Dislike : 讨厌
+			TorchGod: {
+				NoShop: 未选择商店
+				IncShop: 下个商店
+				DecShop: 上个商店
+				FirstShop: 首家商店
+			}
 		}
 		ItemName: {
 			BeCostumeBodypiece: 双足翼龙上衣
@@ -439,6 +455,9 @@ Mods: {
 			SPCostumeLegpiece: 机械骷髅王裤子
 			SpazCostumeHeadpiece: 魔焰眼头饰
 			SpazCostumeBodypiece: 魔焰眼上衣
+			TGCostumeHeadpiece: 火把神头饰
+			TGCostumeBodypiece: 火把神紧身衣
+			TGCostumeLegpiece: 火把神腿饰
 			WoFCostumeHeadpiece: 血肉墙头饰
 			WoFCostumeBodypiece: 血肉墙上衣
 			WoFCostumeLegpiece: 血肉墙裤子
@@ -479,6 +498,7 @@ Mods: {
 			CaughtPumpking: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtIceQueen: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 			CaughtMartianSaucer: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			CaughtTorchGod: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
 		}
 
 		BiomeName: {
@@ -737,14 +757,16 @@ Mods: {
 				Default3: 我接管泰拉瑞亚的计划已被你阻止，我称赞你所作的这种努力。
 				Default4: 你是一个战士，你不厌其烦地打败了我。
 				Default5: 天界柱被派去征服你的世界。
-				Default6: 我敬畏的只有一位神。幸运的是，它只会困扰火炬。
-				Default7: 不，没有“太阳领主”。
-				Default8: 你为什么要求我制作一些爱？
+				Default6: 不，没有“太阳领主”。
+				Default7: 你为什么要求我制作一些爱？
 				Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
 				Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
 				LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
 				Mechanic: "{0}做得很好，直到你过来救她。"
 				TorchMerchant: 你确定{0}不是...他？
+				NoTorchGod: 我敬畏的只有一位神。幸运的是，它只会被火把困扰。
+				TorchGod: 远离火把之神！他的力量是...不可熄灭。
+				TorchGodVeryClose: 假装我们在说话，直到火把离开。
 			}
 			Dreadnautilus: {
 				Default1: 我是恐惧鹦鹉螺。
@@ -809,6 +831,27 @@ Mods: {
 					'''
 				Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
 				RijamsMod: 我以前从未见过像{0}这样的物种。
+			}
+			TorchGod: {
+				Default1: 我是火把神。
+				Default2: 你最强大的敌人掉落了最好的战利品;在这里买！
+				Default3: 在各自的生物群系中放置正确的火炬将增加您的运气！不用感谢我！
+				Default4: 您是否担心在木屋中放置明火火炬？不要烦恼，木头不会着火！
+				Default5: 别担心，凡人，在当前生物群系中放置错误的火炬不会降低你的运气低于0！
+				Default6: 并非所有的火焰都会用水熄灭。有些火焰被诅咒永远燃烧。
+				Default7: 你知道如何停止下降和滚动，对吧？
+				Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
+				Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
+				Rare: 哈哈！火在向你射击！
+				HasFavor1: 我的青睐使你神奇地改变了你放置的火炬的类型。使用标准火炬让魔法发挥作用。
+				HasFavor2: 你试过我的挑战，玩得开心吗？我当然做到了！
+				NoFavor1: 你还没有向我证明自己。一旦你有，我会帮你一个忙。
+				NoFavor2: 向我证明，你是值得的，通过在我的小挑战中幸存下来。一个巨大的奖励正等着你。
+				Nurse: "火对你的致命组织非常具有破坏性。幸运的是，{0}在治疗烧伤方面经验丰富。"
+				MoonLord: "嗯。。月亮领主在我身边似乎非常谨慎。这是理所当然的。" //Auto translated: "Hmm.. the Moon Lord seems very cautious around me. Rightfully so."
+				TorchMerchant: "一个火焰的家伙。我非常喜欢{0}。"
+				NameIsRedigit: "我欠你的一切，{0}。你是真正的火炬神！"
+				Overhaul: 抛弃我之前说过的关于木材不会着火的话;今天火似乎饿得可怕...
 			}
 		}
 
@@ -1239,6 +1282,23 @@ Mods: {
 				DislikeNPC: "我不喜欢 {NPCName}."
 				HateNPC: "我讨厌 {NPCName}."
 			}
+			TorchGod: {
+				Content: 我感到很满足。
+				NoHome: 我想要一个家。
+				LoveSpace: 我爱这么多的空间。
+				FarFromHome: 我离家很远。
+				DislikeCrowded: 我不喜欢这么多人。
+				HateCrowded: 我讨厌这么多人。
+				LikeBiome: "我喜欢 {BiomeName}."
+				LoveBiome: "我爱 {BiomeName}."
+				DislikeBiome: "我不喜欢 {BiomeName}."
+				HateBiome: "我讨厌 {BiomeName}."
+				LikeNPC: "我喜欢 {NPCName}."
+				LikeNPC_Princess: "我喜欢 {NPCName}."
+				LoveNPC: "我爱 {NPCName}."
+				DislikeNPC: "我不喜欢 {NPCName}."
+				HateNPC: "我讨厌 {NPCName}."
+			}
 		}
 		Bestiary: {
 			Description: {
@@ -1261,12 +1321,13 @@ Mods: {
 				DukeFishron:这种水生猪龙突变生物决定成为你的室友。
 				Betsy: 这只恶龙决定成为你的室友。
 				LunaticCultist: 这位狂热的信徒决定成为你的室友。
-				MoonLord: 这个精灵神决定成为你的室友。
+				MoonLord: 这个恶魔神决定成为你的室友。
 				Dreadnautilus: 这个巨型变种带壳海螺决定成为你的室友。
 				Mothron: 这个巨大的昆虫决定成为你的室友。
 				Pumpking: 这个南瓜王决定成为你的室友。
 				IceQueen: 这个冰冷的怪物决定成为你的室友。
 				MartianSaucer: 这款先进的飞碟生物决定成为你的室友。
+				TorchGod: 这个看不见的神决定成为你的室友。
 			}
 			Happiness: {
 				// These are automatically translated from other localization. Leave as is.
@@ -1388,7 +1449,7 @@ Mods: {
 					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}"
 					Like: "{$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.SkeletronHead}, {$NPCName.TheDestroyer}, {$NPCName.Retinazer}, {$NPCName.Spazmatism}, {$NPCName.SkeletronPrime}, {$NPCName.Mechanic}"
 					Dislike: "{$NPCName.HallowBoss}, {$NPCName.Dryad}"
-					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+					Hate: "{$NPCName.TorchGod}"
 				}
 				Dreadnautilus: {
 					Love: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.BrainofCthulhu}"
@@ -1418,6 +1479,12 @@ Mods: {
 					Love: "{$NPCName.Cyborg}, {$NPCName.Steampunker}"
 					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.IceQueen}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Mechanic}, {$NPCName.GoblinTinkerer}"
 					Dislike: "{$NPCName.Wizard}, {$NPCName.TaxCollector}"
+					Hate: "{$Mods.BossesAsNPCs.Common.None}"
+				}
+				TorchGod: {
+					Love: "{$Mods.BossesAsNPCs.Common.Caverns}"
+					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.MoonLordHead}, {$NPCName.Golem}, {$NPCName.Pumpking}, {$NPCName.DD2Betsy}, {$NPCName.Guide}, {$NPCName.DD2Bartender}, {$NPCName.Clothier}, {$NPCName.Wizard}, {$NPCName.Steampunker}"
+					Dislike: "{$NPCName.BloodNautilus}, {$NPCName.IceQueen}, {$NPCName.Pirate}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 			}
@@ -1453,4 +1520,5 @@ TownNPCMood_Princess: {
 	LoveNPC_BossesAsNPCs/Pumpking: "我爱 {NPCName}."
 	LoveNPC_BossesAsNPCs/IceQueen: "我爱 {NPCName}."
 	LoveNPC_BossesAsNPCs/MartianSaucer: "我爱 {NPCName}."
+	LoveNPC_BossesAsNPCs/TorchGod: "我爱 {NPCName}."
 }

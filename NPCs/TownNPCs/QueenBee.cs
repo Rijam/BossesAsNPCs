@@ -16,6 +16,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	[AutoloadHead]
 	public class QueenBee : ModNPC
 	{
+		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
 		public override void SetStaticDefaults()
 		{
@@ -84,9 +85,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void OnKill()
+		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != NetmodeID.Server)
+			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Wing").Type, 1f);
@@ -161,144 +162,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
-			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
-
-			if (NPCHelper.StatusShop1())
-			{
-				shop.item[nextSlot].SetDefaults(ItemID.Abeemination);
-				shop.item[nextSlot].shopCustomPrice = 125000; //Made up value since it has no value
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeGun);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33); //Formula: (Sell value / drop chance)
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeKeeper);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeesKnees);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HiveWand);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeHat);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeShirt);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeePants);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.11);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HoneyComb);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.33);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Nectar);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.05); //Formula: (Sell value /drop chance)
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.HoneyedGoggles);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.05);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.Beenade);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(40 / 0.75);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeWax);
-				shop.item[nextSlot].shopCustomPrice = 20 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BottledHoney);
-				shop.item[nextSlot].shopCustomPrice = 8 * 5;
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.BeeMask);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
-				nextSlot++;
-				shop.item[nextSlot].SetDefaults(ItemID.QueenBeeTrophy);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
-				nextSlot++;
-
-				if (Main.expertMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.HiveBackpack);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-					nextSlot++;
-				}
-				if (Main.masterMode || ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode)
-				{
-					shop.item[nextSlot].SetDefaults(ItemID.QueenBeePetItem);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.25);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.QueenBeeMasterTrophy);
-					shop.item[nextSlot].shopCustomPrice = 10000 * 5;
-					nextSlot++;
-				}
-				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
-				{
-					if (NPC.savedWizard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.MusicBoxBoss5);
-						shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-						nextSlot++;
-						if (WorldGen.drunkWorldGen || Main.drunkWorld || NPCHelper.UnlockOWMusic()) //Main.TOWMusicUnlocked
-						{
-							shop.item[nextSlot].SetDefaults(ItemID.MusicBoxOWBoss1);
-							shop.item[nextSlot].shopCustomPrice = 20000 * 10;
-							nextSlot++;
-						}
-					}
-					shop.item[nextSlot].SetDefaults(ItemID.Hive);
-					shop.item[nextSlot].shopCustomPrice = 100;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.Stinger);
-					shop.item[nextSlot].shopCustomPrice = 40 * 5;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.Bezoar);
-					shop.item[nextSlot].shopCustomPrice = 20000 * 5;
-					nextSlot++;
-					if (Main.LocalPlayer.ZoneGraveyard)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.BeeHive);
-						shop.item[nextSlot].shopCustomPrice = 50 * 5;
-						nextSlot++;
-					}
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeBodypiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeLegpiece>());
-					shop.item[nextSlot].shopCustomPrice = 50000;
-					nextSlot++;
-					if (NPC.downedMechBossAny)
-					{
-						shop.item[nextSlot].SetDefaults(ItemID.BeeWings);
-						shop.item[nextSlot].shopCustomPrice = 80000 * 5;
-						nextSlot++;
-					}
-				}
-			}
-			if (NPCHelper.StatusShop2() && townNPCsCrossModSupport)
-			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosMutant, "Abeemination2", shop, ref nextSlot, 150000); //Match the Mutant's shop
-				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
-				{
-					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeQueenBee", shop, ref nextSlot, 10000);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "HardenedHoneycomb", shop, ref nextSlot);
-					NPCHelper.SafelySetCrossModItem(calamityMod, "TheBee", shop, ref nextSlot, 0.1f);
-				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
-				{
-					NPCHelper.SafelySetCrossModItem(fargosSouls, "TheSmallSting", shop, ref nextSlot, 0.1f);
-
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "QueenStinger", shop, ref nextSlot); //The Queen's Stinger
-					}
-				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
-				{
-					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BeeQueenMinionItem", shop, ref nextSlot, 0.44f); //Bee Queen's Crown
-				}
-			}
+			SetupShops.QueenBee(shop, ref nextSlot);
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)
