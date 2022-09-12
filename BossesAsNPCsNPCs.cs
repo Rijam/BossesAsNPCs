@@ -105,6 +105,14 @@ namespace BossesAsNPCs
                         NetMessage.SendData(MessageID.WorldData);
                     }
                 }
+                if (NPC.CountNPCS(NPCID.EaterofWorldsHead) <= 1)
+				{
+                    BossesAsNPCsWorld.downedEoW = true;
+                    if (Main.netMode == NetmodeID.Server)
+                    {
+                        NetMessage.SendData(MessageID.WorldData);
+                    }
+                }
                 if (NPC.downedBoss2 && !BossesAsNPCsWorld.downedEoW) //Guaranteed to work on the second kill
                 {
                     BossesAsNPCsWorld.downedEoW = true;

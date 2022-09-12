@@ -125,3 +125,11 @@
 	** Mode 2 will unload all NPCs and a new NPC will sell all of the on configs.
 	* Important: if you had cross mod support for this mod previously, you need to update your support.
 	* Added more Mod Calls.
+
+0.1.15 - Update 15 (September 12, 2022)
+	* Fixed some cases in All-in-One NPC mode 1 where you could access shops before you should've been able to.
+	* The Torch God will now say his dialog about cycling the shop if the player clicks the "No shop selected" button.
+	* Added Gamepad support for the Torch God's shop cycler.
+	* Added cross mod support for Orchid Mod, Polarities, and Clicker Class.
+	* Improved the code for the glow masks.
+	* Changed homepage to Wiki.gg

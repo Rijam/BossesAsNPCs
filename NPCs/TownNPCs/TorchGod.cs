@@ -11,6 +11,7 @@ using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Terraria.Audio;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
@@ -183,71 +184,43 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		//PostDraw taken from Torch Merchant by cace#7129
+		//random taken from Torch Merchant by cace#7129
 		//Sitting frame height is corrected here.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/TorchGod_Glow");
 		private readonly Asset<Texture2D> background = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/TorchGod_FlamesBackground");
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				screenOffset = Vector2.Zero;
-			}
+			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 100);
-			int spriteWidth = 48;
-			int spriteHeight = 56;
-			int x = NPC.frame.X;
-			int y = NPC.frame.Y;
+			Vector2 verticalOffset = new(0, 4);
 			for (int i = 0; i < 5; i++)
 			{
-				float random1 = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
-				float random2 = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
-				Vector2 posOffset;
-				if (NPC.frame.Y == 18 * spriteHeight) // Sitting, move up 4 pixels
+				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
+				float randomY = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
+
+				if (NPC.frame.Y == 18 * NPC.frame.Height) // Sitting, move up 4 pixels
 				{
-					posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 208f);
+					verticalOffset = new Vector2(0, 8);
 				}
-				else
-				{
-					posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 204f);
-				}
-				spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
+
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - verticalOffset + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			/*Main.NewText("ai[0] " + NPC.ai[0]);
-			Main.NewText("ai[1] " + NPC.ai[1]);
-			//Main.NewText("ai[2] " + NPC.ai[2]);
-			//Main.NewText("ai[3] " + NPC.ai[3]);
-			//Main.NewText("localAI[0] " + NPC.localAI[0]);
-			//Main.NewText("localAI[1] " + NPC.localAI[1]);
-			Main.NewText("localAI[2] " + NPC.localAI[2]);
-			Main.NewText("localAI[3] " + NPC.localAI[3]);*/
-
-			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				screenOffset = Vector2.Zero;
-			}
+			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
-			int spriteWidth = 48;
-			int spriteHeight = 56;
-			int x = NPC.frame.X;
-			int y = NPC.frame.Y;
-			Color newColor = new(255, 255, 255, 100);
+			Color color = new(255, 255, 255, 100);
 
-			if (NPC.frame.Y > 20 * spriteHeight) //Only draw while attacking
+			if (NPC.frame.Y > 20 * NPC.frame.Height) //Only draw while attacking
 			{
 				for (int i = 0; i < 5; i++)
 				{
-					float random1 = Utils.RandomInt(ref seed, -50, 50) * 0.15f;
-					float random2 = Utils.RandomInt(ref seed, -20, 20) * 0.15f;
+					float randomX = Utils.RandomInt(ref seed, -50, 50) * 0.15f;
+					float randomY = Utils.RandomInt(ref seed, -20, 20) * 0.15f;
 
-					Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 204f);
-					spriteBatch.Draw(background.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), newColor, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
+					spriteBatch.Draw(background.Value, NPC.Center - screenPos - new Vector2(0, 4) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 			return true;
@@ -375,8 +348,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (firstButton)
 			{
-				if (NPCHelper.StatusShopCycle() == 0 || NPCHelper.StatusShopCycle() == 51)
+				if (NPCHelper.StatusShopCycle() <= 0 || NPCHelper.StatusShopCycle() >= 51)
 				{
+					Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath(Name) + "Common");
 					shop = false;
 				}
 				else
@@ -389,13 +363,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				int mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
 				shop = false;
+				GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 				if (mode == 0)
 				{
-					if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
 						NPCHelper.DecrementShopCycleMode0();
 					}
-					else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
+					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
 						NPCHelper.SetShopCycle(0);
 						NPCHelper.IncrementShopCycleMode0();
@@ -407,11 +382,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				}
 				else if (mode == 1)
 				{
-					if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
 						NPCHelper.DecrementShopCycleMode1();
 					}
-					else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
+					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
 						NPCHelper.SetShopCycle(0);
 						NPCHelper.IncrementShopCycleMode1();
@@ -423,11 +398,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				}
 				else if (mode == 2)
 				{
-					if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
+					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
 						NPCHelper.DecrementShopCycleMode2();
 					}
-					else if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
+					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
 						NPCHelper.SetShopCycle(0);
 						NPCHelper.IncrementShopCycleMode2();

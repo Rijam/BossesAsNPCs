@@ -82,6 +82,14 @@ namespace BossesAsNPCs
 					return BossesAsNPCsWorld.downedDreadnautilus;
 				case "downedMothron":
 					return BossesAsNPCsWorld.downedMothron;
+				case "downedEoW":
+					return BossesAsNPCsWorld.downedEoW;
+				case "downedBoC":
+					return BossesAsNPCsWorld.downedBoC;
+				case "downedWoF":
+					return BossesAsNPCsWorld.downedWoF;
+				case "daytimeEoLDefeated":
+					return BossesAsNPCsWorld.daytimeEoLDefeated;
 				case "SellExpertMode":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode;
 				case "SellMasterMode":
@@ -150,19 +158,19 @@ namespace BossesAsNPCs
 					{
 						case "DefaultPrice":
 							CheckArgsLength(5, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString() });
-							// string npc, int item, bool condition
+							// string npc, int item, Func<bool> condition
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4]);
 						case "CustomPrice":
 							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
-							// string npc, int item, bool condition, int customPrice
+							// string npc, int item, Func<bool> condition, int customPrice
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (int)args[5]);
 						case "WithDiv":
 							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
-							// string npc, int item, bool condition, float priceDiv
+							// string npc, int item, Func<bool> condition, float priceDiv
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5]);
 						case "WithDivAndMulti":
 							CheckArgsLength(7, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString(), args[6].ToString() });
-							// string npc, int item, bool condition, float priceDiv, float priceMulti
+							// string npc, int item, Func<bool> condition, float priceDiv, float priceMulti
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5], (float)args[6]);
 						default:
 							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");

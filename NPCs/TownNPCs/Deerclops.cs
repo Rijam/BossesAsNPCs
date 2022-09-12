@@ -114,7 +114,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             return new DeerclopsProfile();
         }
 
-		//PostDraw taken from Torch Merchant by cace#7129
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Deerclops_Glow");
 		
@@ -125,28 +124,19 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				NPC.ai[2] = 0;
 			}
-			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				screenOffset = Vector2.Zero;
-			}
+
+			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
 			Color color = new(255, 255, 255, 0);
 
-			int spriteWidth = 42;
-			int spriteHeight = 56;
-			int x = NPC.frame.X;
-			int y = NPC.frame.Y;
-			if (NPC.frame.Y > 20 * spriteHeight) //Only draw while attacking
+			if (NPC.frame.Y > 20 * NPC.frame.Height) //Only draw while attacking
             {
 				float sinOffsetY = (float)Math.Sin((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f; //NPC.ai[2] will range from 11 to 34 when attacking. This will produce a sine wave with one period.
 				float sinOffsetX = (float)Math.Cos((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f;
 				for (int i = 0; i < 5; i++)
 				{
-					Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y + sinOffsetY - 204f);
-					Vector2 posOffset2 = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f - sinOffsetX - 191f, NPC.position.Y - Main.screenPosition.Y - sinOffsetY - 204f);
-					spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
-					spriteBatch.Draw(glowmask.Value, posOffset2 + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color * 0.1f, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
+					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4) - new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4) + new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 		}

@@ -297,7 +297,7 @@ Mods: {
 					  当打开时：将生成恐惧鹦鹉螺NPC。
 					  关闭时：恐惧鹦鹉螺NPC不会生成。
 					    关闭以阻止恐惧鹦鹉螺 NPC 生成。
-					默认值：关闭
+					默认值：开
 					'''
 				LabelSpawnMo: "[i:BossesAsNPCs/MoCostumeHeadpiece]   蛾怪可以生成"
 				TooltipSpawnMo:
@@ -306,7 +306,7 @@ Mods: {
 					  当打开时：将生成蛾怪NPC。
 					  关闭时：蛾怪NPC不会生成。
 					    关闭以阻止蛾怪 NPC 生成。
-					默认值：关闭
+					默认值：开
 					'''
 				LabelSpawnPk: "[i:BossesAsNPCs/PkCostumeHeadpiece]   南瓜王可以生成"
 				TooltipSpawnPk:

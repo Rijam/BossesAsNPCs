@@ -229,83 +229,89 @@ namespace BossesAsNPCs.NPCs
 		public static void IncrementShopCycleMode1()
 		{
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			bool KS = config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
 
-			int numOfShops = 50 - (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
+			// Bools true if the config is *off* and the boss has been defeated.
+			bool KS = !config.CanSpawnKingSlime && NPC.downedSlimeKing;
+			bool EoC = !config.CanSpawnEoC && NPC.downedBoss1;
+			bool EoW = !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
+			bool BoC = !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
+			bool QB = !config.CanSpawnQueenBee && NPC.downedQueenBee;
+			bool Sk = !config.CanSpawnSkeletron && NPC.downedBoss3;
+			bool Dc = !config.CanSpawnDeerclops && NPC.downedDeerclops;
+			bool WoF = !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
+			bool QS = !config.CanSpawnQueenSlime && NPC.downedQueenSlime;
+			bool De = !config.CanSpawnDestroyer && NPC.downedMechBoss1;
+			bool Tw = !config.CanSpawnTwins && NPC.downedMechBoss2;
+			bool SP = !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
+			bool Pl = !config.CanSpawnPlantera && NPC.downedPlantBoss;
+			bool Go = !config.CanSpawnGolem && NPC.downedGolemBoss;
+			bool EoL = !config.CanSpawnEoL && NPC.downedEmpressOfLight;
+			bool DF = !config.CanSpawnDukeFishron && NPC.downedFishron;
+			bool Be = !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
+			bool LC = !config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
+			bool ML = !config.CanSpawnMoonLord && NPC.downedMoonlord;
+			bool Dn = !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
+			bool Mo = !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
+			bool Pk = !config.CanSpawnPumpking && NPC.downedHalloweenKing;
+			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
+			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
+
+			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
 				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
 				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
 
-			shopCycler++;
-			if (KS && shopCycler == 1) // If enabled, go to the next shop.
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler++;
+			}
+				
+			if (!KS && shopCycler == 1) // If the bool is false (not a valid shop), go to the next shop.
 				shopCycler += 2;
-			if (EoC && shopCycler == 3)
+			if (!EoC && shopCycler == 3)
 				shopCycler += 2;
-			if (EoW && shopCycler == 5)
+			if (!EoW && shopCycler == 5)
 				shopCycler += 2;
-			if (BoC && shopCycler == 7)
+			if (!BoC && shopCycler == 7)
 				shopCycler += 2;
-			if (QB && shopCycler == 9)
+			if (!QB && shopCycler == 9)
 				shopCycler += 2;
-			if (Sk && shopCycler == 11)
+			if (!Sk && shopCycler == 11)
 				shopCycler += 2;
-			if (Dc && shopCycler == 13)
+			if (!Dc && shopCycler == 13)
 				shopCycler += 2;
-			if (WoF && shopCycler == 15)
+			if (!WoF && shopCycler == 15)
 				shopCycler += 2;
-			if (QS && shopCycler == 17)
+			if (!QS && shopCycler == 17)
 				shopCycler += 2;
-			if (De && shopCycler == 19)
+			if (!De && shopCycler == 19)
 				shopCycler += 2;
-			if (Tw && shopCycler == 21)
+			if (!Tw && shopCycler == 21)
 				shopCycler += 4;
-			if (SP && shopCycler == 25)
+			if (!SP && shopCycler == 25)
 				shopCycler += 2;
-			if (Pl && shopCycler == 27)
+			if (!Pl && shopCycler == 27)
 				shopCycler += 2;
-			if (Go && shopCycler == 29)
+			if (!Go && shopCycler == 29)
 				shopCycler += 2;
-			if (EoL && shopCycler == 31)
+			if (!EoL && shopCycler == 31)
 				shopCycler += 2;
-			if (DF && shopCycler == 33)
+			if (!DF && shopCycler == 33)
 				shopCycler += 2;
-			if (Be && shopCycler == 35)
+			if (!Be && shopCycler == 35)
 				shopCycler += 2;
-			if (LC && shopCycler == 37)
+			if (!LC && shopCycler == 37)
 				shopCycler += 2;
-			if (ML && shopCycler == 39)
+			if (!ML && shopCycler == 39)
 				shopCycler += 2;
-			if (Dn && shopCycler == 41)
+			if (!Dn && shopCycler == 41)
 				shopCycler += 2;
-			if (Mo && shopCycler == 43)
+			if (!Mo && shopCycler == 43)
 				shopCycler += 2;
-			if (Pk && shopCycler == 45)
+			if (!Pk && shopCycler == 45)
 				shopCycler += 2;
-			if (IQ && shopCycler == 47)
+			if (!IQ && shopCycler == 47)
 				shopCycler += 2;
-			if (MS && shopCycler == 49)
+			if (!MS && shopCycler == 49)
 				shopCycler += 2;
 
 			if (shopCycler > 50)
@@ -324,89 +330,97 @@ namespace BossesAsNPCs.NPCs
 		public static void DecrementShopCycleMode1()
 		{
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			bool KS = config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
 
-			int numOfShops = 50 - (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
+			// Bools true if the config is *off* and the boss has been defeated.
+			bool KS = !config.CanSpawnKingSlime && NPC.downedSlimeKing;
+			bool EoC = !config.CanSpawnEoC && NPC.downedBoss1;
+			bool EoW = !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
+			bool BoC = !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
+			bool QB = !config.CanSpawnQueenBee && NPC.downedQueenBee;
+			bool Sk = !config.CanSpawnSkeletron && NPC.downedBoss3;
+			bool Dc = !config.CanSpawnDeerclops && NPC.downedDeerclops;
+			bool WoF = !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
+			bool QS = !config.CanSpawnQueenSlime && NPC.downedQueenSlime;
+			bool De = !config.CanSpawnDestroyer && NPC.downedMechBoss1;
+			bool Tw = !config.CanSpawnTwins && NPC.downedMechBoss2;
+			bool SP = !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
+			bool Pl = !config.CanSpawnPlantera && NPC.downedPlantBoss;
+			bool Go = !config.CanSpawnGolem && NPC.downedGolemBoss;
+			bool EoL = !config.CanSpawnEoL && NPC.downedEmpressOfLight;
+			bool DF = !config.CanSpawnDukeFishron && NPC.downedFishron;
+			bool Be = !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
+			bool LC = !config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
+			bool ML = !config.CanSpawnMoonLord && NPC.downedMoonlord;
+			bool Dn = !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
+			bool Mo = !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
+			bool Pk = !config.CanSpawnPumpking && NPC.downedHalloweenKing;
+			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
+			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
+
+			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
 				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
 				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
 
-			shopCycler -= 2;
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler -= 2;
+			}
 
-			if (MS && shopCycler == 49) // If enabled, go to the next shop.
+			if (!MS && shopCycler == 49) // If the bool is false (not a valid shop), go to the next shop.
 				shopCycler -= 2;
-			if (IQ && shopCycler == 47)
+			if (!IQ && shopCycler == 47)
 				shopCycler -= 2;
-			if (Pk && shopCycler == 45)
+			if (!Pk && shopCycler == 45)
 				shopCycler -= 2;
-			if (Mo && shopCycler == 43)
+			if (!Mo && shopCycler == 43)
 				shopCycler -= 2;
-			if (Dn && shopCycler == 41)
+			if (!Dn && shopCycler == 41)
 				shopCycler -= 2;
-			if (ML && shopCycler == 39)
+			if (!ML && shopCycler == 39)
 				shopCycler -= 2;
-			if (LC && shopCycler == 37)
+			if (!LC && shopCycler == 37)
 				shopCycler -= 2;
-			if (Be && shopCycler == 35)
+			if (!Be && shopCycler == 35)
 				shopCycler -= 2;
-			if (DF && shopCycler == 33)
+			if (!DF && shopCycler == 33)
 				shopCycler -= 2;
-			if (EoL && shopCycler == 31)
+			if (!EoL && shopCycler == 31)
 				shopCycler -= 2;
-			if (Go && shopCycler == 29)
+			if (!Go && shopCycler == 29)
 				shopCycler -= 2;
-			if (Pl && shopCycler == 27)
+			if (!Pl && shopCycler == 27)
 				shopCycler -= 2;
-			if (SP && shopCycler == 25)
+			if (!SP && shopCycler == 25)
 				shopCycler -= 2;
-			if (Tw && shopCycler == 23)
+			if (!Tw && shopCycler == 23)
 				shopCycler -= 2;
-			if (Tw && shopCycler == 21)
+			if (!Tw && shopCycler == 21)
 				shopCycler -= 2;
-			if (De && shopCycler == 19)
+			if (!De && shopCycler == 19)
 				shopCycler -= 2;
-			if (QS && shopCycler == 17)
+			if (!QS && shopCycler == 17)
 				shopCycler -= 2;
-			if (WoF && shopCycler == 15)
+			if (!WoF && shopCycler == 15)
 				shopCycler -= 2;
-			if (Dc && shopCycler == 13)
+			if (!Dc && shopCycler == 13)
 				shopCycler -= 2;
-			if (Sk && shopCycler == 11)
+			if (!Sk && shopCycler == 11)
 				shopCycler -= 2;
-			if (QB && shopCycler == 9)
+			if (!QB && shopCycler == 9)
 				shopCycler -= 2;
-			if (BoC && shopCycler == 7)
+			if (!BoC && shopCycler == 7)
 				shopCycler -= 2;
-			if (EoW && shopCycler == 5)
+			if (!EoW && shopCycler == 5)
 				shopCycler -= 2;
-			if (EoC && shopCycler == 3)
+			if (!EoC && shopCycler == 3)
 				shopCycler -= 2;
-			if (KS && shopCycler == 1)
+			if (!KS && shopCycler == 1)
 				shopCycler -= 2;
 
-			shopCycler++;
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler++;
+			}
 
 			if (shopCycler <= 0)
 			{
@@ -458,7 +472,11 @@ namespace BossesAsNPCs.NPCs
 				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
 				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
 
-			shopCycler++;
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler++;
+			}
+
 			if (!KS && shopCycler == 1) // If disabled, go to the next shop.
 				shopCycler += 2;
 			if (!EoC && shopCycler == 3)
@@ -553,7 +571,10 @@ namespace BossesAsNPCs.NPCs
 				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
 				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
 
-			shopCycler -= 2;
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler -= 2;
+			}
 
 			if (!MS && shopCycler == 49) // If disabled, go to the next shop.
 				shopCycler -= 2;
@@ -606,7 +627,10 @@ namespace BossesAsNPCs.NPCs
 			if (!KS && shopCycler == 1)
 				shopCycler -= 2;
 
-			shopCycler++;
+			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
+			{
+				shopCycler++;
+			}
 
 			if (shopCycler <= 0)
 			{

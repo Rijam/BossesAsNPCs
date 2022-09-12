@@ -398,6 +398,15 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "SlimyShield", shop, ref nextSlot);
 					}
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeFlask", shop, ref nextSlot, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeCard", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "Gelthrower", shop, ref nextSlot, 1f, 5f);
+				}
 				if (customShops.ContainsKey(NPCString.KingSlime))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.KingSlime])
@@ -555,6 +564,14 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeMinion", shop, ref nextSlot, 0.25f); //Eyeball Staff
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeHook", shop, ref nextSlot, 0.25f); //Eyeball Hook
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "EyeCard", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "Eyeruption", shop, ref nextSlot, 1f, 5f);
+				}
 				if (customShops.ContainsKey(NPCString.EyeOfCthulhu))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.EyeOfCthulhu])
@@ -676,6 +693,15 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "DarkenedHeart", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "EaterCard", shop, ref nextSlot, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCorruption", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "ConsumptionCannon", shop, ref nextSlot, 1f, 5f);
 				}
 				if (customShops.ContainsKey(NPCString.EaterOfWorlds))
 				{
@@ -801,6 +827,15 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "GuttedHeart", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BrainCard", shop, ref nextSlot, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCrimson", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "NeuralBasher", shop, ref nextSlot, 1f, 5f);
 				}
 				if (customShops.ContainsKey(NPCString.BrainOfCthulhu))
 				{
@@ -961,6 +996,18 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BeeQueenMinionItem", shop, ref nextSlot, 0.44f); //Bee Queen's Crown
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeCard", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "HoneyDie", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BeeSeeker", shop, ref nextSlot, 0.17f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "WaxyVial", shop, ref nextSlot, 0.17f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeFlask", shop, ref nextSlot, 0.17f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "RoyalOrb", shop, ref nextSlot, 1f, 5f);
+				}
 				if (customShops.ContainsKey(NPCString.QueenBee))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.QueenBee])
@@ -1093,6 +1140,14 @@ namespace BossesAsNPCs.NPCs
 					//Skeletal Rod of Minion Guidance
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BoneWaypointRod", shop, ref nextSlot, 100); //Normally no value
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "SquireSkullAccessory", shop, ref nextSlot, 0.65f);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "SkeletronCard", shop, ref nextSlot);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "BonyBackhand", shop, ref nextSlot, 1f, 5f);
 				}
 				if (customShops.ContainsKey(NPCString.Skeletron))
 				{
@@ -1247,6 +1302,10 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "DeerSinew", shop, ref nextSlot);
 					}
 				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "CyclopsClicker", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.Deerclops))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Deerclops])
@@ -1396,6 +1455,20 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BoneSerpentMinionItem", shop, ref nextSlot, 0.35f);
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ShamanEmblem", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "OrchidEmblem", shop, ref nextSlot);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "MawOfFlesh", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "BurningSuperDeathClicker", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(clickerClass, "ClickerEmblem", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.WallOfFlesh))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.WallOfFlesh])
@@ -1509,6 +1582,10 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "GelicWings", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "ClearKeychain", shop, ref nextSlot, 0.25f);
 				}
 				if (customShops.ContainsKey(NPCString.QueenSlime))
 				{
@@ -1625,6 +1702,14 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechTail", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, ref nextSlot, 0.25f);
 				}
 				if (customShops.ContainsKey(NPCString.TheDestroyer))
 				{
@@ -1746,6 +1831,14 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot); //Mechanical Spikes
 					}
 				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechMask", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.Retinazer))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Retinazer])
@@ -1866,6 +1959,14 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot); //Mechanical Spikes
 					}
 				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechMask", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.Spazmatism))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Spazmatism])
@@ -1982,6 +2083,14 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechChestplate", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, ref nextSlot, 0.25f);
 				}
 				if (customShops.ContainsKey(NPCString.SkeletronPrime))
 				{
@@ -2131,6 +2240,16 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "VitallumCoreUncharged", shop, ref nextSlot); //Vitallum Core
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BulbScepter", shop, ref nextSlot, 0.66f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "FloralStinger", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "JunglesRage", shop, ref nextSlot, 0.25f);
+					NPCHelper.SafelySetCrossModItem(polarities, "UnfoldingBlossom", shop, ref nextSlot, 1f, 5f);
+				}
 				if (customShops.ContainsKey(NPCString.Plantera))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Plantera])
@@ -2262,6 +2381,10 @@ namespace BossesAsNPCs.NPCs
 					{
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "LihzahrdTreasureBox", shop, ref nextSlot);
 					}
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "SunRay", shop, ref nextSlot, 0.14f);
 				}
 				if (customShops.ContainsKey(NPCString.Golem))
 				{
@@ -2399,6 +2522,10 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "EmpressSquireMinionItem", shop, ref nextSlot, 0.34f); //Chalice of the Empress
 				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "RainbowClicker", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.EmpressOfLight))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.EmpressOfLight])
@@ -2520,6 +2647,10 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "BubbleBrewerBaton", shop, ref nextSlot, 0.33f);
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "Cyclone", shop, ref nextSlot, 0.33f);
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "Whirlpool", shop, ref nextSlot, 0.33f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "SeafoamClicker", shop, ref nextSlot, 0.25f);
 				}
 				if (customShops.ContainsKey(NPCString.DukeFishron))
 				{
@@ -2722,6 +2853,18 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(pbonesUtilities, "DefendersCrystal", shop, ref nextSlot);
 				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					NPCHelper.SafelySetCrossModItem(polarities, "WyvernsNest", shop, ref nextSlot, 1f, 5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					if (BossesAsNPCsWorld.downedDarkMage)
+						NPCHelper.SafelySetCrossModItem(clickerClass, "ArcaneClicker", shop, ref nextSlot, 0.20f);
+					if (BossesAsNPCsWorld.downedOgre)
+						NPCHelper.SafelySetCrossModItem(clickerClass, "SnottyClicker", shop, ref nextSlot, 0.20f);
+					NPCHelper.SafelySetCrossModItem(clickerClass, "DraconicClicker", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.Betsy))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Betsy])
@@ -2851,6 +2994,17 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "LunarSilk", shop, ref nextSlot);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "AbyssFragment", shop, ref nextSlot, 1f, 2f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					if (NPC.downedTowerSolar || NPC.downedTowerVortex || NPC.downedTowerNebula || NPC.downedTowerStardust)
+					{
+						NPCHelper.SafelySetCrossModItem(clickerClass, "MiceFragment", shop, ref nextSlot, 1f, 2f);
+					}
 				}
 				if (customShops.ContainsKey(NPCString.LunaticCultist))
 				{
@@ -3010,6 +3164,20 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("MagicStorage", out Mod magicStorage))
 				{
 					NPCHelper.SafelySetCrossModItem(magicStorage, "RadiantJewel", shop, ref nextSlot, 0.05f);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "Nirvana", shop, ref nextSlot, 0.5f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "TheCore", shop, ref nextSlot, 0.5f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "LordsClicker", shop, ref nextSlot);
+					NPCHelper.SafelySetCrossModItem(clickerClass, "TheClicker", shop, ref nextSlot, 0.20f);
+					if (Main.LocalPlayer.unlockedBiomeTorches)
+					{
+						NPCHelper.SafelySetCrossModItem(clickerClass, "TorchClicker", shop, ref nextSlot);
+					}
 				}
 				if (customShops.ContainsKey(NPCString.MoonLord))
 				{
@@ -3181,6 +3349,15 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadnautilusRelic", shop, ref nextSlot, 0.1f);
 					}
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BloodMoonFlask", shop, ref nextSlot, (0.025f * 2));
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "HemoClicker", shop, ref nextSlot, 0.04f * 2f);
+					NPCHelper.SafelySetCrossModItem(clickerClass, "SpiralClicker", shop, ref nextSlot, 0.50f);
+				}
 				if (customShops.ContainsKey(NPCString.Dreadnautilus))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Dreadnautilus])
@@ -3313,6 +3490,14 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "Broken_Hero_GunParts", shop, ref nextSlot, 0.25f);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BrokenHeroScepter", shop, ref nextSlot, 0.25f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "EclipticClicker", shop, ref nextSlot, 0.04f * 2f);
 				}
 				if (customShops.ContainsKey(NPCString.Mothron))
 				{
@@ -3495,6 +3680,21 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SpookyCore", shop, ref nextSlot, 0.07f); //Spooky Emblem
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					if (NPC.downedHalloweenTree)
+					{
+						NPCHelper.SafelySetCrossModItem(orchidMod, "MourningTorch", shop, ref nextSlot, 0.1f);
+					}
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					if (NPC.downedHalloweenTree)
+					{
+						NPCHelper.SafelySetCrossModItem(clickerClass, "WitchClicker", shop, ref nextSlot, 0.1f);
+					}
+					NPCHelper.SafelySetCrossModItem(clickerClass, "LanternClicker", shop, ref nextSlot, 0.1f);
+				}
 				if (customShops.ContainsKey(NPCString.Pumpking))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.Pumpking])
@@ -3668,6 +3868,30 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "IceSentry", shop, ref nextSlot, 0.1f); //Frozen Queen's Staff
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FrostCube", shop, ref nextSlot, 0.07f); //Frozen Queen's Core
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "RCRemote", shop, ref nextSlot, 0.02f);
+					if (NPC.downedChristmasSantank)
+					{
+						NPCHelper.SafelySetCrossModItem(orchidMod, "FragilePresent", shop, ref nextSlot, 0.1f);
+					}
+					NPCHelper.SafelySetCrossModItem(orchidMod, "IceFlakeCone", shop, ref nextSlot, 0.1f);
+				}
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				{
+					if (NPC.downedChristmasTree)
+					{
+						NPCHelper.SafelySetCrossModItem(polarities, "CandyCaneAtlatl", shop, ref nextSlot, 0.23f);
+					}
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					if (NPC.downedChristmasSantank)
+					{
+						NPCHelper.SafelySetCrossModItem(clickerClass, "NaughtyClicker", shop, ref nextSlot, 0.1f);
+					}
+					NPCHelper.SafelySetCrossModItem(clickerClass, "FrozenClicker", shop, ref nextSlot, 0.1f);
+				}
 				if (customShops.ContainsKey(NPCString.IceQueen))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.IceQueen])
@@ -3808,6 +4032,14 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SuperDartLauncher", shop, ref nextSlot, 0.01f * 6);
 				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "MartianBeamer", shop, ref nextSlot, 0.25f);
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "HighTechClicker", shop, ref nextSlot, 0.25f);
+				}
 				if (customShops.ContainsKey(NPCString.MartianSaucer))
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.MartianSaucer])
@@ -3842,6 +4074,19 @@ namespace BossesAsNPCs.NPCs
 			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
 				NPCHelper.SafelySetCrossModItem(calamityMod, "PlasmaRod", shop, ref nextSlot, (0.07f * 5), shopMulti);
+			}
+			if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+			{
+				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyFlask", shop, ref nextSlot, (0.02f * 5), shopMulti);
+				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyCard", shop, ref nextSlot, (0.02f * 5), shopMulti);
+				if (BossesAsNPCsWorld.downedGoblinSummoner)
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinStick", shop, ref nextSlot, 0.33f, shopMulti);
+				}
+			}
+			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+			{
+				NPCHelper.SafelySetCrossModItem(clickerClass, "ShadowyClicker", shop, ref nextSlot, (0.05f * 5), shopMulti);
 			}
 			if (BossesAsNPCsWorld.downedGoblinSummoner)
 			{
@@ -3954,6 +4199,10 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+				{
+					NPCHelper.SafelySetCrossModItem(calamity, "MidasPrime", shop, ref nextSlot, (0.04f * 5), shopMulti);
+				}
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
 				{
 					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
@@ -3962,6 +4211,11 @@ namespace BossesAsNPCs.NPCs
 						NPCHelper.SafelySetCrossModItem(fargosMutant2, "GoldenDippingVat", shop, ref nextSlot, (0.07f * 5), shopMulti);
 						NPCHelper.SafelySetCrossModItem(fargosSouls, "SecurityWallet", shop, ref nextSlot, (0.1f * 5), shopMulti);
 					}
+				}
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				{
+					NPCHelper.SafelySetCrossModItem(clickerClass, "CaptainsClicker", shop, ref nextSlot, (0.125f * 5), shopMulti);
+					NPCHelper.SafelySetCrossModItem(clickerClass, "GoldenTicket", shop, ref nextSlot, (0.25f * 5), shopMulti);
 				}
 				if (customShops.ContainsKey(NPCString.Pirate))
 				{

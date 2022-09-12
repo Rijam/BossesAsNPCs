@@ -51,6 +51,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<QueenSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.SantaClaus, AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Dislike)
+				.SetNPCAffection(ModContent.NPCType<TorchGod>(), AffectionLevel.Dislike)
 				.SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!

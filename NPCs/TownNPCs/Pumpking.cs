@@ -50,6 +50,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<KingSlime>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<DukeFishron>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Mothron>(), AffectionLevel.Like)
+				.SetNPCAffection(ModContent.NPCType<TorchGod>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.PartyGirl, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
@@ -113,28 +114,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             return new PumpkingProfile();
         }
 
-		//PostDraw taken from Torch Merchant by cace#7129
+		//random taken from Torch Merchant by cace#7129
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Pumpking_Glow");
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-			Vector2 screenOffset = new(Main.offScreenRange, Main.offScreenRange);
-			if (Main.drawToScreen)
-			{
-				screenOffset = Vector2.Zero;
-			}
+			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 0);
-			int spriteWidth = 56;
-			int spriteHeight = 56;
-			int x = NPC.frame.X;
-			int y = NPC.frame.Y;
 			for (int i = 0; i < 5; i++)
 			{
-				float random1 = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
-				float random2 = Utils.RandomInt(ref seed, -5, 1) * 0.15f;
-				Vector2 posOffset = new(NPC.position.X - Main.screenPosition.X - (spriteWidth - 16f) / 2f + random1 - 191f, NPC.position.Y - Main.screenPosition.Y + random2 - 204f);
-				spriteBatch.Draw(glowmask.Value, posOffset + screenOffset, (Rectangle?)new Rectangle(x, y, spriteWidth, spriteHeight), color, 0f, default, 1f, NPC.direction == 1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 1f);
+				float randomX = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
+				float randomY = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
+
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 

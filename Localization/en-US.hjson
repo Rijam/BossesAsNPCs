@@ -298,7 +298,7 @@ Mods: {
 					  When On: The Dreadnautilus NPC WILL spawn.
 					  When Off: The Dreadnautilus NPC WILL NOT spawn.
 					    Turn Off to stop the Dreadnautilus NPC from spawning.
-					Default value: Off
+					Default value: On
 					'''
 				LabelSpawnMo: "[i:BossesAsNPCs/MoCostumeHeadpiece]   Mothron Can Spawn"
 				TooltipSpawnMo:
@@ -307,7 +307,7 @@ Mods: {
 					  When On: The Mothron NPC WILL spawn.
 					  When Off: The Mothron NPC WILL NOT spawn.
 					    Turn Off to stop the Mothron NPC from spawning.
-					Default value: Off
+					Default value: On
 					'''
 				LabelSpawnPk: "[i:BossesAsNPCs/PkCostumeHeadpiece]   Pumpking Can Spawn"
 				TooltipSpawnPk:

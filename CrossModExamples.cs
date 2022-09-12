@@ -78,7 +78,6 @@ namespace MyMod
 				// This last example wants to add an item that is 20 times more expensive than its value if Moon Lord has been defeated.
 				bossesAsNPCs.Call("AddToShop", "WithDivAndMulti", "Golem", ModContent.ItemType<MyExpensiveItem>(), () => NPC.downedMoonlord, 1f, 20f);
 
-
 				// For all of the Turbo Nerds out there who want to see how this is implemented in the mod, look at NPCs/SetupShops.cs (or BossesAsNPCs.cs for the Mod Calls)
 			}
 		}
@@ -149,6 +148,7 @@ namespace MyMod
  * Pumpking          =    Pumpking
  * Ice Queen         =    IceQueen
  * Martian Saucer    =    MartianSaucer
+ * The Torch God     =    TorchGod
  */
 
 /* Mod Calls
