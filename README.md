@@ -18,7 +18,7 @@ Exceptions are made for boss summon items and a few other items like the Terrapr
 Contains a config file to disable certain Town NPCs from spawning and other options.
 
 See a complete shop list and other information on this mod's wiki page!
-https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
+https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
 Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=2689434541
 

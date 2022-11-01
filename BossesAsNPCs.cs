@@ -49,6 +49,14 @@ namespace BossesAsNPCs
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.MartianSaucer"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<TorchGod>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TorchGod"));
 			}
+			if (ModLoader.TryGetMod("DialogueTweak", out Mod dialogueTweak))
+			{
+				dialogueTweak.Call("ReplacePortrait",
+					ModContent.NPCType<TorchGod>(),
+					"BossesAsNPCs/NPCs/TownNPCs/TorchGod_Bestiary",
+					() => true,
+					() => Main.npc[NPC.FindFirstNPC(ModContent.NPCType<TorchGod>())].frame);
+			}
 		}
 
 		//Adapted from absoluteAquarian's GraphicsLib
@@ -105,7 +113,7 @@ namespace BossesAsNPCs
 				case "AllInOneNPCMode":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
 				case "GoblinSellInvasionItems":
-                    return ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
+					return ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
 				case "PirateSellInvasionItems":
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
 				case "GetStatusShop1":

@@ -28,8 +28,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 2;
 			NPCID.Sets.AttackTime[Type] = 30;
-			NPCID.Sets.AttackAverageChance[Type] = 70;
+			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 1;
+
+			NPCID.Sets.MagicAuraColor[Type] = Color.Aquamarine;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new(0)
@@ -230,7 +232,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
 		{
-			projType = ProjectileID.MoonlordArrowTrail;
+			projType = ProjectileID.LunarFlare;
 			attackDelay = 1;
 		}
 		

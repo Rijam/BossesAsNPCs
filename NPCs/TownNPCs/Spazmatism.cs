@@ -31,6 +31,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
 
+			NPCID.Sets.MagicAuraColor[Type] = Color.Lime;
+
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
 			{

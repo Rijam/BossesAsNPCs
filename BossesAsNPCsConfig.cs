@@ -14,8 +14,8 @@ namespace BossesAsNPCs
 	/// </summary>
 	[Label("$Mods.BossesAsNPCs.Config.Server.LabelBig")]
 	public class BossesAsNPCsConfigServer : ModConfig
-    {
-        public override ConfigScope Mode => ConfigScope.ServerSide;
+	{
+		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 		//General Options
 		[Header("$Mods.BossesAsNPCs.Config.Server.HeaderGeneral")]

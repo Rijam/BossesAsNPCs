@@ -133,3 +133,7 @@
 	* Added cross mod support for Orchid Mod, Polarities, and Clicker Class.
 	* Improved the code for the glow masks.
 	* Changed homepage to Wiki.gg
+
+0.1.16 - Update 16 (? ?, 2022)
+	* Town NPCs with a magic attack now have the magic aura colored.
+	* Caught Town NPCs can now be ground in a Meat Grinder.

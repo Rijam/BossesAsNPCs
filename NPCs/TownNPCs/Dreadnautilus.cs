@@ -28,7 +28,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 0;
 			NPCID.Sets.AttackTime[Type] = 30;
-			NPCID.Sets.AttackAverageChance[Type] = 70;
+			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 0;
 
 			// Influences how the NPC looks in the Bestiary

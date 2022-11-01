@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.GameContent;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -29,6 +30,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+
+			NPCID.Sets.MagicAuraColor[Type] = Color.White;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
