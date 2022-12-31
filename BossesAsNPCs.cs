@@ -12,6 +12,15 @@ namespace BossesAsNPCs
 	{
 		internal static BossesAsNPCsConfigServer ConfigServer;
 		internal static BossesAsNPCs Instance;
+
+		public override void Load()
+		{
+			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
+			{
+				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs{}");
+			}
+		}
+
 		public override void Unload()
 		{
 			NPCs.SetupShops.ClearCustomShops();

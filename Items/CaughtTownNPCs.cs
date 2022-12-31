@@ -640,7 +640,7 @@ namespace BossesAsNPCs.Items
 	#region Dreadnautilus
 	public class CaughtDreadnautilus : CaughtKingSlime
 	{
-		readonly private static string name = Language.GetTextValue("NPCName.Bloodnautilus");
+		readonly private static string name = Language.GetTextValue("NPCName.BloodNautilus");
 		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
