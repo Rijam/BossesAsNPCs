@@ -12,7 +12,7 @@ namespace BossesAsNPCs.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Mothron Egg");
+			// DisplayName.SetDefault("Mothron Egg");
 		}
 
 		public override void SetDefaults()

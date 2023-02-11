@@ -92,7 +92,7 @@ namespace BossesAsNPCs
 					.AddIngredient(ModContent.ItemType<CaughtMoonLord>())
 					.AddTile(TileID.MeatGrinder)
 					.Register();
-				Recipe.Create(ItemID.FleshBlock, 25)
+				Recipe.Create(ItemID.ReefBlock, 25)
 					.AddIngredient(ModContent.ItemType<CaughtDreadnautilus>())
 					.AddTile(TileID.MeatGrinder)
 					.Register();
@@ -104,7 +104,7 @@ namespace BossesAsNPCs
 					.AddIngredient(ModContent.ItemType<CaughtPumpking>())
 					.AddTile(TileID.MeatGrinder)
 					.Register();
-				Recipe.Create(ItemID.FleshBlock, 25)
+				Recipe.Create(ItemID.IceBlock, 25)
 					.AddIngredient(ModContent.ItemType<CaughtIceQueen>())
 					.AddTile(TileID.MeatGrinder)
 					.Register();

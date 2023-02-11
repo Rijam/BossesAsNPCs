@@ -671,7 +671,7 @@ namespace BossesAsNPCs.NPCs
 			{
 				npc1Home = new Vector2(npc.Center.X / 16f, npc.Center.Y / 16f);
 			}
-			for (int i = 0; i < 200; i++)
+			for (int i = 0; i < Main.maxNPCs; i++)
 			{
 				if (i == npc.whoAmI)
 				{
@@ -719,7 +719,7 @@ namespace BossesAsNPCs.NPCs
 					{
 						return true;
 					}
-					return true;
+					return false;
 				case 2: // Town NPCs and Town Pets. Excludes Old Man, Traveling Merchant, and Skeleton Merchant.
 					if (npc2.type != NPCID.OldMan || npc2.type != NPCID.TravellingMerchant || npc2.type != NPCID.SkeletonMerchant || !NPCID.Sets.ActsLikeTownNPC[npc2.type])
 					{
@@ -736,6 +736,7 @@ namespace BossesAsNPCs.NPCs
 					return false;
 			}
 		}
+
 		/// <summary>
 		/// Searches the shop (or chest) to see if an item is in it. slotNumber is the slot the item is in.
 		/// See ItemOriginDesc.CheckIfInShop() for a player version.
@@ -744,7 +745,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool FindItemInShop(int[] shop, int item, out int? slotNumber)
 		{
 			slotNumber = null;
-			for (int i = 0; i < 40; i++)
+			for (int i = 0; i < Chest.maxItems; i++)
 			{
 				if (shop[i] == item)
 				{
@@ -762,7 +763,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool FindItemInShop(Chest shop, int item, out int? slotNumber)
 		{
 			slotNumber = null;
-			for (int i = 0; i < 40; i++)
+			for (int i = 0; i < Chest.maxItems; i++)
 			{
 				if (shop.item[i].type == item)
 				{

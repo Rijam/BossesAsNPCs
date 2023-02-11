@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Terraria.GameContent.ItemDropRules;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -20,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.Plantera"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.Plantera"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Guide];
 			NPCID.Sets.ExtraFramesCount[Type] = 10;
 			NPCID.Sets.AttackFrameCount[Type] = 5;
@@ -29,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -97,7 +99,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedPlantBoss && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnPlantera)
 			{
@@ -113,6 +115,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new PlanteraProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{
@@ -192,6 +196,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void SetupShop(Chest shop, ref int nextSlot)
 		{
 			SetupShops.Plantera(shop, ref nextSlot);
+		}
+
+		public override void ModifyNPCLoot(NPCLoot npcLoot)
+		{
+			npcLoot.Add(ItemDropRule.Common(ModContent.ItemType<Items.PlanterasAxe>(), 4));
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)

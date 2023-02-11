@@ -13,7 +13,7 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.TiedEighthNote;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Double Eighth Note");
+			// DisplayName.SetDefault("Double Eighth Note");
 		}
 
 		public override void SetDefaults()
@@ -69,7 +69,7 @@ namespace BossesAsNPCs.Projectiles
 			}
 			if (Projectile.ai[0] == 7) //Update every 2 ticks
 			{
-				int newTarget = FindTargetWithLineOfSight();
+				int newTarget = Projectile.FindTargetWithLineOfSight();
 				if (newTarget != -1) //fly to the target
 				{
 					NPC nPC2 = Main.npc[newTarget];
@@ -85,31 +85,7 @@ namespace BossesAsNPCs.Projectiles
 			}
 			Projectile.rotation = Projectile.velocity.ToRotation() * 0.1f;
 		}
-		//Copied from vanilla (1.4) Projectiles.cs
-		public int FindTargetWithLineOfSight(float maxRange = 800f)
-		{
-			float newMaxRange = maxRange;
-			int result = -1;
-			for (int i = 0; i < 200; i++)
-			{
-				NPC nPC = Main.npc[i];
-				bool nPCCanBeChased = nPC.CanBeChasedBy(this);
-				if (Projectile.localNPCImmunity[i] != 0)
-				{
-					nPCCanBeChased = false;
-				}
-				if (nPCCanBeChased)
-				{
-					float projDist = Projectile.Distance(Main.npc[i].Center);
-					if (projDist < newMaxRange && Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, nPC.position, nPC.width, nPC.height))
-					{
-						newMaxRange = projDist;
-						result = i;
-					}
-				}
-			}
-			return result;
-		}
+
 		public static readonly SoundStyle Guitar2 = new("Terraria/Sounds/Item_47", 47, 1)
 		{
 			Volume = 0.5f,
@@ -133,7 +109,7 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.EighthNote;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Single Eighth Note");
+			// DisplayName.SetDefault("Single Eighth Note");
 		}
 
 		public override void SetDefaults()

@@ -17,7 +17,7 @@ namespace BossesAsNPCs.Projectiles
 		}
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Town NPC Killer");
+			// DisplayName.SetDefault("Town NPC Killer");
 		}
 		public override void SetDefaults()
 		{

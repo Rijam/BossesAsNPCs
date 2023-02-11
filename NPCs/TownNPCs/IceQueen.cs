@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.IceQueen"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.IceQueen"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.DyeTrader];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.White;
 
@@ -101,7 +102,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedChristmasIceQueen && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnIceQueen)
 			{
@@ -117,6 +118,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new IceQueenProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{

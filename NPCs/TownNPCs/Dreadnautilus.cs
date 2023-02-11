@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.BloodNautilus"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.BloodNautilus"));
 			Main.npcFrameCount[Type] = 25; //Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 0;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -99,7 +100,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (BossesAsNPCsWorld.downedDreadnautilus && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDreadnautilus)
 			{
@@ -121,6 +122,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			return new List<string>() { };
 		}*/
 
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+
 		public override string GetChat()
 		{
 			string path = NPCHelper.DialogPath(Name);
@@ -134,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
-			if (NPC.killCount[Item.NPCtoBanner(NPCID.Mothron)] > 0)
+			if (NPC.killCount[Item.NPCtoBanner(NPCID.BloodNautilus)] > 0)
 			{
 				chat.Add(Language.GetTextValue(path + "KillCount", NPC.killCount[Item.NPCtoBanner(NPCID.BloodNautilus)].ToString()), 0.5);
 			}

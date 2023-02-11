@@ -20,7 +20,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.QueenBee"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.QueenBee"));
 			Main.npcFrameCount[Type] = 25; // Main.npcFrameCount[NPCID.DyeTrader];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -29,6 +29,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -68,7 +69,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.defense = 15;
 			NPC.lifeMax = 340;
 			NPC.HitSound = SoundID.NPCHit1;
-			NPC.DeathSound = SoundID.NPCDeath1;
+			NPC.DeathSound = SoundID.NPCDeath66;
 			NPC.knockBackResist = 0.5f;
 			AnimationType = NPCID.Guide;
 			Main.npcCatchable[NPC.type] = ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs;
@@ -99,7 +100,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedQueenBee && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnQueenBee)
 			{
@@ -115,6 +116,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new QueenBeeProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{

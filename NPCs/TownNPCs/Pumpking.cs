@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.Pumpking"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.Pumpking"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Merchant];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -64,8 +65,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.height = 40;
 			NPC.aiStyle = 7;
 			NPC.damage = 10;
-			NPC.defense = 36;
-			NPC.lifeMax = 2200;
+			NPC.defense = 40;
+			NPC.lifeMax = 2600;
 			NPC.HitSound = SoundID.NPCHit1;
 			NPC.DeathSound = SoundID.NPCDeath1;
 			NPC.knockBackResist = 0.5f;
@@ -97,7 +98,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedHalloweenKing && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnPumpking)
 			{
@@ -113,6 +114,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new PumpkingProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		//random taken from Torch Merchant by cace#7129
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.

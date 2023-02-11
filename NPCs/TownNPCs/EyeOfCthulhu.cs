@@ -20,7 +20,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.EyeofCthulhu"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.EyeofCthulhu"));
 			Main.npcFrameCount[Type] = 25; // Main.npcFrameCount[NPCID.DyeTrader];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -29,6 +29,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -95,7 +96,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedBoss1 && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoC)
 			{
@@ -111,6 +112,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new EyeOfCthulhuProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{

@@ -240,29 +240,33 @@ namespace BossesAsNPCs.NPCs
 
 			if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC) && townNPCsCrossModSupport)
 			{
-				int fishermanType = fishermanNPC.Find<ModNPC>("Fisherman").Type;
-				var fishermanHappiness = NPCHappiness.Get(fishermanNPC.Find<ModNPC>("Fisherman").Type);
+				if (fishermanNPC.TryFind<ModNPC>("Fisherman", out ModNPC fishermanModNPC))
+				{
+					var fishermanHappiness = NPCHappiness.Get(fishermanModNPC.Type);
 
-				var dreadnautilusHappiness = NPCHappiness.Get(dreadnautilus);
+					var dreadnautilusHappiness = NPCHappiness.Get(dreadnautilus);
 
-				fishermanHappiness.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
-				dreadnautilusHappiness.SetNPCAffection(fishermanType, AffectionLevel.Love);
+					fishermanHappiness.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
+					dreadnautilusHappiness.SetNPCAffection(fishermanModNPC.Type, AffectionLevel.Love);
+				}
 			}
 
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
-				int torchManType = torchSeller.Find<ModNPC>("TorchSellerNPC").Type;
-				var torchManHappiness = NPCHappiness.Get(torchManType);
+				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchSellerModNPC))
+				{
+					var torchManHappiness = NPCHappiness.Get(torchSellerModNPC.Type);
 
-				var mothronHappiness = NPCHappiness.Get(mothron);
-				mothronHappiness.SetNPCAffection(torchManType, AffectionLevel.Love);
+					var mothronHappiness = NPCHappiness.Get(mothron);
+					mothronHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
 
-				var moonLordHappiness = NPCHappiness.Get(moonLord);
-				moonLordHappiness.SetNPCAffection(torchManType, AffectionLevel.Dislike);
+					var moonLordHappiness = NPCHappiness.Get(moonLord);
+					moonLordHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Dislike);
 
-				var torchGodHappiness = NPCHappiness.Get(torchGod);
-				torchGodHappiness.SetNPCAffection(torchManType, AffectionLevel.Love);
-				torchManHappiness.SetNPCAffection(torchGod, AffectionLevel.Love);
+					var torchGodHappiness = NPCHappiness.Get(torchGod);
+					torchGodHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
+					torchManHappiness.SetNPCAffection(torchGod, AffectionLevel.Love);
+				}
 			}
 		}
 	}

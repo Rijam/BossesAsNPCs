@@ -1,4 +1,5 @@
 using BossesAsNPCs.NPCs.TownNPCs;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.IO;
 using Terraria;
@@ -17,7 +18,10 @@ namespace BossesAsNPCs
 		{
 			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
 			{
-				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs{}");
+				// Special thanks to Wikithis for having an outdated mod calls description -_-
+				// Actual special thanks to Confection Rebaked for having the correct format.
+				wikithis.Call("AddModURL", this, "terrariamods.wiki.gg$Bosses_As_NPCs");
+				wikithis.Call("AddWikiTexture", this, ModContent.Request<Texture2D>("BossesAsNPCs/icon_small"));
 			}
 		}
 
@@ -27,6 +31,7 @@ namespace BossesAsNPCs
 			ConfigServer = null;
 			Instance = null;
 		}
+
 		public override void PostSetupContent()
 		{
 			if (ModLoader.TryGetMod("Census", out Mod censusMod))

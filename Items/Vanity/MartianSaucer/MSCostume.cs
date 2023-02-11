@@ -20,6 +20,14 @@ namespace BossesAsNPCs.Items.Vanity.MartianSaucer
 				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glowmask", "255", "255", "255", "none" });
 			}
 		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			if (!Main.dedServ)
+			{
+				Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			}
+		}
 	}
 	[AutoloadEquip(EquipType.Body)]
 	public class MSCostumeBodypiece : VanityBase
@@ -32,6 +40,14 @@ namespace BossesAsNPCs.Items.Vanity.MartianSaucer
 				ArmorGlowmaskBody.RegisterData(Item.bodySlot, Color.White);
 			}
 		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			if (!Main.dedServ)
+			{
+				Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			}
+		}
 	}
 	[AutoloadEquip(EquipType.Legs)]
 	public class MSCostumeLegpiece : VanityBase
@@ -42,6 +58,14 @@ namespace BossesAsNPCs.Items.Vanity.MartianSaucer
 			if (!Main.dedServ)
 			{
 				ArmorPlayerDrawLayerLegs.RegisterData(Item.legSlot, new string[] { Texture + "_Legs_Glowmask", "255", "255", "255", "none" });
+			}
+		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			if (!Main.dedServ)
+			{
+				Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
 			}
 		}
 	}

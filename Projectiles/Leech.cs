@@ -14,7 +14,7 @@ namespace BossesAsNPCs.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Leech");
+			// DisplayName.SetDefault("Leech");
 		}
 
 		public override void SetDefaults()
@@ -38,7 +38,7 @@ namespace BossesAsNPCs.Projectiles
 			}
 			if (Projectile.ai[0] == 7) //Update every 2 ticks
 			{
-				int newTarget = FindTargetWithLineOfSight();
+				int newTarget = Projectile.FindTargetWithLineOfSight();
 				if (newTarget != -1) //fly to the target
 				{
 					NPC nPC2 = Main.npc[newTarget];
@@ -54,31 +54,7 @@ namespace BossesAsNPCs.Projectiles
 			}
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
 		}
-		//Copied from vanilla (1.4) Projectiles.cs
-		public int FindTargetWithLineOfSight(float maxRange = 800f)
-		{
-			float newMaxRange = maxRange;
-			int result = -1;
-			for (int i = 0; i < 200; i++)
-			{
-				NPC nPC = Main.npc[i];
-				bool nPCCanBeChased = nPC.CanBeChasedBy(this);
-				if (Projectile.localNPCImmunity[i] != 0)
-				{
-					nPCCanBeChased = false;
-				}
-				if (nPCCanBeChased)
-				{
-					float projDist = Projectile.Distance(Main.npc[i].Center);
-					if (projDist < newMaxRange && Collision.CanHit(Projectile.position, Projectile.width, Projectile.height, nPC.position, nPC.width, nPC.height))
-					{
-						newMaxRange = projDist;
-						result = i;
-					}
-				}
-			}
-			return result;
-		}
+
 		public override void Kill(int timeLeft)
 		{
 			for (int i = 0; i < 20; i++)

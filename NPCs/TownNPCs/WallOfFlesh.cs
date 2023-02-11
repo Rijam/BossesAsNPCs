@@ -20,7 +20,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.WallofFlesh"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.WallofFlesh"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Guide];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 5;
@@ -29,6 +29,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 0;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -97,7 +98,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if ((Main.hardMode || BossesAsNPCsWorld.downedWoF) && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnWoF)
 			{
@@ -113,6 +114,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new WallOfFleshProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{

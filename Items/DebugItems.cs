@@ -17,8 +17,8 @@ namespace BossesAsNPCs.Items
 		public override string Texture => "Terraria/Images/Item_" + ItemID.BlueSolution;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("[c/ff0000:Debug] - Method Tester");
-			Tooltip.SetDefault("Displays the custom downed bools\nLeft click to display them in chat");
+			// DisplayName.SetDefault("[c/ff0000:Debug] - Method Tester");
+			// Tooltip.SetDefault("Displays the custom downed bools\nLeft click to display them in chat");
 		}
 
 		public override void SetDefaults()
@@ -62,8 +62,8 @@ namespace BossesAsNPCs.Items
 		public override string Texture => "Terraria/Images/Item_" + ItemID.RedSolution;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("[c/ff0000:Debug] - Method Tester2");
-			Tooltip.SetDefault("Resets the custom downed bools\nLeft click to reset");
+			// DisplayName.SetDefault("[c/ff0000:Debug] - Method Tester2");
+			// Tooltip.SetDefault("Resets the custom downed bools\nLeft click to reset");
 		}
 
 		public override void SetDefaults()

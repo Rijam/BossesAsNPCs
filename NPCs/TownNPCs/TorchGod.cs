@@ -26,7 +26,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.TorchGod"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.TorchGod"));
 			Main.npcFrameCount[Type] = 26;
 			NPCID.Sets.ExtraFramesCount[Type] = 10;
 			NPCID.Sets.AttackFrameCount[Type] = 5;
@@ -35,6 +35,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 80;
 			NPCID.Sets.AttackAverageChance[Type] = 20; // Lower numbers actually make the NPC more likely to attack
 			NPCID.Sets.HatOffsetY[Type] = 4;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -109,7 +110,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPCHelper.DownedAnyBossWithConfigCheck() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == 1)
 			{
@@ -131,6 +132,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			return new List<string>() { };
 		}*/
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		// Hacky solution to play the frames the way I wanted them
 		public override void FindFrame(int frameHeight)

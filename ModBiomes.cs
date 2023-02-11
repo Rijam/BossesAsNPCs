@@ -15,7 +15,7 @@ namespace BossesAsNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("Bestiary_Biomes.Graveyard"));
+			// DisplayName.SetDefault(Language.GetTextValue("Bestiary_Biomes.Graveyard"));
 		}
 
 		// Calculate when the biome is active.

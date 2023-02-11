@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.HallowBoss"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.HallowBoss"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.PaleGoldenrod;
 
@@ -108,7 +109,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedEmpressOfLight && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnEoL)
 			{
@@ -125,13 +126,15 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             return new EmpressOfLightProfile();
         }
 
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/EmpressOfLight_Wings");
 		private int colorIndex = 0;
 		private Color color = new(255, 255, 255, 100);
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			NPC.ai[2] += 3;
+			NPC.localAI[2] += 3;
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
@@ -147,19 +150,19 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			else if (colorIndex == 1)
 			{
-				color = Color.Lerp(colorMagenta, colorYellow, NPC.ai[2] / 100f);
+				color = Color.Lerp(colorMagenta, colorYellow, NPC.localAI[2] / 100f);
 			}
 			else if (colorIndex == 2)
 			{
-				color = Color.Lerp(colorYellow, colorLBlue, NPC.ai[2] / 100f);
+				color = Color.Lerp(colorYellow, colorLBlue, NPC.localAI[2] / 100f);
 			}
 			else if (colorIndex == 3)
 			{
-				color = Color.Lerp(colorLBlue, colorDBlue, NPC.ai[2] / 100f);
+				color = Color.Lerp(colorLBlue, colorDBlue, NPC.localAI[2] / 100f);
 			}
 			else if (colorIndex == 4)
 			{
-				color = Color.Lerp(colorDBlue, colorMagenta, NPC.ai[2] / 100f);
+				color = Color.Lerp(colorDBlue, colorMagenta, NPC.localAI[2] / 100f);
 			}
 
 			for (int i = 0; i < 3; i++)
@@ -167,10 +170,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 
-			if (NPC.ai[2] > 100)
+			if (NPC.localAI[2] > 100)
             {
 				colorIndex++;
-				NPC.ai[2] = 0;
+				NPC.localAI[2] = 0;
 				if (colorIndex > 4)
 				{
 					colorIndex = 1;

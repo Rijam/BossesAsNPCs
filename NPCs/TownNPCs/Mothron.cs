@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.Mothron"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.Mothron"));
 			Main.npcFrameCount[Type] = 25; //Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 0;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -101,7 +102,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}	
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (BossesAsNPCsWorld.downedMothron && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMothron)
 			{
@@ -122,6 +123,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			return new List<string>() { };
 		}*/
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{
@@ -166,10 +169,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
-				int torchMan = NPC.FindFirstNPC(torchSeller.Find<ModNPC>("TorchSellerNPC").Type);
-				if (torchMan >= 0)
+				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchManModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "TorchMerchant", Main.npc[torchMan].GivenName));
+					int torchMan = NPC.FindFirstNPC(torchManModNPC.Type);
+					if (torchMan >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "TorchMerchant", Main.npc[torchMan].GivenName));
+					}
 				}
 			}
 			return chat;

@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.DukeFishron"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.DukeFishron"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.MediumSeaGreen;
 
@@ -67,7 +68,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.aiStyle = 7;
 			NPC.damage = 10;
 			NPC.defense = 50;
-			NPC.lifeMax = 5000;
+			NPC.lifeMax = 6000;
 			NPC.HitSound = SoundID.NPCHit14;
 			NPC.DeathSound = SoundID.NPCDeath20;
 			NPC.knockBackResist = 0.25f;
@@ -99,7 +100,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedFishron && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDukeFishron)
 			{
@@ -115,6 +116,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new DukeFishronProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{
@@ -132,10 +135,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
-				int mutant = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Mutant").Type);
-				if (mutant >= 0)
+				if (fargosMutant.TryFind<ModNPC>("Mutant", out ModNPC mutantModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[mutant].GivenName));
+					int mutant = NPC.FindFirstNPC(mutantModNPC.Type);
+					if (mutant >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[mutant].GivenName));
+					}
 				}
 			}
 			if (ModLoader.TryGetMod("CalamityMod", out Mod _) && townNPCsCrossModSupport)

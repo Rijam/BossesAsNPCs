@@ -249,32 +249,11 @@ namespace BossesAsNPCs.NPCs
 		/// Gets the value of the item.
 		/// </summary>
 		/// <param name="item">The ID for the item</param>
-		/// <returns>The value of the item. Will return -1 if the ModItem is vanilla.</returns>
+		/// <returns>The value of the item.</returns>
 		public static int CalcItemValue(int item)
 		{
-			ModItem modItem = ItemLoader.GetItem(item);
-			if (modItem == null) // Vanilla item
-			{
-				ModContent.GetInstance<BossesAsNPCs>().Logger.DebugFormat("Cross mod SetShopItem(): Vanilla item detected \"{0}\". Price may be inaccurate. It is recommended to manually set the price with \"CustomPrice\".", item);
-				return -1;
-			}
-			return modItem.Item.value;
-		}
-
-		/// <summary>
-		/// CalcItemValue() cannot determine the value of vanilla items. This will get the value of the item as it is being set.
-		/// </summary>
-		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
-		/// <param name="nextSlot">The ref nextSlot. Pass ref nextSlot in most cases.</param>
-		/// <returns>ModItems will return currentPrice. If it is a vanilla item, it will be the value of the current shop slot.</returns>
-		public static int PostCalcItemValue(Chest shop, ref int nextSlot, int currentPrice)
-		{
-			if (currentPrice > 0) // If the price is positive, then that is the price.
-			{
-				return currentPrice;
-			}
-			// If it is negative (because we said vanilla items had -1 value), then get the value of the slot.
-			return shop.item[nextSlot].value;
+			Item newItem = new(item);
+			return newItem.value;
 		}
 
 		#region King Slime
@@ -417,10 +396,12 @@ namespace BossesAsNPCs.NPCs
 				{
 					foreach (KeyValuePair<int, object[]> set in customShops[NPCString.KingSlime])
 					{
+						// set.Value[0] is the price (int)
+						// set.Value[1] is the condition (Func<bool>)
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -585,7 +566,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -720,7 +701,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -858,7 +839,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1033,7 +1014,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1178,7 +1159,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1208,6 +1189,9 @@ namespace BossesAsNPCs.NPCs
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.DontStarveShaderItem); //Radio Thing
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.33);
+				nextSlot++;
+				shop.item[nextSlot].SetDefaults(ItemID.DizzyHat); //Dizzy's Rare Gecko Chester
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.0714);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.PewMaticHorn);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(15000 / 0.25);
@@ -1335,7 +1319,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1504,7 +1488,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1622,7 +1606,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1644,12 +1628,24 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.MechanicalWorm);
 				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && Main.zenithWorld || WorldGen.everythingWorldGen)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.MechdusaSummon); // Ocram's Razor
+					shop.item[nextSlot].shopCustomPrice = 1000000; //Made up value
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
 				shop.item[nextSlot].shopCustomPrice = 400 * 5;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SoulofMight);
 				shop.item[nextSlot].shopCustomPrice = 800 * 5;
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && (Main.zenithWorld || WorldGen.everythingWorldGen))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.WaffleIron);
+					shop.item[nextSlot].shopCustomPrice = 150000;
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.DestroyerMask);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
 				nextSlot++;
@@ -1686,6 +1682,9 @@ namespace BossesAsNPCs.NPCs
 							nextSlot++;
 						}
 					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
@@ -1751,7 +1750,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1773,12 +1772,24 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.MechanicalEye);
 				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && Main.zenithWorld || WorldGen.everythingWorldGen)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.MechdusaSummon); // Ocram's Razor
+					shop.item[nextSlot].shopCustomPrice = 1000000; //Made up value
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
 				shop.item[nextSlot].shopCustomPrice = 400 * 5;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SoulofSight);
 				shop.item[nextSlot].shopCustomPrice = 800 * 5;
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && (Main.zenithWorld || WorldGen.everythingWorldGen))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.WaffleIron);
+					shop.item[nextSlot].shopCustomPrice = 150000;
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.TwinMask);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
 				nextSlot++;
@@ -1884,7 +1895,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -1906,12 +1917,24 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.MechanicalEye);
 				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && Main.zenithWorld || WorldGen.everythingWorldGen)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.MechdusaSummon); // Ocram's Razor
+					shop.item[nextSlot].shopCustomPrice = 1000000; //Made up value
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
 				shop.item[nextSlot].shopCustomPrice = 400 * 5;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SoulofSight);
 				shop.item[nextSlot].shopCustomPrice = 800 * 5;
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && (Main.zenithWorld || WorldGen.everythingWorldGen))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.WaffleIron);
+					shop.item[nextSlot].shopCustomPrice = 150000;
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.TwinMask);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
 				nextSlot++;
@@ -2017,7 +2040,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2039,12 +2062,24 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.MechanicalSkull);
 				shop.item[nextSlot].shopCustomPrice = 250000; //Made up value
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && Main.zenithWorld || WorldGen.everythingWorldGen)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.MechdusaSummon); // Ocram's Razor
+					shop.item[nextSlot].shopCustomPrice = 1000000; //Made up value
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.HallowedBar);
 				shop.item[nextSlot].shopCustomPrice = 400 * 5;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SoulofFright);
 				shop.item[nextSlot].shopCustomPrice = 800 * 5;
 				nextSlot++;
+				if (NPCHelper.DownedMechBossAll() && (Main.zenithWorld || WorldGen.everythingWorldGen))
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.WaffleIron);
+					shop.item[nextSlot].shopCustomPrice = 150000;
+					nextSlot++;
+				}
 				shop.item[nextSlot].SetDefaults(ItemID.SkeletronPrimeMask);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(7500 / 0.14);
 				nextSlot++;
@@ -2081,6 +2116,9 @@ namespace BossesAsNPCs.NPCs
 							nextSlot++;
 						}
 					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
@@ -2147,7 +2185,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2315,7 +2353,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2410,6 +2448,9 @@ namespace BossesAsNPCs.NPCs
 					shop.item[nextSlot].SetDefaults(ItemID.LihzahrdAltar);
 					shop.item[nextSlot].shopCustomPrice = 60 * 5 * 1000; //sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
 					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
@@ -2451,7 +2492,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2591,7 +2632,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2723,7 +2764,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -2747,6 +2788,12 @@ namespace BossesAsNPCs.NPCs
 				nextSlot++;
 				if (BossesAsNPCsWorld.downedDarkMage)
 				{
+					shop.item[nextSlot].SetDefaults(ItemID.ApprenticeScarf);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.25);
+					nextSlot++;
+					shop.item[nextSlot].SetDefaults(ItemID.SquireShield);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.25);
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.WarTable);
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.1);  //Formula: (Sell value / drop chance))
 					nextSlot++;
@@ -2777,32 +2824,26 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (BossesAsNPCsWorld.downedOgre)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.ApprenticeScarf);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-					nextSlot++;
-					shop.item[nextSlot].SetDefaults(ItemID.SquireShield);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
-					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.HuntressBuckler);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.17);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.MonkBelt);
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.08);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(30000 / 0.17);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.BookStaff); //Tome of Infinite Wisdom
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.DD2PhoenixBow); //Phantom Phoenix
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.DD2SquireDemonSword); //Brand of the Inferno
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT1); //Sleepy Octopod
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.MonkStaffT2); //Ghastly Glaive
-					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.07);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.DD2PetGhost); //Creeper Egg
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(20000 / 0.2);
@@ -2867,6 +2908,9 @@ namespace BossesAsNPCs.NPCs
 							nextSlot++;
 						}
 					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
@@ -2944,7 +2988,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3099,7 +3143,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3129,31 +3173,31 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].shopCustomPrice = 3000 * 5;
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.Meowmere);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.Terrarian);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.StarWrath);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(200000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.SDMG);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(150000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(150000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.LastPrism);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.LunarFlareBook);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.RainbowCrystalStaff);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.MoonlordTurretStaff); //Lunar Portal Staff
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.Celeb2); //Celebration Mk2
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.11);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.22);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.MeowmereMinecart);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.1);
@@ -3200,6 +3244,9 @@ namespace BossesAsNPCs.NPCs
 							nextSlot++;
 						}
 					}
+					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeHeadpiece>());
+					shop.item[nextSlot].shopCustomPrice = 50000;
+					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeBodypiece>());
 					shop.item[nextSlot].shopCustomPrice = 50000;
 					nextSlot++;
@@ -3278,7 +3325,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3376,6 +3423,12 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.BloodMoonMonolith);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1111);
 				nextSlot++;
+				if (Main.bloodMoon)
+				{
+					shop.item[nextSlot].SetDefaults(ItemID.DreadoftheRedSea);
+					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.05); // Don't actually know the odds.
+					nextSlot++;
+				}
 				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
 				{
 					if (NPC.savedWizard)
@@ -3477,7 +3530,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3559,6 +3612,52 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].SetDefaults(ItemID.MothronWings);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(80000 / 0.05);
 				nextSlot++;
+				
+				// Randomly choose a painting every time the shop is opened.
+				switch (Main.rand.Next(8))
+				{
+					case 1:
+						shop.item[nextSlot].SetDefaults(ItemID.WingsofEvil);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.067);
+						nextSlot++;
+						break;
+					case 2:
+						shop.item[nextSlot].SetDefaults(ItemID.MidnightSun);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.017);
+						nextSlot++;
+						break;
+					case 3:
+						shop.item[nextSlot].SetDefaults(ItemID.Buddies);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.0044);
+						nextSlot++;
+						break;
+					case 4:
+						shop.item[nextSlot].SetDefaults(ItemID.ThisIsGettingOutOfHand);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.017);
+						nextSlot++;
+						break;
+					case 5:
+						shop.item[nextSlot].SetDefaults(ItemID.AMachineforTerrarians);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.017);
+						nextSlot++;
+						break;
+					case 6:
+						shop.item[nextSlot].SetDefaults(ItemID.Requiem);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.017);
+						nextSlot++;
+						break;
+					case 7:
+						shop.item[nextSlot].SetDefaults(ItemID.Eyezorhead);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.067);
+						nextSlot++;
+						break;
+					default:
+						shop.item[nextSlot].SetDefaults(ItemID.OcularResonance);
+						shop.item[nextSlot].shopCustomPrice = (int)Math.Round(1000 / 0.067);
+						nextSlot++;
+						break;
+				}
+
 				if (ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems)
 				{
 					if (NPC.savedWizard)
@@ -3629,7 +3728,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3837,7 +3936,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -3897,7 +3996,7 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (NPC.downedChristmasSantank)
 				{
-					shop.item[nextSlot].SetDefaults(ItemID.EldMelter); //Elf Melter, lol Re-Logic misspelled it.
+					shop.item[nextSlot].SetDefaults(ItemID.ElfMelter);
 					shop.item[nextSlot].shopCustomPrice = (int)Math.Round(100000 / 0.125);
 					nextSlot++;
 					shop.item[nextSlot].SetDefaults(ItemID.ChainGun);
@@ -3929,7 +4028,7 @@ namespace BossesAsNPCs.NPCs
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.017); //Has no value
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.ReindeerBells);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.01);
+				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(50000 / 0.017);
 				nextSlot++;
 				shop.item[nextSlot].SetDefaults(ItemID.IceQueenTrophy);
 				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.1); //same trophy price
@@ -4048,7 +4147,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -4209,7 +4308,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}
@@ -4311,7 +4410,7 @@ namespace BossesAsNPCs.NPCs
 							if (((Func<bool>)set.Value[1]).Invoke())
 							{
 								shop.item[nextSlot].SetDefaults(set.Key);
-								shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+								shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 								nextSlot++;
 							}
 						}
@@ -4340,19 +4439,19 @@ namespace BossesAsNPCs.NPCs
 				nextSlot++;
 			}
 			shop.item[nextSlot].SetDefaults(ItemID.CoinGun);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.0025 * shopMulti);  //Formula: (Sell value / drop chance)
+			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(60000 / 0.02 * shopMulti);  //Formula: (Sell value / drop chance)
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemID.LuckyCoin);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.005 * shopMulti);
+			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.067 * shopMulti);
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemID.DiscountCard);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.01 * shopMulti);
+			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.067 * shopMulti);
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemID.PirateStaff);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.01 * shopMulti);
+			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.067 * shopMulti);
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemID.GoldRing);
-			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.02 * shopMulti);
+			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(10000 / 0.067 * shopMulti);
 			nextSlot++;
 			shop.item[nextSlot].SetDefaults(ItemID.PirateMinecart);
 			shop.item[nextSlot].shopCustomPrice = (int)Math.Round(5000 / 0.05 * shopMulti);
@@ -4413,7 +4512,7 @@ namespace BossesAsNPCs.NPCs
 						if (((Func<bool>)set.Value[1]).Invoke())
 						{
 							shop.item[nextSlot].SetDefaults(set.Key);
-							shop.item[nextSlot].shopCustomPrice = PostCalcItemValue(shop, ref nextSlot, (int)set.Value[0]);
+							shop.item[nextSlot].shopCustomPrice = (int)set.Value[0];
 							nextSlot++;
 						}
 					}

@@ -12,7 +12,7 @@ namespace BossesAsNPCs.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Eye Ornament");
+			// DisplayName.SetDefault("Eye Ornament");
 		}
 
 		public override void SetDefaults()

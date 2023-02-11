@@ -12,7 +12,7 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.SpikedSlimeSpike;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Gel Spike");
+			// DisplayName.SetDefault("Gel Spike");
 		}
 
 		public override void SetDefaults()

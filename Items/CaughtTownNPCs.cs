@@ -22,8 +22,9 @@ namespace BossesAsNPCs.Items
 		public override string Texture => Mod.Name + "/NPCs/TownNPCs/" + Name.Split("Caught")[1];
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			Item.ResearchUnlockCount = 3;
 		}
 
 		public override void SetDefaults()
@@ -55,14 +56,14 @@ namespace BossesAsNPCs.Items
 		}
 		internal static void SpawnText(string npcName)
 		{
-			string chatmessage = Language.GetTextValue("Mods." + ModContent.GetInstance<BossesAsNPCs>().Name + ".UI.CapturedSpawnText").Replace("{0}", npcName);
+			string chatMessage = Language.GetTextValue("Mods." + ModContent.GetInstance<BossesAsNPCs>().Name + ".UI.CapturedSpawnText", npcName);
 			if (Main.netMode != NetmodeID.Server)
 			{
-				Main.NewText(chatmessage, 50, 125, 255);
+				Main.NewText(chatMessage, 50, 125, 255);
 			}
 			else
 			{
-				ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(chatmessage), new Color(50, 125, 255));
+				ChatHelper.BroadcastChatMessage(NetworkText.FromLiteral(chatMessage), new Color(50, 125, 255));
 			}
 		}
 	}
@@ -75,7 +76,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -105,7 +106,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -135,7 +136,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -165,7 +166,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -195,7 +196,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -225,7 +226,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -255,7 +256,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
 		}
 
@@ -285,7 +286,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -315,7 +316,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -345,7 +346,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -375,7 +376,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -405,7 +406,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -435,7 +436,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
 		}
 
@@ -465,7 +466,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -495,7 +496,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -525,7 +526,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -555,7 +556,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -585,7 +586,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -615,7 +616,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
 		}
 
@@ -645,7 +646,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -675,7 +676,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -705,7 +706,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -735,7 +736,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 		}
 
@@ -765,7 +766,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
 		}
 
@@ -796,7 +797,7 @@ namespace BossesAsNPCs.Items
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault(name);
+			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
 		}
 

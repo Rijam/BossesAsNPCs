@@ -20,6 +20,14 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glowmask", "255", "255", "255", "flame" });
 			}
 		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			if (!Main.dedServ)
+			{
+				Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			}
+		}
 	}
 	[AutoloadEquip(EquipType.Body)]
 	public class PkCostumeBodypiece : VanityBase
@@ -53,7 +61,7 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			Tooltip.SetDefault("[c/403638:Unobtainable]");
+			// Tooltip.SetDefault("[c/403638:Unobtainable]");
 			ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
 		}
 	}

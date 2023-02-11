@@ -178,7 +178,7 @@ namespace BossesAsNPCs
 
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
-				if (type == torchSeller.Find<ModNPC>("TorchSellerNPC").Type)
+				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchMan) && type == torchMan.Type)
 				{
 					if (NPC.CountNPCS(ModContent.NPCType<TorchGod>()) > 0)
 					{

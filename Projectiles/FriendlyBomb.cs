@@ -13,7 +13,7 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.BombSkeletronPrime;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Friendly Bomb");
+			// DisplayName.SetDefault("Friendly Bomb");
 			Main.projFrames[Projectile.type] = 2;
 		}
 

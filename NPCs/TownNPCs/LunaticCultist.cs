@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.CultistBoss"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.CultistBoss"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 1;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.Gold;
 
@@ -99,7 +100,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedAncientCultist && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnLunaticCultist)
 			{
@@ -115,6 +116,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new LunaticCultistProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		public override string GetChat()
 		{
@@ -154,10 +157,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities) && townNPCsCrossModSupport)
 			{
-				int mysteriousTrader = NPC.FindFirstNPC(pbonesUtilities.Find<ModNPC>("MysteriousTrader").Type);
-				if (mysteriousTrader >= 0)
+				if (pbonesUtilities.TryFind<ModNPC>("MysteriousTrader", out ModNPC mysteriousTraderModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "PbonesUtilities"));
+					int mysteriousTrader = NPC.FindFirstNPC(mysteriousTraderModNPC.Type);
+					if (mysteriousTrader >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "PbonesUtilities"));
+					}
 				}
 			}
 			return chat;

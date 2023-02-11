@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.Deerclops"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.Deerclops"));
 			Main.npcFrameCount[Type] = 25; // Main.npcFrameCount[NPCID.DyeTrader];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -97,7 +98,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedDeerclops && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnDeerclops)
 			{
@@ -114,15 +115,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             return new DeerclopsProfile();
         }
 
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Deerclops_Glow");
 		
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			NPC.ai[2]++;
-            if (NPC.ai[2] > 115)
+			NPC.localAI[2]++;
+            if (NPC.localAI[2] > 115)
 			{
-				NPC.ai[2] = 0;
+				NPC.localAI[2] = 0;
 			}
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
@@ -131,8 +134,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			if (NPC.frame.Y > 20 * NPC.frame.Height) //Only draw while attacking
             {
-				float sinOffsetY = (float)Math.Sin((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f; //NPC.ai[2] will range from 11 to 34 when attacking. This will produce a sine wave with one period.
-				float sinOffsetX = (float)Math.Cos((NPC.ai[2] - 11) * Math.PI / 11.5f) * 2f;
+				float sinOffsetY = (float)Math.Sin((NPC.localAI[2] - 11) * Math.PI / 11.5f) * 2f; //NPC.ai[3] will range from 11 to 34 when attacking. This will produce a sine wave with one period.
+				float sinOffsetX = (float)Math.Cos((NPC.localAI[2] - 11) * Math.PI / 11.5f) * 2f;
 				for (int i = 0; i < 5; i++)
 				{
 					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4) - new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);

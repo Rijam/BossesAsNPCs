@@ -24,6 +24,14 @@ namespace BossesAsNPCs.Items.Vanity.TorchGod
 				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glowmask", "255", "255", "255", "flame2" });
 			}
 		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			if (!Main.dedServ)
+			{
+				Item.GetGlobalItem<ItemUseGlow>().glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			}
+		}
 	}
 	[AutoloadEquip(EquipType.Body)]
     public class TGCostumeBodypiece : VanityBase

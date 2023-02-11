@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.MartianSaucer"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.MartianSaucer"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Guide];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 5;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 90;
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
@@ -97,7 +98,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedMartians && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMartianSaucer)
 			{
@@ -113,6 +114,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			return new MartianSaucerProfile();
 		}
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/MartianSaucer_Glow");
@@ -140,10 +143,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod) && townNPCsCrossModSupport)
 			{
-				int intTrav = NPC.FindFirstNPC(rijamsMod.Find<ModNPC>("InterstellarTraveler").Type);
-				if (intTrav >= 0)
+				if (rijamsMod.TryFind<ModNPC>("InterstellarTraveler", out ModNPC intTravModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "RijamsMod", Main.npc[intTrav].GivenName));
+					int intTrav = NPC.FindFirstNPC(intTravModNPC.Type);
+					if (intTrav >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "RijamsMod", Main.npc[intTrav].GivenName));
+					}
 				}
 			}
 			return chat;

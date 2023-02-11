@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.MoonLordHead"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.MoonLordHead"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 1;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.Aquamarine;
 
@@ -102,7 +103,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (NPC.downedMoonlord && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnMoonLord)
 			{
@@ -118,6 +119,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         {
             return new MoonLordProfile();
         }
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/MoonLord_Glow");
@@ -175,10 +178,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
-				int torchMan = NPC.FindFirstNPC(torchSeller.Find<ModNPC>("TorchSellerNPC").Type);
-				if (torchMan >= 0)
+				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchManModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "TorchMerchant", Main.npc[torchMan].GivenName));
+					int torchMan = NPC.FindFirstNPC(torchManModNPC.Type);
+					if (torchMan >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "TorchMerchant", Main.npc[torchMan].GivenName));
+					}
 				}
 			}
 			return chat;

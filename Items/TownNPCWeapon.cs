@@ -15,7 +15,7 @@ namespace BossesAsNPCs.Items
 		}
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Town NPC Weapon");
+			// DisplayName.SetDefault("Town NPC Weapon");
 		}
 
 		public override void SetDefaults()

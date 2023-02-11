@@ -21,7 +21,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault(Language.GetTextValue("NPCName.DD2Betsy"));
+			// DisplayName.SetDefault(Language.GetTextValue("NPCName.DD2Betsy"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -30,6 +30,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackTime[Type] = 30;
 			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 0;
+			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.Gold;
 
@@ -100,7 +101,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
 			if (BossesAsNPCsWorld.downedBetsy && ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnBetsy)
 			{
@@ -121,6 +122,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			return new List<string>() { };
 		}*/
+
+		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Betsy_Glow");
@@ -146,18 +149,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{
-				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);
-				if (abominationn >= 0)
+				if (fargosMutant.TryFind<ModNPC>("Abominationn", out ModNPC abomModNPC))
 				{
-					chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[abominationn].GivenName));
+					int abominationn = NPC.FindFirstNPC(abomModNPC.Type);
+					if (abominationn >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "FargosMutantMod", Main.npc[abominationn].GivenName));
+					}
 				}
 			}
 			if (ModLoader.TryGetMod("SGAmod", out Mod sGAmod))
 			{
-				int draken = NPC.FindFirstNPC(sGAmod.Find<ModNPC>("Dergon").Type);
-				if (draken >= 0)
+				if (sGAmod.TryFind<ModNPC>("Dergon", out ModNPC dergon))
 				{
-					chat.Add(Language.GetTextValue(path + "SGAmod", Main.npc[draken].GivenName));
+					int draken = NPC.FindFirstNPC(dergon.Type);
+					if (draken >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "SGAmod", Main.npc[draken].GivenName));
+					}
 				}
 			}
 			return chat;

@@ -14,7 +14,7 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.BloodShot;
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Friendly Blood Shot");
+			// DisplayName.SetDefault("Friendly Blood Shot");
 			ProjectileID.Sets.TrailingMode[Projectile.type] = 2;
 		}
 
