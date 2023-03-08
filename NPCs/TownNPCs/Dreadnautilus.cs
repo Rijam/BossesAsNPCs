@@ -19,6 +19,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
+		private static Profiles.StackedNPCProfile NPCProfile;
+
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault(Language.GetTextValue("NPCName.BloodNautilus"));
@@ -56,6 +58,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(NPCID.Pirate, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
+
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture))
+			);
 		}
 
 		public override void SetDefaults()
@@ -114,7 +120,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override ITownNPCProfile TownNPCProfile()
 		{
-			return new DreadnautilusProfile();
+			return NPCProfile;
 		}
 		//SetNPCNameList is not needed for these Town NPCs because they don't have a name
 		/*public override List<string> SetNPCNameList()
@@ -224,17 +230,5 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
-	}
-	public class DreadnautilusProfile : ITownNPCProfile
-	{
-		public int RollVariation() => 0;
-
-		//Normally you'd want to choose a random name, but these Town NPCs have no name.
-		//public string GetNameForVariant(NPC npc) => npc.getNewNPCName();
-		public string GetNameForVariant(NPC npc) => null;
-
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
-
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

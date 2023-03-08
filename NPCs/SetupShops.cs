@@ -43,6 +43,7 @@ namespace BossesAsNPCs.NPCs
 		public static string Pumpking => "Pumpking";
 		public static string IceQueen => "IceQueen";
 		public static string MartianSaucer => "MartianSaucer";
+		public static string TorchGod => "TorchGod";
 		public static string GoblinTinkerer => "GoblinTinkerer";
 		public static string Pirate => "Pirate";
 	}

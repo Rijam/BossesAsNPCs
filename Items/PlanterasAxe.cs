@@ -1,13 +1,9 @@
 using Microsoft.Xna.Framework;
-using Steamworks;
 using System;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
-using static Terraria.ModLoader.PlayerDrawLayer;
-using static Terraria.Player;
 
 namespace BossesAsNPCs.Items
 {

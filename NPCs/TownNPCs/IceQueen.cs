@@ -19,6 +19,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
+		private static Profiles.StackedNPCProfile NPCProfile;
+
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault(Language.GetTextValue("NPCName.IceQueen"));
@@ -59,6 +61,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(NPCID.Painter, AffectionLevel.Dislike)
 				//Princess is automatically set
 			; // < Mind the semicolon!
+
+			NPCProfile = new Profiles.StackedNPCProfile(
+				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture))
+			);
 		}
 
 		public override void SetDefaults()
@@ -116,7 +122,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override ITownNPCProfile TownNPCProfile()
         {
-            return new IceQueenProfile();
+            return NPCProfile;
         }
 
 		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
@@ -199,14 +205,5 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			multiplier = 10f;
 			gravityCorrection = 2;
 		}
-	}
-	public class IceQueenProfile : ITownNPCProfile
-	{
-		public int RollVariation() => 0;
-		public string GetNameForVariant(NPC npc) => null;
-
-		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc) => ModContent.Request<Texture2D>((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/'));
-
-		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot((GetType().Namespace + "." + GetType().Name.Split("Profile")[0]).Replace('.', '/') + "_Head");
 	}
 }

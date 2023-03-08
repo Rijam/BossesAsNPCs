@@ -29,13 +29,17 @@ https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.1.15
-	- Fixed some cases in All-in-One NPC mode 1 where you could access shops before you should've been able to.
-	- The Torch God will now say his dialog about cycling the shop if the player clicks the "No shop selected" button.
-	- Added Gamepad support for the Torch God's shop cycler.
-	- Added cross mod support for Orchid Mod, Polarities, and Clicker Class.
-	- Improved the code for the glow masks.
-	- Changed homepage to Wiki.gg
+Mod version: 0.1.17
+	- Updated prices to match 1.4.4 drop rates.
+	- Town NPCs now become rainbow when Shimmered.
+	- Added support for Wikithis.
+	- Added Destroyer Costume Headpiece, Skeletron Prime Costume Headpiece, Golem Costume Headpiece, Betsy Costume Headpiece, and Moon Lord Costume Headpiece
+	- Added glow masks to the Destroyer Costume set, Skeletron Prime Costume set, Golem Costume set, Betsy Costume set, and Moon Lord Costume Headpiece
+	- Armor with glow masks now glow when their items are dropped on the ground.
+	- Made cross mod dialog even safer.
+	- Revamped King Slime's dialog. (Thanks Joby!)
+	- Made Plantera's Axe obtainable and playable!
+	- Updated the cross mod support. Now the price modifiers work with vanilla items.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

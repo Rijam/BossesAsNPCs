@@ -370,7 +370,7 @@ Mods: {
 
 		Common: {
 			VanityAccesssory: 梳妆台配件
-			// IncludesGlowMask: Includes Glow Mask
+			IncludesGlowMask: 包括发光面膜
 			CaughtNPC: 被抓到的NPC
 			// The following words are used for the Bestiary happiness text.
 			Forest: 森林
@@ -402,7 +402,7 @@ Mods: {
 
 		Items: {
 			BeCostumeHeadpiece: {
-				// DisplayName: Betsy Costume Headpiece
+				DisplayName: 双足翼龙头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
@@ -437,7 +437,7 @@ Mods: {
 			}
 
 			DeCostumeHeadpiece: {
-				// DisplayName: Destroyer Costume Headpiece
+				DisplayName: 毁灭者头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
@@ -522,7 +522,7 @@ Mods: {
 			}
 
 			GolemCostumeHeadpiece: {
-				// DisplayName: Golem Costume Headpiece
+				DisplayName: 石巨人头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
@@ -582,7 +582,7 @@ Mods: {
 			}
 
 			MLCostumeHeadpiece: {
-				// DisplayName: M L Costume Headpiece
+				DisplayName: 月亮领主头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
@@ -699,7 +699,7 @@ Mods: {
 			}
 
 			SPCostumeHeadpiece: {
-				// DisplayName: Skeletron Prime Costume Headpiece
+				DisplayName: 机械骷髅王头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
@@ -759,8 +759,8 @@ Mods: {
 			}
 
 			PlanterasAxe: {
-				// DisplayName: Plantera's Axe
-				// Tooltip: Playable Instrument
+				DisplayName: 世纪之花吉他
+				Tooltip: 可演奏乐器
 			}
 
 			CaughtKingSlime: {
@@ -904,23 +904,22 @@ Mods: {
 			// {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
 			// If a line starts with {0}, the line must be in quotes.
 			KingSlime: {
-				Default1: 我是史莱姆王。
-				Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
-				Default3: 我的失败不会阻止我的史莱姆大军！
-				Default4: 我希望你把那些火把离我远点。
+				// Default1: Have you seen that fellow Ninja person? I'd like to give my sincere apologies for... partake of a him; the taste was awful.
+				// Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
+				// Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
+				// Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
 				# Not changed
 				Default5: 无论你听到什么谣言说所有的史莱姆都来自一个来源，这都是错误的。
 				// Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
 				// Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
 				// Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
-				# Default9: .
 				// Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
 				# Not changed
 				Rare: 凝胶可能是“美味的”，但不要有任何想法！
 				// Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
 				// Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
-				QS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
-				QS2: 你已经击败了史莱姆王室的统治，我赞扬你。
+				// QS1: You may clutch a victory over me, but we'll see how you handle the other half of royal family.
+				// QS2: I see, you bested me and my darling too. Well, a fine foe you were, enjoy your victory... until our next generation put you into a place!
 				// QS3: You want to know how I got such a beautiful wife as Queen Slime, I know, I know. She's just got a thing for a shiny stones, and so she got one.
 				// QS4: Honestly, I don't mind Queen Slime ruling over two thirds of my land, since seeing her so happy is so much more worth it.
 				// SlimeRain: To command my people to stop ruining your day? I'm a monarchist, peasant, not a tyrant!
@@ -940,7 +939,7 @@ Mods: {
 				// Golfer: "{0} really knows how to have a great time, I might even learn how to play golf one day."
 				// Betsy: I knew I wanted a dragon, but not a fire one! Still, Betsy seems to behave well enough to make me just a bit more anxious than I should.
 				// SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
-				TorchMerchant: 我对{0}非常谨慎，我觉得我要抓住一个余烬。
+				// TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
 			}
 
 			EyeOfCthulhu: {
@@ -1994,32 +1993,32 @@ Mods: {
 		}
 
 		NPCs: {
-			// Betsy.DisplayName: Betsy
-			// BrainOfCthulhu.DisplayName: Brain of Cthulhu
-			// Deerclops.DisplayName: Deerclops
-			// Dreadnautilus.DisplayName: Dreadnautilus
-			// DukeFishron.DisplayName: Duke Fishron
-			// EaterOfWorlds.DisplayName: Eater of Worlds
-			// EmpressOfLight.DisplayName: Empress of Light
-			// EyeOfCthulhu.DisplayName: Eye of Cthulhu
-			// Golem.DisplayName: Golem
-			// IceQueen.DisplayName: Ice Queen
-			// KingSlime.DisplayName: King Slime
-			// LunaticCultist.DisplayName: Lunatic Cultist
-			// MartianSaucer.DisplayName: Martian Saucer
-			// MoonLord.DisplayName: Moon Lord
-			// Mothron.DisplayName: Mothron
-			// Plantera.DisplayName: Plantera
-			// Pumpking.DisplayName: Pumpking
-			// QueenBee.DisplayName: Queen Bee
-			// QueenSlime.DisplayName: Queen Slime
-			// Retinazer.DisplayName: Retinazer
-			// Skeletron.DisplayName: Skeletron
-			// SkeletronPrime.DisplayName: Skeletron Prime
-			// Spazmatism.DisplayName: Spazmatism
-			// TheDestroyer.DisplayName: The Destroyer
-			// TorchGod.DisplayName: The Torch God
-			// WallOfFlesh.DisplayName: Wall of Flesh
+			Betsy.DisplayName: "{$NPCName.DD2Betsy}"
+			BrainOfCthulhu.DisplayName: "{$NPCName.BrainofCthulhu}"
+			Deerclops.DisplayName: "{$NPCName.Deerclops}"
+			Dreadnautilus.DisplayName: "{$NPCName.BloodNautilus}"
+			DukeFishron.DisplayName: "{$NPCName.DukeFishron}"
+			EaterOfWorlds.DisplayName: "{$NPCName.EaterofWorldsHead}"
+			EmpressOfLight.DisplayName: "{$NPCName.HallowBoss}"
+			EyeOfCthulhu.DisplayName: "{$NPCName.EyeofCthulhu}"
+			Golem.DisplayName: "{$NPCName.Golem}"
+			IceQueen.DisplayName: "{$NPCName.IceQueen}"
+			KingSlime.DisplayName: "{$NPCName.KingSlime}"
+			LunaticCultist.DisplayName: "{$NPCName.CultistBoss}"
+			MartianSaucer.DisplayName: "{$NPCName.MartianSaucer}"
+			MoonLord.DisplayName: "{$NPCName.MoonLordHead}"
+			Mothron.DisplayName: "{$NPCName.Mothron}"
+			Plantera.DisplayName: "{$NPCName.Plantera}"
+			Pumpking.DisplayName: "{$NPCName.Pumpking}"
+			QueenBee.DisplayName: "{$NPCName.QueenBee}"
+			QueenSlime.DisplayName: "{$NPCName.QueenSlimeBoss}"
+			Retinazer.DisplayName: "{$NPCName.Retinazer}"
+			Skeletron.DisplayName: "{$NPCName.SkeletronHead}"
+			SkeletronPrime.DisplayName: "{$NPCName.SkeletronPrime}"
+			Spazmatism.DisplayName: "{$NPCName.Spazmatism}"
+			TheDestroyer.DisplayName: "{$NPCName.TheDestroyer}"
+			TorchGod.DisplayName: "{$NPCName.TorchGod}"
+			WallOfFlesh.DisplayName: "{$NPCName.WallofFlesh}"
 		}
 
 		Projectiles: {

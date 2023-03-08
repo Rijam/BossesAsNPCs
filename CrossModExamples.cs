@@ -27,7 +27,6 @@ namespace MyMod
 				//   "CustomPrice"          This will set the price to whatever value you specify here.
 				//   "WithDiv"              This will get the value of the item divided by 5 and then divided by the value you specify here. [value / 5 / priceDiv]
 				//   "WithDivAndMulti"      This will get the value of the item, divide it by the value you specify, and multiply it by the value you specify. [(value / priceDiv) * priceMulti]
-				// Quick warning: The modifiers in "WithDiv" and "WithDivAndMulti" will not work on vanilla items, use "CustomPrice" instead and calculate the value here.
 
 				// The 3rd parameter is which shop you want to add your item to. A list of valid strings are at the bottom of this file.
 				// The 4th parameter is the item you want to be sold. (int data type)
@@ -44,13 +43,13 @@ namespace MyMod
 				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, Func<bool> availability, float priceDiv, float priceMulti)
 
 
-				// Here we want to add an item to the Goblin Tinkerer's shop that is a 10% drop chance if the Goblin Summoner has been defeated.
+				// Here we want to add an item to the Goblin Tinkerer's shop that is a 10% drop chance if the Goblin Warlock has been defeated.
 				// Explaining the call line by line:
 				bossesAsNPCs.Call("AddToShop", // Call "AddToShop" to add something to a shop
 						"WithDiv", // Select the price mode. "WithDiv" will take a float as the 6th parameter
 						"GoblinTinkerer", // Select the shop we want to add the item to. In this case, Goblin Tinkerer
 						ModContent.ItemType<My10PercentDropChanceItem>(), // Our mod item that we want to be sold
-						() => (bool)bossesAsNPCs.Call("downedGoblinSummoner"), // The Func<bool> for our availability. We call to see if the Goblin Summoner has been defeated.
+						() => (bool)bossesAsNPCs.Call("downedGoblinSummoner"), // The Func<bool> for our availability. We call to see if the Goblin Warlock has been defeated.
 						0.1f); // The float that will divide our price.
 
 				// Here is an example selling an Expert Mode exclusive item at the value of the item.
@@ -69,7 +68,6 @@ namespace MyMod
 				bossesAsNPCs.Call("AddToShop", "CustomPrice", "BrainOfCthulhu", itemType, availability, price);
 
 				// Here is an example using a vanilla item. Here we are adding Souls of Light to the Empress of Light's shop for 5 gold. The item is always available.
-				// As stated above, the modifiers in "WithDiv" and "WithDivAndMulti" will not work on vanilla items. So we use "CustomPrice" instead.
 				// You need to cast the ItemID as an (int).
 				// Item.buyPrice() is a nice method that will make the correct coin value for you.
 				bossesAsNPCs.Call("AddToShop", "CustomPrice", "EmpressOfLight", (int)ItemID.SoulofLight, () => true, Item.buyPrice(gold: 5));
@@ -152,7 +150,7 @@ namespace MyMod
  */
 
 /* Mod Calls
- * More info on https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs#Mod_Calls
+ * More info on https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/Mod_calls
  * 
  * Call                             Data Type
  * 

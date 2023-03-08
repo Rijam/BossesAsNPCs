@@ -24,6 +24,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			return ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode > 0 || NPCHelper.bypassMode;
 		}
 
+		private static ITownNPCProfile NPCProfile;
+
 		public override void SetStaticDefaults()
 		{
 			// DisplayName.SetDefault(Language.GetTextValue("NPCName.TorchGod"));
@@ -63,6 +65,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(NPCID.Pirate, AffectionLevel.Dislike)
 			//Princess is automatically set
 			; // < Mind the semicolon!
+
+			NPCProfile = new TorchGodProfile();
 		}
 
 		public override void SetDefaults()
@@ -125,7 +129,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override ITownNPCProfile TownNPCProfile()
 		{
-			return new TorchGodProfile();
+			return NPCProfile;
 		}
 		//SetNPCNameList is not needed for these Town NPCs because they don't have a name
 		/*public override List<string> SetNPCNameList()
