@@ -43,8 +43,9 @@ namespace BossesAsNPCs.Items
 
 				pitch = (float)Math.Round(pitch * Player.musicNotes);
 				pitch = (Main.musicPitch = pitch / (float)Player.musicNotes);
-				SoundEngine.PlaySound(SoundID.Item47 with { MaxInstances = 2 }, player.position); // Changed MaxInstances to 2 (from 1) to make spam clicking sound a little better.
-				NetMessage.SendData(MessageID.InstrumentSound, -1, -1, null, player.whoAmI, pitch);
+				// Changed MaxInstances to 2 (from 1) to make spam clicking sound a little better.
+				ModContent.GetInstance<BossesAsNPCs>().PlayNetworkSound(SoundID.Item47 with { Pitch = pitch, MaxInstances = 2 }, player.position, player);
+				// NetMessage.SendData(MessageID.InstrumentSound, -1, -1, null, player.whoAmI, pitch);
 				return false;
 			}
 			return null;

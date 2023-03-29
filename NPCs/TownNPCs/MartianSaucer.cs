@@ -19,6 +19,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
 
+		private const string Shop1 = "Shop1";
+		private const string Shop2 = "Shop2";
 		private static Profiles.StackedNPCProfile NPCProfile;
 
 		public override void SetStaticDefaults()
@@ -91,7 +93,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			});
 		}
 
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hitInfo)
 		{
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
@@ -169,25 +171,31 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+		public override void OnChatButtonClicked(bool firstButton, ref string shop)
 		{
 			if (firstButton)
 			{
-				shop = true;
+				shop = Shop1;
 				NPCHelper.SetShop1(true);
 				NPCHelper.SetShop2(false);
 			}
 			if (!firstButton)
 			{
-				shop = true;
+				shop = Shop2;
 				NPCHelper.SetShop1(false);
 				NPCHelper.SetShop2(true);
 			}
 		}
 
-		public override void SetupShop(Chest shop, ref int nextSlot)
+		public override void AddShops()
 		{
-			SetupShops.MartianSaucer(shop, ref nextSlot);
+			var npcShop1 = new NPCShop(Type, Shop1);
+			SetupShops.MartianSaucer(npcShop1, Shop1);
+			npcShop1.Register();
+
+			var npcShop2 = new NPCShop(Type, Shop2);
+			SetupShops.MartianSaucer(npcShop2, Shop2);
+			npcShop2.Register();
 		}
 
 		public override bool CanGoToStatue(bool toKingStatue)
@@ -217,11 +225,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			multiplier = 10f;
 		}
-		public override void DrawTownAttackGun(ref float scale, ref int item, ref int closeness)
+		public override void DrawTownAttackGun(ref Texture2D item, ref Rectangle itemFrame, ref float scale, ref int horizontalHoldoutOffset)
 		{
-			item = ItemID.None;
+			Main.GetItemDrawFrame(ItemID.None, out Texture2D itemTexture, out Rectangle itemRectangle);
+			item = itemTexture;
+			itemFrame = itemRectangle;
 			scale = 1f;
-			closeness = 0;
+			horizontalHoldoutOffset = 0;
 		}
 	}
 }

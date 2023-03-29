@@ -9,6 +9,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.Localization;
+using System.Linq;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -858,21 +859,39 @@ namespace BossesAsNPCs.NPCs
 		/// <summary>
 		/// Safely sets the shop item of the ModItem from the given slot in the given slot.
 		/// Will not set the shop item if the ModItem is not found.
+		/// The price of the item will be the value.
+		/// </summary>
+		/// <param name="mod">The mod that the item is from.</param>
+		/// <param name="itemString">The class name of the item.</param>
+		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
+		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, params Condition[] condition)
+		{
+			mod.TryFind<ModItem>(itemString, out ModItem outItem);
+			if (outItem != null)
+			{
+				shop.Add(outItem.Type, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+			}
+			else
+			{
+				ModContent.GetInstance<BossesAsNPCs>().Logger.WarnFormat("SafelySetCrossModItem(): ModItem type \"{0}\" from \"{1}\" was not found.", itemString, mod);
+			}
+		}
+
+		/// <summary>
+		/// Safely sets the shop item of the ModItem from the given slot in the given slot.
+		/// Will not set the shop item if the ModItem is not found.
 		/// The price of the item will be the customPrice.
 		/// </summary>
 		/// <param name="mod">The mod that the item is from.</param>
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
-		/// <param name="nextSlot">The ref nextSlot. Pass ref nextSlot in most cases.</param>
 		/// <param name="customPrice">The custom price of the item.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, Chest shop, ref int nextSlot, int customPrice)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, int customPrice, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.item[nextSlot].SetDefaults(outItem.Type);
-				shop.item[nextSlot].shopCustomPrice = customPrice;
-				nextSlot++;
+				shop.Add(new Item(outItem.Type) { shopCustomPrice = customPrice }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
 			}
 			else
 			{
@@ -888,16 +907,13 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="mod">The mod that the item is from.</param>
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
-		/// <param name="nextSlot">The ref nextSlot. Pass ref nextSlot in most cases.</param>
 		/// <param name="priceDiv">The price will be divided by this amount.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, Chest shop, ref int nextSlot, float priceDiv)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, float priceDiv, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.item[nextSlot].SetDefaults(outItem.Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / 5 / priceDiv);
-				nextSlot++;
+				shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / 5 / priceDiv) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
 			}
 			else
 			{
@@ -913,17 +929,14 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="mod">The mod that the item is from.</param>
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
-		/// <param name="nextSlot">The ref nextSlot. Pass ref nextSlot in most cases.</param>
 		/// <param name="priceDiv">The price will be divided by this amount.</param>
 		/// <param name="priceMulti">The price will be multiplied by this amount after the priceDiv.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, Chest shop, ref int nextSlot, float priceDiv = 1f, float priceMulti = 1f)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, float priceDiv, float priceMulti, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.item[nextSlot].SetDefaults(outItem.Type);
-				shop.item[nextSlot].shopCustomPrice = (int)Math.Round(shop.item[nextSlot].value / priceDiv * priceMulti);
-				nextSlot++;
+				shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / priceDiv * priceMulti) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
 			}
 			else
 			{
@@ -1004,7 +1017,7 @@ namespace BossesAsNPCs.NPCs
 		}
 
 		// This is used to bypass the NPCs unloading from the All In One config.
-		public static readonly bool bypassMode = false;
+		public static readonly bool bypassMode = true;
 
 		/// <summary>
 		/// Determines whether the NPC should unload based on the All In One config.
@@ -1056,5 +1069,48 @@ namespace BossesAsNPCs.NPCs
 			}
 			return true;
 		}
+	}
+	public static class ShopConditions
+	{
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+
+		/// <summary> Use ShopConditions.Expert instead </summary>
+		public static Condition SellExpertMode = new("\'Sell Expert Mode Items in Non-Expert Worlds\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode);
+		/// <summary> Use ShopConditions.Master instead </summary>
+		public static Condition SellMasterMode = new("\'Sell Master Mode Items in Non-Master Worlds\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode);
+		public static Condition SellExtraItems = new("\'Sell Extra Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems);
+		public static Condition TownNPCsCrossModSupport = new("\'Town NPCs Cross Mod Support\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport);
+		public static Condition GoblinSellInvasionItems = new("\'Goblin Tinkerer Sells Goblin Army Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems);
+		public static Condition PirateSellInvasionItems = new("\'Pirate Sells Pirate Invasion Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems);
+
+		public static Condition IsNotNpcShimmered = new("When the vendor is not a shimmer variant", () => !Condition.IsNpcShimmered.IsMet());
+		public static Condition Expert = new(Condition.InExpertMode.Description + " or " + SellExpertMode.Description, () => Condition.InExpertMode.IsMet() || SellExpertMode.IsMet());
+		public static Condition Master = new(Condition.InMasterMode.Description + " or " + SellMasterMode.Description, () => Condition.InMasterMode.IsMet() || SellMasterMode.IsMet());
+		public static Condition Legendary = new("When in Legendary Mode or " + SellMasterMode.Description, () => Master.IsMet() && (Condition.ForTheWorthyWorld.IsMet() || Condition.ZenithWorld.IsMet()));
+
+		public static Condition DaytimeEoLDefated = new("After defeating Empress of Light during the day time", () => BossesAsNPCsWorld.daytimeEoLDefeated);
+		public static Condition DownedBetsy = new("After defeating Betsy", () => BossesAsNPCsWorld.downedBetsy);
+		public static Condition DownedDungeonGuardian = new("After defeating Dungeon Guardian", () => BossesAsNPCsWorld.downedDungeonGuardian);
+		public static Condition DownedDarkMage = new("After defeating Dark Mage", () => BossesAsNPCsWorld.downedDarkMage);
+		public static Condition DownedOgre = new("After defeating Ogre", () => BossesAsNPCsWorld.downedOgre);
+		public static Condition DownedGoblinWarlock = new("After defeating Goblin Warlock", () => BossesAsNPCsWorld.downedGoblinSummoner);
+		public static Condition DownedGoblinSummoner = DownedGoblinWarlock;
+		public static Condition DownedMothron = new("After defeating Mothron", () => BossesAsNPCsWorld.downedMothron);
+		public static Condition DownedDreadnautilus = new("After defeating Dreadnautilus", () => BossesAsNPCsWorld.downedDreadnautilus);
+		public static Condition DownedEaterOfWorlds = new("After defeating Eater of Worlds", () => BossesAsNPCsWorld.downedEoW);
+		public static Condition DownedBrainOfCthulhu = new("After defeating Brain of Cthulhu", () => BossesAsNPCsWorld.downedBoC);
+		public static Condition DownedWallOfFlesh = new("After defeating Wall of Flesh", () => BossesAsNPCsWorld.downedWoF);
+
+		public static Condition RescuedWizard = new("After rescuing the Wizard", () => NPC.savedWizard);
+		public static Condition UnlockOWMusicOrDrunkWorld = new("After unlocking the Otherworldly music", () => NPCHelper.UnlockOWMusic() || Condition.DrunkWorld.IsMet());
+		public static Condition CorruptionOrHardmode = new(Condition.CorruptWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CorruptWorld.IsMet() || Condition.Hardmode.IsMet());
+		public static Condition CrimsonOrHardmode = new(Condition.CrimsonWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CrimsonWorld.IsMet() || Condition.Hardmode.IsMet());
+
+		public static string TownNPCRangeS(string range) => $"Where there are {range} or more Town NPCs in the world";
+		public static string CountTownNPCsS(int number) => $"When there are {number} or more Town NPCs in the world";
+		public static string EternityModeS = "In Eternity Mode";
+		//public static Func<bool> CountTownNPCsFb(int number) => () => NPCHelper.CountTownNPCs() >= number;
+
+#pragma warning restore CA2211 // Non-constant fields should not be visible
 	}
 }

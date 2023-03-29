@@ -95,17 +95,17 @@ namespace BossesAsNPCs.Projectiles
 				Lighting.AddLight(Projectile.Center, dustColor.ToVector3());
 			}
 		}
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
-			if (damage > 0)
+			if (damageDone > 0)
 			{
 				if (Main.hardMode)
 				{
-					target.AddBuff(BuffID.OnFire3, damage);
+					target.AddBuff(BuffID.OnFire3, damageDone);
 				}
 				else
 				{
-					target.AddBuff(BuffID.OnFire, damage);
+					target.AddBuff(BuffID.OnFire, damageDone);
 				}
 			}
 			

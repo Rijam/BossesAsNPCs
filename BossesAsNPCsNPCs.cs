@@ -147,48 +147,50 @@ namespace BossesAsNPCs
 				}
 			}
 		}
-		public override void SetupShop(int type, Chest shop, ref int nextSlot)
+		public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
 		{
 			int shopPriceScaling = ModContent.GetInstance<BossesAsNPCsConfigServer>().ShopPriceScaling;
 			float shopMulti = (shopPriceScaling / 100f);
-			if (type == ModContent.NPCType<KingSlime>() || type == ModContent.NPCType<EyeOfCthulhu>() || type == ModContent.NPCType<EaterOfWorlds>()
-				|| type == ModContent.NPCType<EaterOfWorlds>() || type == ModContent.NPCType<BrainOfCthulhu>() || type == ModContent.NPCType<QueenBee>()
-				|| type == ModContent.NPCType<Skeletron>() || type == ModContent.NPCType<Deerclops>() || type == ModContent.NPCType<WallOfFlesh>()
-				|| type == ModContent.NPCType<TheDestroyer>() || type == ModContent.NPCType<Retinazer>() || type == ModContent.NPCType<Spazmatism>()
-				|| type == ModContent.NPCType<SkeletronPrime>() || type == ModContent.NPCType<Plantera>() || type == ModContent.NPCType<Golem>()
-				|| type == ModContent.NPCType<EmpressOfLight>() || type == ModContent.NPCType<DukeFishron>() || type == ModContent.NPCType<Betsy>()
-				|| type == ModContent.NPCType<LunaticCultist>() || type == ModContent.NPCType<MoonLord>() || type == ModContent.NPCType<Dreadnautilus>()
-				|| type == ModContent.NPCType<Mothron>() || type == ModContent.NPCType<Pumpking>() || type == ModContent.NPCType<IceQueen>()
-				|| type == ModContent.NPCType<MartianSaucer>() || type == ModContent.NPCType<TorchGod>())
+			if (npc.type == ModContent.NPCType<KingSlime>() || npc.type == ModContent.NPCType<EyeOfCthulhu>() || npc.type == ModContent.NPCType<EaterOfWorlds>()
+				|| npc.type == ModContent.NPCType<EaterOfWorlds>() || npc.type == ModContent.NPCType<BrainOfCthulhu>() || npc.type == ModContent.NPCType<QueenBee>()
+				|| npc.type == ModContent.NPCType<Skeletron>() || npc.type == ModContent.NPCType<Deerclops>() || npc.type == ModContent.NPCType<WallOfFlesh>()
+				|| npc.type == ModContent.NPCType<TheDestroyer>() || npc.type == ModContent.NPCType<Retinazer>() || npc.type == ModContent.NPCType<Spazmatism>()
+				|| npc.type == ModContent.NPCType<SkeletronPrime>() || npc.type == ModContent.NPCType<Plantera>() || npc.type == ModContent.NPCType<Golem>()
+				|| npc.type == ModContent.NPCType<EmpressOfLight>() || npc.type == ModContent.NPCType<DukeFishron>() || npc.type == ModContent.NPCType<Betsy>()
+				|| npc.type == ModContent.NPCType<LunaticCultist>() || npc.type == ModContent.NPCType<MoonLord>() || npc.type == ModContent.NPCType<Dreadnautilus>()
+				|| npc.type == ModContent.NPCType<Mothron>() || npc.type == ModContent.NPCType<Pumpking>() || npc.type == ModContent.NPCType<IceQueen>()
+				|| npc.type == ModContent.NPCType<MartianSaucer>() || npc.type == ModContent.NPCType<TorchGod>())
 			{
-				foreach (Item item in shop.item)
+				foreach (Item item in items)
 				{
-					int shopPrice = item.shopCustomPrice ?? 0; //Some hackery with changing the int? type into int
-					item.shopCustomPrice = (int?)Math.Round(shopPrice * shopMulti);
+					if (item is not null)
+					{
+						int shopPrice = item.shopCustomPrice ?? item.value;
+						item.shopCustomPrice = (int?)Math.Round(shopPrice * shopMulti);
+					}
 				}
 			}
-			if (type == NPCID.Pirate && ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems)
+		}
+		public override void ModifyShop(NPCShop shop)
+		{
+			int shopPriceScaling = ModContent.GetInstance<BossesAsNPCsConfigServer>().ShopPriceScaling;
+			float shopMulti = (shopPriceScaling / 100f);
+			if (shop.NpcType == NPCID.Pirate && ShopConditions.PirateSellInvasionItems.IsMet())
 			{
-				NPCs.SetupShops.Pirate(shop, ref nextSlot, shopMulti);
+				NPCs.SetupShops.Pirate(shop, shopMulti);
 			}
-			if (type == NPCID.GoblinTinkerer && ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems)
+			if (shop.NpcType == NPCID.GoblinTinkerer && ShopConditions.GoblinSellInvasionItems.IsMet())
 			{
-				NPCs.SetupShops.GoblinTinkerer(shop, ref nextSlot, shopMulti);
+				NPCs.SetupShops.GoblinTinkerer(shop, shopMulti);
 			}
 
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
-				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchMan) && type == torchMan.Type)
+				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchMan) && shop.NpcType == torchMan.Type)
 				{
-					if (NPC.CountNPCS(ModContent.NPCType<TorchGod>()) > 0)
-					{
-						shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>());
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeBodypiece>());
-						nextSlot++;
-						shop.item[nextSlot].SetDefaults(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeLegpiece>());
-						nextSlot++;
-					}
+					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
+					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeBodypiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
+					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeLegpiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
 				}
 			}
 		}

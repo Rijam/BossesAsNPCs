@@ -1,8 +1,12 @@
+using BossesAsNPCs.NPCs;
 using BossesAsNPCs.NPCs.TownNPCs;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -175,25 +179,54 @@ namespace BossesAsNPCs
 						"TheTorchGod" => ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode > 0,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
+				case "GetCondition":
+					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					return args[1].ToString() switch
+					{
+						"TownNPCsCrossModSupport" => ShopConditions.TownNPCsCrossModSupport,
+						"SellExtraItems" => ShopConditions.SellExtraItems,
+						"GoblinSellInvasionItems" => ShopConditions.GoblinSellInvasionItems,
+						"PirateSellInvasionItems" => ShopConditions.PirateSellInvasionItems,
+						"IsNotNpcShimmered" => ShopConditions.IsNotNpcShimmered,
+						"Expert" => ShopConditions.Expert,
+						"Master" => ShopConditions.Master,
+						"DaytimeEoLDefated" => ShopConditions.DaytimeEoLDefated,
+						"DownedBetsy" => ShopConditions.DownedBetsy,
+						"DownedDungeonGuardian" => ShopConditions.DownedDungeonGuardian,
+						"DownedDarkMage" => ShopConditions.DownedDarkMage,
+						"DownedOgre" => ShopConditions.DownedOgre,
+						"DownedGoblinWarlock" => ShopConditions.DownedGoblinWarlock,
+						"DownedGoblinSummoner" => ShopConditions.DownedGoblinSummoner,
+						"DownedMothron" => ShopConditions.DownedMothron,
+						"DownedDreadnautilus" => ShopConditions.DownedDreadnautilus,
+						"DownedEaterOfWorlds" => ShopConditions.DownedEaterOfWorlds,
+						"DownedBrainOfCthulhu" => ShopConditions.DownedBrainOfCthulhu,
+						"DownedWallOfFlesh" => ShopConditions.DownedWallOfFlesh,
+						"RescuedWizard" => ShopConditions.RescuedWizard,
+						"UnlockOWMusicOrDrunkWorld" => ShopConditions.UnlockOWMusicOrDrunkWorld,
+						"CorruptionOrHardmode" => ShopConditions.CorruptionOrHardmode,
+						"CrimsonOrHardmode" => ShopConditions.CrimsonOrHardmode,
+						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
+					};
 				case "AddToShop":
 					switch (args[1].ToString())
 					{
 						case "DefaultPrice":
 							CheckArgsLength(5, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString() });
-							// string npc, int item, Func<bool> condition
-							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4]);
+							// string npc, int item, Condition condition
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4]);
 						case "CustomPrice":
 							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
-							// string npc, int item, Func<bool> condition, int customPrice
-							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (int)args[5]);
+							// string npc, int item, Condition condition, int customPrice
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (int)args[5]);
 						case "WithDiv":
 							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
-							// string npc, int item, Func<bool> condition, float priceDiv
-							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5]);
+							// string npc, int item, Condition condition, float priceDiv
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (float)args[5]);
 						case "WithDivAndMulti":
 							CheckArgsLength(7, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString(), args[6].ToString() });
-							// string npc, int item, Func<bool> condition, float priceDiv, float priceMulti
-							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (Func<bool>)args[4], (float)args[5], (float)args[6]);
+							// string npc, int item, Condition condition, float priceDiv, float priceMulti
+							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (float)args[5], (float)args[6]);
 						default:
 							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");
 					}
@@ -201,5 +234,79 @@ namespace BossesAsNPCs
 					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}
 		}
+
+		// Adapted from Thorium Mod
+		/// <summary>
+		/// Attempts to play a sound across the network. Only supports Volume and Pitch modifiers.
+		/// </summary>
+		/// <param name="soundStyle"> The SoundStyle of the sound. Can include Volume and Pitch modifiers. </param>
+		/// <param name="position"> The position of the sound. </param>
+		/// <param name="player"> The player who is creating the sound. </param>
+		/// <returns>True if multiplayer, false if single player.</returns>
+		public bool PlayNetworkSound(SoundStyle soundStyle, Vector2 position, Player player)
+		{
+			PlaySound(soundStyle, player);
+
+			if (Main.netMode == NetmodeID.Server || Main.netMode == NetmodeID.MultiplayerClient && player.whoAmI == Main.myPlayer)
+			{
+				// Create a packet to send.
+				ModPacket packet = GetPacket();
+				packet.Write((byte)BossesAsNPCsMessageType.PlayNetworkSound); // Message type
+				packet.Write(soundStyle.SoundPath); // Sound path
+				packet.Write(soundStyle.Volume); // Volume
+				packet.Write(soundStyle.Pitch); // Pitch
+				packet.Write(soundStyle.MaxInstances); // Max Instances
+				packet.WriteVector2(position); // Position
+				packet.Write((byte)player.whoAmI); // Who created the sound
+				packet.Send(-1, player.whoAmI);
+
+				return true;
+			}
+			return false;
+		}
+
+		/// <summary>
+		/// Receives the packet and requests to play the sound.
+		/// </summary>
+		/// <param name="reader"></param>
+		internal void PlayNetworkSoundReceive(BinaryReader reader)
+		{
+			string soundPath = reader.ReadString();
+			float volume = reader.ReadSingle();
+			float pitch = reader.ReadSingle();
+			int maxInstances = reader.ReadInt32();
+			Vector2 position = reader.ReadVector2();
+			int playerIndex = reader.ReadByte();
+
+			Player player = Main.player[playerIndex];
+			PlayNetworkSound(new SoundStyle(soundPath) with { Volume = volume, Pitch = pitch, MaxInstances = maxInstances }, position, player);
+		}
+		/// <summary>
+		/// Plays the sound at the player who created the sound's center.
+		/// </summary>
+		/// <param name="soundStyle"> The sound. </param>
+		/// <param name="player"> The player who created the sound. </param>
+		internal static void PlaySound(SoundStyle soundStyle, Player player)
+		{
+			SoundEngine.PlaySound(soundStyle, player.Center);
+		}
+
+		public override void HandlePacket(BinaryReader reader, int whoAmI)
+		{
+			BossesAsNPCsMessageType msgType = (BossesAsNPCsMessageType)reader.ReadByte();
+			switch (msgType)
+			{
+				case BossesAsNPCsMessageType.PlayNetworkSound:
+					PlayNetworkSoundReceive(reader);
+					break;
+				default:
+					Logger.WarnFormat("BossesAsNPCs: Unknown Message type: {0}", msgType);
+					break;
+			}
+		}
+	}
+	internal enum BossesAsNPCsMessageType : byte
+	{
+		PlayNetworkSound
 	}
 }
