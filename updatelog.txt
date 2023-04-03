@@ -151,3 +151,4 @@
 	* Revamped King Slime's dialog. (Thanks Joby!)
 	* Made Plantera's Axe obtainable and playable!
 	* Updated the cross mod support. Now the price modifiers work with vanilla items.
+	* Updated and added many Mod Calls. Any mods adding items to shops will need to update their calls.

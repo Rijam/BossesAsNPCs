@@ -40,6 +40,7 @@ Mod version: 0.1.17
 	- Revamped King Slime's dialog. (Thanks Joby!)
 	- Made Plantera's Axe obtainable and playable!
 	- Updated the cross mod support. Now the price modifiers work with vanilla items.
+	- Updated and added many Mod Calls. Any mods adding items to shops will need to update their calls.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

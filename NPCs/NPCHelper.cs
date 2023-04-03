@@ -1100,11 +1100,17 @@ namespace BossesAsNPCs.NPCs
 		public static Condition DownedEaterOfWorlds = new("After defeating Eater of Worlds", () => BossesAsNPCsWorld.downedEoW);
 		public static Condition DownedBrainOfCthulhu = new("After defeating Brain of Cthulhu", () => BossesAsNPCsWorld.downedBoC);
 		public static Condition DownedWallOfFlesh = new("After defeating Wall of Flesh", () => BossesAsNPCsWorld.downedWoF);
+		public static Condition DownedAnyPillar = new("After defeating any Celestial Pillar", () => NPC.downedTowerSolar || NPC.downedTowerVortex || NPC.downedTowerNebula || NPC.downedTowerStardust);
+		public static Condition DownedAllPillars = new("After defeating all Celestial Pillars", () => NPC.downedTowers);
+		public static Condition UnlockedBiomeTorches = new("After receiving Torch God's Favor", () => Main.LocalPlayer.unlockedBiomeTorches);
 
 		public static Condition RescuedWizard = new("After rescuing the Wizard", () => NPC.savedWizard);
 		public static Condition UnlockOWMusicOrDrunkWorld = new("After unlocking the Otherworldly music", () => NPCHelper.UnlockOWMusic() || Condition.DrunkWorld.IsMet());
 		public static Condition CorruptionOrHardmode = new(Condition.CorruptWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CorruptWorld.IsMet() || Condition.Hardmode.IsMet());
 		public static Condition CrimsonOrHardmode = new(Condition.CrimsonWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CrimsonWorld.IsMet() || Condition.Hardmode.IsMet());
+		public static Condition UndergroundCavernsOrHardmode = new("When in the Underground or Caverns layer, or " + Condition.Hardmode.Description, () => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) || Condition.Hardmode.IsMet());
+		public static Condition HallowOrCorruptionOrCrimson = new("When in the Hallow, Corruption, or Crimson", () => Condition.InHallow.IsMet() || Condition.InCorrupt.IsMet() || Condition.InCrimson.IsMet());
+		public static Condition InIceAndHallowOrCorruptionOrCrimson = new("When in the Ice biome and " + HallowOrCorruptionOrCrimson.Description, () => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) && Condition.InSnow.IsMet() && HallowOrCorruptionOrCrimson.IsMet());
 
 		public static string TownNPCRangeS(string range) => $"Where there are {range} or more Town NPCs in the world";
 		public static string CountTownNPCsS(int number) => $"When there are {number} or more Town NPCs in the world";
