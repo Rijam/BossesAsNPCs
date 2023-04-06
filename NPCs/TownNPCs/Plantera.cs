@@ -251,7 +251,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			item = itemTexture;
 			itemFrame = itemRectangle;
 			scale = 1f;
-			horizontalHoldoutOffset = 40;
+			horizontalHoldoutOffset = -56;
 		}
 	}
 }

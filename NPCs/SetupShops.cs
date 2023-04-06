@@ -1317,20 +1317,14 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechSkull", shop, 400000);
 
-					if (NPCHelper.DownedMechBossAll())
-					{
-						NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
-					}
+					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
 				}
 
 				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeSkeletronPrime", shop, 10000);
 
-					if (NPCHelper.DownedMechBossAll())
-					{
-						NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
-					}
+					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
 				}
 				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
 				{

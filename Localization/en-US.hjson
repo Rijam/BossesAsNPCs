@@ -401,6 +401,43 @@ Mods: {
 			}
 		}
 
+		Conditions: {
+			SellExpertMode: "'Sell Expert Mode Items in Non-Expert Worlds' config is enabled"
+			SellMasterMode: "'Sell Master Mode Items in Non-Master Worlds' config is enabled"
+			SellExtraItems: "'Sell Extra Items' config is enabled"
+			TownNPCsCrossModSupport: "'Town NPCs Cross Mod Support' config is enabled"
+			GoblinSellInvasionItems: "'Goblin Tinkerer Sells Goblin Army Items' config is enabled"
+			PirateSellInvasionItems: "'Pirate Sells Pirate Invasion Items' config is enabled"
+			IsNotNpcShimmered: When the vendor is not a shimmer variant
+			Expert: "{$Conditions.InExpertMode} or {$Mods.BossesAsNPCs.Conditions.SellExpertMode}"
+			Master: "{$Conditions.InMasterMode} or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}"
+			Legendary: When in Legendary Mode or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}
+			DaytimeEoLDefated: After defeating Empress of Light during the day time
+			DownedBetsy: After defeating Betsy
+			DownedDungeonGuardian: After defeating Dungeon Guardian
+			DownedDarkMage: After defeating Dark Mage
+			DownedOgre: After defeating Ogre
+			DownedGoblinWarlock: After defeating Goblin Warlock
+			DownedMothron: After defeating Mothron
+			DownedDreadnautilus: After defeating Dreadnautilus
+			DownedEaterOfWorlds: After defeating Eater of Worlds
+			DownedBrainOfCthulhu: After defeating Brain of Cthulhu
+			DownedWallOfFlesh: After defeating Wall of Flesh
+			DownedAnyPillar: After defeating any Celestial Pillar
+			DownedAllPillars: After defeating all Celestial Pillars
+			UnlockedBiomeTorches: After receiving Torch God's Favor
+			RescuedWizard: After rescuing the Wizard
+			UnlockOWMusicOrDrunkWorld: After unlocking the Otherworldly music
+			CorruptionOrHardmode: "{$Conditions.WorldCorrupt} or {$Conditions.InHardmode}"
+			CrimsonOrHardmode: "{$Conditions.WorldCrimson} or {$Conditions.InHardmode}"
+			UndergroundCavernsOrHardmode: When in the Underground or Caverns layer, or {$Conditions.InHardmode}
+			HallowOrCorruptionOrCrimson: When in the Hallow, Corruption, or Crimson
+			InIceAndHallowOrCorruptionOrCrimson: When in the Ice biome and {$Mods.BossesAsNPCs.Conditions.HallowOrCorruptionOrCrimson}
+			TownNPCRangeS: When there are {0} or more Town NPCs in the world
+			CountTownNPCsS: When there are {0} or more Town NPCs in the world
+			EternityModeS: In Eternity Mode
+		}
+
 		Items: {
 			BeCostumeHeadpiece: {
 				DisplayName: Betsy Costume Headpiece

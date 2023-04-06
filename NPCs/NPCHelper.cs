@@ -776,18 +776,6 @@ namespace BossesAsNPCs.NPCs
 		}
 
 		/// <summary>
-		/// Returns true if all mechanical bosses have been defeated.
-		/// </summary>
-		public static bool DownedMechBossAll()
-		{
-			if (NPC.downedMechBoss1 && NPC.downedBoss2 && NPC.downedBoss3)
-			{
-				return true;
-			}
-			return false;
-		}
-
-		/// <summary>
 		/// Returns true if any boss has been defeated. (Only tracks the ones that are NPCs in this mod.)
 		/// </summary>
 		public static bool DownedAnyBoss()
@@ -1075,47 +1063,46 @@ namespace BossesAsNPCs.NPCs
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
 		/// <summary> Use ShopConditions.Expert instead </summary>
-		public static Condition SellExpertMode = new("\'Sell Expert Mode Items in Non-Expert Worlds\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode);
+		public static Condition SellExpertMode =			new("Mods.BossesAsNPCs.Conditions.SellExpertMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode);
 		/// <summary> Use ShopConditions.Master instead </summary>
-		public static Condition SellMasterMode = new("\'Sell Master Mode Items in Non-Master Worlds\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode);
-		public static Condition SellExtraItems = new("\'Sell Extra Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems);
-		public static Condition TownNPCsCrossModSupport = new("\'Town NPCs Cross Mod Support\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport);
-		public static Condition GoblinSellInvasionItems = new("\'Goblin Tinkerer Sells Goblin Army Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems);
-		public static Condition PirateSellInvasionItems = new("\'Pirate Sells Pirate Invasion Items\' config is enabled", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems);
+		public static Condition SellMasterMode =			new("Mods.BossesAsNPCs.Conditions.SellMasterMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode);
+		public static Condition SellExtraItems =			new("Mods.BossesAsNPCs.Conditions.SellExtraItems",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems);
+		public static Condition TownNPCsCrossModSupport =	new("Mods.BossesAsNPCs.Conditions.TownNPCsCrossModSupport", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport);
+		public static Condition GoblinSellInvasionItems =	new("Mods.BossesAsNPCs.Conditions.GoblinSellInvasionItems", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems);
+		public static Condition PirateSellInvasionItems =	new("Mods.BossesAsNPCs.Conditions.PirateSellInvasionItems", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems);
 
-		public static Condition IsNotNpcShimmered = new("When the vendor is not a shimmer variant", () => !Condition.IsNpcShimmered.IsMet());
-		public static Condition Expert = new(Condition.InExpertMode.Description + " or " + SellExpertMode.Description, () => Condition.InExpertMode.IsMet() || SellExpertMode.IsMet());
-		public static Condition Master = new(Condition.InMasterMode.Description + " or " + SellMasterMode.Description, () => Condition.InMasterMode.IsMet() || SellMasterMode.IsMet());
-		public static Condition Legendary = new("When in Legendary Mode or " + SellMasterMode.Description, () => Master.IsMet() && (Condition.ForTheWorthyWorld.IsMet() || Condition.ZenithWorld.IsMet()));
+		public static Condition IsNotNpcShimmered =		new("Mods.BossesAsNPCs.Conditions.IsNotNpcShimmered",	() => !Condition.IsNpcShimmered.IsMet());
+		public static Condition Expert =				new("Mods.BossesAsNPCs.Conditions.Expert",				() => Condition.InExpertMode.IsMet() || SellExpertMode.IsMet());
+		public static Condition Master =				new("Mods.BossesAsNPCs.Conditions.Master",				() => Condition.InMasterMode.IsMet() || SellMasterMode.IsMet());
+		public static Condition Legendary =				new("Mods.BossesAsNPCs.Conditions.Legendary",			() => Master.IsMet() && (Condition.ForTheWorthyWorld.IsMet() || Condition.ZenithWorld.IsMet()));
 
-		public static Condition DaytimeEoLDefated = new("After defeating Empress of Light during the day time", () => BossesAsNPCsWorld.daytimeEoLDefeated);
-		public static Condition DownedBetsy = new("After defeating Betsy", () => BossesAsNPCsWorld.downedBetsy);
-		public static Condition DownedDungeonGuardian = new("After defeating Dungeon Guardian", () => BossesAsNPCsWorld.downedDungeonGuardian);
-		public static Condition DownedDarkMage = new("After defeating Dark Mage", () => BossesAsNPCsWorld.downedDarkMage);
-		public static Condition DownedOgre = new("After defeating Ogre", () => BossesAsNPCsWorld.downedOgre);
-		public static Condition DownedGoblinWarlock = new("After defeating Goblin Warlock", () => BossesAsNPCsWorld.downedGoblinSummoner);
+		public static Condition DaytimeEoLDefated =		new("Mods.BossesAsNPCs.Conditions.DaytimeEoLDefated",		() => BossesAsNPCsWorld.daytimeEoLDefeated);
+		public static Condition DownedBetsy =			new("Mods.BossesAsNPCs.Conditions.DownedBetsy",				() => BossesAsNPCsWorld.downedBetsy);
+		public static Condition DownedDungeonGuardian = new("Mods.BossesAsNPCs.Conditions.DownedDungeonGuardian",	() => BossesAsNPCsWorld.downedDungeonGuardian);
+		public static Condition DownedDarkMage =		new("Mods.BossesAsNPCs.Conditions.DownedDarkMage",			() => BossesAsNPCsWorld.downedDarkMage);
+		public static Condition DownedOgre =			new("Mods.BossesAsNPCs.Conditions.DownedOgre",				() => BossesAsNPCsWorld.downedOgre);
+		public static Condition DownedGoblinWarlock =	new("Mods.BossesAsNPCs.Conditions.DownedGoblinWarlock",		() => BossesAsNPCsWorld.downedGoblinSummoner);
 		public static Condition DownedGoblinSummoner = DownedGoblinWarlock;
-		public static Condition DownedMothron = new("After defeating Mothron", () => BossesAsNPCsWorld.downedMothron);
-		public static Condition DownedDreadnautilus = new("After defeating Dreadnautilus", () => BossesAsNPCsWorld.downedDreadnautilus);
-		public static Condition DownedEaterOfWorlds = new("After defeating Eater of Worlds", () => BossesAsNPCsWorld.downedEoW);
-		public static Condition DownedBrainOfCthulhu = new("After defeating Brain of Cthulhu", () => BossesAsNPCsWorld.downedBoC);
-		public static Condition DownedWallOfFlesh = new("After defeating Wall of Flesh", () => BossesAsNPCsWorld.downedWoF);
-		public static Condition DownedAnyPillar = new("After defeating any Celestial Pillar", () => NPC.downedTowerSolar || NPC.downedTowerVortex || NPC.downedTowerNebula || NPC.downedTowerStardust);
-		public static Condition DownedAllPillars = new("After defeating all Celestial Pillars", () => NPC.downedTowers);
-		public static Condition UnlockedBiomeTorches = new("After receiving Torch God's Favor", () => Main.LocalPlayer.unlockedBiomeTorches);
+		public static Condition DownedMothron =			new("Mods.BossesAsNPCs.Conditions.DownedMothron",			() => BossesAsNPCsWorld.downedMothron);
+		public static Condition DownedDreadnautilus =	new("Mods.BossesAsNPCs.Conditions.DownedDreadnautilus",		() => BossesAsNPCsWorld.downedDreadnautilus);
+		public static Condition DownedEaterOfWorlds =	new("Mods.BossesAsNPCs.Conditions.DownedEaterOfWorlds",		() => BossesAsNPCsWorld.downedEoW);
+		public static Condition DownedBrainOfCthulhu =	new("Mods.BossesAsNPCs.Conditions.DownedBrainOfCthulhu",	() => BossesAsNPCsWorld.downedBoC);
+		public static Condition DownedWallOfFlesh =		new("Mods.BossesAsNPCs.Conditions.DownedWallOfFlesh",		() => BossesAsNPCsWorld.downedWoF);
+		public static Condition DownedAnyPillar =		new("Mods.BossesAsNPCs.Conditions.DownedAnyPillar",			() => NPC.downedTowerSolar || NPC.downedTowerVortex || NPC.downedTowerNebula || NPC.downedTowerStardust);
+		public static Condition DownedAllPillars =		new("Mods.BossesAsNPCs.Conditions.DownedAllPillars",		() => NPC.downedTowers);
+		public static Condition UnlockedBiomeTorches =	new("Mods.BossesAsNPCs.Conditions.UnlockedBiomeTorches",	() => Main.LocalPlayer.unlockedBiomeTorches);
 
-		public static Condition RescuedWizard = new("After rescuing the Wizard", () => NPC.savedWizard);
-		public static Condition UnlockOWMusicOrDrunkWorld = new("After unlocking the Otherworldly music", () => NPCHelper.UnlockOWMusic() || Condition.DrunkWorld.IsMet());
-		public static Condition CorruptionOrHardmode = new(Condition.CorruptWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CorruptWorld.IsMet() || Condition.Hardmode.IsMet());
-		public static Condition CrimsonOrHardmode = new(Condition.CrimsonWorld.Description + ", or " + Condition.Hardmode.Description, () => Condition.CrimsonWorld.IsMet() || Condition.Hardmode.IsMet());
-		public static Condition UndergroundCavernsOrHardmode = new("When in the Underground or Caverns layer, or " + Condition.Hardmode.Description, () => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) || Condition.Hardmode.IsMet());
-		public static Condition HallowOrCorruptionOrCrimson = new("When in the Hallow, Corruption, or Crimson", () => Condition.InHallow.IsMet() || Condition.InCorrupt.IsMet() || Condition.InCrimson.IsMet());
-		public static Condition InIceAndHallowOrCorruptionOrCrimson = new("When in the Ice biome and " + HallowOrCorruptionOrCrimson.Description, () => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) && Condition.InSnow.IsMet() && HallowOrCorruptionOrCrimson.IsMet());
+		public static Condition RescuedWizard =						new("Mods.BossesAsNPCs.Conditions.RescuedWizard",						() => NPC.savedWizard);
+		public static Condition UnlockOWMusicOrDrunkWorld =			new("Mods.BossesAsNPCs.Conditions.UnlockOWMusicOrDrunkWorld",			() => NPCHelper.UnlockOWMusic() || Condition.DrunkWorld.IsMet());
+		public static Condition CorruptionOrHardmode =				new("Mods.BossesAsNPCs.Conditions.CorruptionOrHardmode",				() => Condition.CorruptWorld.IsMet() || Condition.Hardmode.IsMet());
+		public static Condition CrimsonOrHardmode =					new("Mods.BossesAsNPCs.Conditions.CrimsonOrHardmode",					() => Condition.CrimsonWorld.IsMet() || Condition.Hardmode.IsMet());
+		public static Condition UndergroundCavernsOrHardmode =		new("Mods.BossesAsNPCs.Conditions.UndergroundCavernsOrHardmode",		() => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) || Condition.Hardmode.IsMet());
+		public static Condition HallowOrCorruptionOrCrimson =		new("Mods.BossesAsNPCs.Conditions.HallowOrCorruptionOrCrimson",			() => Condition.InHallow.IsMet() || Condition.InCorrupt.IsMet() || Condition.InCrimson.IsMet());
+		public static Condition InIceAndHallowOrCorruptionOrCrimson = new("Mods.BossesAsNPCs.Conditions.InIceAndHallowOrCorruptionOrCrimson", () => (Condition.InDirtLayerHeight.IsMet() || Condition.InRockLayerHeight.IsMet()) && Condition.InSnow.IsMet() && HallowOrCorruptionOrCrimson.IsMet());
 
-		public static string TownNPCRangeS(string range) => $"Where there are {range} or more Town NPCs in the world";
-		public static string CountTownNPCsS(int number) => $"When there are {number} or more Town NPCs in the world";
-		public static string EternityModeS = "In Eternity Mode";
-		//public static Func<bool> CountTownNPCsFb(int number) => () => NPCHelper.CountTownNPCs() >= number;
+		public static string TownNPCRangeS(string range) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.TownNPCRangeS", range);
+		public static string CountTownNPCsS(int number) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.CountTownNPCsS", number);
+		public static string EternityModeS = "Mods.BossesAsNPCs.Conditions.EternityModeS";
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 	}
