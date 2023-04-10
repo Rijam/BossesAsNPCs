@@ -29,7 +29,7 @@ https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.1.17
+Mod version: 0.2.0
 	- Updated prices to match 1.4.4 drop rates.
 	- Town NPCs now become rainbow when Shimmered.
 	- Added support for Wikithis.

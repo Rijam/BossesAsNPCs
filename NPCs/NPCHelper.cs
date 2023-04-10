@@ -1005,7 +1005,7 @@ namespace BossesAsNPCs.NPCs
 		}
 
 		// This is used to bypass the NPCs unloading from the All In One config.
-		public static readonly bool bypassMode = true;
+		public static readonly bool bypassMode = false;
 
 		/// <summary>
 		/// Determines whether the NPC should unload based on the All In One config.

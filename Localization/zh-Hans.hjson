@@ -410,7 +410,7 @@ Mods: {
 			// IsNotNpcShimmered: When the vendor is not a shimmer variant
 			// Expert: "{$Conditions.InExpertMode} or {$Mods.BossesAsNPCs.Conditions.SellExpertMode}"
 			// Master: "{$Conditions.InMasterMode} or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}"
-			// Legendary: When in Legendary Mode or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}
+			// Legendary: In Legendary Mode or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}
 			// DaytimeEoLDefated: After defeating Empress of Light during the day time
 			// DownedBetsy: After defeating Betsy
 			// DownedDungeonGuardian: After defeating Dungeon Guardian
@@ -1166,6 +1166,8 @@ Mods: {
 				Temple1: 当心陷阱...除非您禁用所有这些。
 				Temple2: 我直接融入这些墙壁！
 				Plantera: 我是世纪之花金属乐队的鼓手，我非常擅长打人。
+				// Automaton1: "{0} and I are very different. How does anyone get us confused?"
+				// Automaton2: I am not made with Bluemagic. Please stop asking.
 			}
 
 			EmpressOfLight: {

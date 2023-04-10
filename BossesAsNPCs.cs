@@ -206,6 +206,9 @@ namespace BossesAsNPCs
 						"UnlockOWMusicOrDrunkWorld" => ShopConditions.UnlockOWMusicOrDrunkWorld,
 						"CorruptionOrHardmode" => ShopConditions.CorruptionOrHardmode,
 						"CrimsonOrHardmode" => ShopConditions.CrimsonOrHardmode,
+						"UndergroundCavernsOrHardmode" => ShopConditions.UndergroundCavernsOrHardmode,
+						"HallowOrCorruptionOrCrimson" => ShopConditions.HallowOrCorruptionOrCrimson,
+						"InIceAndHallowOrCorruptionOrCrimson" => ShopConditions.InIceAndHallowOrCorruptionOrCrimson,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				case "AddToShop":

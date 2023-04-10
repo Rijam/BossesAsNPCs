@@ -1,5 +1,6 @@
 /*
 using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.Personalities;
 using Terraria.ID;
@@ -30,17 +31,17 @@ namespace MyMod
 
 				// The 3rd parameter is which shop you want to add your item to. A list of valid strings are at the bottom of this file.
 				// The 4th parameter is the item you want to be sold. (int data type)
-				// The 5th parameter is the availability. The item will only be sold once this condition is true. (Func<bool> data type)
+				// The 5th parameter is the availability. The item will only be sold once this condition is true. (List<Condition> data type)
 
 				// Parameter and data types for each call:
 				// "DefaultPrice"
-				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, Func<bool> availability)
+				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, List<Condition> availability)
 				// "CustomPrice"
-				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, Func<bool> availability, int customPrice)
+				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, List<Condition> availability, int customPrice)
 				// "WithDiv"
-				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, Func<bool> availability, float priceDiv)
+				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, List<Condition> availability, float priceDiv)
 				// "WithDivAndMulti"
-				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, Func<bool> availability, float priceDiv, float priceMulti)
+				//     bossesAsNPCs.Call(string call, string priceMode, string shop, int itemType, List<Condition> availability, float priceDiv, float priceMulti)
 
 
 				// Here we want to add an item to the Goblin Tinkerer's shop that is a 10% drop chance if the Goblin Warlock has been defeated.
@@ -49,16 +50,17 @@ namespace MyMod
 						"WithDiv", // Select the price mode. "WithDiv" will take a float as the 6th parameter
 						"GoblinTinkerer", // Select the shop we want to add the item to. In this case, Goblin Tinkerer
 						ModContent.ItemType<My10PercentDropChanceItem>(), // Our mod item that we want to be sold
-						() => (bool)bossesAsNPCs.Call("downedGoblinSummoner"), // The Func<bool> for our availability. We call to see if the Goblin Warlock has been defeated.
+						new List<Condition>() { (Condition)bossesAsNPCs.Call("GetCondition", "DownedGoblinWarlock") }, // The List<Condition> for our availability. We call to see if the Goblin Warlock has been defeated.
 						0.1f); // The float that will divide our price.
 
 				// Here is an example selling an Expert Mode exclusive item at the value of the item.
-				// We set the Func<bool> to Main.expertMode OR if the Bosses As NPCs config "Sell Expert Mode Items in Non-Expert Worlds" is set to true.
-				bossesAsNPCs.Call("AddToShop", "DefaultPrice", "IceQueen", ModContent.ItemType<MyExpertItem>(), () => Main.expertMode || (bool)bossesAsNPCs.Call("SellExpertMode"));
+				// We set the List<Condition> to Main.expertMode OR if the Bosses As NPCs config "Sell Expert Mode Items in Non-Expert Worlds" is set to true.
+				// This is a Condition that is already defined in Bosses As NPCs and we can get that condition with another Call.
+				bossesAsNPCs.Call("AddToShop", "DefaultPrice", "IceQueen", ModContent.ItemType<MyExpertItem>(), new List<Condition>() { (Condition)bossesAsNPCs.Call("GetCondition", "Expert") });
 
 				// If it makes it easier for you, you can create variables.
 				int itemType = ModContent.ItemType<MyVanityOrMatieralItem>(); // Our item that we want to use
-				Func<bool> availability = () => (bool)bossesAsNPCs.Call("SellExtraItems"); // Only available if the "Sell Extra Items" config is enabled.
+				List<Condition> availability = new() { (Condition)bossesAsNPCs.Call("GetCondition", "SellExtraItems") }; // Only available if the "Sell Extra Items" config is enabled.
 
 				// Here we set the price of the item. This item of ours has a 5% drop chance. We want our price to match that.
 				// We manually set the value of the item to 30000 (3 gold).
@@ -70,11 +72,11 @@ namespace MyMod
 				// Here is an example using a vanilla item. Here we are adding Souls of Light to the Empress of Light's shop for 5 gold. The item is always available.
 				// You need to cast the ItemID as an (int).
 				// Item.buyPrice() is a nice method that will make the correct coin value for you.
-				bossesAsNPCs.Call("AddToShop", "CustomPrice", "EmpressOfLight", (int)ItemID.SoulofLight, () => true, Item.buyPrice(gold: 5));
+				bossesAsNPCs.Call("AddToShop", "CustomPrice", "EmpressOfLight", (int)ItemID.SoulofLight, new List<Condition>(), Item.buyPrice(gold: 5));
 
 
-				// This last example wants to add an item that is 20 times more expensive than its value if Moon Lord has been defeated.
-				bossesAsNPCs.Call("AddToShop", "WithDivAndMulti", "Golem", ModContent.ItemType<MyExpensiveItem>(), () => NPC.downedMoonlord, 1f, 20f);
+				// This last example wants to add an item that is 20 times more expensive than its value if Moon Lord has been defeated and in the Jungle.
+				bossesAsNPCs.Call("AddToShop", "WithDivAndMulti", "Golem", ModContent.ItemType<MyExpensiveItem>(), new List<Condition>() { Condition.DownedMoonLord, Condition.InJungle }, 1f, 20f);
 
 				// For all of the Turbo Nerds out there who want to see how this is implemented in the mod, look at NPCs/SetupShops.cs (or BossesAsNPCs.cs for the Mod Calls)
 			}
@@ -196,6 +198,32 @@ namespace MyMod
  *    "IceQueen"
  *    "MartianSaucer"
  *    "TorchGod"
+ * "GetCondition"                  Condition
+ *    "TownNPCsCrossModSupport"
+ *    "SellExtraItems"
+ *    "GoblinSellInvasionItems"
+ *    "PirateSellInvasionItems"
+ *    "IsNotNpcShimmered"
+ *    "Expert"
+ *    "Master"
+ *    "DaytimeEoLDefated"
+ *    "DownedBetsy"
+ *    "DownedDungeonGuardian"
+ *    "DownedDarkMage"
+ *    "DownedOgre"
+ *    "DownedGoblinWarlock"
+ *    "DownedMothron"
+ *    "DownedDreadnautilus"
+ *    "DownedEaterOfWorlds"
+ *    "DownedBrainOfCthulhu"
+ *    "DownedWallOfFlesh"
+ *    "RescuedWizard"
+ *    "UnlockOWMusicOrDrunkWorld"
+ *    "CorruptionOrHardmode"
+ *    "CrimsonOrHardmode"
+ *    "UndergroundCavernsOrHardmode"
+ *    "HallowOrCorruptionOrCrimson"
+ *    "InIceAndHallowOrCorruptionOrCrimson"
  * "AddToShop"                     bool
  *    "DefaultPrice"
  *    "CustomPrice"

@@ -170,6 +170,18 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Plantera"));
 			}
+			if (ModLoader.TryGetMod("MagicStorage", out Mod magicStorage))
+			{
+				if (magicStorage.TryFind<ModNPC>("Golem", out ModNPC automaton))
+				{
+					int automatonWorld = NPC.FindFirstNPC(automaton.Type);
+					if (automatonWorld >= 0)
+					{
+						chat.Add(Language.GetTextValue(path + "Automaton1", Main.npc[automatonWorld].GivenName));
+						chat.Add(Language.GetTextValue(path + "Automaton2"));
+					}
+				}
+			}
 			return chat;
 		}
 		public override void SetChatButtons(ref string button, ref string button2)

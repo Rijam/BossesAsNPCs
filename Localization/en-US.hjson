@@ -411,7 +411,7 @@ Mods: {
 			IsNotNpcShimmered: When the vendor is not a shimmer variant
 			Expert: "{$Conditions.InExpertMode} or {$Mods.BossesAsNPCs.Conditions.SellExpertMode}"
 			Master: "{$Conditions.InMasterMode} or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}"
-			Legendary: When in Legendary Mode or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}
+			Legendary: In Legendary Mode or {$Mods.BossesAsNPCs.Conditions.SellMasterMode}
 			DaytimeEoLDefated: After defeating Empress of Light during the day time
 			DownedBetsy: After defeating Betsy
 			DownedDungeonGuardian: After defeating Dungeon Guardian
@@ -1167,6 +1167,8 @@ Mods: {
 				Temple1: Watch out for traps... unless you disabled all of them.
 				Temple2: I blend right into these walls!
 				Plantera: I am the drummer for Plantera's metal band. I am very good at smacking.
+				Automaton1: "{0} and I are very different. How does anyone get us confused?"
+				Automaton2: I am not made with Bluemagic. Please stop asking.
 			}
 
 			EmpressOfLight: {
