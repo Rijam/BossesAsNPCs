@@ -1577,6 +1577,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeEars>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
@@ -2036,7 +2037,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ItemID.SanguineStaff) { shopCustomPrice = 50000 * 5 }, Condition.Hardmode);  //50% drop chance in normal mode, but I wanted it to be more expensive
 
 				shop.Add(new Item(ItemID.BloodMoonMonolith) { shopCustomPrice = (int)Math.Round(10000 / 0.1111) });
-				shop.Add(new Item(ItemID.BloodMoonMonolith) { shopCustomPrice = (int)Math.Round(1000 / 0.05) }, Condition.BloodMoon); // Don't actually know the odds.
+				shop.Add(new Item(ItemID.DreadoftheRedSea) { shopCustomPrice = (int)Math.Round(1000 / 0.05) }, Condition.BloodMoon); // Don't actually know the odds.
 
 				shop.Add(new Item(ItemID.MusicBoxEerie) { shopCustomPrice = 20000 * 10 },
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);

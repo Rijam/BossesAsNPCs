@@ -88,17 +88,17 @@ Mods: {
 				TooltipSpawnAllInOne:
 					'''
 					This option changes "All in One NPC Mode".
-					  When 0: Standard behavior.
-					  When 1: Unloads the any Boss NPCs who's config is off.
-					    Instead, this new Boss NPC and Boss NPCs who's configs are on will be loaded.
-					    The shops Boss NPCs who's configs are off will now be sold by this new NPC.
-					  When 2: Unloads all of the other Boss NPCs from this mod.
-					    Instead, only this one Boss NPC will be loaded.
+					  When "Off (Normal)": Standard behavior.
+					  When "Mixed": Unloads the any Boss NPCs who's config is off.
+					    Instead, a new Torch God NPC and Boss NPCs who's configs are on will be loaded.
+					    The shops Boss NPCs who's configs are off will now be sold by the Torch God.
+					  When "Only One": Unloads all of the other Boss NPCs from this mod.
+					    Instead, only the Torch God will be loaded.
 					    It will have shops for each boss' loot when they have been defeated.
 					    The other configs for each Boss NPC will now determine which shops are available.
 
 					  Change this config if you have too many Town NPCs or don't want as many Town NPCs.
-					Default value: 0
+					Default value: "Off (Normal)"
 					Requires a Reload.
 					'''
 				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   King Slime Can Spawn"
@@ -336,6 +336,12 @@ Mods: {
 					Default value: On
 					'''
 				MultiplayerMessage: You are not the server owner so you can not change this config!
+
+				AllInOneOptions: {
+					Off: Off (Normal)
+					Mixed: Mixed
+					OnlyOne: Only One
+				}
 			}
 		}
 
@@ -365,7 +371,7 @@ Mods: {
 				Pumpking: Defeat the Pumpking
 				IceQueen: Defeat the Ice Queen
 				MartianSaucer: Defeat the Martian Saucer
-				TorchGod: Defeat any boss with All in One NPC Mode set to 1 or 2.
+				TorchGod: Defeat any boss with All in One NPC Mode set to "Mixed" or "Only One".
 			}
 		}
 
@@ -531,6 +537,11 @@ Mods: {
 
 			EoLCostumeLegpiece: {
 				DisplayName: Empress Costume Legpiece
+				Tooltip: ""
+			}
+
+			EoLCostumeEars: {
+				DisplayName: Empress Costume Ears
 				Tooltip: ""
 			}
 
@@ -933,887 +944,13 @@ Mods: {
 		}
 
 		Biomes: {
-			GraveyardBiome.DisplayName: Graveyard
+			GraveyardBiome: {
+				DisplayName: Graveyard
+				TownNPCDialogueName: the Graveyard
+			}
+
 			SkyBiome.DisplayName: Sky
 			UnderworldBiome.DisplayName: Underworld
-		}
-
-		NPCDialog: {
-			// {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
-			// If a line starts with {0}, the line must be in quotes.
-			KingSlime: {
-				Default1: Have you seen that fellow Ninja person? I'd like to give my sincere apologies for... partake of a him; the taste was awful.
-				Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
-				Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
-				Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
-				# Not changed
-				Default5: Whatever rumor you heard that all slimes originate from one source is wrong.
-				Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
-				Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
-				Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
-				Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
-				# Not changed
-				Rare: Gel may be 'tasty', but don't get any ideas!
-				Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
-				Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
-				QS1: You may clutch a victory over me, but we'll see how you handle the other half of royal family.
-				QS2: I see, you bested me and my darling too. Well, a fine foe you were, enjoy your victory... until our next generation put you into a place!
-				QS3: You want to know how I got such a beautiful wife as Queen Slime, I know, I know. She's just got a thing for a shiny stones, and so she got one.
-				QS4: Honestly, I don't mind Queen Slime ruling over two thirds of my land, since seeing her so happy is so much more worth it.
-				SlimeRain: To command my people to stop ruining your day? I'm a monarchist, peasant, not a tyrant!
-				Rain1: So giant crowns are a thing, but not a giant umbrellas? Shenanigans, I say, shenanigans!
-				Rain2: Why do my people even wear umbrellas during rain? Don't be silly, consuming water gives you so much water weigh, it's horrible. And I do not want competition.
-				Eclipse: How could all of those monsters gather outside... and without a Blob?! That's insulting!
-				BloodMoon: '''"Blood slimes"? We're not vampires, and blood tastes really bad. Even worse, we might become iron slimes!'''
-				WindyDay1: All those slimes flying around on their balloons, and people still call us low-intelligent. Low-intelligent creatures wouldn't be able to create a vast empire, now would they?
-				WindyDay2: What do you mean that {0} has sudden shortage on balloons? By my good name, I don't know anything about this!
-				Thunderstorm: Did I tell you how one of my fellow slimes was struck by lightning and consumed it? It could've become one of my best man, but sadly, it then fell into a lake.
-				Graveyard: This place feels me with melancholy, and I didn't even knew slimes could feel such a thing.
-				EoC: Words can't tell you how much I adore that Eye of Cthulhu. What a nice beast guardian it could be to a mighty royalty like me!
-				Pk: Pumpking may have some troubles, but I really like his way of managing. He even gifted me my very own Hoppin' Jack!
-				DF: Duke Fishron may not be a king, but being duke is good enough for me. To excuse his smell, at least.
-				Guide: I like {0}, we're pretty much partners. He teaches newbies how to survive, and I teach them how to die. What do you think all that contact damage is for?
-				DyeTrader: It's nice to have {0} around, his tonics may be expensive, but they are tasty too.
-				Golfer: "{0} really knows how to have a great time, I might even learn how to play golf one day."
-				Betsy: I knew I wanted a dragon, but not a fire one! Still, Betsy seems to behave well enough to make me just a bit more anxious than I should.
-				SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
-				TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
-			}
-
-			EyeOfCthulhu: {
-				Default1: I am the Eye of Cthulhu.
-				Default2: I have my eye on you...
-				Default3: Besides that tree or that bunny, I think I am the mascot of this world.
-				Default4: Somebody once called me the 'Eye of Terror'.
-				Default5: I have been defeated in three separate universes! How is that fair?
-				Default6: What is your fascination with eyes anyway?
-				Party: A party! Surely to celebrate my status as the best EYEcon!
-				// Rez and Spaz being Retinazer and Spazmatism.
-				RezSpaz: Rez, Spaz, and I like to socialize.
-				ML: There is nothing truer than the original!
-				EoC: I'm so popular that they put me on merchandise.
-			}
-
-			EaterOfWorlds: {
-				Default1: I am the Eater of Worlds.
-				Default2: No, I am not Cthulhu's spine. Where did you even hear that?
-				Default3: Which way to the nearest restroom?! I think I'm going to vomit.
-				Default4: Of course piercing weapons are effective -- they go right through you!
-				Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
-				Party: You might have to start calling the "Eater of Cake" after this party!
-				Expert: Your explosives are 80% less effective against me in this world!
-				Evil: Yes! Let the Corruption spread!
-				Good: That nasty Hallow is ruining my plans of spreading the Corruption!
-				Dryad: I'm not sure if you have noticed, but {0} really hates me.
-			}
-
-			BrainOfCthulhu: {
-				Default1: I am the Brain of Cthulhu.
-				Default2: Cthulhu was an intelligent individual. I know, I was his brain.
-				Default3: My Creepers allow me to see. They also act as good meat shields.
-				Default4: The Crimson is one giant living organism.
-				Default5: Screams echo around you telling you to purchase something.
-				Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
-				Blood: The hive mind of the Crimson only grows stronger!
-				Good: The Hallow poses a threat to spreading of the Crimson!
-				Dryad: "{0} despises my presence."
-				// quotes are important on this one
-				Mechanic: Be glad that you rescued {0} before she could finish building the mechanical version of me.
-			}
-
-			QueenBee: {
-				Default1: I am the Queen Bee.
-				Default2: My larvae are very delicate, please be careful.
-				Default3: Don't worry, my wings are, in fact, large enough to allow me to fly.
-				Default4: Honey has great healing properties, just don't get stuck in it.
-				Default5: I hope you don't have melissophobia.
-				Default6: What? Expecting me to say "Buzz Buzz"?
-				Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
-				Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
-				NotTheBees1: I feel very at home in this land.
-				NotTheBees2: Ah, jungle as far as my compound eyes can see!
-			}
-
-			Skeletron: {
-				Default1: I am Skeletron.
-				Default2: I'm the backbone of this world.
-				Default3: I am what is left of Cthulhu's skeleton.
-				Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
-				Rare: Sans what? I don't know what you are talking about.
-				Party: I offered to host this party in the Dungeon but nobody seemed interested.
-				Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
-				Clothier: "{0} was such a great host! We should get together again some time!"
-				// quotes are important on this one
-				SP: If you thought I couldn't get any more awesome, check out Skeletron Prime!
-				DG: Impressive, you managed to defeat my Guardian form. Here, have this key. I'm not sure what it does, so you figure it out.
-				// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron is such an awesome guy.
-			}
-
-			Deerclops: {
-				Default1: I am Deerclops.
-				Default2: Make sure to eat and keep your sanity up!
-				Default3: Stay out of the darkness, or she'll get you...
-				Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
-				Default5: Everyone else gets an achievement; where is mine?
-				Party: Oh a party! There better be a big feast for all of us!
-				Snow: Are you going to hold a feast of some kind in this winter weather?
-				Betsy: I heard Betsy is from another world, too.
-				TheConstant1: This world reminds of the place where I am from.
-				TheConstant2: Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!
-			}
-
-			WallOfFlesh: {
-				Default1: I am the Wall of Flesh.
-				Default2: You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!
-				Default3: Oh, don't look so horrified!
-				Default4: Let me have a little lick. Kidding! I'm just messing with you...
-				Default5: I hope you're prepared for the effects of the "V".
-				Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
-				Party: There are plenty of desserts at this party, but is any meat being served?
-				NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
-				Expert: It may be gross for you, but consuming my heart will give you extra strength!
-				Guide1: Are {0} and I the same person? It's hard to say...
-				Guide2: "{0} is certainly no stranger to burns."
-				// quotes are important on this one
-				Calamity1: Can't you read? Smashing Altars won't give you new ores!
-				Calamity2: Confused about the Altars? Here's a tip: read the label on the Pwnhammer!
-				PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
-				PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
-			}
-
-			QueenSlime: {
-				Default1: I am the Queen Slime.
-				Default2: Just a reminder that touching living slimes will dissolve your flesh.
-				Default3: My defeat will not stop my army of slimes!
-				Default4: I would prefer it if you stopped bouncing objects off of me.
-				Rare: Pink Gel may be 'sweet', but get any ideas!
-				Party: I expected this party to be spectacular. I am not disappointed.
-				KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
-				KS2: You have bested the slime oligarchy. I commend you.
-			}
-
-			TheDestroyer: {
-				Default1: I am The Destroyer.
-				Default2: What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!
-				Default3: I guess Cthulhu won't be getting his replacement spine after all.
-				Default4: You feel vibrations deep within your pockets... so buy something!
-				Party: I better be invited to this party! If I'm not, I'll crash this party!
-				Mechanic: "{0} was the one who built me, you know."
-			}
-
-			Retinazer: {
-				Default1: I am Retinazer, one of The Twins.
-				Default2: I prefer to say back and watch.
-				Default3: Spazmatism can be a little hyper sometimes.
-				Default4: Greetings, Terrarian.
-				Default5: Did you know that all the mechanical bosses shoot a red laser?
-				Party: Will this party include a laser rave?
-				SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
-				OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
-				Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
-			}
-
-			Spazmatism: {
-				Default1: I am Spazmatism, one of The Twins.
-				// Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
-				Default2: Uh sorry, I don't know who Sclerepugnant is.
-				Default3: I am fresh out of Ichor, but I have plenty of Cursed Flames!
-				Default4: HEY, it's the Terrarian!
-				Default5: This is going to be a terrible night... if you don't buy something!
-				Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
-				RezEoC: Eye of Cthulhu, Rez, and I like to talk.
-				OpticStaff: Those mini Spazmatisms are so cute!
-				Mechanic: Go blame {0}, she's the one who made me!
-			}
-
-			SkeletronPrime: {
-				Default1: I am Skeletron Prime.
-				Default2: I am selling my soul to you, literally!
-				Default3: Nope. I'm not sure who Ocram is. Sorry.
-				Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
-				Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
-				Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
-				Mechanic: I'd like to thank {0} for giving me such awesome weapons.
-				// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron is a pretty cool dude.
-			}
-
-			Plantera: {
-				Default1: I am Plantera.
-				Default2: Why don't you stop and smell the roses?
-				Default3: I'm very protective of my bulbs, please don't disturb them.
-				Default4: Sorry if I seem snappy... get it?
-				Default5: I grow restless... for you to buy something!
-				Band1: I was thinking of starting a band...
-				Band1Party: This party needs a musical performance of some sort!
-				Band2: I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.
-				Band2Party: My band should play at one these parties in the future...
-				Band3: The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.
-				Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
-				Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
-				Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
-				MudBud: Look at that little Plantero go!
-			}
-
-			Golem: {
-				Default1: I am Golem.
-				Default2: I am not a push-over. Seriously, try to push me over!
-				Default3: Do you want a Picksaw? Luckily, I have one for sale!
-				Party: I'm not used to being part of such celebrations. I like it!
-				WitchDoctor: I shall protect {0} at all costs.
-				ForTheWorthy: I'm just as big as when I fought you!
-				Surface: At least there is more sunlight up here.
-				Temple1: Watch out for traps... unless you disabled all of them.
-				Temple2: I blend right into these walls!
-				Plantera: I am the drummer for Plantera's metal band. I am very good at smacking.
-				Automaton1: "{0} and I are very different. How does anyone get us confused?"
-				Automaton2: I am not made with Bluemagic. Please stop asking.
-			}
-
-			EmpressOfLight: {
-				Default1: I am the Empress of Light.
-				Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
-				Default3: Don't you dare touch those butterflies!
-				Default4: If you want a real challenge, fight me during the day.
-				Default5: '''"A beautiful bullet hell"? I don't use any firearms, but I am beautiful.'''
-				// quotes and backslashes are important on this one
-				Default6: I bet you thought all fairies were small, didn't you?
-				Default7: My empire? That's a story for another time.
-				Default8:
-					'''
-					Don't be silly, there is no Emperor of Night.
-
-					Is there?
-					'''
-				Rare1: Don't ask about my tentacles...
-				Rare2: Is it a mouth or a nose?
-				Good: I applaud you for spreading the Hallow. Good job!
-				NoEvilBlood: I applaud you for removing the evil in this world. Good job!
-				Dryad: Buy as many Hallow Seeds from {0} as you can!
-				Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
-				Party: I can put on real light show for this party!
-				Costume: That's quite the stunning outfit you have on. Following in my image I see!
-				BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
-			}
-
-			DukeFishron: {
-				Default1: I am Duke Fishron.
-				Default2: I'm the Duke, baby!
-				Default3: It's time to eat worms and blow bubbles, and I'm all out of bubbles.
-				Default4: Have you ever been to a sewer? I have, met a lot of mutants down there.
-				Default5: How strong does the wind have to be to be able to pick up water and sharks?
-				Default6: A third pig, a third fish, a third dragon, completely awesome!
-				Party: I'm the only person who can eat like a pig and get away with it!
-				FargosMutantMod: "{0} has some pretty nice looking wings."
-				Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
-				Calamity2: I haven't seen my father in a long time...
-			}
-
-			Betsy: {
-				Default1: I am Betsy.
-				Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
-				Default3: I'm a real boss, I promise!
-				Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
-				Party: Stick around; we're going to see how many candles I can light with one breath of fire!
-				FargosMutantMod: Where did {0} get his wings?
-				SGAmod: Good to see another dragon like {0}.
-			}
-
-			LunaticCultist: {
-				Default1: I am the Lunatic Cultist.
-				Default2: My defeat will not stop my cult!
-				Default3: Every good cult needs some sort of hooded figure!
-				PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
-				PostML: Not even Cthulhu could stop you? I'm impressed.
-				Party: Is this a costume party? I'm already wearing a mask.
-				Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
-				Plantera: My mysterious chanting is perfect for Plantera's metal band.
-				Dusk: Dusk is my favorite time of the day.
-				PbonesUtilities: I quite like the look of that Mysterious Trader's attire.
-			}
-
-			MoonLord: {
-				Default1: I am the Moon Lord.
-				Default2: I don't know who Steve is, but at least I found my legs.
-				Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
-				Default4: You are quite the fighter. You went out of your way to defeat me.
-				Default5: The Celestial Pillars were sent to conquer your world.
-				Default6: No, there is no 'Sun Lord'.
-				Default7: Why are you asking me to craft some love?
-				Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
-				Dryad: I've decided to let {0} live. She is the last of her kind anyway.
-				LunaticCultist: It's nice to have people worship me, as they should be.
-				Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
-				TorchMerchant: Are you sure that {0} is not... Him?
-				NoTorchGod: There is only one other God that I fear. Luckily, it only haunts torches.
-				TorchGod: Stay away from The Torch God! His power is... inextinguishable.
-				TorchGodVeryClose: Just pretend like we are talking until Torchy leaves.
-			}
-
-			Dreadnautilus: {
-				Default1: I am Dreadnautilus.
-				Default2: Now we are really stretching the definition of boss!
-				Default3: Some people mistakenly call me "Blood Nautilus". Where did that come from?
-				Default4: Have you seen my trophy? I lost it, unfortunately.
-				Party: The punch bowl at this party reminds me of blood. Tasty!
-				Rare: What even is a "Conch of Fish"?
-				DayNoRain: Ugh, it's so bright out during the day! I wish the clouds would cover the sun.
-				Night: It's easy to see at night, is it not for you?
-				Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, though.
-				BloodMoon1: I don't get what the fuss is all about, I love the Blood Moon!
-				BloodMoon2: The {$ItemName.Deathweed} bloom tonight. Don't forget to harvest them!
-				KillCount: You have slain me {0} times. Have you enjoyed it?
-				Zoologist: See, even {0} likes the Blood Moon! She blends in with the red environment, too!
-			}
-
-			Mothron: {
-				Default1: I am Mothron.
-				Default2: I'm honored to be considered a boss!
-				Default3: Do you not put your children to work as soon as they are hatched?
-				Default4: A lot of people really want this rusty old sword that I have. What value does it have to you?
-				Default5: I accidentally ate a rusty old sword. I thought it was candy! Do you still want it?
-				Default6: Oh, hello! I hope you brought your dust pan with you!
-				Party: So many fancy lights! I love parties!
-				KillCount: You defeated me {0} times in this world. What else are you looking for?
-				Deerclops: Deerclops' fuzzy hair reminds me of somebody else I know...
-				WitchDoctor: "{0}'s scales reminds me of somebody else I know..."
-				Merchant: Do you know if {0} sells any lamps? Lanterns work, too. Just asking.
-				EoC: Eye of Cthulhu is eying the yoyo that I have. They can have it; I don't even know why I have it in the first place.
-				UndergroundJungle: Why is it that those moths drop butterfly dust?
-				TorchMerchant: "{0} is so bright! They always keep me company at night!"
-			}
-
-			Pumpking: {
-				Default1: I am the Pumpking.
-				Default2: Don't get on my bad side!
-				Default3: I don't get the whole 'pumpkin spice' craze.
-				Default4: They are scythes, not sickles! Get it right!
-				Party: Is this the type of party that involves passing out candy? I sure hope it is!
-				FargosMutantMod: "{0}'s hat suits him quite nicely."
-			}
-
-			IceQueen: {
-				Default1: I am the Ice Queen.
-				Default2: Don't you dare make any cool puns. That would not be nICE.
-				Default3: That snowmen mafia would be no match against me.
-				Default4: How about a friendly snowball fight?
-				Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
-				Santa1: Have you been good this year for Santa Claus?
-				Santa2: Instead of getting coal this year, you are getting a beating from me!
-			}
-
-			MartianSaucer: {
-				Default1: I am the Martian Saucer.
-				Default2: Do you believe in aliens? Well you should, you're looking right at one.
-				Default3: What? Didn't think a robot could be sentient?
-				Default4: I hope you have your tin-foil hat on.
-				Default5: Don't worry, I'm not going to probe you. That's that job for a Martian Scientist.
-				Default6: Martians are shorter than you Terrarians. As a result, your dwellings large enough for me in this form.
-				Default7: Maybe you Terrarians aren't so bad after all...
-				Default8:
-					'''
-					This sentence is false.
-					...Don't answer that.
-					'''
-				Party: Parties entail such strange decor and customs that I am not used to.
-				RijamsMod: I haven't seen a species like {0} before.
-			}
-
-			TorchGod: {
-				Default1: I am The Torch God.
-				Default2: Your greatest foes drop the greatest loot; buy it here!
-				Default3: Placing the correct torches in their respective biomes will increase your luck! No need to thank me!
-				Default4: Are you concerned about placing open flame torches in a wooden house? Do not fret, the wood will not catch fire!
-				Default5: No fear, mortal, placing the wrong torches in the current biome will not decrease your luck below 0!
-				Default6: Not all flames extinguish with water. Some flames are cursed to be lit forever.
-				Default7: You do know how to stop-drop-and-roll, right?
-				Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
-				Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
-				Rare: Haha! The fire IS shooting at you!
-				HasFavor1: My favor has allowed you to magically change the type of torches you place. Use standard torches for the magic to work.
-				HasFavor2: Did you have a fun time attempting my challenge? I sure did!
-				NoFavor1: You have not proven yourself to me yet. Once you have, I will offer you a favor.
-				NoFavor2: Prove to me that you are worthy by surviving my little challenge. A great reward is waiting for you.
-				Nurse: Fire is very destructive to your mortal tissues. Luckily, {0} is experienced with treating burns.
-				MoonLord: Hmm.. the Moon Lord seems very cautious around me. Rightfully so.
-				TorchMerchant: A fellow being of flame. I quite like {0}.
-				NameIsRedigit: I owe everything I am to you, {0}. You are the true Torch God!
-				Overhaul: Discard what I previously said about wood not catching fire; The fire seems awfully hungry today...
-			}
-		}
-
-		TownNPCMood: {
-			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
-			# {BiomeName} will be replaced with the name of the biome preceded by the. Example "the Forest", "the Corruption", "the Hallow".
-			# {NPCName} will be replaced by the specified Town NPC's name.
-			KingSlime: {
-				Content: There were the worst of times, there were the best of times, and now times are pretty nice.
-				NoHome: The whole world is my kingdom! Still, I would love to have my castle in said kingdom.
-				LoveSpace: I like it quiet, helps me sleep better. Yes we do.
-				FarFromHome: Oh home, my dear home! Oh, wait, I can teleport, how silly of me.
-				DislikeCrowded: Oh, what a crowd! Who are you little people? Where do you keep coming from?!
-				HateCrowded: This castle is much too crowded for me!
-				LikeBiome: If not for my darling, I doubt I could see how beautiful {BiomeName}.
-				LoveBiome: Ah {BiomeName}, so full of newbies and critters to prey- to conquer!
-				DislikeBiome: What an awful place to live, {BiomeName}! Snow just keeps falling on my head and it's not even tasty!
-				HateBiome: Oh my, what a place {BiomeName} is! As if I was not corrupted enough already!
-				LikeNPC: "{NPCName} is fitting my style pretty nicely, too."
-				LikeNPC_Princess: "{NPCName} is such a well-behaved girl, she might even know good manners better than me!"
-				LoveNPC: "{NPCName} is such a nice company to have!"
-				DislikeNPC: "{NPCName} is like a serf to me."
-				HateNPC: "{NPCName} is the type of person I'd banish from my kingdom!"
-			}
-
-			EyeOfCthulhu: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			EaterOfWorlds: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: "{BiomeName} isn't suitable for housing."
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			BrainOfCthulhu: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: "{BiomeName} isn't suitable for housing."
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			QueenBee: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Skeletron: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: "{BiomeName} isn't suitable for housing."
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Deerclops: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			WallOfFlesh: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			QueenSlime: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			TheDestroyer: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Retinazer: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Spazmatism: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			SkeletronPrime: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Plantera: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Golem: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			EmpressOfLight: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			DukeFishron: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Betsy: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			LunaticCultist: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			MoonLord: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Dreadnautilus: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Mothron: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			Pumpking: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			IceQueen: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			MartianSaucer: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
-
-			TorchGod: {
-				Content: I feel content.
-				NoHome: I would like a home.
-				LoveSpace: I love how there is so much space.
-				FarFromHome: I am far from my home.
-				DislikeCrowded: I dislike the crowd.
-				HateCrowded: I hate the crowd.
-				LikeBiome: I like {BiomeName}.
-				LoveBiome: I love {BiomeName}.
-				DislikeBiome: I dislike {BiomeName}.
-				HateBiome: I hate {BiomeName}.
-				LikeNPC: I like {NPCName}.
-				LikeNPC_Princess: I like {NPCName}.
-				LoveNPC: I love {NPCName}.
-				DislikeNPC: I dislike {NPCName}.
-				HateNPC: I hate {NPCName}.
-			}
 		}
 
 		Bestiary: {
@@ -2033,32 +1170,1009 @@ Mods: {
 		}
 
 		NPCs: {
-			Betsy.DisplayName: Betsy
-			BrainOfCthulhu.DisplayName: Brain of Cthulhu
-			Deerclops.DisplayName: Deerclops
-			Dreadnautilus.DisplayName: Dreadnautilus
-			DukeFishron.DisplayName: Duke Fishron
-			EaterOfWorlds.DisplayName: Eater of Worlds
-			EmpressOfLight.DisplayName: Empress of Light
-			EyeOfCthulhu.DisplayName: Eye of Cthulhu
-			Golem.DisplayName: Golem
-			IceQueen.DisplayName: Ice Queen
-			KingSlime.DisplayName: King Slime
-			LunaticCultist.DisplayName: Lunatic Cultist
-			MartianSaucer.DisplayName: Martian Saucer
-			MoonLord.DisplayName: Moon Lord
-			Mothron.DisplayName: Mothron
-			Plantera.DisplayName: Plantera
-			Pumpking.DisplayName: Pumpking
-			QueenBee.DisplayName: Queen Bee
-			QueenSlime.DisplayName: Queen Slime
-			Retinazer.DisplayName: Retinazer
-			Skeletron.DisplayName: Skeletron
-			SkeletronPrime.DisplayName: Skeletron Prime
-			Spazmatism.DisplayName: Spazmatism
-			TheDestroyer.DisplayName: The Destroyer
-			TorchGod.DisplayName: The Torch God
-			WallOfFlesh.DisplayName: Wall of Flesh
+			KingSlime: {
+				DisplayName: King Slime
+
+				# {BiomeName} will be replaced with the name of the biome preceded by the. Example "the Forest", "the Corruption", "the Hallow".
+				# {NPCName} will be replaced by the specified Town NPC's name.
+				TownNPCMood: {
+					Content: There were the worst of times, there were the best of times, and now times are pretty nice.
+					NoHome: The whole world is my kingdom! Still, I would love to have my castle in said kingdom.
+					LoveSpace: I like it quiet, helps me sleep better. Yes we do.
+					FarFromHome: Oh home, my dear home! Oh, wait, I can teleport, how silly of me.
+					DislikeCrowded: Oh, what a crowd! Who are you little people? Where do you keep coming from?!
+					HateCrowded: This castle is much too crowded for me!
+					LikeBiome: If not for my darling, I doubt I could see how beautiful {BiomeName}.
+					LoveBiome: Ah {BiomeName}, so full of newbies and critters to prey- to conquer!
+					DislikeBiome: What an awful place to live, {BiomeName}! Snow just keeps falling on my head and it's not even tasty!
+					HateBiome: Oh my, what a place {BiomeName} is! As if I was not corrupted enough already!
+					LikeNPC: "{NPCName} is fitting my style pretty nicely, too."
+					LikeNPC_Princess: "{NPCName} is such a well-behaved girl, she might even know good manners better than me!"
+					LoveNPC: "{NPCName} is such a nice company to have!"
+					DislikeNPC: "{NPCName} is like a serf to me."
+					HateNPC: "{NPCName} is the type of person I'd banish from my kingdom!"
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				# {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
+				# If a line starts with {0}, the line must be in quotes
+				NPCDialog: {
+					Default1: Have you seen that fellow Ninja person? I'd like to give my sincere apologies for... partake of a him; the taste was awful.
+					Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
+					Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
+					Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
+					# Not changed
+					Default5: Whatever rumor you heard that all slimes originate from one source is wrong.
+					Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
+					Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
+					Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
+					Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
+					# Not changed
+					Rare: Gel may be 'tasty', but don't get any ideas!
+					Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
+					Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
+					QS1: You may clutch a victory over me, but we'll see how you handle the other half of royal family.
+					QS2: I see, you bested me and my darling too. Well, a fine foe you were, enjoy your victory... until our next generation put you into a place!
+					QS3: You want to know how I got such a beautiful wife as Queen Slime, I know, I know. She's just got a thing for a shiny stones, and so she got one.
+					QS4: Honestly, I don't mind Queen Slime ruling over two thirds of my land, since seeing her so happy is so much more worth it.
+					SlimeRain: To command my people to stop ruining your day? I'm a monarchist, peasant, not a tyrant!
+					Rain1: So giant crowns are a thing, but not a giant umbrellas? Shenanigans, I say, shenanigans!
+					Rain2: Why do my people even wear umbrellas during rain? Don't be silly, consuming water gives you so much water weigh, it's horrible. And I do not want competition.
+					Eclipse: How could all of those monsters gather outside... and without a Blob?! That's insulting!
+					BloodMoon: '''"Blood slimes"? We're not vampires, and blood tastes really bad. Even worse, we might become iron slimes!'''
+					WindyDay1: All those slimes flying around on their balloons, and people still call us low-intelligent. Low-intelligent creatures wouldn't be able to create a vast empire, now would they?
+					WindyDay2: What do you mean that {0} has sudden shortage on balloons? By my good name, I don't know anything about this!
+					Thunderstorm: Did I tell you how one of my fellow slimes was struck by lightning and consumed it? It could've become one of my best man, but sadly, it then fell into a lake.
+					Graveyard: This place feels me with melancholy, and I didn't even knew slimes could feel such a thing.
+					EoC: Words can't tell you how much I adore that Eye of Cthulhu. What a nice beast guardian it could be to a mighty royalty like me!
+					Pk: Pumpking may have some troubles, but I really like his way of managing. He even gifted me my very own Hoppin' Jack!
+					DF: Duke Fishron may not be a king, but being duke is good enough for me. To excuse his smell, at least.
+					Guide: I like {0}, we're pretty much partners. He teaches newbies how to survive, and I teach them how to die. What do you think all that contact damage is for?
+					DyeTrader: It's nice to have {0} around, his tonics may be expensive, but they are tasty too.
+					Golfer: "{0} really knows how to have a great time, I might even learn how to play golf one day."
+					Betsy: I knew I wanted a dragon, but not a fire one! Still, Betsy seems to behave well enough to make me just a bit more anxious than I should.
+					SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
+					TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
+				}
+			}
+
+			EyeOfCthulhu: {
+				DisplayName: Eye of Cthulhu
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Eye of Cthulhu.
+					Default2: I have my eye on you...
+					Default3: Besides that tree or that bunny, I think I am the mascot of this world.
+					Default4: Somebody once called me the 'Eye of Terror'.
+					Default5: I have been defeated in three separate universes! How is that fair?
+					Default6: What is your fascination with eyes anyway?
+					Party: A party! Surely to celebrate my status as the best EYEcon!
+					# Rez and Spaz being Retinazer and Spazmatism.
+					RezSpaz: Rez, Spaz, and I like to socialize.
+					ML: There is nothing truer than the original!
+					EoC: I'm so popular that they put me on merchandise.
+				}
+			}
+
+			EaterOfWorlds: {
+				DisplayName: Eater of Worlds
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Eater of Worlds.
+					Default2: No, I am not Cthulhu's spine. Where did you even hear that?
+					Default3: Which way to the nearest restroom?! I think I'm going to vomit.
+					Default4: Of course piercing weapons are effective -- they go right through you!
+					Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
+					Party: You might have to start calling the "Eater of Cake" after this party!
+					Expert: Your explosives are 80% less effective against me in this world!
+					Evil: Yes! Let the Corruption spread!
+					Good: That nasty Hallow is ruining my plans of spreading the Corruption!
+					Dryad: I'm not sure if you have noticed, but {0} really hates me.
+				}
+			}
+
+			BrainOfCthulhu: {
+				DisplayName: Brain of Cthulhu
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Brain of Cthulhu.
+					Default2: Cthulhu was an intelligent individual. I know, I was his brain.
+					Default3: My Creepers allow me to see. They also act as good meat shields.
+					Default4: The Crimson is one giant living organism.
+					Default5: Screams echo around you telling you to purchase something.
+					Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
+					Blood: The hive mind of the Crimson only grows stronger!
+					Good: The Hallow poses a threat to spreading of the Crimson!
+					# quotes are important on this one
+					Dryad: "{0} despises my presence."
+					Mechanic: Be glad that you rescued {0} before she could finish building the mechanical version of me.
+				}
+			}
+
+			QueenBee: {
+				DisplayName: Queen Bee
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Queen Bee.
+					Default2: My larvae are very delicate, please be careful.
+					Default3: Don't worry, my wings are, in fact, large enough to allow me to fly.
+					Default4: Honey has great healing properties, just don't get stuck in it.
+					Default5: I hope you don't have melissophobia.
+					Default6: What? Expecting me to say "Buzz Buzz"?
+					Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
+					Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
+					NotTheBees1: I feel very at home in this land.
+					NotTheBees2: Ah, jungle as far as my compound eyes can see!
+				}
+			}
+
+			Skeletron: {
+				DisplayName: Skeletron
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Skeletron.
+					Default2: I'm the backbone of this world.
+					Default3: I am what is left of Cthulhu's skeleton.
+					Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
+					Rare: Sans what? I don't know what you are talking about.
+					Party: I offered to host this party in the Dungeon but nobody seemed interested.
+					Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
+					# quotes are important on this one
+					Clothier: "{0} was such a great host! We should get together again some time!"
+					SP: If you thought I couldn't get any more awesome, check out Skeletron Prime!
+					DG: Impressive, you managed to defeat my Guardian form. Here, have this key. I'm not sure what it does, so you figure it out.
+					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+					SDMG: Omegatron is such an awesome guy.
+				}
+			}
+
+			Deerclops: {
+				DisplayName: Deerclops
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Deerclops.
+					Default2: Make sure to eat and keep your sanity up!
+					Default3: Stay out of the darkness, or she'll get you...
+					Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
+					Default5: Everyone else gets an achievement; where is mine?
+					Party: Oh a party! There better be a big feast for all of us!
+					Snow: Are you going to hold a feast of some kind in this winter weather?
+					Betsy: I heard Betsy is from another world, too.
+					TheConstant1: This world reminds of the place where I am from.
+					TheConstant2: Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!
+				}
+			}
+
+			WallOfFlesh: {
+				DisplayName: Wall of Flesh
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Wall of Flesh.
+					Default2: You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!
+					Default3: Oh, don't look so horrified!
+					Default4: Let me have a little lick. Kidding! I'm just messing with you...
+					Default5: I hope you're prepared for the effects of the "V".
+					Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
+					Party: There are plenty of desserts at this party, but is any meat being served?
+					NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
+					Expert: It may be gross for you, but consuming my heart will give you extra strength!
+					Guide1: Are {0} and I the same person? It's hard to say...
+					# quotes are important on this one
+					Guide2: "{0} is certainly no stranger to burns."
+					Calamity1: Can't you read? Smashing Altars won't give you new ores!
+					Calamity2: Confused about the Altars? Here's a tip: read the label on the Pwnhammer!
+					PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
+					PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
+				}
+			}
+
+			QueenSlime: {
+				DisplayName: Queen Slime
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Queen Slime.
+					Default2: Just a reminder that touching living slimes will dissolve your flesh.
+					Default3: My defeat will not stop my army of slimes!
+					Default4: I would prefer it if you stopped bouncing objects off of me.
+					Rare: Pink Gel may be 'sweet', but get any ideas!
+					Party: I expected this party to be spectacular. I am not disappointed.
+					KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
+					KS2: You have bested the slime oligarchy. I commend you.
+				}
+			}
+
+			TheDestroyer: {
+				DisplayName: The Destroyer
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am The Destroyer.
+					Default2: What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!
+					Default3: I guess Cthulhu won't be getting his replacement spine after all.
+					Default4: You feel vibrations deep within your pockets... so buy something!
+					Party: I better be invited to this party! If I'm not, I'll crash this party!
+					Mechanic: "{0} was the one who built me, you know."
+				}
+			}
+
+			Retinazer: {
+				DisplayName: Retinazer
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Retinazer, one of The Twins.
+					Default2: I prefer to say back and watch.
+					Default3: Spazmatism can be a little hyper sometimes.
+					Default4: Greetings, Terrarian.
+					Default5: Did you know that all the mechanical bosses shoot a red laser?
+					Party: Will this party include a laser rave?
+					SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
+					OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
+					Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
+				}
+			}
+
+			Spazmatism: {
+				DisplayName: Spazmatism
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Spazmatism, one of The Twins.
+					# Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
+					Default2: Uh sorry, I don't know who Sclerepugnant is.
+					Default3: I am fresh out of Ichor, but I have plenty of Cursed Flames!
+					Default4: HEY, it's the Terrarian!
+					Default5: This is going to be a terrible night... if you don't buy something!
+					Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
+					RezEoC: Eye of Cthulhu, Rez, and I like to talk.
+					OpticStaff: Those mini Spazmatisms are so cute!
+					Mechanic: Go blame {0}, she's the one who made me!
+				}
+			}
+
+			SkeletronPrime: {
+				DisplayName: Skeletron Prime
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Skeletron Prime.
+					Default2: I am selling my soul to you, literally!
+					Default3: Nope. I'm not sure who Ocram is. Sorry.
+					Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
+					Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
+					Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
+					Mechanic: I'd like to thank {0} for giving me such awesome weapons.
+					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+					SDMG: Omegatron is a pretty cool dude.
+				}
+			}
+
+			Plantera: {
+				DisplayName: Plantera
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Plantera.
+					Default2: Why don't you stop and smell the roses?
+					Default3: I'm very protective of my bulbs, please don't disturb them.
+					Default4: Sorry if I seem snappy... get it?
+					Default5: I grow restless... for you to buy something!
+					Band1: I was thinking of starting a band...
+					Band1Party: This party needs a musical performance of some sort!
+					Band2: I'm starting a metal band with the Empress of Light! We are trying to get Golem to be our drummer.
+					Band2Party: My band should play at one these parties in the future...
+					Band3: The Empress of Light, Golem, Lunatic Cultist, and I are recording our first album! Lunatic Cultist's mysterious voice is perfect for our songs.
+					Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
+					Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
+					Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
+					MudBud: Look at that little Plantero go!
+				}
+			}
+
+			Golem: {
+				DisplayName: Golem
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Golem.
+					Default2: I am not a push-over. Seriously, try to push me over!
+					Default3: Do you want a Picksaw? Luckily, I have one for sale!
+					Party: I'm not used to being part of such celebrations. I like it!
+					WitchDoctor: I shall protect {0} at all costs.
+					ForTheWorthy: I'm just as big as when I fought you!
+					Surface: At least there is more sunlight up here.
+					Temple1: Watch out for traps... unless you disabled all of them.
+					Temple2: I blend right into these walls!
+					Plantera: I am the drummer for Plantera's metal band. I am very good at smacking.
+					Automaton1: "{0} and I are very different. How does anyone get us confused?"
+					Automaton2: I am not made with Bluemagic. Please stop asking.
+				}
+			}
+
+			EmpressOfLight: {
+				DisplayName: Empress of Light
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Empress of Light.
+					Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
+					Default3: Don't you dare touch those butterflies!
+					Default4: If you want a real challenge, fight me during the day.
+					# quotes and backslashes are important on this one
+					Default5: '''"A beautiful bullet hell"? I don't use any firearms, but I am beautiful.'''
+					Default6: I bet you thought all fairies were small, didn't you?
+					Default7: My empire? That's a story for another time.
+					Default8:
+						'''
+						Don't be silly, there is no Emperor of Night.
+
+						Is there?
+						'''
+					Rare1: Don't ask about my tentacles...
+					Rare2: Is it a mouth or a nose?
+					Good: I applaud you for spreading the Hallow. Good job!
+					NoEvilBlood: I applaud you for removing the evil in this world. Good job!
+					Dryad: Buy as many Hallow Seeds from {0} as you can!
+					Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
+					Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
+					Party: I can put on real light show for this party!
+					Costume: That's quite the stunning outfit you have on. Following in my image I see!
+					BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
+				}
+			}
+
+			DukeFishron: {
+				DisplayName: Duke Fishron
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Duke Fishron.
+					Default2: I'm the Duke, baby!
+					Default3: It's time to eat worms and blow bubbles, and I'm all out of bubbles.
+					Default4: Have you ever been to a sewer? I have, met a lot of mutants down there.
+					Default5: How strong does the wind have to be to be able to pick up water and sharks?
+					Default6: A third pig, a third fish, a third dragon, completely awesome!
+					Party: I'm the only person who can eat like a pig and get away with it!
+					FargosMutantMod: "{0} has some pretty nice looking wings."
+					Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
+					Calamity2: I haven't seen my father in a long time...
+				}
+			}
+
+			Betsy: {
+				DisplayName: Betsy
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Betsy.
+					Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
+					Default3: I'm a real boss, I promise!
+					Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
+					Party: Stick around; we're going to see how many candles I can light with one breath of fire!
+					FargosMutantMod: Where did {0} get his wings?
+					SGAmod: Good to see another dragon like {0}.
+				}
+			}
+
+			LunaticCultist: {
+				DisplayName: Lunatic Cultist
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Lunatic Cultist.
+					Default2: My defeat will not stop my cult!
+					Default3: Every good cult needs some sort of hooded figure!
+					PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
+					PostML: Not even Cthulhu could stop you? I'm impressed.
+					Party: Is this a costume party? I'm already wearing a mask.
+					Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
+					Plantera: My mysterious chanting is perfect for Plantera's metal band.
+					Dusk: Dusk is my favorite time of the day.
+					PbonesUtilities: I quite like the look of that Mysterious Trader's attire.
+				}
+			}
+
+			MoonLord: {
+				DisplayName: Moon Lord
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Moon Lord.
+					Default2: I don't know who Steve is, but at least I found my legs.
+					Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
+					Default4: You are quite the fighter. You went out of your way to defeat me.
+					Default5: The Celestial Pillars were sent to conquer your world.
+					Default6: No, there is no 'Sun Lord'.
+					Default7: Why are you asking me to craft some love?
+					Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
+					Dryad: I've decided to let {0} live. She is the last of her kind anyway.
+					LunaticCultist: It's nice to have people worship me, as they should be.
+					Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
+					TorchMerchant: Are you sure that {0} is not... Him?
+					NoTorchGod: There is only one other God that I fear. Luckily, it only haunts torches.
+					TorchGod: Stay away from The Torch God! His power is... inextinguishable.
+					TorchGodVeryClose: Just pretend like we are talking until Torchy leaves.
+				}
+			}
+
+			Dreadnautilus: {
+				DisplayName: Dreadnautilus
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Dreadnautilus.
+					Default2: Now we are really stretching the definition of boss!
+					Default3: Some people mistakenly call me "Blood Nautilus". Where did that come from?
+					Default4: Have you seen my trophy? I lost it, unfortunately.
+					Party: The punch bowl at this party reminds me of blood. Tasty!
+					Rare: What even is a "Conch of Fish"?
+					DayNoRain: Ugh, it's so bright out during the day! I wish the clouds would cover the sun.
+					Night: It's easy to see at night, is it not for you?
+					Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, though.
+					BloodMoon1: I don't get what the fuss is all about, I love the Blood Moon!
+					BloodMoon2: The {$ItemName.Deathweed} bloom tonight. Don't forget to harvest them!
+					KillCount: You have slain me {0} times. Have you enjoyed it?
+					Zoologist: See, even {0} likes the Blood Moon! She blends in with the red environment, too!
+				}
+			}
+
+			Mothron: {
+				DisplayName: Mothron
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am Mothron.
+					Default2: I'm honored to be considered a boss!
+					Default3: Do you not put your children to work as soon as they are hatched?
+					Default4: A lot of people really want this rusty old sword that I have. What value does it have to you?
+					Default5: I accidentally ate a rusty old sword. I thought it was candy! Do you still want it?
+					Default6: Oh, hello! I hope you brought your dust pan with you!
+					Party: So many fancy lights! I love parties!
+					KillCount: You defeated me {0} times in this world. What else are you looking for?
+					Deerclops: Deerclops' fuzzy hair reminds me of somebody else I know...
+					WitchDoctor: "{0}'s scales reminds me of somebody else I know..."
+					Merchant: Do you know if {0} sells any lamps? Lanterns work, too. Just asking.
+					EoC: Eye of Cthulhu is eying the yoyo that I have. They can have it; I don't even know why I have it in the first place.
+					UndergroundJungle: Why is it that those moths drop butterfly dust?
+					TorchMerchant: "{0} is so bright! They always keep me company at night!"
+				}
+			}
+
+			Pumpking: {
+				DisplayName: Pumpking
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Pumpking.
+					Default2: Don't get on my bad side!
+					Default3: I don't get the whole 'pumpkin spice' craze.
+					Default4: They are scythes, not sickles! Get it right!
+					Party: Is this the type of party that involves passing out candy? I sure hope it is!
+					FargosMutantMod: "{0}'s hat suits him quite nicely."
+				}
+			}
+
+			IceQueen: {
+				DisplayName: Ice Queen
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Ice Queen.
+					Default2: Don't you dare make any cool puns. That would not be nICE.
+					Default3: That snowmen mafia would be no match against me.
+					Default4: How about a friendly snowball fight?
+					Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
+					Santa1: Have you been good this year for Santa Claus?
+					Santa2: Instead of getting coal this year, you are getting a beating from me!
+				}
+			}
+
+			MartianSaucer: {
+				DisplayName: Martian Saucer
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am the Martian Saucer.
+					Default2: Do you believe in aliens? Well you should, you're looking right at one.
+					Default3: What? Didn't think a robot could be sentient?
+					Default4: I hope you have your tin-foil hat on.
+					Default5: Don't worry, I'm not going to probe you. That's that job for a Martian Scientist.
+					Default6: Martians are shorter than you Terrarians. As a result, your dwellings large enough for me in this form.
+					Default7: Maybe you Terrarians aren't so bad after all...
+					Default8:
+						'''
+						This sentence is false.
+						...Don't answer that.
+						'''
+					Party: Parties entail such strange decor and customs that I am not used to.
+					RijamsMod: I haven't seen a species like {0} before.
+				}
+			}
+
+			TorchGod: {
+				DisplayName: The Torch God
+
+				TownNPCMood: {
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: I am The Torch God.
+					Default2: Your greatest foes drop the greatest loot; buy it here!
+					Default3: Placing the correct torches in their respective biomes will increase your luck! No need to thank me!
+					Default4: Are you concerned about placing open flame torches in a wooden house? Do not fret, the wood will not catch fire!
+					Default5: No fear, mortal, placing the wrong torches in the current biome will not decrease your luck below 0!
+					Default6: Not all flames extinguish with water. Some flames are cursed to be lit forever.
+					Default7: You do know how to stop-drop-and-roll, right?
+					Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
+					Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
+					Rare: Haha! The fire IS shooting at you!
+					HasFavor1: My favor has allowed you to magically change the type of torches you place. Use standard torches for the magic to work.
+					HasFavor2: Did you have a fun time attempting my challenge? I sure did!
+					NoFavor1: You have not proven yourself to me yet. Once you have, I will offer you a favor.
+					NoFavor2: Prove to me that you are worthy by surviving my little challenge. A great reward is waiting for you.
+					Nurse: Fire is very destructive to your mortal tissues. Luckily, {0} is experienced with treating burns.
+					MoonLord: Hmm.. the Moon Lord seems very cautious around me. Rightfully so.
+					TorchMerchant: A fellow being of flame. I quite like {0}.
+					NameIsRedigit: I owe everything I am to you, {0}. You are the true Torch God!
+					Overhaul: Discard what I previously said about wood not catching fire; The fire seems awfully hungry today...
+				}
+			}
 		}
 
 		Projectiles: {
@@ -2076,8 +2190,6 @@ Mods: {
 		}
 	}
 }
-
-TownNPCMoodBiomes.GraveyardBiome: the Graveyard
 
 TownNPCMood_Princess: {
 	LoveNPC_BossesAsNPCs/KingSlime: I love {NPCName}.

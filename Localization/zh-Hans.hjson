@@ -87,17 +87,17 @@ Mods: {
 				TooltipSpawnAllInOne:
 					'''
 					此选项将更改“全部在一个 NPC 模式下”。
-					  当 0 时：标准模式。
-					  当 1 时：卸载任何配置已关闭的 Boss NPC。
-					    取而代之的是，将加载配置所在的新BOSS NPC 和BOSS NPC。
-					    配置已关闭的商店Boss NPC现在将由这个新的NPC出售。
-					  当 2 时：从这个模组中卸载所有其他Boss NPC。
-					    取而代之的是，只会加载这一个Boss NPC。
+					  当关(正常)时：标准模式。
+					  当混合：卸载任何配置已关闭的 Boss NPC。
+					    取而代之的是，将加载配置所在的新 {$NPCName.TorchGod} 和BOSS NPC。
+					    配置已关闭的商店Boss NPC现在将由这个新的 {$NPCName.TorchGod} 出售。
+					  当只有一个：从这个模组中卸载所有其他Boss NPC。
+					    取而代之的是，只会加载这一个 {$NPCName.TorchGod}。
 					    当每个Boss被击败时，它的商店会提供每个BOSS的战利品使用。
 					    现在，每个Boss NPC的其他配置将决定哪些商店可用。
 
 					  如果您拥有太多城镇 NPC 或不想拥有那么多城镇 NPC，请更改此配置。
-					默认值：0
+					默认值：关 (正常)
 					需要重新加载。
 					'''
 				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   史莱姆王可以生成"
@@ -335,6 +335,12 @@ Mods: {
 					默认值：开
 					'''
 				MultiplayerMessage: 您不是服务器所有者，因此您无法更改此配置！
+
+				AllInOneOptions: {
+					Off: 关 (正常)
+					Mixed: 混合
+					OnlyOne: 只有一个
+				}
 			}
 		}
 
@@ -364,7 +370,7 @@ Mods: {
 				Pumpking: 打败南瓜王
 				IceQueen: 打败冰雪女王
 				MartianSaucer: 打败火星飞碟
-				TorchGod: 击败任何头目，将“一体式NPC模式”设置为1或2。
+				TorchGod: 击败任何头目，将“一体式NPC模式”设置为混合或只有一个。
 			}
 		}
 
@@ -530,6 +536,11 @@ Mods: {
 
 			EoLCostumeLegpiece: {
 				DisplayName: 女皇裤子
+				// Tooltip: ""
+			}
+
+			EoLCostumeEars: {
+				// DisplayName: Empress Costume Ears
 				// Tooltip: ""
 			}
 
@@ -932,887 +943,13 @@ Mods: {
 		}
 
 		Biomes: {
-			GraveyardBiome.DisplayName: "{$Mods.BossesAsNPCs.Common.Graveyard}"
+			GraveyardBiome: {
+				DisplayName: "{$Mods.BossesAsNPCs.Common.Graveyard}"
+				// TownNPCDialogueName: the Graveyard
+			}
+
 			SkyBiome.DisplayName: 天空
 			UnderworldBiome.DisplayName: 地下
-		}
-
-		NPCDialog: {
-			// {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
-			// If a line starts with {0}, the line must be in quotes.
-			KingSlime: {
-				// Default1: Have you seen that fellow Ninja person? I'd like to give my sincere apologies for... partake of a him; the taste was awful.
-				// Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
-				// Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
-				// Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
-				# Not changed
-				Default5: 无论你听到什么谣言说所有的史莱姆都来自一个来源，这都是错误的。
-				// Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
-				// Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
-				// Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
-				// Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
-				# Not changed
-				Rare: 凝胶可能是“美味的”，但不要有任何想法！
-				// Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
-				// Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
-				// QS1: You may clutch a victory over me, but we'll see how you handle the other half of royal family.
-				// QS2: I see, you bested me and my darling too. Well, a fine foe you were, enjoy your victory... until our next generation put you into a place!
-				// QS3: You want to know how I got such a beautiful wife as Queen Slime, I know, I know. She's just got a thing for a shiny stones, and so she got one.
-				// QS4: Honestly, I don't mind Queen Slime ruling over two thirds of my land, since seeing her so happy is so much more worth it.
-				// SlimeRain: To command my people to stop ruining your day? I'm a monarchist, peasant, not a tyrant!
-				// Rain1: So giant crowns are a thing, but not a giant umbrellas? Shenanigans, I say, shenanigans!
-				// Rain2: Why do my people even wear umbrellas during rain? Don't be silly, consuming water gives you so much water weigh, it's horrible. And I do not want competition.
-				// Eclipse: How could all of those monsters gather outside... and without a Blob?! That's insulting!
-				// BloodMoon: '''"Blood slimes"? We're not vampires, and blood tastes really bad. Even worse, we might become iron slimes!'''
-				// WindyDay1: All those slimes flying around on their balloons, and people still call us low-intelligent. Low-intelligent creatures wouldn't be able to create a vast empire, now would they?
-				// WindyDay2: What do you mean that {0} has sudden shortage on balloons? By my good name, I don't know anything about this!
-				// Thunderstorm: Did I tell you how one of my fellow slimes was struck by lightning and consumed it? It could've become one of my best man, but sadly, it then fell into a lake.
-				// Graveyard: This place feels me with melancholy, and I didn't even knew slimes could feel such a thing.
-				// EoC: Words can't tell you how much I adore that Eye of Cthulhu. What a nice beast guardian it could be to a mighty royalty like me!
-				// Pk: Pumpking may have some troubles, but I really like his way of managing. He even gifted me my very own Hoppin' Jack!
-				// DF: Duke Fishron may not be a king, but being duke is good enough for me. To excuse his smell, at least.
-				// Guide: I like {0}, we're pretty much partners. He teaches newbies how to survive, and I teach them how to die. What do you think all that contact damage is for?
-				// DyeTrader: It's nice to have {0} around, his tonics may be expensive, but they are tasty too.
-				// Golfer: "{0} really knows how to have a great time, I might even learn how to play golf one day."
-				// Betsy: I knew I wanted a dragon, but not a fire one! Still, Betsy seems to behave well enough to make me just a bit more anxious than I should.
-				// SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
-				// TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
-			}
-
-			EyeOfCthulhu: {
-				Default1: 我是克苏鲁之眼。
-				Default2: 我正在看着你...
-				Default3: 除了那棵树或那只兔子，我想我是这个世界的吉祥物。
-				Default4: 有人曾经称我为“恐怖之眼”。
-				Default5: 我在三个独立的宇宙中被打败了！这公平吗？
-				Default6: 你对眼睛的迷恋到底是什么？
-				Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
-				// Rez and Spaz being Retinazer and Spazmatism.
-				RezSpaz: ML: 没有什么比原版更真实了！
-				// ML: There is nothing truer than the original!
-				EoC: 我是如此受欢迎，以至于他们把我放在商品上。
-			}
-
-			EaterOfWorlds: {
-				Default1: 我是世界吞噬怪。
-				Default2: 不，我不是克苏鲁的脊椎。你从哪里听说的？
-				Default3: 哪条路到最近的洗手间？！我想我会呕吐的。
-				Default4: 当然，穿刺武器是有效的 - 它们直接穿过你！
-				Default5: 一股可怕的寒意从你的钱包里流下来...我认为唯一的解决方案是买东西。
-				Party: 你可能不得不在这次聚会后开始称呼“吃蛋糕的人”！
-				Expert: 在这个世界上，你的炸药对我的作用要低80%！
-				Evil: 是的！让腐败蔓延！
-				Good: 那个讨厌的圣地正在破坏我传播腐败的计划！
-				Dryad: 我不确定你是否注意到了，但{0}真的很讨厌我。
-			}
-
-			BrainOfCthulhu: {
-				Default1: 我是克苏鲁之脑。
-				Default2: 克苏鲁是一个聪明的人，我知道，我是他的大脑。
-				Default3: 我的爬行者让我看到了，它们也可以作为良好的肉盾。
-				Default4: 猩红地是一个巨大的生物体。
-				Default5: 尖叫声在你周围回荡，告诉你买东西。
-				Party: 生日和周年纪念日是一件如此随意的事情。尽管如此，我喜欢参加这些派对。
-				Blood: 猩红之地的心脏心智只会越来越强大！
-				Good: 圣地对猩红的传播构成了威胁！
-				Dryad: “{0}鄙视我的存在”//引号在这个问题上很重要
-				// quotes are important on this one
-				Mechanic: 很高兴你在{0}完成机械版的建造之前救了我。
-			}
-
-			QueenBee: {
-				Default1: 我是蜂王。
-				Default2: 我的幼虫非常娇嫩，请小心。
-				Default3: 别担心，事实上，我的翅膀足够大，可以让我飞翔。
-				Default4: 蜂蜜有很好的愈合特性，只是不要陷入其中。
-				Default5: 我希望你没有害怕我。
-				Default6: 什么？期待我说“巴斯 巴斯”？
-				Default7: 大黄蜂、黄蜂和黄色夹克有什么区别？我不知道，我是一只蜜蜂。
-				Party: 我为今天的派对做了一些甜糕点！它们可能是你吃过的最甜的糕点！
-				NotTheBees1: 在这片土地上，我感到非常自由。
-				NotTheBees2: 啊，丛林，就我的双眼所能看到的！
-			}
-
-			Skeletron: {
-				Default1: 我是骷髅王。
-				Default2: 我是这个世界的支柱。
-				Default3: 我是克苏鲁的骨架剩下的。
-				Default4: 地牢上的诅咒已经解除，尽管我想你还会发现它仍然很危险。
-				Rare: 无呢？我不知道你在说什么。
-				Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
-				Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
-				Clothier: "{0}是一个很棒的主人！我们应该再聚一会儿！"
-				// quotes are important on this one
-				SP: 如果您认为我无法再获得任何能力，请看看机械骷髅王！
-				DG: 令人印象深刻的是，你设法击败了我的守护者形态。在这里，有这个钥匙。我不确定它的作用，所以你弄清楚了。
-				// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron是一个很棒的家伙。
-			}
-
-			Deerclops: {
-				Default1: 我是巨鹿怪。
-				Default2: 一定要吃东西，保持理智！
-				Default3: 远离黑暗，否则它会吞噬你...
-				Default4: 对不起，我声音太大，收到了其他村民的投诉。
-				Default5: 其他人都会获得成就;我的在哪里？
-				Party: 哦，派对！最好为我们所有人举办一场盛宴！
-				Snow: 在这个冬天的天气里，你打算举行某种盛宴吗？
-				Betsy: 我听说双足翼龙也来自另一个世界。
-				TheConstant1: 这个世界让人想起我来自的地方。
-				TheConstant2: 好在，你只需要担心你在这个世界上的饥饿。想象一下，如果你也必须控制你的温度！
-			}
-
-			WallOfFlesh: {
-				Default1: 我是血肉墙。
-				Default2: 你已经打败了世界的守护者，我挡住了所有强大的远古精灵！
-				Default3: 呵呵，别那么惊讶的看我！
-				Default4: 让我舔一舔。开玩笑！我只是在惹你...
-				Default5: 我希望你已经为“V”字形的污染做好了准备。
-				Default6: 没有得到你想要的徽章？别担心，我都有...当然是有价格的。
-				Party: 这个派对上有很多甜点，但是有肉吗？
-				NotUnderworld: 你知道，这里比地狱要冷得多。
-				Expert: 这对你来说可能是粗暴的，但消耗我的心会给你额外的力量！
-				Guide1: "{0}和我是同一个人吗？很难说..."
-				Guide2: "{0}对烧伤当然不陌生。"
-				// quotes are important on this one
-				Calamity1: 你看不懂吗？砸碎祭坛不会给你新的矿石！
-				Calamity2: 对祭坛感到困惑？这里有一个提示：阅读神锤上的介绍！
-				PwnCorruption: 用那把锤子砸碎那些腐化地的暗影珠！好事一定会发生！
-				PwnCrimson: 用那把锤子砸碎那些猩红地的心脏！好事一定会发生！
-			}
-
-			QueenSlime: {
-				Default1: 我是史莱姆皇后。
-				Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
-				Default3: 我的失败不会阻止我的史莱姆大军！
-				Default4: 如果你停止从我身上弹起物体，我会更喜欢它。
-				Rare: 粉红凝胶可能是“甜的”，但不要有任何想法！
-				Party: 我本以为这个派对会很壮观，我没有失望。
-				KS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
-				KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
-			}
-
-			TheDestroyer: {
-				Default1: 我是毁灭者。
-				Default2: 你的意思是我是机械BOSS中最弱的？我有最多的生命值！
-				Default3: 我猜克苏鲁终究不会得到他的替代脊柱。
-				Default4: 你感觉到口袋深处的振动...所以买点东西！
-				Party: 我最好被邀请参加这个派对！如果我不是，我会摧毁这个派对！
-				Mechanic: "{0}是造就我的人，你知道的。"
-			}
-
-			Retinazer: {
-				Default1: 我是激光眼，双子魔眼之一。
-				Default2: 我更喜欢说回来，看着。
-				Default3: 魔焰眼有时可能有点亢奋。
-				Default4: 恭喜，泰拉人。
-				Default5: 你知道所有的机械BOSS都发射红色激光吗？
-				Party: 这个派对会包括激光狂欢吗？
-				SpazEoC: 克苏鲁之眼，魔焰眼和我喜欢社交。
-				OpticStaff: 那些迷你眼球怪很帅，如果我自己这么说的话。
-				Mechanic: "{0}机械师被迫建造了机械Boss。这包括我。"
-			}
-
-			Spazmatism: {
-				Default1: 我是魔焰眼，双子魔眼之一。
-				// Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
-				Default2: 呃，对不起，我不知道谁是Sclerepugnant。
-				Default3: 我是刚从伊科尔出来的，但我有很多被诅咒的火焰！
-				Default4: 嘿，这是泰拉人！
-				Default5: 这将是一个可怕的夜晚...如果你不买东西！
-				Party: 这个派对是相当壮观的！明白了吗？奇观！喜欢引人注目的东西？是的，你明白了。
-				RezEoC: 克苏鲁之眼，激光眼和我喜欢说话。
-				OpticStaff: 那些迷你眼球怪是如此可爱！
-				Mechanic: 去责怪{0}，是她造就了我！
-			}
-
-			SkeletronPrime: {
-				Default1: 我是机械骷髅王。
-				Default2: 我真的在把我的灵魂出卖给你！
-				Default3: 不。我不知道奥库瑞姆姆是谁。不好意思。
-				Default4: 现在我们永远不会知道克苏鲁是否会有四只手臂，多谢！
-				Default5: 你周围的空气越来越冷，你觉得自己把手伸进口袋里掏出钱包。
-				Party: 这个派对需要更多的行动！幸运的是，我有合适的wep - 我的意思是工作的工具！
-				Mechanic: 我要感谢{0}给了我这么棒的武器。
-				// Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
-				SDMG: Omegatron是一个非常酷的家伙。
-			}
-
-			Plantera: {
-				Default1: 我是世纪之花。
-				Default2: 你为什么不停下来闻闻玫瑰呢？
-				Default3: 我非常保护我的花苞，请不要打扰它们。
-				Default4: 对不起，如果我看起来很活泼...明白了吗？
-				Default5: 我变得焦躁不安...为你买东西！
-				Band1: 我正在考虑成立一个乐队...
-				Band1Party: 这个派对需要某种音乐表演！
-				Band2: 我要和光之女皇后一起组建一支金属乐队！我们正在努力让石巨人成为我们的鼓手。
-				Band2Party: 我的乐队将来应该在这些派对上演奏......
-				Band3: 光之女皇，石巨人，拜月教邪教徒，和我正在录制我们的第一张专辑！拜月教邪教徒的神秘声音非常适合我们的歌曲。
-				Band3Party: 我试图让其他村民让我为下一个聚会举办一场音乐会。
-				Band4: 光之女皇，石巨人，拜月教邪教徒，我完成了第一张专辑！你应该检查一下！
-				Band4Party: 我的金属乐队将在今晚的音乐会上演奏！我迫不及待地想在那里见到你！
-				MudBud: 看看那个小小的世纪之花去吧！
-			}
-
-			Golem: {
-				Default1: 我是石巨人。
-				Default2: 我不是推倒者，说真的，试着把我推过去！
-				Default3: 你想要一个镐锯吗？幸运的是，我有一个出售！
-				Party: 我不习惯参加这样的庆祝活动。我喜欢！
-				WitchDoctor: 我将不惜一切代价保护{0}。
-				ForTheWorthy: 我和我跟你打架时一样大！
-				Surface: 至少这里有更多的阳光。
-				Temple1: 当心陷阱...除非您禁用所有这些。
-				Temple2: 我直接融入这些墙壁！
-				Plantera: 我是世纪之花金属乐队的鼓手，我非常擅长打人。
-				// Automaton1: "{0} and I are very different. How does anyone get us confused?"
-				// Automaton2: I am not made with Bluemagic. Please stop asking.
-			}
-
-			EmpressOfLight: {
-				Default1: 我是光之女皇。
-				Default2: 生物图鉴将我描述为一个复仇的女神;我同意这一点。
-				Default3: 你不敢碰那些蝴蝶吗！
-				Default4: 如果你想要一个真正的挑战，在白天和我战斗。
-				Default5: '''"美丽的子弹炼狱"? 我不使用任何枪支，但我很漂亮。'''
-				// quotes and backslashes are important on this one
-				Default6: 我敢打赌，你以为所有的仙女都很小，不是吗？
-				Default7: 我的帝国？这是另一个时代的故事。
-				Default8:
-					'''
-					别傻了，没有夜之国王。
-
-					有吗？
-					'''
-				Rare1: 不要问我的触手...
-				Rare2: 是嘴还是鼻子？
-				Good: 我为你们传播圣地而鼓掌，干得好！
-				NoEvilBlood: 我为你们消除这个世界上的邪恶而鼓掌，干得好！
-				Dryad: 从{0}购买尽可能多的万圣节种子！
-				Plantera: 我在世纪之花的金属乐队演奏我的恒星曲调。你应该来听一听！
-				Party: 我可以为这个派对上演真正的灯光秀！
-				Costume: 这就是你穿的令人惊叹的衣服。跟随我的图像，我看到了！
-				BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
-			}
-
-			DukeFishron: {
-				Default1: 我是猪龙鱼公爵。
-				Default2: 我是公爵，宝贝！
-				Default3: 是时候吃虫子吹泡泡了，我完全没有泡泡了。
-				Default4: 你去过下水道吗？我在那里遇到了很多变种人。
-				Default5: 风必须有多强才能溅起水和鲨鱼？
-				Default6: 第三只猪，第三条鱼，第三条龙，完全真棒！
-				Party: 我是唯一一个可以像猪一样吃东西并逃脱惩罚的人！
-				FargosMutantMod: "{0}有一些漂亮的翅膀。"
-				Calamity1: 嗯。。。对不起，我只是在想一个血腥蠕虫会有多好吃。
-				Calamity2: 我已经很久没见过我的父亲了...
-			}
-
-			Betsy: {
-				Default1: 我是双足翼龙。
-				Default2: 我是飞龙的母亲。不，不是你想的那种飞龙。
-				Default3: 我是一个真正的BOSS，我保证！
-				Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
-				Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
-				FargosMutantMod: "{0}从哪里得到他的翅膀？"
-				SGAmod: 很高兴看到另一条像{0}一样的龙。
-			}
-
-			LunaticCultist: {
-				Default1: 我是拜月教邪教徒。
-				Default2: 我的失败不会阻止我的崇拜！
-				Default3: 每个好的邪教徒都需要穿着这种连帽衫！
-				PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
-				PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
-				Party: 这是一个化装舞会吗？我已经戴上了口罩。
-				Demolitionist: "{0}一直在为我提供炸药的优惠，我不知道为什么。"
-				Plantera: 我神秘的吟唱非常适合世纪之花的金属乐队。
-				Dusk: 黄昏是我一天中最喜欢的时间。
-				PbonesUtilities: 我非常喜欢那个神秘商人的服装的样子。
-			}
-
-			MoonLord: {
-				Default1: 我是月亮领主。
-				Default2: 我不知道史蒂夫是谁，但至少我找到了我的腿。
-				Default3: 我接管泰拉瑞亚的计划已被你阻止，我称赞你所作的这种努力。
-				Default4: 你是一个战士，你不厌其烦地打败了我。
-				Default5: 天界柱被派去征服你的世界。
-				Default6: 不，没有“太阳领主”。
-				Default7: 你为什么要求我制作一些爱？
-				Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
-				Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
-				LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
-				Mechanic: "{0}做得很好，直到你过来救她。"
-				TorchMerchant: 你确定{0}不是...他？
-				NoTorchGod: 我敬畏的只有一位神。幸运的是，它只会被火把困扰。
-				TorchGod: 远离火把之神！他的力量是...不可熄灭。
-				TorchGodVeryClose: 假装我们在说话，直到火把离开。
-			}
-
-			Dreadnautilus: {
-				Default1: 我是恐惧鹦鹉螺。
-				Default2: 现在我们真的在延伸BOSS的定义！
-				Default3: 有些人误称我为“血鹦鹉螺”。这是从哪里来的？
-				Default4: 你看过我的奖杯吗？不幸的是，我失去了它。
-				Party: 这个派对上的打孔碗让我想起了鲜血。美味！
-				Rare: 什么是“鱼海螺”？
-				DayNoRain: 呃，白天太亮了！我希望云层能遮住太阳。
-				Night: 晚上很容易看到，难道不适合您吗？
-				Rain: 可爱，淡水从天而降。我更像是一个咸水人，通过。
-				BloodMoon1: 我不明白大惊小怪是什么，我喜欢血月！
-				BloodMoon2: "{$ItemName.Deathweed}今晚绽放。别忘了收获它们！"
-				KillCount: 你杀了我{0}次。你喜欢吗？
-				Zoologist: 看，即使{0}喜欢血月！她也融入了红色的环境！
-			}
-
-			Mothron: {
-				Default1: 我是蛾怪。
-				Default2: 我很荣幸被认为是BOSS！
-				Default3: 难道你不让你的孩子一出生就去上班吗？
-				Default4: 很多人真的想要我拥有的这把生锈的旧剑。它对你有什么价值？
-				Default5: 我不小心吃了一把生锈的旧剑。我以为是糖果！你还想要它吗？
-				Default6: 哦，你好！我希望你带上你的簸箕！
-				Party: 这么多花哨的灯！我喜欢派对！
-				KillCount: 你在这个世界上打败了我{0}次。您还在寻找什么？
-				Deerclops: 鹿角怪 毛茸茸的头发让我想起了我认识的其他人...
-				WitchDoctor: "{0}的鳞片让我想起了我认识的其他人..."
-				Merchant: 你知道{0}卖什么灯吗？灯笼也有效。只是问。
-				EoC: 克苏鲁之眼正在盯着我所拥有的溜溜球。他们可以拥有它，我甚至不知道为什么我首先拥有它。
-				UndergroundJungle: 为什么那些飞蛾会掉落蝴蝶粉尘？
-				TorchMerchant: "{0}太亮了！他们总是在晚上陪伴我！"
-			}
-
-			Pumpking: {
-				Default1: 我是南瓜王。
-				Default2: 不要站在我不好的一面！
-				Default3: 我不明白整个“南瓜香料”的热潮。
-				Default4: 他们是镰刀，不是镰刀！做对了！
-				Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
-				FargosMutantMod: "{0}的帽子很适合他。"
-			}
-
-			IceQueen: {
-				Default1: 我是冰雪女王。
-				Default2: 你不敢做任何很酷的双关语。那不是很好。
-				Default3: 那个雪人军团不会与我匹敌。
-				Default4: 友谊雪球赛怎么样？
-				Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
-				Santa1: 你今年对圣诞老人很好吗？
-				Santa2: 今年你不会得到煤炭，而是受到我的殴打！
-			}
-
-			MartianSaucer: {
-				Default1: 我是火星飞碟。
-				Default2: 你相信外星人吗？好吧，你应该，你正在看一个。
-				Default3: 什么？没想到机器人是有知觉的吗？
-				Default4: 我希望你戴上锡箔帽。
-				Default5: 别担心，我不会去探究你，这就是火星科学家的工作。
-				Default6: 火星人比你们这些泰拉瑞人矮；因此，你的住所以这种形式对我来说足够大。
-				Default7: 也许你们这些泰拉瑞人毕竟没有那么糟糕......
-				Default8:
-					'''
-					这句话是错误的。
-					...不要回答这个问题。
-					'''
-				Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
-				RijamsMod: 我以前从未见过像{0}这样的物种。
-			}
-
-			TorchGod: {
-				Default1: 我是火把神。
-				Default2: 你最强大的敌人掉落了最好的战利品;在这里买！
-				Default3: 在各自的生物群系中放置正确的火炬将增加您的运气！不用感谢我！
-				Default4: 您是否担心在木屋中放置明火火炬？不要烦恼，木头不会着火！
-				Default5: 别担心，凡人，在当前生物群系中放置错误的火炬不会降低你的运气低于0！
-				Default6: 并非所有的火焰都会用水熄灭。有些火焰被诅咒永远燃烧。
-				Default7: 你知道如何停止下降和滚动，对吧？
-				Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
-				Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
-				Rare: 哈哈！火在向你射击！
-				HasFavor1: 我的青睐使你神奇地改变了你放置的火炬的类型。使用标准火炬让魔法发挥作用。
-				HasFavor2: 你试过我的挑战，玩得开心吗？我当然做到了！
-				NoFavor1: 你还没有向我证明自己。一旦你有，我会帮你一个忙。
-				NoFavor2: 向我证明，你是值得的，通过在我的小挑战中幸存下来。一个巨大的奖励正等着你。
-				Nurse: 火对你的致命组织非常具有破坏性。幸运的是，{0}在治疗烧伤方面经验丰富。
-				MoonLord: 嗯。。月亮领主在我身边似乎非常谨慎。这是理所当然的。
-				TorchMerchant: 一个火焰的家伙。我非常喜欢{0}。
-				NameIsRedigit: 我欠你的一切，{0}。你是真正的火炬神！
-				Overhaul: 抛弃我之前说过的关于木材不会着火的话;今天火似乎饿得可怕...
-			}
-		}
-
-		TownNPCMood: {
-			#This is what displays during all of an NPC's happiness levels. Note that the localization key for these should always be "TownNPCMood.*NPCName*.*Mood*" or else it won't display properly.
-			# {BiomeName} will be replaced with the name of the biome preceded by the. Example "the Forest", "the Corruption", "the Hallow".
-			# {NPCName} will be replaced by the specified Town NPC's name.
-			KingSlime: {
-				Content: 我感到很满足。
-				NoHome: 像我这样的国王需要一个家！
-				LoveSpace: 我喜欢有这么多空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}。
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			EyeOfCthulhu: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我喜欢有这么多空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}。
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢{BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			EaterOfWorlds: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我喜欢有这么多空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}。
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: "{BiomeName} 不适合住房子。"
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			BrainOfCthulhu: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我喜欢有这么多空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}。
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: "{BiomeName} 不适合住房子。"
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			QueenBee: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Skeletron: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: "{BiomeName} 不适合住房子。"
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Deerclops: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			WallOfFlesh: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			QueenSlime: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			TheDestroyer: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Retinazer: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Spazmatism: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			SkeletronPrime: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Plantera: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Golem: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			EmpressOfLight: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			DukeFishron: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Betsy: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			LunaticCultist: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			MoonLord: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Dreadnautilus: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Mothron: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			Pumpking: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			IceQueen: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			MartianSaucer: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
-
-			TorchGod: {
-				Content: 我感到很满足。
-				NoHome: 我想要一个家。
-				LoveSpace: 我爱这么多的空间。
-				FarFromHome: 我离家很远。
-				DislikeCrowded: 我不喜欢这么多人。
-				HateCrowded: 我讨厌这么多人。
-				LikeBiome: 我喜欢 {BiomeName}.
-				LoveBiome: 我爱 {BiomeName}.
-				DislikeBiome: 我不喜欢 {BiomeName}.
-				HateBiome: 我讨厌 {BiomeName}.
-				LikeNPC: 我喜欢 {NPCName}.
-				LikeNPC_Princess: 我喜欢 {NPCName}.
-				LoveNPC: 我爱 {NPCName}.
-				DislikeNPC: 我不喜欢 {NPCName}.
-				HateNPC: 我讨厌 {NPCName}.
-			}
 		}
 
 		Bestiary: {
@@ -2032,32 +1169,1009 @@ Mods: {
 		}
 
 		NPCs: {
-			Betsy.DisplayName: "{$NPCName.DD2Betsy}"
-			BrainOfCthulhu.DisplayName: "{$NPCName.BrainofCthulhu}"
-			Deerclops.DisplayName: "{$NPCName.Deerclops}"
-			Dreadnautilus.DisplayName: "{$NPCName.BloodNautilus}"
-			DukeFishron.DisplayName: "{$NPCName.DukeFishron}"
-			EaterOfWorlds.DisplayName: "{$NPCName.EaterofWorldsHead}"
-			EmpressOfLight.DisplayName: "{$NPCName.HallowBoss}"
-			EyeOfCthulhu.DisplayName: "{$NPCName.EyeofCthulhu}"
-			Golem.DisplayName: "{$NPCName.Golem}"
-			IceQueen.DisplayName: "{$NPCName.IceQueen}"
-			KingSlime.DisplayName: "{$NPCName.KingSlime}"
-			LunaticCultist.DisplayName: "{$NPCName.CultistBoss}"
-			MartianSaucer.DisplayName: "{$NPCName.MartianSaucer}"
-			MoonLord.DisplayName: "{$NPCName.MoonLordHead}"
-			Mothron.DisplayName: "{$NPCName.Mothron}"
-			Plantera.DisplayName: "{$NPCName.Plantera}"
-			Pumpking.DisplayName: "{$NPCName.Pumpking}"
-			QueenBee.DisplayName: "{$NPCName.QueenBee}"
-			QueenSlime.DisplayName: "{$NPCName.QueenSlimeBoss}"
-			Retinazer.DisplayName: "{$NPCName.Retinazer}"
-			Skeletron.DisplayName: "{$NPCName.SkeletronHead}"
-			SkeletronPrime.DisplayName: "{$NPCName.SkeletronPrime}"
-			Spazmatism.DisplayName: "{$NPCName.Spazmatism}"
-			TheDestroyer.DisplayName: "{$NPCName.TheDestroyer}"
-			TorchGod.DisplayName: "{$NPCName.TorchGod}"
-			WallOfFlesh.DisplayName: "{$NPCName.WallofFlesh}"
+			KingSlime: {
+				DisplayName: "{$NPCName.KingSlime}"
+
+				# {BiomeName} will be replaced with the name of the biome preceded by the. Example "the Forest", "the Corruption", "the Hallow".
+				# {NPCName} will be replaced by the specified Town NPC's name.
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 像我这样的国王需要一个家！
+					LoveSpace: 我喜欢有这么多空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}。
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				# {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
+				# If a line starts with {0}, the line must be in quotes
+				NPCDialog: {
+					// Default1: Have you seen that fellow Ninja person? I'd like to give my sincere apologies for... partake of a him; the taste was awful.
+					// Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
+					// Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
+					// Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
+					# Not changed
+					Default5: 无论你听到什么谣言说所有的史莱姆都来自一个来源，这都是错误的。
+					// Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
+					// Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
+					// Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
+					// Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
+					# Not changed
+					Rare: 凝胶可能是“美味的”，但不要有任何想法！
+					// Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
+					// Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
+					// QS1: You may clutch a victory over me, but we'll see how you handle the other half of royal family.
+					// QS2: I see, you bested me and my darling too. Well, a fine foe you were, enjoy your victory... until our next generation put you into a place!
+					// QS3: You want to know how I got such a beautiful wife as Queen Slime, I know, I know. She's just got a thing for a shiny stones, and so she got one.
+					// QS4: Honestly, I don't mind Queen Slime ruling over two thirds of my land, since seeing her so happy is so much more worth it.
+					// SlimeRain: To command my people to stop ruining your day? I'm a monarchist, peasant, not a tyrant!
+					// Rain1: So giant crowns are a thing, but not a giant umbrellas? Shenanigans, I say, shenanigans!
+					// Rain2: Why do my people even wear umbrellas during rain? Don't be silly, consuming water gives you so much water weigh, it's horrible. And I do not want competition.
+					// Eclipse: How could all of those monsters gather outside... and without a Blob?! That's insulting!
+					// BloodMoon: '''"Blood slimes"? We're not vampires, and blood tastes really bad. Even worse, we might become iron slimes!'''
+					// WindyDay1: All those slimes flying around on their balloons, and people still call us low-intelligent. Low-intelligent creatures wouldn't be able to create a vast empire, now would they?
+					// WindyDay2: What do you mean that {0} has sudden shortage on balloons? By my good name, I don't know anything about this!
+					// Thunderstorm: Did I tell you how one of my fellow slimes was struck by lightning and consumed it? It could've become one of my best man, but sadly, it then fell into a lake.
+					// Graveyard: This place feels me with melancholy, and I didn't even knew slimes could feel such a thing.
+					// EoC: Words can't tell you how much I adore that Eye of Cthulhu. What a nice beast guardian it could be to a mighty royalty like me!
+					// Pk: Pumpking may have some troubles, but I really like his way of managing. He even gifted me my very own Hoppin' Jack!
+					// DF: Duke Fishron may not be a king, but being duke is good enough for me. To excuse his smell, at least.
+					// Guide: I like {0}, we're pretty much partners. He teaches newbies how to survive, and I teach them how to die. What do you think all that contact damage is for?
+					// DyeTrader: It's nice to have {0} around, his tonics may be expensive, but they are tasty too.
+					// Golfer: "{0} really knows how to have a great time, I might even learn how to play golf one day."
+					// Betsy: I knew I wanted a dragon, but not a fire one! Still, Betsy seems to behave well enough to make me just a bit more anxious than I should.
+					// SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
+					// TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
+				}
+			}
+
+			EyeOfCthulhu: {
+				DisplayName: "{$NPCName.EyeofCthulhu}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我喜欢有这么多空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}。
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢{BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是克苏鲁之眼。
+					Default2: 我正在看着你...
+					Default3: 除了那棵树或那只兔子，我想我是这个世界的吉祥物。
+					Default4: 有人曾经称我为“恐怖之眼”。
+					Default5: 我在三个独立的宇宙中被打败了！这公平吗？
+					Default6: 你对眼睛的迷恋到底是什么？
+					Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
+					# Rez and Spaz being Retinazer and Spazmatism.
+					RezSpaz: ML: 没有什么比原版更真实了！
+					// ML: There is nothing truer than the original!
+					EoC: 我是如此受欢迎，以至于他们把我放在商品上。
+				}
+			}
+
+			EaterOfWorlds: {
+				DisplayName: "{$NPCName.EaterofWorldsHead}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我喜欢有这么多空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}。
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: "{BiomeName} 不适合住房子。"
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是世界吞噬怪。
+					Default2: 不，我不是克苏鲁的脊椎。你从哪里听说的？
+					Default3: 哪条路到最近的洗手间？！我想我会呕吐的。
+					Default4: 当然，穿刺武器是有效的 - 它们直接穿过你！
+					Default5: 一股可怕的寒意从你的钱包里流下来...我认为唯一的解决方案是买东西。
+					Party: 你可能不得不在这次聚会后开始称呼“吃蛋糕的人”！
+					Expert: 在这个世界上，你的炸药对我的作用要低80%！
+					Evil: 是的！让腐败蔓延！
+					Good: 那个讨厌的圣地正在破坏我传播腐败的计划！
+					Dryad: 我不确定你是否注意到了，但{0}真的很讨厌我。
+				}
+			}
+
+			BrainOfCthulhu: {
+				DisplayName: "{$NPCName.BrainofCthulhu}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我喜欢有这么多空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}。
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: "{BiomeName} 不适合住房子。"
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是克苏鲁之脑。
+					Default2: 克苏鲁是一个聪明的人，我知道，我是他的大脑。
+					Default3: 我的爬行者让我看到了，它们也可以作为良好的肉盾。
+					Default4: 猩红地是一个巨大的生物体。
+					Default5: 尖叫声在你周围回荡，告诉你买东西。
+					Party: 生日和周年纪念日是一件如此随意的事情。尽管如此，我喜欢参加这些派对。
+					Blood: 猩红之地的心脏心智只会越来越强大！
+					Good: 圣地对猩红的传播构成了威胁！
+					# quotes are important on this one
+					Dryad: “{0}鄙视我的存在”//引号在这个问题上很重要
+					Mechanic: 很高兴你在{0}完成机械版的建造之前救了我。
+				}
+			}
+
+			QueenBee: {
+				DisplayName: "{$NPCName.QueenBee}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是蜂王。
+					Default2: 我的幼虫非常娇嫩，请小心。
+					Default3: 别担心，事实上，我的翅膀足够大，可以让我飞翔。
+					Default4: 蜂蜜有很好的愈合特性，只是不要陷入其中。
+					Default5: 我希望你没有害怕我。
+					Default6: 什么？期待我说“巴斯 巴斯”？
+					Default7: 大黄蜂、黄蜂和黄色夹克有什么区别？我不知道，我是一只蜜蜂。
+					Party: 我为今天的派对做了一些甜糕点！它们可能是你吃过的最甜的糕点！
+					NotTheBees1: 在这片土地上，我感到非常自由。
+					NotTheBees2: 啊，丛林，就我的双眼所能看到的！
+				}
+			}
+
+			Skeletron: {
+				DisplayName: "{$NPCName.SkeletronHead}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: "{BiomeName} 不适合住房子。"
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是骷髅王。
+					Default2: 我是这个世界的支柱。
+					Default3: 我是克苏鲁的骨架剩下的。
+					Default4: 地牢上的诅咒已经解除，尽管我想你还会发现它仍然很危险。
+					Rare: 无呢？我不知道你在说什么。
+					Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
+					Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
+					# quotes are important on this one
+					Clothier: "{0}是一个很棒的主人！我们应该再聚一会儿！"
+					SP: 如果您认为我无法再获得任何能力，请看看机械骷髅王！
+					DG: 令人印象深刻的是，你设法击败了我的守护者形态。在这里，有这个钥匙。我不确定它的作用，所以你弄清楚了。
+					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+					SDMG: Omegatron是一个很棒的家伙。
+				}
+			}
+
+			Deerclops: {
+				DisplayName: "{$NPCName.Deerclops}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是巨鹿怪。
+					Default2: 一定要吃东西，保持理智！
+					Default3: 远离黑暗，否则它会吞噬你...
+					Default4: 对不起，我声音太大，收到了其他村民的投诉。
+					Default5: 其他人都会获得成就;我的在哪里？
+					Party: 哦，派对！最好为我们所有人举办一场盛宴！
+					Snow: 在这个冬天的天气里，你打算举行某种盛宴吗？
+					Betsy: 我听说双足翼龙也来自另一个世界。
+					TheConstant1: 这个世界让人想起我来自的地方。
+					TheConstant2: 好在，你只需要担心你在这个世界上的饥饿。想象一下，如果你也必须控制你的温度！
+				}
+			}
+
+			WallOfFlesh: {
+				DisplayName: "{$NPCName.WallofFlesh}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是血肉墙。
+					Default2: 你已经打败了世界的守护者，我挡住了所有强大的远古精灵！
+					Default3: 呵呵，别那么惊讶的看我！
+					Default4: 让我舔一舔。开玩笑！我只是在惹你...
+					Default5: 我希望你已经为“V”字形的污染做好了准备。
+					Default6: 没有得到你想要的徽章？别担心，我都有...当然是有价格的。
+					Party: 这个派对上有很多甜点，但是有肉吗？
+					NotUnderworld: 你知道，这里比地狱要冷得多。
+					Expert: 这对你来说可能是粗暴的，但消耗我的心会给你额外的力量！
+					Guide1: "{0}和我是同一个人吗？很难说..."
+					# quotes are important on this one
+					Guide2: "{0}对烧伤当然不陌生。"
+					Calamity1: 你看不懂吗？砸碎祭坛不会给你新的矿石！
+					Calamity2: 对祭坛感到困惑？这里有一个提示：阅读神锤上的介绍！
+					PwnCorruption: 用那把锤子砸碎那些腐化地的暗影珠！好事一定会发生！
+					PwnCrimson: 用那把锤子砸碎那些猩红地的心脏！好事一定会发生！
+				}
+			}
+
+			QueenSlime: {
+				DisplayName: "{$NPCName.QueenSlimeBoss}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是史莱姆皇后。
+					Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
+					Default3: 我的失败不会阻止我的史莱姆大军！
+					Default4: 如果你停止从我身上弹起物体，我会更喜欢它。
+					Rare: 粉红凝胶可能是“甜的”，但不要有任何想法！
+					Party: 我本以为这个派对会很壮观，我没有失望。
+					KS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
+					KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
+				}
+			}
+
+			TheDestroyer: {
+				DisplayName: "{$NPCName.TheDestroyer}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是毁灭者。
+					Default2: 你的意思是我是机械BOSS中最弱的？我有最多的生命值！
+					Default3: 我猜克苏鲁终究不会得到他的替代脊柱。
+					Default4: 你感觉到口袋深处的振动...所以买点东西！
+					Party: 我最好被邀请参加这个派对！如果我不是，我会摧毁这个派对！
+					Mechanic: "{0}是造就我的人，你知道的。"
+				}
+			}
+
+			Retinazer: {
+				DisplayName: "{$NPCName.Retinazer}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是激光眼，双子魔眼之一。
+					Default2: 我更喜欢说回来，看着。
+					Default3: 魔焰眼有时可能有点亢奋。
+					Default4: 恭喜，泰拉人。
+					Default5: 你知道所有的机械BOSS都发射红色激光吗？
+					Party: 这个派对会包括激光狂欢吗？
+					SpazEoC: 克苏鲁之眼，魔焰眼和我喜欢社交。
+					OpticStaff: 那些迷你眼球怪很帅，如果我自己这么说的话。
+					Mechanic: "{0}机械师被迫建造了机械Boss。这包括我。"
+				}
+			}
+
+			Spazmatism: {
+				DisplayName: "{$NPCName.Spazmatism}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是魔焰眼，双子魔眼之一。
+					# Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
+					Default2: 呃，对不起，我不知道谁是Sclerepugnant。
+					Default3: 我是刚从伊科尔出来的，但我有很多被诅咒的火焰！
+					Default4: 嘿，这是泰拉人！
+					Default5: 这将是一个可怕的夜晚...如果你不买东西！
+					Party: 这个派对是相当壮观的！明白了吗？奇观！喜欢引人注目的东西？是的，你明白了。
+					RezEoC: 克苏鲁之眼，激光眼和我喜欢说话。
+					OpticStaff: 那些迷你眼球怪是如此可爱！
+					Mechanic: 去责怪{0}，是她造就了我！
+				}
+			}
+
+			SkeletronPrime: {
+				DisplayName: "{$NPCName.SkeletronPrime}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是机械骷髅王。
+					Default2: 我真的在把我的灵魂出卖给你！
+					Default3: 不。我不知道奥库瑞姆姆是谁。不好意思。
+					Default4: 现在我们永远不会知道克苏鲁是否会有四只手臂，多谢！
+					Default5: 你周围的空气越来越冷，你觉得自己把手伸进口袋里掏出钱包。
+					Party: 这个派对需要更多的行动！幸运的是，我有合适的wep - 我的意思是工作的工具！
+					Mechanic: 我要感谢{0}给了我这么棒的武器。
+					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
+					SDMG: Omegatron是一个非常酷的家伙。
+				}
+			}
+
+			Plantera: {
+				DisplayName: "{$NPCName.Plantera}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是世纪之花。
+					Default2: 你为什么不停下来闻闻玫瑰呢？
+					Default3: 我非常保护我的花苞，请不要打扰它们。
+					Default4: 对不起，如果我看起来很活泼...明白了吗？
+					Default5: 我变得焦躁不安...为你买东西！
+					Band1: 我正在考虑成立一个乐队...
+					Band1Party: 这个派对需要某种音乐表演！
+					Band2: 我要和光之女皇后一起组建一支金属乐队！我们正在努力让石巨人成为我们的鼓手。
+					Band2Party: 我的乐队将来应该在这些派对上演奏......
+					Band3: 光之女皇，石巨人，拜月教邪教徒，和我正在录制我们的第一张专辑！拜月教邪教徒的神秘声音非常适合我们的歌曲。
+					Band3Party: 我试图让其他村民让我为下一个聚会举办一场音乐会。
+					Band4: 光之女皇，石巨人，拜月教邪教徒，我完成了第一张专辑！你应该检查一下！
+					Band4Party: 我的金属乐队将在今晚的音乐会上演奏！我迫不及待地想在那里见到你！
+					MudBud: 看看那个小小的世纪之花去吧！
+				}
+			}
+
+			Golem: {
+				DisplayName: "{$NPCName.Golem}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是石巨人。
+					Default2: 我不是推倒者，说真的，试着把我推过去！
+					Default3: 你想要一个镐锯吗？幸运的是，我有一个出售！
+					Party: 我不习惯参加这样的庆祝活动。我喜欢！
+					WitchDoctor: 我将不惜一切代价保护{0}。
+					ForTheWorthy: 我和我跟你打架时一样大！
+					Surface: 至少这里有更多的阳光。
+					Temple1: 当心陷阱...除非您禁用所有这些。
+					Temple2: 我直接融入这些墙壁！
+					Plantera: 我是世纪之花金属乐队的鼓手，我非常擅长打人。
+					// Automaton1: "{0} and I are very different. How does anyone get us confused?"
+					// Automaton2: I am not made with Bluemagic. Please stop asking.
+				}
+			}
+
+			EmpressOfLight: {
+				DisplayName: "{$NPCName.HallowBoss}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是光之女皇。
+					Default2: 生物图鉴将我描述为一个复仇的女神;我同意这一点。
+					Default3: 你不敢碰那些蝴蝶吗！
+					Default4: 如果你想要一个真正的挑战，在白天和我战斗。
+					# quotes and backslashes are important on this one
+					Default5: '''"美丽的子弹炼狱"? 我不使用任何枪支，但我很漂亮。'''
+					Default6: 我敢打赌，你以为所有的仙女都很小，不是吗？
+					Default7: 我的帝国？这是另一个时代的故事。
+					Default8:
+						'''
+						别傻了，没有夜之国王。
+
+						有吗？
+						'''
+					Rare1: 不要问我的触手...
+					Rare2: 是嘴还是鼻子？
+					Good: 我为你们传播圣地而鼓掌，干得好！
+					NoEvilBlood: 我为你们消除这个世界上的邪恶而鼓掌，干得好！
+					Dryad: 从{0}购买尽可能多的万圣节种子！
+					// Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
+					Plantera: 我在世纪之花的金属乐队演奏我的恒星曲调。你应该来听一听！
+					Party: 我可以为这个派对上演真正的灯光秀！
+					Costume: 这就是你穿的令人惊叹的衣服。跟随我的图像，我看到了！
+					BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
+				}
+			}
+
+			DukeFishron: {
+				DisplayName: "{$NPCName.DukeFishron}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是猪龙鱼公爵。
+					Default2: 我是公爵，宝贝！
+					Default3: 是时候吃虫子吹泡泡了，我完全没有泡泡了。
+					Default4: 你去过下水道吗？我在那里遇到了很多变种人。
+					Default5: 风必须有多强才能溅起水和鲨鱼？
+					Default6: 第三只猪，第三条鱼，第三条龙，完全真棒！
+					Party: 我是唯一一个可以像猪一样吃东西并逃脱惩罚的人！
+					FargosMutantMod: "{0}有一些漂亮的翅膀。"
+					Calamity1: 嗯。。。对不起，我只是在想一个血腥蠕虫会有多好吃。
+					Calamity2: 我已经很久没见过我的父亲了...
+				}
+			}
+
+			Betsy: {
+				DisplayName: "{$NPCName.DD2Betsy}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是双足翼龙。
+					Default2: 我是飞龙的母亲。不，不是你想的那种飞龙。
+					Default3: 我是一个真正的BOSS，我保证！
+					Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
+					Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
+					FargosMutantMod: "{0}从哪里得到他的翅膀？"
+					SGAmod: 很高兴看到另一条像{0}一样的龙。
+				}
+			}
+
+			LunaticCultist: {
+				DisplayName: "{$NPCName.CultistBoss}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是拜月教邪教徒。
+					Default2: 我的失败不会阻止我的崇拜！
+					Default3: 每个好的邪教徒都需要穿着这种连帽衫！
+					PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
+					PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
+					Party: 这是一个化装舞会吗？我已经戴上了口罩。
+					Demolitionist: "{0}一直在为我提供炸药的优惠，我不知道为什么。"
+					Plantera: 我神秘的吟唱非常适合世纪之花的金属乐队。
+					Dusk: 黄昏是我一天中最喜欢的时间。
+					PbonesUtilities: 我非常喜欢那个神秘商人的服装的样子。
+				}
+			}
+
+			MoonLord: {
+				DisplayName: "{$NPCName.MoonLordHead}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是月亮领主。
+					Default2: 我不知道史蒂夫是谁，但至少我找到了我的腿。
+					Default3: 我接管泰拉瑞亚的计划已被你阻止，我称赞你所作的这种努力。
+					Default4: 你是一个战士，你不厌其烦地打败了我。
+					Default5: 天界柱被派去征服你的世界。
+					Default6: 不，没有“太阳领主”。
+					Default7: 你为什么要求我制作一些爱？
+					Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
+					Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
+					LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
+					Mechanic: "{0}做得很好，直到你过来救她。"
+					TorchMerchant: 你确定{0}不是...他？
+					NoTorchGod: 我敬畏的只有一位神。幸运的是，它只会被火把困扰。
+					TorchGod: 远离火把之神！他的力量是...不可熄灭。
+					TorchGodVeryClose: 假装我们在说话，直到火把离开。
+				}
+			}
+
+			Dreadnautilus: {
+				DisplayName: "{$NPCName.BloodNautilus}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是恐惧鹦鹉螺。
+					Default2: 现在我们真的在延伸BOSS的定义！
+					Default3: 有些人误称我为“血鹦鹉螺”。这是从哪里来的？
+					Default4: 你看过我的奖杯吗？不幸的是，我失去了它。
+					Party: 这个派对上的打孔碗让我想起了鲜血。美味！
+					Rare: 什么是“鱼海螺”？
+					DayNoRain: 呃，白天太亮了！我希望云层能遮住太阳。
+					Night: 晚上很容易看到，难道不适合您吗？
+					Rain: 可爱，淡水从天而降。我更像是一个咸水人，通过。
+					BloodMoon1: 我不明白大惊小怪是什么，我喜欢血月！
+					BloodMoon2: "{$ItemName.Deathweed}今晚绽放。别忘了收获它们！"
+					KillCount: 你杀了我{0}次。你喜欢吗？
+					Zoologist: 看，即使{0}喜欢血月！她也融入了红色的环境！
+				}
+			}
+
+			Mothron: {
+				DisplayName: "{$NPCName.Mothron}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是蛾怪。
+					Default2: 我很荣幸被认为是BOSS！
+					Default3: 难道你不让你的孩子一出生就去上班吗？
+					Default4: 很多人真的想要我拥有的这把生锈的旧剑。它对你有什么价值？
+					Default5: 我不小心吃了一把生锈的旧剑。我以为是糖果！你还想要它吗？
+					Default6: 哦，你好！我希望你带上你的簸箕！
+					Party: 这么多花哨的灯！我喜欢派对！
+					KillCount: 你在这个世界上打败了我{0}次。您还在寻找什么？
+					Deerclops: 鹿角怪 毛茸茸的头发让我想起了我认识的其他人...
+					WitchDoctor: "{0}的鳞片让我想起了我认识的其他人..."
+					Merchant: 你知道{0}卖什么灯吗？灯笼也有效。只是问。
+					EoC: 克苏鲁之眼正在盯着我所拥有的溜溜球。他们可以拥有它，我甚至不知道为什么我首先拥有它。
+					UndergroundJungle: 为什么那些飞蛾会掉落蝴蝶粉尘？
+					TorchMerchant: "{0}太亮了！他们总是在晚上陪伴我！"
+				}
+			}
+
+			Pumpking: {
+				DisplayName: "{$NPCName.Pumpking}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是南瓜王。
+					Default2: 不要站在我不好的一面！
+					Default3: 我不明白整个“南瓜香料”的热潮。
+					Default4: 他们是镰刀，不是镰刀！做对了！
+					Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
+					FargosMutantMod: "{0}的帽子很适合他。"
+				}
+			}
+
+			IceQueen: {
+				DisplayName: "{$NPCName.IceQueen}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是冰雪女王。
+					Default2: 你不敢做任何很酷的双关语。那不是很好。
+					Default3: 那个雪人军团不会与我匹敌。
+					Default4: 友谊雪球赛怎么样？
+					Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
+					Santa1: 你今年对圣诞老人很好吗？
+					Santa2: 今年你不会得到煤炭，而是受到我的殴打！
+				}
+			}
+
+			MartianSaucer: {
+				DisplayName: "{$NPCName.MartianSaucer}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是火星飞碟。
+					Default2: 你相信外星人吗？好吧，你应该，你正在看一个。
+					Default3: 什么？没想到机器人是有知觉的吗？
+					Default4: 我希望你戴上锡箔帽。
+					Default5: 别担心，我不会去探究你，这就是火星科学家的工作。
+					Default6: 火星人比你们这些泰拉瑞人矮；因此，你的住所以这种形式对我来说足够大。
+					Default7: 也许你们这些泰拉瑞人毕竟没有那么糟糕......
+					Default8:
+						'''
+						这句话是错误的。
+						...不要回答这个问题。
+						'''
+					Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
+					RijamsMod: 我以前从未见过像{0}这样的物种。
+				}
+			}
+
+			TorchGod: {
+				DisplayName: "{$NPCName.TorchGod}"
+
+				TownNPCMood: {
+					Content: 我感到很满足。
+					NoHome: 我想要一个家。
+					LoveSpace: 我爱这么多的空间。
+					FarFromHome: 我离家很远。
+					DislikeCrowded: 我不喜欢这么多人。
+					HateCrowded: 我讨厌这么多人。
+					LikeBiome: 我喜欢 {BiomeName}.
+					LoveBiome: 我爱 {BiomeName}.
+					DislikeBiome: 我不喜欢 {BiomeName}.
+					HateBiome: 我讨厌 {BiomeName}.
+					LikeNPC: 我喜欢 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
+					LoveNPC: 我爱 {NPCName}.
+					DislikeNPC: 我不喜欢 {NPCName}.
+					HateNPC: 我讨厌 {NPCName}.
+					Princess_LovesNPC: 我爱 {NPCName}.
+				}
+
+				NPCDialog: {
+					Default1: 我是火把神。
+					Default2: 你最强大的敌人掉落了最好的战利品;在这里买！
+					Default3: 在各自的生物群系中放置正确的火炬将增加您的运气！不用感谢我！
+					Default4: 您是否担心在木屋中放置明火火炬？不要烦恼，木头不会着火！
+					Default5: 别担心，凡人，在当前生物群系中放置错误的火炬不会降低你的运气低于0！
+					Default6: 并非所有的火焰都会用水熄灭。有些火焰被诅咒永远燃烧。
+					Default7: 你知道如何停止下降和滚动，对吧？
+					Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
+					Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
+					Rare: 哈哈！火在向你射击！
+					HasFavor1: 我的青睐使你神奇地改变了你放置的火炬的类型。使用标准火炬让魔法发挥作用。
+					HasFavor2: 你试过我的挑战，玩得开心吗？我当然做到了！
+					NoFavor1: 你还没有向我证明自己。一旦你有，我会帮你一个忙。
+					NoFavor2: 向我证明，你是值得的，通过在我的小挑战中幸存下来。一个巨大的奖励正等着你。
+					Nurse: 火对你的致命组织非常具有破坏性。幸运的是，{0}在治疗烧伤方面经验丰富。
+					MoonLord: 嗯。。月亮领主在我身边似乎非常谨慎。这是理所当然的。
+					TorchMerchant: 一个火焰的家伙。我非常喜欢{0}。
+					NameIsRedigit: 我欠你的一切，{0}。你是真正的火炬神！
+					Overhaul: 抛弃我之前说过的关于木材不会着火的话;今天火似乎饿得可怕...
+				}
+			}
 		}
 
 		Projectiles: {
@@ -2075,8 +2189,6 @@ Mods: {
 		}
 	}
 }
-
-TownNPCMoodBiomes.GraveyardBiome: 墓地
 
 TownNPCMood_Princess: {
 	LoveNPC_BossesAsNPCs/KingSlime: 我爱 {NPCName}.

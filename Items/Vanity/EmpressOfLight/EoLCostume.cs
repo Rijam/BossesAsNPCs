@@ -38,4 +38,19 @@ namespace BossesAsNPCs.Items.Vanity.EmpressOfLight
 			if (!male) equipSlot = LegEquipTextureFemale;
 		}
 	}
+	[AutoloadEquip(EquipType.Head)]
+	public class EoLCostumeEars : VanityBase
+	{
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			ArmorIDs.Head.Sets.UseSkinColor[Item.headSlot] = true;
+			ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true;
+		}
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			Item.color = Main.LocalPlayer.skinColor;
+		}
+	}
 }

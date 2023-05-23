@@ -214,6 +214,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Dryad", Main.npc[dryad].GivenName));
 			}
+			int stylist = NPC.FindFirstNPC(NPCID.Stylist);
+			if (stylist >= 0 && NPC.downedEmpressOfLight)
+			{
+				chat.Add(Language.GetTextValue(path + "Stylist", Main.npc[stylist].GivenName));
+			}
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{

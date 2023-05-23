@@ -140,7 +140,7 @@
 	* Fixed typo on Captured Dreadnautilus.
 	* Added support for Thorium.
 
-0.2.0 - 1.4.4 Update (April 10, 2022)
+0.2.0 - 1.4.4 Update (April 10, 2023)
 	* Updated prices to match 1.4.4 drop rates.
 	* Town NPCs now become rainbow when Shimmered.
 	* Added support for Wikithis.
@@ -152,3 +152,10 @@
 	* Made Plantera's Axe obtainable and playable!
 	* Updated the cross mod support. Now the price modifiers work with vanilla items.
 	* Updated and added many Mod Calls. Any mods adding items to shops will need to update their calls.
+
+0.2.1 - Update 18 (? ?, 2023)
+	* Fixed DreadoftheRedSea
+	* Added a hairstyle that matches the Empress of Light.
+	* Added Empress Costume Ears.
+	* Improved the wording of the All in One Mode config option.
+	* Updated TownNPCMood localizations and dialog localization paths.

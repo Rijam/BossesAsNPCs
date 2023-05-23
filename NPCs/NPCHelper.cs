@@ -7,9 +7,9 @@ using Terraria.ID;
 using Terraria.Chat;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.Localization;
 using System.Linq;
+using static BossesAsNPCs.BossesAsNPCsConfigServer;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -78,7 +78,7 @@ namespace BossesAsNPCs.NPCs
 		/// <returns>string</returns>
 		public static string DialogPath(string npc)
 		{
-			return "Mods." + mod + ".NPCDialog." + npc + ".";
+			return "Mods." + mod + ".NPCs." + npc + ".NPCDialog.";
 		}
 
 		/// <summary>
@@ -1001,7 +1001,7 @@ namespace BossesAsNPCs.NPCs
 		/// <returns>string</returns>
 		public static string DialogPath(string npc, string yourMod, string otherMod)
 		{
-			return "Mods." + yourMod + ".NPCDialog." + otherMod + "." + npc + ".";
+			return "Mods." + yourMod + ".NPCs." + otherMod + "." + npc + ".NPCDialog.";
 		}
 
 		// This is used to bypass the NPCs unloading from the All In One config.
@@ -1018,16 +1018,16 @@ namespace BossesAsNPCs.NPCs
 				return true;
 			}
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			int mode = config.AllInOneNPCMode;
+			AllInOneOptions mode = config.AllInOneNPCMode;
 			if (mode == 0)
 			{
 				return true;
 			}
-			if (mode == 2)
+			if (mode == AllInOneOptions.OnlyOne)
 			{
 				return false;
 			}
-			if (mode == 1)
+			if (mode == AllInOneOptions.Mixed)
 			{
 				if (npc == NPCString.KingSlime && !config.CanSpawnKingSlime) return false;
 				if (npc == NPCString.EyeOfCthulhu && !config.CanSpawnEoC) return false;

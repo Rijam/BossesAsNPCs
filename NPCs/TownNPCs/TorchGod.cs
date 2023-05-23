@@ -13,6 +13,7 @@ using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria.Audio;
+using static BossesAsNPCs.BossesAsNPCsConfigServer;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -116,11 +117,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
-			if (NPCHelper.DownedAnyBossWithConfigCheck() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == 1)
+			if (NPCHelper.DownedAnyBossWithConfigCheck() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == AllInOneOptions.Mixed)
 			{
 				return true;
 			}
-			if (NPCHelper.DownedAnyBoss() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == 2)
+			if (NPCHelper.DownedAnyBoss() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == AllInOneOptions.OnlyOne)
 			{
 				return true;
 			}
@@ -446,9 +447,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			if (!firstButton)
 			{
-				int mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
+				AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
 				GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-				if (mode == 0)
+				if (mode == AllInOneOptions.Off)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
@@ -464,7 +465,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						NPCHelper.IncrementShopCycleMode0();
 					}
 				}
-				else if (mode == 1)
+				else if (mode == AllInOneOptions.Mixed)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
@@ -480,7 +481,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						NPCHelper.IncrementShopCycleMode1();
 					}
 				}
-				else if (mode == 2)
+				else if (mode == AllInOneOptions.OnlyOne)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{

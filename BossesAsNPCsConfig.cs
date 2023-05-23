@@ -70,11 +70,10 @@ namespace BossesAsNPCs
 		[BackgroundColor(39, 77, 253)]
 		[Label("$Mods.BossesAsNPCs.Config.Server.LabelSpawnAllInOne")]
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnAllInOne")]
-		[DefaultValue(0)]
-		[Range(0, 2)]
-		[Slider]
+		[DefaultValue(AllInOneOptions.Off)]
+		[DrawTicks]
 		[ReloadRequired]
-		public int AllInOneNPCMode { get; set; }
+		public AllInOneOptions AllInOneNPCMode { get; set; }
 
 		//Spawn Options
 		[Header("$Mods.BossesAsNPCs.Config.Server.HeaderSpawn")]
@@ -234,6 +233,16 @@ namespace BossesAsNPCs
 		[Tooltip("$Mods.BossesAsNPCs.Config.Server.TooltipSpawnMS")]
 		[DefaultValue(true)]
 		public bool CanSpawnMartianSaucer { get; set; }
+
+		public enum AllInOneOptions
+		{
+			[Label("$Mods.BossesAsNPCs.Config.Server.AllInOneOptions.Off")]
+			Off,
+			[Label("$Mods.BossesAsNPCs.Config.Server.AllInOneOptions.Mixed")]
+			Mixed,
+			[Label("$Mods.BossesAsNPCs.Config.Server.AllInOneOptions.OnlyOne")]
+			OnlyOne
+		}
 
 		/* Not written by Rijam */
 		public static bool IsPlayerLocalServerOwner(int whoAmI)
