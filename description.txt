@@ -24,17 +24,15 @@ Exceptions are made for boss summon items and a few other items like the Terrapr
 Contains a config file to disable certain Town NPCs from spawning and other options.
 
 See a complete shop list and other information on this mod's wiki page!
-https://terrariamods.fandom.com/wiki/User:Rijam/Bosses_As_NPCs
+https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
 Mod version: 0.2.1
-	- Fixed DreadoftheRedSea
-	- Added a hairstyle that matches the Empress of Light.
-	- Added Empress Costume Ears.
-	- Improved the wording of the All in One Mode config option.
-	- Updated TownNPCMood localizations and dialog localization paths.
+	- Updated config localization.
+	- Added support for Item Checklist Blacklist.
+	- Added buff immunities to the NPCs.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

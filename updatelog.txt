@@ -153,9 +153,14 @@
 	* Updated the cross mod support. Now the price modifiers work with vanilla items.
 	* Updated and added many Mod Calls. Any mods adding items to shops will need to update their calls.
 
-0.2.1 - Update 18 (? ?, 2023)
+0.2.1 - Update 18 (May 22, 2023)
 	* Fixed DreadoftheRedSea
 	* Added a hairstyle that matches the Empress of Light.
 	* Added Empress Costume Ears.
 	* Improved the wording of the All in One Mode config option.
 	* Updated TownNPCMood localizations and dialog localization paths.
+
+0.2.2 - Updated 19 (June 4, 2023)
+	* Updated config localization.
+	* Added support for Item Checklist Blacklist.
+	* Added buff immunities to the NPCs.

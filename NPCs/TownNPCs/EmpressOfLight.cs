@@ -11,6 +11,7 @@ using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
+using Terraria.DataStructures;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -67,6 +68,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCProfile = new Profiles.StackedNPCProfile(
 				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture), Texture + "_Party")
 			);
+
+			// Specify the debuffs it is immune to
+			NPCDebuffImmunityData debuffData = new()
+			{
+				SpecificallyImmuneTo = new int[]
+				{
+					BuffID.Confused, // Most NPCs have this
+				}
+			};
+			NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
 		}
 
 		public override void SetDefaults()

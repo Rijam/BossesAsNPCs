@@ -14,6 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria.Audio;
 using static BossesAsNPCs.BossesAsNPCsConfigServer;
+using Terraria.DataStructures;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -68,6 +69,23 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			; // < Mind the semicolon!
 
 			NPCProfile = new TorchGodProfile();
+
+			// Specify the debuffs it is immune to
+			NPCDebuffImmunityData debuffData = new()
+			{
+				SpecificallyImmuneTo = new int[]
+				{
+					BuffID.Confused, // Most NPCs have this
+					BuffID.Poisoned,
+					BuffID.OnFire,
+					BuffID.OnFire3,
+					BuffID.Frostburn,
+					BuffID.Frostburn2,
+					BuffID.CursedInferno,
+					BuffID.ShadowFlame
+				}
+			};
+			NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
 		}
 
 		public override void SetDefaults()

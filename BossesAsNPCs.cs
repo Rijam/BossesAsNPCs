@@ -1,3 +1,4 @@
+using BossesAsNPCs.Items;
 using BossesAsNPCs.NPCs;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Microsoft.Xna.Framework;
@@ -26,6 +27,17 @@ namespace BossesAsNPCs
 				// Actual special thanks to Confection Rebaked for having the correct format.
 				wikithis.Call("AddModURL", this, "terrariamods.wiki.gg$Bosses_As_NPCs");
 				wikithis.Call("AddWikiTexture", this, ModContent.Request<Texture2D>("BossesAsNPCs/icon_small"));
+			}
+			if (ModLoader.TryGetMod("ItemCheckBlacklist", out Mod itemCheckBlacklist))
+			{
+				itemCheckBlacklist.Call("ItemCheckBlacklist", new List<int>() { ModContent.ItemType<TownNPCWeapon>(), ModContent.ItemType<DebugMethodTester>(), ModContent.ItemType<DebugMethodTester2>(),
+					ModContent.ItemType<CaughtBetsy>(), ModContent.ItemType<CaughtBrainOfCthulhu>(), ModContent.ItemType<CaughtDeerclops>(), ModContent.ItemType<CaughtDreadnautilus>(),
+					ModContent.ItemType<CaughtDukeFishron>(), ModContent.ItemType<CaughtEaterOfWorlds>(), ModContent.ItemType<CaughtEmpressOfLight>(), ModContent.ItemType<CaughtEyeOfCthulhu>(),
+					ModContent.ItemType<CaughtGolem>(), ModContent.ItemType<CaughtIceQueen>(), ModContent.ItemType<CaughtKingSlime>(), ModContent.ItemType<CaughtLunaticCultist>(),
+					ModContent.ItemType<CaughtMartianSaucer>(), ModContent.ItemType<CaughtMoonLord>(), ModContent.ItemType<CaughtMothron>(), ModContent.ItemType<CaughtPlantera>(),
+					ModContent.ItemType<CaughtPumpking>(), ModContent.ItemType<CaughtQueenBee>(), ModContent.ItemType<CaughtQueenSlime>(), ModContent.ItemType<CaughtRetinazer>(),
+					ModContent.ItemType<CaughtSkeletron>(), ModContent.ItemType<CaughtSkeletronPrime>(), ModContent.ItemType<CaughtSpazmatism>(), ModContent.ItemType<CaughtTheDestroyer>(),
+					ModContent.ItemType<CaughtTorchGod>(), ModContent.ItemType<CaughtWallOfFlesh>()});
 			}
 		}
 

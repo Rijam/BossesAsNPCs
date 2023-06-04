@@ -3,345 +3,452 @@
 
 Mods: {
 	BossesAsNPCs: {
-		Config: {
-			Server: {
-				LabelBig: Bosses As NPCs Server Options
-				HeaderGeneral: "[c/00FF00:General Options]"
-				HeaderSpawn: "[c/00FF00:Spawn Options]"
-				LabelGeneral1: "[i:4080]   Boost Town NPC Spawn Rates"
-				TooltipGeneral1:
-					'''
-					This option toggles if the Town NPC spawn rates will be boosted
-					  When On: Town NPC spawn rates WILL be boosted.
-					  When Off: Town NPC spawn rates WILL NOT be boosted.
-					    Turn On to boost Town NPC spawn rates.
-					Default value: Off
-					'''
-				LabelGeneral2: "[i:3090]   Sell Expert Mode Items in Non-Expert Worlds"
-				TooltipGeneral2:
-					'''
-					This option toggles if the NPCs will sell
-					Expert Mode items in non-Expert Mode and non-Master Mode worlds.
-					  When On: Expert Mode items WILL be sold in ALL modes.
-					  When Off: Expert Mode items WILL ONLY be sold in Expert Mode and Master Mode.
-					    Turn On to get Expert Mode items in all modes.
-					Default value: Off
-					'''
-				LabelGeneral3: "[i:4929]   Sell Master Mode Items in Non-Master Worlds"
-				TooltipGeneral3:
-					'''
-					This option toggles if the NPCs will sell
-					Master Mode items in non-Master Mode worlds.
-					  When On: Master Mode items WILL be sold in ALL modes.
-					  When Off: Master Mode items WILL ONLY be sold in Master Mode.
-					    Turn On to get Master Mode items in all modes.
-					Default value: Off
-					'''
-				LabelGeneral4: "[i:1309]   Sell Extra Items"
-				TooltipGeneral4:
-					'''
-					This option toggles if the NPCs will sell extra non-boss drop
-					items such as vanity items, music boxes, and other materials.
-					For example: the King Slime NPC will sell Gel and the Slime Staff.
-					  When On: Extra items WILL be sold.
-					  When Off: Extra items WILL NOT be sold.
-					    Turn Off to remove extra items from the shop.
-					Default value: On
-					'''
-				LabelGeneral5: "[i:87]   Shop Price Scaling"
-				TooltipGeneral5:
-					'''
-					This option sets the scaling for the prices in the Town NPCs' shops.
-					  25 means 1/4 (quarter) the normal price.
-					  50 means 1/2 (half) the normal price.
-					  100 means normal price.
-					  200 means 2x (double) the normal price.
-					  400 means 4x (quadruple) the normal price.
-					    Change this value if you want the shop to be cheaper or more expensive.
-					Default value: 100
-					'''
-				LabelGeneral7: "[i:3121]   Town NPCs Cross Mod Support"
-				TooltipGeneral7:
-					'''
-					This option toggles if the Town NPCs will sell items from other mods,
-					if they will have cross mod dialog, and cross mod happiness.
-					  When On: The Town NPCs will sell cross mod items.
-					  When Off: The Town NPCs WILL NOT sell cross mod items.
-					    Turn Off to remove cross mod items from the shops and dialog.
-					Default value: On
-					Reload not required for dialog and shop items.
-					Reload required for happiness.
-					'''
-				LabelGeneral6: "[i:1991]   Catch Town NPCs"
-				TooltipGeneral6:
-					'''
-					This option toggles if the Town NPCs added by this mod can be
-					caught with a Bug Net (Fargo's Mutant Mod style)
-					  When On: The Town NPCs CAN be caught.
-					  When Off: The Town NPCs CAN NOT be caught.
-					    Turn On to catch the Town NPCs.
-					Warning: caught NPC items will become unloaded if this option is Off.
-					Default value: Off
-					Requires a Reload.
-					'''
-				LabelSpawnAllInOne: "[i:5043]   All in One NPC Mode"
-				TooltipSpawnAllInOne:
-					'''
-					This option changes "All in One NPC Mode".
-					  When "Off (Normal)": Standard behavior.
-					  When "Mixed": Unloads the any Boss NPCs who's config is off.
-					    Instead, a new Torch God NPC and Boss NPCs who's configs are on will be loaded.
-					    The shops Boss NPCs who's configs are off will now be sold by the Torch God.
-					  When "Only One": Unloads all of the other Boss NPCs from this mod.
-					    Instead, only the Torch God will be loaded.
-					    It will have shops for each boss' loot when they have been defeated.
-					    The other configs for each Boss NPC will now determine which shops are available.
+		Configs: {
+			BossesAsNPCsConfigServer: {
+				DisplayName: Bosses As NPCs Server Options
 
-					  Change this config if you have too many Town NPCs or don't want as many Town NPCs.
-					Default value: "Off (Normal)"
-					Requires a Reload.
-					'''
-				LabelSpawnKS: "[i:BossesAsNPCs/KSCostumeHeadpiece]   King Slime Can Spawn"
-				TooltipSpawnKS:
-					'''
-					This option toggles if the King Slime NPC can spawn.
-					  When On: The King Slime NPC WILL spawn.
-					  When Off: The King Slime NPC WILL NOT spawn.
-					    Turn Off to stop the King Slime NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnEoC: "[i:BossesAsNPCs/EoCCostumeHeadpiece]   Eye of Cthulhu Can Spawn"
-				TooltipSpawnEoC:
-					'''
-					This option toggles if the Eye of Cthulhu NPC can spawn.
-					  When On: The Eye of Cthulhu NPC WILL spawn.
-					  When Off: The Eye of Cthulhu NPC WILL NOT spawn.
-					    Turn Off to stop the Eye of Cthulhu NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnEoW: "[i:2111]   Eater of Worlds Can Spawn"
-				TooltipSpawnEoW:
-					'''
-					This option toggles if the Eater of Worlds NPC can spawn.
-					  When On: The Eater of Worlds NPC WILL spawn.
-					  When Off: The Eater of Worlds NPC WILL NOT spawn.
-					    Turn Off to stop the Eater of Worlds NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnBoC: "[i:2104]   Brain of Cthulhu Can Spawn"
-				TooltipSpawnBoC:
-					'''
-					This option toggles if the Brain of Cthulhu NPC can spawn.
-					  When On: The Brain of Cthulhu NPC WILL spawn.
-					  When Off: The Brain of Cthulhu NPC WILL NOT spawn.
-					    Turn Off to stop the Brain of Cthulhu NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnQB: "[i:2108]   Queen Bee Can Spawn"
-				TooltipSpawnQB:
-					'''
-					This option toggles if the Queen Bee NPC can spawn.
-					  When On: The Queen Bee NPC WILL spawn.
-					  When Off: The Queen Bee NPC WILL NOT spawn.
-					    Turn Off to stop the Queen Bee NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnSk: "[i:1281]   Skeletron Can Spawn"
-				TooltipSpawnSk:
-					'''
-					This option toggles if the Skeletron NPC can spawn.
-					  When On: The Skeletron NPC WILL spawn.
-					  When Off: The Skeletron NPC WILL NOT spawn.
-					    Turn Off to stop the Skeletron NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnDc: "[i:5109]   Deerclops Can Spawn"
-				TooltipSpawnDc:
-					'''
-					This option toggles if the Deerclops NPC can spawn.
-					  When On: The Deerclops NPC WILL spawn.
-					  When Off: The Deerclops NPC WILL NOT spawn.
-					    Turn Off to stop the Deerclops NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnWoF: "[i:BossesAsNPCs/WoFCostumeHeadpiece]   Wall of Flesh Can Spawn"
-				TooltipSpawnWoF:
-					'''
-					This option toggles if the Wall of Flesh NPC can spawn.
-					  When On: The Wall of Flesh NPC WILL spawn.
-					  When Off: The Wall of Flesh NPC WILL NOT spawn.
-					    Turn Off to stop the Wall of Flesh NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnQS: "[i:4959]   Queen Slime Can Spawn"
-				TooltipSpawnQS:
-					'''
-					This option toggles if the Queen Slime NPC can spawn.
-					  When On: The Queen Slime NPC WILL spawn.
-					  When Off: The Queen Slime NPC WILL NOT spawn.
-					    Turn Off to stop the Queen Slime NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnDe: "[i:2113]   The Destroyer Can Spawn"
-				TooltipSpawnDe:
-					'''
-					This option toggles if the Destroyer NPC can spawn.
-					  When On: The Destroyer NPC WILL spawn.
-					  When Off: The Destroyer NPC WILL NOT spawn.
-					    Turn Off to stop the Destroyer NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnTw: "[i:2106]   The Twins Can Spawn"
-				TooltipSpawnTw:
-					'''
-					This option toggles if the Retinazer & Spazmatism NPCs can spawn.
-					  When On: The Twins NPCs WILL spawn.
-					  When Off: The Twins NPCs WILL NOT spawn.
-					    Turn Off to stop the Twins NPCs from spawning.
-					Default value: On
-					'''
-				LabelSpawnSP: "[i:2107]   Skeletron Prime Can Spawn"
-				TooltipSpawnSP:
-					'''
-					This option toggles if the Skeletron Prime NPC can spawn.
-					  When On: The Skeletron Prime NPC WILL spawn.
-					  When Off: The Skeletron Prime NPC WILL NOT spawn.
-					    Turn Off to stop the Skeletron Prime NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnPl: "[i:2109]   Plantera Can Spawn"
-				TooltipSpawnPl:
-					'''
-					This option toggles if the Plantera NPC can spawn.
-					  When On: The Plantera NPC WILL spawn.
-					  When Off: The Plantera NPC WILL NOT spawn.
-					    Turn Off to stop the Plantera NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnGo: "[i:2110]   Golem Can Spawn"
-				TooltipSpawnGo:
-					'''
-					This option toggles if the Golem NPC can spawn.
-					  When On: The Golem NPC WILL spawn.
-					  When Off: The Golem NPC WILL NOT spawn.
-					    Turn Off to stop the Golem NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnEoL: "[i:BossesAsNPCs/EoLCostumeHeadpiece]   Empress of Light Can Spawn"
-				TooltipSpawnEoL:
-					'''
-					This option toggles if the Empress of Light NPC can spawn.
-					  When On: The Empress of Light NPC WILL spawn.
-					  When Off: The Empress of Light NPC WILL NOT spawn.
-					    Turn Off to stop the Empress of Light NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnDF: "[i:BossesAsNPCs/DFCostumeHeadpiece]   Duke Fishron Can Spawn"
-				TooltipSpawnDF:
-					'''
-					This option toggles if the Duke Fishron NPC can spawn.
-					  When On: The Duke Fishron NPC WILL spawn.
-					  When Off: The Duke Fishron NPC WILL NOT spawn.
-					    Turn Off to stop the Duke Fishron NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnBe: "[i:3863]   Betsy Can Spawn"
-				TooltipSpawnBe:
-					'''
-					This option toggles if the Betsy NPC can spawn.
-					  When On: The Betsy NPC WILL spawn.
-					  When Off: The Betsy NPC WILL NOT spawn.
-					    Turn Off to stop the Betsy NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnLC: "[i:BossesAsNPCs/LCCostumeHeadpiece]   Lunatic Cultist Can Spawn"
-				TooltipSpawnLC:
-					'''
-					This option toggles if the Lunatic Cultist NPC can spawn.
-					  When On: The Lunatic Cultist NPC WILL spawn.
-					  When Off: The Lunatic Cultist NPC WILL NOT spawn.
-					    Turn Off to stop the Lunatic Cultist NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnML: "[i:3373]   Moon Lord Can Spawn"
-				TooltipSpawnML:
-					'''
-					This option toggles if the Moon Lord NPC can spawn.
-					  When On: The Moon Lord NPC WILL spawn.
-					  When Off: The Moon Lord NPC WILL NOT spawn.
-					    Turn Off to stop the Moon Lord NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnGoblinSell: "[i:361]   Goblin Tinkerer Sells Goblin Army Items"
-				TooltipSpawnGoblinSell:
-					'''
-					This option toggles if the Goblin Tinkerer can sell Goblin Army items.
-					  When On: The Goblin Tinkerer WILL sell Goblin Army items.
-					  When Off: The Goblin Tinkerer WILL NOT sell Goblin Army items.
-					    Turn Off to stop the Goblin Army items from the Goblin Tinkerer's shop.
-					Default value: On
-					'''
-				LabelSpawnPirateSell: "[i:1315]   Pirate Sells Pirate Invasion Items"
-				TooltipSpawnPirateSell:
-					'''
-					This option toggles if the Pirate can sell Pirate Invasion items.
-					  When On: The Pirate WILL sell Pirate Invasion items.
-					  When Off: The Pirate WILL NOT sell Pirate Invasion items.
-					    Turn Off to stop the Pirate Invasion items from the Pirate's shop.
-					Default value: On
-					'''
-				LabelSpawnDn: "[i:BossesAsNPCs/DnCostumeHeadpiece]   Dreadnautilus Can Spawn"
-				TooltipSpawnDn:
-					'''
-					This option toggles if the Dreadnautilus NPC can spawn.
-					  When On: The Dreadnautilus NPC WILL spawn.
-					  When Off: The Dreadnautilus NPC WILL NOT spawn.
-					    Turn Off to stop the Dreadnautilus NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnMo: "[i:BossesAsNPCs/MoCostumeHeadpiece]   Mothron Can Spawn"
-				TooltipSpawnMo:
-					'''
-					This option toggles if the Mothron NPC can spawn.
-					  When On: The Mothron NPC WILL spawn.
-					  When Off: The Mothron NPC WILL NOT spawn.
-					    Turn Off to stop the Mothron NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnPk: "[i:BossesAsNPCs/PkCostumeHeadpiece]   Pumpking Can Spawn"
-				TooltipSpawnPk:
-					'''
-					This option toggles if the Pumpking NPC can spawn.
-					  When On: The Pumpking NPC WILL spawn.
-					  When Off: The Pumpking NPC WILL NOT spawn.
-					    Turn Off to stop the Pumpking NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnIQ: "[i:BossesAsNPCs/IQCostumeHeadpiece]   Ice Queen Can Spawn"
-				TooltipSpawnIQ:
-					'''
-					This option toggles if the Ice Queen NPC can spawn.
-					  When On: The Ice Queen NPC WILL spawn.
-					  When Off: The Ice Queen NPC WILL NOT spawn.
-					    Turn Off to stop the Ice Queen NPC from spawning.
-					Default value: On
-					'''
-				LabelSpawnMS: "[i:BossesAsNPCs/MSCostumeHeadpiece]   Martian Saucer Can Spawn"
-				TooltipSpawnMS:
-					'''
-					This option toggles if the Martian Saucer NPC can spawn.
-					  When On: The Martian Saucer NPC WILL spawn.
-					  When Off: The Martian Saucer NPC WILL NOT spawn.
-					    Turn Off to stop the Martian Saucer NPC from spawning.
-					Default value: On
-					'''
+				BoostTownNPCRates: {
+					Label: "[i:4080]   Boost Town NPC Spawn Rates"
+					Tooltip:
+						'''
+						This option toggles if the Town NPC spawn rates will be boosted
+						  When On: Town NPC spawn rates WILL be boosted.
+						  When Off: Town NPC spawn rates WILL NOT be boosted.
+						    Turn On to boost Town NPC spawn rates.
+						Default value: Off
+						'''
+				}
+
+				SellExpertMode: {
+					Label: "[i:3090]   Sell Expert Mode Items in Non-Expert Worlds"
+					Tooltip:
+						'''
+						This option toggles if the NPCs will sell
+						Expert Mode items in non-Expert Mode and non-Master Mode worlds.
+						  When On: Expert Mode items WILL be sold in ALL modes.
+						  When Off: Expert Mode items WILL ONLY be sold in Expert Mode and Master Mode.
+						    Turn On to get Expert Mode items in all modes.
+						Default value: Off
+						'''
+				}
+
+				SellMasterMode: {
+					Label: "[i:4929]   Sell Master Mode Items in Non-Master Worlds"
+					Tooltip:
+						'''
+						This option toggles if the NPCs will sell
+						Master Mode items in non-Master Mode worlds.
+						  When On: Master Mode items WILL be sold in ALL modes.
+						  When Off: Master Mode items WILL ONLY be sold in Master Mode.
+						    Turn On to get Master Mode items in all modes.
+						Default value: Off
+						'''
+				}
+
+				SellExtraItems: {
+					Label: "[i:1309]   Sell Extra Items"
+					Tooltip:
+						'''
+						This option toggles if the NPCs will sell extra non-boss drop
+						items such as vanity items, music boxes, and other materials.
+						For example: the King Slime NPC will sell Gel and the Slime Staff.
+						  When On: Extra items WILL be sold.
+						  When Off: Extra items WILL NOT be sold.
+						    Turn Off to remove extra items from the shop.
+						Default value: On
+						'''
+				}
+
+				ShopPriceScaling: {
+					Label: "[i:87]   Shop Price Scaling"
+					Tooltip:
+						'''
+						This option sets the scaling for the prices in the Town NPCs' shops.
+						  25 means 1/4 (quarter) the normal price.
+						  50 means 1/2 (half) the normal price.
+						  100 means normal price.
+						  200 means 2x (double) the normal price.
+						  400 means 4x (quadruple) the normal price.
+						    Change this value if you want the shop to be cheaper or more expensive.
+						Default value: 100
+						'''
+				}
+
+				TownNPCsCrossModSupport: {
+					Label: "[i:3121]   Town NPCs Cross Mod Support"
+					Tooltip:
+						'''
+						This option toggles if the Town NPCs will sell items from other mods,
+						if they will have cross mod dialog, and cross mod happiness.
+						  When On: The Town NPCs will sell cross mod items.
+						  When Off: The Town NPCs WILL NOT sell cross mod items.
+						    Turn Off to remove cross mod items from the shops and dialog.
+						Default value: On
+						Reload not required for dialog and shop items.
+						Reload required for happiness.
+						'''
+				}
+
+				CatchNPCs: {
+					Label: "[i:1991]   Catch Town NPCs"
+					Tooltip:
+						'''
+						This option toggles if the Town NPCs added by this mod can be
+						caught with a Bug Net (Fargo's Mutant Mod style)
+						  When On: The Town NPCs CAN be caught.
+						  When Off: The Town NPCs CAN NOT be caught.
+						    Turn On to catch the Town NPCs.
+						Warning: caught NPC items will become unloaded if this option is Off.
+						Default value: Off
+						Requires a Reload.
+						'''
+				}
+
+				AllInOneNPCMode: {
+					Label: "[i:5043]   All in One NPC Mode"
+					Tooltip:
+						'''
+						This option changes "All in One NPC Mode".
+						  When "Off (Normal)": Standard behavior.
+						  When "Mixed": Unloads the any Boss NPCs who's config is off.
+						    Instead, a new Torch God NPC and Boss NPCs who's configs are on will be loaded.
+						    The shops Boss NPCs who's configs are off will now be sold by the Torch God.
+						  When "Only One": Unloads all of the other Boss NPCs from this mod.
+						    Instead, only the Torch God will be loaded.
+						    It will have shops for each boss' loot when they have been defeated.
+						    The other configs for each Boss NPC will now determine which shops are available.
+
+						  Change this config if you have too many Town NPCs or don't want as many Town NPCs.
+						Default value: "Off (Normal)"
+						Requires a Reload.
+						'''
+				}
+
+				CanSpawnKingSlime: {
+					Label: "[i:BossesAsNPCs/KSCostumeHeadpiece]   King Slime Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the King Slime NPC can spawn.
+						  When On: The King Slime NPC WILL spawn.
+						  When Off: The King Slime NPC WILL NOT spawn.
+						    Turn Off to stop the King Slime NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnEoC: {
+					Label: "[i:BossesAsNPCs/EoCCostumeHeadpiece]   Eye of Cthulhu Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Eye of Cthulhu NPC can spawn.
+						  When On: The Eye of Cthulhu NPC WILL spawn.
+						  When Off: The Eye of Cthulhu NPC WILL NOT spawn.
+						    Turn Off to stop the Eye of Cthulhu NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnEoW: {
+					Label: "[i:2111]   Eater of Worlds Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Eater of Worlds NPC can spawn.
+						  When On: The Eater of Worlds NPC WILL spawn.
+						  When Off: The Eater of Worlds NPC WILL NOT spawn.
+						    Turn Off to stop the Eater of Worlds NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnBoC: {
+					Label: "[i:2104]   Brain of Cthulhu Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Brain of Cthulhu NPC can spawn.
+						  When On: The Brain of Cthulhu NPC WILL spawn.
+						  When Off: The Brain of Cthulhu NPC WILL NOT spawn.
+						    Turn Off to stop the Brain of Cthulhu NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnQueenBee: {
+					Label: "[i:2108]   Queen Bee Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Queen Bee NPC can spawn.
+						  When On: The Queen Bee NPC WILL spawn.
+						  When Off: The Queen Bee NPC WILL NOT spawn.
+						    Turn Off to stop the Queen Bee NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnSkeletron: {
+					Label: "[i:1281]   Skeletron Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Skeletron NPC can spawn.
+						  When On: The Skeletron NPC WILL spawn.
+						  When Off: The Skeletron NPC WILL NOT spawn.
+						    Turn Off to stop the Skeletron NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnDeerclops: {
+					Label: "[i:5109]   Deerclops Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Deerclops NPC can spawn.
+						  When On: The Deerclops NPC WILL spawn.
+						  When Off: The Deerclops NPC WILL NOT spawn.
+						    Turn Off to stop the Deerclops NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnWoF: {
+					Label: "[i:BossesAsNPCs/WoFCostumeHeadpiece]   Wall of Flesh Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Wall of Flesh NPC can spawn.
+						  When On: The Wall of Flesh NPC WILL spawn.
+						  When Off: The Wall of Flesh NPC WILL NOT spawn.
+						    Turn Off to stop the Wall of Flesh NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnQueenSlime: {
+					Label: "[i:4959]   Queen Slime Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Queen Slime NPC can spawn.
+						  When On: The Queen Slime NPC WILL spawn.
+						  When Off: The Queen Slime NPC WILL NOT spawn.
+						    Turn Off to stop the Queen Slime NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnDestroyer: {
+					Label: "[i:2113]   The Destroyer Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Destroyer NPC can spawn.
+						  When On: The Destroyer NPC WILL spawn.
+						  When Off: The Destroyer NPC WILL NOT spawn.
+						    Turn Off to stop the Destroyer NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnTwins: {
+					Label: "[i:2106]   The Twins Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Retinazer & Spazmatism NPCs can spawn.
+						  When On: The Twins NPCs WILL spawn.
+						  When Off: The Twins NPCs WILL NOT spawn.
+						    Turn Off to stop the Twins NPCs from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnSkeletronPrime: {
+					Label: "[i:2107]   Skeletron Prime Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Skeletron Prime NPC can spawn.
+						  When On: The Skeletron Prime NPC WILL spawn.
+						  When Off: The Skeletron Prime NPC WILL NOT spawn.
+						    Turn Off to stop the Skeletron Prime NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnPlantera: {
+					Label: "[i:2109]   Plantera Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Plantera NPC can spawn.
+						  When On: The Plantera NPC WILL spawn.
+						  When Off: The Plantera NPC WILL NOT spawn.
+						    Turn Off to stop the Plantera NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnGolem: {
+					Label: "[i:2110]   Golem Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Golem NPC can spawn.
+						  When On: The Golem NPC WILL spawn.
+						  When Off: The Golem NPC WILL NOT spawn.
+						    Turn Off to stop the Golem NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnEoL: {
+					Label: "[i:BossesAsNPCs/EoLCostumeHeadpiece]   Empress of Light Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Empress of Light NPC can spawn.
+						  When On: The Empress of Light NPC WILL spawn.
+						  When Off: The Empress of Light NPC WILL NOT spawn.
+						    Turn Off to stop the Empress of Light NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnDukeFishron: {
+					Label: "[i:BossesAsNPCs/DFCostumeHeadpiece]   Duke Fishron Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Duke Fishron NPC can spawn.
+						  When On: The Duke Fishron NPC WILL spawn.
+						  When Off: The Duke Fishron NPC WILL NOT spawn.
+						    Turn Off to stop the Duke Fishron NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnBetsy: {
+					Label: "[i:3863]   Betsy Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Betsy NPC can spawn.
+						  When On: The Betsy NPC WILL spawn.
+						  When Off: The Betsy NPC WILL NOT spawn.
+						    Turn Off to stop the Betsy NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnLunaticCultist: {
+					Label: "[i:BossesAsNPCs/LCCostumeHeadpiece]   Lunatic Cultist Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Lunatic Cultist NPC can spawn.
+						  When On: The Lunatic Cultist NPC WILL spawn.
+						  When Off: The Lunatic Cultist NPC WILL NOT spawn.
+						    Turn Off to stop the Lunatic Cultist NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnMoonLord: {
+					Label: "[i:3373]   Moon Lord Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Moon Lord NPC can spawn.
+						  When On: The Moon Lord NPC WILL spawn.
+						  When Off: The Moon Lord NPC WILL NOT spawn.
+						    Turn Off to stop the Moon Lord NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				GoblinSellInvasionItems: {
+					Label: "[i:361]   Goblin Tinkerer Sells Goblin Army Items"
+					Tooltip:
+						'''
+						This option toggles if the Goblin Tinkerer can sell Goblin Army items.
+						  When On: The Goblin Tinkerer WILL sell Goblin Army items.
+						  When Off: The Goblin Tinkerer WILL NOT sell Goblin Army items.
+						    Turn Off to stop the Goblin Army items from the Goblin Tinkerer's shop.
+						Default value: On
+						'''
+				}
+
+				PirateSellInvasionItems: {
+					Label: "[i:1315]   Pirate Sells Pirate Invasion Items"
+					Tooltip:
+						'''
+						This option toggles if the Pirate can sell Pirate Invasion items.
+						  When On: The Pirate WILL sell Pirate Invasion items.
+						  When Off: The Pirate WILL NOT sell Pirate Invasion items.
+						    Turn Off to stop the Pirate Invasion items from the Pirate's shop.
+						Default value: On
+						'''
+				}
+
+				CanSpawnDreadnautilus: {
+					Label: "[i:BossesAsNPCs/DnCostumeHeadpiece]   Dreadnautilus Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Dreadnautilus NPC can spawn.
+						  When On: The Dreadnautilus NPC WILL spawn.
+						  When Off: The Dreadnautilus NPC WILL NOT spawn.
+						    Turn Off to stop the Dreadnautilus NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnMothron: {
+					Label: "[i:BossesAsNPCs/MoCostumeHeadpiece]   Mothron Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Mothron NPC can spawn.
+						  When On: The Mothron NPC WILL spawn.
+						  When Off: The Mothron NPC WILL NOT spawn.
+						    Turn Off to stop the Mothron NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnPumpking: {
+					Label: "[i:BossesAsNPCs/PkCostumeHeadpiece]   Pumpking Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Pumpking NPC can spawn.
+						  When On: The Pumpking NPC WILL spawn.
+						  When Off: The Pumpking NPC WILL NOT spawn.
+						    Turn Off to stop the Pumpking NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnIceQueen: {
+					Label: "[i:BossesAsNPCs/IQCostumeHeadpiece]   Ice Queen Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Ice Queen NPC can spawn.
+						  When On: The Ice Queen NPC WILL spawn.
+						  When Off: The Ice Queen NPC WILL NOT spawn.
+						    Turn Off to stop the Ice Queen NPC from spawning.
+						Default value: On
+						'''
+				}
+
+				CanSpawnMartianSaucer: {
+					Label: "[i:BossesAsNPCs/MSCostumeHeadpiece]   Martian Saucer Can Spawn"
+					Tooltip:
+						'''
+						This option toggles if the Martian Saucer NPC can spawn.
+						  When On: The Martian Saucer NPC WILL spawn.
+						  When Off: The Martian Saucer NPC WILL NOT spawn.
+						    Turn Off to stop the Martian Saucer NPC from spawning.
+						Default value: On
+						'''
+				}
+
 				MultiplayerMessage: You are not the server owner so you can not change this config!
 
-				AllInOneOptions: {
-					Off: Off (Normal)
-					Mixed: Mixed
-					OnlyOne: Only One
+				Headers: {
+					HeaderGeneral: "[c/00FF00:General Options]"
+					HeaderSpawn: "[c/00FF00:Spawn Options]"
 				}
+			}
+
+			AllInOneOptions: {
+				Tooltip: ""
+				Off.Label: Off (Normal)
+				Mixed.Label: Mixed
+				OnlyOne.Label: Only One
 			}
 		}
 
@@ -1234,6 +1341,8 @@ Mods: {
 					SquireSlime: "{0} is one of my greatest warriors! They've arrived to conquer your land! Bow before them!"
 					TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
 				}
+
+				Census.SpawnCondition: Defeat King Slime
 			}
 
 			EyeOfCthulhu: {
@@ -1271,6 +1380,8 @@ Mods: {
 					ML: There is nothing truer than the original!
 					EoC: I'm so popular that they put me on merchandise.
 				}
+
+				Census.SpawnCondition: Defeat the Eye of Cthulhu
 			}
 
 			EaterOfWorlds: {
@@ -1307,6 +1418,8 @@ Mods: {
 					Good: That nasty Hallow is ruining my plans of spreading the Corruption!
 					Dryad: I'm not sure if you have noticed, but {0} really hates me.
 				}
+
+				Census.SpawnCondition: Defeat the Eater of Worlds
 			}
 
 			BrainOfCthulhu: {
@@ -1344,6 +1457,8 @@ Mods: {
 					Dryad: "{0} despises my presence."
 					Mechanic: Be glad that you rescued {0} before she could finish building the mechanical version of me.
 				}
+
+				Census.SpawnCondition: Defeat the Brain of Cthulhu
 			}
 
 			QueenBee: {
@@ -1380,6 +1495,8 @@ Mods: {
 					NotTheBees1: I feel very at home in this land.
 					NotTheBees2: Ah, jungle as far as my compound eyes can see!
 				}
+
+				Census.SpawnCondition: Defeat Queen Bee
 			}
 
 			Skeletron: {
@@ -1419,6 +1536,8 @@ Mods: {
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
 					SDMG: Omegatron is such an awesome guy.
 				}
+
+				Census.SpawnCondition: Defeat Skeletron
 			}
 
 			Deerclops: {
@@ -1455,6 +1574,8 @@ Mods: {
 					TheConstant1: This world reminds of the place where I am from.
 					TheConstant2: Good thing you only have to worry about your hunger in this world. Imagine if you had to manage your temperature too!
 				}
+
+				Census.SpawnCondition: Defeat Deerclops
 			}
 
 			WallOfFlesh: {
@@ -1497,6 +1618,8 @@ Mods: {
 					PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
 					PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
 				}
+
+				Census.SpawnCondition: Defeat the Wall of Flesh
 			}
 
 			QueenSlime: {
@@ -1531,6 +1654,8 @@ Mods: {
 					KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
 					KS2: You have bested the slime oligarchy. I commend you.
 				}
+
+				Census.SpawnCondition: Defeat Queen Slime
 			}
 
 			TheDestroyer: {
@@ -1563,6 +1688,8 @@ Mods: {
 					Party: I better be invited to this party! If I'm not, I'll crash this party!
 					Mechanic: "{0} was the one who built me, you know."
 				}
+
+				Census.SpawnCondition: Defeat The Destroyer
 			}
 
 			Retinazer: {
@@ -1598,6 +1725,8 @@ Mods: {
 					OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
 					Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
 				}
+
+				Census.SpawnCondition: Defeat The Twins
 			}
 
 			Spazmatism: {
@@ -1634,6 +1763,8 @@ Mods: {
 					OpticStaff: Those mini Spazmatisms are so cute!
 					Mechanic: Go blame {0}, she's the one who made me!
 				}
+
+				Census.SpawnCondition: Defeat The Twins
 			}
 
 			SkeletronPrime: {
@@ -1669,6 +1800,8 @@ Mods: {
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
 					SDMG: Omegatron is a pretty cool dude.
 				}
+
+				Census.SpawnCondition: Defeat Skeletron Prime
 			}
 
 			Plantera: {
@@ -1709,6 +1842,8 @@ Mods: {
 					Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
 					MudBud: Look at that little Plantero go!
 				}
+
+				Census.SpawnCondition: Defeat Plantera
 			}
 
 			Golem: {
@@ -1747,6 +1882,8 @@ Mods: {
 					Automaton1: "{0} and I are very different. How does anyone get us confused?"
 					Automaton2: I am not made with Bluemagic. Please stop asking.
 				}
+
+				Census.SpawnCondition: Defeat Golem
 			}
 
 			EmpressOfLight: {
@@ -1797,6 +1934,8 @@ Mods: {
 					Costume: That's quite the stunning outfit you have on. Following in my image I see!
 					BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
 				}
+
+				Census.SpawnCondition: Defeat the Empress of Light
 			}
 
 			DukeFishron: {
@@ -1833,6 +1972,8 @@ Mods: {
 					Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
 					Calamity2: I haven't seen my father in a long time...
 				}
+
+				Census.SpawnCondition: Defeat Duke Fishron
 			}
 
 			Betsy: {
@@ -1866,6 +2007,8 @@ Mods: {
 					FargosMutantMod: Where did {0} get his wings?
 					SGAmod: Good to see another dragon like {0}.
 				}
+
+				Census.SpawnCondition: Defeat Betsy
 			}
 
 			LunaticCultist: {
@@ -1902,6 +2045,8 @@ Mods: {
 					Dusk: Dusk is my favorite time of the day.
 					PbonesUtilities: I quite like the look of that Mysterious Trader's attire.
 				}
+
+				Census.SpawnCondition: Defeat the Lunatic Cultist
 			}
 
 			MoonLord: {
@@ -1943,6 +2088,8 @@ Mods: {
 					TorchGod: Stay away from The Torch God! His power is... inextinguishable.
 					TorchGodVeryClose: Just pretend like we are talking until Torchy leaves.
 				}
+
+				Census.SpawnCondition: Defeat Moon Lord
 			}
 
 			Dreadnautilus: {
@@ -1982,6 +2129,8 @@ Mods: {
 					KillCount: You have slain me {0} times. Have you enjoyed it?
 					Zoologist: See, even {0} likes the Blood Moon! She blends in with the red environment, too!
 				}
+
+				Census.SpawnCondition: Defeat Dreadnautilus
 			}
 
 			Mothron: {
@@ -2022,6 +2171,8 @@ Mods: {
 					UndergroundJungle: Why is it that those moths drop butterfly dust?
 					TorchMerchant: "{0} is so bright! They always keep me company at night!"
 				}
+
+				Census.SpawnCondition: Defeat Mothron
 			}
 
 			Pumpking: {
@@ -2054,6 +2205,8 @@ Mods: {
 					Party: Is this the type of party that involves passing out candy? I sure hope it is!
 					FargosMutantMod: "{0}'s hat suits him quite nicely."
 				}
+
+				Census.SpawnCondition: Defeat the Pumpking
 			}
 
 			IceQueen: {
@@ -2087,6 +2240,8 @@ Mods: {
 					Santa1: Have you been good this year for Santa Claus?
 					Santa2: Instead of getting coal this year, you are getting a beating from me!
 				}
+
+				Census.SpawnCondition: Defeat the Ice Queen
 			}
 
 			MartianSaucer: {
@@ -2127,6 +2282,8 @@ Mods: {
 					Party: Parties entail such strange decor and customs that I am not used to.
 					RijamsMod: I haven't seen a species like {0} before.
 				}
+
+				Census.SpawnCondition: Defeat the Martian Saucer
 			}
 
 			TorchGod: {
@@ -2172,6 +2329,8 @@ Mods: {
 					NameIsRedigit: I owe everything I am to you, {0}. You are the true Torch God!
 					Overhaul: Discard what I previously said about wood not catching fire; The fire seems awfully hungry today...
 				}
+
+				Census.SpawnCondition: Defeat any boss with All in One NPC Mode set to "Mixed" or "Only One".
 			}
 		}
 
