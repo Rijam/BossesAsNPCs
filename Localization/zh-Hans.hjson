@@ -451,36 +451,6 @@ Mods: {
 			}
 		}
 
-		CrossMod: {
-			Census: {
-				KingSlime: 打败史莱姆王
-				EyeOfCthulhu: 打败克苏鲁之眼
-				EaterOfWorlds: 打败世界吞噬者
-				BrainOfCthulhu: 打败克苏鲁之脑
-				QueenBee: 打败蜂王
-				Skeletron: 打败骷髅王
-				Deerclops: 打败巨鹿怪
-				WallOfFlesh: 打败血肉墙
-				QueenSlime: 打败史莱姆皇后
-				TheDestroyer: 打败毁灭者
-				TheTwins: 打败双子魔眼
-				SkeletronPrime: 打败机械骷髅王
-				Plantera: 打败世纪之花
-				Golem: 打败石巨人
-				EmpressOfLight: 打败光之女皇
-				DukeFishron: 打败猪龙鱼公爵
-				Betsy: 打败双足翼龙
-				LunaticCultist: 打败拜月教邪教徒
-				MoonLord: 打败月亮领主
-				Dreadnautilus: 打败恐惧鹦鹉螺
-				Mothron: 打败蛾怪
-				Pumpking: 打败南瓜王
-				IceQueen: 打败冰雪女王
-				MartianSaucer: 打败火星飞碟
-				TorchGod: 击败任何头目，将“一体式NPC模式”设置为混合或只有一个。
-			}
-		}
-
 		Common: {
 			VanityAccesssory: 梳妆台配件
 			IncludesGlowMask: 包括发光面膜
@@ -548,6 +518,8 @@ Mods: {
 			// TownNPCRangeS: When there are {0} or more Town NPCs in the world
 			// CountTownNPCsS: When there are {0} or more Town NPCs in the world
 			// EternityModeS: In Eternity Mode
+			// MothronPaintingsS: Paintings are randomly sold
+			// RandomVanityS: Vanity are randomly sold
 		}
 
 		Items: {
@@ -671,6 +643,21 @@ Mods: {
 				// Tooltip: ""
 			}
 
+			EsCostumeHeadpiece: {
+				// DisplayName: Everscream Costume Headpiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			EsCostumeBodypiece: {
+				// DisplayName: Everscream Costume Bodypiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			EsCostumeLegpiece: {
+				// DisplayName: Everscream Costume Legpiece
+				// Tooltip: ""
+			}
+
 			EyeCostumeLegpiece: {
 				DisplayName: 克苏鲁之眼裤子
 				// Tooltip: ""
@@ -776,6 +763,21 @@ Mods: {
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
+			MWCostumeHeadpiece: {
+				// DisplayName: Mourning Wood Costume Headpiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			MWCostumeBodypiece: {
+				// DisplayName: Mourning Wood Costume Bodypiece
+				// Tooltip: ""
+			}
+
+			MWCostumeLegpiece: {
+				// DisplayName: Mourning Wood Costume Legpiece
+				// Tooltip: ""
+			}
+
 			PkCostumeHeadpiece: {
 				DisplayName: 南瓜王头饰
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
@@ -851,6 +853,26 @@ Mods: {
 			SkCostumeLegpiece: {
 				DisplayName: 骷髅王裤子
 				// Tooltip: ""
+			}
+
+			SNKCostumeHeadpiece: {
+				// DisplayName: Santa-NK1 Costume Headpiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			SNKCostumeBodypiece: {
+				// DisplayName: Santa-NK1 Costume Bodypiece
+				// Tooltip: ""
+			}
+
+			SNKCostumeLegpiece: {
+				// DisplayName: Santa-NK1 Costume Legpiece
+				// Tooltip: ""
+			}
+
+			SNKCostumeBackpiece: {
+				// DisplayName: Santa-NK1 Costume Backpiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			}
 
 			SPCostumeHeadpiece: {
@@ -1052,7 +1074,7 @@ Mods: {
 		Biomes: {
 			GraveyardBiome: {
 				DisplayName: "{$Mods.BossesAsNPCs.Common.Graveyard}"
-				// TownNPCDialogueName: the Graveyard
+				TownNPCDialogueName: "{$Mods.BossesAsNPCs.Common.Graveyard}"
 			}
 
 			SkyBiome.DisplayName: 天空
@@ -1341,7 +1363,7 @@ Mods: {
 					// TorchMerchant: I never had a nightmares in my life, but now when I saw {0}? Boing! That creature sends shivers down my spine!
 				}
 
-				// Census.SpawnCondition: Defeat King Slime
+				Census.SpawnCondition: 打败史莱姆王
 			}
 
 			EyeOfCthulhu: {
@@ -1380,7 +1402,7 @@ Mods: {
 					EoC: 我是如此受欢迎，以至于他们把我放在商品上。
 				}
 
-				// Census.SpawnCondition: Defeat the Eye of Cthulhu
+				Census.SpawnCondition: 打败克苏鲁之眼
 			}
 
 			EaterOfWorlds: {
@@ -1418,7 +1440,7 @@ Mods: {
 					Dryad: 我不确定你是否注意到了，但{0}真的很讨厌我。
 				}
 
-				// Census.SpawnCondition: Defeat the Eater of Worlds
+				Census.SpawnCondition: 打败世界吞噬者
 			}
 
 			BrainOfCthulhu: {
@@ -1457,7 +1479,7 @@ Mods: {
 					Mechanic: 很高兴你在{0}完成机械版的建造之前救了我。
 				}
 
-				// Census.SpawnCondition: Defeat the Brain of Cthulhu
+				Census.SpawnCondition: 打败克苏鲁之脑
 			}
 
 			QueenBee: {
@@ -1495,7 +1517,7 @@ Mods: {
 					NotTheBees2: 啊，丛林，就我的双眼所能看到的！
 				}
 
-				// Census.SpawnCondition: Defeat Queen Bee
+				Census.SpawnCondition: 打败蜂王
 			}
 
 			Skeletron: {
@@ -1536,7 +1558,7 @@ Mods: {
 					SDMG: Omegatron是一个很棒的家伙。
 				}
 
-				// Census.SpawnCondition: Defeat Skeletron
+				Census.SpawnCondition: 打败骷髅王
 			}
 
 			Deerclops: {
@@ -1574,7 +1596,7 @@ Mods: {
 					TheConstant2: 好在，你只需要担心你在这个世界上的饥饿。想象一下，如果你也必须控制你的温度！
 				}
 
-				// Census.SpawnCondition: Defeat Deerclops
+				Census.SpawnCondition: 打败巨鹿怪
 			}
 
 			WallOfFlesh: {
@@ -1618,7 +1640,7 @@ Mods: {
 					PwnCrimson: 用那把锤子砸碎那些猩红地的心脏！好事一定会发生！
 				}
 
-				// Census.SpawnCondition: Defeat the Wall of Flesh
+				Census.SpawnCondition: 打败血肉墙
 			}
 
 			QueenSlime: {
@@ -1654,7 +1676,7 @@ Mods: {
 					KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
 				}
 
-				// Census.SpawnCondition: Defeat Queen Slime
+				Census.SpawnCondition: 打败史莱姆皇后
 			}
 
 			TheDestroyer: {
@@ -1688,7 +1710,7 @@ Mods: {
 					Mechanic: "{0}是造就我的人，你知道的。"
 				}
 
-				// Census.SpawnCondition: Defeat The Destroyer
+				Census.SpawnCondition: 打败毁灭者
 			}
 
 			Retinazer: {
@@ -1725,7 +1747,7 @@ Mods: {
 					Mechanic: "{0}机械师被迫建造了机械Boss。这包括我。"
 				}
 
-				// Census.SpawnCondition: Defeat The Twins
+				Census.SpawnCondition: 打败双子魔眼
 			}
 
 			Spazmatism: {
@@ -1763,7 +1785,7 @@ Mods: {
 					Mechanic: 去责怪{0}，是她造就了我！
 				}
 
-				// Census.SpawnCondition: Defeat The Twins
+				Census.SpawnCondition: 打败双子魔眼
 			}
 
 			SkeletronPrime: {
@@ -1800,7 +1822,7 @@ Mods: {
 					SDMG: Omegatron是一个非常酷的家伙。
 				}
 
-				// Census.SpawnCondition: Defeat Skeletron Prime
+				Census.SpawnCondition: 打败机械骷髅王
 			}
 
 			Plantera: {
@@ -1842,7 +1864,7 @@ Mods: {
 					MudBud: 看看那个小小的世纪之花去吧！
 				}
 
-				// Census.SpawnCondition: Defeat Plantera
+				Census.SpawnCondition: 打败世纪之花
 			}
 
 			Golem: {
@@ -1882,7 +1904,7 @@ Mods: {
 					// Automaton2: I am not made with Bluemagic. Please stop asking.
 				}
 
-				// Census.SpawnCondition: Defeat Golem
+				Census.SpawnCondition: 打败石巨人
 			}
 
 			EmpressOfLight: {
@@ -1934,7 +1956,7 @@ Mods: {
 					BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
 				}
 
-				// Census.SpawnCondition: Defeat the Empress of Light
+				Census.SpawnCondition: 打败光之女皇
 			}
 
 			DukeFishron: {
@@ -1972,7 +1994,7 @@ Mods: {
 					Calamity2: 我已经很久没见过我的父亲了...
 				}
 
-				// Census.SpawnCondition: Defeat Duke Fishron
+				Census.SpawnCondition: 打败猪龙鱼公爵
 			}
 
 			Betsy: {
@@ -2007,7 +2029,7 @@ Mods: {
 					SGAmod: 很高兴看到另一条像{0}一样的龙。
 				}
 
-				// Census.SpawnCondition: Defeat Betsy
+				Census.SpawnCondition: 打败双足翼龙
 			}
 
 			LunaticCultist: {
@@ -2045,7 +2067,7 @@ Mods: {
 					PbonesUtilities: 我非常喜欢那个神秘商人的服装的样子。
 				}
 
-				// Census.SpawnCondition: Defeat the Lunatic Cultist
+				Census.SpawnCondition: 打败拜月教邪教徒
 			}
 
 			MoonLord: {
@@ -2088,7 +2110,7 @@ Mods: {
 					TorchGodVeryClose: 假装我们在说话，直到火把离开。
 				}
 
-				// Census.SpawnCondition: Defeat Moon Lord
+				Census.SpawnCondition: 打败月亮领主
 			}
 
 			Dreadnautilus: {
@@ -2129,7 +2151,7 @@ Mods: {
 					Zoologist: 看，即使{0}喜欢血月！她也融入了红色的环境！
 				}
 
-				// Census.SpawnCondition: Defeat Dreadnautilus
+				Census.SpawnCondition: 打败恐惧鹦鹉螺
 			}
 
 			Mothron: {
@@ -2171,7 +2193,7 @@ Mods: {
 					TorchMerchant: "{0}太亮了！他们总是在晚上陪伴我！"
 				}
 
-				// Census.SpawnCondition: Defeat Mothron
+				Census.SpawnCondition: 打败蛾怪
 			}
 
 			Pumpking: {
@@ -2205,7 +2227,7 @@ Mods: {
 					FargosMutantMod: "{0}的帽子很适合他。"
 				}
 
-				// Census.SpawnCondition: Defeat the Pumpking
+				Census.SpawnCondition: 打败南瓜王
 			}
 
 			IceQueen: {
@@ -2240,7 +2262,7 @@ Mods: {
 					Santa2: 今年你不会得到煤炭，而是受到我的殴打！
 				}
 
-				// Census.SpawnCondition: Defeat the Ice Queen
+				Census.SpawnCondition: 打败冰雪女王
 			}
 
 			MartianSaucer: {
@@ -2282,7 +2304,7 @@ Mods: {
 					RijamsMod: 我以前从未见过像{0}这样的物种。
 				}
 
-				// Census.SpawnCondition: Defeat the Martian Saucer
+				Census.SpawnCondition: 打败火星飞碟
 			}
 
 			TorchGod: {
@@ -2329,7 +2351,7 @@ Mods: {
 					Overhaul: 抛弃我之前说过的关于木材不会着火的话;今天火似乎饿得可怕...
 				}
 
-				// Census.SpawnCondition: Defeat any boss with All in One NPC Mode set to "Mixed" or "Only One".
+				Census.SpawnCondition: 击败任何头目，将“一体式NPC模式”设置为混合或只有一个。
 			}
 		}
 

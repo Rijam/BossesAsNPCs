@@ -71,6 +71,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				SpecificallyImmuneTo = new int[]
 				{
 					BuffID.Confused, // Most NPCs have this
+					BuffID.Poisoned,
 					BuffID.BoneJavelin, // Penetrated
 					BuffID.BloodButcherer, // Blood Butchered
 					BuffID.TentacleSpike

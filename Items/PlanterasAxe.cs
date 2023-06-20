@@ -14,6 +14,7 @@ namespace BossesAsNPCs.Items
 			// DisplayName.SetDefault("Plantera's Axe");
 			// Tooltip.SetDefault("[c/403638:Used by the Plantera Town NPC]\n[c/403638:because the normal The Axe is upside-down]");
 			Item.ResearchUnlockCount = 1;
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.TheAxe;
 		}
 		public override void SetDefaults()
 		{

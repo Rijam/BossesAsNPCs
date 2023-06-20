@@ -5,13 +5,14 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.Localization;
+using Terraria.GameContent.Animations;
 
 namespace BossesAsNPCs.NPCs
 {
 	/// <summary>
 	/// Returns the associated string.
 	/// </summary>
-	public class NPCString
+	public struct NPCString
 	{
 		public static string KingSlime => "KingSlime";
 		public static string EyeOfCthulhu => "EyeOfCthulhu";
@@ -83,7 +84,11 @@ namespace BossesAsNPCs.NPCs
 			{ NPCString.Pirate, new Dictionary<int, object[]> { } }
 		};
 
-		public static void ClearCustomShops() => customShops.Clear();
+		public static void ClearCustomShops()
+		{
+			customShops.Clear();
+			customShops = null;
+		}
 
 		/// <summary>
 		/// Adds to the dictionary.
@@ -288,6 +293,25 @@ namespace BossesAsNPCs.NPCs
 			}
 		}
 
+		// If the internal support for the mod is enabled.
+
+		public static bool Fargowiltas = true;
+		public static bool FargowiltasSouls = true;
+		public static bool CalamityMod = true;
+		public static bool OrchidMod = true;
+		public static bool Polarities = true;
+		public static bool ThoriumMod = true;
+		public static bool StormDiversMod = true;
+		public static bool AmuletOfManyMinions = true;
+		public static bool ClickerClass = true;
+		public static bool QwertyMod = true;
+		public static bool MagicStorage = true;
+		public static bool ItReallyMustBe = true;
+		public static bool EchoesoftheAncients = true;
+		public static bool StarsAbove = true;
+		public static bool StarlightRiver = true;
+		public static bool PboneUtils = true;
+
 		#region King Slime
 		/// <summary>
 		/// King Slime's shop.
@@ -329,36 +353,40 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SlimyCrown", shop, 50000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeKingSlime", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "CrownJewel", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "SlimeKingsSlasher", shop, 0.1f);
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "MedallionoftheFallenKing", shop, 0.01f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "SlimyShield", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeFlask", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeCard", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "Gelthrower", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "TechniqueHiddenBlade", shop, 0.5f);
 					NPCHelper.SafelySetCrossModItem(thorium, "ShinobiSlicer", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "GelGlove", shop, 0.33f);
+				}
+				if (ModLoader.TryGetMod("StarlightRiver", out Mod starlightRiver) && StarlightRiver)
+				{
+					NPCHelper.SafelySetCrossModItem(starlightRiver, "Gelatine", shop, 5000); // No value
 				}
 				if (customShops.ContainsKey(NPCString.KingSlime))
 				{
@@ -419,23 +447,23 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousEye", shop, 80000); //Match the Mutant's shop
 				}
 
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeEyeofCthulhu", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "DeathstareRod", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "TeardropCleaver", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "LeashOfCthulhu", shop, 0.1f);
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "AgitatingLens", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeSword", shop, 0.25f); //Eye Sored
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeGun", shop, 0.25f); //Eye Rifle
@@ -443,11 +471,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeMinion", shop, 0.25f); //Eyeball Staff
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "EyeHook", shop, 0.25f); //Eyeball Hook
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "EyeCard", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "Eyeruption", shop, 1f, 5f);
 				}
@@ -499,30 +527,30 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "WormyFood", shop, 100000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeEaterofWorlds", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeCorruption", shop, 10000);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "EaterStaff", shop, 0.1f); //Eater of Worlds Staff
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DarkenedHeart", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "EaterCard", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCorruption", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "ConsumptionCannon", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "EaterOfPain", shop, 0.33f);
 				}
@@ -578,33 +606,33 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "GoreySpine", shop, 100000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeBrainofCthulhu", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeCrimson", shop, 10000);
 				}
 
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "BrainStaff", shop, 0.1f); //Mind Break
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "CrimetroidEgg", shop, 0.04f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "GuttedHeart", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "BrainCard", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCrimson", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "NeuralBasher", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "TheStalker", shop, 0.33f);
 				}
@@ -666,27 +694,27 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "Abeemination2", shop, 150000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeQueenBee", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "HardenedHoneycomb", shop);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "TheBee", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "TheSmallSting", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "QueenStinger", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode"))); //The Queen's Stinger
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BeeQueenMinionItem", shop, 0.44f); //Bee Queen's Crown
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeCard", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "HoneyDie", shop, 0.25f);
@@ -694,11 +722,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(orchidMod, "WaxyVial", shop, 0.17f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeFlask", shop, 0.17f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "RoyalOrb", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "SweetHeart", shop, 0.33f);
 				}
@@ -756,37 +784,37 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousSkull", shop, 150000); //Match the Mutant's shop
 				}
 
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeSkeletron", shop, 10000);
 				}
 
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "BoneZone", shop, 0.1f); //The Bone Zone
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "NecromanticBrew", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
 
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					//Skeletal Rod of Minion Guidance
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BoneWaypointRod", shop, 100); //Normally no value
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "SquireSkullAccessory", shop, 0.65f);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "SkeletronCard", shop);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "BonyBackhand", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "GuildsStaff", shop, 0.25f);
 				}
@@ -854,18 +882,22 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "DeerThing2", shop, 120000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "Deerclawps", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DeerSinew", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "CyclopsClicker", shop, 0.25f);
+				}
+				if (ModLoader.TryGetMod("StarlightRiver", out Mod starlightRiver) && StarlightRiver)
+				{
+					NPCHelper.SafelySetCrossModItem(starlightRiver, "HungryStomach", shop);
 				}
 				if (customShops.ContainsKey(NPCString.Deerclops))
 				{
@@ -922,11 +954,11 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "FleshyDoll", shop, 200000);
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeWallofFlesh", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeUnderworld", shop, 10000);
@@ -937,34 +969,38 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(calamityMod, "RogueEmblem", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "HermitsBoxofOneHundredMedicines", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "FleshHand", shop, 0.1f);
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "PungentEyeball", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "BoneSerpentMinionItem", shop, 0.35f);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "ShamanEmblem", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "OrchidEmblem", shop);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "MawOfFlesh", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "BurningSuperDeathClicker", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "ClickerEmblem", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "NinjaEmblem", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(thorium, "ClericEmblem", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(thorium, "BardEmblem", shop, 0.33f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "ShatteredDisk", shop, 10000); // No value
 				}
 				if (customShops.ContainsKey(NPCString.WallOfFlesh))
 				{
@@ -1015,17 +1051,21 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "JellyCrystal", shop, 250000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "GelicWings", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "ClearKeychain", shop, 0.25f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "RoyalSlimePrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.QueenSlime))
 				{
@@ -1072,40 +1112,44 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechWorm", shop, 400000);
 
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeDestroyer", shop, 10000);
 
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DestroyerGun", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "GroundStick", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ShopConditions.Expert);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechTail", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", shop);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.TheDestroyer))
 				{
@@ -1152,41 +1196,45 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechEye", shop, 400000); //Match the Mutant's shop
 
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeTwins", shop, 10000);
 
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "Arbalest", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "TwinRangs", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "FusedLens", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ShopConditions.Expert); //Mechanical Spikes
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechMask", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", shop);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.Retinazer))
 				{
@@ -1233,40 +1281,44 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechEye", shop, 400000);
 
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeTwins", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "Arbalest", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "TwinRangs", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "FusedLens", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ShopConditions.Expert); //Mechanical Spikes
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechMask", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", shop);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.Spazmatism))
 				{
@@ -1313,41 +1365,45 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant)  && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechSkull", shop, 400000);
 
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MechanicalAmalgam", shop, 1000000, Condition.DownedMechBossAll);
 				}
 
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeSkeletronPrime", shop, 10000);
 
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMechs", shop, 10000, Condition.DownedMechBossAll);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "RefractorBlaster", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "ReinforcedPlating", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PrimeAccess", shop, ShopConditions.Expert);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "FlawlessMechChestplate", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "BottomlessBoxofPaperclips", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", shop);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.SkeletronPrime))
 				{
@@ -1404,12 +1460,12 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "PlanterasFruit", shop, 500000); //Match the Mutant's shop
 				}
 
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgePlantera", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "LivingShard", shop);
@@ -1417,31 +1473,31 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(calamityMod, "BlossomFlux", shop, 0.1f);
 				}
 
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "Dicer", shop, 0.1f); //The Dicer
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "MagicalBulb", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "PottedPalMinionItem", shop, 0.44f); //Potted Pal
 				}
-				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod))
+				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod) && QwertyMod)
 				{
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "VitallumCoreUncharged", shop); //Vitallum Core
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "BulbScepter", shop, 0.66f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "FloralStinger", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "JunglesRage", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(polarities, "UnfoldingBlossom", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "BloomWeave", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "BudBomb", shop);
@@ -1450,6 +1506,10 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "VuvuzelaYellow", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "VuvuzelaBlue", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "VerdantOrnament", shop, 0.25f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "OvergrownPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.Plantera))
 				{
@@ -1504,25 +1564,29 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "LihzahrdPowerCell2", shop, 600000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeGolem", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "AegisBlade", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "RockSlide", shop, 0.1f);
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "ComputationOrb", shop, 0.1f);
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "LihzahrdTreasureBox", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "SunRay", shop, 0.14f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "LihzahrdPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.Golem))
 				{
@@ -1581,21 +1645,25 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "PrismaticPrimrose", shop, 600000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "PrecisionSeal", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "EmpressSquireMinionItem", shop, 0.34f); //Chalice of the Empress
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "RainbowClicker", shop, 0.25f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "EmpressPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.EmpressOfLight))
 				{
@@ -1645,41 +1713,41 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "TruffleWorm2", shop, 600000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeDukeFishron", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "DukesDecapitator", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "BrinyBaron", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "FishStick", shop, 0.1f);
 
-					bool eternityMode = (bool)fargosSouls.Call("EternityMode");
-					if (eternityMode)
-					{
-						NPCHelper.SafelySetCrossModItem(fargosSouls, "MutantAntibodies", shop);
-					}
+					NPCHelper.SafelySetCrossModItem(fargosSouls, "MutantAntibodies", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod))
+				if (ModLoader.TryGetMod("QwertyMod", out Mod qwertyMod) && QwertyMod)
 				{
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "BubbleBrewerBaton", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "Cyclone", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(qwertyMod, "Whirlpool", shop, 0.33f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "SeafoamClicker", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "DukesRegalCarnyx", shop, 0.20f);
 					NPCHelper.SafelySetCrossModItem(thorium, "Brinefang", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SoulAnchor", shop, 0.20f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "TyphoonPrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.DukeFishron))
 				{
@@ -1756,7 +1824,7 @@ namespace BossesAsNPCs.NPCs
 
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "ForbiddenTome", shop, 50000, ShopConditions.DownedDarkMage); //Match the Abominationn's shop
 
@@ -1764,35 +1832,35 @@ namespace BossesAsNPCs.NPCs
 
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "BetsyEgg", shop, 400000); //Match the Abominationn's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DragonBreath", shop, 0.1f); //Dragon's Breath
 
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "BetsysHeart", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode"))); //Betsy's Heart
 				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients) && EchoesoftheAncients)
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "BetsyScale", shop);
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FlameCore", shop, ShopConditions.Expert); //Betsy's Flame
 				}
-				if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities))
+				if (ModLoader.TryGetMod("PboneUtils", out Mod pbonesUtilities) && PboneUtils)
 				{
 					NPCHelper.SafelySetCrossModItem(pbonesUtilities, "DefendersCrystal", shop);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "WyvernsNest", shop, 1f, 5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "ArcaneClicker", shop, 0.20f, ShopConditions.DownedDarkMage);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "SnottyClicker", shop, 0.20f, ShopConditions.DownedOgre);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "DraconicClicker", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "DragonFang", shop, 0.33f);
 					NPCHelper.SafelySetCrossModItem(thorium, "DragonHeartWand", shop, 0.33f);
@@ -1842,21 +1910,21 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "CultistSummon", shop, 750000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeLunaticCultist", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeBloodMoon", shop, 10000, Condition.BloodMoon);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "CelestialRune", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "MutantsPact", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode"))); //Mutant's Pact
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistLazor", shop, 0.02f); //Mysterious Cultist Hood
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistBow", shop, 0.25f); //Lunatic Bow of Ice
@@ -1864,20 +1932,41 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistTome", shop, 0.25f); //Lunatic Spell of Ancient Light
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "CultistStaff", shop, 0.25f); //Lunatic Staff of Lightning
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunaticHood", shop, ShopConditions.Expert);  //Lunatic Hood of Command
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunarSelenianBlade", shop, 0.05f);  // Selenian Blade // Made slightly cheaper than 2%
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunarVortexShotgun", shop, 0.05f);  // Storm Diver Shotgun
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunarPredictorBrain", shop, 0.05f);  // Predictor Brain
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "LunarStargazerLaser", shop, 0.05f);  // Stargazer Core
+
+					Condition randomVanity(int tick) => new("Mods.BossesAsNPCs.Conditions.RandomVanityS", () => Main.GameUpdateCount % 4 == tick);
+
+					// Randomly choose a vantiy set every time the shop is opened.
+
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SelenianBMask", shop, 0.05f, randomVanity(0));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SelenianBody", shop, 0.05f, randomVanity(0));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SelenianLegs", shop, 0.05f, randomVanity(0));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StormDiverBMask", shop, 0.05f, randomVanity(1));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StormDiverBody", shop, 0.05f, randomVanity(1));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StormDiverLegs", shop, 0.05f, randomVanity(1));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PredictorBMask", shop, 0.05f, randomVanity(2));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PredictorBody", shop, 0.05f, randomVanity(2));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "PredictorLegs", shop, 0.05f, randomVanity(2));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StargazerBMask", shop, 0.05f, randomVanity(3));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StargazerBody", shop, 0.05f, randomVanity(3));
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "StargazerLegs", shop, 0.05f, randomVanity(3));
 				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients) && EchoesoftheAncients)
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "LunarSilk", shop);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "AbyssFragment", shop, 1f, 2f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "MiceFragment", shop, 1f, 2f, ShopConditions.DownedAnyPillar);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "WhiteDwarfFragment", shop, ShopConditions.DownedAllPillars);
 					NPCHelper.SafelySetCrossModItem(thorium, "CelestialFragment", shop, ShopConditions.DownedAllPillars);
@@ -1948,46 +2037,50 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "CelestialSigil2", shop, 1000000); //Match the Mutant's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "KnowledgeMoonLord", shop, 10000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "CelestialOnion", shop, 100000);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "UtensilPoker", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DeviousAestheticus", shop, 0.05f);
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "GalacticGlobe", shop, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients) && EchoesoftheAncients)
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "TrueThirdEye", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "Cosmic_Key", shop, 100000);
 				}
-				if (ModLoader.TryGetMod("MagicStorage", out Mod magicStorage))
+				if (ModLoader.TryGetMod("MagicStorage", out Mod magicStorage) && MagicStorage)
 				{
 					NPCHelper.SafelySetCrossModItem(magicStorage, "RadiantJewel", shop, 0.05f);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "Nirvana", shop, 0.5f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "TheCore", shop, 0.5f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "LordsClicker", shop);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "TheClicker", shop, 0.20f);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "TorchClicker", shop, ShopConditions.UnlockedBiomeTorches);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "AngelsEnd", shop, 0.11f);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeAndDeath", shop, 0.11f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SonicAmplifier", shop, 0.11f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod theStarsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(theStarsAbove, "LuminitePrism", shop);
 				}
 				if (customShops.ContainsKey(NPCString.MoonLord))
 				{
@@ -2049,29 +2142,29 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousLookingLure", shop, 100000); //Match the Deviantt's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "BloodUrchin", shop, 100000); //Match the Deviantt's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "HemoclawCrab", shop, 100000); //Match the Deviantt's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "BloodSushiPlatter", shop, 200000); //Match the Deviantt's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "BloodOrb", shop, 1f, 5f);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "BouncingEyeball", shop, (0.025f * 2f));
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "SqueakyToy", shop, 0.1f, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "DreadShell", shop, 0.2f, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "BloodDrop", shop); //Bloody Drop
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "BloodyRifle", shop, 0.125f); //Bloodshot Rifle
 				}
-				if (ModLoader.TryGetMod("ItReallyMustBe", out Mod dreadnautilusIsABoss))
+				if (ModLoader.TryGetMod("ItReallyMustBe", out Mod dreadnautilusIsABoss) && ItReallyMustBe)
 				{
 					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "FunnyBait", shop); //Blood Bait
 					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadPistol", shop, 0.25f);
@@ -2080,16 +2173,16 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "BloodyCarKey", shop, 0.25f, ShopConditions.Master);
 					NPCHelper.SafelySetCrossModItem(dreadnautilusIsABoss, "DreadnautilusRelic", shop, 0.1f, ShopConditions.Master);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "BloodMoonFlask", shop, (0.025f * 2));
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "HemoClicker", shop, 0.04f * 2f);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "SpiralClicker", shop, 0.50f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "LuckyRabbitsFoot", shop, 0.1f);
 					NPCHelper.SafelySetCrossModItem(thorium, "Blood", shop, 0.2f);
@@ -2148,7 +2241,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ItemID.TheEyeOfCthulhu) { shopCustomPrice = (int)Math.Round(125000 / 0.33) });
 				shop.Add(new Item(ItemID.MothronWings) { shopCustomPrice = (int)Math.Round(80000 / 0.05) });
 
-				Condition randomPainting(int tick) => new("Paintings are randomly sold", () => Main.GameUpdateCount % 8 == tick);
+				Condition randomPainting(int tick) => new("Mods.BossesAsNPCs.Conditions.MothronPaintingsS", () => Main.GameUpdateCount % 8 == tick);
 
 				// Randomly choose a painting every time the shop is opened.
 
@@ -2171,32 +2264,32 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MothronEgg", shop, 150000); //Match the Deviantt's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "SolarVeil", shop);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "DefectiveSphere", shop, 0.2f);
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "SqueyereMinionItem", shop, 0.1f); //Crest of Eyes
 				}
-				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients))
+				if (ModLoader.TryGetMod("EchoesoftheAncients", out Mod echoesOfTheAncients) &&  EchoesoftheAncients)
 				{
 					NPCHelper.SafelySetCrossModItem(echoesOfTheAncients, "Broken_Hero_GunParts", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "BrokenHeroScepter", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "EclipticClicker", shop, 0.04f * 2f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "TeslaDefibrillator", shop, 0.025f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SwampSpike", shop, 0.025f);
@@ -2270,39 +2363,44 @@ namespace BossesAsNPCs.NPCs
 
 				shop.Add(new Item(ItemID.GoodieBag) { shopCustomPrice = 5000 }, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				Condition randomVanity(int tick) => new("Mods.BossesAsNPCs.Conditions.RandomVanityS", () => Main.GameUpdateCount % 2 == tick);
+
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Pumpking.PkCostumeShoes>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MourningWood.MWCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MourningWood.MWCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MourningWood.MWCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SpookyBranch", shop, 200000, Condition.DownedMourningWood); //Match the Abominationn's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "SuspiciousLookingScythe", shop, 300000); //Match the Abominationn's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "PumpkingsCape", shop, 0.2f, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode"))); //Pumpking's Cape
 				}
-				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+				if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 				{
 					NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "GoldenRogueSquireMinionItem", shop, 0.13f); //Golden Rogue Crest
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SpookyCore", shop, 0.07f); //Spooky Emblem
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "MourningTorch", shop, 0.1f, Condition.DownedMourningWood);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "WitchClicker", shop, 0.1f, Condition.DownedMourningWood);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "LanternClicker", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "PaganGrasp", shop, 0.1f, Condition.DownedMourningWood);
 					NPCHelper.SafelySetCrossModItem(thorium, "Effigy", shop, 0.1f, Condition.DownedMourningWood);
@@ -2368,46 +2466,55 @@ namespace BossesAsNPCs.NPCs
 
 				shop.Add(new Item(ItemID.Present) { shopCustomPrice = 5000 }, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				Condition randomVanity(int tick) => new("Mods.BossesAsNPCs.Conditions.RandomVanityS", () => Main.GameUpdateCount % 3 == tick);
+
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.IceQueen.IQCostumeCape>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Everscream.EsCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Everscream.EsCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Everscream.EsCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SantaNK1.SNKCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SantaNK1.SNKCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SantaNK1.SNKCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SantaNK1.SNKCostumeBackpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
 			}
 
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "FestiveOrnament", shop, 200000, Condition.DownedEverscream); //Match the Abominationn's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "NaughtyList", shop, 200000, Condition.DownedSantaNK1); //Match the Abominationn's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "IceKingsRemains", shop, 300000); //Match the Abominationn's shop
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "IceQueensCrown", shop, 0.2f, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantankScrap", shop); //Mechanical Scrap
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "IceSentry", shop, 0.1f); //Frozen Queen's Staff
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FrostCube", shop, 0.07f); //Frozen Queen's Core
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "RCRemote", shop, 0.02f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "FragilePresent", shop, 0.1f, Condition.DownedSantaNK1);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "IceFlakeCone", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("Polarities", out Mod polarities))
+				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "CandyCaneAtlatl", shop, 0.23f, Condition.DownedEverscream);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "NaughtyClicker", shop, 0.1f, Condition.DownedSantaNK1);
 					NPCHelper.SafelySetCrossModItem(clickerClass, "FrozenClicker", shop, 0.1f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "Permafrost", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "ChristmasCheer", shop, 0.07f, Condition.DownedEverscream);
@@ -2469,34 +2576,34 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
-				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "RunawayProbe", shop, 500000); //Match the Abominationn's shop
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "MartianMemoryStick", shop, 300000); //Match the Abominationn's shop
 				}
-				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod))
+				if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod)
 				{
 					NPCHelper.SafelySetCrossModItem(calamityMod, "ShockGrenade", shop);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "Wingman", shop, 0.14f);
 					NPCHelper.SafelySetCrossModItem(calamityMod, "NullificationRifle", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+				if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosSouls, "SaucerControlConsole", shop, 0.2f, new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")));
 				}
-				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+				if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 				{
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SuperDartLauncher", shop, 0.01f * 6);
 				}
-				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "MartianBeamer", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "HighTechClicker", shop, 0.25f);
 				}
-				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "VoltModule", shop, 0.05f);
 					NPCHelper.SafelySetCrossModItem(thorium, "ShieldDroneBeacon", shop, 0.04f);
@@ -2530,21 +2637,21 @@ namespace BossesAsNPCs.NPCs
 		{
 			shop.Add(new Item(ItemID.GoblinBattleStandard) { shopCustomPrice = (int)Math.Round(25000 * shopMulti) }); //Made up value
 			shop.Add(new Item(ItemID.Harpoon) { shopCustomPrice = (int)Math.Round(5400 / 0.005 / 5 * shopMulti) }); //Special case to make it cheaper
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && ShopConditions.TownNPCsCrossModSupport.IsMet())
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod) && CalamityMod && ShopConditions.TownNPCsCrossModSupport.IsMet())
 			{
 				NPCHelper.SafelySetCrossModItem(calamityMod, "PlasmaRod", shop, (0.07f * 5), shopMulti);
 			}
-			if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod))
+			if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 			{
 				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyFlask", shop, (0.02f * 5), shopMulti);
 				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyCard", shop, (0.02f * 5), shopMulti);
 				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinStick", shop, 0.33f, shopMulti, ShopConditions.DownedGoblinWarlock);
 			}
-			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 			{
 				NPCHelper.SafelySetCrossModItem(clickerClass, "ShadowyClicker", shop, (0.05f * 5), shopMulti);
 			}
-			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 			{
 				NPCHelper.SafelySetCrossModItem(thorium, "YewWoodBlowpipe", shop, 0.05f);
 				NPCHelper.SafelySetCrossModItem(thorium, "YewWood", shop);
@@ -2555,32 +2662,32 @@ namespace BossesAsNPCs.NPCs
 			shop.Add(new Item(ItemID.ShadowFlameBow) { shopCustomPrice = (int)Math.Round(20000 / 0.17 * shopMulti) }, ShopConditions.DownedGoblinWarlock);
 			shop.Add(new Item(ItemID.ShadowFlameKnife) { shopCustomPrice = (int)Math.Round(20000 / 0.17 * shopMulti) }, ShopConditions.DownedGoblinWarlock);
 
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 			{
 				NPCHelper.SafelySetCrossModItem(fargosMutant, "ShadowflameIcon", shop, 0.01f, shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport); //10 gold
 			}
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod2))
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamityMod2) && CalamityMod)
 			{
 				NPCHelper.SafelySetCrossModItem(calamityMod2, "BurningStrife", shop, (0.33f * 5), shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport);
 				NPCHelper.SafelySetCrossModItem(calamityMod2, "TheFirstShadowflame", shop, (0.33f * 5), shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport);
 			}
-			if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+			if (ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && FargowiltasSouls)
 			{
 				NPCHelper.SafelySetCrossModItem(fargosSouls, "WretchedPouch", shop, (0.2f * 5), shopMulti, ShopConditions.DownedGoblinWarlock,
 					new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")),
 					ShopConditions.TownNPCsCrossModSupport);
 			}
-			if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions))
+			if (ModLoader.TryGetMod("AmuletOfManyMinions", out Mod amuletOfManyMinions) && AmuletOfManyMinions)
 			{
 				NPCHelper.SafelySetCrossModItem(amuletOfManyMinions, "GoblinGunnerMinionItem", shop, (0.44f * 5), shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport); //Goblin Radio Beacon
 			}
-			if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions))
+			if (ModLoader.TryGetMod("StormDiversMod", out Mod stormsAdditions) && StormDiversMod)
 			{
 				NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameBMask", shop, 1f, shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport); //Shadowflare Mask
 				NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameChestplate", shop, 1f, shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport); //Shadowflare Robe
 				NPCHelper.SafelySetCrossModItem(stormsAdditions, "ShadowFlameGreaves", shop, 1f, shopMulti, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport); //Shadowflare Greaves
 			}
-			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium2))
+			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium2) &&  ThoriumMod)
 			{
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowPurgeCaltrop", shop, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport);
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowflameWarhorn", shop, 0.17f, ShopConditions.DownedGoblinWarlock, ShopConditions.TownNPCsCrossModSupport);
@@ -2623,23 +2730,23 @@ namespace BossesAsNPCs.NPCs
 			shop.Add(new Item(ItemID.PirateShipMountItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25 * shopMulti) }, ShopConditions.Master); //Black Spot
 			shop.Add(new Item(ItemID.FlyingDutchmanMasterTrophy) { shopCustomPrice = (int)Math.Round(10000 * 5 * shopMulti) }, ShopConditions.Master);
 
-			if (ModLoader.TryGetMod("CalamityMod", out Mod calamity))
+			if (ModLoader.TryGetMod("CalamityMod", out Mod calamity) && CalamityMod)
 			{
 				NPCHelper.SafelySetCrossModItem(calamity, "MidasPrime", shop, (0.04f * 5), shopMulti, ShopConditions.TownNPCsCrossModSupport);
 			}
-			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls))
+			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant2) && ModLoader.TryGetMod("FargowiltasSouls", out Mod fargosSouls) && Fargowiltas && FargowiltasSouls)
 			{
 				NPCHelper.SafelySetCrossModItem(fargosMutant2, "GoldenDippingVat", shop, (0.07f * 5), shopMulti,
 					new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")), ShopConditions.TownNPCsCrossModSupport);
 				NPCHelper.SafelySetCrossModItem(fargosSouls, "SecurityWallet", shop, (0.1f * 5), shopMulti,
 					new Condition(ShopConditions.EternityModeS, () => (bool)fargosSouls.Call("EternityMode")), ShopConditions.TownNPCsCrossModSupport);
 			}
-			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass))
+			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 			{
 				NPCHelper.SafelySetCrossModItem(clickerClass, "CaptainsClicker", shop, (0.125f * 5), shopMulti, ShopConditions.TownNPCsCrossModSupport);
 				NPCHelper.SafelySetCrossModItem(clickerClass, "GoldenTicket", shop, (0.25f * 5), shopMulti, ShopConditions.TownNPCsCrossModSupport);
 			}
-			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium))
+			if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 			{
 				NPCHelper.SafelySetCrossModItem(thorium, "DeadEyePatch", shop, 0.04f, ShopConditions.TownNPCsCrossModSupport);
 				// NPCHelper.SafelySetCrossModItem(thorium, "CaptainsPoniard", shop, ShopConditions.TownNPCsCrossModSupport); Thorium already adds it

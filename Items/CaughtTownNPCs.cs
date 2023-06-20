@@ -25,6 +25,8 @@ namespace BossesAsNPCs.Items
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
 			Item.ResearchUnlockCount = 3;
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.SlimeBlock;
+			ItemID.Sets.AnimatesAsSoul[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -78,6 +80,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -108,6 +111,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.LesionBlock;
 		}
 
 		public override void SetDefaults()
@@ -138,6 +142,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -168,6 +173,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.Hive;
 		}
 
 		public override void SetDefaults()
@@ -198,6 +204,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.BoneBlock;
 		}
 
 		public override void SetDefaults()
@@ -228,6 +235,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -258,6 +266,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -288,6 +297,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.PinkSlimeBlock;
 		}
 
 		public override void SetDefaults()
@@ -318,6 +328,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.TungstenBrick;
 		}
 
 		public override void SetDefaults()
@@ -348,6 +359,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.IronBrick;
 		}
 
 		public override void SetDefaults()
@@ -378,6 +390,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.LeadBrick;
 		}
 
 		public override void SetDefaults()
@@ -408,6 +421,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.SilverBrick;
 		}
 
 		public override void SetDefaults()
@@ -438,6 +452,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.Hay;
 		}
 
 		public override void SetDefaults()
@@ -468,6 +483,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.LihzahrdBrick;
 		}
 
 		public override void SetDefaults()
@@ -498,6 +514,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -528,6 +545,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -558,6 +576,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -588,6 +607,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -618,6 +638,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 23));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -648,6 +669,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.ReefBlock;
 		}
 
 		public override void SetDefaults()
@@ -678,6 +700,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.FleshBlock;
 		}
 
 		public override void SetDefaults()
@@ -708,6 +731,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.Pumpkin;
 		}
 
 		public override void SetDefaults()
@@ -738,6 +762,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 25));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.IceBlock;
 		}
 
 		public override void SetDefaults()
@@ -768,6 +793,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.MartianConduitPlating;
 		}
 
 		public override void SetDefaults()
@@ -799,6 +825,7 @@ namespace BossesAsNPCs.Items
 			base.SetStaticDefaults();
 			// DisplayName.SetDefault(name);
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(5, 26));
+			ItemID.Sets.ShimmerTransformToItem[Type] = ItemID.LivingFireBlock;
 		}
 
 		public override void SetDefaults()

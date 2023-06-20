@@ -50,7 +50,7 @@ namespace BossesAsNPCs
 
 		public override void PostSetupContent()
 		{
-			if (ModLoader.TryGetMod("Census", out Mod censusMod))
+			/*if (ModLoader.TryGetMod("Census", out Mod censusMod))
 			{
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<KingSlime>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.KingSlime"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<EyeOfCthulhu>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.EyeOfCthulhu"));
@@ -78,7 +78,7 @@ namespace BossesAsNPCs
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.IceQueen"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.MartianSaucer"));
 				censusMod.Call("TownNPCCondition", ModContent.NPCType<TorchGod>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TorchGod"));
-			}
+			}*/
 			if (ModLoader.TryGetMod("DialogueTweak", out Mod dialogueTweak))
 			{
 				dialogueTweak.Call("ReplacePortrait",
@@ -245,6 +245,29 @@ namespace BossesAsNPCs
 						default:
 							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");
 					}
+				case "DisableInternalCrossModSupport":
+					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					Logger.DebugFormat("Internal cross mod support for {0} has been disabled.", args[1].ToString());
+					return args[1].ToString() switch
+					{
+						"Fargowiltas" => SetupShops.Fargowiltas = false,
+						"FargowiltasSouls" => SetupShops.FargowiltasSouls = false,
+						"CalamityMod" => SetupShops.CalamityMod = false,
+						"OrchidMod" => SetupShops.OrchidMod = false,
+						"Polarities" => SetupShops.Polarities = false,
+						"ThoriumMod" => SetupShops.ThoriumMod = false,
+						"StormDiversMod" => SetupShops.StormDiversMod = false,
+						"AmuletOfManyMinions" => SetupShops.AmuletOfManyMinions = false,
+						"ClickerClass" => SetupShops.ClickerClass = false,
+						"QwertyMod" => SetupShops.QwertyMod = false,
+						"MagicStorage" => SetupShops.MagicStorage = false,
+						"ItReallyMustBe" => SetupShops.ItReallyMustBe = false,
+						"EchoesoftheAncients" => SetupShops.EchoesoftheAncients = false,
+						"StarsAbove" => SetupShops.StarsAbove = false,
+						"StarlightRiver" => SetupShops.StarlightRiver = false,
+						"PboneUtils" => SetupShops.PboneUtils = false,
+						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
+					};
 				default:
 					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}

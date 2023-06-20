@@ -452,36 +452,6 @@ Mods: {
 			}
 		}
 
-		CrossMod: {
-			Census: {
-				KingSlime: Defeat King Slime
-				EyeOfCthulhu: Defeat the Eye of Cthulhu
-				EaterOfWorlds: Defeat the Eater of Worlds
-				BrainOfCthulhu: Defeat the Brain of Cthulhu
-				QueenBee: Defeat Queen Bee
-				Skeletron: Defeat Skeletron
-				Deerclops: Defeat Deerclops
-				WallOfFlesh: Defeat the Wall of Flesh
-				QueenSlime: Defeat Queen Slime
-				TheDestroyer: Defeat The Destroyer
-				TheTwins: Defeat The Twins
-				SkeletronPrime: Defeat Skeletron Prime
-				Plantera: Defeat Plantera
-				Golem: Defeat Golem
-				EmpressOfLight: Defeat the Empress of Light
-				DukeFishron: Defeat Duke Fishron
-				Betsy: Defeat Betsy
-				LunaticCultist: Defeat the Lunatic Cultist
-				MoonLord: Defeat Moon Lord
-				Dreadnautilus: Defeat Dreadnautilus
-				Mothron: Defeat Mothron
-				Pumpking: Defeat the Pumpking
-				IceQueen: Defeat the Ice Queen
-				MartianSaucer: Defeat the Martian Saucer
-				TorchGod: Defeat any boss with All in One NPC Mode set to "Mixed" or "Only One".
-			}
-		}
-
 		Common: {
 			VanityAccesssory: Vanity Accessory
 			IncludesGlowMask: Includes Glow Mask
@@ -549,6 +519,8 @@ Mods: {
 			TownNPCRangeS: When there are {0} or more Town NPCs in the world
 			CountTownNPCsS: When there are {0} or more Town NPCs in the world
 			EternityModeS: In Eternity Mode
+			MothronPaintingsS: Paintings are randomly sold
+			RandomVanityS: Vanity are randomly sold
 		}
 
 		Items: {
@@ -672,6 +644,21 @@ Mods: {
 				Tooltip: ""
 			}
 
+			EsCostumeHeadpiece: {
+				DisplayName: Everscream Costume Headpiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			EsCostumeBodypiece: {
+				DisplayName: Everscream Costume Bodypiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			EsCostumeLegpiece: {
+				DisplayName: Everscream Costume Legpiece
+				Tooltip: ""
+			}
+
 			EyeCostumeLegpiece: {
 				DisplayName: Eye Costume Legpiece
 				Tooltip: ""
@@ -777,6 +764,21 @@ Mods: {
 				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
+			MWCostumeHeadpiece: {
+				DisplayName: Mourning Wood Costume Headpiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			MWCostumeBodypiece: {
+				DisplayName: Mourning Wood Costume Bodypiece
+				Tooltip: ""
+			}
+
+			MWCostumeLegpiece: {
+				DisplayName: Mourning Wood Costume Legpiece
+				Tooltip: ""
+			}
+
 			PkCostumeHeadpiece: {
 				DisplayName: Pumpking Costume Headpiece
 				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
@@ -852,6 +854,26 @@ Mods: {
 			SkCostumeLegpiece: {
 				DisplayName: Skeletron Costume Legpiece
 				Tooltip: ""
+			}
+
+			SNKCostumeHeadpiece: {
+				DisplayName: Santa-NK1 Costume Headpiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			SNKCostumeBodypiece: {
+				DisplayName: Santa-NK1 Costume Bodypiece
+				Tooltip: ""
+			}
+
+			SNKCostumeLegpiece: {
+				DisplayName: Santa-NK1 Costume Legpiece
+				Tooltip: ""
+			}
+
+			SNKCostumeBackpiece: {
+				DisplayName: Santa-NK1 Costume Backpiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			}
 
 			SPCostumeHeadpiece: {

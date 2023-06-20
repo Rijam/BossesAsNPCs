@@ -164,3 +164,15 @@
 	* Updated config localization.
 	* Added support for Item Checklist Blacklist.
 	* Added buff immunities to the NPCs.
+
+0.2.3 - Update 20 (June 20, 2023)
+	* Updated Census support.
+	* Added support for Starlight River and The Stars Above.
+	* Updated the Lunatic Cultist for Storm's Additions Mod.
+	* Added Mod Calls for disabling the internal cross mod support for a specific mod.
+	* Added Everscream Costume.
+	* Added Santa-NK1 Costume.
+	* Added Mourning Wood Costume.
+	* Ice Queen now randomly sells the Ice Queen Costume set, the Everscream Costume set, or the Santa-NK1 Costume set each time the shop is opened.
+	* Pumpking now randomly sells the Pumpking Costume set or the Mourning Wood Costume set each time the shop is opened.
+	* Caught Town NPCs now transform into a block when thrown into shimmer instead of creating another version of the Town NPC.

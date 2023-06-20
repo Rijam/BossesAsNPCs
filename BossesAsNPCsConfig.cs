@@ -9,7 +9,7 @@ using Terraria.ModLoader.Config;
 namespace BossesAsNPCs
 {
 	/// <summary>
-	/// ExampleConfigServer has Server-wide effects. Things that happen on the server, on the world, or influence autoload go here
+	/// BossesAsNPCsConfigServer has Server-wide effects. Things that happen on the server, on the world, or influence autoload go here
 	/// ConfigScope.ServerSide ModConfigs are SHARED from the server to all clients connecting in MP.
 	/// </summary>
 	public class BossesAsNPCsConfigServer : ModConfig
