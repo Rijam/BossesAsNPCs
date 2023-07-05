@@ -18,6 +18,8 @@ namespace BossesAsNPCs
 			// DisplayName.SetDefault(Language.GetTextValue("Bestiary_Biomes.Graveyard"));
 		}
 
+		public override string BestiaryIcon => base.BestiaryIcon;
+
 		// Calculate when the biome is active.
 		public override bool IsBiomeActive(Player player)
 		{

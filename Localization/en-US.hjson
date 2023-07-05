@@ -589,6 +589,21 @@ Mods: {
 				Tooltip: ""
 			}
 
+			DMCostumeHeadpiece: {
+				DisplayName: Dark Mage Costume Headpiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
+			}
+
+			DMCostumeBodypiece: {
+				DisplayName: Dark Mage Costume Bodypiece
+				Tooltip: ""
+			}
+
+			DMCostumeLegpiece: {
+				DisplayName: Dark Mage Costume Legpiece
+				Tooltip: ""
+			}
+
 			DnCostumeHeadpiece: {
 				DisplayName: Dreadnautilus Costume Headpiece
 				Tooltip: ""
@@ -776,6 +791,16 @@ Mods: {
 
 			MWCostumeLegpiece: {
 				DisplayName: Mourning Wood Costume Legpiece
+				Tooltip: ""
+			}
+
+			OgCostumeBodypiece: {
+				DisplayName: Ogre Costume Bodypiece
+				Tooltip: ""
+			}
+
+			OgCostumeLegpiece: {
+				DisplayName: Ogre Costume Legpiece
 				Tooltip: ""
 			}
 

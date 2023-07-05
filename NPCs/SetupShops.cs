@@ -1609,7 +1609,7 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.LihzahrdPowerCell) { shopCustomPrice = 400000 }); //Prismatic Lacewing //Sell value * 5 = 250000
+				shop.Add(new Item(ItemID.EmpressButterfly) { shopCustomPrice = 400000 }); //Prismatic Lacewing //Sell value * 5 = 250000
 				//Formula: (Sell value / drop chance); It would be 200000 in this case
 				shop.Add(new Item(ItemID.FairyQueenMagicItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Nightglow
 				shop.Add(new Item(ItemID.PiercingStarlight) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Starlight
@@ -1817,9 +1817,17 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ItemID.MusicBoxOWInvasion) { shopCustomPrice = 20000 * 10 },
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+
+				Condition randomVanity(int tick) => new("Mods.BossesAsNPCs.Conditions.RandomVanityS", () => Main.GameUpdateCount % 3 == tick);
+
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Betsy.BeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(0));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.DarkMage.DMCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.DarkMage.DMCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.DarkMage.DMCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(1));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Ogre.OgCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Ogre.OgCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, randomVanity(2));
 			}
 
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())

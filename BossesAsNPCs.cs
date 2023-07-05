@@ -23,9 +23,7 @@ namespace BossesAsNPCs
 		{
 			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
 			{
-				// Special thanks to Wikithis for having an outdated mod calls description -_-
-				// Actual special thanks to Confection Rebaked for having the correct format.
-				wikithis.Call("AddModURL", this, "terrariamods.wiki.gg$Bosses_As_NPCs");
+				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/{}");
 				wikithis.Call("AddWikiTexture", this, ModContent.Request<Texture2D>("BossesAsNPCs/icon_small"));
 			}
 			if (ModLoader.TryGetMod("ItemCheckBlacklist", out Mod itemCheckBlacklist))
@@ -81,11 +79,40 @@ namespace BossesAsNPCs
 			}*/
 			if (ModLoader.TryGetMod("DialogueTweak", out Mod dialogueTweak))
 			{
-				dialogueTweak.Call("ReplacePortrait",
+				dialogueTweak.Call("ReplaceExtraButtonIcon",
 					ModContent.NPCType<TorchGod>(),
-					"BossesAsNPCs/NPCs/TownNPCs/TorchGod_Bestiary",
-					() => true,
-					() => Main.npc[NPC.FindFirstNPC(ModContent.NPCType<TorchGod>())].frame);
+					"BossesAsNPCs/NPCs/Icon_CycleShops");
+
+				dialogueTweak.Call("ReplaceExtraButtonIcon",
+					new List<int>
+					{
+						ModContent.NPCType<KingSlime>(),
+						ModContent.NPCType<EyeOfCthulhu>(),
+						ModContent.NPCType<EaterOfWorlds>(),
+						ModContent.NPCType<BrainOfCthulhu>(),
+						ModContent.NPCType<QueenBee>(),
+						ModContent.NPCType<Skeletron>(),
+						ModContent.NPCType<Deerclops>(),
+						ModContent.NPCType<WallOfFlesh>(),
+						ModContent.NPCType<QueenSlime>(),
+						ModContent.NPCType<TheDestroyer>(),
+						ModContent.NPCType<Retinazer>(),
+						ModContent.NPCType<Spazmatism>(),
+						ModContent.NPCType<SkeletronPrime>(),
+						ModContent.NPCType<Plantera>(),
+						ModContent.NPCType<Golem>(),
+						ModContent.NPCType<EmpressOfLight>(),
+						ModContent.NPCType<DukeFishron>(),
+						ModContent.NPCType<Betsy>(),
+						ModContent.NPCType<LunaticCultist>(),
+						ModContent.NPCType<MoonLord>(),
+						ModContent.NPCType<Dreadnautilus>(),
+						ModContent.NPCType<Mothron>(),
+						ModContent.NPCType<Pumpking>(),
+						ModContent.NPCType<IceQueen>(),
+						ModContent.NPCType<MartianSaucer>(),
+					},
+					"BossesAsNPCs/NPCs/Icon_Shop2");
 			}
 		}
 

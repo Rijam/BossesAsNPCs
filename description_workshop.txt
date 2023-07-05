@@ -4,13 +4,6 @@ Ever wanted bosses that you have defeated to move in as Town NPCs?
 
 Well this is the mod for you!
 
-—— boss成为npc ——
-你喜欢大量的城镇 NPC 吗？
- 你喜欢管理 25 个额外城镇 NPC 的快乐吗？
- 曾经被你击败的boss作为城镇 NPC 搬进来吗？
- 好吧，这是适合你的模组！
-（模组目前支持灾厄，法狗等模组的boss专属物品，npc也会出售灾厄以及法狗的专属掉落物，不再看脸掉落，完全可以在npc处购买）
-
 [b] Each vanilla boss has their own Town NPC that will arrive after the respective boss has been killed. [/b]
 Each Town NPC sells their boss drops. Expert and Master Mode items are included for their respective difficulties.
 
@@ -26,20 +19,23 @@ Contains a config file to disable certain Town NPCs from spawning and other opti
 See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
+—— boss成为npc ——
+你喜欢大量的城镇 NPC 吗？
+ 你喜欢管理 25 个额外城镇 NPC 的快乐吗？
+ 曾经被你击败的boss作为城镇 NPC 搬进来吗？
+ 好吧，这是适合你的模组！
+（模组目前支持灾厄，法狗等模组的boss专属物品，npc也会出售灾厄以及法狗的专属掉落物，不再看脸掉落，完全可以在npc处购买）
+
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.3
-	- Updated Census support.
-	- Added support for Starlight River and The Stars Above.
-	- Updated the Lunatic Cultist for Storm's Additions Mod.
-	- Added Mod Calls for disabling the internal cross mod support for a specific mod.
-	- Added Everscream Costume.
-	- Added Santa-NK1 Costume.
-	- Added Mourning Wood Costume.
-	- Ice Queen now randomly sells the Ice Queen Costume set, the Everscream Costume set, or the Santa-NK1 Costume set each time the shop is opened.
-	- Pumpking now randomly sells the Pumpking Costume set or the Mourning Wood Costume set each time the shop is opened.
-	- Caught Town NPCs now transform into a block when thrown into shimmer instead of creating another version of the Town NPC.
+Mod version: 0.2.4
+	- Updated support for Dialogue Panel Rework.
+	- Updated support for Wikithis.
+	- Added Dark Mage Costume.
+	- Added Ogre Costume.
+	- Betsy now randomly sells the Betsy, the Dark Mage, or the Ogre Costume set each time the shop is opened.
+	- Fixed Empress of Light selling the Lihzahrd Power Cell instead of the Prismatic Lacewing.
 
 Known issues:
 	- Modded Town NPCs sell Pylons for free (tML bug I assume)

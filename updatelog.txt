@@ -176,3 +176,11 @@
 	* Ice Queen now randomly sells the Ice Queen Costume set, the Everscream Costume set, or the Santa-NK1 Costume set each time the shop is opened.
 	* Pumpking now randomly sells the Pumpking Costume set or the Mourning Wood Costume set each time the shop is opened.
 	* Caught Town NPCs now transform into a block when thrown into shimmer instead of creating another version of the Town NPC.
+
+0.2.4 - Updated 21 (July 5, 2023)
+	* Updated support for Dialogue Panel Rework.
+	* Updated support for Wikithis.
+	* Added Dark Mage Costume.
+	* Added Ogre Costume.
+	* Betsy now randomly sells the Betsy, the Dark Mage, or the Ogre Costume set each time the shop is opened.
+	* Fixed Empress of Light selling the Lihzahrd Power Cell instead of the Prismatic Lacewing.
