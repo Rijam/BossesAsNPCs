@@ -740,7 +740,7 @@ Mods: {
 			}
 
 			MLCostumeHeadpiece: {
-				DisplayName: M L Costume Headpiece
+				DisplayName: Moon Lord Costume Headpiece
 				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
