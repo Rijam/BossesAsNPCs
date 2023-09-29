@@ -14,7 +14,7 @@ namespace BossesAsNPCs.Items.Vanity.MourningWood
 			base.SetStaticDefaults();
 			if (!Main.dedServ)
 			{
-				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glow", "255", "255", "255", "flame" });
+				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new ArmorHeadLegsOptions(Texture + "_Head_Glow", Color.White, GlowMaskEffects.Flame));
 			}
 		}
 		public override void SetDefaults()

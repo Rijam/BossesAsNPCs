@@ -41,7 +41,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.MagicAuraColor[Type] = Color.Gold;
 
 			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
 			{
 				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
 				Direction = -1
@@ -70,17 +70,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			);
 
 			// Specify the debuffs it is immune to
-			NPCDebuffImmunityData debuffData = new()
-			{
-				SpecificallyImmuneTo = new int[]
-				{
-					BuffID.Confused, // Most NPCs have this
-					BuffID.OnFire,
-					BuffID.OnFire3,
-					BuffID.BetsysCurse,
-				}
-			};
-			NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BetsysCurse] = true;
 		}
 
 		public override void SetDefaults()

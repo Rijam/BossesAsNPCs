@@ -37,7 +37,7 @@ namespace BossesAsNPCs
 
 		//Shop Price Scaling
 		[Increment(5)]
-		[Range(25, 400)]
+		[Range(25, 1000)]
 		[DefaultValue(100)]
 		[Slider]
 		public int ShopPriceScaling { get; set; }
@@ -200,7 +200,8 @@ namespace BossesAsNPCs
 
 			if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				message = Language.GetTextValue("Mods.BossesAsNPCs.NPCDialog.Config.Server.MultiplayerMessage");
+				//message = NetworkText.FromKey("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
+				message = Language.GetTextValue("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

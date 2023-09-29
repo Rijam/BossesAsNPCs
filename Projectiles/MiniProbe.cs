@@ -77,7 +77,7 @@ namespace BossesAsNPCs.Projectiles
 			}
 		}
 
-		public override void Kill(int timeLeft)
+		public override void OnKill(int timeLeft)
 		{
 			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity * 0.5f, GoreID.Smoke1, 1f);
 			Gore.NewGore(Projectile.GetSource_Death(), Projectile.position, Projectile.velocity * 0.4f, GoreID.Smoke2, 1f);

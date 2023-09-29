@@ -38,7 +38,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
 			{
 				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
 				Direction = -1
@@ -66,18 +66,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			);
 
 			// Specify the debuffs it is immune to
-			NPCDebuffImmunityData debuffData = new()
-			{
-				SpecificallyImmuneTo = new int[]
-				{
-					BuffID.Confused, // Most NPCs have this
-					BuffID.Poisoned,
-					BuffID.BoneJavelin, // Penetrated
-					BuffID.BloodButcherer, // Blood Butchered
-					BuffID.TentacleSpike
-				}
-			};
-			NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BoneJavelin] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BloodButcherer] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.TentacleSpike] = true;
 		}
 
 		public override void SetDefaults()

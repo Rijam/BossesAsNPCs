@@ -14,7 +14,7 @@ namespace BossesAsNPCs.Items.Vanity.Everscream
 			base.SetStaticDefaults();
 			if (!Main.dedServ)
 			{
-				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glow", "255", "255", "255", "none" });
+				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new ArmorHeadLegsOptions(Texture + "_Head_Glow"));
 			}
 		}
 		public override void SetDefaults()

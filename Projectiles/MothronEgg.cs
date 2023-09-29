@@ -29,7 +29,7 @@ namespace BossesAsNPCs.Projectiles
 		{
 			Projectile.rotation += 0.2f;
 		}
-		public override void Kill(int timeLeft)
+		public override void OnKill(int timeLeft)
 		{
 			Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
 			Dust.NewDust(new Vector2(Projectile.position.X, Projectile.position.Y), 1, 1, DustID.TintableDust, 0, 0, 200);

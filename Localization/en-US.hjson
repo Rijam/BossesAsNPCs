@@ -69,6 +69,7 @@ Mods: {
 						  100 means normal price.
 						  200 means 2x (double) the normal price.
 						  400 means 4x (quadruple) the normal price.
+						  1000 means 10x the normal price.
 						    Change this value if you want the shop to be cheaper or more expensive.
 						Default value: 100
 						'''

@@ -91,7 +91,7 @@ namespace BossesAsNPCs.Projectiles
 			Volume = 0.5f,
 			PitchRange = (0.5f, 0.5f)
 		};
-		public override void Kill(int timeLeft)
+		public override void OnKill(int timeLeft)
 		{
 			for (int i = 0; i < 20; i++)
             {
@@ -155,7 +155,7 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.rotation = Projectile.velocity.ToRotation() * 0.1f;
 		}
 
-        public override void Kill(int timeLeft)
+        public override void OnKill(int timeLeft)
 		{
 			for (int i = 0; i < 10; i++)
 			{

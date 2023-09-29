@@ -20,7 +20,7 @@ namespace BossesAsNPCs.Items.Vanity.TorchGod
 			ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = false;
 			if (!Main.dedServ)
 			{
-				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glowmask", "255", "255", "255", "flame2" });
+				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new ArmorHeadLegsOptions(Texture + "_Head_Glow", Color.White, GlowMaskEffects.Flame2));
 			}
 		}
 		public override void SetDefaults()

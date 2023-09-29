@@ -14,7 +14,7 @@ namespace BossesAsNPCs.Items.Vanity.TheDestroyer
 			base.SetStaticDefaults();
 			if (!Main.dedServ)
 			{
-				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new string[] { Texture + "_Head_Glow", "255", "255", "255", "none" });
+				ArmorPlayerDrawLayerHead.RegisterData(Item.headSlot, new ArmorHeadLegsOptions(Texture + "_Head_Glow"));
 			}
 		}
 		public override void SetDefaults()
@@ -55,7 +55,7 @@ namespace BossesAsNPCs.Items.Vanity.TheDestroyer
 			ArmorIDs.Legs.Sets.HidesBottomSkin[Item.legSlot] = true;
 			if (!Main.dedServ)
 			{
-				ArmorPlayerDrawLayerLegs.RegisterData(Item.legSlot, new string[] { Texture + "_Legs_Glow", "255", "255", "255", "none" });
+				ArmorPlayerDrawLayerLegs.RegisterData(Item.legSlot, new ArmorHeadLegsOptions(Texture + "_Legs_Glow"));
 			}
 		}
 		public override void SetDefaults()

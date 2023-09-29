@@ -824,6 +824,34 @@ namespace BossesAsNPCs.NPCs
 			{
 				return true;
 			}
+			// Still allow the Torch God to spawn even if no other bosses were disabled.
+			if ((NPC.downedSlimeKing && !config.CanSpawnKingSlime) &&
+				(NPC.downedBoss1 && !config.CanSpawnEoC) &&
+				(BossesAsNPCsWorld.downedEoW && !config.CanSpawnEoW) &&
+				(BossesAsNPCsWorld.downedBoC && !config.CanSpawnBoC) &&
+				(NPC.downedQueenBee && !config.CanSpawnQueenBee) &&
+				(NPC.downedBoss3 && !config.CanSpawnSkeletron) &&
+				(NPC.downedDeerclops && !config.CanSpawnDeerclops) &&
+				(BossesAsNPCsWorld.downedWoF && !config.CanSpawnWoF) &&
+				(NPC.downedQueenSlime && !config.CanSpawnQueenSlime) &&
+				(NPC.downedMechBoss1 && !config.CanSpawnDestroyer) &&
+				(NPC.downedMechBoss2 && !config.CanSpawnTwins) &&
+				(NPC.downedMechBoss3 && !config.CanSpawnSkeletronPrime) &&
+				(NPC.downedPlantBoss && !config.CanSpawnPlantera) &&
+				(NPC.downedGolemBoss && !config.CanSpawnGolem) &&
+				(NPC.downedEmpressOfLight && !config.CanSpawnEoL) &&
+				(NPC.downedFishron && !config.CanSpawnDukeFishron) &&
+				(BossesAsNPCsWorld.downedBetsy && !config.CanSpawnBetsy) &&
+				(NPC.downedAncientCultist && !config.CanSpawnLunaticCultist) &&
+				(NPC.downedMoonlord && !config.CanSpawnMoonLord) &&
+				(BossesAsNPCsWorld.downedDreadnautilus && !config.CanSpawnDreadnautilus) &&
+				(BossesAsNPCsWorld.downedMothron && !config.CanSpawnMothron) &&
+				(NPC.downedHalloweenKing && !config.CanSpawnPumpking) &&
+				(NPC.downedChristmasIceQueen && !config.CanSpawnIceQueen) &&
+				(NPC.downedMartians && !config.CanSpawnMartianSaucer))
+			{
+				return true;
+			}
 			return false;
 		}
 
@@ -930,6 +958,39 @@ namespace BossesAsNPCs.NPCs
 			{
 				ModContent.GetInstance<BossesAsNPCs>().Logger.WarnFormat("SafelySetCrossModItem(): ModItem type \"{0}\" from \"{1}\" was not found.", itemString, mod);
 			}
+		}
+
+		/// <summary>
+		/// <br>Creates a new Item object with a <code>shopCustomPrice</code> based on the values entered.</br>
+		/// <br>Calculation is: <code>item.value / valueDiv / priceDiv * priceMulti / secondDiv</code></br>
+		/// </summary>
+		/// <param name="itemID">The Item ID of the item.</param>
+		/// <param name="priceDiv">Divides the price</param>
+		/// <param name="priceMulti">Multiplies the price</param>
+		/// <param name="secondDiv">Divides the price again. This is after the multiplication</param>
+		/// <param name="valueDiv">The value is 5 times the sell price, this defaults to 5 to divide the value by 5.</param>
+		/// <returns></returns>
+		public static Item ItemWithPrice(int itemID, double priceDiv = 1, double priceMulti = 1, double secondDiv = 1, int valueDiv = 5)
+		{
+			Item item = new(itemID);
+			item.shopCustomPrice = (int?)Math.Round((item.shopCustomPrice ?? item.value) / valueDiv / priceDiv * priceMulti / secondDiv);
+			return item;
+		}
+
+		/// <summary>
+		/// <br>Modifies an Item object with a <code>shopCustomPrice</code> based on the values entered.</br>
+		/// <br>Calculation is: <code>item.value / valueDiv / priceDiv * priceMulti / secondDiv</code></br>
+		/// </summary>
+		/// <param name="item">An existing item object</param>
+		/// <param name="priceDiv">Divides the price</param>
+		/// <param name="priceMulti">Multiplies the price</param>
+		/// <param name="secondDiv">Divides the price again. This is after the multiplication</param>
+		/// <param name="valueDiv">The value is 5 times the sell price, this defaults to 5 to divide the value by 5.</param>
+		/// <returns></returns>
+		public static Item ItemWithPrice(Item item, double priceDiv = 1, double priceMulti = 1, double secondDiv = 1, int valueDiv = 5)
+		{
+			item.shopCustomPrice = (int?)Math.Round((item.shopCustomPrice ?? item.value) / valueDiv / priceDiv * priceMulti / secondDiv);
+			return item;
 		}
 
 		/// <summary>

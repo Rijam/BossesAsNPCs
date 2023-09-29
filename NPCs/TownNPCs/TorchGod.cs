@@ -42,7 +42,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
 			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new (0)
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
 			{
 				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
 				Direction = -1
@@ -71,21 +71,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCProfile = new TorchGodProfile();
 
 			// Specify the debuffs it is immune to
-			NPCDebuffImmunityData debuffData = new()
-			{
-				SpecificallyImmuneTo = new int[]
-				{
-					BuffID.Confused, // Most NPCs have this
-					BuffID.Poisoned,
-					BuffID.OnFire,
-					BuffID.OnFire3,
-					BuffID.Frostburn,
-					BuffID.Frostburn2,
-					BuffID.CursedInferno,
-					BuffID.ShadowFlame
-				}
-			};
-			NPCID.Sets.DebuffImmunitySets[Type] = debuffData;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Poisoned] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.OnFire3] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Frostburn2] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.CursedInferno] = true;
+			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.ShadowFlame] = true;
 		}
 
 		public override void SetDefaults()

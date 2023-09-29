@@ -12,38 +12,43 @@ using ReLogic.Content;
 
 namespace BossesAsNPCs
 {
-	///Adapted from Clicker Class Core/BodyGlowmaskPlayer.cs
-	///Usage: In the item's SetStaticDefaults(), Check for !Main.dedServ first, then add:
-	///```
-	///ArmorGlowmaskBody.RegisterData(Item.bodySlot, Color.White);
-	///```
-	///The key value is the slot. Item.bodySlot
-	///The second value can be any color
+	/// <summary>
+	/// <br>Adapted from Clicker Class Core/BodyGlowmaskPlayer.cs</br>
+	/// <br>Usage: In the item's SetStaticDefaults(), Check for !Main.dedServ first, then add:</br>
+	/// <br><code>ArmorGlowmaskBody.RegisterData(Item.bodySlot, Color.White);</code></br>
+	/// <br>The key value is the slot. Item.bodySlot</br>
+	/// <br>The second value can be any color</br>
+	/// </summary>
 	public class ArmorGlowmaskBody : ModPlayer
 	{
 		//slot, color
-		private static Dictionary<int, Color> glowListBody { get; set; }
+		private static Dictionary<int, Color> GlowListBody { get; set; }
 
+		/// <summary>
+		/// Register this body piece to have a glow mask.
+		/// </summary>
+		/// <param name="bodySlot">The key value is the slot. Item.bodySlot</param>
+		/// <param name="color">The color is the color to draw</param>
 		public static void RegisterData(int bodySlot, Color color)
 		{
-			if (!glowListBody.ContainsKey(bodySlot))
+			if (!GlowListBody.ContainsKey(bodySlot))
 			{
-				glowListBody.Add(bodySlot, color);
+				GlowListBody.Add(bodySlot, color);
 			}
 		}
 
 		public override void Load()
 		{
-			glowListBody = new Dictionary<int, Color>();
+			GlowListBody = new Dictionary<int, Color>();
 		}
 
 		public override void Unload()
 		{
-			glowListBody.Clear();
+			GlowListBody.Clear();
 		}
 		public override void ModifyDrawInfo(ref PlayerDrawSet drawInfo)
 		{
-			if (!glowListBody.TryGetValue(drawInfo.drawPlayer.body, out Color color))
+			if (!GlowListBody.TryGetValue(drawInfo.drawPlayer.body, out Color color))
 			{
 				return;
 			}
