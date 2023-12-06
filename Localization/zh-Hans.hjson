@@ -1354,13 +1354,11 @@ Mods: {
 					// Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
 					// Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
 					// Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
-					# Not changed
 					Default5: 无论你听到什么谣言说所有的史莱姆都来自一个来源，这都是错误的。
 					// Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
 					// Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
 					// Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
 					// Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
-					# Not changed
 					Rare: 凝胶可能是“美味的”，但不要有任何想法！
 					// Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
 					// Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
@@ -1421,6 +1419,7 @@ Mods: {
 					Default5: 我在三个独立的宇宙中被打败了！这公平吗？
 					Default6: 你对眼睛的迷恋到底是什么？
 					Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
+					// Graveyard: This graveyard makes me feel like I'm constantly being watched. It's my job to do that!
 					# Rez and Spaz being Retinazer and Spazmatism.
 					RezSpaz: ML: 没有什么比原版更真实了！
 					// ML: There is nothing truer than the original!
@@ -1459,6 +1458,7 @@ Mods: {
 					Default4: 当然，穿刺武器是有效的 - 它们直接穿过你！
 					Default5: 一股可怕的寒意从你的钱包里流下来...我认为唯一的解决方案是买东西。
 					Party: 你可能不得不在这次聚会后开始称呼“吃蛋糕的人”！
+					// Graveyard: A haunting place like this is the second best place for me!
 					Expert: 在这个世界上，你的炸药对我的作用要低80%！
 					Evil: 是的！让腐败蔓延！
 					Good: 那个讨厌的圣地正在破坏我传播腐败的计划！
@@ -1497,6 +1497,7 @@ Mods: {
 					Default4: 猩红地是一个巨大的生物体。
 					Default5: 尖叫声在你周围回荡，告诉你买东西。
 					Party: 生日和周年纪念日是一件如此随意的事情。尽管如此，我喜欢参加这些派对。
+					// Graveyard: You know, these corpses could make a great addition to my Crimson...
 					Blood: 猩红之地的心脏心智只会越来越强大！
 					Good: 圣地对猩红的传播构成了威胁！
 					# quotes are important on this one
@@ -1538,6 +1539,7 @@ Mods: {
 					Default6: 什么？期待我说“巴斯 巴斯”？
 					Default7: 大黄蜂、黄蜂和黄色夹克有什么区别？我不知道，我是一只蜜蜂。
 					Party: 我为今天的派对做了一些甜糕点！它们可能是你吃过的最甜的糕点！
+					// Graveyard: There's only one flower in this area and I think it's haunted!
 					NotTheBees1: 在这片土地上，我感到非常自由。
 					NotTheBees2: 啊，丛林，就我的双眼所能看到的！
 				}
@@ -1574,6 +1576,7 @@ Mods: {
 					Default4: 地牢上的诅咒已经解除，尽管我想你还会发现它仍然很危险。
 					Rare: 无呢？我不知道你在说什么。
 					Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
+					// Graveyard: Scared of this place? Me? I'm not scared at all. Have you been in my Dungeon?
 					Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
 					# quotes are important on this one
 					Clothier: "{0}是一个很棒的主人！我们应该再聚一会儿！"
@@ -1615,6 +1618,7 @@ Mods: {
 					Default4: 对不起，我声音太大，收到了其他村民的投诉。
 					Default5: 其他人都会获得成就;我的在哪里？
 					Party: 哦，派对！最好为我们所有人举办一场盛宴！
+					// Graveyard: So much death... and I don't see any touch stones anywhere here.
 					Snow: 在这个冬天的天气里，你打算举行某种盛宴吗？
 					Betsy: 我听说双足翼龙也来自另一个世界。
 					TheConstant1: 这个世界让人想起我来自的地方。
@@ -1654,6 +1658,7 @@ Mods: {
 					Default5: 我希望你已经为“V”字形的污染做好了准备。
 					Default6: 没有得到你想要的徽章？别担心，我都有...当然是有价格的。
 					Party: 这个派对上有很多甜点，但是有肉吗？
+					// Graveyard: I suppose a demon in a graveyard is not that out of place. I could make this work.
 					NotUnderworld: 你知道，这里比地狱要冷得多。
 					Expert: 这对你来说可能是粗暴的，但消耗我的心会给你额外的力量！
 					Guide1: "{0}和我是同一个人吗？很难说..."
@@ -1695,10 +1700,17 @@ Mods: {
 					Default2: 只是提醒一下，触摸活的史莱姆会溶解你的肉体。
 					Default3: 我的失败不会阻止我的史莱姆大军！
 					Default4: 如果你停止从我身上弹起物体，我会更喜欢它。
+					// Default5: I'm not quite sure what these sparkle balloons are filled with. It's probably just some regular water...
+					// Default6: Hm... I hope my fall doesn't start some sort of slime revolution...
+					// Default7: I know I won't be able to convince you, but slimes are truly the ultimate lifeform.
 					Rare: 粉红凝胶可能是“甜的”，但不要有任何想法！
 					Party: 我本以为这个派对会很壮观，我没有失望。
+					// SlimeRain: The strategy of para trooping was one of the greatest advancements in our kingdom's history!
+					// Graveyard: We tried creating our own graveyard in my kingdom. It didn't really work out. Let's just say it was a huge fire hazard.
 					KS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
 					KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
+					// KS3: My husband is quite eccentric isn't he? Ah, that's why I married him.
+					// KS4: The end to our fighting has allowed me to spend more time with my King. I guess I should thank you for that.
 				}
 
 				Census.SpawnCondition: 打败史莱姆皇后
@@ -1731,8 +1743,10 @@ Mods: {
 					Default2: 你的意思是我是机械BOSS中最弱的？我有最多的生命值！
 					Default3: 我猜克苏鲁终究不会得到他的替代脊柱。
 					Default4: 你感觉到口袋深处的振动...所以买点东西！
+					// Default5: The environment does not affect me at all; I'm immune to it!
 					Party: 我最好被邀请参加这个派对！如果我不是，我会摧毁这个派对！
-					Mechanic: "{0}是造就我的人，你知道的。"
+					// Graveyard: I try to avoid digging in chilling places such as this one.
+					// Mechanic: "{0} was the one who built me, you know."
 				}
 
 				Census.SpawnCondition: 打败毁灭者
@@ -1767,6 +1781,7 @@ Mods: {
 					Default4: 恭喜，泰拉人。
 					Default5: 你知道所有的机械BOSS都发射红色激光吗？
 					Party: 这个派对会包括激光狂欢吗？
+					// Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
 					SpazEoC: 克苏鲁之眼，魔焰眼和我喜欢社交。
 					OpticStaff: 那些迷你眼球怪很帅，如果我自己这么说的话。
 					Mechanic: "{0}机械师被迫建造了机械Boss。这包括我。"
@@ -1805,6 +1820,9 @@ Mods: {
 					Default4: 嘿，这是泰拉人！
 					Default5: 这将是一个可怕的夜晚...如果你不买东西！
 					Party: 这个派对是相当壮观的！明白了吗？奇观！喜欢引人注目的东西？是的，你明白了。
+					// Graveyard: Y'know what this graveyard could use some more of? FIRE!
+					// NoTorchGod: I heard theres this evil being that haunts the fire of torches! You should anger them!
+					// TorchGod: See {0} gets it! Fire is really cool... I mean hot!
 					RezEoC: 克苏鲁之眼，激光眼和我喜欢说话。
 					OpticStaff: 那些迷你眼球怪是如此可爱！
 					Mechanic: 去责怪{0}，是她造就了我！
@@ -1842,6 +1860,7 @@ Mods: {
 					Default4: 现在我们永远不会知道克苏鲁是否会有四只手臂，多谢！
 					Default5: 你周围的空气越来越冷，你觉得自己把手伸进口袋里掏出钱包。
 					Party: 这个派对需要更多的行动！幸运的是，我有合适的wep - 我的意思是工作的工具！
+					// Graveyard: Do you think there are any metal skeletons buried in this graveyard?
 					Mechanic: 我要感谢{0}给了我这么棒的武器。
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
 					SDMG: Omegatron是一个非常酷的家伙。
@@ -1886,6 +1905,7 @@ Mods: {
 					Band3Party: 我试图让其他村民让我为下一个聚会举办一场音乐会。
 					Band4: 光之女皇，石巨人，拜月教邪教徒，我完成了第一张专辑！你应该检查一下！
 					Band4Party: 我的金属乐队将在今晚的音乐会上演奏！我迫不及待地想在那里见到你！
+					// Graveyard: This eerie place makes me feel like I'm going to wilt!
 					MudBud: 看看那个小小的世纪之花去吧！
 				}
 
@@ -1919,6 +1939,7 @@ Mods: {
 					Default2: 我不是推倒者，说真的，试着把我推过去！
 					Default3: 你想要一个镐锯吗？幸运的是，我有一个出售！
 					Party: 我不习惯参加这样的庆祝活动。我喜欢！
+					// Graveyard: I like sunlight. This mist in this area is blocking out the sunlight!
 					WitchDoctor: 我将不惜一切代价保护{0}。
 					ForTheWorthy: 我和我跟你打架时一样大！
 					Surface: 至少这里有更多的阳光。
@@ -1977,6 +1998,7 @@ Mods: {
 					// Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
 					Plantera: 我在世纪之花的金属乐队演奏我的恒星曲调。你应该来听一听！
 					Party: 我可以为这个派对上演真正的灯光秀！
+					// Graveyard: I hate this place! My beautiful lights are no longer colorful!
 					Costume: 这就是你穿的令人惊叹的衣服。跟随我的图像，我看到了！
 					BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
 				}
@@ -2008,12 +2030,13 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是猪龙鱼公爵。
-					Default2: 我是公爵，宝贝！
+					// Default2: I'm the Duke, baby!
 					Default3: 是时候吃虫子吹泡泡了，我完全没有泡泡了。
 					Default4: 你去过下水道吗？我在那里遇到了很多变种人。
 					Default5: 风必须有多强才能溅起水和鲨鱼？
 					Default6: 第三只猪，第三条鱼，第三条龙，完全真棒！
 					Party: 我是唯一一个可以像猪一样吃东西并逃脱惩罚的人！
+					// Graveyard: I'd rather stay at the bottom of the ocean that be only six feet under the ground.
 					FargosMutantMod: "{0}有一些漂亮的翅膀。"
 					Calamity1: 嗯。。。对不起，我只是在想一个血腥蠕虫会有多好吃。
 					Calamity2: 我已经很久没见过我的父亲了...
@@ -2046,10 +2069,13 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是双足翼龙。
-					Default2: 我是飞龙的母亲。不，不是你想的那种飞龙。
+					// Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
 					Default3: 我是一个真正的BOSS，我保证！
 					Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
+					// Default5: So just because I'm a red dragon I'm automatically chaotic evil?
 					Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
+					// Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
+					// Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: "{0}从哪里得到他的翅膀？"
 					SGAmod: 很高兴看到另一条像{0}一样的龙。
 				}
@@ -2081,11 +2107,13 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是拜月教邪教徒。
-					Default2: 我的失败不会阻止我的崇拜！
+					// Default2: My defeat will not stop my cult!
 					Default3: 每个好的邪教徒都需要穿着这种连帽衫！
+					// Default4: My magical abilities make me resistant to all seeking projectiles!
 					PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
 					PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
 					Party: 这是一个化装舞会吗？我已经戴上了口罩。
+					// Graveyard: Although my cult sought to resurrect our master, Cthulhu, we never tried resurrecting people. We should try that!
 					Demolitionist: "{0}一直在为我提供炸药的优惠，我不知道为什么。"
 					Plantera: 我神秘的吟唱非常适合世纪之花的金属乐队。
 					Dusk: 黄昏是我一天中最喜欢的时间。
@@ -2119,13 +2147,14 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是月亮领主。
-					Default2: 我不知道史蒂夫是谁，但至少我找到了我的腿。
+					// Default2: I don't know who Steve is, but at least I found my legs.
 					Default3: 我接管泰拉瑞亚的计划已被你阻止，我称赞你所作的这种努力。
 					Default4: 你是一个战士，你不厌其烦地打败了我。
 					Default5: 天界柱被派去征服你的世界。
 					Default6: 不，没有“太阳领主”。
 					Default7: 你为什么要求我制作一些爱？
 					Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
+					// Graveyard: This is the area I was hoping I'd send you during our battle. No hard feelings!
 					Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
 					LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
 					Mechanic: "{0}做得很好，直到你过来救她。"
@@ -2162,10 +2191,11 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是恐惧鹦鹉螺。
-					Default2: 现在我们真的在延伸BOSS的定义！
+					// Default2: Now we are really stretching the definition of boss!
 					Default3: 有些人误称我为“血鹦鹉螺”。这是从哪里来的？
 					Default4: 你看过我的奖杯吗？不幸的是，我失去了它。
 					Party: 这个派对上的打孔碗让我想起了鲜血。美味！
+					// Graveyard: The smell of this yard is quite pungent.
 					Rare: 什么是“鱼海螺”？
 					DayNoRain: 呃，白天太亮了！我希望云层能遮住太阳。
 					Night: 晚上很容易看到，难道不适合您吗？
@@ -2203,12 +2233,13 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是蛾怪。
-					Default2: 我很荣幸被认为是BOSS！
+					// Default2: I'm honored to be considered a boss!
 					Default3: 难道你不让你的孩子一出生就去上班吗？
 					Default4: 很多人真的想要我拥有的这把生锈的旧剑。它对你有什么价值？
 					Default5: 我不小心吃了一把生锈的旧剑。我以为是糖果！你还想要它吗？
 					Default6: 哦，你好！我希望你带上你的簸箕！
 					Party: 这么多花哨的灯！我喜欢派对！
+					// Graveyard: This place must be where people go to make their cocoons!
 					KillCount: 你在这个世界上打败了我{0}次。您还在寻找什么？
 					Deerclops: 鹿角怪 毛茸茸的头发让我想起了我认识的其他人...
 					WitchDoctor: "{0}的鳞片让我想起了我认识的其他人..."
@@ -2249,6 +2280,8 @@ Mods: {
 					Default3: 我不明白整个“南瓜香料”的热潮。
 					Default4: 他们是镰刀，不是镰刀！做对了！
 					Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
+					// Graveyard: Relaxing mist, soothing cries, eternal slumber! What isn't there to love about graveyards!
+					// Dryad: Pumpkins are an amazing plant and are very easy to grow. I highly recommend purchasing several hundred seeds from {0} and planting them all over the world! I'm not biased, I swear!
 					FargosMutantMod: "{0}的帽子很适合他。"
 				}
 
@@ -2279,10 +2312,12 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是冰雪女王。
-					Default2: 你不敢做任何很酷的双关语。那不是很好。
+					// Default2: Don't you dare make any cool puns. That would not be nICE.
 					Default3: 那个雪人军团不会与我匹敌。
 					Default4: 友谊雪球赛怎么样？
+					// Default5: I had two faces when I fought you, did you even notice it?
 					Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
+					// Graveyard: The atmosphere of this graveyard is chilling!
 					Santa1: 你今年对圣诞老人很好吗？
 					Santa2: 今年你不会得到煤炭，而是受到我的殴打！
 				}
@@ -2314,7 +2349,7 @@ Mods: {
 
 				NPCDialog: {
 					Default1: 我是火星飞碟。
-					Default2: 你相信外星人吗？好吧，你应该，你正在看一个。
+					// Default2: Do you believe in aliens? Well you should, you're looking right at one.
 					Default3: 什么？没想到机器人是有知觉的吗？
 					Default4: 我希望你戴上锡箔帽。
 					Default5: 别担心，我不会去探究你，这就是火星科学家的工作。
@@ -2326,6 +2361,7 @@ Mods: {
 						...不要回答这个问题。
 						'''
 					Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
+					// Graveyard: Precious land dedicated to storing deactivated humans? Maybe you humans do have a few wires missing.
 					RijamsMod: 我以前从未见过像{0}这样的物种。
 				}
 
@@ -2365,6 +2401,8 @@ Mods: {
 					Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
 					Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
 					Rare: 哈哈！火在向你射击！
+					// Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
+					// Graveyard: Oh yes, it is very possible for fire to die. Fire doesn't leave its own corpse, though, just corpses of others...
 					HasFavor1: 我的青睐使你神奇地改变了你放置的火炬的类型。使用标准火炬让魔法发挥作用。
 					HasFavor2: 你试过我的挑战，玩得开心吗？我当然做到了！
 					NoFavor1: 你还没有向我证明自己。一旦你有，我会帮你一个忙。

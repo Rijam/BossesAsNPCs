@@ -144,6 +144,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int eol = NPC.FindFirstNPC(ModContent.NPCType<EmpressOfLight>());
 			int golem = NPC.FindFirstNPC(ModContent.NPCType<Golem>());
 			int cultist = NPC.FindFirstNPC(ModContent.NPCType<LunaticCultist>());
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			if (eol <= -1 && golem <= -1 && cultist <= -1 && !NPC.downedMoonlord)
             {
 				chat.Add(Language.GetTextValue(path + "Band1"));

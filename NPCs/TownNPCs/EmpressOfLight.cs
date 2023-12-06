@@ -232,6 +232,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             {
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			if (Main.LocalPlayer.armor[10].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>() &&
 				Main.LocalPlayer.armor[11].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>() &&
 				Main.LocalPlayer.armor[12].type == ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeLegpiece>())

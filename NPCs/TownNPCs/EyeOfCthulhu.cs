@@ -139,6 +139,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			int retinazer = NPC.FindFirstNPC(ModContent.NPCType<Retinazer>());
 			int spazmatism = NPC.FindFirstNPC(ModContent.NPCType<Spazmatism>());
 			if (retinazer >= 0 && spazmatism >= 0)

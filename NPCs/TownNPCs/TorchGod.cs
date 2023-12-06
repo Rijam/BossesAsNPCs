@@ -256,6 +256,14 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			chat.Add(Language.GetTextValue(path + "Common"), 2);
 			chat.Add(Language.GetTextValue(path + "Rare"), 0.1);
+			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
+			{
+				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			if (Main.LocalPlayer.unlockedBiomeTorches)
 			{
 				chat.Add(Language.GetTextValue(path + "HasFavor1"));

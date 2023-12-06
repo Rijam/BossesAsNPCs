@@ -29,11 +29,7 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.5
-	- Built for tModLoader v2023.8
-	- Increased the Shop Price Scaling config maximum to 1000 (10x price).
-	- Refactored some internal code to make it nicer.
-	- Created a new system to automatically get the sale value instead of hardcoding it. (Hasn't been applied to every shop yet.)
+Mod version: 0.2.6
+	- Finished the new system to automatically get the sale value instead of hardcoding it for most shop items. Some prices have changed because of this (They are technically more accurate now).
+	- Added many more lines of dialog and removed all of the "I am the _" lines.
 
-Known issues:
-	- Modded Town NPCs sell Pylons for free (tML bug I assume)

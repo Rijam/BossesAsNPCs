@@ -1,6 +1,6 @@
 ﻿displayName = Bosses As NPCs
 author = Rijam
-version = 0.2.5
+version = 0.2.6
 homepage = https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 buildIgnore = .vs\*, obj\*, bin\*, *.xcf, .git\*, git\*, Effects\fxcompiler.exe
 hideCode = false

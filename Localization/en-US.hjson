@@ -1356,13 +1356,11 @@ Mods: {
 					Default2: Semi-friendly reminder, that touching living slimes will dissolve your flesh. Better watch your feet!
 					Default3: Remember to feed your slime mount! It's not that hard, really, just jump on some bunny along your way and that should be a nice snack.
 					Default4: Ugh, asphalt, what a horrible way to die. I gave you Soldifier, so please, just use frozen slime blocks, it's so much more humane.
-					# Not changed
 					Default5: Whatever rumor you heard that all slimes originate from one source is wrong.
 					Default6: You better tell me torches in this house are made of charcoal, or I shall find another place to stay.
 					Default7: Don't be too harsh on those underground black slimes, they just want a little bit of attention, since no one can see them properly. Including me.
 					Default8: Spiked slimes were a really great addition to my army. This idea was so much better than "let's eat bombs and then blow up" one.
 					Night: I see, it's dark at night, but could you use lanterns instead of torches around here? It's almost an assassination attempt, you know?
-					# Not changed
 					Rare: Gel may be 'tasty', but don't get any ideas!
 					Party1: Slimes are not best at parties. We often swallow our party hats and the only music is drums, but at last I shall enjoy a party worthy royalty!
 					Party2: I'm not sure I should wear this party hat like this, my people could stop recognizing me. Oh well, need to keep image somehow.
@@ -1416,13 +1414,14 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Eye of Cthulhu.
+					Default1: I seem to have lost my servants. Looks like you'll be my new servant now!
 					Default2: I have my eye on you...
 					Default3: Besides that tree or that bunny, I think I am the mascot of this world.
 					Default4: Somebody once called me the 'Eye of Terror'.
 					Default5: I have been defeated in three separate universes! How is that fair?
 					Default6: What is your fascination with eyes anyway?
 					Party: A party! Surely to celebrate my status as the best EYEcon!
+					Graveyard: This graveyard makes me feel like I'm constantly being watched. It's my job to do that!
 					# Rez and Spaz being Retinazer and Spazmatism.
 					RezSpaz: Rez, Spaz, and I like to socialize.
 					ML: There is nothing truer than the original!
@@ -1455,12 +1454,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Eater of Worlds.
+					Default1: The housing association won't let me live in my own biome! How unfair is that?!
 					Default2: No, I am not Cthulhu's spine. Where did you even hear that?
 					Default3: Which way to the nearest restroom?! I think I'm going to vomit.
 					Default4: Of course piercing weapons are effective -- they go right through you!
 					Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
-					Party: You might have to start calling the "Eater of Cake" after this party!
+					Party: You might have to start calling me the "Eater of Cake" after this party!
+					Graveyard: A haunting place like this is the second best place for me!
 					Expert: Your explosives are 80% less effective against me in this world!
 					Evil: Yes! Let the Corruption spread!
 					Good: That nasty Hallow is ruining my plans of spreading the Corruption!
@@ -1493,12 +1493,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Brain of Cthulhu.
+					Default1: Section 12-A of the housing rules and guidelines forbids the housing of tenants in so called "evil places", much to my dismay.
 					Default2: Cthulhu was an intelligent individual. I know, I was his brain.
 					Default3: My Creepers allow me to see. They also act as good meat shields.
 					Default4: The Crimson is one giant living organism.
 					Default5: Screams echo around you telling you to purchase something.
 					Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
+					Graveyard: You know, these corpses could make a great addition to my Crimson...
 					Blood: The hive mind of the Crimson only grows stronger!
 					Good: The Hallow poses a threat to spreading of the Crimson!
 					# quotes are important on this one
@@ -1532,7 +1533,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Queen Bee.
+					Default1: I think any house could benefit from a few potted flowers!
 					Default2: My larvae are very delicate, please be careful.
 					Default3: Don't worry, my wings are, in fact, large enough to allow me to fly.
 					Default4: Honey has great healing properties, just don't get stuck in it.
@@ -1540,6 +1541,7 @@ Mods: {
 					Default6: What? Expecting me to say "Buzz Buzz"?
 					Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
 					Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
+					Graveyard: There's only one flower in this area and I think it's haunted!
 					NotTheBees1: I feel very at home in this land.
 					NotTheBees2: Ah, jungle as far as my compound eyes can see!
 				}
@@ -1570,12 +1572,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Skeletron.
+					Default1: I've called the Dungeon my home for many years, but now the housing association is telling me I shouldn't?
 					Default2: I'm the backbone of this world.
 					Default3: I am what is left of Cthulhu's skeleton.
 					Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
 					Rare: Sans what? I don't know what you are talking about.
 					Party: I offered to host this party in the Dungeon but nobody seemed interested.
+					Graveyard: Scared of this place? Me? I'm not scared at all. Have you been in my Dungeon?
 					Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
 					# quotes are important on this one
 					Clothier: "{0} was such a great host! We should get together again some time!"
@@ -1611,12 +1614,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Deerclops.
+					Default1: Have you ever had a crystal spike for eyes? Well don't, it makes it much more difficult to see.
 					Default2: Make sure to eat and keep your sanity up!
 					Default3: Stay out of the darkness, or she'll get you...
 					Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
 					Default5: Everyone else gets an achievement; where is mine?
 					Party: Oh a party! There better be a big feast for all of us!
+					Graveyard: So much death... and I don't see any touch stones anywhere here.
 					Snow: Are you going to hold a feast of some kind in this winter weather?
 					Betsy: I heard Betsy is from another world, too.
 					TheConstant1: This world reminds of the place where I am from.
@@ -1649,13 +1653,14 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Wall of Flesh.
+					Default1: Voodoo is some strange magic, that's for sure. Harming several dolls at once can harm several people, if you didn't know.
 					Default2: You have defeated the world's guardian. I was holding back all of the powerful ancient spirits!
 					Default3: Oh, don't look so horrified!
 					Default4: Let me have a little lick. Kidding! I'm just messing with you...
 					Default5: I hope you're prepared for the effects of the "V".
 					Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
 					Party: There are plenty of desserts at this party, but is any meat being served?
+					Graveyard: I suppose a demon in a graveyard is not that out of place. I could make this work.
 					NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
 					Expert: It may be gross for you, but consuming my heart will give you extra strength!
 					Guide1: Are {0} and I the same person? It's hard to say...
@@ -1693,14 +1698,21 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Queen Slime.
+					Default1: Crystals are not very nutritious and are difficult to digest. I don't recommend eating them unless they are magical.
 					Default2: Just a reminder that touching living slimes will dissolve your flesh.
 					Default3: My defeat will not stop my army of slimes!
 					Default4: I would prefer it if you stopped bouncing objects off of me.
+					Default5: I'm not quite sure what these sparkle balloons are filled with. It's probably just some regular water...
+					Default6: Hm... I hope my fall doesn't start some sort of slime revolution...
+					Default7: I know I won't be able to convince you, but slimes are truly the ultimate lifeform.
 					Rare: Pink Gel may be 'sweet', but get any ideas!
 					Party: I expected this party to be spectacular. I am not disappointed.
+					SlimeRain: The strategy of para trooping was one of the greatest advancements in our kingdom's history!
+					Graveyard: We tried creating our own graveyard in my kingdom. It didn't really work out. Let's just say it was a huge fire hazard.
 					KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
 					KS2: You have bested the slime oligarchy. I commend you.
+					KS3: My husband is quite eccentric isn't he? Ah, that's why I married him.
+					KS4: The end to our fighting has allowed me to spend more time with my King. I guess I should thank you for that.
 				}
 
 				Census.SpawnCondition: Defeat Queen Slime
@@ -1729,11 +1741,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am The Destroyer.
+					Default1: My probes are a great defense! I also use them as an external energy source.
 					Default2: What do you mean I am the weakest of the Mechanical Bosses? I have the most hit points!
 					Default3: I guess Cthulhu won't be getting his replacement spine after all.
 					Default4: You feel vibrations deep within your pockets... so buy something!
+					Default5: The environment does not affect me at all; I'm immune to it!
 					Party: I better be invited to this party! If I'm not, I'll crash this party!
+					Graveyard: I try to avoid digging in chilling places such as this one.
 					Mechanic: "{0} was the one who built me, you know."
 				}
 
@@ -1763,12 +1777,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Retinazer, one of The Twins.
+					Default1: Remember to always stay laser focused at the tasks ahead.
 					Default2: I prefer to say back and watch.
 					Default3: Spazmatism can be a little hyper sometimes.
 					Default4: Greetings, Terrarian.
 					Default5: Did you know that all the mechanical bosses shoot a red laser?
 					Party: Will this party include a laser rave?
+					Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
 					SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
 					OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
 					Mechanic: "{0} the Mechanic was forced to construct the Mechanical Bosses. That includes me."
@@ -1800,13 +1815,16 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Spazmatism, one of The Twins.
+					Default1: If you ever face any obstacles in life, just rush at them and light them on fire! It worked for me! Or wait, it didn't. That's why I'm here now. Hm... Maybe don't take my life advice.
 					# Sclerepugnant was a community made alternate version of Spazmatism that was Crimson/Ichor themed.
 					Default2: Uh sorry, I don't know who Sclerepugnant is.
 					Default3: I am fresh out of Ichor, but I have plenty of Cursed Flames!
 					Default4: HEY, it's the Terrarian!
 					Default5: This is going to be a terrible night... if you don't buy something!
 					Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
+					Graveyard: Y'know what this graveyard could use some more of? FIRE!
+					NoTorchGod: I heard theres this evil being that haunts the fire of torches! You should anger them!
+					TorchGod: See {0} gets it! Fire is really cool... I mean hot!
 					RezEoC: Eye of Cthulhu, Rez, and I like to talk.
 					OpticStaff: Those mini Spazmatisms are so cute!
 					Mechanic: Go blame {0}, she's the one who made me!
@@ -1838,12 +1856,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Skeletron Prime.
+					Default1: I can get pretty angry in the morning if I haven't had my morning coffee.
 					Default2: I am selling my soul to you, literally!
 					Default3: Nope. I'm not sure who Ocram is. Sorry.
 					Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
 					Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
 					Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
+					Graveyard: Do you think there are any metal skeletons buried in this graveyard?
 					Mechanic: I'd like to thank {0} for giving me such awesome weapons.
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
 					SDMG: Omegatron is a pretty cool dude.
@@ -1875,7 +1894,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Plantera.
+					Default1: The jungle is my home! I get a little angry when I leave it.
 					Default2: Why don't you stop and smell the roses?
 					Default3: I'm very protective of my bulbs, please don't disturb them.
 					Default4: Sorry if I seem snappy... get it?
@@ -1888,6 +1907,7 @@ Mods: {
 					Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
 					Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
 					Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
+					Graveyard: This eerie place makes me feel like I'm going to wilt!
 					MudBud: Look at that little Plantero go!
 				}
 
@@ -1917,10 +1937,11 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Golem.
+					Default1: Remember to remain calm in the face of danger and to never lose your head.
 					Default2: I am not a push-over. Seriously, try to push me over!
 					Default3: Do you want a Picksaw? Luckily, I have one for sale!
 					Party: I'm not used to being part of such celebrations. I like it!
+					Graveyard: I like sunlight. This mist in this area is blocking out the sunlight!
 					WitchDoctor: I shall protect {0} at all costs.
 					ForTheWorthy: I'm just as big as when I fought you!
 					Surface: At least there is more sunlight up here.
@@ -1957,7 +1978,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Empress of Light.
+					Default1: I'm not "predictable"! I'm just fair and balanced!
 					Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
 					Default3: Don't you dare touch those butterflies!
 					Default4: If you want a real challenge, fight me during the day.
@@ -1979,6 +2000,7 @@ Mods: {
 					Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
 					Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
 					Party: I can put on real light show for this party!
+					Graveyard: I hate this place! My beautiful lights are no longer colorful!
 					Costume: That's quite the stunning outfit you have on. Following in my image I see!
 					BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
 				}
@@ -2009,13 +2031,19 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Duke Fishron.
+					Default1:
+						'''
+						Watch out! There's an Aquarian Horde that will invade our Town!
+
+						...any day now.
+						'''
 					Default2: I'm the Duke, baby!
 					Default3: It's time to eat worms and blow bubbles, and I'm all out of bubbles.
 					Default4: Have you ever been to a sewer? I have, met a lot of mutants down there.
 					Default5: How strong does the wind have to be to be able to pick up water and sharks?
-					Default6: A third pig, a third fish, a third dragon, completely awesome!
+					Default6: A third pig, a third shark, a third dragon, completely awesome!
 					Party: I'm the only person who can eat like a pig and get away with it!
+					Graveyard: I'd rather stay at the bottom of the ocean that be only six feet under the ground.
 					FargosMutantMod: "{0} has some pretty nice looking wings."
 					Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
 					Calamity2: I haven't seen my father in a long time...
@@ -2047,11 +2075,14 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Betsy.
+					Default1: My minions were heading for battle through a strange portal and I followed them. Real nice of you to welcome me to your world with hostility!
 					Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
 					Default3: I'm a real boss, I promise!
 					Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
+					Default5: So just because I'm a red dragon I'm automatically chaotic evil?
 					Party: Stick around; we're going to see how many candles I can light with one breath of fire!
+					Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
+					Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: Where did {0} get his wings?
 					SGAmod: Good to see another dragon like {0}.
 				}
@@ -2082,12 +2113,14 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Lunatic Cultist.
+					Default1: I may be crazy, but I'm not insane!
 					Default2: My defeat will not stop my cult!
 					Default3: Every good cult needs some sort of hooded figure!
+					Default4: My magical abilities make me resistant to all seeking projectiles!
 					PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
 					PostML: Not even Cthulhu could stop you? I'm impressed.
 					Party: Is this a costume party? I'm already wearing a mask.
+					Graveyard: Although my cult sought to resurrect our master, Cthulhu, we never tried resurrecting people. We should try that!
 					Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
 					Plantera: My mysterious chanting is perfect for Plantera's metal band.
 					Dusk: Dusk is my favorite time of the day.
@@ -2120,7 +2153,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Moon Lord.
+					Default1: I am the one you know as Cthulhu. I had conquered this land many -- What? No, I'm not my own brother! That doesn't make any sense. Huh? Father of that human? Have you gone mad?
 					Default2: I don't know who Steve is, but at least I found my legs.
 					Default3: My plans to take over Terraria have been stopped by you. I commend you for such efforts.
 					Default4: You are quite the fighter. You went out of your way to defeat me.
@@ -2128,6 +2161,7 @@ Mods: {
 					Default6: No, there is no 'Sun Lord'.
 					Default7: Why are you asking me to craft some love?
 					Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
+					Graveyard: This is the area I was hoping I'd send you during our battle. No hard feelings!
 					Dryad: I've decided to let {0} live. She is the last of her kind anyway.
 					LunaticCultist: It's nice to have people worship me, as they should be.
 					Mechanic: "{0} was doing a fantastic job, until you came along and rescued her."
@@ -2163,11 +2197,12 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Dreadnautilus.
+					Default1: My eyesight isn't that great. Can I smell you instead?
 					Default2: Now we are really stretching the definition of boss!
 					Default3: Some people mistakenly call me "Blood Nautilus". Where did that come from?
 					Default4: Have you seen my trophy? I lost it, unfortunately.
 					Party: The punch bowl at this party reminds me of blood. Tasty!
+					Graveyard: The smell of this yard is quite pungent.
 					Rare: What even is a "Conch of Fish"?
 					DayNoRain: Ugh, it's so bright out during the day! I wish the clouds would cover the sun.
 					Night: It's easy to see at night, is it not for you?
@@ -2204,13 +2239,14 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am Mothron.
+					Default1: Do you need any silk? I could make some for you. No? Ok, then.
 					Default2: I'm honored to be considered a boss!
 					Default3: Do you not put your children to work as soon as they are hatched?
 					Default4: A lot of people really want this rusty old sword that I have. What value does it have to you?
 					Default5: I accidentally ate a rusty old sword. I thought it was candy! Do you still want it?
 					Default6: Oh, hello! I hope you brought your dust pan with you!
 					Party: So many fancy lights! I love parties!
+					Graveyard: This place must be where people go to make their cocoons!
 					KillCount: You defeated me {0} times in this world. What else are you looking for?
 					Deerclops: Deerclops' fuzzy hair reminds me of somebody else I know...
 					WitchDoctor: "{0}'s scales reminds me of somebody else I know..."
@@ -2246,11 +2282,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Pumpking.
+					Default1: I saw my face in cloud the other day. Even nature knows I'm king.
 					Default2: Don't get on my bad side!
 					Default3: I don't get the whole 'pumpkin spice' craze.
 					Default4: They are scythes, not sickles! Get it right!
 					Party: Is this the type of party that involves passing out candy? I sure hope it is!
+					Graveyard: Relaxing mist, soothing cries, eternal slumber! What isn't there to love about graveyards!
+					Dryad: Pumpkins are an amazing plant and are very easy to grow. I highly recommend purchasing several hundred seeds from {0} and planting them all over the world! I'm not biased, I swear!
 					FargosMutantMod: "{0}'s hat suits him quite nicely."
 				}
 
@@ -2280,11 +2318,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Ice Queen.
+					Default1: Some say I'm "cold hearted". I like to think of myself as "literally made of ice".
 					Default2: Don't you dare make any cool puns. That would not be nICE.
 					Default3: That snowmen mafia would be no match against me.
 					Default4: How about a friendly snowball fight?
+					Default5: I had two faces when I fought you, did you even notice it?
 					Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
+					Graveyard: The atmosphere of this graveyard is chilling!
 					Santa1: Have you been good this year for Santa Claus?
 					Santa2: Instead of getting coal this year, you are getting a beating from me!
 				}
@@ -2315,7 +2355,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am the Martian Saucer.
+					Default1: Of course I can speak your language. How else would you be able to understand me?
 					Default2: Do you believe in aliens? Well you should, you're looking right at one.
 					Default3: What? Didn't think a robot could be sentient?
 					Default4: I hope you have your tin-foil hat on.
@@ -2328,6 +2368,7 @@ Mods: {
 						...Don't answer that.
 						'''
 					Party: Parties entail such strange decor and customs that I am not used to.
+					Graveyard: Precious land dedicated to storing deactivated humans? Maybe you humans do have a few wires missing.
 					RijamsMod: I haven't seen a species like {0} before.
 				}
 
@@ -2357,7 +2398,7 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: I am The Torch God.
+					Default1: There are 24 varieties of torches that you can obtain. Not counting me, of course.
 					Default2: Your greatest foes drop the greatest loot; buy it here!
 					Default3: Placing the correct torches in their respective biomes will increase your luck! No need to thank me!
 					Default4: Are you concerned about placing open flame torches in a wooden house? Do not fret, the wood will not catch fire!
@@ -2367,6 +2408,8 @@ Mods: {
 					Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
 					Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
 					Rare: Haha! The fire IS shooting at you!
+					Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
+					Graveyard: Oh yes, it is very possible for fire to die. Fire doesn't leave its own corpse, though, just corpses of others...
 					HasFavor1: My favor has allowed you to magically change the type of torches you place. Use standard torches for the magic to work.
 					HasFavor2: Did you have a fun time attempting my challenge? I sure did!
 					NoFavor1: You have not proven yourself to me yet. Once you have, I will offer you a favor.

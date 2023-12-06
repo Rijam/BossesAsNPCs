@@ -137,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 3; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -152,6 +152,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
 			}
 			int demolitionist = NPC.FindFirstNPC(NPCID.Demolitionist);
 			if (demolitionist >= 0)

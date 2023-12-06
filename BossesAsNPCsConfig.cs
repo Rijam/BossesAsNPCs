@@ -191,7 +191,7 @@ namespace BossesAsNPCs
 			return false;
 		}
 
-		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref string message)
+		public override bool AcceptClientChanges(ModConfig pendingConfig, int whoAmI, ref NetworkText message)
 		{
 			if (Main.netMode == NetmodeID.SinglePlayer)
 			{
@@ -200,8 +200,8 @@ namespace BossesAsNPCs
 
 			if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				//message = NetworkText.FromKey("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
-				message = Language.GetTextValue("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
+				message = NetworkText.FromKey("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
+				//message = Language.GetTextValue("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

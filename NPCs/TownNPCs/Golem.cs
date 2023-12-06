@@ -159,6 +159,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			if (Main.getGoodWorld || WorldGen.getGoodWorldGen)
             {
 				chat.Add(Language.GetTextValue(path + "ForTheWorthy"));

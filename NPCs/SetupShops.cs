@@ -324,27 +324,27 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.SlimeCrown) { shopCustomPrice = 50000 }); //Made up value since Slime Crown has no value
-				shop.Add(new Item(ItemID.Solidifier) { shopCustomPrice = 20000 * 2 });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Solidifier, priceMulti: 2));
 				//Formula: (Sell value / drop chance)
-				shop.Add(new Item(ItemID.SlimySaddle) { shopCustomPrice = (int)Math.Round(50000 / 0.25) });
-				shop.Add(new Item(ItemID.NinjaHood) { shopCustomPrice = (int)Math.Round(4000 / 0.33) });
-				shop.Add(new Item(ItemID.NinjaShirt) { shopCustomPrice = (int)Math.Round(4000 / 0.33) });
-				shop.Add(new Item(ItemID.NinjaPants) { shopCustomPrice = (int)Math.Round(4000 / 0.33) });
-				shop.Add(new Item(ItemID.SlimeHook) { shopCustomPrice = (int)Math.Round(4000 / 0.33) });
-				shop.Add(new Item(ItemID.SlimeGun) { shopCustomPrice = (int)Math.Round(3000 / 0.67) });
-				shop.Add(new Item(ItemID.KingSlimeMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.KingSlimeTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimySaddle, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.NinjaHood, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.NinjaShirt, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.NinjaPants, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeHook, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeGun, 0.67));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.RoyalGel) { shopCustomPrice = 10000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.KingSlimePetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master); //Royal Delight
-				shop.Add(new Item(ItemID.KingSlimeMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RoyalGel, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimePetItem, 0.25), ShopConditions.Master); //Royal Delight
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.Gel) { shopCustomPrice = 1 * 10 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.SlimeStaff) { shopCustomPrice = 20000 * 10 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Gel, priceMulti: 10), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeStaff, priceMulti: 10), ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ItemID.PrinceUniform) { shopCustomPrice = 500000 }, Condition.NpcIsPresent(NPCID.Princess), ShopConditions.SellExtraItems);
 				shop.Add(new Item(ItemID.PrincePants) { shopCustomPrice = 500000 }, Condition.NpcIsPresent(NPCID.Princess), ShopConditions.SellExtraItems);
@@ -413,8 +413,8 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.SuspiciousLookingEye) { shopCustomPrice = 75000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.DemoniteOre) { shopCustomPrice = 1000 * 5 }, ShopConditions.CorruptionOrHardmode);
-				shop.Add(new Item(ItemID.CorruptSeeds) { shopCustomPrice = 500 * 5 }, ShopConditions.CorruptionOrHardmode);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DemoniteOre, priceMulti: 5), ShopConditions.CorruptionOrHardmode);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CorruptSeeds, priceMulti: 5), ShopConditions.CorruptionOrHardmode);
 				// In a Corruption World, in Hardmode, after defeating EoW
 				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 }, Condition.CorruptWorld, Condition.Hardmode, Condition.DownedEowOrBoc);
 				// In a Corruption World, in Pre-HardMode, after defeating EoW
@@ -422,24 +422,24 @@ namespace BossesAsNPCs.NPCs
 				// In a Corruption World, before defeating EoW
 				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 * 5 }, ShopConditions.CorruptionOrHardmode, Condition.NotDownedEowOrBoc);
 
-				shop.Add(new Item(ItemID.CrimtaneOre) { shopCustomPrice = 1300 * 5 }, ShopConditions.CrimsonOrHardmode);
-				shop.Add(new Item(ItemID.CrimsonSeeds) { shopCustomPrice = 500 * 5 }, ShopConditions.CrimsonOrHardmode);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrimtaneOre, priceMulti: 5), ShopConditions.CrimsonOrHardmode);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrimsonSeeds, priceMulti: 5), ShopConditions.CrimsonOrHardmode);
 
-				shop.Add(new Item(ItemID.Binoculars) { shopCustomPrice = (int)Math.Round(30000 / 0.03) }); //Formula: (Sell value * 3 / drop chance))
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Binoculars, 0.03)); //Formula: (Sell value * 3 / drop chance))
 
-				shop.Add(new Item(ItemID.BadgersHat) { shopCustomPrice = 3000 * 20 }, Condition.NpcIsPresent(ModContent.NPCType<WallOfFlesh>()));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BadgersHat, priceMulti: 20), Condition.NpcIsPresent(ModContent.NPCType<WallOfFlesh>()));
 
-				shop.Add(new Item(ItemID.EyeMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.EyeofCthulhuTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeofCthulhuTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.EoCShield) { shopCustomPrice = 10000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.AviatorSunglasses) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.EyeOfCthulhuPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.EyeofCthulhuMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EoCShield, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.AviatorSunglasses, priceMulti: 5), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeOfCthulhuPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeofCthulhuMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EoCCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -502,26 +502,26 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.WormFood) { shopCustomPrice = 100000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.DemoniteOre) { shopCustomPrice = 1000 * 5 });
-				shop.Add(new Item(ItemID.ShadowScale) { shopCustomPrice = 100 * 5 });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DemoniteOre, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ShadowScale, priceMulti: 5));
 				//Formula: (Sell value / drop chance))
-				shop.Add(new Item(ItemID.EatersBone) { shopCustomPrice = (int)Math.Round(75000 / 0.05) });
-				shop.Add(new Item(ItemID.EaterMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.EaterofWorldsTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EatersBone, 0.05));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterofWorldsTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.WormScarf) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.EaterOfWorldsPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.EaterofWorldsMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WormScarf, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterOfWorldsPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterofWorldsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.VilePowder) { shopCustomPrice = 100 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.UnholyWater) { shopCustomPrice = 100 }, Condition.Hardmode, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PurpleSolution) { shopCustomPrice = 2500 }, Condition.DownedMechBossAny, Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.WormTooth) { shopCustomPrice = 20 * 5 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.VilePowder, valueDiv: 1), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.UnholyWater, valueDiv: 1), Condition.Hardmode, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PurpleSolution, valueDiv: 1), Condition.DownedMechBossAny, Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WormTooth, valueDiv: 1), ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EaterOfWorlds.EoWCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EaterOfWorlds.EoWCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -577,25 +577,25 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.BloodySpine) { shopCustomPrice = 100000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.CrimtaneOre) { shopCustomPrice = 1300 * 5 });
-				shop.Add(new Item(ItemID.TissueSample) { shopCustomPrice = 150 * 5 });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrimtaneOre, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TissueSample, priceMulti: 5));
 				//Formula: (Sell value / drop chance))
-				shop.Add(new Item(ItemID.BoneRattle) { shopCustomPrice = (int)Math.Round(75000 / 0.05) });
-				shop.Add(new Item(ItemID.BrainMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.BrainofCthulhuTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BoneRattle, 0.05));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BrainMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BrainofCthulhuTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.BrainOfConfusion) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.BrainOfCthulhuPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.BrainofCthulhuMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BrainOfConfusion, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BrainOfCthulhuPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BrainofCthulhuMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss3) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss3, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.ViciousPowder) { shopCustomPrice = 100 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BloodWater) { shopCustomPrice = 100 }, Condition.Hardmode, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.RedSolution) { shopCustomPrice = 2500 }, Condition.DownedMechBossAny, Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ViciousPowder, valueDiv: 1), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BloodWater, valueDiv: 1), Condition.Hardmode, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RedSolution, valueDiv: 1), Condition.DownedMechBossAny, Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
 
 				if (ModLoader.TryGetMod("RijamsMod", out Mod rijamsMod)) // It's my mod lol
 				{
@@ -659,39 +659,39 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.Abeemination) { shopCustomPrice = 125000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.BeeGun) { shopCustomPrice = (int)Math.Round(20000 / 0.33) });
-				shop.Add(new Item(ItemID.BeeKeeper) { shopCustomPrice = (int)Math.Round(20000 / 0.33) });
-				shop.Add(new Item(ItemID.BeesKnees) { shopCustomPrice = (int)Math.Round(20000 / 0.33) });
-				shop.Add(new Item(ItemID.HiveWand) { shopCustomPrice = (int)Math.Round(5000 / 0.33) });
-				shop.Add(new Item(ItemID.BeeHat) { shopCustomPrice = (int)Math.Round(5000 / 0.11) });
-				shop.Add(new Item(ItemID.BeeShirt) { shopCustomPrice = (int)Math.Round(5000 / 0.11) });
-				shop.Add(new Item(ItemID.BeePants) { shopCustomPrice = (int)Math.Round(5000 / 0.11) });
-				shop.Add(new Item(ItemID.HoneyComb) { shopCustomPrice = (int)Math.Round(20000 / 0.33) });
-				shop.Add(new Item(ItemID.Nectar) { shopCustomPrice = (int)Math.Round(30000 / 0.05) });
-				shop.Add(new Item(ItemID.HoneyedGoggles) { shopCustomPrice = (int)Math.Round(50000 / 0.05) });
-				shop.Add(new Item(ItemID.Beenade) { shopCustomPrice = (int)Math.Round(40 / 0.75) });
-				shop.Add(new Item(ItemID.BeeWax) { shopCustomPrice = 20 * 5 });
-				shop.Add(new Item(ItemID.BottledHoney) { shopCustomPrice = 8 * 5 });
-				shop.Add(new Item(ItemID.BeeMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.QueenBeeTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeGun, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeKeeper, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeesKnees, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HiveWand, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeHat, 0.11));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeShirt, 0.11));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeePants, 0.11));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HoneyComb, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Nectar, 0.05));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HoneyedGoggles, 0.05));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Beenade, valueDiv: 1));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeWax, valueDiv: 1));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BottledHoney, valueDiv: 1));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeeTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.HiveBackpack) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.QueenBeePetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.QueenBeeMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HiveBackpack, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeePetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss5) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ItemID.Hive) { shopCustomPrice = 100 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.Stinger) { shopCustomPrice = 40 * 5 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.Bezoar) { shopCustomPrice = 20000 * 5 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BeeHive) { shopCustomPrice = 50 * 5 }, Condition.InGraveyard, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Stinger, valueDiv: 1), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Bezoar, valueDiv: 1), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeHive, valueDiv: 1), Condition.InGraveyard, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.QueenBee.QBCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BeeWings) { shopCustomPrice = 80000 * 5 }, Condition.DownedMechBossAny, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeWings, valueDiv: 1), Condition.DownedMechBossAny, ShopConditions.SellExtraItems);
 			}
 			if (shopName == "Shop2" || NPCHelper.StatusShop2())
 			{
@@ -753,30 +753,30 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.ClothierVoodooDoll) { shopCustomPrice = 130000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.SkeletronHand) { shopCustomPrice = (int)Math.Round(9000 / 0.12) });
-				shop.Add(new Item(ItemID.BookofSkulls) { shopCustomPrice = (int)Math.Round(15000 / 0.11) });
-				shop.Add(new Item(ItemID.ChippysCouch) { shopCustomPrice = (int)Math.Round(5000 / 0.14) });
-				shop.Add(new Item(ItemID.SkeletronMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.SkeletronTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronHand, 0.12));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BookofSkulls, 0.11));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ChippysCouch, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.BoneGlove) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.SkeletronPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.SkeletronMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BoneGlove, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss5) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.BoneKey) { shopCustomPrice = 50000 * 5 }, ShopConditions.DownedDungeonGuardian, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BoneWand) { shopCustomPrice = 50 * 5 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.Bone) { shopCustomPrice = 10 * 5 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BoneKey, valueDiv: 1), ShopConditions.DownedDungeonGuardian, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BoneWand, valueDiv: 1), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Bone, valueDiv: 1), ShopConditions.SellExtraItems);
 
 				if (ModLoader.TryGetMod("FishermanNPC", out Mod fishermanNPC)) // I'll leave this here because it's a vanilla item and it's my mod.
 				{
 					if (fishermanNPC.TryFind<ModNPC>("Fisherman", out ModNPC fisherman))
 					{
-						shop.Add(new Item(ItemID.LockBox) { shopCustomPrice = 4000 * 5 }, Condition.NpcIsPresent(fisherman.Type));
+						shop.Add(NPCHelper.ItemWithPrice(ItemID.LockBox, valueDiv: 1), Condition.NpcIsPresent(fisherman.Type));
 					}
 				}
 
@@ -841,42 +841,42 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.DeerThing) { shopCustomPrice = 140000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.ChesterPetItem) { shopCustomPrice = (int)Math.Round(20000 / 0.33) }); //Eye Bone
-				shop.Add(new Item(ItemID.Eyebrella) { shopCustomPrice = (int)Math.Round(5000 / 0.33) });
-				shop.Add(new Item(ItemID.DontStarveShaderItem) { shopCustomPrice = (int)Math.Round(10000 / 0.33) }); //Radio Thing
-				shop.Add(new Item(ItemID.DizzyHat) { shopCustomPrice = (int)Math.Round(5000 / 0.0714) }); //Dizzy's Rare Gecko Chester
-				shop.Add(new Item(ItemID.PewMaticHorn) { shopCustomPrice = (int)Math.Round(15000 / 0.25) });
-				shop.Add(new Item(ItemID.WeatherPain) { shopCustomPrice = (int)Math.Round(15000 / 0.25) });
-				shop.Add(new Item(ItemID.HoundiusShootius) { shopCustomPrice = (int)Math.Round(15000 / 0.25) });
-				shop.Add(new Item(ItemID.LucyTheAxe) { shopCustomPrice = (int)Math.Round(15000 / 0.25) });
-				shop.Add(new Item(ItemID.DeerclopsMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.DeerclopsTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ChesterPetItem, 0.33)); // Eye Bone
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Eyebrella, 0.33));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DontStarveShaderItem, 0.33)); // Radio Thing
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DizzyHat, 0.0714)); // Dizzy's Rare Gecko Chester
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PewMaticHorn, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WeatherPain, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HoundiusShootius, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LucyTheAxe, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DeerclopsMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DeerclopsTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.BoneHelm) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.DeerclopsPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.DeerclopsMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BoneHelm, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DeerclopsPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DeerclopsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxDeerclops) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxDeerclops, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.AbigailsFlower) { shopCustomPrice = 500 * 5 }, Condition.InGraveyard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BatBat) { shopCustomPrice = (int)Math.Round(2500 / 0.004) }, ShopConditions.UndergroundCavernsOrHardmode, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.BatBat) { shopCustomPrice = (int)Math.Round(2500 / 0.01) }, ShopConditions.UndergroundCavernsOrHardmode, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.HamBat) { shopCustomPrice = (int)Math.Round(10000 / 0.04) }, ShopConditions.InIceAndHallowOrCorruptionOrCrimson, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.HamBat) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.InIceAndHallowOrCorruptionOrCrimson, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.AbigailsFlower, valueDiv: 1), Condition.InGraveyard, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BatBat, 0.004), ShopConditions.UndergroundCavernsOrHardmode, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BatBat, 0.01), ShopConditions.UndergroundCavernsOrHardmode, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HamBat, 0.04), ShopConditions.InIceAndHallowOrCorruptionOrCrimson, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HamBat, 0.1) , ShopConditions.InIceAndHallowOrCorruptionOrCrimson, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
 				//Monster Meat
-				shop.Add(new Item(ItemID.PigPetItem) { shopCustomPrice = (int)Math.Round(10000 / 0.001) }, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PigPetItem) { shopCustomPrice = (int)Math.Round(10000 / 0.005) }, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PigPetItem, 0.001), Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PigPetItem, 0.005), Condition.DontStarveWorld, ShopConditions.SellExtraItems);
 				//Glommer's Flower
-				shop.Add(new Item(ItemID.GlommerPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.01) }, Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.GlommerPetItem) { shopCustomPrice = (int)Math.Round(10000 / 0.025) }, Condition.DontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GlommerPetItem, 0.01), Condition.NotDontStarveWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GlommerPetItem, 0.025), Condition.DontStarveWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.PaintingWendy) { shopCustomPrice = 10000 * 5 }, Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PaintingWillow) { shopCustomPrice = 10000 * 5 }, Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PaintingWilson) { shopCustomPrice = 10000 * 5 }, Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PaintingWolfgang) { shopCustomPrice = 10000 * 5 }, Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PaintingWendy, priceMulti: 5, valueDiv: 1), Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PaintingWillow, priceMulti: 5, valueDiv: 1), Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PaintingWilson, priceMulti: 5, valueDiv: 1), Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PaintingWolfgang, priceMulti: 5, valueDiv: 1), Condition.NpcIsPresent(NPCID.TravellingMerchant), ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Deerclops.DcCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -922,27 +922,27 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.GuideVoodooDoll) { shopCustomPrice = 150000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.Pwnhammer) { shopCustomPrice = 7800 * 5 });
-				shop.Add(new Item(ItemID.BreakerBlade) { shopCustomPrice = (int)Math.Round(30000 / 0.13) });
-				shop.Add(new Item(ItemID.ClockworkAssaultRifle) { shopCustomPrice = (int)Math.Round(30000 / 0.13) });
-				shop.Add(new Item(ItemID.LaserRifle) { shopCustomPrice = (int)Math.Round(30000 / 0.13) });
-				shop.Add(new Item(ItemID.FireWhip) { shopCustomPrice = (int)Math.Round(30000 / 0.13) }); //Firecracker
-				shop.Add(new Item(ItemID.WarriorEmblem) { shopCustomPrice = (int)Math.Round(20000 / 0.13) });
-				shop.Add(new Item(ItemID.RangerEmblem) { shopCustomPrice = (int)Math.Round(20000 / 0.13) });
-				shop.Add(new Item(ItemID.SorcererEmblem) { shopCustomPrice = (int)Math.Round(20000 / 0.13) });
-				shop.Add(new Item(ItemID.SummonerEmblem) { shopCustomPrice = (int)Math.Round(20000 / 0.13) });
-				shop.Add(new Item(ItemID.BadgersHat) { shopCustomPrice = 3000 * 20 }, Condition.NpcIsPresent(ModContent.NPCType<EyeOfCthulhu>()));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Pwnhammer, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BreakerBlade, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ClockworkAssaultRifle, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LaserRifle, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FireWhip, 0.13)); // Firecracker
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WarriorEmblem, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RangerEmblem, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SorcererEmblem, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SummonerEmblem, 0.13));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BadgersHat, priceMulti: 20), Condition.NpcIsPresent(ModContent.NPCType<EyeOfCthulhu>()));
 
-				shop.Add(new Item(ItemID.FleshMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.WallofFleshTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FleshMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WallofFleshTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.DemonHeart) { shopCustomPrice = 20000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.WallOfFleshGoatMountItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.WallofFleshMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DemonHeart, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WallOfFleshGoatMountItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WallofFleshMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWWallOfFlesh) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWWallOfFlesh, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ItemID.DemoniteBrick) { shopCustomPrice = 1500 }, ShopConditions.SellExtraItems);
@@ -1025,27 +1025,27 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.QueenSlimeCrystal) { shopCustomPrice = 200000 }); //Made up value since it has no value
-				shop.Add(new Item(ItemID.QueenSlimeMountSaddle) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Gelatinous Pillion
-				shop.Add(new Item(ItemID.CrystalNinjaHelmet) { shopCustomPrice = (int)Math.Round(20000 / 0.33) }); //Crystal Assassin Hood
-				shop.Add(new Item(ItemID.CrystalNinjaChestplate) { shopCustomPrice = (int)Math.Round(20000 / 0.33) }); //Crystal Assassin Shirt
-				shop.Add(new Item(ItemID.CrystalNinjaLeggings) { shopCustomPrice = (int)Math.Round(20000 / 0.33) }); //Crystal Assassin Pants
-				shop.Add(new Item(ItemID.QueenSlimeHook) { shopCustomPrice = (int)Math.Round(5000 / 0.33) }); //Hook of Dissonance
-				shop.Add(new Item(ItemID.Smolstar) { shopCustomPrice = (int)Math.Round(5000 / 0.33) }); //Blade Staff
-				shop.Add(new Item(ItemID.GelBalloon) { shopCustomPrice = 40 * 5 });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimeMountSaddle, 0.25)); // Gelatinous Pillion
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrystalNinjaHelmet, 0.33)); // Crystal Assassin Hood
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrystalNinjaChestplate, 0.33)); // Crystal Assassin Shirt
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrystalNinjaLeggings, 0.33)); // Crystal Assassin Pants
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimeHook, 0.33)); // Hook of Dissonance
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Smolstar, 0.33)); // Blade Staff
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GelBalloon, priceMulti: 5)); // Sparkle Slime Balloon
 				
-				shop.Add(new Item(ItemID.QueenSlimeMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.QueenSlimeTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimeMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimeTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.VolatileGelatin) { shopCustomPrice = 50000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.QueenSlimePetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.QueenSlimeMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.VolatileGelatin, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimePetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenSlimeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxQueenSlime) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxQueenSlime, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.PinkGel) { shopCustomPrice = 3 * 10 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PinkGel, priceMulti: 10), ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.QueenSlime.QSAltCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.QueenSlime.QSCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.QueenSlime.QSCostumeGloves>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1091,20 +1091,20 @@ namespace BossesAsNPCs.NPCs
 			{
 				shop.Add(new Item(ItemID.MechanicalWorm) { shopCustomPrice = 250000 }); //Made up value since it has no value
 				shop.Add(new Item(ItemID.MechdusaSummon) { shopCustomPrice = 1000000 }, Condition.DownedMechBossAll, Condition.ZenithWorld); // Ocram's Razor
-				shop.Add(new Item(ItemID.HallowedBar) { shopCustomPrice = 400 * 5 });
-				shop.Add(new Item(ItemID.SoulofMight) { shopCustomPrice = 800 * 5 });
-				shop.Add(new Item(ItemID.WaffleIron) { shopCustomPrice = 150000 }, Condition.DownedMechBossAll, Condition.ZenithWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HallowedBar, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SoulofMight, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WaffleIron, priceMulti: 5), Condition.DownedMechBossAll, Condition.ZenithWorld);
 
-				shop.Add(new Item(ItemID.DestroyerMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.DestroyerTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.MechanicalWagonPiece) { shopCustomPrice = 5000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.DestroyerPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.DestroyerMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MechanicalWagonPiece, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss3) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss3, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1175,20 +1175,20 @@ namespace BossesAsNPCs.NPCs
 			{
 				shop.Add(new Item(ItemID.MechanicalEye) { shopCustomPrice = 250000 }); //Made up value since it has no value
 				shop.Add(new Item(ItemID.MechdusaSummon) { shopCustomPrice = 1000000 }, Condition.DownedMechBossAll, Condition.ZenithWorld); // Ocram's Razor
-				shop.Add(new Item(ItemID.HallowedBar) { shopCustomPrice = 400 * 5 });
-				shop.Add(new Item(ItemID.SoulofSight) { shopCustomPrice = 800 * 5 });
-				shop.Add(new Item(ItemID.WaffleIron) { shopCustomPrice = 150000 }, Condition.DownedMechBossAll, Condition.ZenithWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HallowedBar, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SoulofSight, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WaffleIron, priceMulti: 5), Condition.DownedMechBossAll, Condition.ZenithWorld);
 
-				shop.Add(new Item(ItemID.TwinMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.RetinazerTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RetinazerTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.MechanicalWheelPiece) { shopCustomPrice = 5000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.TwinsPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.TwinsMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MechanicalWheelPiece, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Retinazer.RetCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1260,20 +1260,20 @@ namespace BossesAsNPCs.NPCs
 			{
 				shop.Add(new Item(ItemID.MechanicalEye) { shopCustomPrice = 250000 }); //Made up value since it has no value
 				shop.Add(new Item(ItemID.MechdusaSummon) { shopCustomPrice = 1000000 }, Condition.DownedMechBossAll, Condition.ZenithWorld); // Ocram's Razor
-				shop.Add(new Item(ItemID.HallowedBar) { shopCustomPrice = 400 * 5 });
-				shop.Add(new Item(ItemID.SoulofSight) { shopCustomPrice = 800 * 5 });
-				shop.Add(new Item(ItemID.WaffleIron) { shopCustomPrice = 150000 }, Condition.DownedMechBossAll, Condition.ZenithWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HallowedBar, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SoulofSight, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WaffleIron, priceMulti: 5), Condition.DownedMechBossAll, Condition.ZenithWorld);
 
-				shop.Add(new Item(ItemID.TwinMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.SpazmatismTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SpazmatismTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.MechanicalWheelPiece) { shopCustomPrice = 5000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.TwinsPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.TwinsMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MechanicalWheelPiece, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1344,20 +1344,20 @@ namespace BossesAsNPCs.NPCs
 			{
 				shop.Add(new Item(ItemID.MechanicalSkull) { shopCustomPrice = 250000 }); //Made up value since it has no value
 				shop.Add(new Item(ItemID.MechdusaSummon) { shopCustomPrice = 1000000 }, Condition.DownedMechBossAll, Condition.ZenithWorld); // Ocram's Razor
-				shop.Add(new Item(ItemID.HallowedBar) { shopCustomPrice = 400 * 5 });
-				shop.Add(new Item(ItemID.SoulofFright) { shopCustomPrice = 800 * 5 });
-				shop.Add(new Item(ItemID.WaffleIron) { shopCustomPrice = 150000 }, Condition.DownedMechBossAll, Condition.ZenithWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HallowedBar, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SoulofFright, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WaffleIron, priceMulti: 5), Condition.DownedMechBossAll, Condition.ZenithWorld);
 
-				shop.Add(new Item(ItemID.SkeletronPrimeMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.SkeletronPrimeTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimeMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimeTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.MechanicalBatteryPiece) { shopCustomPrice = 5000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.SkeletronPrimePetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.SkeletronPrimeMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MechanicalBatteryPiece, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimePetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss1) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1427,33 +1427,32 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.TempleKey) { shopCustomPrice = 5000 }); //Made up value
-				shop.Add(new Item(ItemID.GrenadeLauncher) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
-				shop.Add(new Item(ItemID.VenusMagnum) { shopCustomPrice = (int)Math.Round(50000 / 0.14) });
-				shop.Add(new Item(ItemID.NettleBurst) { shopCustomPrice = (int)Math.Round(40000 / 0.14) });
-				shop.Add(new Item(ItemID.LeafBlower) { shopCustomPrice = (int)Math.Round(60000 / 0.14) });
-				shop.Add(new Item(ItemID.FlowerPow) { shopCustomPrice = (int)Math.Round(60000 / 0.14) });
-				shop.Add(new Item(ItemID.WaspGun) { shopCustomPrice = (int)Math.Round(100000 / 0.14) });
-				shop.Add(new Item(ItemID.Seedler) { shopCustomPrice = (int)Math.Round(100000 / 0.14) });
-				shop.Add(new Item(ItemID.PygmyStaff) { shopCustomPrice = (int)Math.Round(70000 / 0.25) });
-				shop.Add(new Item(ItemID.ThornHook) { shopCustomPrice = (int)Math.Round(60000 / 0.1) });
-				shop.Add(new Item(ItemID.TheAxe) { shopCustomPrice = (int)Math.Round(100000 / 0.02) });
-				shop.Add(new Item(ItemID.Seedling) { shopCustomPrice = (int)Math.Round(20000 / 0.05) });
-				shop.Add(new Item(ItemID.Seedling) { shopCustomPrice = (int)Math.Round(20000 / 0.05) });
+				shop.Add(new Item(ItemID.TempleKey) { shopCustomPrice = 5000 }); // Made up value
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GrenadeLauncher, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.VenusMagnum, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.NettleBurst, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LeafBlower, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FlowerPow, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WaspGun, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Seedler, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PygmyStaff, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ThornHook, 0.1));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TheAxe, 0.02));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Seedling, 0.05));
 
-				shop.Add(new Item(ItemID.PlanteraMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.PlanteraTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PlanteraMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PlanteraTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.SporeSac) { shopCustomPrice = 40000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.PlanteraPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.PlanteraMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SporeSac, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PlanteraPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PlanteraMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxPlantera) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxPlantera, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWPlantera) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWPlantera, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.JungleGrassSeeds) { shopCustomPrice = 30 * 5 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.JungleGrassSeeds, priceMulti: 5), ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Plantera.PlCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1533,31 +1532,31 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.LihzahrdPowerCell) { shopCustomPrice = 350000 }); //Made up value
-				shop.Add(new Item(ItemID.Picksaw) { shopCustomPrice = (int)Math.Round(43200 / 0.25) });
-				shop.Add(new Item(ItemID.BeetleHusk) { shopCustomPrice = 5000 * 5 });
-				shop.Add(new Item(ItemID.Stynger) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
-				shop.Add(new Item(ItemID.StyngerBolt) { shopCustomPrice = 75 });
-				shop.Add(new Item(ItemID.PossessedHatchet) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
-				shop.Add(new Item(ItemID.SunStone) { shopCustomPrice = (int)Math.Round(60000 / 0.14) });
-				shop.Add(new Item(ItemID.EyeoftheGolem) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
-				shop.Add(new Item(ItemID.StaffofEarth) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
-				shop.Add(new Item(ItemID.GolemFist) { shopCustomPrice = (int)Math.Round(70000 / 0.14) });
+				shop.Add(new Item(ItemID.LihzahrdPowerCell) { shopCustomPrice = 350000 }); // Made up value
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Picksaw, 0.25));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeetleHusk, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Stynger, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.StyngerBolt, valueDiv: 1));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PossessedHatchet, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SunStone, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeoftheGolem, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.StaffofEarth, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemFist, 0.14));
 
-				shop.Add(new Item(ItemID.GolemMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.GolemTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.ShinyStone) { shopCustomPrice = 50000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.GolemPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.GolemMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ShinyStone, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss4) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss4, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ItemID.LihzahrdBrick) { shopCustomPrice = 2500 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.LihzahrdAltar) { shopCustomPrice = 60 * 5 * 1000 }, ShopConditions.SellExtraItems); //sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LihzahrdAltar, priceMulti: 5 * 1000), ShopConditions.SellExtraItems); // Sells for 60 copper, but that seems way to cheap for an item that you should only have one of.
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Golem.GolemCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1610,34 +1609,34 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.EmpressButterfly) { shopCustomPrice = 400000 }); //Prismatic Lacewing //Sell value * 5 = 250000
-				//Formula: (Sell value / drop chance); It would be 200000 in this case
-				shop.Add(new Item(ItemID.FairyQueenMagicItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Nightglow
-				shop.Add(new Item(ItemID.PiercingStarlight) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Starlight
-				shop.Add(new Item(ItemID.RainbowWhip) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Kaleidoscope
-				shop.Add(new Item(ItemID.FairyQueenRangedItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Eventide
-				shop.Add(new Item(ItemID.RainbowWings) { shopCustomPrice = (int)Math.Round(80000 / 0.07) }); //Empress Wings
-				shop.Add(new Item(ItemID.HallowBossDye) { shopCustomPrice = (int)Math.Round(15000 / 0.25) }); //Prismatic Dye
-				shop.Add(new Item(ItemID.SparkleGuitar) { shopCustomPrice = (int)Math.Round(100000 / 0.05) }); //Stellar Tune
-				shop.Add(new Item(ItemID.RainbowCursor) { shopCustomPrice = (int)Math.Round(10000 / 0.05) }); //Rainbow Cursor
+				shop.Add(new Item(ItemID.EmpressButterfly) { shopCustomPrice = 400000 }); // Prismatic Lacewing // Sell value * 5 = 250000
+				// Formula: (Sell value / drop chance); It would be 200000 in this case
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenMagicItem, 0.25)); // Nightglow
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PiercingStarlight, 0.25)); // Starlight
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RainbowWhip, 0.25)); // Kaleidoscope
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenRangedItem, 0.25)); // Eventide
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RainbowWings, 0.07)); // Empress Wings
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HallowBossDye, 0.25)); // Prismatic Dye
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SparkleGuitar, 0.05)); // Stellar Tune
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RainbowCursor, 0.05)); // Rainbow Cursor
 
-				//Special case since it is technically a "100% drop chance".
-				shop.Add(new Item(ItemID.EmpressBlade) { shopCustomPrice = 200000 * 50 }, ShopConditions.DaytimeEoLDefated); //Terraprisma
+				// Special case since it is technically a "100% drop chance".
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EmpressBlade, priceMulti: 50), ShopConditions.DaytimeEoLDefated); //Terraprisma
 
-				shop.Add(new Item(ItemID.FairyQueenMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) }); //Empress of Light Mask
-				shop.Add(new Item(ItemID.FairyQueenTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }); //Empress of Light Trophy
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenMask, 0.14)); //Empress of Light Mask
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenTrophy, 0.1)); //Empress of Light Trophy
 
-				shop.Add(new Item(ItemID.EmpressFlightBooster) { shopCustomPrice = 50000 * 5 }, ShopConditions.Expert); //Soaring Insignia
-				shop.Add(new Item(ItemID.FairyQueenPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master); //Jewel of Light
-				shop.Add(new Item(ItemID.FairyQueenMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master); //Empress of Light Relic
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EmpressFlightBooster, priceMulti: 5), ShopConditions.Expert); //Soaring Insignia
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenPetItem, 0.25), ShopConditions.Master); //Jewel of Light
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FairyQueenMasterTrophy, priceMulti: 5), ShopConditions.Master); //Empress of Light Relic
 
-				shop.Add(new Item(ItemID.MusicBoxEmpressOfLight) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxEmpressOfLight, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
-				shop.Add(new Item(ItemID.HolyWater) { shopCustomPrice = 200 }, Condition.Hardmode, ShopConditions.SellExtraItems); //For some reason Holy Water is double as valuable than Unholy/Blood Water.
-				shop.Add(new Item(ItemID.BlueSolution) { shopCustomPrice = 2500 }, Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HolyWater, valueDiv: 1), Condition.Hardmode, ShopConditions.SellExtraItems); // For some reason Holy Water is double as valuable than Unholy/Blood Water.
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BlueSolution, valueDiv: 1), Condition.NpcIsPresent(NPCID.Steampunker), ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EmpressOfLight.EoLCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1687,25 +1686,25 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.TruffleWorm) { shopCustomPrice = 400000 }); //Made up value
-				shop.Add(new Item(ItemID.BubbleGun) { shopCustomPrice = (int)Math.Round(50000 / 0.2) });
-				shop.Add(new Item(ItemID.Flairon) { shopCustomPrice = (int)Math.Round(50000 / 0.2) });
-				shop.Add(new Item(ItemID.RazorbladeTyphoon) { shopCustomPrice = (int)Math.Round(50000 / 0.2) });
-				shop.Add(new Item(ItemID.TempestStaff) { shopCustomPrice = (int)Math.Round(50000 / 0.2) });
-				shop.Add(new Item(ItemID.Tsunami) { shopCustomPrice = (int)Math.Round(50000 / 0.2) });
-				shop.Add(new Item(ItemID.FishronWings) { shopCustomPrice = (int)Math.Round(80000 / 0.07) });
-				shop.Add(new Item(ItemID.FishronWings) { shopCustomPrice = (int)Math.Round(80000 / 0.07) });
+				shop.Add(new Item(ItemID.TruffleWorm) { shopCustomPrice = 400000 }); // Made up value
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BubbleGun, 0.2), Condition.NotRemixWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.AquaScepter, 0.2), Condition.RemixWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Flairon, 0.2));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RazorbladeTyphoon, 0.2));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TempestStaff, 0.2));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Tsunami, 0.2));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FishronWings, 0.07));
 
-				shop.Add(new Item(ItemID.DukeFishronMask) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.DukeFishronTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronMask, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.ShrimpyTruffle) { shopCustomPrice = 50000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.DukeFishronPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.DukeFishronMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ShrimpyTruffle, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxDukeFishron) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxDukeFishron, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.DukeFishron.DFCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1773,50 +1772,50 @@ namespace BossesAsNPCs.NPCs
 			{
 				shop.Add(new Item(ItemID.DD2ElderCrystal) { shopCustomPrice = 40000 });
 
-				//Formula: (Sell value / drop chance))
-				shop.Add(new Item(ItemID.ApprenticeScarf) { shopCustomPrice = (int)Math.Round(30000 / 0.25) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.SquireShield) { shopCustomPrice = (int)Math.Round(30000 / 0.25) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.WarTable) { shopCustomPrice = (int)Math.Round(20000 / 0.1) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.WarTableBanner) { shopCustomPrice = (int)Math.Round(20000 / 0.1) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.DD2PetDragon) { shopCustomPrice = (int)Math.Round(20000 / 0.17) }, ShopConditions.DownedDarkMage); //Dragon Egg
-				shop.Add(new Item(ItemID.DD2PetGato) { shopCustomPrice = (int)Math.Round(20000 / 0.17) }, ShopConditions.DownedDarkMage); //Gato Egg
-				shop.Add(new Item(ItemID.BossMaskDarkMage) { shopCustomPrice = (int)Math.Round(7500 / 0.14) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.BossTrophyDarkmage) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedDarkMage);
-				shop.Add(new Item(ItemID.DarkMageBookMountItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.DownedDarkMage,
+				// Formula: (Sell value / drop chance))
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ApprenticeScarf, 0.25), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SquireShield, 0.25), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WarTable, 0.1), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.WarTableBanner, 0.1), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2PetDragon, 0.17), ShopConditions.DownedDarkMage); // Dragon Egg
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2PetGato, 0.17), ShopConditions.DownedDarkMage); // Gato Egg
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskDarkMage, 0.14), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossTrophyDarkmage, 0.1), ShopConditions.DownedDarkMage);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DarkMageBookMountItem, 0.25), ShopConditions.DownedDarkMage,
 					ShopConditions.Master);
-				shop.Add(new Item(ItemID.DarkMageMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.DownedDarkMage,
-					ShopConditions.Master);
-
-				shop.Add(new Item(ItemID.HuntressBuckler) { shopCustomPrice = (int)Math.Round(30000 / 0.17) }, ShopConditions.DownedOgre);
-				shop.Add(new Item(ItemID.MonkBelt) { shopCustomPrice = (int)Math.Round(30000 / 0.17) }, ShopConditions.DownedOgre);
-				shop.Add(new Item(ItemID.BookStaff) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre); //Tome of Infinite Wisdom
-				shop.Add(new Item(ItemID.DD2PhoenixBow) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre); //Phantom Phoenix
-				shop.Add(new Item(ItemID.DD2SquireDemonSword) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre); //Brand of the Inferno
-				shop.Add(new Item(ItemID.MonkStaffT1) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre); //Sleepy Octopod
-				shop.Add(new Item(ItemID.MonkStaffT2) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre); //Ghastly Glaive
-				shop.Add(new Item(ItemID.DD2PetGhost) { shopCustomPrice = (int)Math.Round(20000 / 0.2) }, ShopConditions.DownedOgre); //Creeper Egg
-				shop.Add(new Item(ItemID.BossMaskOgre) { shopCustomPrice = (int)Math.Round(7500 / 0.14) }, ShopConditions.DownedOgre);
-				shop.Add(new Item(ItemID.BossTrophyOgre) { shopCustomPrice = (int)Math.Round(10000 / 0.1) }, ShopConditions.DownedOgre);
-				shop.Add(new Item(ItemID.DD2OgrePetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.DownedOgre,
-					ShopConditions.Master);
-				shop.Add(new Item(ItemID.OgreMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.DownedOgre,
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DarkMageMasterTrophy, priceMulti: 5), ShopConditions.DownedDarkMage,
 					ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.DD2BetsyBow) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Aerial Bane
-				shop.Add(new Item(ItemID.MonkStaffT3) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Sky Dragon's Fury
-				shop.Add(new Item(ItemID.ApprenticeStaffT3) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Betsy's Wrath
-				shop.Add(new Item(ItemID.DD2SquireBetsySword) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }); //Flying Dragon
-				shop.Add(new Item(ItemID.BetsyWings) { shopCustomPrice = (int)Math.Round(80000 / 0.07) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HuntressBuckler, 0.17), ShopConditions.DownedOgre);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MonkBelt, 0.17), ShopConditions.DownedOgre);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BookStaff, 0.1), ShopConditions.DownedOgre); // Tome of Infinite Wisdom
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2PhoenixBow, 0.1), ShopConditions.DownedOgre); // Phantom Phoenix
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2SquireDemonSword, 0.1), ShopConditions.DownedOgre); // Brand of the Inferno
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MonkStaffT1, 0.1), ShopConditions.DownedOgre); // Sleepy Octopod
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MonkStaffT2, 0.1), ShopConditions.DownedOgre); // Ghastly Glaive
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2PetGhost, 0.2), ShopConditions.DownedOgre); // Creeper Egg
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskOgre, 0.14), ShopConditions.DownedOgre);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossTrophyOgre, 0.1), ShopConditions.DownedOgre);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2OgrePetItem, 0.25), ShopConditions.DownedOgre,
+					ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.OgreMasterTrophy, priceMulti: 5), ShopConditions.DownedOgre,
+					ShopConditions.Master);
+
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2BetsyBow, 0.25)); // Aerial Bane
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MonkStaffT3, 0.25)); // Sky Dragon's Fury
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ApprenticeStaffT3, 0.25)); // Betsy's Wrath
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2SquireBetsySword, 0.25)); // Flying Dragon
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BetsyWings, 0.07));
 				
-				shop.Add(new Item(ItemID.BossMaskBetsy) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.BossTrophyBetsy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskBetsy, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossTrophyBetsy, 0.1));
 
-				shop.Add(new Item(ItemID.DD2BetsyPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.BetsyMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.DD2BetsyPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BetsyMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxDD2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxDD2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWInvasion) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWInvasion, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 
 				Condition randomVanity(int tick) => new("Mods.BossesAsNPCs.Conditions.RandomVanityS", () => Main.GameUpdateCount % 3 == tick);
@@ -1898,21 +1897,21 @@ namespace BossesAsNPCs.NPCs
 		{
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
-				shop.Add(new Item(ItemID.LunarCraftingStation) { shopCustomPrice = 100000 }); //Ancient Manipulator //Made up value
-				shop.Add(new Item(ItemID.FragmentSolar) { shopCustomPrice = 2000 * 10 }, Condition.DownedSolarPillar);
-				shop.Add(new Item(ItemID.FragmentVortex) { shopCustomPrice = 2000 * 10 }, Condition.DownedSolarPillar);
-				shop.Add(new Item(ItemID.FragmentNebula) { shopCustomPrice = 2000 * 10 }, Condition.DownedSolarPillar);
-				shop.Add(new Item(ItemID.FragmentStardust) { shopCustomPrice = 2000 * 10 }, Condition.DownedSolarPillar);
+				shop.Add(new Item(ItemID.LunarCraftingStation) { shopCustomPrice = 100000 }); // Ancient Manipulator // Made up value
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FragmentSolar, priceMulti: 10), Condition.DownedSolarPillar);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FragmentVortex, priceMulti: 10), Condition.DownedSolarPillar);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FragmentNebula, priceMulti: 10), Condition.DownedSolarPillar);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.FragmentStardust, priceMulti: 10), Condition.DownedSolarPillar);
 
-				shop.Add(new Item(ItemID.BossMaskCultist) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.AncientCultistTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskCultist, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.AncientCultistTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.LunaticCultistPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.LunaticCultistMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunaticCultistPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunaticCultistMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxBoss4) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss4, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWBoss2) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -2009,36 +2008,37 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1" || NPCHelper.StatusShop1())
 			{
 				shop.Add(new Item(ItemID.CelestialSigil) { shopCustomPrice = 500000 });
-				shop.Add(new Item(ItemID.PortalGun) { shopCustomPrice = 100000 * 5 });
-				shop.Add(new Item(ItemID.LunarOre) { shopCustomPrice = 3000 * 5 });
-				shop.Add(new Item(ItemID.Meowmere) { shopCustomPrice = (int)Math.Round(200000 / 0.22) });
-				shop.Add(new Item(ItemID.Terrarian) { shopCustomPrice = (int)Math.Round(100000 / 0.22) });
-				shop.Add(new Item(ItemID.StarWrath) { shopCustomPrice = (int)Math.Round(200000 / 0.22) });
-				shop.Add(new Item(ItemID.SDMG) { shopCustomPrice = (int)Math.Round(150000 / 0.22) });
-				shop.Add(new Item(ItemID.LastPrism) { shopCustomPrice = (int)Math.Round(100000 / 0.22) });
-				shop.Add(new Item(ItemID.LunarFlareBook) { shopCustomPrice = (int)Math.Round(100000 / 0.22) });
-				shop.Add(new Item(ItemID.RainbowCrystalStaff) { shopCustomPrice = (int)Math.Round(100000 / 0.22) });
-				shop.Add(new Item(ItemID.MoonlordTurretStaff) { shopCustomPrice = (int)Math.Round(100000 / 0.22) }); //Lunar Portal Staff
-				shop.Add(new Item(ItemID.Celeb2) { shopCustomPrice = (int)Math.Round(100000 / 0.22) }); //Celebration Mk2
-				shop.Add(new Item(ItemID.MeowmereMinecart) { shopCustomPrice = (int)Math.Round(100000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.PortalGun, priceMulti: 5));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunarOre, priceMulti: 5));
+				// Even though Moon Lord now drops two of these items, I've left the chances at 0.22
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Meowmere, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Terrarian, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.StarWrath, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SDMG, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LastPrism, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunarFlareBook, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RainbowCrystalStaff, 0.22));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonlordTurretStaff, 0.22)); // Lunar Portal Staff
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Celeb2, 0.22)); // Celebration Mk2
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MeowmereMinecart, 0.1));
 
-				shop.Add(new Item(ItemID.BossMaskMoonlord) { shopCustomPrice = (int)Math.Round(7500 / 0.14) });
-				shop.Add(new Item(ItemID.MoonLordTrophy) { shopCustomPrice = (int)Math.Round(10000 / 0.1) });
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskMoonlord, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordTrophy, 0.1));
 
-				shop.Add(new Item(ItemID.GravityGlobe) { shopCustomPrice = 400000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.SuspiciousLookingTentacle) { shopCustomPrice = 10000 * 5 }, ShopConditions.Expert);
-				shop.Add(new Item(ItemID.LongRainbowTrailWings) { shopCustomPrice = 10000 * 5 }, ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.GravityGlobe, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SuspiciousLookingTentacle, priceMulti: 5), ShopConditions.Expert);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.LongRainbowTrailWings, priceMulti: 5), ShopConditions.Expert);
 
-				shop.Add(new Item(ItemID.MoonLordPetItem) { shopCustomPrice = (int)Math.Round(50000 / 0.25) }, ShopConditions.Master);
-				shop.Add(new Item(ItemID.MoonLordMasterTrophy) { shopCustomPrice = 10000 * 5 }, ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordPetItem, 0.25), ShopConditions.Master);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(new Item(ItemID.MusicBoxLunarBoss) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxLunarBoss, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MusicBoxOWMoonLord) { shopCustomPrice = 20000 * 10 },
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWMoonLord, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.MoonLordLegs) { shopCustomPrice = 20000 * 5 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordLegs, priceMulti: 5), ShopConditions.SellExtraItems);
 				
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);

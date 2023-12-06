@@ -163,6 +163,15 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
+			int dryad = NPC.FindFirstNPC(NPCID.Dryad);
+			if (dryad >= 0)
+			{
+				chat.Add(Language.GetTextValue(path + "Dryad", Main.npc[dryad].GivenName));
+			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && townNPCsCrossModSupport)
 			{
 				int abominationn = NPC.FindFirstNPC(fargosMutant.Find<ModNPC>("Abominationn").Type);

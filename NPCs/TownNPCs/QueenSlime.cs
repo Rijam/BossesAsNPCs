@@ -137,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 7; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -146,13 +146,24 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
+			if (Main.slimeRain)
+			{
+				chat.Add(Language.GetTextValue(path + "SlimeRain"));
+			}
 			if (!NPC.downedSlimeKing)
 			{
 				chat.Add(Language.GetTextValue(path + "KS1"));
 			}
 			if (NPC.downedSlimeKing)
 			{
-				chat.Add(Language.GetTextValue(path + "KS2"));
+				for (int i = 2; i <= 4; i++)
+				{
+					chat.Add(Language.GetTextValue(path + "KS" + i));
+				}
 			}
 			return chat;
 		}

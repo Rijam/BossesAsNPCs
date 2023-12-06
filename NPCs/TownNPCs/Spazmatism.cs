@@ -146,8 +146,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
+			if (!Main.LocalPlayer.unlockedBiomeTorches)
+			{
+				chat.Add(Language.GetTextValue(path + "NoTorchGod"));
+			}
 			int retinazer = NPC.FindFirstNPC(ModContent.NPCType<Retinazer>());
 			int eoc = NPC.FindFirstNPC(ModContent.NPCType<EyeOfCthulhu>());
+			int torchGod = NPC.FindFirstNPC(ModContent.NPCType<TorchGod>());
+			if (torchGod >= 0)
+			{
+				chat.Add(Language.GetTextValue(path + "TorchGod", Main.npc[torchGod].GivenName));
+			}
 			if (retinazer >= 0 && eoc >= 0)
 			{
 				chat.Add(Language.GetTextValue(path + "RezEoC"), 0.5);

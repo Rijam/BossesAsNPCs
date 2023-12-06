@@ -155,13 +155,22 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 5; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
+			int deerclops = NPC.FindFirstNPC(ModContent.NPCType<Deerclops>());
+			if (deerclops >= 0)
+			{
+				chat.Add(Language.GetTextValue(path + "Deerclops"));
 			}
 			if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant))
 			{

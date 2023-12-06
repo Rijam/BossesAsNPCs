@@ -176,6 +176,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			int betsy = NPC.FindFirstNPC(ModContent.NPCType<Betsy>());
             if (betsy >= 0)
 			{
@@ -226,7 +230,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override bool CanGoToStatue(bool toKingStatue)
 		{
-			return toKingStatue;
+			return !toKingStatue;
 		}
 
 		public override void TownNPCAttackStrength(ref int damage, ref float knockback)

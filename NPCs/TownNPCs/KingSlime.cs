@@ -157,6 +157,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				chat.Add(Language.GetTextValue(path + "Party1"), 2.0); // 2 times more common.
 				chat.Add(Language.GetTextValue(path + "Party2"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			if (!NPC.downedQueenSlime) // Queen Slime is not defeated.
 			{
 				chat.Add(Language.GetTextValue(path + "QS1"));

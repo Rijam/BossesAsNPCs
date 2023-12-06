@@ -145,6 +145,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.InGraveyard.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "Graveyard"));
+			}
 			int spazmatism = NPC.FindFirstNPC(ModContent.NPCType<Spazmatism>());
 			int eoc = NPC.FindFirstNPC(ModContent.NPCType<EyeOfCthulhu>());
 			if (spazmatism >= 0 && eoc >= 0)
