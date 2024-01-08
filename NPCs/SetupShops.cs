@@ -2239,6 +2239,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ButchersChainsaw, 0.025, secondDiv: 2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ButcherMask, 0.02, secondDiv: 2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ButcherApron, 0.02, secondDiv: 2));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ButcherPants, 0.02, secondDiv: 2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DeadlySphereStaff, 0.025, secondDiv: 2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ToxicFlask, 0.025, secondDiv: 2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DrManFlyMask, 0.0396, secondDiv: 2));
@@ -2462,7 +2463,8 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.BlizzardStaff, 0.08));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SnowmanCannon, 0.08));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.NorthPole, 0.08));
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.BabyGrinchMischiefWhistle, 0.017)); //Has no value
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BabyGrinchMischiefWhistle, 0.017));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ReindeerBells, 0.017));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.IceQueenTrophy, 0.1));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.IceQueenPetItem, 0.25), ShopConditions.Master); //Frozen Crown
