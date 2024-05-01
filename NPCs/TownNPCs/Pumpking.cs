@@ -1,4 +1,3 @@
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -9,9 +8,7 @@ using Terraria.GameContent.Personalities;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Terraria.GameContent;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Terraria.DataStructures;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -119,10 +116,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+			return false;
 		}
 
 		public override ITownNPCProfile TownNPCProfile()
@@ -133,7 +127,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
 		//random taken from Torch Merchant by cace#7129
-		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/Pumpking_Glow");
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
@@ -145,7 +138,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				float randomX = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
 				float randomY = Utils.RandomInt(ref seed, -5, 11) * 0.05f;
 
-				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 
@@ -196,14 +189,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = Shop1;
-				NPCHelper.SetShop1(true);
-				NPCHelper.SetShop2(false);
 			}
 			if (!firstButton)
 			{
 				shop = Shop2;
-				NPCHelper.SetShop1(false);
-				NPCHelper.SetShop2(true);
 			}
 		}
 

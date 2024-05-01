@@ -1,4 +1,3 @@
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -6,12 +5,12 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
-using System.Collections.Generic;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
+using Terraria.Graphics.Shaders;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -127,10 +126,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+			return false;
 		}
 
 		public override ITownNPCProfile TownNPCProfile()
@@ -140,21 +136,19 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
 
-		//Note about the glow mask, the sitting frame needs to be 2 visible pixels higher.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/EmpressOfLight_Wings");
 		private int colorIndex = 0;
 		private Color color = new(255, 255, 255, 100);
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			NPC.localAI[2] += 3;
+			NPC.localAI[2] += 5f;
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
 			Color colorMagenta = new(207, 0, 151, 100);
-			Color colorYellow = new(241, 240, 161, 100);
+			Color colorYellow = new(241, 240, 120, 100);
 			Color colorLBlue = new(0, 241, 255, 100);
 			Color colorDBlue = new(82, 123, 239, 100);
-
 
 			if (colorIndex == 0)
 			{
@@ -176,13 +170,27 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				color = Color.Lerp(colorDBlue, colorMagenta, NPC.localAI[2] / 100f);
 			}
+			
+			Vector2 vector = NPC.Center - screenPos;
 
-			for (int i = 0; i < 3; i++)
+			if (NPC.ai[0] == 14) // Attacking
 			{
-				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - new Vector2(0, 4), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				color = Main.OurFavoriteColor; // Enraged color
+				color.A = 100;
 			}
 
-			if (NPC.localAI[2] > 100)
+			for (int i = 0; i < 2; i++)
+			{
+				DrawData glowData = new(glowmask.Value, vector + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				GameShaders.Misc["HallowBoss"].Apply(glowData);
+				glowData.Draw(spriteBatch);
+
+				// DrawData magicPixelData = new(TextureAssets.MagicPixel.Value, vector + new Vector2(0, -80 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				// GameShaders.Misc["HallowBoss"].Apply(magicPixelData);
+				// magicPixelData.Draw(spriteBatch);
+			}
+
+			if (NPC.localAI[2] >= 100)
             {
 				colorIndex++;
 				NPC.localAI[2] = 0;
@@ -262,14 +270,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = Shop1;
-				NPCHelper.SetShop1(true);
-				NPCHelper.SetShop2(false);
 			}
 			if (!firstButton)
 			{
 				shop = Shop2;
-				NPCHelper.SetShop1(false);
-				NPCHelper.SetShop2(true);
 			}
 		}
 

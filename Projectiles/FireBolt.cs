@@ -1,12 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Graphics.Shaders;
-using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Audio;
 
@@ -23,7 +20,8 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.friendly = true;
 			Projectile.hostile = false;
 			Projectile.tileCollide = false;
-			Projectile.timeLeft = 300;
+			//Projectile.timeLeft = 300;
+			Projectile.timeLeft = int.MaxValue;
 			Projectile.alpha = 255;
 			AIType = -1;
 		}
@@ -31,8 +29,9 @@ namespace BossesAsNPCs.Projectiles
 		public override void AI()
 		{
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.PiOver2;
+			Projectile.spriteDirection = Projectile.direction;
 			Projectile.ai[0]++;
-			if (Projectile.ai[0] == 0)
+			if (Projectile.ai[0] == 1)
 			{
 				SoundEngine.PlaySound(SoundID.Item8, Projectile.Center);
 			}
@@ -45,7 +44,7 @@ namespace BossesAsNPCs.Projectiles
 		public override bool PreDraw(ref Color lightColor)
 		{
 			// SpriteEffects change which direction the sprite is drawn.
-			SpriteEffects spriteEffects = SpriteEffects.None;
+			SpriteEffects spriteEffects = SpriteEffects.FlipHorizontally;
 
 			// Get texture of projectile
 			Texture2D texture = TextureAssets.Projectile[Type].Value;
@@ -57,12 +56,27 @@ namespace BossesAsNPCs.Projectiles
 			float rotation = Projectile.rotation;
 
 			// The position of the sprite.
-			Vector2 position = new(Projectile.Center.X, Projectile.Center.Y);
+			Vector2 position = new(Projectile.position.X, Projectile.position.Y + Projectile.gfxOffY);
 
 			// Apply lighting and draw our projectile
 			Color drawColor = new(255, 255, 255, 100);
 
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)Projectile.position.Y << 32) | (uint)Projectile.position.X);
+
+			// There's probably some fancy math that could be used here to get a much more accurate result.
+			// This adjusts the origin so the rotation aligns with the hitbox better.
+			Vector2 origin = Vector2.Zero;
+
+			origin.X = Projectile.direction == 1 ? 0 : 14;
+			origin.Y = Projectile.direction == 1 ? 0 : -14;
+
+			float div = Projectile.velocity.X / Projectile.velocity.Y;
+
+			if (div > 0 && div < float.PositiveInfinity)
+			{
+				origin.X = 7;
+				origin.Y = -7;
+			}
 
 			// Fading trail
 			for (int i = 0; i < 5; i++)
@@ -72,7 +86,7 @@ namespace BossesAsNPCs.Projectiles
 				position += new Vector2(random1, random2);
 				Vector2 moveTo = Projectile.velocity.SafeNormalize(Vector2.Zero) * (i + 3f);
 				position += moveTo;
-				Main.EntitySpriteDraw(TextureAssets.Projectile[Projectile.type].Value, position - Main.screenPosition, sourceRectangle, drawColor * ((i + 1f) / 10), rotation, default, Projectile.scale, spriteEffects, 0);
+				Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, drawColor * ((i + 1f) / 10), rotation, origin, Projectile.scale, spriteEffects, 0);
 			}
 			// Actual position
 			for (int i = 0; i < 5; i++)
@@ -80,8 +94,9 @@ namespace BossesAsNPCs.Projectiles
 				float random1 = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
 				float random2 = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
 				position += new Vector2(random1, random2);
-				Main.EntitySpriteDraw(TextureAssets.Projectile[Projectile.type].Value, position - Main.screenPosition, sourceRectangle, drawColor, rotation, default, Projectile.scale, spriteEffects, 0);
+				Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, drawColor, rotation, origin, Projectile.scale, spriteEffects, 0);
 			}
+			//Main.EntitySpriteDraw(texture, position - Main.screenPosition, sourceRectangle, Color.Red, rotation, new Vector2(14, 14), Projectile.scale, spriteEffects, 0);
 			return false;
 		}
 

@@ -29,7 +29,8 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.6
-	- Finished the new system to automatically get the sale value instead of hardcoding it for most shop items. Some prices have changed because of this (They are technically more accurate now).
-	- Added many more lines of dialog and removed all of the "I am the _" lines.
-
+Mod version: 0.2.7
+	- Shop items for the Goblin Tinkerer and the Pirate added by this mod can now be disabled and their prices changed without having to reload the mod.
+	- Fixed Torch God not being able to spawn in Mixed mode if none of the other Town NPCs were disabled.
+	- Updated cross mod support for Calamity, Thorium, and Fargo's Souls Mod.
+	- Upgraded to .NET 8

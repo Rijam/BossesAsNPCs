@@ -1,4 +1,3 @@
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -8,9 +7,6 @@ using Terraria.GameContent.Bestiary;
 using System.Collections.Generic;
 using Terraria.GameContent.Personalities;
 using Terraria.GameContent;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Terraria.DataStructures;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -120,10 +116,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+			return false;
 		}
 
 		public override ITownNPCProfile TownNPCProfile()
@@ -277,14 +270,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (firstButton)
 			{
 				shop = Shop1;
-				NPCHelper.SetShop1(true);
-				NPCHelper.SetShop2(false);
 			}
 			if (!firstButton)
 			{
 				shop = Shop2;
-				NPCHelper.SetShop1(false);
-				NPCHelper.SetShop2(true);
 			}
 		}
 

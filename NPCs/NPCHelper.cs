@@ -1,12 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.ID;
-using Terraria.Chat;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 using Terraria.Localization;
 using System.Linq;
 using static BossesAsNPCs.BossesAsNPCsConfigServer;
@@ -88,43 +85,6 @@ namespace BossesAsNPCs.NPCs
 		public static bool UnlockOWMusic()
 		{
 			return Main.Configuration.Get("UnlockMusicSwap", false);
-		}
-
-		private static bool shop1;
-		private static bool shop2;
-
-		/// <summary>
-		/// Sets the shop1 bool. Set it to the opposite of the SetShop2()
-		/// </summary>
-		public static void SetShop1(bool tOrF)
-		{
-			shop1 = tOrF;
-		}
-
-		/// <summary>
-		/// Sets the shop2 bool. Set it to the opposite of the SetShop1()
-		/// </summary>
-		public static void SetShop2(bool tOrF)
-		{
-			shop2 = tOrF;
-		}
-
-		/// <summary>
-		/// Gets if shop1 is open.
-		/// </summary>
-		/// <returns>bool</returns>
-		public static bool StatusShop1()
-		{
-			return shop1;
-		}
-
-		/// <summary>
-		/// Gets if shop2 is open.
-		/// </summary>
-		/// <returns>bool</returns>
-		public static bool StatusShop2()
-		{
-			return shop2;
 		}
 
 		private static int shopCycler = 0;
@@ -825,30 +785,31 @@ namespace BossesAsNPCs.NPCs
 				return true;
 			}
 			// Still allow the Torch God to spawn even if no other bosses were disabled.
-			if ((NPC.downedSlimeKing && !config.CanSpawnKingSlime) &&
-				(NPC.downedBoss1 && !config.CanSpawnEoC) &&
-				(BossesAsNPCsWorld.downedEoW && !config.CanSpawnEoW) &&
-				(BossesAsNPCsWorld.downedBoC && !config.CanSpawnBoC) &&
-				(NPC.downedQueenBee && !config.CanSpawnQueenBee) &&
-				(NPC.downedBoss3 && !config.CanSpawnSkeletron) &&
-				(NPC.downedDeerclops && !config.CanSpawnDeerclops) &&
-				(BossesAsNPCsWorld.downedWoF && !config.CanSpawnWoF) &&
-				(NPC.downedQueenSlime && !config.CanSpawnQueenSlime) &&
-				(NPC.downedMechBoss1 && !config.CanSpawnDestroyer) &&
-				(NPC.downedMechBoss2 && !config.CanSpawnTwins) &&
-				(NPC.downedMechBoss3 && !config.CanSpawnSkeletronPrime) &&
-				(NPC.downedPlantBoss && !config.CanSpawnPlantera) &&
-				(NPC.downedGolemBoss && !config.CanSpawnGolem) &&
-				(NPC.downedEmpressOfLight && !config.CanSpawnEoL) &&
-				(NPC.downedFishron && !config.CanSpawnDukeFishron) &&
-				(BossesAsNPCsWorld.downedBetsy && !config.CanSpawnBetsy) &&
-				(NPC.downedAncientCultist && !config.CanSpawnLunaticCultist) &&
-				(NPC.downedMoonlord && !config.CanSpawnMoonLord) &&
-				(BossesAsNPCsWorld.downedDreadnautilus && !config.CanSpawnDreadnautilus) &&
-				(BossesAsNPCsWorld.downedMothron && !config.CanSpawnMothron) &&
-				(NPC.downedHalloweenKing && !config.CanSpawnPumpking) &&
-				(NPC.downedChristmasIceQueen && !config.CanSpawnIceQueen) &&
-				(NPC.downedMartians && !config.CanSpawnMartianSaucer))
+			if (DownedAnyBoss() &&
+				config.CanSpawnKingSlime &&
+				config.CanSpawnEoC &&
+				config.CanSpawnEoW &&
+				config.CanSpawnBoC &&
+				config.CanSpawnQueenBee &&
+				config.CanSpawnSkeletron &&
+				config.CanSpawnDeerclops &&
+				config.CanSpawnWoF &&
+				config.CanSpawnQueenSlime &&
+				config.CanSpawnDestroyer &&
+				config.CanSpawnTwins &&
+				config.CanSpawnSkeletronPrime &&
+				config.CanSpawnPlantera &&
+				config.CanSpawnGolem &&
+				config.CanSpawnEoL &&
+				config.CanSpawnDukeFishron &&
+				config.CanSpawnBetsy &&
+				config.CanSpawnLunaticCultist &&
+				config.CanSpawnMoonLord &&
+				config.CanSpawnDreadnautilus &&
+				config.CanSpawnMothron &&
+				config.CanSpawnPumpking &&
+				config.CanSpawnIceQueen &&
+				config.CanSpawnMartianSaucer)
 			{
 				return true;
 			}
@@ -1080,7 +1041,7 @@ namespace BossesAsNPCs.NPCs
 			}
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
 			AllInOneOptions mode = config.AllInOneNPCMode;
-			if (mode == 0)
+			if (mode == AllInOneOptions.Off)
 			{
 				return true;
 			}
@@ -1164,6 +1125,8 @@ namespace BossesAsNPCs.NPCs
 		public static string TownNPCRangeS(string range) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.TownNPCRangeS", range);
 		public static string CountTownNPCsS(int number) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.CountTownNPCsS", number);
 		public static string EternityModeS = "Mods.BossesAsNPCs.Conditions.EternityModeS";
+
+		public static Condition EternityMode(Mod passedMod) { return new("Mods.BossesAsNPCs.Conditions.EternityModeS", () => (bool)passedMod.Call("EternityMode")); }
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 	}

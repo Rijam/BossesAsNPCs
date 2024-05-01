@@ -43,7 +43,7 @@ namespace BossesAsNPCs
 
 		public override void Load()
 		{
-			GlowListLegs = new Dictionary<int, ArmorHeadLegsOptions>();
+			GlowListLegs = new();
 		}
 
 		public override void Unload()

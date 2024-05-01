@@ -1,17 +1,11 @@
 using System;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.ID;
-using Terraria.Chat;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 using BossesAsNPCs.NPCs.TownNPCs;
-using Terraria.Localization;
 using Terraria.GameContent.Bestiary;
-using Terraria.GameContent.ItemDropRules;
 using BossesAsNPCs.NPCs;
+using Terraria.ModLoader.IO;
 
 namespace BossesAsNPCs
 {
@@ -170,18 +164,41 @@ namespace BossesAsNPCs
 					}
 				}
 			}
+			if (npc.type == NPCID.GoblinTinkerer)
+			{
+				foreach (Item item in items)
+				{
+					// Only change the price of the items that were added by this mod. Vanilla and other mods won't be affected (unless they add the same items).
+					// (I tried to store the Item instead of the type and compare that, but it was never true.)
+					if (item is not null && SetupShops.GoblinTinkererShopCopy.Contains(item.type))
+					{
+						int shopPrice = item.shopCustomPrice ?? item.value;
+						item.shopCustomPrice = (int?)Math.Round(shopPrice * shopMulti);
+					}
+				}
+			}
+			if (npc.type == NPCID.Pirate)
+			{
+				foreach (Item item in items)
+				{
+					if (item is not null && SetupShops.PirateShopCopy.Contains(item.type))
+					{
+						int shopPrice = item.shopCustomPrice ?? item.value;
+						item.shopCustomPrice = (int?)Math.Round(shopPrice * shopMulti);
+					}
+				}
+			}
 		}
+
 		public override void ModifyShop(NPCShop shop)
 		{
-			int shopPriceScaling = ModContent.GetInstance<BossesAsNPCsConfigServer>().ShopPriceScaling;
-			float shopMulti = (shopPriceScaling / 100f);
-			if (shop.NpcType == NPCID.Pirate && ShopConditions.PirateSellInvasionItems.IsMet())
+			if (shop.NpcType == NPCID.Pirate)
 			{
-				NPCs.SetupShops.Pirate(shop, shopMulti);
+				NPCs.SetupShops.Pirate(shop);
 			}
-			if (shop.NpcType == NPCID.GoblinTinkerer && ShopConditions.GoblinSellInvasionItems.IsMet())
+			if (shop.NpcType == NPCID.GoblinTinkerer)
 			{
-				NPCs.SetupShops.GoblinTinkerer(shop, shopMulti);
+				NPCs.SetupShops.GoblinTinkerer(shop);
 			}
 
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)

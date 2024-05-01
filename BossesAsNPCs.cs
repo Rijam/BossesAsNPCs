@@ -9,7 +9,6 @@ using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace BossesAsNPCs
@@ -44,39 +43,12 @@ namespace BossesAsNPCs
 			NPCs.SetupShops.ClearCustomShops();
 			ConfigServer = null;
 			Instance = null;
+			NPCs.SetupShops.GoblinTinkererShopCopy = null;
+			NPCs.SetupShops.PirateShopCopy = null;
 		}
 
 		public override void PostSetupContent()
 		{
-			/*if (ModLoader.TryGetMod("Census", out Mod censusMod))
-			{
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<KingSlime>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.KingSlime"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EyeOfCthulhu>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.EyeOfCthulhu"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EaterOfWorlds>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.EaterOfWorlds"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<BrainOfCthulhu>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.BrainOfCthulhu"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenBee>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.QueenBee"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Skeletron>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Skeletron"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Deerclops>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Deerclops"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<WallOfFlesh>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.WallOfFlesh"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<QueenSlime>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.QueenSlime"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<TheDestroyer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TheDestroyer"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Retinazer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TheTwins"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Spazmatism>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TheTwins"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<SkeletronPrime>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.SkeletronPrime"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Plantera>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Plantera"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Golem>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Golem"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<EmpressOfLight>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.EmpressOfLight"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<DukeFishron>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.DukeFishron"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Betsy>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Betsy"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<LunaticCultist>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.LunaticCultist"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<MoonLord>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.MoonLord"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Dreadnautilus>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Dreadnautilus"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Mothron>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Mothron"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<Pumpking>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.Pumpking"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<IceQueen>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.IceQueen"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<MartianSaucer>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.MartianSaucer"));
-				censusMod.Call("TownNPCCondition", ModContent.NPCType<TorchGod>(), Language.GetTextValue($"Mods.BossesAsNPCs.CrossMod.Census.TorchGod"));
-			}*/
 			if (ModLoader.TryGetMod("DialogueTweak", out Mod dialogueTweak))
 			{
 				dialogueTweak.Call("ReplaceExtraButtonIcon",
@@ -143,6 +115,8 @@ namespace BossesAsNPCs
 					return BossesAsNPCsWorld.downedOgre;
 				case "downedGoblinSummoner":
 					return BossesAsNPCsWorld.downedGoblinSummoner;
+				case "downedGoblinWarlock":
+					return BossesAsNPCsWorld.downedGoblinSummoner;
 				case "downedDreadnautilus":
 					return BossesAsNPCsWorld.downedDreadnautilus;
 				case "downedMothron":
@@ -175,10 +149,10 @@ namespace BossesAsNPCs
 					return ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
 				case "GetStatusShop1":
 					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
-					return NPCs.NPCHelper.StatusShop1();
+					return false;
 				case "GetStatusShop2":
 					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
-					return NPCs.NPCHelper.StatusShop2();
+					return false;
 				case "CanSpawn":
 					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
 					return args[1].ToString() switch

@@ -39,7 +39,7 @@ namespace BossesAsNPCs
 
 		public override void Load()
 		{
-			GlowListBody = new Dictionary<int, Color>();
+			GlowListBody = new();
 		}
 
 		public override void Unload()

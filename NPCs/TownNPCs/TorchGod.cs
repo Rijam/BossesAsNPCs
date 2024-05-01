@@ -1,4 +1,3 @@
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
@@ -6,7 +5,6 @@ using Terraria.ModLoader;
 using Terraria.Utilities;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
-using System.Collections.Generic;
 using Terraria.GameContent;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -14,7 +12,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Terraria.Audio;
 using static BossesAsNPCs.BossesAsNPCsConfigServer;
-using Terraria.DataStructures;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -37,7 +34,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 0;
 			NPCID.Sets.AttackTime[Type] = 80;
-			NPCID.Sets.AttackAverageChance[Type] = 20; // Lower numbers actually make the NPC more likely to attack
+			NPCID.Sets.AttackAverageChance[Type] = 10; // Lower numbers actually make the NPC more likely to attack
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 
@@ -212,18 +209,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 100);
-			Vector2 verticalOffset = new(0, 4);
+			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC));
 			for (int i = 0; i < 5; i++)
 			{
 				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
 				float randomY = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
 
-				if (NPC.frame.Y == 18 * NPC.frame.Height) // Sitting, move up 4 pixels
-				{
-					verticalOffset = new Vector2(0, 8);
-				}
-
-				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos - verticalOffset + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + verticalOffset + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -239,7 +231,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					float randomX = Utils.RandomInt(ref seed, -50, 50) * 0.15f;
 					float randomY = Utils.RandomInt(ref seed, -20, 20) * 0.15f;
 
-					spriteBatch.Draw(background.Value, NPC.Center - screenPos - new Vector2(0, 4) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(background.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 			return true;
