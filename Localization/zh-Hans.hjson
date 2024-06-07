@@ -449,6 +449,18 @@ Mods: {
 				Mixed.Label: 混合
 				OnlyOne.Label: 只有一个
 			}
+
+			BoostSpawnRatesOptions: {
+				// Tooltip: ""
+				// Off.Label: Off (2 Minutes)
+				// OneMinute.Label: Every Minute
+				// ThirdySeconds.Label: Every 30 seconds
+				// FifteenSeconds.Label: Every 15 seconds
+				// TenSeconds.Label: Every 10 seconds
+				// FiveSeconds.Label: Every 5 seconds
+				// TwoSeconds.Label: Every 2 seconds
+				// EverySecond.Label: Every second
+			}
 		}
 
 		Common: {
@@ -481,6 +493,8 @@ Mods: {
 				DecShop: 上个商店
 				FirstShop: 首家商店
 			}
+
+			// Shop2: "{$LegacyInterface.28} 2"
 		}
 
 		Conditions: {
@@ -2430,6 +2444,40 @@ Mods: {
 			// MothronEgg.DisplayName: Mothron Egg
 			// SingleEighthNote.DisplayName: Single Eighth Note
 			// SpikedSlimeProjectile.DisplayName: Gel Spike
+		}
+
+		Emotes: {
+			// KingSlimeEmote.Command: banpckingslime
+			// EyeOfCthulhuEmote.Command: banpceyeofcthulhu
+			// EaterOfWorldsEmote.Command: banpceaterofworlds
+			// BrainOfCthulhuEmote.Command: banpcbrainofcthulhu
+			// QueenBeeEmote.Command: banpcqueenbee
+			// DeerclopsEmote.Command: banpcdeerclops
+			// SkeletronEmote.Command: banpcskeletron
+			// WallOfFleshEmote.Command: banpcwallofflesh
+			// QueenSlimeEmote.Command: banpcqueenslime
+			// TheDestoryerEmote.Command: banpcthedestoryer
+			// RetinazerEmote.Command: banpcretinazer
+			// SpazmatismEmote.Command: banpcspazmatism
+			// SkeletronPrimeEmote.Command: banpcskeletronprime
+			// PlanteraEmote.Command: banpcplantera
+			// GolemEmote.Command: banpcgolem
+			// EmpressOfLightEmote.Command: banpcempressoflight
+			// DukeFishronEmote.Command: banpcdukefishron
+			// BetsyEmote.Command: banpcbetsy
+			// LunaticCultistEmote.Command: banpclunaticcultist
+			// MoonLordEmote.Command: banpcmoonlord
+			// DreadnautilusEmote.Command: banpcdreadnautilus
+			// MothronEmote.Command: banpcmothron
+			// PumpkingEmote.Command: banpcpumpking
+			// IceQueenEmote.Command: banpcicequeen
+			// MartianSaucerEmote.Command: banpcmartiansaucer
+			// TorchGodEmote.Command: banpctorchgod
+			// DarkMageEmote.Command: banpcdarkmage
+			// OgreEmote.Command: banpcogre
+			// MourningWoodEmote.Command: banpcmourningwood
+			// EverscreamEmote.Command: banpceverscream
+			// SantaNK1Emote.Command: banpcsantank1
 		}
 	}
 }

@@ -31,10 +31,7 @@ namespace BossesAsNPCs
 		/// <param name="color">The color is the color to draw</param>
 		public static void RegisterData(int bodySlot, Color color)
 		{
-			if (!GlowListBody.ContainsKey(bodySlot))
-			{
-				GlowListBody.Add(bodySlot, color);
-			}
+			GlowListBody.TryAdd(bodySlot, color);
 		}
 
 		public override void Load()

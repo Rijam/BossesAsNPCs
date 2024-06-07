@@ -35,10 +35,7 @@ namespace BossesAsNPCs
 		/// <br>ArmorHeadLegsOptions Effects is the special effect. This can be omitted and defaults to None.</br></param>
 		public static void RegisterData(int headSlot, ArmorHeadLegsOptions values)
 		{
-			if (!GlowListHead.ContainsKey(headSlot))
-			{
-				GlowListHead.Add(headSlot, values);
-			}
+			GlowListHead.TryAdd(headSlot, values);
 		}
 
 		// Returning true in this property makes this layer appear on the minimap player head icon.

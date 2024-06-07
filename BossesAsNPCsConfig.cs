@@ -19,8 +19,9 @@ namespace BossesAsNPCs
 		[Header("HeaderGeneral")]
 
 		//Boost Town NPC Spawn Rates
-		[DefaultValue(false)]
-		public bool BoostTownNPCRates { get; set; }
+		[DefaultValue(BoostSpawnRatesOptions.Off)]
+		[DrawTicks]
+		public BoostSpawnRatesOptions BoostTownNPCRates { get; set; }
 
 		//Sell Expert Mode Items in Non-Expert Worlds
 		[DefaultValue(false)]
@@ -169,6 +170,18 @@ namespace BossesAsNPCs
 			Off,
 			Mixed,
 			OnlyOne
+		}
+
+		public enum BoostSpawnRatesOptions
+		{
+			Off,
+			OneMinute,
+			ThirdySeconds,
+			FifteenSeconds,
+			TenSeconds,
+			FiveSeconds,
+			TwoSeconds,
+			EverySecond
 		}
 
 		/* Not written by Rijam */

@@ -1,11 +1,15 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
-using Terraria.GameContent;
+using BossesAsNPCs.EmoteBubbles;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -20,8 +24,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault(Language.GetTextValue("NPCName.QueenBee"));
-			Main.npcFrameCount[Type] = 25; // Main.npcFrameCount[NPCID.DyeTrader];
+			Main.npcFrameCount[Type] = 25;
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
 			NPCID.Sets.DangerDetectRange[Type] = 700;
@@ -30,6 +33,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
+			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<QueenBeeEmote>();
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
@@ -98,12 +102,17 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
+				int partyHatGore = NPC.GetPartyHatGore();
+				if (partyHatGore > 0)
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, partyHatGore);
+				}
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Wing").Type, 1f);
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -123,6 +132,15 @@ namespace BossesAsNPCs.NPCs.TownNPCs
         }
 
 		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+
+		private readonly Asset<Texture2D> wings = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/QueenBee_Wings");
+		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+		{
+			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+			Vector2 offset = new(NPC.width + 2, 4 - NPC.gfxOffY - Main.NPCAddHeight(NPC));
+			spriteBatch.Draw(wings.Value, NPC.Center - screenPos - offset, new Rectangle(NPC.frame.X, NPC.frame.Y, wings.Width(), NPC.frame.Height), drawColor, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+			return true;
+		}
 
 		public override string GetChat()
 		{
@@ -152,7 +170,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			button = Language.GetTextValue("LegacyInterface.28");
 			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
-				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
 			}
 		}
 

@@ -29,8 +29,10 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.7
-	- Shop items for the Goblin Tinkerer and the Pirate added by this mod can now be disabled and their prices changed without having to reload the mod.
-	- Fixed Torch God not being able to spawn in Mixed mode if none of the other Town NPCs were disabled.
-	- Updated cross mod support for Calamity, Thorium, and Fargo's Souls Mod.
-	- Upgraded to .NET 8
+Mod version: 0.2.8
+	- Updated how the custom shops work. Now other mods can add the same item more than once without any issues.
+	- Localized the Shop 2 button instead of hard coding it as "Shop" + "2".
+	- Replaced Deerclops' dialog line about not having an achievement with something else.
+	- Split Queen Bee's wings from the main sprite to a second sprite. This way Queen Bee's bounding box isn't so large. This fixes a few visual things like chat and emote bubbles appearing far away and the portrait in the Bestiary not being centered.
+	- Added Emotes for all of the Boss Town NPCs.
+	- Boss Town NPCs now drop party hat gore if they die while wearing a party hat.

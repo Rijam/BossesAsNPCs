@@ -17,6 +17,7 @@ namespace BossesAsNPCs
 	{
 		internal static BossesAsNPCsConfigServer ConfigServer;
 		internal static BossesAsNPCs Instance;
+		// internal bool dialogueTweakUsingStaticOrBestiaryDrawSetting = false;
 
 		public override void Load()
 		{
@@ -45,6 +46,7 @@ namespace BossesAsNPCs
 			Instance = null;
 			NPCs.SetupShops.GoblinTinkererShopCopy = null;
 			NPCs.SetupShops.PirateShopCopy = null;
+			// dialogueTweakUsingStaticOrBestiaryDrawSetting = false;
 		}
 
 		public override void PostSetupContent()
@@ -85,14 +87,36 @@ namespace BossesAsNPCs
 						ModContent.NPCType<MartianSaucer>(),
 					},
 					"BossesAsNPCs/NPCs/Icon_Shop2");
+
+				/*
+				if (dialogueTweak.TryFind<ModConfig>("Configuration", out ModConfig dialogueTweakConfig))
+				{
+					// Trying to get the config value of PortraitDrawStyle to see if it is Static or Bestiary.
+					// If so, the glow masks and such for the Town NPCs need to be drawn higher up.
+					// https://github.com/Cyrillya/DialogueTweak/blob/1.4.4/Configuration.cs#L34
+
+					FieldInfo DialogueTweakConfigPortraitDrawStyle = dialogueTweakConfig.GetType().GetField("PortraitDrawStyle", BindingFlags.Public | BindingFlags.Instance );
+					Logger.DebugFormat("DialogueTweakConfigPortraitDrawStyle {0}", DialogueTweakConfigPortraitDrawStyle);
+					object value = DialogueTweakConfigPortraitDrawStyle.GetValue(dialogueTweakConfig);
+					Logger.DebugFormat("value {0}", value);
+					if (value?.ToString() == "Static" || value?.ToString() == "Bestiary")
+					{
+						dialogueTweakUsingStaticOrBestiaryDrawSetting = true;
+						Logger.Debug("Static or Bestiary draw style");
+					}
+					else
+					{
+						dialogueTweakUsingStaticOrBestiaryDrawSetting = false;
+					}
+				}
+				*/
 			}
 		}
 
 		//Adapted from absoluteAquarian's GraphicsLib
 		public override object Call(params object[] args)
 		{
-			if (args is null)
-				throw new ArgumentNullException(nameof(args));
+			ArgumentNullException.ThrowIfNull(args);
 
 			if (args[0] is not string function)
 				throw new ArgumentException("Expected a function name for the first argument");

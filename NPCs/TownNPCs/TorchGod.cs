@@ -1,17 +1,18 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
-using Terraria.GameContent;
-using Microsoft.Xna.Framework.Graphics;
-using ReLogic.Content;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Terraria.Audio;
-using static BossesAsNPCs.BossesAsNPCsConfigServer;
+using BossesAsNPCs.EmoteBubbles;
+using System;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -27,7 +28,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault(Language.GetTextValue("NPCName.TorchGod"));
 			Main.npcFrameCount[Type] = 26;
 			NPCID.Sets.ExtraFramesCount[Type] = 10;
 			NPCID.Sets.AttackFrameCount[Type] = 5;
@@ -37,6 +37,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackAverageChance[Type] = 10; // Lower numbers actually make the NPC more likely to attack
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
+			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<TorchGodEmote>();
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
@@ -110,11 +111,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
+				int partyHatGore = NPC.GetPartyHatGore();
+				if (partyHatGore > 0)
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, partyHatGore);
+				}
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 				}
 				for (int j = 0; j < 20; j++)
 				{
@@ -125,11 +131,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override bool CanTownNPCSpawn(int numTownNPCs)
 		{
-			if (NPCHelper.DownedAnyBossWithConfigCheck() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == AllInOneOptions.Mixed)
+			if (NPCHelper.DownedAnyBossWithConfigCheck() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 			{
 				return true;
 			}
-			if (NPCHelper.DownedAnyBoss() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == AllInOneOptions.OnlyOne)
+			if (NPCHelper.DownedAnyBoss() && ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 			{
 				return true;
 			}
@@ -156,7 +162,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				if (NPC.localAI[3] == 1)
 				{
-					SoundEngine.PlaySound(new("Terraria/Sounds/Item_74") { Pitch = -1f }, NPC.Center); //Other good options 20 45 66 69 74 80 88
+					SoundEngine.PlaySound(new("Terraria/Sounds/Item_74") { Pitch = -1f }, NPC.Center); // Other good options 20 45 66 69 74 80 88
 				}
 				if (NPC.localAI[3] < attackTimeDiv * 1)
 				{
@@ -200,8 +206,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 		}
 
-		//random taken from Torch Merchant by cace#7129
-		//Sitting frame height is corrected here.
+		// random taken from Torch Merchant by cace#7129
+		// Sitting frame height is corrected here.
 		private readonly Asset<Texture2D> glowmask = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/TorchGod_Glow");
 		private readonly Asset<Texture2D> background = ModContent.Request<Texture2D>("BossesAsNPCs/NPCs/TownNPCs/GlowMasks/TorchGod_FlamesBackground");
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -209,7 +215,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 100);
-			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC));
+			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY - Main.NPCAddHeight(NPC));
 			for (int i = 0; i < 5; i++)
 			{
 				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
@@ -224,7 +230,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 100);
 
-			if (NPC.frame.Y > 20 * NPC.frame.Height) //Only draw while attacking
+			if (NPC.frame.Y > 20 * NPC.frame.Height) // Only draw while attacking
 			{
 				for (int i = 0; i < 5; i++)
 				{
@@ -296,7 +302,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		}
 		public override void SetChatButtons(ref string button, ref string button2)
 		{
-			button = NPCHelper.StatusShopCycle() switch
+			button = NPCHelper.ShopCycler switch
 			{
 				0 => Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".NoShop"), // No shop selected
 				1 => Language.GetTextValue("NPCName.KingSlime"), // 1 = King Slime
@@ -385,7 +391,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public static string ChooseCorrectShop()
 		{
-			return NPCHelper.StatusShopCycle() switch
+			return NPCHelper.ShopCycler switch
 			{
 				0 => "", // No shop selected
 				1 => TorchGodShop1, // 1 = King Slime
@@ -446,7 +452,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (firstButton)
 			{
-				if (NPCHelper.StatusShopCycle() <= 0 || NPCHelper.StatusShopCycle() >= 51)
+				if (NPCHelper.ShopCycler <= 0 || NPCHelper.ShopCycler >= 51)
 				{
 					Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath(Name) + "Common");
 				}
@@ -454,13 +460,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				{
 					shop = ChooseCorrectShop();
 				}
-				NPCHelper.StatusShopCycle();
 			}
 			if (!firstButton)
 			{
-				AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
+				BossesAsNPCsConfigServer.AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
 				GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-				if (mode == AllInOneOptions.Off)
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
@@ -468,7 +473,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					}
 					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
-						NPCHelper.SetShopCycle(0);
+						NPCHelper.ShopCycler = 0;
 						NPCHelper.IncrementShopCycleMode0();
 					}
 					else
@@ -476,7 +481,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						NPCHelper.IncrementShopCycleMode0();
 					}
 				}
-				else if (mode == AllInOneOptions.Mixed)
+				else if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
@@ -484,7 +489,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					}
 					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
-						NPCHelper.SetShopCycle(0);
+						NPCHelper.ShopCycler = 0;
 						NPCHelper.IncrementShopCycleMode1();
 					}
 					else
@@ -492,7 +497,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 						NPCHelper.IncrementShopCycleMode1();
 					}
 				}
-				else if (mode == AllInOneOptions.OnlyOne)
+				else if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 				{
 					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
 					{
@@ -500,7 +505,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					}
 					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
 					{
-						NPCHelper.SetShopCycle(0);
+						NPCHelper.ShopCycler = 0;
 						NPCHelper.IncrementShopCycleMode2();
 					}
 					else
@@ -749,17 +754,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public int RollVariation() => 0;
 
-		//Normally you'd want to choose a random name, but these Town NPCs have no name.
-		//public string GetNameForVariant(NPC npc) => npc.getNewNPCName();
+		// Normally you'd want to choose a random name, but these Town NPCs have no name.
+		// public string GetNameForVariant(NPC npc) => npc.getNewNPCName();
 		public string GetNameForVariant(NPC npc) => null;
+
+		private Asset<Texture2D> bestiaryTexture;
+		private Asset<Texture2D> regularTexture;
 
 		public Asset<Texture2D> GetTextureNPCShouldUse(NPC npc)
 		{
 			if (npc.IsABestiaryIconDummy && !npc.ForcePartyHatOn)
 			{
-				return ModContent.Request<Texture2D>(Path + "_Bestiary");
+				return bestiaryTexture ??= ModContent.Request<Texture2D>(Path + "_Bestiary");
 			}
-			return ModContent.Request<Texture2D>(Path);
+			return regularTexture ??= ModContent.Request<Texture2D>(Path);
 		}
 		
 		public int GetHeadTextureIndex(NPC npc) => ModContent.GetModHeadSlot(Path + "_Head");

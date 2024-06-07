@@ -1,12 +1,13 @@
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
+using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
-using Terraria.GameContent;
-using Microsoft.Xna.Framework;
+using BossesAsNPCs.EmoteBubbles;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -21,7 +22,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault(Language.GetTextValue("NPCName.CultistBoss"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.Clothier];
 			NPCID.Sets.ExtraFramesCount[Type] = 7;
 			NPCID.Sets.AttackFrameCount[Type] = 2;
@@ -31,6 +31,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackAverageChance[Type] = 20;
 			NPCID.Sets.HatOffsetY[Type] = 1;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
+			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<LunaticCultistEmote>();
 
 			NPCID.Sets.MagicAuraColor[Type] = Color.Gold;
 
@@ -98,11 +99,16 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
+				int partyHatGore = NPC.GetPartyHatGore();
+				if (partyHatGore > 0)
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, partyHatGore);
+				}
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss1, 1f);
 				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.CultistBoss2, 1f);
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, GoreID.Cultist2, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, GoreID.Cultist2, 1f);
 				}
 			}
 		}
@@ -181,7 +187,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			button = Language.GetTextValue("LegacyInterface.28");
 			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
-				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
 			}
 		}
 

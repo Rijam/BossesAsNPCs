@@ -35,10 +35,7 @@ namespace BossesAsNPCs
 		/// <br>ArmorHeadLegsOptions Effects is the special effect. This can be omitted and defaults to None.</br></param>
 		public static void RegisterData(int legSlot, ArmorHeadLegsOptions values)
 		{
-			if (!GlowListLegs.ContainsKey(legSlot))
-			{
-				GlowListLegs.Add(legSlot, values);
-			}
+			GlowListLegs.TryAdd(legSlot, values);
 		}
 
 		public override void Load()

@@ -47,39 +47,40 @@ namespace BossesAsNPCs.NPCs
 	/// </summary>
 	public class SetupShops
 	{
-		// string is the NPC name
-		// int (key) is the item
-		// int is the price
-		// List<Condition> are the conditions
-		private static Dictionary<string, Dictionary<int, Tuple<int, List<Condition>>>> customShops = new()
+
+		// string (key) is the NPC name
+		// ShopItem int is the item
+		// ShopItem int is the price
+		// ShopItem List<Condition> are the conditions
+		private static Dictionary<string, List<ShopItem>> customShops = new()
 		{
-			{ NPCString.KingSlime, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.EyeOfCthulhu, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.EaterOfWorlds, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.BrainOfCthulhu, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.QueenBee, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Skeletron, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Deerclops, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.WallOfFlesh, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.QueenSlime, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.TheDestroyer, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Retinazer, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Spazmatism, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.SkeletronPrime, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Plantera, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Golem, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.EmpressOfLight, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.DukeFishron, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Betsy, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.LunaticCultist, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.MoonLord, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Dreadnautilus, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Mothron, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Pumpking, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.IceQueen, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.MartianSaucer, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.GoblinTinkerer, new Dictionary<int, Tuple<int, List<Condition>>> { } },
-			{ NPCString.Pirate, new Dictionary<int, Tuple<int, List<Condition>>> { } }
+			{ NPCString.KingSlime, new List<ShopItem> { } },
+			{ NPCString.EyeOfCthulhu, new List<ShopItem> { } },
+			{ NPCString.EaterOfWorlds, new List<ShopItem> { } },
+			{ NPCString.BrainOfCthulhu, new List<ShopItem> { } },
+			{ NPCString.QueenBee, new List<ShopItem> { } },
+			{ NPCString.Skeletron, new List<ShopItem> { } },
+			{ NPCString.Deerclops, new List < ShopItem > { } },
+			{ NPCString.WallOfFlesh, new List<ShopItem> { } },
+			{ NPCString.QueenSlime, new List<ShopItem> { } },
+			{ NPCString.TheDestroyer, new List<ShopItem> { } },
+			{ NPCString.Retinazer, new List<ShopItem> { } },
+			{ NPCString.Spazmatism,new List<ShopItem> { } },
+			{ NPCString.SkeletronPrime, new List<ShopItem> { } },
+			{ NPCString.Plantera, new List<ShopItem> { } },
+			{ NPCString.Golem, new List<ShopItem> { } },
+			{ NPCString.EmpressOfLight, new List<ShopItem> { } },
+			{ NPCString.DukeFishron, new List<ShopItem> { } },
+			{ NPCString.Betsy, new List<ShopItem> { } },
+			{ NPCString.LunaticCultist, new List<ShopItem> { } },
+			{ NPCString.MoonLord, new List<ShopItem> { } },
+			{ NPCString.Dreadnautilus, new List<ShopItem> { } },
+			{ NPCString.Mothron, new List<ShopItem> { } },
+			{ NPCString.Pumpking, new List<ShopItem> { } },
+			{ NPCString.IceQueen, new List<ShopItem> { } },
+			{ NPCString.MartianSaucer, new List<ShopItem> { } },
+			{ NPCString.GoblinTinkerer, new List<ShopItem> { } },
+			{ NPCString.Pirate, new List<ShopItem> { } }
 		};
 
 		public static void ClearCustomShops()
@@ -95,7 +96,7 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="item">The ID for the item</param>
 		/// <param name="price">The price for the item</param>
 		/// <param name="condition">The availability of the item</param>
-		public static void AddToCustomShops(string npc, int item, int price, List<Condition> condition) => customShops[npc].Add(item, new Tuple<int, List<Condition>>(price, condition));
+		public static void AddToCustomShops(string npc, int item, int price, List<Condition> condition) => customShops[npc].Add(new ShopItem(item, price, condition));
 
 		/// <summary>
 		/// Attempts to do AddToCustomShops() after some checks.
@@ -260,14 +261,12 @@ namespace BossesAsNPCs.NPCs
 		{
 			// Change the vanilla Expert and Master Mode conditions to the one that includes the config.
 			// (You could get around this by making your own conditions, but why would you?)
-			if (condition.Contains(Condition.InExpertMode))
+			if (condition.Remove(Condition.InExpertMode)) // Remove returns false if the item is not found.
 			{
-				condition.Remove(Condition.InExpertMode);
 				condition.Add(ShopConditions.Expert);
 			}
-			if (condition.Contains(Condition.InMasterMode))
+			if (condition.Remove(Condition.InMasterMode))
 			{
-				condition.Remove(Condition.InMasterMode);
 				condition.Add(ShopConditions.Master);
 			}
 
@@ -383,13 +382,13 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(starlightRiver, "Gelatine", shop, 5000); // No value
 				}
-				if (customShops.ContainsKey(NPCString.KingSlime))
+				if (customShops.TryGetValue(NPCString.KingSlime, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.KingSlime])
+					foreach (ShopItem set in value)
 					{
 						// set.Value.Item1 is the price (int)
 						// set.Value.Item2 is the condition (List<Condition>)
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -474,11 +473,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(polarities, "Eyeruption", shop, 1f, 5f);
 				}
-				if (customShops.ContainsKey(NPCString.EyeOfCthulhu))
+				if (customShops.TryGetValue(NPCString.EyeOfCthulhu, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.EyeOfCthulhu])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -549,11 +548,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "EaterOfPain", shop, 0.33f);
 				}
-				if (customShops.ContainsKey(NPCString.EaterOfWorlds))
+				if (customShops.TryGetValue(NPCString.EaterOfWorlds, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.EaterOfWorlds])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -631,11 +630,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "TheStalker", shop, 0.33f);
 				}
-				if (customShops.ContainsKey(NPCString.BrainOfCthulhu))
+				if (customShops.TryGetValue(NPCString.BrainOfCthulhu, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.BrainOfCthulhu])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -725,11 +724,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "SweetHeart", shop, 0.33f);
 				}
-				if (customShops.ContainsKey(NPCString.QueenBee))
+				if (customShops.TryGetValue(NPCString.QueenBee, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.QueenBee])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -813,11 +812,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "GuildsStaff", shop, 0.25f);
 				}
-				if (customShops.ContainsKey(NPCString.Skeletron))
+				if (customShops.TryGetValue(NPCString.Skeletron, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Skeletron])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -894,11 +893,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(starlightRiver, "HungryStomach", shop);
 				}
-				if (customShops.ContainsKey(NPCString.Deerclops))
+				if (customShops.TryGetValue(NPCString.Deerclops, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Deerclops])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -997,11 +996,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "ShatteredDisk", shop, 10000); // No value
 				}
-				if (customShops.ContainsKey(NPCString.WallOfFlesh))
+				if (customShops.TryGetValue(NPCString.WallOfFlesh, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.WallOfFlesh])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1066,11 +1065,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "RoyalSlimePrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.QueenSlime))
+				if (customShops.TryGetValue(NPCString.QueenSlime, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.QueenSlime])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1150,11 +1149,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.TheDestroyer))
+				if (customShops.TryGetValue(NPCString.TheDestroyer, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.TheDestroyer])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1235,11 +1234,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.Retinazer))
+				if (customShops.TryGetValue(NPCString.Retinazer, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Retinazer])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1319,11 +1318,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.Spazmatism))
+				if (customShops.TryGetValue(NPCString.Spazmatism, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Spazmatism])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1404,11 +1403,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "MechanicalPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.SkeletronPrime))
+				if (customShops.TryGetValue(NPCString.SkeletronPrime, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.SkeletronPrime])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1509,11 +1508,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "OvergrownPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.Plantera))
+				if (customShops.TryGetValue(NPCString.Plantera, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Plantera])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1586,11 +1585,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "LihzahrdPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.Golem))
+				if (customShops.TryGetValue(NPCString.Golem, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Golem])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1668,11 +1667,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "EmpressPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.EmpressOfLight))
+				if (customShops.TryGetValue(NPCString.EmpressOfLight, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.EmpressOfLight])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1752,11 +1751,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "TyphoonPrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.DukeFishron))
+				if (customShops.TryGetValue(NPCString.DukeFishron, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.DukeFishron])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -1887,11 +1886,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "ValhallasDescent", shop, 1f, 5f);
 					NPCHelper.SafelySetCrossModItem(thorium, "MediumRareSteak", shop, 1f, 5f);
 				}
-				if (customShops.ContainsKey(NPCString.Betsy))
+				if (customShops.TryGetValue(NPCString.Betsy, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Betsy])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2000,11 +1999,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "LunaticsLeggings", shop, 0.2f);
 					NPCHelper.SafelySetCrossModItem(thorium, "AncientLight", shop);
 				}
-				if (customShops.ContainsKey(NPCString.LunaticCultist))
+				if (customShops.TryGetValue(NPCString.LunaticCultist, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.LunaticCultist])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2105,11 +2104,11 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theStarsAbove, "LuminitePrism", shop);
 				}
-				if (customShops.ContainsKey(NPCString.MoonLord))
+				if (customShops.TryGetValue(NPCString.MoonLord, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.MoonLord])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2223,11 +2222,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "ShadeBand", shop, 0.1f, Condition.Hardmode);
 					NPCHelper.SafelySetCrossModItem(thorium, "NecroticStaff", shop, 0.1f, Condition.Hardmode);
 				}
-				if (customShops.ContainsKey(NPCString.Dreadnautilus))
+				if (customShops.TryGetValue(NPCString.Dreadnautilus, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Dreadnautilus])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2325,11 +2324,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "SunflareGuitar", shop, 0.05f);
 					NPCHelper.SafelySetCrossModItem(thorium, "StalkersSnippers", shop, 0.05f);
 				}
-				if (customShops.ContainsKey(NPCString.Mothron))
+				if (customShops.TryGetValue(NPCString.Mothron, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Mothron])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2434,11 +2433,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "SnackLantern", shop, 0.2f);
 					NPCHelper.SafelySetCrossModItem(thorium, "HauntingBassDrum", shop, 0.1f);
 				}
-				if (customShops.ContainsKey(NPCString.Pumpking))
+				if (customShops.TryGetValue(NPCString.Pumpking, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Pumpking])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2548,11 +2547,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "SoftServeSunderer", shop);
 					NPCHelper.SafelySetCrossModItem(thorium, "Cryotherapy", shop, 0.1f);
 				}
-				if (customShops.ContainsKey(NPCString.IceQueen))
+				if (customShops.TryGetValue(NPCString.IceQueen, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.IceQueen])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2643,11 +2642,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "LivewireCrasher", shop, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "MolecularStabilizer", shop, 0.25f);
 				}
-				if (customShops.ContainsKey(NPCString.MartianSaucer))
+				if (customShops.TryGetValue(NPCString.MartianSaucer, out List<ShopItem> value))
 				{
-					foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.MartianSaucer])
+					foreach (ShopItem set in value)
 					{
-						shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+						shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 					}
 				}
 			}
@@ -2727,11 +2726,11 @@ namespace BossesAsNPCs.NPCs
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowflameWarhorn", shop, 0.17f, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowTippedJavelin", shop, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
 			}
-			if (customShops.ContainsKey(NPCString.GoblinTinkerer))
+			if (customShops.TryGetValue(NPCString.GoblinTinkerer, out List<ShopItem> value))
 			{
-				foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.GoblinTinkerer])
+				foreach (ShopItem set in value)
 				{
-					shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+					shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 				}
 			}
 			foreach (NPCShop.Entry entry in shop.Entries)
@@ -2804,11 +2803,11 @@ namespace BossesAsNPCs.NPCs
 				NPCHelper.SafelySetCrossModItem(thorium, "GreedfulGurdy", shop, 0.1f, ShopConditions.PirateSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium, "GreedyMagnet", shop, 0.1f, ShopConditions.PirateSellInvasionItems);
 			}
-			if (customShops.ContainsKey(NPCString.Pirate))
+			if (customShops.TryGetValue(NPCString.Pirate, out List<ShopItem> value))
 			{
-				foreach (KeyValuePair<int, Tuple<int, List<Condition>>> set in customShops[NPCString.Pirate])
+				foreach (ShopItem set in value)
 				{
-					shop.Add(new Item(set.Key) { shopCustomPrice = set.Value.Item1 }, (set.Value.Item2).ToArray());
+					shop.Add(new Item(set.ItemType) { shopCustomPrice = set.Price }, set.Condition.ToArray());
 				}
 			}
 			foreach (NPCShop.Entry entry in shop.Entries)

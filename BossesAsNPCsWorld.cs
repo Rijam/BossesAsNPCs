@@ -149,9 +149,37 @@ namespace BossesAsNPCs
 		}
 		public override void PreUpdateWorld()
 		{
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().BoostTownNPCRates)
+			// Vanilla increments Main.checkForSpawns every tick (during the day time).
+			// If it >= 7200 ticks (120 seconds or 2 minutes) it will mark a Town NPC as able to spawn.
+			// Incrementing Main.checkForSpawns more means it will reach 7200 ticks sooner and spawn a Town NPC sooner.
+			// More frequent attempts to spawn Town NPCs might cause a very (and I mean very) small amount of lag.
+			// The best case for Main.UpdateTime_SpawnTownNPCs() is O(1) but the worse case is probably O(n^2).
+
+			switch (ModContent.GetInstance<BossesAsNPCsConfigServer>().BoostTownNPCRates)
 			{
-				Main.checkForSpawns += 81;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.OneMinute:
+					Main.checkForSpawns++;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.ThirdySeconds:
+					Main.checkForSpawns += 3;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.FifteenSeconds:
+					Main.checkForSpawns += 7;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.TenSeconds:
+					Main.checkForSpawns += 11;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.FiveSeconds:
+					Main.checkForSpawns += 23;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.TwoSeconds:
+					Main.checkForSpawns += 59;
+					break;
+				case BossesAsNPCsConfigServer.BoostSpawnRatesOptions.EverySecond:
+					Main.checkForSpawns += 119;
+					break;
+				default:
+					break;
 			}
 		}
 	}

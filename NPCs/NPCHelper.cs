@@ -87,7 +87,10 @@ namespace BossesAsNPCs.NPCs
 			return Main.Configuration.Get("UnlockMusicSwap", false);
 		}
 
-		private static int shopCycler = 0;
+		/// <summary>
+		/// The current shop that is selected.
+		/// </summary>
+		internal static int ShopCycler { get; set; } = 0;
 		// 1 = King Slime
 		// 2 = King Slime 2
 		// 3 = EoC
@@ -140,32 +143,16 @@ namespace BossesAsNPCs.NPCs
 		// 50 = Martian Saucer 2
 
 		/// <summary>
-		/// Sets the shopCycler int.
-		/// </summary>
-		public static void SetShopCycle(int type)
-		{
-			shopCycler = type;
-		}
-
-		/// <summary>
-		/// Gets the current shop selected.
-		/// </summary>
-		public static int StatusShopCycle()
-		{
-			return shopCycler;
-		}
-
-		/// <summary>
 		/// Increments the shopCycler int. If it exceeds 50, it will be set to 1 again.
 		/// Will get every shop.
 		/// </summary>
 		public static void IncrementShopCycleMode0()
 		{
-			shopCycler++;
+			ShopCycler++;
 
-			if (shopCycler > 50)
+			if (ShopCycler > 50)
 			{
-				shopCycler = 0;
+				ShopCycler = 0;
 				IncrementShopCycleMode0();
 			}
 		}
@@ -175,11 +162,11 @@ namespace BossesAsNPCs.NPCs
 		/// </summary>
 		public static void DecrementShopCycleMode0()
 		{
-			shopCycler--;
+			ShopCycler--;
 
-			if (shopCycler <= 0)
+			if (ShopCycler <= 0)
 			{
-				shopCycler = 50;
+				ShopCycler = 50;
 			}
 		}
 
@@ -223,61 +210,61 @@ namespace BossesAsNPCs.NPCs
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler++;
+				ShopCycler++;
 			}
 				
-			if (!KS && shopCycler == 1) // If the bool is false (not a valid shop), go to the next shop.
-				shopCycler += 2;
-			if (!EoC && shopCycler == 3)
-				shopCycler += 2;
-			if (!EoW && shopCycler == 5)
-				shopCycler += 2;
-			if (!BoC && shopCycler == 7)
-				shopCycler += 2;
-			if (!QB && shopCycler == 9)
-				shopCycler += 2;
-			if (!Sk && shopCycler == 11)
-				shopCycler += 2;
-			if (!Dc && shopCycler == 13)
-				shopCycler += 2;
-			if (!WoF && shopCycler == 15)
-				shopCycler += 2;
-			if (!QS && shopCycler == 17)
-				shopCycler += 2;
-			if (!De && shopCycler == 19)
-				shopCycler += 2;
-			if (!Tw && shopCycler == 21)
-				shopCycler += 4;
-			if (!SP && shopCycler == 25)
-				shopCycler += 2;
-			if (!Pl && shopCycler == 27)
-				shopCycler += 2;
-			if (!Go && shopCycler == 29)
-				shopCycler += 2;
-			if (!EoL && shopCycler == 31)
-				shopCycler += 2;
-			if (!DF && shopCycler == 33)
-				shopCycler += 2;
-			if (!Be && shopCycler == 35)
-				shopCycler += 2;
-			if (!LC && shopCycler == 37)
-				shopCycler += 2;
-			if (!ML && shopCycler == 39)
-				shopCycler += 2;
-			if (!Dn && shopCycler == 41)
-				shopCycler += 2;
-			if (!Mo && shopCycler == 43)
-				shopCycler += 2;
-			if (!Pk && shopCycler == 45)
-				shopCycler += 2;
-			if (!IQ && shopCycler == 47)
-				shopCycler += 2;
-			if (!MS && shopCycler == 49)
-				shopCycler += 2;
+			if (!KS && ShopCycler == 1) // If the bool is false (not a valid shop), go to the next shop.
+				ShopCycler += 2;
+			if (!EoC && ShopCycler == 3)
+				ShopCycler += 2;
+			if (!EoW && ShopCycler == 5)
+				ShopCycler += 2;
+			if (!BoC && ShopCycler == 7)
+				ShopCycler += 2;
+			if (!QB && ShopCycler == 9)
+				ShopCycler += 2;
+			if (!Sk && ShopCycler == 11)
+				ShopCycler += 2;
+			if (!Dc && ShopCycler == 13)
+				ShopCycler += 2;
+			if (!WoF && ShopCycler == 15)
+				ShopCycler += 2;
+			if (!QS && ShopCycler == 17)
+				ShopCycler += 2;
+			if (!De && ShopCycler == 19)
+				ShopCycler += 2;
+			if (!Tw && ShopCycler == 21)
+				ShopCycler += 4;
+			if (!SP && ShopCycler == 25)
+				ShopCycler += 2;
+			if (!Pl && ShopCycler == 27)
+				ShopCycler += 2;
+			if (!Go && ShopCycler == 29)
+				ShopCycler += 2;
+			if (!EoL && ShopCycler == 31)
+				ShopCycler += 2;
+			if (!DF && ShopCycler == 33)
+				ShopCycler += 2;
+			if (!Be && ShopCycler == 35)
+				ShopCycler += 2;
+			if (!LC && ShopCycler == 37)
+				ShopCycler += 2;
+			if (!ML && ShopCycler == 39)
+				ShopCycler += 2;
+			if (!Dn && ShopCycler == 41)
+				ShopCycler += 2;
+			if (!Mo && ShopCycler == 43)
+				ShopCycler += 2;
+			if (!Pk && ShopCycler == 45)
+				ShopCycler += 2;
+			if (!IQ && ShopCycler == 47)
+				ShopCycler += 2;
+			if (!MS && ShopCycler == 49)
+				ShopCycler += 2;
 
-			if (shopCycler > 50)
+			if (ShopCycler > 50)
 			{
-				shopCycler = 0;
+				ShopCycler = 0;
 				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 				{
 					IncrementShopCycleMode1();
@@ -324,76 +311,76 @@ namespace BossesAsNPCs.NPCs
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler -= 2;
+				ShopCycler -= 2;
 			}
 
-			if (!MS && shopCycler == 49) // If the bool is false (not a valid shop), go to the next shop.
-				shopCycler -= 2;
-			if (!IQ && shopCycler == 47)
-				shopCycler -= 2;
-			if (!Pk && shopCycler == 45)
-				shopCycler -= 2;
-			if (!Mo && shopCycler == 43)
-				shopCycler -= 2;
-			if (!Dn && shopCycler == 41)
-				shopCycler -= 2;
-			if (!ML && shopCycler == 39)
-				shopCycler -= 2;
-			if (!LC && shopCycler == 37)
-				shopCycler -= 2;
-			if (!Be && shopCycler == 35)
-				shopCycler -= 2;
-			if (!DF && shopCycler == 33)
-				shopCycler -= 2;
-			if (!EoL && shopCycler == 31)
-				shopCycler -= 2;
-			if (!Go && shopCycler == 29)
-				shopCycler -= 2;
-			if (!Pl && shopCycler == 27)
-				shopCycler -= 2;
-			if (!SP && shopCycler == 25)
-				shopCycler -= 2;
-			if (!Tw && shopCycler == 23)
-				shopCycler -= 2;
-			if (!Tw && shopCycler == 21)
-				shopCycler -= 2;
-			if (!De && shopCycler == 19)
-				shopCycler -= 2;
-			if (!QS && shopCycler == 17)
-				shopCycler -= 2;
-			if (!WoF && shopCycler == 15)
-				shopCycler -= 2;
-			if (!Dc && shopCycler == 13)
-				shopCycler -= 2;
-			if (!Sk && shopCycler == 11)
-				shopCycler -= 2;
-			if (!QB && shopCycler == 9)
-				shopCycler -= 2;
-			if (!BoC && shopCycler == 7)
-				shopCycler -= 2;
-			if (!EoW && shopCycler == 5)
-				shopCycler -= 2;
-			if (!EoC && shopCycler == 3)
-				shopCycler -= 2;
-			if (!KS && shopCycler == 1)
-				shopCycler -= 2;
+			if (!MS && ShopCycler == 49) // If the bool is false (not a valid shop), go to the next shop.
+				ShopCycler -= 2;
+			if (!IQ && ShopCycler == 47)
+				ShopCycler -= 2;
+			if (!Pk && ShopCycler == 45)
+				ShopCycler -= 2;
+			if (!Mo && ShopCycler == 43)
+				ShopCycler -= 2;
+			if (!Dn && ShopCycler == 41)
+				ShopCycler -= 2;
+			if (!ML && ShopCycler == 39)
+				ShopCycler -= 2;
+			if (!LC && ShopCycler == 37)
+				ShopCycler -= 2;
+			if (!Be && ShopCycler == 35)
+				ShopCycler -= 2;
+			if (!DF && ShopCycler == 33)
+				ShopCycler -= 2;
+			if (!EoL && ShopCycler == 31)
+				ShopCycler -= 2;
+			if (!Go && ShopCycler == 29)
+				ShopCycler -= 2;
+			if (!Pl && ShopCycler == 27)
+				ShopCycler -= 2;
+			if (!SP && ShopCycler == 25)
+				ShopCycler -= 2;
+			if (!Tw && ShopCycler == 23)
+				ShopCycler -= 2;
+			if (!Tw && ShopCycler == 21)
+				ShopCycler -= 2;
+			if (!De && ShopCycler == 19)
+				ShopCycler -= 2;
+			if (!QS && ShopCycler == 17)
+				ShopCycler -= 2;
+			if (!WoF && ShopCycler == 15)
+				ShopCycler -= 2;
+			if (!Dc && ShopCycler == 13)
+				ShopCycler -= 2;
+			if (!Sk && ShopCycler == 11)
+				ShopCycler -= 2;
+			if (!QB && ShopCycler == 9)
+				ShopCycler -= 2;
+			if (!BoC && ShopCycler == 7)
+				ShopCycler -= 2;
+			if (!EoW && ShopCycler == 5)
+				ShopCycler -= 2;
+			if (!EoC && ShopCycler == 3)
+				ShopCycler -= 2;
+			if (!KS && ShopCycler == 1)
+				ShopCycler -= 2;
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler++;
+				ShopCycler++;
 			}
 
-			if (shopCycler <= 0)
+			if (ShopCycler <= 0)
 			{
-				shopCycler = 51;
+				ShopCycler = 51;
 				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 				{
 					DecrementShopCycleMode1();
 				}
 			}
-			if (shopCycler == 51)
+			if (ShopCycler == 51)
 			{
-				shopCycler = 0;
+				ShopCycler = 0;
 			}
 		}
 
@@ -435,61 +422,61 @@ namespace BossesAsNPCs.NPCs
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler++;
+				ShopCycler++;
 			}
 
-			if (!KS && shopCycler == 1) // If disabled, go to the next shop.
-				shopCycler += 2;
-			if (!EoC && shopCycler == 3)
-				shopCycler += 2;
-			if (!EoW && shopCycler == 5)
-				shopCycler += 2;
-			if (!BoC && shopCycler == 7)
-				shopCycler += 2;
-			if (!QB && shopCycler == 9)
-				shopCycler += 2;
-			if (!Sk && shopCycler == 11)
-				shopCycler += 2;
-			if (!Dc && shopCycler == 13)
-				shopCycler += 2;
-			if (!WoF && shopCycler == 15)
-				shopCycler += 2;
-			if (!QS && shopCycler == 17)
-				shopCycler += 2;
-			if (!De && shopCycler == 19)
-				shopCycler += 2;
-			if (!Tw && shopCycler == 21)
-				shopCycler += 4;
-			if (!SP && shopCycler == 25)
-				shopCycler += 2;
-			if (!Pl && shopCycler == 27)
-				shopCycler += 2;
-			if (!Go && shopCycler == 29)
-				shopCycler += 2;
-			if (!EoL && shopCycler == 31)
-				shopCycler += 2;
-			if (!DF && shopCycler == 33)
-				shopCycler += 2;
-			if (!Be && shopCycler == 35)
-				shopCycler += 2;
-			if (!LC && shopCycler == 37)
-				shopCycler += 2;
-			if (!ML && shopCycler == 39)
-				shopCycler += 2;
-			if (!Dn && shopCycler == 41)
-				shopCycler += 2;
-			if (!Mo && shopCycler == 43)
-				shopCycler += 2;
-			if (!Pk && shopCycler == 45)
-				shopCycler += 2;
-			if (!IQ && shopCycler == 47)
-				shopCycler += 2;
-			if (!MS && shopCycler == 49)
-				shopCycler += 2;
+			if (!KS && ShopCycler == 1) // If disabled, go to the next shop.
+				ShopCycler += 2;
+			if (!EoC && ShopCycler == 3)
+				ShopCycler += 2;
+			if (!EoW && ShopCycler == 5)
+				ShopCycler += 2;
+			if (!BoC && ShopCycler == 7)
+				ShopCycler += 2;
+			if (!QB && ShopCycler == 9)
+				ShopCycler += 2;
+			if (!Sk && ShopCycler == 11)
+				ShopCycler += 2;
+			if (!Dc && ShopCycler == 13)
+				ShopCycler += 2;
+			if (!WoF && ShopCycler == 15)
+				ShopCycler += 2;
+			if (!QS && ShopCycler == 17)
+				ShopCycler += 2;
+			if (!De && ShopCycler == 19)
+				ShopCycler += 2;
+			if (!Tw && ShopCycler == 21)
+				ShopCycler += 4;
+			if (!SP && ShopCycler == 25)
+				ShopCycler += 2;
+			if (!Pl && ShopCycler == 27)
+				ShopCycler += 2;
+			if (!Go && ShopCycler == 29)
+				ShopCycler += 2;
+			if (!EoL && ShopCycler == 31)
+				ShopCycler += 2;
+			if (!DF && ShopCycler == 33)
+				ShopCycler += 2;
+			if (!Be && ShopCycler == 35)
+				ShopCycler += 2;
+			if (!LC && ShopCycler == 37)
+				ShopCycler += 2;
+			if (!ML && ShopCycler == 39)
+				ShopCycler += 2;
+			if (!Dn && ShopCycler == 41)
+				ShopCycler += 2;
+			if (!Mo && ShopCycler == 43)
+				ShopCycler += 2;
+			if (!Pk && ShopCycler == 45)
+				ShopCycler += 2;
+			if (!IQ && ShopCycler == 47)
+				ShopCycler += 2;
+			if (!MS && ShopCycler == 49)
+				ShopCycler += 2;
 
-			if (shopCycler > 50)
+			if (ShopCycler > 50)
 			{
-				shopCycler = 0;
+				ShopCycler = 0;
 				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 				{
 					IncrementShopCycleMode2();
@@ -534,76 +521,76 @@ namespace BossesAsNPCs.NPCs
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler -= 2;
+				ShopCycler -= 2;
 			}
 
-			if (!MS && shopCycler == 49) // If disabled, go to the next shop.
-				shopCycler -= 2;
-			if (!IQ && shopCycler == 47)
-				shopCycler -= 2;
-			if (!Pk && shopCycler == 45)
-				shopCycler -= 2;
-			if (!Mo && shopCycler == 43)
-				shopCycler -= 2;
-			if (!Dn && shopCycler == 41)
-				shopCycler -= 2;
-			if (!ML && shopCycler == 39)
-				shopCycler -= 2;
-			if (!LC && shopCycler == 37)
-				shopCycler -= 2;
-			if (!Be && shopCycler == 35)
-				shopCycler -= 2;
-			if (!DF && shopCycler == 33)
-				shopCycler -= 2;
-			if (!EoL && shopCycler == 31)
-				shopCycler -= 2;
-			if (!Go && shopCycler == 29)
-				shopCycler -= 2;
-			if (!Pl && shopCycler == 27)
-				shopCycler -= 2;
-			if (!SP && shopCycler == 25)
-				shopCycler -= 2;
-			if (!Tw && shopCycler == 23)
-				shopCycler -= 2;
-			if (!Tw && shopCycler == 21)
-				shopCycler -= 2;
-			if (!De && shopCycler == 19)
-				shopCycler -= 2;
-			if (!QS && shopCycler == 17)
-				shopCycler -= 2;
-			if (!WoF && shopCycler == 15)
-				shopCycler -= 2;
-			if (!Dc && shopCycler == 13)
-				shopCycler -= 2;
-			if (!Sk && shopCycler == 11)
-				shopCycler -= 2;
-			if (!QB && shopCycler == 9)
-				shopCycler -= 2;
-			if (!BoC && shopCycler == 7)
-				shopCycler -= 2;
-			if (!EoW && shopCycler == 5)
-				shopCycler -= 2;
-			if (!EoC && shopCycler == 3)
-				shopCycler -= 2;
-			if (!KS && shopCycler == 1)
-				shopCycler -= 2;
+			if (!MS && ShopCycler == 49) // If disabled, go to the next shop.
+				ShopCycler -= 2;
+			if (!IQ && ShopCycler == 47)
+				ShopCycler -= 2;
+			if (!Pk && ShopCycler == 45)
+				ShopCycler -= 2;
+			if (!Mo && ShopCycler == 43)
+				ShopCycler -= 2;
+			if (!Dn && ShopCycler == 41)
+				ShopCycler -= 2;
+			if (!ML && ShopCycler == 39)
+				ShopCycler -= 2;
+			if (!LC && ShopCycler == 37)
+				ShopCycler -= 2;
+			if (!Be && ShopCycler == 35)
+				ShopCycler -= 2;
+			if (!DF && ShopCycler == 33)
+				ShopCycler -= 2;
+			if (!EoL && ShopCycler == 31)
+				ShopCycler -= 2;
+			if (!Go && ShopCycler == 29)
+				ShopCycler -= 2;
+			if (!Pl && ShopCycler == 27)
+				ShopCycler -= 2;
+			if (!SP && ShopCycler == 25)
+				ShopCycler -= 2;
+			if (!Tw && ShopCycler == 23)
+				ShopCycler -= 2;
+			if (!Tw && ShopCycler == 21)
+				ShopCycler -= 2;
+			if (!De && ShopCycler == 19)
+				ShopCycler -= 2;
+			if (!QS && ShopCycler == 17)
+				ShopCycler -= 2;
+			if (!WoF && ShopCycler == 15)
+				ShopCycler -= 2;
+			if (!Dc && ShopCycler == 13)
+				ShopCycler -= 2;
+			if (!Sk && ShopCycler == 11)
+				ShopCycler -= 2;
+			if (!QB && ShopCycler == 9)
+				ShopCycler -= 2;
+			if (!BoC && ShopCycler == 7)
+				ShopCycler -= 2;
+			if (!EoW && ShopCycler == 5)
+				ShopCycler -= 2;
+			if (!EoC && ShopCycler == 3)
+				ShopCycler -= 2;
+			if (!KS && ShopCycler == 1)
+				ShopCycler -= 2;
 
 			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 			{
-				shopCycler++;
+				ShopCycler++;
 			}
 
-			if (shopCycler <= 0)
+			if (ShopCycler <= 0)
 			{
-				shopCycler = 51;
+				ShopCycler = 51;
 				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
 				{
 					DecrementShopCycleMode2();
 				}
 			}
-			if (shopCycler == 51)
+			if (ShopCycler == 51)
 			{
-				shopCycler = 0;
+				ShopCycler = 0;
 			}
 		}
 
@@ -700,7 +687,6 @@ namespace BossesAsNPCs.NPCs
 
 		/// <summary>
 		/// Searches the shop (or chest) to see if an item is in it. slotNumber is the slot the item is in.
-		/// See ItemOriginDesc.CheckIfInShop() for a player version.
 		/// </summary>
 		/// <returns>True if the item is found</returns>
 		public static bool FindItemInShop(int[] shop, int item, out int? slotNumber)
@@ -718,7 +704,6 @@ namespace BossesAsNPCs.NPCs
 		}
 		/// <summary>
 		/// Searches the shop (or chest) to see if an item is in it. slotNumber is the slot the item is in.
-		/// See ItemOriginDesc.CheckIfInShop() for a player version.
 		/// </summary>
 		/// <returns>True if the item is found</returns>
 		public static bool FindItemInShop(Chest shop, int item, out int? slotNumber)
@@ -1085,9 +1070,9 @@ namespace BossesAsNPCs.NPCs
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
 		/// <summary> Use ShopConditions.Expert instead </summary>
-		public static Condition SellExpertMode =			new("Mods.BossesAsNPCs.Conditions.SellExpertMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode);
+		internal static Condition SellExpertMode =			new("Mods.BossesAsNPCs.Conditions.SellExpertMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExpertMode);
 		/// <summary> Use ShopConditions.Master instead </summary>
-		public static Condition SellMasterMode =			new("Mods.BossesAsNPCs.Conditions.SellMasterMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode);
+		internal static Condition SellMasterMode =			new("Mods.BossesAsNPCs.Conditions.SellMasterMode",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellMasterMode);
 		public static Condition SellExtraItems =			new("Mods.BossesAsNPCs.Conditions.SellExtraItems",			() => ModContent.GetInstance<BossesAsNPCsConfigServer>().SellExtraItems);
 		public static Condition TownNPCsCrossModSupport =	new("Mods.BossesAsNPCs.Conditions.TownNPCsCrossModSupport", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport);
 		public static Condition GoblinSellInvasionItems =	new("Mods.BossesAsNPCs.Conditions.GoblinSellInvasionItems", () => ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems);

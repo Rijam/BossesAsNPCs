@@ -1,12 +1,13 @@
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Terraria.GameContent.Bestiary;
-using System.Collections.Generic;
-using Terraria.GameContent.Personalities;
 using Terraria.GameContent;
+using Terraria.GameContent.Bestiary;
+using Terraria.GameContent.Personalities;
+using BossesAsNPCs.EmoteBubbles;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -21,7 +22,6 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault(Language.GetTextValue("NPCName.KingSlime"));
 			Main.npcFrameCount[Type] = Main.npcFrameCount[NPCID.DyeTrader];
 			NPCID.Sets.ExtraFramesCount[Type] = 9;
 			NPCID.Sets.AttackFrameCount[Type] = 4;
@@ -31,6 +31,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackAverageChance[Type] = 30;
 			NPCID.Sets.HatOffsetY[Type] = 2;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
+			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<KingSlimeEmote>();
 
 			// Influences how the NPC looks in the Bestiary
 			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
@@ -96,6 +97,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			if (Main.netMode != NetmodeID.Server && NPC.life <= 0)
 			{
+				int partyHatGore = NPC.GetPartyHatGore();
+				if (partyHatGore > 0)
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, partyHatGore);
+				}
 				if (!Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 				{
 					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Crown").Type, 1f);
@@ -104,8 +110,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 				for (int k = 0; k < 2; k++)
 				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 				}
 			}
 		}
@@ -261,7 +267,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			button = Language.GetTextValue("LegacyInterface.28");
 			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
-				button2 = Language.GetTextValue("LegacyInterface.28") + " 2";
+				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
 			}
 		}
 

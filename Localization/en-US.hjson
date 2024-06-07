@@ -11,11 +11,14 @@ Mods: {
 					Label: "[i:4080]   Boost Town NPC Spawn Rates"
 					Tooltip:
 						'''
-						This option toggles if the Town NPC spawn rates will be boosted
+						This option toggles if the Town NPC spawn rates will be boosted.
+						This is how often the game attempts to spawn a Town NPC.
+						Vanilla does this every 2 minutes.
+						More frequent attempts to spawn Town NPCs may cause a very small amount of lag.
 						  When On: Town NPC spawn rates WILL be boosted.
 						  When Off: Town NPC spawn rates WILL NOT be boosted.
 						    Turn On to boost Town NPC spawn rates.
-						Default value: Off
+						Default value: Off (2 Minutes)
 						'''
 				}
 
@@ -451,6 +454,18 @@ Mods: {
 				Mixed.Label: Mixed
 				OnlyOne.Label: Only One
 			}
+
+			BoostSpawnRatesOptions: {
+				Tooltip: ""
+				Off.Label: Off (2 Minutes)
+				OneMinute.Label: Every Minute
+				ThirdySeconds.Label: Every 30 seconds
+				FifteenSeconds.Label: Every 15 seconds
+				TenSeconds.Label: Every 10 seconds
+				FiveSeconds.Label: Every 5 seconds
+				TwoSeconds.Label: Every 2 seconds
+				EverySecond.Label: Every second
+			}
 		}
 
 		Common: {
@@ -483,6 +498,8 @@ Mods: {
 				DecShop: Previous shop
 				FirstShop: First shop
 			}
+
+			Shop2: "{$LegacyInterface.28} 2"
 		}
 
 		Conditions: {
@@ -1618,7 +1635,7 @@ Mods: {
 					Default2: Make sure to eat and keep your sanity up!
 					Default3: Stay out of the darkness, or she'll get you...
 					Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
-					Default5: Everyone else gets an achievement; where is mine?
+					Default5: No, I'm not going to trade my eye for anything! How would I be able to see?
 					Party: Oh a party! There better be a big feast for all of us!
 					Graveyard: So much death... and I don't see any touch stones anywhere here.
 					Snow: Are you going to hold a feast of some kind in this winter weather?
@@ -2437,6 +2454,40 @@ Mods: {
 			MothronEgg.DisplayName: Mothron Egg
 			SingleEighthNote.DisplayName: Single Eighth Note
 			SpikedSlimeProjectile.DisplayName: Gel Spike
+		}
+
+		Emotes: {
+			KingSlimeEmote.Command: banpckingslime
+			EyeOfCthulhuEmote.Command: banpceyeofcthulhu
+			EaterOfWorldsEmote.Command: banpceaterofworlds
+			BrainOfCthulhuEmote.Command: banpcbrainofcthulhu
+			QueenBeeEmote.Command: banpcqueenbee
+			DeerclopsEmote.Command: banpcdeerclops
+			SkeletronEmote.Command: banpcskeletron
+			WallOfFleshEmote.Command: banpcwallofflesh
+			QueenSlimeEmote.Command: banpcqueenslime
+			TheDestoryerEmote.Command: banpcthedestoryer
+			RetinazerEmote.Command: banpcretinazer
+			SpazmatismEmote.Command: banpcspazmatism
+			SkeletronPrimeEmote.Command: banpcskeletronprime
+			PlanteraEmote.Command: banpcplantera
+			GolemEmote.Command: banpcgolem
+			EmpressOfLightEmote.Command: banpcempressoflight
+			DukeFishronEmote.Command: banpcdukefishron
+			BetsyEmote.Command: banpcbetsy
+			LunaticCultistEmote.Command: banpclunaticcultist
+			MoonLordEmote.Command: banpcmoonlord
+			DreadnautilusEmote.Command: banpcdreadnautilus
+			MothronEmote.Command: banpcmothron
+			PumpkingEmote.Command: banpcpumpking
+			IceQueenEmote.Command: banpcicequeen
+			MartianSaucerEmote.Command: banpcmartiansaucer
+			TorchGodEmote.Command: banpctorchgod
+			DarkMageEmote.Command: banpcdarkmage
+			OgreEmote.Command: banpcogre
+			MourningWoodEmote.Command: banpcmourningwood
+			EverscreamEmote.Command: banpceverscream
+			SantaNK1Emote.Command: banpcsantank1
 		}
 	}
 }
