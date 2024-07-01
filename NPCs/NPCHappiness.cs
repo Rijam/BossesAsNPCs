@@ -1,19 +1,12 @@
-using System;
-using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System.IO;
 using Terraria;
 using Terraria.ID;
-using Terraria.Chat;
 using Terraria.ModLoader;
-using Terraria.ModLoader.IO;
 using BossesAsNPCs.NPCs.TownNPCs;
-using Terraria.Localization;
 using Terraria.GameContent.Personalities;
 
 namespace BossesAsNPCs.NPCs
 {
-	//This only is for happiness. Shop changes are in BossesAsNPCsNPCs.cs
+	// This only is for happiness. Shop changes are in BossesAsNPCsNPCs.cs
 	public class BossesAsNPCsNPCHappiness : GlobalNPC
 	{
 		public override void SetStaticDefaults()
@@ -72,7 +65,7 @@ namespace BossesAsNPCs.NPCs
 			var steampunker = NPCHappiness.Get(NPCID.Steampunker);
 			var cyborg = NPCHappiness.Get(NPCID.Cyborg);
 			var santa = NPCHappiness.Get(NPCID.SantaClaus);
-			//Princess automatically Loves everyone
+			// Princess automatically Loves everyone
 
 			guide.SetNPCAffection(kingSlime, AffectionLevel.Like); // Make the Guide like King Slime!
 			guide.SetNPCAffection(eyeOfCthulhu, AffectionLevel.Like);

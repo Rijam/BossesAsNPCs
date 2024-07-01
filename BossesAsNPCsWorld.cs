@@ -150,7 +150,7 @@ namespace BossesAsNPCs
 		public override void PreUpdateWorld()
 		{
 			// Vanilla increments Main.checkForSpawns every tick (during the day time).
-			// If it >= 7200 ticks (120 seconds or 2 minutes) it will mark a Town NPC as able to spawn.
+			// If it's >= 7200 ticks (120 seconds or 2 minutes) it will mark a Town NPC as able to spawn.
 			// Incrementing Main.checkForSpawns more means it will reach 7200 ticks sooner and spawn a Town NPC sooner.
 			// More frequent attempts to spawn Town NPCs might cause a very (and I mean very) small amount of lag.
 			// The best case for Main.UpdateTime_SpawnTownNPCs() is O(1) but the worse case is probably O(n^2).

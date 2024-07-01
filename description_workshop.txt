@@ -29,10 +29,7 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.8
-	- Updated how the custom shops work. Now other mods can add the same item more than once without any issues.
-	- Localized the Shop 2 button instead of hard coding it as "Shop" + "2".
-	- Replaced Deerclops' dialog line about not having an achievement with something else.
-	- Split Queen Bee's wings from the main sprite to a second sprite. This way Queen Bee's bounding box isn't so large. This fixes a few visual things like chat and emote bubbles appearing far away and the portrait in the Bestiary not being centered.
-	- Added Emotes for all of the Boss Town NPCs.
-	- Boss Town NPCs now drop party hat gore if they die while wearing a party hat.
+Mod version: 0.2.9
+	- Fixed Golem not selling the Heat Ray since the 1.4.4 update.
+	- Updated ModifyActiveShop checking for !item.IsAir now instead item is not null.
+	- Fixed Torch God's glow mask having the incorrect offset while sitting.

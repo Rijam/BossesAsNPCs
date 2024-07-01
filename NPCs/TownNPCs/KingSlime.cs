@@ -136,8 +136,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 
-			int kingSlime = NPC.FindFirstNPC(ModContent.NPCType<KingSlime>());
-			NPCHelper.GetNearbyResidentNPCs(Main.npc[kingSlime], 1, out List<int> npcTypeListHouse, out List<int> npcTypeListNearBy, out List<int> npcTypeListVillage, out List<int> _);
+			NPCHelper.GetNearbyResidentNPCs(Main.npc[NPC.whoAmI], 1, out List<int> npcTypeListHouse, out List<int> npcTypeListNearBy, out List<int> npcTypeListVillage, out List<int> _);
 
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();

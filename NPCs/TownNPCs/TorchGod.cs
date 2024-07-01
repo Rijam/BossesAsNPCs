@@ -215,7 +215,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
 			Color color = new(255, 255, 255, 100);
-			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY - Main.NPCAddHeight(NPC));
+			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC));
 			for (int i = 0; i < 5; i++)
 			{
 				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;

@@ -213,7 +213,6 @@ namespace BossesAsNPCs
 			if (!IsPlayerLocalServerOwner(whoAmI))
 			{
 				message = NetworkText.FromKey("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
-				//message = Language.GetTextValue("Mods.BossesAsNPCs.Configs.BossesAsNPCsConfigServer.MultiplayerMessage");
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

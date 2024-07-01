@@ -1537,6 +1537,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.PossessedHatchet, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SunStone, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeoftheGolem, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.HeatRay, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.StaffofEarth, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemFist, 0.14));
 

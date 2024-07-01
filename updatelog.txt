@@ -208,3 +208,8 @@
 	* Split Queen Bee's wings from the main sprite to a second sprite. This way Queen Bee's bounding box isn't so large. This fixes a few visual things like chat and emote bubbles appearing far away and the portrait in the Bestiary not being centered.
 	* Added Emotes for all of the Boss Town NPCs.
 	* Boss Town NPCs now drop party hat gore if they die while wearing a party hat.
+
+0.2.9 - Update 24 (July 1, 2024)
+	* Fixed Golem not selling the Heat Ray since the 1.4.4 update.
+	* Updated ModifyActiveShop checking for !item.IsAir now instead item is not null.
+	* Fixed Torch God's glow mask having the incorrect offset while sitting.

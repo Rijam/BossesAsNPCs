@@ -176,8 +176,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (torchGod >= 0)
 			{
 				chat.Add(Language.GetTextValue(path + "TorchGod"));
-				int moonLord = NPC.FindFirstNPC(ModContent.NPCType<MoonLord>());
-				NPCHelper.GetNearbyResidentNPCs(Main.npc[moonLord], 3, out List<int> npcTypeListHouse, out List<int> _, out List<int> _, out List<int> _);
+				NPCHelper.GetNearbyResidentNPCs(Main.npc[NPC.whoAmI], 3, out List<int> npcTypeListHouse, out List<int> _, out List<int> _, out List<int> _);
 				if (npcTypeListHouse.Contains(ModContent.NPCType<TorchGod>()))
 				{
 					chat.Add(Language.GetTextValue(path + "TorchGodVeryClose"), 10);

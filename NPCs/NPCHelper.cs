@@ -1109,7 +1109,6 @@ namespace BossesAsNPCs.NPCs
 
 		public static string TownNPCRangeS(string range) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.TownNPCRangeS", range);
 		public static string CountTownNPCsS(int number) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.CountTownNPCsS", number);
-		public static string EternityModeS = "Mods.BossesAsNPCs.Conditions.EternityModeS";
 
 		public static Condition EternityMode(Mod passedMod) { return new("Mods.BossesAsNPCs.Conditions.EternityModeS", () => (bool)passedMod.Call("EternityMode")); }
 
