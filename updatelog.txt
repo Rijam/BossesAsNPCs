@@ -213,3 +213,6 @@
 	* Fixed Golem not selling the Heat Ray since the 1.4.4 update.
 	* Updated ModifyActiveShop checking for !item.IsAir now instead item is not null.
 	* Fixed Torch God's glow mask having the incorrect offset while sitting.
+
+0.2.10 - Update 25 (July 1, 2024)
+	* Reverted: Updated ModifyActiveShop checking for !item.IsAir now instead item is not null. This change was reverted in tModLoader.

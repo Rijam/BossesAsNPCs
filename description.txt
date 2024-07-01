@@ -29,7 +29,5 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.9
-	- Fixed Golem not selling the Heat Ray since the 1.4.4 update.
-	- Updated ModifyActiveShop checking for !item.IsAir now instead item is not null.
-	- Fixed Torch God's glow mask having the incorrect offset while sitting.
+Mod version: 0.2.10
+	- Reverted: Updated ModifyActiveShop checking for !item.IsAir now instead item is not null. This change was reverted in tModLoader.

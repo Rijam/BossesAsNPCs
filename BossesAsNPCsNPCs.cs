@@ -157,7 +157,7 @@ namespace BossesAsNPCs
 			{
 				foreach (Item item in items)
 				{
-					if (!item.IsAir)
+					if (item is not null)
 					{
 						//item.GetStoreValue() is just `item.shopCustomPrice ?? item.value`
 						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
@@ -170,7 +170,7 @@ namespace BossesAsNPCs
 				{
 					// Only change the price of the items that were added by this mod. Vanilla and other mods won't be affected (unless they add the same items).
 					// (I tried to store the Item instead of the type and compare that, but it was never true.)
-					if (!item.IsAir && SetupShops.GoblinTinkererShopCopy.Contains(item.type))
+					if (item is not null && SetupShops.GoblinTinkererShopCopy.Contains(item.type))
 					{
 						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
 					}
@@ -180,7 +180,7 @@ namespace BossesAsNPCs
 			{
 				foreach (Item item in items)
 				{
-					if (!item.IsAir && SetupShops.PirateShopCopy.Contains(item.type))
+					if (item is not null && SetupShops.PirateShopCopy.Contains(item.type))
 					{
 						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
 					}
