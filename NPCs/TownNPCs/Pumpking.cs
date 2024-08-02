@@ -227,7 +227,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
 		{
 			cooldown = 5;
-			randExtraCooldown = 30;
+			randExtraCooldown = 10;
 		}
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)

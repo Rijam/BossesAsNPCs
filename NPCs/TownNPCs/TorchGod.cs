@@ -34,7 +34,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 0;
 			NPCID.Sets.AttackTime[Type] = 80;
-			NPCID.Sets.AttackAverageChance[Type] = 10; // Lower numbers actually make the NPC more likely to attack
+			NPCID.Sets.AttackAverageChance[Type] = 5; // Lower numbers actually make the NPC more likely to attack
 			NPCID.Sets.HatOffsetY[Type] = 4;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<TorchGodEmote>();
@@ -734,7 +734,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
 		{
 			cooldown = 5;
-			randExtraCooldown = 30;
+			randExtraCooldown = 5;
 		}
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)

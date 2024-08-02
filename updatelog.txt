@@ -216,3 +216,9 @@
 
 0.2.10 - Update 25 (July 1, 2024)
 	* Reverted: Updated ModifyActiveShop checking for !item.IsAir now instead item is not null. This change was reverted in tModLoader.
+
+0.2.11 - Update 26 (July 31, 2024)
+	* Fixed a few issues with Skeletron Prime's bomb projectile. It can now correctly hit multiple enemies at once.
+	* Increased the likelihood that most of the Boss NPCs will attack.
+	* Decreased the waiting period between attacks for some Boss NPCs.
+	* Created a License for the mod.

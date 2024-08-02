@@ -29,8 +29,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackFrameCount[Type] = 5;
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 1;
-			NPCID.Sets.AttackTime[Type] = 90;
-			NPCID.Sets.AttackAverageChance[Type] = 30;
+			NPCID.Sets.AttackTime[Type] = 60;
+			NPCID.Sets.AttackAverageChance[Type] = 10;
 			NPCID.Sets.HatOffsetY[Type] = 2;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<MartianSaucerEmote>();
@@ -110,6 +110,15 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
 					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
 				}
+			}
+		}
+
+		public override void FindFrame(int frameHeight)
+		{
+			// Attacking and the frame is the normal hand held out forwards
+			if (NPC.ai[0] == 12 && NPC.frame.Y == 17 * frameHeight) 
+			{
+				NPC.frame.Y = 23 * frameHeight; // Set it to the attacking hand held out forwards (with the weapon).
 			}
 		}
 
@@ -214,8 +223,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
 		{
-			cooldown = 5;
-			randExtraCooldown = 30;
+			cooldown = 1;
+			randExtraCooldown = 1;
 		}
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)

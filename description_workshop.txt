@@ -29,5 +29,8 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 
-Mod version: 0.2.10
-	- Reverted: Updated ModifyActiveShop checking for !item.IsAir now instead item is not null. This change was reverted in tModLoader.
+Mod version: 0.2.11
+	- Fixed a few issues with Skeletron Prime's bomb projectile. It can now correctly hit multiple enemies at once.
+	- Increased the likelihood that most of the Boss NPCs will attack.
+	- Decreased the waiting period between attacks for some Boss NPCs.
+	- Created a License for the mod.

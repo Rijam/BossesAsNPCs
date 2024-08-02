@@ -26,8 +26,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.AttackFrameCount[Type] = 4;
 			NPCID.Sets.DangerDetectRange[Type] = 700;
 			NPCID.Sets.AttackType[Type] = 0;
-			NPCID.Sets.AttackTime[Type] = 90;
-			NPCID.Sets.AttackAverageChance[Type] = 30;
+			NPCID.Sets.AttackTime[Type] = 60;
+			NPCID.Sets.AttackAverageChance[Type] = 15;
 			NPCID.Sets.HatOffsetY[Type] = 2;
 			NPCID.Sets.ShimmerTownTransform[Type] = true;
 			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<QueenSlimeEmote>();
@@ -211,7 +211,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void TownNPCAttackCooldown(ref int cooldown, ref int randExtraCooldown)
 		{
 			cooldown = 5;
-			randExtraCooldown = 30;
+			randExtraCooldown = 10;
 		}
 
 		public override void TownNPCAttackProj(ref int projType, ref int attackDelay)

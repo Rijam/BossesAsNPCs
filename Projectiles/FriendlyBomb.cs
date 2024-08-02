@@ -13,8 +13,8 @@ namespace BossesAsNPCs.Projectiles
 		public override string Texture => "Terraria/Images/Projectile_" + ProjectileID.BombSkeletronPrime;
 		public override void SetStaticDefaults()
 		{
-			// DisplayName.SetDefault("Friendly Bomb");
 			Main.projFrames[Projectile.type] = 2;
+			ProjectileID.Sets.Explosive[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -22,22 +22,14 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.arrow = false;
 			Projectile.width = 20;
 			Projectile.height = 20;
-			Projectile.aiStyle = ProjAIStyleID.Arrow;
+			Projectile.aiStyle = -1;
 			Projectile.friendly = true;
-			Projectile.hostile = false;
 			Projectile.DamageType = DamageClass.Ranged;
-			AIType = ProjectileID.HappyBomb;
 			Projectile.timeLeft = 300;
-		}
-		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
-		{
-			if (Projectile.timeLeft > 3)
-			{
-				Projectile.timeLeft = 3; // Set the timeLeft to 3 so it can get ready to explode.
-			}
-
-			// Set the direction of the projectile so the knockback is always in the correct direction.
-			Projectile.direction = (target.Center.X > Projectile.Center.X).ToDirectionInt();
+			Projectile.penetrate = -1; // Infinite penetration so that the blast can hit all enemies within its radius.
+			// usesLocalNPCImmunity and localNPCHitCooldown of -1 mean the projectile can only hit the same target once.
+			Projectile.usesLocalNPCImmunity = true;
+			Projectile.localNPCHitCooldown = -1;
 		}
 		public override bool OnTileCollide(Vector2 oldVelocity)
 		{
@@ -53,11 +45,9 @@ namespace BossesAsNPCs.Projectiles
 		}
 		public override void AI()
         {
-			base.AI();
-
 			if (Projectile.owner == Main.myPlayer && Projectile.timeLeft <= 3)
 			{
-				PrepareBombToBlow();
+				Projectile.PrepareBombToBlow();
 				return;
 			}
 
@@ -89,8 +79,7 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.rotation += Projectile.velocity.X* 0.1f;
 		}
 
-		/// <summary> Resizes the projectile for the explosion blast radius. </summary>
-		private void PrepareBombToBlow()
+		public override void PrepareBombToBlow()
 		{
 			Projectile.tileCollide = false; // This is important or the explosion will be in the wrong place if the bomb explodes on slopes.
 			Projectile.alpha = 255; // Make the bomb invisible.
@@ -101,8 +90,8 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.Resize(60, 60);
 			// Set the knockback of the blast.
 			// Rocket I: 8f, Rocket III: 10f, Mini Nuke Rocket: 12f
-			Projectile.knockBack = 4f;
-			Projectile.damage = 40;
+			Projectile.knockBack += 4f;
+			//Projectile.damage = 40;
 		}
 
 		public override void OnKill(int timeLeft)
@@ -120,6 +109,6 @@ namespace BossesAsNPCs.Projectiles
 			}
 		}
 
-		public override Color? GetAlpha(Color lightColor) => Color.White; //Fullbright
+		public override Color? GetAlpha(Color lightColor) => Color.White * Projectile.Opacity; // Fullbright
 	}
 }
