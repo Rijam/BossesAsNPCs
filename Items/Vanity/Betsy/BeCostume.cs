@@ -57,8 +57,8 @@ namespace BossesAsNPCs.Items.Vanity.Betsy
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this);
-				LegEquipTextureFemale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs", EquipType.Legs, this);
+				LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this, "BeCostumeLegpiece_Legs");
+				LegEquipTextureFemale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs", EquipType.Legs, this, "BeCostumeLegpiece_FemaleLegs");
 			}
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)

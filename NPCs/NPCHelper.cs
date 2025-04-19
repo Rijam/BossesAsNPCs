@@ -609,11 +609,11 @@ namespace BossesAsNPCs.NPCs
 		/// <returns>List<NPC> of all the Town NPCs within 25 tiles.</returns>
 		public static List<NPC> GetNearbyResidentNPCs(NPC npc, int searchMode, out List<int> npcTypeListHouse, out List<int> npcTypeListNearBy, out List<int> npcTypeListVillage, out List<int> npcTypeListAll)
 		{
-			List<NPC> list = new();
-			npcTypeListHouse = new();
-			npcTypeListNearBy = new();
-			npcTypeListVillage = new();
-			npcTypeListAll = new();
+			List<NPC> list = [];
+			npcTypeListHouse = [];
+			npcTypeListNearBy = [];
+			npcTypeListVillage = [];
+			npcTypeListAll = [];
 			Vector2 npc1Home = new(npc.homeTileX, npc.homeTileY);
 			if (npc.homeless)
 			{
@@ -826,12 +826,15 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="mod">The mod that the item is from.</param>
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, params Condition[] condition)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, /*NPCShop shop*/ string npcString, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.Add(outItem.Type, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				// shop.Add(outItem.Type, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				List<Condition> listCondition = condition.ToList();
+				listCondition.Add(ShopConditions.TownNPCsCrossModSupport);
+				SetupShops.AddToCustomShops(npcString, outItem.Type, ContentSamples.ItemsByType[outItem.Type]?.value ?? 0, listCondition);
 			}
 			else
 			{
@@ -848,12 +851,15 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
 		/// <param name="customPrice">The custom price of the item.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, int customPrice, params Condition[] condition)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, /*NPCShop shop*/ string npcString, int customPrice, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.Add(new Item(outItem.Type) { shopCustomPrice = customPrice }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				//shop.Add(new Item(outItem.Type) { shopCustomPrice = customPrice }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				List<Condition> listCondition = condition.ToList();
+				listCondition.Add(ShopConditions.TownNPCsCrossModSupport);
+				SetupShops.AddToCustomShops(npcString, outItem.Type, customPrice, listCondition);
 			}
 			else
 			{
@@ -870,12 +876,15 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="itemString">The class name of the item.</param>
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
 		/// <param name="priceDiv">The price will be divided by this amount.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, float priceDiv, params Condition[] condition)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, /*NPCShop shop*/ string npcString, float priceDiv, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / 5 / priceDiv) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				//shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / 5 / priceDiv) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				List<Condition> listCondition = condition.ToList();
+				listCondition.Add(ShopConditions.TownNPCsCrossModSupport);
+				SetupShops.AddToCustomShops(npcString, outItem.Type, (int)Math.Round(ContentSamples.ItemsByType[outItem.Type]?.value ?? 0 / 5 / priceDiv), listCondition);
 			}
 			else
 			{
@@ -893,12 +902,15 @@ namespace BossesAsNPCs.NPCs
 		/// <param name="shop">The Chest shop of the Town NPC. Pass shop in most cases.</param>
 		/// <param name="priceDiv">The price will be divided by this amount.</param>
 		/// <param name="priceMulti">The price will be multiplied by this amount after the priceDiv.</param>
-		public static void SafelySetCrossModItem(Mod mod, string itemString, NPCShop shop, float priceDiv, float priceMulti, params Condition[] condition)
+		public static void SafelySetCrossModItem(Mod mod, string itemString, /*NPCShop shop*/ string npcString, float priceDiv, float priceMulti, params Condition[] condition)
 		{
 			mod.TryFind<ModItem>(itemString, out ModItem outItem);
 			if (outItem != null)
 			{
-				shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / priceDiv * priceMulti) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				// shop.Add(new Item(outItem.Type) { shopCustomPrice = (int)Math.Round(outItem.Item.value / priceDiv * priceMulti) }, condition.Append(ShopConditions.TownNPCsCrossModSupport).ToArray());
+				List<Condition> listCondition = condition.ToList();
+				listCondition.Add(ShopConditions.TownNPCsCrossModSupport);
+				SetupShops.AddToCustomShops(npcString, outItem.Type, (int)Math.Round(ContentSamples.ItemsByType[outItem.Type]?.value ?? 0 / priceDiv * priceMulti), listCondition);
 			}
 			else
 			{
@@ -918,7 +930,7 @@ namespace BossesAsNPCs.NPCs
 		/// <returns></returns>
 		public static Item ItemWithPrice(int itemID, double priceDiv = 1, double priceMulti = 1, double secondDiv = 1, int valueDiv = 5)
 		{
-			Item item = new(itemID);
+			Item item = new(itemID); // ContentSamples.ItemsByType[itemID];
 			item.shopCustomPrice = (int?)Math.Round((item.shopCustomPrice ?? item.value) / valueDiv / priceDiv * priceMulti / secondDiv);
 			return item;
 		}
@@ -1067,6 +1079,7 @@ namespace BossesAsNPCs.NPCs
 	}
 	public static class ShopConditions
 	{
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA2211 // Non-constant fields should not be visible
 
 		/// <summary> Use ShopConditions.Expert instead </summary>
@@ -1111,7 +1124,9 @@ namespace BossesAsNPCs.NPCs
 		public static string CountTownNPCsS(int number) => Language.GetTextValue("Mods.BossesAsNPCs.Conditions.CountTownNPCsS", number);
 
 		public static Condition EternityMode(Mod passedMod) { return new("Mods.BossesAsNPCs.Conditions.EternityModeS", () => (bool)passedMod.Call("EternityMode")); }
+		public static Condition WorldContagion(Mod passedMod) { return new("Mods.BossesAsNPCs.Conditions.WorldContagionS", () => (bool)passedMod.Call("Contagion")); }
 
 #pragma warning restore CA2211 // Non-constant fields should not be visible
+#pragma warning restore IDE0079 // Remove unnecessary suppression
 	}
 }

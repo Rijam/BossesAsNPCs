@@ -88,6 +88,25 @@ Mods: {
 						'''
 				}
 
+				GenerateItemsFromBestiary: {
+					// Label: "[i:Book]   Generate Modded Items from Bestiary"
+					/* Tooltip:
+						'''
+						[c/FF0000:Warning! Experimental!]
+
+						This option will generate shop items for each Boss NPC based on what the boss drops from the Bestiary.
+						Items added by other mods will be sold without Bosses As NPCs explicitly adding support for that mod.
+						  When On: All modded items will be generated and added to the shops.
+						  When Off: Only items from supported mods will be in the shops.
+						    Turn On to get items from other mods that Bosses As NPCs doesn't support.
+
+						Turning off the "Town NPCs Cross Mod Support" config will disable this feature.
+
+						Default value: "Off"
+						Requires a Reload.
+						''' */
+				}
+
 				CatchNPCs: {
 					Label: "[i:1991]   捕捉城镇 NPC"
 					Tooltip:
@@ -532,6 +551,7 @@ Mods: {
 			// TownNPCRangeS: When there are {0} or more Town NPCs in the world
 			// CountTownNPCsS: When there are {0} or more Town NPCs in the world
 			// EternityModeS: In Eternity Mode
+			// WorldContagionS: In a world with The Contagion
 			// MothronPaintingsS: Paintings are randomly sold
 			// RandomVanityS: Vanity are randomly sold
 		}
@@ -1107,6 +1127,11 @@ Mods: {
 			CaughtTorchGod: {
 				// DisplayName: "{$NPCName.TorchGod}"
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.CaughtNPC}"
+			}
+
+			DebugMethodTester: {
+				// DisplayName: Debug Method Tester
+				// Tooltip: ""
 			}
 		}
 

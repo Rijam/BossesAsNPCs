@@ -46,6 +46,11 @@ namespace BossesAsNPCs
 		[DefaultValue(true)]
 		public bool TownNPCsCrossModSupport { get; set; }
 
+		//Generate Items From Bestiary
+		[DefaultValue(false)]
+		[ReloadRequired]
+		public bool GenerateItemsFromBestiary { get; set; }
+
 		//Catch Town NPCs
 		[ReloadRequired]
 		[DefaultValue(false)]

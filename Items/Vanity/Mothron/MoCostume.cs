@@ -1,11 +1,6 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Localization;
-using Terraria.Utilities;
-using System.Linq;
 
 namespace BossesAsNPCs.Items.Vanity.Mothron
 {
@@ -28,8 +23,8 @@ namespace BossesAsNPCs.Items.Vanity.Mothron
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this);
-				LegEquipTextureFemale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs", EquipType.Legs, this);
+				LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this, "MoCostumeLegpiece_Legs");
+				LegEquipTextureFemale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs", EquipType.Legs, this, "MoCostumeLegpiece_FemaleLegs");
 			}
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)

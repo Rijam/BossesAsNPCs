@@ -86,12 +86,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-			{
+			bestiaryEntry.Info.AddRange(
+			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
 				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
-			});
+			]);
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)

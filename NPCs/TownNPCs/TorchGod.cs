@@ -99,12 +99,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		public override void SetBestiary(BestiaryDatabase database, BestiaryEntry bestiaryEntry)
 		{
-			bestiaryEntry.Info.AddRange(new IBestiaryInfoElement[]
-			{
+			bestiaryEntry.Info.AddRange(
+			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
 				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
-			});
+			]);
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -599,21 +599,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			SetupShops.TheDestroyer(npcTorchGodShop20, Shop2);
 			npcTorchGodShop20.Register();
 
-			var npcTorchGodShop21 = new NPCShop(Type, TorchGodShop21);
-			SetupShops.Spazmatism(npcTorchGodShop21, Shop1);
-			npcTorchGodShop21.Register();
-
-			var npcTorchGodShop22 = new NPCShop(Type, TorchGodShop22);
-			SetupShops.Spazmatism(npcTorchGodShop22, Shop2);
-			npcTorchGodShop22.Register();
-
-			var npcTorchGodShop23 = new NPCShop(Type, TorchGodShop23);
+			var npcTorchGodShop23 = new NPCShop(Type, TorchGodShop21);
 			SetupShops.Retinazer(npcTorchGodShop23, Shop1);
 			npcTorchGodShop23.Register();
 
-			var npcTorchGodShop24 = new NPCShop(Type, TorchGodShop24);
+			var npcTorchGodShop24 = new NPCShop(Type, TorchGodShop22);
 			SetupShops.Retinazer(npcTorchGodShop24, Shop2);
 			npcTorchGodShop24.Register();
+
+			var npcTorchGodShop21 = new NPCShop(Type, TorchGodShop23);
+			SetupShops.Spazmatism(npcTorchGodShop21, Shop1);
+			npcTorchGodShop21.Register();
+
+			var npcTorchGodShop22 = new NPCShop(Type, TorchGodShop24);
+			SetupShops.Spazmatism(npcTorchGodShop22, Shop2);
+			npcTorchGodShop22.Register();
 
 			var npcTorchGodShop25 = new NPCShop(Type, TorchGodShop25);
 			SetupShops.SkeletronPrime(npcTorchGodShop25, Shop1);

@@ -3,9 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Localization;
-using Terraria.Utilities;
-using System.Linq;
 
 namespace BossesAsNPCs.Items.Vanity.Pumpking
 {
@@ -39,7 +36,7 @@ namespace BossesAsNPCs.Items.Vanity.Pumpking
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTexture = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs_Complete", EquipType.Legs, this);
+				LegEquipTexture = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs_Complete", EquipType.Legs, this, "PkCostumeBodypiece_Legs_Complete");
 			}
 		}
 		public override void SetStaticDefaults()

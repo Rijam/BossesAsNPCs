@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs;
 using Terraria.GameContent.Events;
+using BossesAsNPCs.NPCs;
 
 namespace BossesAsNPCs.Items
 {
@@ -50,6 +51,9 @@ namespace BossesAsNPCs.Items
 			Main.NewText("downedEoW " + BossesAsNPCsWorld.downedEoW);
 			Main.NewText("downedBoC " + BossesAsNPCsWorld.downedBoC);
 			Main.NewText("downedWoF " + BossesAsNPCsWorld.downedWoF);
+
+			Main.NewText("ShopContainsItem " + SetupShops.CustomShopContainsItem("KingSlime", 19303));
+			Main.NewText("CheckTorchGodShops " + GenerateShops.CheckTorchGodShops(6166, NPCID.KingSlime));
 			return true;
 		}
 	}

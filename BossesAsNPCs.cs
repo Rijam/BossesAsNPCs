@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -21,6 +23,7 @@ namespace BossesAsNPCs
 
 		public override void Load()
 		{
+			Instance = this;
 			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
 			{
 				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/{}");
@@ -111,6 +114,49 @@ namespace BossesAsNPCs
 				}
 				*/
 			}
+			/*
+			if (ModLoader.TryGetMod("BetterDialogue", out Mod dialect))
+			{
+				try
+				{
+					// Idk reflection
+					PropertyInfo supportedNPCs = dialect.GetType().GetProperty("SupportedNPCs", BindingFlags.Public | BindingFlags.Static);
+					List<int> list = (List<int>)supportedNPCs?.GetValue(dialect);
+					list.Add(ModContent.ItemType<CaughtKingSlime>());
+					list.Add(ModContent.ItemType<CaughtEyeOfCthulhu>());
+					list.Add(ModContent.ItemType<CaughtEaterOfWorlds>());
+					list.Add(ModContent.ItemType<CaughtBrainOfCthulhu>());
+					list.Add(ModContent.ItemType<CaughtQueenBee>());
+					list.Add(ModContent.ItemType<CaughtSkeletron>());
+					list.Add(ModContent.ItemType<CaughtDeerclops>());
+					list.Add(ModContent.ItemType<CaughtWallOfFlesh>());
+					list.Add(ModContent.ItemType<CaughtQueenSlime>());
+					list.Add(ModContent.ItemType<CaughtTheDestroyer>());
+					list.Add(ModContent.ItemType<CaughtSpazmatism>());
+					list.Add(ModContent.ItemType<CaughtRetinazer>());
+					list.Add(ModContent.ItemType<CaughtSkeletronPrime>());
+					list.Add(ModContent.ItemType<CaughtPlantera>());
+					list.Add(ModContent.ItemType<CaughtGolem>());
+					list.Add(ModContent.ItemType<CaughtEmpressOfLight>());
+					list.Add(ModContent.ItemType<CaughtDukeFishron>());
+					list.Add(ModContent.ItemType<CaughtBetsy>());
+					list.Add(ModContent.ItemType<CaughtLunaticCultist>());
+					list.Add(ModContent.ItemType<CaughtMoonLord>());
+					list.Add(ModContent.ItemType<CaughtDreadnautilus>());
+					list.Add(ModContent.ItemType<CaughtMothron>());
+					list.Add(ModContent.ItemType<CaughtPumpking>());
+					list.Add(ModContent.ItemType<CaughtIceQueen>());
+					list.Add(ModContent.ItemType<CaughtMartianSaucer>());
+					list.Add(ModContent.ItemType<CaughtTorchGod>());
+					supportedNPCs.SetValue(dialect, list);
+					Logger.Debug("Bosses as NPCs Dialect support added?");
+				}
+				catch
+				{
+					Logger.Warn("Bosses as NPCs Dialect support failed.");
+				}
+			}
+			*/
 		}
 
 		//Adapted from absoluteAquarian's GraphicsLib
@@ -178,7 +224,7 @@ namespace BossesAsNPCs
 					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
 					return false;
 				case "CanSpawn":
-					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					return args[1].ToString() switch
 					{
 						"KingSlime" => ModContent.GetInstance<BossesAsNPCsConfigServer>().CanSpawnKingSlime,
@@ -217,7 +263,7 @@ namespace BossesAsNPCs
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				case "GetCondition":
-					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					return args[1].ToString() switch
 					{
 						"TownNPCsCrossModSupport" => ShopConditions.TownNPCsCrossModSupport,
@@ -252,26 +298,26 @@ namespace BossesAsNPCs
 					switch (args[1].ToString())
 					{
 						case "DefaultPrice":
-							CheckArgsLength(5, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString() });
+							CheckArgsLength(5, [args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString()]);
 							// string npc, int item, Condition condition
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4]);
 						case "CustomPrice":
-							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
+							CheckArgsLength(6, [args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString()]);
 							// string npc, int item, Condition condition, int customPrice
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (int)args[5]);
 						case "WithDiv":
-							CheckArgsLength(6, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString() });
+							CheckArgsLength(6, [args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString()]);
 							// string npc, int item, Condition condition, float priceDiv
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (float)args[5]);
 						case "WithDivAndMulti":
-							CheckArgsLength(7, new string[] { args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString(), args[6].ToString() });
+							CheckArgsLength(7, [args[0].ToString(), args[1].ToString(), args[2].ToString(), args[3].ToString(), args[4].ToString(), args[5].ToString(), args[6].ToString()]);
 							// string npc, int item, Condition condition, float priceDiv, float priceMulti
 							return NPCs.SetupShops.SetShopItem(args[2].ToString(), (int)args[3], (List<Condition>)args[4], (float)args[5], (float)args[6]);
 						default:
 							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");
 					}
 				case "DisableInternalCrossModSupport":
-					CheckArgsLength(2, new string[] { args[0].ToString(), args[1].ToString() });
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					Logger.DebugFormat("Internal cross mod support for {0} has been disabled.", args[1].ToString());
 					return args[1].ToString() switch
 					{
@@ -291,6 +337,7 @@ namespace BossesAsNPCs
 						"StarsAbove" => SetupShops.StarsAbove = false,
 						"StarlightRiver" => SetupShops.StarlightRiver = false,
 						"PboneUtils" => SetupShops.PboneUtils = false,
+						"Avalon" => SetupShops.Avalon = false,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				default:
