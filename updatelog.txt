@@ -223,7 +223,7 @@
 	* Decreased the waiting period between attacks for some Boss NPCs.
 	* Created a License for the mod.
 
-0.2.12 - Update 27 (? ?, 2024)
+0.2.12 - Update 27 (May 1, 2024)
 	* Fixed a typo in one of Queen Slime's dialog lines (Thanks gochiaotzugogo (Nephro))
 	* Made the caught Town NPCs compatible with the recipes added for caught Town NPCs in Fargo's Mutant Mod.
 	* New config option to auto generate shop items based on drops from Bosses. This will work with any mod enabled. Still experimental.
