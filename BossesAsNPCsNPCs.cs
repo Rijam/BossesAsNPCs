@@ -209,7 +209,8 @@ namespace BossesAsNPCs
 				}
 			}
 		}
-		public override void SetBestiary(NPC npc, BestiaryDatabase database, BestiaryEntry bestiaryEntry)
+
+		public override void SetStaticDefaults()
 		{
 			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<KingSlime>()] = 2;
 			ContentSamples.NpcBestiaryRarityStars[ModContent.NPCType<EyeOfCthulhu>()] = 2;
