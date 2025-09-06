@@ -1,8 +1,4 @@
-using Microsoft.Xna.Framework;
-using System;
 using Terraria;
-using Terraria.Graphics.Capture;
-using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace BossesAsNPCs

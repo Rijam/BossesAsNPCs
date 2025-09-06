@@ -12,7 +12,6 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
 using BossesAsNPCs.EmoteBubbles;
-using System;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {

@@ -1,17 +1,15 @@
-using BossesAsNPCs.Items;
-using BossesAsNPCs.NPCs;
-using BossesAsNPCs.NPCs.TownNPCs;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
 using Terraria.ModLoader;
+using BossesAsNPCs.Items;
+using BossesAsNPCs.NPCs;
+using BossesAsNPCs.NPCs.TownNPCs;
 
 namespace BossesAsNPCs
 {
@@ -338,6 +336,12 @@ namespace BossesAsNPCs
 						"StarlightRiver" => SetupShops.StarlightRiver = false,
 						"PboneUtils" => SetupShops.PboneUtils = false,
 						"Avalon" => SetupShops.Avalon = false,
+						"Redeption" => SetupShops.Redeption = false,
+						"Consolaria" => SetupShops.Consolaria = false,
+						"SOTS" => SetupShops.SOTS = false,
+						"VitalityMod" => SetupShops.VitalityMod = false,
+						"TheConfectionRebirth" => SetupShops.TheConfectionRebirth = false,
+						"CrystiliumMod" => SetupShops.CrystiliumMod = false,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				default:

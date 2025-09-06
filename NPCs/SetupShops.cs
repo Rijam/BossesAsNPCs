@@ -4,7 +4,6 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs.TownNPCs;
-using Terraria.ModLoader.IO;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -337,6 +336,10 @@ namespace BossesAsNPCs.NPCs
 		public static bool Avalon = true;
 		public static bool Redeption = true;
 		public static bool Consolaria = true;
+		public static bool SOTS = true;
+		public static bool VitalityMod = true;
+		public static bool TheConfectionRebirth = true;
+		public static bool CrystiliumMod = true;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 #pragma warning restore IDE0079 // Remove unnecessary suppression
 
@@ -403,6 +406,8 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeFlask", npcString, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "KingSlimeCard", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "WardenSlime", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ScrollTier1", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -519,6 +524,7 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "EyeCard", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ScrollTier2", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -526,12 +532,13 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
 				{
-					NPCHelper.SafelySetCrossModItem(starsAbove, "FerrumPawn", npcString, 0.1f);
+					NPCHelper.SafelySetCrossModItem(starsAbove, "Pawn", npcString, 0.1f);
 				}
 				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
 				{
-					NPCHelper.SafelySetCrossModItem(avalon, "BaccaliteOre", npcString, ShopConditions.WorldContagion(avalon));
+					NPCHelper.SafelySetCrossModItem(avalon, "BacciliteOre", npcString, priceDiv: 1f, priceMulti: 5f, ShopConditions.WorldContagion(avalon));
 					NPCHelper.SafelySetCrossModItem(avalon, "IckyArrow", npcString, ShopConditions.WorldContagion(avalon));
+					NPCHelper.SafelySetCrossModItem(avalon, "BloodyArrow", npcString, ShopConditions.WorldContagion(avalon));
 					NPCHelper.SafelySetCrossModItem(avalon, "ContagionSeeds", npcString, ShopConditions.WorldContagion(avalon));
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.EyeofCthulhu, NPCString.EyeOfCthulhu, ModContent.NPCType<EyeOfCthulhu>());
@@ -602,6 +609,7 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "EaterCard", npcString, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCorruption", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ScrollTier2", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -618,6 +626,11 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("Consolaria", out Mod consolaria) && Consolaria)
 				{
 					NPCHelper.SafelySetCrossModItem(consolaria, "SuspiciousLookingApple", npcString, 0.05f);
+				}
+				if (ModLoader.TryGetMod("SOTS", out Mod secretsOfTheShadows) && SOTS)
+				{
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "PyramidKey", npcString);
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "ToothAche", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.EaterofWorldsHead, NPCString.EaterOfWorlds, ModContent.NPCType<EaterOfWorlds>());
 				if (customShops.TryGetValue(NPCString.EaterOfWorlds, out List<ShopItem> value))
@@ -695,6 +708,7 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "BrainCard", npcString, 0.33f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "PreservedCrimson", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ScrollTier1", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -703,6 +717,11 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "TheStalker", npcString, 0.33f);
+				}
+				if (ModLoader.TryGetMod("SOTS", out Mod secretsOfTheShadows) && SOTS)
+				{
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "PyramidKey", npcString);
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "Vertebraeker", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.BrainofCthulhu, NPCString.BrainOfCthulhu, ModContent.NPCType<BrainOfCthulhu>());
 				if (customShops.TryGetValue(NPCString.BrainOfCthulhu, out List<ShopItem> value))
@@ -788,9 +807,10 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeCard", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "HoneyDie", npcString, 0.25f);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "BeeSeeker", npcString, 0.17f);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "WaxyVial", npcString, 0.17f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "BeeSeeker", npcString, 0.17f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "WaxyVial", npcString, 0.17f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "QueenBeeFlask", npcString, 0.17f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "BeeRune", npcString, 0.33f);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -799,6 +819,18 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "SweetHeart", npcString, 0.33f);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "FightoftheBumblebee", npcString);
+				}
+				if (ModLoader.TryGetMod("SOTS", out Mod secretsOfTheShadows) && SOTS)
+				{
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "RoyalJelly", npcString);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Honeydrop", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.QueenBee, NPCString.QueenBee, ModContent.NPCType<QueenBee>());
 				if (customShops.TryGetValue(NPCString.QueenBee, out List<ShopItem> value))
@@ -881,6 +913,7 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "SkeletronCard", npcString);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ScrollTier3", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -889,6 +922,10 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("ThoriumMod", out Mod thorium) && ThoriumMod)
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "GuildsStaff", npcString, 0.25f);
+				}
+				if (ModLoader.TryGetMod("SOTS", out Mod secretsOfTheShadows) && SOTS)
+				{
+					NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "Baguette", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.SkeletronHead, NPCString.Skeletron, ModContent.NPCType<Skeletron>());
 				if (customShops.TryGetValue(NPCString.Skeletron, out List<ShopItem> value))
@@ -973,6 +1010,10 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(starlightRiver, "HungryStomach", npcString);
 				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "MonsterTooth", npcString);
+				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Deerclops, NPCString.Deerclops, ModContent.NPCType<Deerclops>());
 				if (customShops.TryGetValue(NPCString.Deerclops, out List<ShopItem> value))
 				{
@@ -1056,7 +1097,8 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "ShamanEmblem", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "GuardianEmblem", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "ShapeshifterEmblem", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(orchidMod, "OrchidEmblem", npcString);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
@@ -1074,6 +1116,24 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "ClericEmblem", npcString, 0.33f);
 					NPCHelper.SafelySetCrossModItem(thorium, "BardEmblem", npcString, 0.33f);
 				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "RedSpiderLily", npcString);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "BloodHunterEmblem", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "GluttonousLeash", npcString);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "FleshyTendril", npcString);
+				}
+				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
+				{
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "GrandSlammer", npcString);
+				}
+
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.WallofFlesh, NPCString.WallOfFlesh, ModContent.NPCType<WallOfFlesh>());
 				if (customShops.TryGetValue(NPCString.WallOfFlesh, out List<ShopItem> value))
 				{
@@ -1140,6 +1200,14 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "ClearKeychain", npcString, 0.25f);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
+				{
+					NPCHelper.SafelySetCrossModItem(orchidMod, "GuardianCrystalNinjaHelm", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "YoumuHilt", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.QueenSlimeBoss, NPCString.QueenSlime, ModContent.NPCType<QueenSlime>());
 				if (customShops.TryGetValue(NPCString.QueenSlime, out List<ShopItem> value))
@@ -1222,6 +1290,16 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", npcString);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", npcString);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "SonicHat", npcString);
+					NPCHelper.SafelySetCrossModItem(avalon, "ScrollofTome", npcString);
+				}
+				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
+				{
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "NeapoliniteOre", npcString, priceDiv: 1f, priceMulti: 5f);
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "HallowedOre", npcString, priceDiv: 1f, priceMulti: 5f);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.TheDestroyer, NPCString.TheDestroyer, ModContent.NPCType<TheDestroyer>());
 				if (customShops.TryGetValue(NPCString.TheDestroyer, out List<ShopItem> value))
@@ -1306,6 +1384,20 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", npcString);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", npcString);
 				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "SonicShirt", npcString);
+					NPCHelper.SafelySetCrossModItem(avalon, "ScrollofTome", npcString);
+				}
+				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
+				{
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "NeapoliniteOre", npcString, priceDiv: 1f, priceMulti: 5f);
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "HallowedOre", npcString, priceDiv: 1f, priceMulti: 5f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Retilazer", npcString);
+				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Retinazer, NPCString.Retinazer, ModContent.NPCType<Retinazer>());
 				if (customShops.TryGetValue(NPCString.Retinazer, out List<ShopItem> value))
 				{
@@ -1387,6 +1479,22 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", npcString);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", npcString);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "SonicShirt", npcString);
+					NPCHelper.SafelySetCrossModItem(avalon, "ScrollofTome", npcString);
+					NPCHelper.SafelySetCrossModItem(avalon, "GreekExtinguisher", npcString);
+				}
+				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
+				{
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "NeapoliniteOre", npcString, priceDiv: 1f, priceMulti: 5f);
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "HallowedOre", npcString, priceDiv: 1f, priceMulti: 5f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Spazmatica", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "CursedFlamesprayer", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Spazmatism, NPCString.Spazmatism, ModContent.NPCType<Spazmatism>());
 				if (customShops.TryGetValue(NPCString.Spazmatism, out List<ShopItem> value))
@@ -1470,6 +1578,24 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(thorium, "StrangePlating", npcString);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeCell", npcString);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "SonicShoes", npcString);
+					NPCHelper.SafelySetCrossModItem(avalon, "ScrollofTome", npcString);
+				}
+				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
+				{
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "NeapoliniteOre", npcString, priceDiv: 1f, priceMulti: 5f);
+					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "HallowedOre", npcString, priceDiv: 1f, priceMulti: 5f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "MechanicalHandful", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "Rageblade", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.SkeletronPrime, NPCString.SkeletronPrime, ModContent.NPCType<SkeletronPrime>());
 				if (customShops.TryGetValue(NPCString.SkeletronPrime, out List<ShopItem> value))
@@ -1556,8 +1682,9 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "BulbScepter", npcString, 0.66f);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "FloralStinger", npcString, 0.33f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "BulbScepter", npcString, 0.66f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "FloralStinger", npcString, 0.33f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "PlanteraStandard", npcString, 0.33f);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -1573,6 +1700,20 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "VuvuzelaYellow", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "VuvuzelaBlue", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "VerdantOrnament", npcString, 0.25f);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "LifeDew", npcString);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "FoliageStaff", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "PocketMachete", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "SporeSpreader", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "DekuNut", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Plantera, NPCString.Plantera, ModContent.NPCType<Plantera>());
 				if (customShops.TryGetValue(NPCString.Plantera, out List<ShopItem> value))
@@ -1648,7 +1789,8 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "SunRay", npcString, 0.14f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "SunRay", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "TempleWarhammer", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Golem, NPCString.Golem, ModContent.NPCType<Golem>());
 				if (customShops.TryGetValue(NPCString.Golem, out List<ShopItem> value))
@@ -1729,6 +1871,15 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
 					NPCHelper.SafelySetCrossModItem(clickerClass, "RainbowClicker", npcString, 0.25f);
+				}
+				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
+				{
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "SunRay", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "GuardianEmpressMaterial", npcString);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "LightShow", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.HallowBoss, NPCString.EmpressOfLight, ModContent.NPCType<EmpressOfLight>());
 				if (customShops.TryGetValue(NPCString.EmpressOfLight, out List<ShopItem> value))
@@ -1811,6 +1962,11 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "DukesRegalCarnyx", npcString, 0.20f);
 					NPCHelper.SafelySetCrossModItem(thorium, "Brinefang", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SoulAnchor", npcString, 0.20f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Cyclone", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "DukesTusk", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.DukeFishron, NPCString.DukeFishron, ModContent.NPCType<DukeFishron>());
 				if (customShops.TryGetValue(NPCString.DukeFishron, out List<ShopItem> value))
@@ -1949,6 +2105,10 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "ValhallasDescent", npcString, 1f, 5f);
 					NPCHelper.SafelySetCrossModItem(thorium, "MediumRareSteak", npcString, 1f, 5f);
 				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "DragonDagger", npcString);
+				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.DD2Betsy, NPCString.Betsy, ModContent.NPCType<Betsy>());
 				if (customShops.TryGetValue(NPCString.Betsy, out List<ShopItem> value))
 				{
@@ -2042,7 +2202,7 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "AbyssFragment", npcString, 1f, 2f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "AbyssFragment", npcString, 1f, 2f);
 				}
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
@@ -2063,6 +2223,15 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "LunaticsRobe", npcString, 0.2f);
 					NPCHelper.SafelySetCrossModItem(thorium, "LunaticsLeggings", npcString, 0.2f);
 					NPCHelper.SafelySetCrossModItem(thorium, "AncientLight", npcString);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "RitualSyringe", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "PearlescentOrb", npcString);
+					NPCHelper.SafelySetCrossModItem(starsAbove, "ResonanceGem", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.CultistBoss, NPCString.LunaticCultist, ModContent.NPCType<LunaticCultist>());
 				if (customShops.TryGetValue(NPCString.LunaticCultist, out List<ShopItem> value))
@@ -2152,8 +2321,10 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "Nirvana", npcString, 0.5f);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "TheCore", npcString, 0.5f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "Nirvana", npcString, 0.5f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "TheCore", npcString, 0.5f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "MoonLordRune", npcString, 0.5f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "MoonLordShield", npcString, 0.5f);
 				}
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
@@ -2166,6 +2337,10 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "AngelsEnd", npcString, 0.11f);
 					NPCHelper.SafelySetCrossModItem(thorium, "LifeAndDeath", npcString, 0.11f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SonicAmplifier", npcString, 0.11f);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "PearlescentOrb", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.MoonLordCore, NPCString.MoonLord, ModContent.NPCType<MoonLord>());
 				if (customShops.TryGetValue(NPCString.MoonLord, out List<ShopItem> value))
@@ -2287,6 +2462,10 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "ShadeBand", npcString, 0.1f, Condition.Hardmode);
 					NPCHelper.SafelySetCrossModItem(thorium, "NecroticStaff", npcString, 0.1f, Condition.Hardmode);
 				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "BloodsBoundary", npcString);
+				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.BloodNautilus, NPCString.Dreadnautilus, ModContent.NPCType<Dreadnautilus>());
 				if (customShops.TryGetValue(NPCString.Dreadnautilus, out List<ShopItem> value))
 				{
@@ -2374,7 +2553,7 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "BrokenHeroScepter", npcString, 0.25f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "BrokenHeroScepter", npcString, 0.25f);
 				}
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
@@ -2390,6 +2569,14 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "SunrayStaff", npcString, 0.05f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SunflareGuitar", npcString, 0.05f);
 					NPCHelper.SafelySetCrossModItem(thorium, "StalkersSnippers", npcString, 0.05f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "BrokenVigilanteTome", npcString);
+				}
+				if (ModLoader.TryGetMod("CrystiliumMod", out Mod crystiliumMod) && CrystiliumMod)
+				{
+					NPCHelper.SafelySetCrossModItem(crystiliumMod, "BrokenStaff", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Mothron, NPCString.Mothron, ModContent.NPCType<Mothron>());
 				if (customShops.TryGetValue(NPCString.Mothron, out List<ShopItem> value))
@@ -2486,7 +2673,7 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "MourningTorch", npcString, 0.1f, Condition.DownedMourningWood);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "MourningTorch", npcString, 0.1f, Condition.DownedMourningWood);
 				}
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
@@ -2501,6 +2688,14 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "Witchblade", npcString, 0.1f);
 					NPCHelper.SafelySetCrossModItem(thorium, "SnackLantern", npcString, 0.2f);
 					NPCHelper.SafelySetCrossModItem(thorium, "HauntingBassDrum", npcString, 0.1f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "JackOCrack", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "GuppyHead", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.MourningWood, NPCString.Pumpking, ModContent.NPCType<Pumpking>());
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Pumpking, NPCString.Pumpking, ModContent.NPCType<Pumpking>());
@@ -2595,12 +2790,16 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantankScrap", npcString); //Mechanical Scrap
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "IceSentry", npcString, 0.1f); //Frozen Queen's Staff
 					NPCHelper.SafelySetCrossModItem(stormsAdditions, "FrostCube", npcString, 0.07f); //Frozen Queen's Core
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantankMinion", npcString); 
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantaShotgun", npcString);
+					NPCHelper.SafelySetCrossModItem(stormsAdditions, "SantaWires", npcString);
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
 					NPCHelper.SafelySetCrossModItem(orchidMod, "RCRemote", npcString, 0.02f);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "FragilePresent", npcString, 0.1f, Condition.DownedSantaNK1);
-					NPCHelper.SafelySetCrossModItem(orchidMod, "IceFlakeCone", npcString, 0.1f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "FrostRune", npcString, 0.02f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "FragilePresent", npcString, 0.1f, Condition.DownedSantaNK1);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "IceFlakeCone", npcString, 0.1f);
 				}
 				if (ModLoader.TryGetMod("Polarities", out Mod polarities) && Polarities)
 				{
@@ -2618,6 +2817,16 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "JingleBells", npcString, 0.1f, Condition.DownedSantaNK1);
 					NPCHelper.SafelySetCrossModItem(thorium, "SoftServeSunderer", npcString);
 					NPCHelper.SafelySetCrossModItem(thorium, "Cryotherapy", npcString, 0.1f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Jollylash", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "Piercicle", npcString);
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "ShiverFragment", npcString);
+				}
+				if (ModLoader.TryGetMod("StarsAbove", out Mod starsAbove) && StarsAbove)
+				{
+					NPCHelper.SafelySetCrossModItem(starsAbove, "GuppyHead", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.Everscream, NPCString.IceQueen, ModContent.NPCType<IceQueen>());
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.SantaNK1, NPCString.IceQueen, ModContent.NPCType<IceQueen>());
@@ -2698,7 +2907,8 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
 				{
-					NPCHelper.SafelySetCrossModItem(orchidMod, "MartianBeamer", npcString, 0.25f);
+					// NPCHelper.SafelySetCrossModItem(orchidMod, "MartianBeamer", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(orchidMod, "MartianWarhammer", npcString);
 				}
 				if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 				{
@@ -2717,6 +2927,14 @@ namespace BossesAsNPCs.NPCs
 					NPCHelper.SafelySetCrossModItem(thorium, "CosmicDagger", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "LivewireCrasher", npcString, 0.25f);
 					NPCHelper.SafelySetCrossModItem(thorium, "MolecularStabilizer", npcString, 0.25f);
+				}
+				if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+				{
+					NPCHelper.SafelySetCrossModItem(vitalityMod, "MartianScrap", npcString);
+				}
+				if (ModLoader.TryGetMod("Avalon", out Mod avalon) && Avalon)
+				{
+					NPCHelper.SafelySetCrossModItem(avalon, "StaminaCrystal", npcString);
 				}
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.MartianSaucerCore, NPCString.MartianSaucer, ModContent.NPCType<MartianSaucer>());
 				if (customShops.TryGetValue(NPCString.MartianSaucer, out List<ShopItem> value))
@@ -2756,7 +2974,7 @@ namespace BossesAsNPCs.NPCs
 			{
 				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyFlask", npcString, (0.02f * 5), ShopConditions.GoblinSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinArmyCard", npcString, (0.02f * 5), ShopConditions.GoblinSellInvasionItems);
-				NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinStick", npcString, 0.33f, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
+				// NPCHelper.SafelySetCrossModItem(orchidMod, "GoblinStick", npcString, 0.33f, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
 			}
 			if (ModLoader.TryGetMod("ClickerClass", out Mod clickerClass) && ClickerClass)
 			{
@@ -2803,6 +3021,10 @@ namespace BossesAsNPCs.NPCs
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowPurgeCaltrop", npcString, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowflameWarhorn", npcString, 0.17f, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium2, "ShadowTippedJavelin", npcString, ShopConditions.DownedGoblinWarlock, ShopConditions.GoblinSellInvasionItems);
+			}
+			if (ModLoader.TryGetMod("VitalityMod", out Mod vitalityMod) && VitalityMod)
+			{
+				NPCHelper.SafelySetCrossModItem(vitalityMod, "ShadowStone", npcString);
 			}
 			if (customShops.TryGetValue(NPCString.GoblinTinkerer, out List<ShopItem> value))
 			{
@@ -2882,6 +3104,15 @@ namespace BossesAsNPCs.NPCs
 				NPCHelper.SafelySetCrossModItem(thorium, "TwentyFourCaratTuba", npcString, 0.2f, ShopConditions.PirateSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium, "GreedfulGurdy", npcString, 0.1f, ShopConditions.PirateSellInvasionItems);
 				NPCHelper.SafelySetCrossModItem(thorium, "GreedyMagnet", npcString, 0.1f, ShopConditions.PirateSellInvasionItems);
+			}
+			if (ModLoader.TryGetMod("OrchidMod", out Mod orchidMod) && OrchidMod)
+			{
+				NPCHelper.SafelySetCrossModItem(orchidMod, "PirateWarhammer", npcString);
+				NPCHelper.SafelySetCrossModItem(orchidMod, "PirateStandard", npcString);
+			}
+			if (ModLoader.TryGetMod("SOTS", out Mod secretsOfTheShadows) && SOTS)
+			{
+				NPCHelper.SafelySetCrossModItem(secretsOfTheShadows, "Chocolate", npcString);
 			}
 			if (customShops.TryGetValue(NPCString.Pirate, out List<ShopItem> value))
 			{

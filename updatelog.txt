@@ -229,5 +229,6 @@
 	* New config option to auto generate shop items based on drops from Bosses. This will work with any mod enabled. Still experimental.
 	* Fixed equipment registering for several vanity sets for tModLoader v2025.3
 
-0.2.13 - Update 28 (? ?, ?)
+0.2.13 - Update 28 (September 5, 2025)
 	* Updated manually setting the Bestiary stars for the boss NPCs.
+	* Added support Exxo Avalon Origins, Mod of Redeption, Consolaria, Secrets of the Shadows, Vitality Mod, The Confection Rebirth, and Crystilium Mod.

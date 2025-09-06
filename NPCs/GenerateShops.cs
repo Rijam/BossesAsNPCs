@@ -176,7 +176,7 @@ namespace BossesAsNPCs.NPCs
 					}
 				}
 				SetupShops.SetShopItem(npcShop, item2.itemId, conditions, customPrice);
-				BossesAsNPCs.Instance.Logger.InfoFormat("      Added Item to shop {0} {1}", item2.itemId, item.Name);
+				BossesAsNPCs.Instance.Logger.InfoFormat("      Added Item to shop {0} {1} ({2}) from {3}", item2.itemId, item.Name, item.ModItem?.GetType(), item.ModItem?.Mod);
 			}
 		}
 

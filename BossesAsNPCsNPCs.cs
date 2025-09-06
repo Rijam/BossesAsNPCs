@@ -3,9 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs.TownNPCs;
-using Terraria.GameContent.Bestiary;
 using BossesAsNPCs.NPCs;
-using Terraria.ModLoader.IO;
 
 namespace BossesAsNPCs
 {
