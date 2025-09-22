@@ -137,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
-			chat.Add(Language.GetTextValue(path + ".Rare"), 0.1);
+			chat.Add(Language.GetTextValue(path + "Rare"), 0.1);
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
