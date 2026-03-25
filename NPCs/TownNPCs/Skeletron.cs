@@ -7,6 +7,7 @@ using Terraria.GameContent;
 using Terraria.GameContent.Bestiary;
 using Terraria.GameContent.Personalities;
 using BossesAsNPCs.EmoteBubbles;
+using Microsoft.Xna.Framework;
 
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
@@ -17,7 +18,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 		private const string Shop1 = "Shop1";
 		private const string Shop2 = "Shop2";
+		private static int ShimmerHeadIndex;
 		private static Profiles.StackedNPCProfile NPCProfile;
+
+		public override void Load()
+		{
+			ShimmerHeadIndex = Mod.AddNPCHeadTexture(Type, GetType().Namespace.Replace('.', '/') + "/Shimmered/" + Name + "_Head");
+		}
 
 		public override void SetStaticDefaults()
 		{
@@ -33,7 +40,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.FaceEmote[Type] = ModContent.EmoteBubbleType<SkeletronEmote>();
 
 			// Influences how the NPC looks in the Bestiary
-			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new ()
+			NPCID.Sets.NPCBestiaryDrawModifiers drawModifiers = new()
 			{
 				Velocity = 1f, // Draws the NPC in the bestiary as if its walking +1 tiles in the x direction
 				Direction = -1
@@ -42,8 +49,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
 			NPC.Happiness
-				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Love)
-				.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<DungeonBiome>(AffectionLevel.Love)
+				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<HallowBiome>(AffectionLevel.Dislike)
 				.SetNPCAffection(NPCID.Clothier, AffectionLevel.Love)
 				.SetNPCAffection(ModContent.NPCType<LunaticCultist>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<SkeletronPrime>(), AffectionLevel.Like)
@@ -52,11 +60,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				.SetNPCAffection(ModContent.NPCType<MoonLord>(), AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Merchant, AffectionLevel.Like)
 				.SetNPCAffection(NPCID.Angler, AffectionLevel.Dislike)
-				//Princess is automatically set
+			//Princess is automatically set
 			; // < Mind the semicolon!
 
 			NPCProfile = new Profiles.StackedNPCProfile(
-				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture))
+				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture)),
+				new Profiles.DefaultNPCProfile(GetType().Namespace.Replace('.', '/') + "/Shimmered/" + Name, ShimmerHeadIndex, GetType().Namespace.Replace('.', '/') + "/Shimmered/" + Name + "_Party")
 			);
 
 			// Specify the debuffs it is immune to
@@ -64,6 +73,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BoneJavelin] = true;
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.BloodButcherer] = true;
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.TentacleSpike] = true;
+
+			TownNPCLiveInBadBiomeSets.CanLiveInDungeon[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -72,7 +83,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 15;
 			NPC.lifeMax = 440;
@@ -88,7 +99,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bestiaryEntry.Info.AddRange(
 			[
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
 				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
@@ -103,12 +114,29 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				{
 					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, partyHatGore);
 				}
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
-				Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Jaw").Type, 1f);
-				for (int k = 0; k < 2; k++)
+				if (NPC.IsShimmerVariant)
 				{
-					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
-					Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
+					if (partyHatGore == 0)
+					{
+						Gore.NewGore(NPC.GetSource_Death(), NPC.position + new Vector2(0, -10), NPC.velocity + new Vector2(0, -6), ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Hat_Shimmered").Type, 1f);
+					}
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head_Shimmered").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Jaw_Shimmered").Type, 1f);
+					for (int k = 0; k < 2; k++)
+					{
+						Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm_Shimmered").Type, 1f);
+						Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg_Shimmered").Type, 1f);
+					}
+				}
+				else
+				{
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Head").Type, 1f);
+					Gore.NewGore(NPC.GetSource_Death(), NPC.position, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Jaw").Type, 1f);
+					for (int k = 0; k < 2; k++)
+					{
+						Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Arm").Type, 1f);
+						Gore.NewGore(NPC.GetSource_Death(), NPC.Center, NPC.velocity, ModContent.Find<ModGore>(Mod.Name + "/" + Name + "_Gore_Leg").Type, 1f);
+					}
 				}
 			}
 		}
@@ -123,17 +151,18 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		}
 
 		public override ITownNPCProfile TownNPCProfile()
-        {
-            return NPCProfile;
-        }
+		{
+			return NPCProfile;
+		}
 
-		public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+		// public override void PostAI() => NPC.color = NPC.IsShimmerVariant ? Main.DiscoColor : default; // Make the color of the NPC rainbow when shimmered.
+		public override void PostAI() {}
 
 		public override string GetChat()
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 5; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -141,6 +170,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.BloodMoon.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "BloodMoon"), 2.0);
 			}
 			if (Condition.InGraveyard.IsMet())
 			{

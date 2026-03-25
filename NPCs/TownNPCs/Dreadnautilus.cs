@@ -71,7 +71,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 24;
 			NPC.lifeMax = 700;
@@ -137,7 +137,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 5; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -171,6 +171,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				for (int i = 1; i <= 2; i++)
 				{
 					chat.Add(Language.GetTextValue(path + "BloodMoon" + i));
+				}
+				if (Main.LocalPlayer.ZoneBeach)
+				{
+					chat.Add(Language.GetTextValue(path + "BloodMoonOcean"));
 				}
 				int zoologist = NPC.FindFirstNPC(NPCID.BestiaryGirl);
 				if (zoologist >= 0)

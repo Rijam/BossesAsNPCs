@@ -1,12 +1,6 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.GameContent.Creative;
-using Terraria.Localization;
-using Terraria.Utilities;
-using System.Linq;
 
 namespace BossesAsNPCs.Items.Vanity
 {

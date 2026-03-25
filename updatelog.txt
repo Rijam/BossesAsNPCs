@@ -235,3 +235,13 @@
 
 0.2.14 - Updated 29 (? ?, 2025)
 	* Fixed Skeletron's rare dialogue.
+	* Made it possible to have the Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist live in the Corruption, Crimson, and Dungeon.
+	* Added mod calls to add your Town NPC to be able to live in the Corruption, Crimson, or Dungeon.
+	* Updated the living preferences of Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist.
+	* Added shimmered variant of Skeletron.
+	* Added Shimmered Skeletron Costume Headpiece, Alternate Shimmered Skeletron Costume Headpiece, Shimmered Skeletron Costume Bodypiece, and Shimmered Skeletron Costume Legpiece.
+	* Added some more descriptions on the Boost Town NPC Spawn Rates and All in One NPC Mode config options.
+	* Added some more dialog.
+	* Updated King Slime's sprite.
+	* Added King Slime Costume Bodypiece, King Slime Costume Legpiece, and King Slime Costume Cape.
+	* King Slime no longer sells the Prince set.

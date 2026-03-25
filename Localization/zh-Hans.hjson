@@ -464,21 +464,89 @@ Mods: {
 
 			AllInOneOptions: {
 				// Tooltip: ""
-				Off.Label: 关 (正常)
-				Mixed.Label: 混合
-				OnlyOne.Label: 只有一个
+
+				Off: {
+					Label: 关 (正常)
+					/* Tooltip:
+						'''
+						{$Label}
+						Standard behavior.
+						Boss NPCs who's configs are on will be able to spawn in the world.
+						[c/AAAAAA:(Default value)]
+						''' */
+				}
+
+				Mixed: {
+					Label: 混合
+					/* Tooltip:
+						'''
+						{$Label}
+						Unloads the any Boss NPCs who's config is off.
+						Instead, a new Torch God NPC and Boss NPCs who's configs are on will be loaded.
+						The shops Boss NPCs who's configs are off will now be sold by the Torch God.
+						''' */
+				}
+
+				OnlyOne: {
+					Label: 只有一个
+					/* Tooltip:
+						'''
+						{$Label}
+						Unloads all of the other Boss NPCs from this mod.
+						Instead, only the Torch God will be loaded.
+						It will have shops for each boss' loot when they have been defeated.
+						The other configs for each Boss NPC will now determine which shops are available.
+						''' */
+				}
 			}
 
 			BoostSpawnRatesOptions: {
 				// Tooltip: ""
-				// Off.Label: Off (2 Minutes)
-				// OneMinute.Label: Every Minute
-				// ThirdySeconds.Label: Every 30 seconds
-				// FifteenSeconds.Label: Every 15 seconds
-				// TenSeconds.Label: Every 10 seconds
-				// FiveSeconds.Label: Every 5 seconds
-				// TwoSeconds.Label: Every 2 seconds
-				// EverySecond.Label: Every second
+
+				Off: {
+					// Label: Off (2 Minutes)
+					/* Tooltip:
+						'''
+						{$Label}
+						Vanilla behavior.
+						[c/AAAAAA:(Default value)]
+						''' */
+				}
+
+				OneMinute: {
+					// Label: Every Minute
+					// Tooltip: "{$Label}"
+				}
+
+				ThirdySeconds: {
+					// Label: Every 30 seconds
+					// Tooltip: "{$Label}"
+				}
+
+				FifteenSeconds: {
+					// Label: Every 15 seconds
+					// Tooltip: "{$Label}"
+				}
+
+				TenSeconds: {
+					// Label: Every 10 seconds
+					// Tooltip: "{$Label}"
+				}
+
+				FiveSeconds: {
+					// Label: Every 5 seconds
+					// Tooltip: "{$Label}"
+				}
+
+				TwoSeconds: {
+					// Label: Every 2 seconds
+					// Tooltip: "{$Label}"
+				}
+
+				EverySecond: {
+					// Label: Every second
+					// Tooltip: "{$Label}"
+				}
 			}
 		}
 
@@ -497,6 +565,9 @@ Mods: {
 			Graveyard: 墓地
 			//Set automatically from vanilla's localization
 			// Caverns: "{$GameUI.LayerCaverns}"
+			// Corruption: "{$LegacyMisc.101}"
+			// Crimson: "{$LegacyMisc.102}"
+			// Dungeon: Dungeon
 			None: 无
 		}
 
@@ -752,6 +823,16 @@ Mods: {
 				// Tooltip: ""
 			}
 
+			KSCostumeBodypiece: {
+				// DisplayName: King Slime Costume Bodypiece
+				// Tooltip: ""
+			}
+
+			KSCostumeLegpiece: {
+				// DisplayName: King Slime Costume Legpiece
+				// Tooltip: ""
+			}
+
 			KSCostumeGloves: {
 				DisplayName: 史莱姆王手套
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
@@ -759,6 +840,11 @@ Mods: {
 
 			KSAltCostumeGloves: {
 				DisplayName: 史莱姆王手套替代品
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			}
+
+			KSCostumeCape: {
+				// DisplayName: King Slime Costume Cape
 				// Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			}
 
@@ -770,6 +856,16 @@ Mods: {
 			LCCostumeBodypiece: {
 				DisplayName: 拜月教邪教徒上衣
 				// Tooltip: ""
+			}
+
+			MdCostumeHeadpiece: {
+				// DisplayName: Mechdusa Costume Headpiece
+				// Tooltip: ""
+			}
+
+			MdCostumeBodypiece: {
+				// DisplayName: Mechdusa Costume Bodypiece
+				// Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
 			MLCostumeHeadpiece: {
@@ -911,6 +1007,31 @@ Mods: {
 
 			SkCostumeLegpiece: {
 				DisplayName: 骷髅王裤子
+				// Tooltip: ""
+			}
+
+			SkeletronsRedHat: {
+				// DisplayName: Skeletron's Red Hat
+				// Tooltip: ""
+			}
+
+			SkShimmeredCostumeHeadpiece: {
+				// DisplayName: Shimmered Skeletron Costume Headpiece
+				// Tooltip: ""
+			}
+
+			SkShimmeredAltCostumeHeadpiece: {
+				// DisplayName: Alternate Shimmered Skeletron Costume Headpiece
+				// Tooltip: ""
+			}
+
+			SkShimmeredCostumeBodypiece: {
+				// DisplayName: Shimmered Skeletron Costume Bodypiece
+				// Tooltip: ""
+			}
+
+			SkShimmeredCostumeLegpiece: {
+				// DisplayName: Shimmered Skeletron Costume Legpiece
 				// Tooltip: ""
 			}
 
@@ -1192,15 +1313,15 @@ Mods: {
 				}
 
 				EaterOfWorlds: {
-					// Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.BrainofCthulhu}"
-					// Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					// Love: "{$Mods.BossesAsNPCs.Common.Corruption}, {$NPCName.BrainofCthulhu}"
+					// Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$Mods.BossesAsNPCs.Common.Crimson}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					// Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					// Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
 
 				BrainOfCthulhu: {
-					// Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
-					// Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					// Love: "{$Mods.BossesAsNPCs.Common.Crimson}, {$NPCName.EaterofWorldsHead}"
+					// Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$Mods.BossesAsNPCs.Common.Corruption}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					// Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					// Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
@@ -1213,9 +1334,9 @@ Mods: {
 				}
 
 				Skeletron: {
-					// Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Clothier}"
-					// Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
-					// Dislike: "{$NPCName.Angler}"
+					// Love: "{$Mods.BossesAsNPCs.Common.Dungeon}, {$NPCName.Clothier}"
+					// Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
+					// Dislike: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Angler}"
 					// Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 
@@ -1304,9 +1425,9 @@ Mods: {
 				}
 
 				LunaticCultist: {
-					// Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
-					// Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
-					// Dislike: "{$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
+					// Love: "{$Mods.BossesAsNPCs.Common.Dungeon}, {$NPCName.MoonLordHead}"
+					// Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
+					// Dislike: "{$Mods.BossesAsNPCs.Common.GlowingMushroom}, {$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
 					// Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 
@@ -1455,9 +1576,13 @@ Mods: {
 					Default2: 我正在看着你...
 					Default3: 除了那棵树或那只兔子，我想我是这个世界的吉祥物。
 					Default4: 有人曾经称我为“恐怖之眼”。
+					# Terraria, Dungeon Defenders 2, Don't Starve Together, Palworld.
 					Default5: 我在三个独立的宇宙中被打败了！这公平吗？
 					Default6: 你对眼睛的迷恋到底是什么？
+					// Default7: An evil presence watches you. The only cure is to purchase something from me!
+					// Default8: So, you're that scawny kid I heard about?
 					Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
+					// BloodMoon: See! Those Dripplers get it! We can combine our bodies into one amalgamation. You in?
 					// Graveyard: This graveyard makes me feel like I'm constantly being watched. It's my job to do that!
 					# Rez and Spaz being Retinazer and Spazmatism.
 					RezSpaz: ML: 没有什么比原版更真实了！
@@ -1497,6 +1622,7 @@ Mods: {
 					Default4: 当然，穿刺武器是有效的 - 它们直接穿过你！
 					Default5: 一股可怕的寒意从你的钱包里流下来...我认为唯一的解决方案是买东西。
 					Party: 你可能不得不在这次聚会后开始称呼“吃蛋糕的人”！
+					// BloodMoon: Wait a second, if there is such thing as a "Blood" Moon, where is my "Corrupt" Moon?
 					// Graveyard: A haunting place like this is the second best place for me!
 					Expert: 在这个世界上，你的炸药对我的作用要低80%！
 					Evil: 是的！让腐败蔓延！
@@ -1536,6 +1662,7 @@ Mods: {
 					Default4: 猩红地是一个巨大的生物体。
 					Default5: 尖叫声在你周围回荡，告诉你买东西。
 					Party: 生日和周年纪念日是一件如此随意的事情。尽管如此，我喜欢参加这些派对。
+					// BloodMoon: Between you and me, it is pure coincidence that the current moon happens to be bloody tonight. I will tell everyone that it is the Crimson's doing, though!
 					// Graveyard: You know, these corpses could make a great addition to my Crimson...
 					Blood: 猩红之地的心脏心智只会越来越强大！
 					Good: 圣地对猩红的传播构成了威胁！
@@ -1578,6 +1705,7 @@ Mods: {
 					Default6: 什么？期待我说“巴斯 巴斯”？
 					Default7: 大黄蜂、黄蜂和黄色夹克有什么区别？我不知道，我是一只蜜蜂。
 					Party: 我为今天的派对做了一些甜糕点！它们可能是你吃过的最甜的糕点！
+					// BloodMoon: Blood? No thanks. I will stick with my honey, honey.
 					// Graveyard: There's only one flower in this area and I think it's haunted!
 					NotTheBees1: 在这片土地上，我感到非常自由。
 					NotTheBees2: 啊，丛林，就我的双眼所能看到的！
@@ -1613,8 +1741,10 @@ Mods: {
 					Default2: 我是这个世界的支柱。
 					Default3: 我是克苏鲁的骨架剩下的。
 					Default4: 地牢上的诅咒已经解除，尽管我想你还会发现它仍然很危险。
+					// Default5: You've come seeking my help with navigating the Dungeon? Drink a {$ItemName.TrapsightPotion} to highlight traps and blocked off areas.
 					Rare: 无呢？我不知道你在说什么。
 					Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
+					// BloodMoon: Zombies aren't that different from my Angry Bones. We could just disolve their flesh and you would not know the difference!
 					// Graveyard: Scared of this place? Me? I'm not scared at all. Have you been in my Dungeon?
 					Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
 					# quotes are important on this one
@@ -1657,6 +1787,7 @@ Mods: {
 					Default4: 对不起，我声音太大，收到了其他村民的投诉。
 					Default5: 其他人都会获得成就;我的在哪里？
 					Party: 哦，派对！最好为我们所有人举办一场盛宴！
+					// BloodMoon: I've seen the moon cast blue light, but red is new to me. It's bright enough to not have to worry about Her, but all the zombies seem to be another problem.
 					// Graveyard: So much death... and I don't see any touch stones anywhere here.
 					Snow: 在这个冬天的天气里，你打算举行某种盛宴吗？
 					Betsy: 我听说双足翼龙也来自另一个世界。
@@ -1697,6 +1828,7 @@ Mods: {
 					Default5: 我希望你已经为“V”字形的污染做好了准备。
 					Default6: 没有得到你想要的徽章？别担心，我都有...当然是有价格的。
 					Party: 这个派对上有很多甜点，但是有肉吗？
+					// BloodMoon: That horde of zombies was chasing you like when I was chasing you! Good times!
 					// Graveyard: I suppose a demon in a graveyard is not that out of place. I could make this work.
 					NotUnderworld: 你知道，这里比地狱要冷得多。
 					Expert: 这对你来说可能是粗暴的，但消耗我的心会给你额外的力量！
@@ -1745,6 +1877,7 @@ Mods: {
 					Rare: 粉红凝胶可能是“甜的”，但不要有任何想法！
 					Party: 我本以为这个派对会很壮观，我没有失望。
 					// SlimeRain: The strategy of para trooping was one of the greatest advancements in our kingdom's history!
+					// BloodMoon: One of my personal guards fell into a river during a Blood Moon. Don't worry, they were replaced immediately.
 					// Graveyard: We tried creating our own graveyard in my kingdom. It didn't really work out. Let's just say it was a huge fire hazard.
 					KS1: 你可能已经打败了我，但我只是史莱姆王储的一半！
 					KS2: 你已经击败了史莱姆王室的统治，我赞扬你。
@@ -1784,6 +1917,7 @@ Mods: {
 					Default4: 你感觉到口袋深处的振动...所以买点东西！
 					// Default5: The environment does not affect me at all; I'm immune to it!
 					Party: 我最好被邀请参加这个派对！如果我不是，我会摧毁这个派对！
+					// BloodMoon: I love digging through the ground popping out below a horde of zombies. It sends them flying in all directions!
 					// Graveyard: I try to avoid digging in chilling places such as this one.
 					// Mechanic: "{0} was the one who built me, you know."
 				}
@@ -1820,6 +1954,7 @@ Mods: {
 					Default4: 恭喜，泰拉人。
 					Default5: 你知道所有的机械BOSS都发射红色激光吗？
 					Party: 这个派对会包括激光狂欢吗？
+					// BloodMoon: The red rain looks like a barrage of my red lasers.
 					// Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
 					SpazEoC: 克苏鲁之眼，魔焰眼和我喜欢社交。
 					OpticStaff: 那些迷你眼球怪很帅，如果我自己这么说的话。
@@ -1859,6 +1994,7 @@ Mods: {
 					Default4: 嘿，这是泰拉人！
 					Default5: 这将是一个可怕的夜晚...如果你不买东西！
 					Party: 这个派对是相当壮观的！明白了吗？奇观！喜欢引人注目的东西？是的，你明白了。
+					// BloodMoon: So many zombies out tonight. It's the perfect excuse to light everything on fire!
 					// Graveyard: Y'know what this graveyard could use some more of? FIRE!
 					// NoTorchGod: I heard there's this evil being that haunts the fire of torches! You should anger them!
 					// TorchGod: See {0} gets it! Fire is really cool... I mean hot!
@@ -1899,6 +2035,7 @@ Mods: {
 					Default4: 现在我们永远不会知道克苏鲁是否会有四只手臂，多谢！
 					Default5: 你周围的空气越来越冷，你觉得自己把手伸进口袋里掏出钱包。
 					Party: 这个派对需要更多的行动！幸运的是，我有合适的wep - 我的意思是工作的工具！
+					// BloodMoon: Grab your Prime Saw, the two of us are going to rip and tear through all of these zombies!
 					// Graveyard: Do you think there are any metal skeletons buried in this graveyard?
 					Mechanic: 我要感谢{0}给了我这么棒的武器。
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
@@ -1944,6 +2081,7 @@ Mods: {
 					Band3Party: 我试图让其他村民让我为下一个聚会举办一场音乐会。
 					Band4: 光之女皇，石巨人，拜月教邪教徒，我完成了第一张专辑！你应该检查一下！
 					Band4Party: 我的金属乐队将在今晚的音乐会上演奏！我迫不及待地想在那里见到你！
+					// BloodMoon: Next time you chop a tree and you get sap on your hands, remember that it is the blood of plants!
 					// Graveyard: This eerie place makes me feel like I'm going to wilt!
 					MudBud: 看看那个小小的世纪之花去吧！
 				}
@@ -1977,7 +2115,10 @@ Mods: {
 					Default1: 我是石巨人。
 					Default2: 我不是推倒者，说真的，试着把我推过去！
 					Default3: 你想要一个镐锯吗？幸运的是，我有一个出售！
+					// Default4: I get my energy from the sun, most plants get their energy from the sun, why can't you?
+					// Default5: I had a beetle infestation at one point. That's where I got all of these beatle husks from.
 					Party: 我不习惯参加这样的庆祝活动。我喜欢！
+					// BloodMoon: There is something about Blood Moons that gives these creatures additional energy. Not me, though. I get my energy from the sun.
 					// Graveyard: I like sunlight. This mist in this area is blocking out the sunlight!
 					WitchDoctor: 我将不惜一切代价保护{0}。
 					ForTheWorthy: 我和我跟你打架时一样大！
@@ -2037,6 +2178,7 @@ Mods: {
 					// Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
 					Plantera: 我在世纪之花的金属乐队演奏我的恒星曲调。你应该来听一听！
 					Party: 我可以为这个派对上演真正的灯光秀！
+					// BloodMoon: The extra light provided by the Blood Moon is not enough for me. I'll wait for the day time.
 					// Graveyard: I hate this place! My beautiful lights are no longer colorful!
 					Costume: 这就是你穿的令人惊叹的衣服。跟随我的图像，我看到了！
 					BossChecklist: 哦，所以你有一个“BOSS列表”，列出了这个世界上所有强大的生物？你一直打算打败我？
@@ -2075,7 +2217,8 @@ Mods: {
 					Default5: 风必须有多强才能溅起水和鲨鱼？
 					Default6: 第三只猪，第三条鱼，第三条龙，完全真棒！
 					Party: 我是唯一一个可以像猪一样吃东西并逃脱惩罚的人！
-					// Graveyard: I'd rather stay at the bottom of the ocean that be only six feet under the ground.
+					// BloodMoon: When the ocean turns to blood, it is much more difficult to see and swim through.
+					// Graveyard: I'd rather stay at the bottom of the ocean than be only six feet under the ground.
 					FargosMutantMod: "{0}有一些漂亮的翅膀。"
 					Calamity1: 嗯。。。对不起，我只是在想一个血腥蠕虫会有多好吃。
 					Calamity2: 我已经很久没见过我的父亲了...
@@ -2111,8 +2254,9 @@ Mods: {
 					// Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
 					Default3: 我是一个真正的BOSS，我保证！
 					Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
-					// Default5: So just because I'm a red dragon I'm automatically chaotic evil?
+					// Default5: So just because I'm a red dragon means I'm automatically chaotic evil?
 					Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
+					// BloodMoon: Blood Moons are regular occurences here? I guess that would explain why I saw {0} when one happened in my world.
 					// Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
 					// Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: "{0}从哪里得到他的翅膀？"
@@ -2149,9 +2293,11 @@ Mods: {
 					// Default2: My defeat will not stop my cult!
 					Default3: 每个好的邪教徒都需要穿着这种连帽衫！
 					// Default4: My magical abilities make me resistant to all seeking projectiles!
+					// Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane.
 					PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
 					PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
 					Party: 这是一个化装舞会吗？我已经戴上了口罩。
+					// BloodMoon: Blood Moons are perfect times to perform rituals. Do you want to join in?
 					// Graveyard: Although my cult sought to resurrect our master, Cthulhu, we never tried resurrecting people. We should try that!
 					Demolitionist: "{0}一直在为我提供炸药的优惠，我不知道为什么。"
 					Plantera: 我神秘的吟唱非常适合世纪之花的金属乐队。
@@ -2192,7 +2338,15 @@ Mods: {
 					Default5: 天界柱被派去征服你的世界。
 					Default6: 不，没有“太阳领主”。
 					Default7: 你为什么要求我制作一些爱？
+					// Moon Lord is featured in Palworld
+					/* Default8:
+						'''
+						I was visiting another land and was attacked by cute animals with firearms. I thought it was you and your minions.
+
+						...Yes they did defeat me as well.
+						''' */
 					Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
+					// BloodMoon: Total lunar eclipses are simply a visual effect based on our viewing perspective. I would definitly never turn the moon to blood to mess with you!
 					// Graveyard: This is the area I was hoping I'd send you during our battle. No hard feelings!
 					Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
 					LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
@@ -2233,6 +2387,7 @@ Mods: {
 					// Default2: Now we are really stretching the definition of boss!
 					Default3: 有些人误称我为“血鹦鹉螺”。这是从哪里来的？
 					Default4: 你看过我的奖杯吗？不幸的是，我失去了它。
+					// Default5: Solidified tears made of blood have special magical properties at night. Buy one from me and see what it does!
 					Party: 这个派对上的打孔碗让我想起了鲜血。美味！
 					// Graveyard: The smell of this yard is quite pungent.
 					Rare: 什么是“鱼海螺”？
@@ -2241,6 +2396,7 @@ Mods: {
 					Rain: 可爱，淡水从天而降。我更像是一个咸水人，通过。
 					BloodMoon1: 我不明白大惊小怪是什么，我喜欢血月！
 					BloodMoon2: "{$ItemName.Deathweed}今晚绽放。别忘了收获它们！"
+					// BloodMoonOcean: An ocean of blood... Let's get you into a submarine to explore it!
 					KillCount: 你杀了我{0}次。你喜欢吗？
 					Zoologist: 看，即使{0}喜欢血月！她也融入了红色的环境！
 				}
@@ -2278,6 +2434,7 @@ Mods: {
 					Default5: 我不小心吃了一把生锈的旧剑。我以为是糖果！你还想要它吗？
 					Default6: 哦，你好！我希望你带上你的簸箕！
 					Party: 这么多花哨的灯！我喜欢派对！
+					// BloodMoon: I'm more familiar with solar eclipses, but I can make do with a lunar eclipse as well.
 					// Graveyard: This place must be where people go to make their cocoons!
 					KillCount: 你在这个世界上打败了我{0}次。您还在寻找什么？
 					Deerclops: 鹿角怪 毛茸茸的头发让我想起了我认识的其他人...
@@ -2318,7 +2475,10 @@ Mods: {
 					Default2: 不要站在我不好的一面！
 					Default3: 我不明白整个“南瓜香料”的热潮。
 					Default4: 他们是镰刀，不是镰刀！做对了！
+					// Default5: I can help you havest all of the grain you are growing. You don't grow crops? I thought you said you were a farmer? You always mention how you are farming.
+					// Default6: You know, the goblins should've invested in explosive jack 'o lanterns.
 					Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
+					// BloodMoon: Quite the spooky night tonight, eh? I quite like it.
 					// Graveyard: Relaxing mist, soothing cries, eternal slumber! What isn't there to love about graveyards!
 					// Dryad: Pumpkins are an amazing plant and are very easy to grow. I highly recommend purchasing several hundred seeds from {0} and planting them all over the world! I'm not biased, I swear!
 					FargosMutantMod: "{0}的帽子很适合他。"
@@ -2355,7 +2515,9 @@ Mods: {
 					Default3: 那个雪人军团不会与我匹敌。
 					Default4: 友谊雪球赛怎么样？
 					// Default5: I had two faces when I fought you, did you even notice it?
+					// Default6: What do you do for leisure? Skating? Skiing? Snowboarding? Or do you just kill for fun?
 					Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
+					// BloodMoon: I've employed zombies myself. They can sometimes be difficult to work with, but they don't ask for things like "raises" or "workers rights".
 					// Graveyard: The atmosphere of this graveyard is chilling!
 					Santa1: 你今年对圣诞老人很好吗？
 					Santa2: 今年你不会得到煤炭，而是受到我的殴打！
@@ -2400,6 +2562,7 @@ Mods: {
 						...不要回答这个问题。
 						'''
 					Party: 派对需要如此奇怪的装饰和习俗，我不习惯。
+					// BloodMoon: You said the planet's moon is made of hemoglobin tonight? Quite interesting celestial phenomenon!
 					// Graveyard: Precious land dedicated to storing deactivated humans? Maybe you humans do have a few wires missing.
 					RijamsMod: 我以前从未见过像{0}这样的物种。
 				}
@@ -2438,9 +2601,11 @@ Mods: {
 					Default6: 并非所有的火焰都会用水熄灭。有些火焰被诅咒永远燃烧。
 					Default7: 你知道如何停止下降和滚动，对吧？
 					Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
+					// Default9: Brew my special cocktail to convert nearby torches into the correct biome type!
 					Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
 					Rare: 哈哈！火在向你射击！
 					// Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
+					// BloodMoon: I love setting all of the zombies ablaze on nights like these!
 					// Graveyard: Oh yes, it is very possible for fire to die. Fire doesn't leave its own corpse, though, just corpses of others...
 					HasFavor1: 我的青睐使你神奇地改变了你放置的火炬的类型。使用标准火炬让魔法发挥作用。
 					HasFavor2: 你试过我的挑战，玩得开心吗？我当然做到了！
@@ -2449,6 +2614,7 @@ Mods: {
 					Nurse: 火对你的致命组织非常具有破坏性。幸运的是，{0}在治疗烧伤方面经验丰富。
 					MoonLord: 嗯。。月亮领主在我身边似乎非常谨慎。这是理所当然的。
 					TorchMerchant: 一个火焰的家伙。我非常喜欢{0}。
+					// Plantera: '''"What am I? What am I? I AM THE TORCH GOD!" OH you startled me! I was just singing along to {0}'s new song.'''
 					NameIsRedigit: 我欠你的一切，{0}。你是真正的火炬神！
 					Overhaul: 抛弃我之前说过的关于木材不会着火的话;今天火似乎饿得可怕...
 				}

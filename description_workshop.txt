@@ -25,6 +25,7 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
  曾经被你击败的boss作为城镇 NPC 搬进来吗？
  好吧，这是适合你的模组！
 （模组目前支持灾厄，法狗等模组的boss专属物品，npc也会出售灾厄以及法狗的专属掉落物，不再看脸掉落，完全可以在npc处购买）
+更好的翻译: BOSS成为常住NPC.汉化 https://steamcommunity.com/sharedfiles/filedetails/?id=3450240111
 
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)

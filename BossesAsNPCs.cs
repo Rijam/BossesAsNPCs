@@ -1,15 +1,15 @@
+using BossesAsNPCs.Items;
+using BossesAsNPCs.NPCs;
+using BossesAsNPCs.NPCs.TownNPCs;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
-using BossesAsNPCs.Items;
-using BossesAsNPCs.NPCs;
-using BossesAsNPCs.NPCs.TownNPCs;
 
 namespace BossesAsNPCs
 {
@@ -221,6 +221,7 @@ namespace BossesAsNPCs
 				case "GetStatusShop2":
 					Logger.Warn($"Function \"{function}\" is obsolete. Please use one of the \"AddToShop\" calls.");
 					return false;
+				// Call("CanSpawn", string bossNPCName)
 				case "CanSpawn":
 					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					return args[1].ToString() switch
@@ -260,6 +261,7 @@ namespace BossesAsNPCs
 						"TheTorchGod" => ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode > 0,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
+				// Call("GetCondition", string conditionName)
 				case "GetCondition":
 					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					return args[1].ToString() switch
@@ -292,6 +294,7 @@ namespace BossesAsNPCs
 						"InIceAndHallowOrCorruptionOrCrimson" => ShopConditions.InIceAndHallowOrCorruptionOrCrimson,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
+				// Call("AddToShop", string priceMode, string npc, int item, List<Condition> condition, ...)
 				case "AddToShop":
 					switch (args[1].ToString())
 					{
@@ -314,6 +317,7 @@ namespace BossesAsNPCs
 						default:
 							throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs");
 					}
+				// Call("DisableInternalCrossModSupport", string modName)
 				case "DisableInternalCrossModSupport":
 					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
 					Logger.DebugFormat("Internal cross mod support for {0} has been disabled.", args[1].ToString());
@@ -344,6 +348,35 @@ namespace BossesAsNPCs
 						"CrystiliumMod" => SetupShops.CrystiliumMod = false,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
+				// Call("AddTownNPCCanLiveInCorruption", int npcType)
+				case "AddTownNPCCanLiveInCorruption":
+				case "AddTownNPCCanLiveInCorruptionType":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInCorruption[(int)args[1]] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInCorruption[(int)args[1]];
+				// Call("AddTownNPCCanLiveInCorruption", NPC npcInstance)
+				case "AddTownNPCCanLiveInCorruptionNPC":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInCorruption[((NPC)args[1]).type] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInCorruption[((NPC)args[1]).type];
+				case "AddTownNPCCanLiveInCrimson":
+				case "AddTownNPCCanLiveInCrimsonType":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInCrimson[(int)args[1]] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInCrimson[(int)args[1]];
+				case "AddTownNPCCanLiveInCrimsonNPC":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInCrimson[((NPC)args[1]).type] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInCrimson[((NPC)args[1]).type];
+				case "AddTownNPCCanLiveInDungeon":
+				case "AddTownNPCCanLiveInDungeonType":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInDungeon[(int)args[1]] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInDungeon[(int)args[1]];
+				case "AddTownNPCCanLiveInDungeonNPC":
+					CheckArgsLength(2, [args[0].ToString(), args[1].ToString()]);
+					TownNPCLiveInBadBiomeSets.CanLiveInDungeon[((NPC)args[1]).type] = true;
+					return TownNPCLiveInBadBiomeSets.CanLiveInDungeon[((NPC)args[1]).type];
 				default:
 					throw new ArgumentException($"Function \"{function}\" is not defined by BossesAsNPCs");
 			}

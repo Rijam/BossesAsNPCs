@@ -42,8 +42,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
 			NPC.Happiness
-				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Love)
-				.SetBiomeAffection<ForestBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Love)
+				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Like)
 				.SetBiomeAffection<JungleBiome>(AffectionLevel.Dislike)
 				.SetBiomeAffection<HallowBiome>(AffectionLevel.Hate)
 				.SetNPCAffection(ModContent.NPCType<BrainOfCthulhu>(), AffectionLevel.Love)
@@ -62,6 +63,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			// Specify the debuffs it is immune to
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
+
+			TownNPCLiveInBadBiomeSets.CanLiveInCorruption[Type] = true;
+			TownNPCLiveInBadBiomeSets.CanLiveInCrimson[Type] = true;
+			TownNPCLiveInBadBiomeSets.CanLiveInDungeon[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -70,7 +75,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 15;
 			NPC.lifeMax = 300;
@@ -86,7 +91,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bestiaryEntry.Info.AddRange(
 			[
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheCorruption,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
 				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
@@ -137,6 +142,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.BloodMoon.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "BloodMoon"), 2.0);
 			}
 			if (Condition.InGraveyard.IsMet())
 			{

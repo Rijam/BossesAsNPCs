@@ -45,8 +45,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPCID.Sets.NPCBestiaryDrawOffset.Add(Type, drawModifiers);
 
 			NPC.Happiness
-				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Love)
-				.SetBiomeAffection<OceanBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<DungeonBiome>(AffectionLevel.Love)
+				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Like)
+				.SetBiomeAffection<MushroomBiome>(AffectionLevel.Dislike)
 				.SetNPCAffection(ModContent.NPCType<MoonLord>(), AffectionLevel.Love)
 				.SetNPCAffection(ModContent.NPCType<Skeletron>(), AffectionLevel.Like)
 				.SetNPCAffection(ModContent.NPCType<Plantera>(), AffectionLevel.Like)
@@ -64,6 +65,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			// Specify the debuffs it is immune to
 			NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
+
+			TownNPCLiveInBadBiomeSets.CanLiveInDungeon[Type] = true;
 		}
 
 		public override void SetDefaults()
@@ -72,7 +75,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 42;
 			NPC.lifeMax = 3200;
@@ -88,7 +91,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			bestiaryEntry.Info.AddRange(
 			[
-				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
+				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheDungeon,
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Surface,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
 				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
@@ -135,7 +138,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 5; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -150,6 +153,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.BloodMoon.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "BloodMoon"), 2.0);
 			}
 			if (Condition.InGraveyard.IsMet())
 			{

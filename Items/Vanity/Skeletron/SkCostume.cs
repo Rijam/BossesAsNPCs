@@ -12,4 +12,34 @@ namespace BossesAsNPCs.Items.Vanity.Skeletron
 	public class SkCostumeLegpiece : VanityBase
 	{
 	}
+
+	[AutoloadEquip(EquipType.Head)]
+	public class SkeletronsRedHat : VanityBase
+	{
+		public override void SetStaticDefaults()
+		{
+			base.SetStaticDefaults();
+			ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true;
+		}
+	}
+
+	[AutoloadEquip(EquipType.Head)]
+	public class SkShimmeredCostumeHeadpiece : VanityBase
+	{
+	}
+
+	[AutoloadEquip(EquipType.Head)]
+	public class SkShimmeredAltCostumeHeadpiece : VanityBase
+	{
+	}
+
+	[AutoloadEquip(EquipType.Body)]
+	public class SkShimmeredCostumeBodypiece : VanityBase
+	{
+	}
+
+	[AutoloadEquip(EquipType.Legs)]
+	public class SkShimmeredCostumeLegpiece : VanityBase
+	{
+	}
 }

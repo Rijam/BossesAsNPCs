@@ -469,21 +469,89 @@ Mods: {
 
 			AllInOneOptions: {
 				Tooltip: ""
-				Off.Label: Off (Normal)
-				Mixed.Label: Mixed
-				OnlyOne.Label: Only One
+
+				Off: {
+					Label: Off (Normal)
+					Tooltip:
+						'''
+						{$Label}
+						Standard behavior.
+						Boss NPCs who's configs are on will be able to spawn in the world.
+						[c/AAAAAA:(Default value)]
+						'''
+				}
+
+				Mixed: {
+					Label: Mixed
+					Tooltip:
+						'''
+						{$Label}
+						Unloads the any Boss NPCs who's config is off.
+						Instead, a new Torch God NPC and Boss NPCs who's configs are on will be loaded.
+						The shops Boss NPCs who's configs are off will now be sold by the Torch God.
+						'''
+				}
+
+				OnlyOne: {
+					Label: Only One
+					Tooltip:
+						'''
+						{$Label}
+						Unloads all of the other Boss NPCs from this mod.
+						Instead, only the Torch God will be loaded.
+						It will have shops for each boss' loot when they have been defeated.
+						The other configs for each Boss NPC will now determine which shops are available.
+						'''
+				}
 			}
 
 			BoostSpawnRatesOptions: {
 				Tooltip: ""
-				Off.Label: Off (2 Minutes)
-				OneMinute.Label: Every Minute
-				ThirdySeconds.Label: Every 30 seconds
-				FifteenSeconds.Label: Every 15 seconds
-				TenSeconds.Label: Every 10 seconds
-				FiveSeconds.Label: Every 5 seconds
-				TwoSeconds.Label: Every 2 seconds
-				EverySecond.Label: Every second
+
+				Off: {
+					Label: Off (2 Minutes)
+					Tooltip:
+						'''
+						{$Label}
+						Vanilla behavior.
+						[c/AAAAAA:(Default value)]
+						'''
+				}
+
+				OneMinute: {
+					Label: Every Minute
+					Tooltip: "{$Label}"
+				}
+
+				ThirdySeconds: {
+					Label: Every 30 seconds
+					Tooltip: "{$Label}"
+				}
+
+				FifteenSeconds: {
+					Label: Every 15 seconds
+					Tooltip: "{$Label}"
+				}
+
+				TenSeconds: {
+					Label: Every 10 seconds
+					Tooltip: "{$Label}"
+				}
+
+				FiveSeconds: {
+					Label: Every 5 seconds
+					Tooltip: "{$Label}"
+				}
+
+				TwoSeconds: {
+					Label: Every 2 seconds
+					Tooltip: "{$Label}"
+				}
+
+				EverySecond: {
+					Label: Every second
+					Tooltip: "{$Label}"
+				}
 			}
 		}
 
@@ -502,6 +570,9 @@ Mods: {
 			Graveyard: Graveyard
 			//Set automatically from vanilla's localization
 			Caverns: "{$GameUI.LayerCaverns}"
+			Corruption: "{$LegacyMisc.101}"
+			Crimson: "{$LegacyMisc.102}"
+			Dungeon: Dungeon
 			None: None
 		}
 
@@ -757,6 +828,16 @@ Mods: {
 				Tooltip: ""
 			}
 
+			KSCostumeBodypiece: {
+				DisplayName: King Slime Costume Bodypiece
+				Tooltip: ""
+			}
+
+			KSCostumeLegpiece: {
+				DisplayName: King Slime Costume Legpiece
+				Tooltip: ""
+			}
+
 			KSCostumeGloves: {
 				DisplayName: King Slime Costume Gloves
 				Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
@@ -764,6 +845,11 @@ Mods: {
 
 			KSAltCostumeGloves: {
 				DisplayName: King Slime Alternate Costume Gloves
+				Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
+			}
+
+			KSCostumeCape: {
+				DisplayName: King Slime Costume Cape
 				Tooltip: "{$Mods.BossesAsNPCs.Common.VanityAccesssory}"
 			}
 
@@ -775,6 +861,16 @@ Mods: {
 			LCCostumeBodypiece: {
 				DisplayName: Lunatic Cultist Costume Bodypiece
 				Tooltip: ""
+			}
+
+			MdCostumeHeadpiece: {
+				DisplayName: Mechdusa Costume Headpiece
+				Tooltip: ""
+			}
+
+			MdCostumeBodypiece: {
+				DisplayName: Mechdusa Costume Bodypiece
+				Tooltip: "{$Mods.BossesAsNPCs.Common.IncludesGlowMask}"
 			}
 
 			MLCostumeHeadpiece: {
@@ -916,6 +1012,31 @@ Mods: {
 
 			SkCostumeLegpiece: {
 				DisplayName: Skeletron Costume Legpiece
+				Tooltip: ""
+			}
+
+			SkeletronsRedHat: {
+				DisplayName: Skeletron's Red Hat
+				Tooltip: ""
+			}
+
+			SkShimmeredCostumeHeadpiece: {
+				DisplayName: Shimmered Skeletron Costume Headpiece
+				Tooltip: ""
+			}
+
+			SkShimmeredAltCostumeHeadpiece: {
+				DisplayName: Alternate Shimmered Skeletron Costume Headpiece
+				Tooltip: ""
+			}
+
+			SkShimmeredCostumeBodypiece: {
+				DisplayName: Shimmered Skeletron Costume Bodypiece
+				Tooltip: ""
+			}
+
+			SkShimmeredCostumeLegpiece: {
+				DisplayName: Shimmered Skeletron Costume Legpiece
 				Tooltip: ""
 			}
 
@@ -1197,15 +1318,15 @@ Mods: {
 				}
 
 				EaterOfWorlds: {
-					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.BrainofCthulhu}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Love: "{$Mods.BossesAsNPCs.Common.Corruption}, {$NPCName.BrainofCthulhu}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$Mods.BossesAsNPCs.Common.Crimson}, {$NPCName.WallofFlesh}, {$NPCName.TheDestroyer}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
 
 				BrainOfCthulhu: {
-					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.EaterofWorldsHead}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
+					Love: "{$Mods.BossesAsNPCs.Common.Crimson}, {$NPCName.EaterofWorldsHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$Mods.BossesAsNPCs.Common.Corruption}, {$NPCName.WallofFlesh}, {$NPCName.EyeofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.BloodNautilus}, {$NPCName.DD2Bartender}, {$NPCName.ArmsDealer}"
 					Dislike: "{$Mods.BossesAsNPCs.Common.Jungle}, {$NPCName.Dryad}, {$NPCName.HallowBoss}"
 					Hate: "{$Mods.BossesAsNPCs.Common.Hallow}"
 				}
@@ -1218,9 +1339,9 @@ Mods: {
 				}
 
 				Skeletron: {
-					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.Clothier}"
-					Like: "{$Mods.BossesAsNPCs.Common.Forest}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
-					Dislike: "{$NPCName.Angler}"
+					Love: "{$Mods.BossesAsNPCs.Common.Dungeon}, {$NPCName.Clothier}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.CultistBoss}, {$NPCName.SkeletronPrime}, {$NPCName.EyeofCthulhu}, {$NPCName.BrainofCthulhu}, {$NPCName.MoonLordHead}, {$NPCName.Merchant}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.Hallow}, {$NPCName.Angler}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 
@@ -1309,9 +1430,9 @@ Mods: {
 				}
 
 				LunaticCultist: {
-					Love: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.MoonLordHead}"
-					Like: "{$Mods.BossesAsNPCs.Common.Ocean}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
-					Dislike: "{$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
+					Love: "{$Mods.BossesAsNPCs.Common.Dungeon}, {$NPCName.MoonLordHead}"
+					Like: "{$Mods.BossesAsNPCs.Common.Graveyard}, {$NPCName.SkeletronHead}, {$NPCName.Plantera}, {$NPCName.Golem}, {$NPCName.HallowBoss}, {$NPCName.Clothier}"
+					Dislike: "{$Mods.BossesAsNPCs.Common.GlowingMushroom}, {$NPCName.BloodNautilus}, {$NPCName.WitchDoctor}"
 					Hate: "{$Mods.BossesAsNPCs.Common.None}"
 				}
 
@@ -1460,9 +1581,13 @@ Mods: {
 					Default2: I have my eye on you...
 					Default3: Besides that tree or that bunny, I think I am the mascot of this world.
 					Default4: Somebody once called me the 'Eye of Terror'.
-					Default5: I have been defeated in three separate universes! How is that fair?
+					# Terraria, Dungeon Defenders 2, Don't Starve Together, Palworld.
+					Default5: I have been defeated in four separate universes! How is that fair?
 					Default6: What is your fascination with eyes anyway?
+					Default7: An evil presence watches you. The only cure is to purchase something from me!
+					Default8: So, you're that scawny kid I heard about?
 					Party: A party! Surely to celebrate my status as the best EYEcon!
+					BloodMoon: See! Those Dripplers get it! We can combine our bodies into one amalgamation. You in?
 					Graveyard: This graveyard makes me feel like I'm constantly being watched. It's my job to do that!
 					# Rez and Spaz being Retinazer and Spazmatism.
 					RezSpaz: Rez, Spaz, and I like to socialize.
@@ -1496,12 +1621,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: The housing association won't let me live in my own biome! How unfair is that?!
+					Default1: The housing association told me I can't live in my own biome! I asked them, "Do you know who you are speaking to?"
 					Default2: No, I am not Cthulhu's spine. Where did you even hear that?
 					Default3: Which way to the nearest restroom?! I think I'm going to vomit.
 					Default4: Of course piercing weapons are effective -- they go right through you!
 					Default5: A horrible chill goes down your wallet... I think the only solution is to buy something.
 					Party: You might have to start calling me the "Eater of Cake" after this party!
+					BloodMoon: Wait a second, if there is such thing as a "Blood" Moon, where is my "Corrupt" Moon?
 					Graveyard: A haunting place like this is the second best place for me!
 					Expert: Your explosives are 80% less effective against me in this world!
 					Evil: Yes! Let the Corruption spread!
@@ -1535,12 +1661,13 @@ Mods: {
 				}
 
 				NPCDialog: {
-					Default1: Section 12-A of the housing rules and guidelines forbids the housing of tenants in so called "evil places", much to my dismay.
+					Default1: Section 12-A of the housing rules and guidelines forbids the housing of tenants in so called "evil places". I believe an exception can be made for me.
 					Default2: Cthulhu was an intelligent individual. I know, I was his brain.
 					Default3: My Creepers allow me to see. They also act as good meat shields.
 					Default4: The Crimson is one giant living organism.
 					Default5: Screams echo around you telling you to purchase something.
 					Party: Birthdays and anniversaries are such an arbitrary thing to celebrate. Despite that, I enjoy participating in these parties.
+					BloodMoon: Between you and me, it is pure coincidence that the current moon happens to be bloody tonight. I will tell everyone that it is the Crimson's doing, though!
 					Graveyard: You know, these corpses could make a great addition to my Crimson...
 					Blood: The hive mind of the Crimson only grows stronger!
 					Good: The Hallow poses a threat to spreading of the Crimson!
@@ -1583,6 +1710,7 @@ Mods: {
 					Default6: What? Expecting me to say "Buzz Buzz"?
 					Default7: What is the difference between a hornet, wasp, and yellow jacket? I don't know, I'm a bee.
 					Party: I made some sweet pastries for today's party! They're probably the sweetest pastries you'll ever eat!
+					BloodMoon: Blood? No thanks. I will stick with my honey, honey.
 					Graveyard: There's only one flower in this area and I think it's haunted!
 					NotTheBees1: I feel very at home in this land.
 					NotTheBees2: Ah, jungle as far as my compound eyes can see!
@@ -1618,8 +1746,10 @@ Mods: {
 					Default2: I'm the backbone of this world.
 					Default3: I am what is left of Cthulhu's skeleton.
 					Default4: The curse on the Dungeon has been lifted, though I think you'll find it quite dangerous still.
+					Default5: You've come seeking my help with navigating the Dungeon? Drink a {$ItemName.TrapsightPotion} to highlight traps and blocked off areas.
 					Rare: Sans what? I don't know what you are talking about.
 					Party: I offered to host this party in the Dungeon but nobody seemed interested.
+					BloodMoon: Zombies aren't that different from my Angry Bones. We could just disolve their flesh and you would not know the difference!
 					Graveyard: Scared of this place? Me? I'm not scared at all. Have you been in my Dungeon?
 					Dryad: No hard feelings to {0} for ripping me out of Cthulhu.
 					# quotes are important on this one
@@ -1658,10 +1788,11 @@ Mods: {
 				NPCDialog: {
 					Default1: Have you ever had a crystal spike for eyes? Well don't, it makes it much more difficult to see.
 					Default2: Make sure to eat and keep your sanity up!
-					Default3: Stay out of the darkness, or she'll get you...
+					Default3: Stay out of the darkness, or She'll get you...
 					Default4: Sorry, I'm loud. I have gotten complaints from the other villagers.
 					Default5: No, I'm not going to trade my eye for anything! How would I be able to see?
 					Party: Oh a party! There better be a big feast for all of us!
+					BloodMoon: I've seen the moon cast blue light, but red is new to me. It's bright enough to not have to worry about Her, but all the zombies seem to be another problem.
 					Graveyard: So much death... and I don't see any touch stones anywhere here.
 					Snow: Are you going to hold a feast of some kind in this winter weather?
 					Betsy: I heard Betsy is from another world, too.
@@ -1702,6 +1833,7 @@ Mods: {
 					Default5: I hope you're prepared for the effects of the "V".
 					Default6: Didn't get the emblem you were hoping for? Don't worry, I have them all... for a price of course.
 					Party: There are plenty of desserts at this party, but is any meat being served?
+					BloodMoon: That horde of zombies was chasing you like when I was chasing you! Good times!
 					Graveyard: I suppose a demon in a graveyard is not that out of place. I could make this work.
 					NotUnderworld: You know, it's quite a bit colder here than in the Underworld.
 					Expert: It may be gross for you, but consuming my heart will give you extra strength!
@@ -1750,6 +1882,7 @@ Mods: {
 					Rare: Pink Gel may be 'sweet', but don't get any ideas!
 					Party: I expected this party to be spectacular. I am not disappointed.
 					SlimeRain: The strategy of para trooping was one of the greatest advancements in our kingdom's history!
+					BloodMoon: One of my personal guards fell into a river during a Blood Moon. Don't worry, they were replaced immediately.
 					Graveyard: We tried creating our own graveyard in my kingdom. It didn't really work out. Let's just say it was a huge fire hazard.
 					KS1: You may have defeated me, but I'm only one half of the slime oligarchy!
 					KS2: You have bested the slime oligarchy. I commend you.
@@ -1789,6 +1922,7 @@ Mods: {
 					Default4: You feel vibrations deep within your pockets... so buy something!
 					Default5: The environment does not affect me at all; I'm immune to it!
 					Party: I better be invited to this party! If I'm not, I'll crash this party!
+					BloodMoon: I love digging through the ground popping out below a horde of zombies. It sends them flying in all directions!
 					Graveyard: I try to avoid digging in chilling places such as this one.
 					Mechanic: "{0} was the one who built me, you know."
 				}
@@ -1825,6 +1959,7 @@ Mods: {
 					Default4: Greetings, Terrarian.
 					Default5: Did you know that all the mechanical bosses shoot a red laser?
 					Party: Will this party include a laser rave?
+					BloodMoon: The red rain looks like a barrage of my red lasers.
 					Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
 					SpazEoC: Eye of Cthulhu, Spaz, and I like to socialize.
 					OpticStaff: Those mini Retinazers are handsome, if I do say so myself.
@@ -1864,6 +1999,7 @@ Mods: {
 					Default4: HEY, it's the Terrarian!
 					Default5: This is going to be a terrible night... if you don't buy something!
 					Party: This party is quite the spectacle! Get it? Spectacle! Like something that is eye-catching? Yeah, you get it.
+					BloodMoon: So many zombies out tonight. It's the perfect excuse to light everything on fire!
 					Graveyard: Y'know what this graveyard could use some more of? FIRE!
 					NoTorchGod: I heard there's this evil being that haunts the fire of torches! You should anger them!
 					TorchGod: See {0} gets it! Fire is really cool... I mean hot!
@@ -1904,6 +2040,7 @@ Mods: {
 					Default4: Now we'll never know if Cthulhu was going to have four arms. Thanks a lot!
 					Default5: The air is getting colder around you. You feel yourself reaching into your pockets to pull out your wallet.
 					Party: This party needs some more action! Luckily, I have just the right wep- I mean tool for the job!
+					BloodMoon: Grab your Prime Saw, the two of us are going to rip and tear through all of these zombies!
 					Graveyard: Do you think there are any metal skeletons buried in this graveyard?
 					Mechanic: I'd like to thank {0} for giving me such awesome weapons.
 					# Omegatron is a boss from Edge of Space which is based on Skeletron Prime (the S.D.M.G. is from Edge of Space)
@@ -1949,6 +2086,7 @@ Mods: {
 					Band3Party: I'm trying to get the other villagers to let me host a concert for the next party.
 					Band4: The Empress of Light, Golem, Lunatic Cultist, and I finished out first album! You should check it out!
 					Band4Party: My metal band is playing at tonight's concert! I can't wait to see you there!
+					BloodMoon: Next time you chop a tree and you get sap on your hands, remember that it is the blood of plants!
 					Graveyard: This eerie place makes me feel like I'm going to wilt!
 					MudBud: Look at that little Plantero go!
 				}
@@ -1982,7 +2120,10 @@ Mods: {
 					Default1: Remember to remain calm in the face of danger and to never lose your head.
 					Default2: I am not a push-over. Seriously, try to push me over!
 					Default3: Do you want a Picksaw? Luckily, I have one for sale!
+					Default4: I get my energy from the sun, most plants get their energy from the sun, why can't you?
+					Default5: I had a beetle infestation at one point. That's where I got all of these beatle husks from.
 					Party: I'm not used to being part of such celebrations. I like it!
+					BloodMoon: There is something about Blood Moons that gives these creatures additional energy. Not me, though. I get my energy from the sun.
 					Graveyard: I like sunlight. This mist in this area is blocking out the sunlight!
 					WitchDoctor: I shall protect {0} at all costs.
 					ForTheWorthy: I'm just as big as when I fought you!
@@ -2042,6 +2183,7 @@ Mods: {
 					Stylist: Do you need a hair cut? {0} is offering a hairstyle that matches my own!
 					Plantera: I play my Stellar Tune in Plantera's metal band. You should come have a listen!
 					Party: I can put on real light show for this party!
+					BloodMoon: The extra light provided by the Blood Moon is not enough for me. I'll wait for the day time.
 					Graveyard: I hate this place! My beautiful lights are no longer colorful!
 					Costume: That's quite the stunning outfit you have on. Following in my image I see!
 					BossChecklist: Oh, so you have a 'hit list' of all the powerful creatures in this world? You planned on defeating me all along?
@@ -2085,7 +2227,8 @@ Mods: {
 					Default5: How strong does the wind have to be to be able to pick up water and sharks?
 					Default6: A third pig, a third shark, a third dragon, completely awesome!
 					Party: I'm the only person who can eat like a pig and get away with it!
-					Graveyard: I'd rather stay at the bottom of the ocean that be only six feet under the ground.
+					BloodMoon: When the ocean turns to blood, it is much more difficult to see and swim through.
+					Graveyard: I'd rather stay at the bottom of the ocean than be only six feet under the ground.
 					FargosMutantMod: "{0} has some pretty nice looking wings."
 					Calamity1: Mmm... Sorry, I was just thinking about how tasty a bloody worm would be.
 					Calamity2: I haven't seen my father in a long time...
@@ -2121,8 +2264,9 @@ Mods: {
 					Default2: I am the Mother of Wyverns. No, not the kind of Wyvern you are thinking of.
 					Default3: I'm a real boss, I promise!
 					Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
-					Default5: So just because I'm a red dragon I'm automatically chaotic evil?
+					Default5: So just because I'm a red dragon means I'm automatically chaotic evil?
 					Party: Stick around; we're going to see how many candles I can light with one breath of fire!
+					BloodMoon: Blood Moons are regular occurences here? I guess that would explain why I saw {0} when one happened in my world.
 					Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
 					Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: Where did {0} get his wings?
@@ -2159,9 +2303,11 @@ Mods: {
 					Default2: My defeat will not stop my cult!
 					Default3: Every good cult needs some sort of hooded figure!
 					Default4: My magical abilities make me resistant to all seeking projectiles!
+					Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane.
 					PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
 					PostML: Not even Cthulhu could stop you? I'm impressed.
 					Party: Is this a costume party? I'm already wearing a mask.
+					BloodMoon: Blood Moons are perfect times to perform rituals. Do you want to join in?
 					Graveyard: Although my cult sought to resurrect our master, Cthulhu, we never tried resurrecting people. We should try that!
 					Demolitionist: "{0} keeps offering me good deals on dynamite and I'm not sure why."
 					Plantera: My mysterious chanting is perfect for Plantera's metal band.
@@ -2202,7 +2348,15 @@ Mods: {
 					Default5: The Celestial Pillars were sent to conquer your world.
 					Default6: No, there is no 'Sun Lord'.
 					Default7: Why are you asking me to craft some love?
+					// Moon Lord is featured in Palworld
+					Default8:
+						'''
+						I was visiting another land and was attacked by cute animals with firearms. I thought it was you and your minions.
+
+						...Yes they did defeat me as well.
+						'''
 					Party: You are celebrating my defeat, aren't you? Well, the party food is good at least.
+					BloodMoon: Total lunar eclipses are simply a visual effect based on our viewing perspective. I would definitly never turn the moon to blood to mess with you!
 					Graveyard: This is the area I was hoping I'd send you during our battle. No hard feelings!
 					Dryad: I've decided to let {0} live. She is the last of her kind anyway.
 					LunaticCultist: It's nice to have people worship me, as they should be.
@@ -2243,6 +2397,7 @@ Mods: {
 					Default2: Now we are really stretching the definition of boss!
 					Default3: Some people mistakenly call me "Blood Nautilus". Where did that come from?
 					Default4: Have you seen my trophy? I lost it, unfortunately.
+					Default5: Solidified tears made of blood have special magical properties at night. Buy one from me and see what it does!
 					Party: The punch bowl at this party reminds me of blood. Tasty!
 					Graveyard: The smell of this yard is quite pungent.
 					Rare: What even is a "Conch of Fish"?
@@ -2251,6 +2406,7 @@ Mods: {
 					Rain: Lovely, fresh water falls from the sky. I'm more of a salt water person, though.
 					BloodMoon1: I don't get what the fuss is all about, I love the Blood Moon!
 					BloodMoon2: The {$ItemName.Deathweed} bloom tonight. Don't forget to harvest them!
+					BloodMoonOcean: An ocean of blood... Let's get you into a submarine to explore it!
 					KillCount: You have slain me {0} times. Have you enjoyed it?
 					Zoologist: See, even {0} likes the Blood Moon! She blends in with the red environment, too!
 				}
@@ -2288,6 +2444,7 @@ Mods: {
 					Default5: I accidentally ate a rusty old sword. I thought it was candy! Do you still want it?
 					Default6: Oh, hello! I hope you brought your dust pan with you!
 					Party: So many fancy lights! I love parties!
+					BloodMoon: I'm more familiar with solar eclipses, but I can make do with a lunar eclipse as well.
 					Graveyard: This place must be where people go to make their cocoons!
 					KillCount: You defeated me {0} times in this world. What else are you looking for?
 					Deerclops: Deerclops' fuzzy hair reminds me of somebody else I know...
@@ -2328,7 +2485,10 @@ Mods: {
 					Default2: Don't get on my bad side!
 					Default3: I don't get the whole 'pumpkin spice' craze.
 					Default4: They are scythes, not sickles! Get it right!
+					Default5: I can help you havest all of the grain you are growing. You don't grow crops? I thought you said you were a farmer? You always mention how you are farming.
+					Default6: You know, the goblins should've invested in explosive jack 'o lanterns.
 					Party: Is this the type of party that involves passing out candy? I sure hope it is!
+					BloodMoon: Quite the spooky night tonight, eh? I quite like it.
 					Graveyard: Relaxing mist, soothing cries, eternal slumber! What isn't there to love about graveyards!
 					Dryad: Pumpkins are an amazing plant and are very easy to grow. I highly recommend purchasing several hundred seeds from {0} and planting them all over the world! I'm not biased, I swear!
 					FargosMutantMod: "{0}'s hat suits him quite nicely."
@@ -2365,7 +2525,9 @@ Mods: {
 					Default3: That snowmen mafia would be no match against me.
 					Default4: How about a friendly snowball fight?
 					Default5: I had two faces when I fought you, did you even notice it?
+					Default6: What do you do for leisure? Skating? Skiing? Snowboarding? Or do you just kill for fun?
 					Party: I love gift giving. It's a time for everyone to come together and show they care about each other. But, I especially love the gift receiving part!
+					BloodMoon: I've employed zombies myself. They can sometimes be difficult to work with, but they don't ask for things like "raises" or "workers rights".
 					Graveyard: The atmosphere of this graveyard is chilling!
 					Santa1: Have you been good this year for Santa Claus?
 					Santa2: Instead of getting coal this year, you are getting a beating from me!
@@ -2410,6 +2572,7 @@ Mods: {
 						...Don't answer that.
 						'''
 					Party: Parties entail such strange decor and customs that I am not used to.
+					BloodMoon: You said the planet's moon is made of hemoglobin tonight? Quite interesting celestial phenomenon!
 					Graveyard: Precious land dedicated to storing deactivated humans? Maybe you humans do have a few wires missing.
 					RijamsMod: I haven't seen a species like {0} before.
 				}
@@ -2448,9 +2611,11 @@ Mods: {
 					Default6: Not all flames extinguish with water. Some flames are cursed to be lit forever.
 					Default7: You do know how to stop-drop-and-roll, right?
 					Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
+					Default9: Brew my special cocktail to convert nearby torches into the correct biome type!
 					Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
 					Rare: Haha! The fire IS shooting at you!
 					Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
+					BloodMoon: I love setting all of the zombies ablaze on nights like these!
 					Graveyard: Oh yes, it is very possible for fire to die. Fire doesn't leave its own corpse, though, just corpses of others...
 					HasFavor1: My favor has allowed you to magically change the type of torches you place. Use standard torches for the magic to work.
 					HasFavor2: Did you have a fun time attempting my challenge? I sure did!
@@ -2459,6 +2624,7 @@ Mods: {
 					Nurse: Fire is very destructive to your mortal tissues. Luckily, {0} is experienced with treating burns.
 					MoonLord: Hmm.. the Moon Lord seems very cautious around me. Rightfully so.
 					TorchMerchant: A fellow being of flame. I quite like {0}.
+					Plantera: '''"What am I? What am I? I AM THE TORCH GOD!" OH you startled me! I was just singing along to {0}'s new song.'''
 					NameIsRedigit: I owe everything I am to you, {0}. You are the true Torch God!
 					Overhaul: Discard what I previously said about wood not catching fire; The fire seems awfully hungry today...
 				}

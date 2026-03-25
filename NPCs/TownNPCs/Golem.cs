@@ -76,7 +76,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 20;
 			NPC.lifeMax = 3900;
@@ -145,7 +145,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 3; i++)
+			for (int i = 1; i <= 5; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -158,6 +158,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
 			}
+			if (Condition.BloodMoon.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "BloodMoon"), 2.0);
+			}
 			if (Condition.InGraveyard.IsMet())
 			{
 				chat.Add(Language.GetTextValue(path + "Graveyard"));
@@ -166,11 +170,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
             {
 				chat.Add(Language.GetTextValue(path + "ForTheWorthy"));
 			}
-			if (Main.player[Main.myPlayer].ZoneOverworldHeight)
+			if (Main.LocalPlayer.ZoneOverworldHeight)
             {
 				chat.Add(Language.GetTextValue(path + "Surface"));
 			}
-			if (Main.player[Main.myPlayer].ZoneLihzhardTemple)
+			if (Main.LocalPlayer.ZoneLihzhardTemple)
 			{
 				chat.Add(Language.GetTextValue(path + "Temple1"));
 				chat.Add(Language.GetTextValue(path + "Temple2"));

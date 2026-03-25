@@ -84,7 +84,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			NPC.friendly = true;
 			NPC.width = 18;
 			NPC.height = 40;
-			NPC.aiStyle = 7;
+			NPC.aiStyle = NPCAIStyleID.Passive;
 			NPC.damage = 10;
 			NPC.defense = 40;
 			NPC.lifeMax = 20000;
@@ -247,7 +247,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			bool townNPCsCrossModSupport = ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 8; i++)
+			for (int i = 1; i <= 9; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}
@@ -256,6 +256,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (Terraria.GameContent.Events.BirthdayParty.PartyIsUp)
 			{
 				chat.Add(Language.GetTextValue(path + "Party"), 2.0);
+			}
+			if (Condition.BloodMoon.IsMet())
+			{
+				chat.Add(Language.GetTextValue(path + "BloodMoon"), 2.0);
 			}
 			if (Condition.InGraveyard.IsMet())
 			{
@@ -280,6 +284,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			if (moonLord >= 0)
 			{
 				chat.Add(Language.GetTextValue(path + "MoonLord"));
+			}
+			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
+			if (plantera >= 0)
+			{
+				chat.Add(Language.GetTextValue(path + "Plantera", Main.npc[plantera].GivenName), 0.25);
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{

@@ -16,20 +16,20 @@ namespace BossesAsNPCs.Items.Vanity.Mothron
 	public class MoCostumeLegpiece : VanityBase
 	{
 		//Thanks Exterminator for the help
-		public int LegEquipTextureMale;
+		// public int LegEquipTextureMale;
 		public int LegEquipTextureFemale;
 
 		public override void Load()
 		{
 			if (!Main.dedServ)
 			{
-				LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this, "MoCostumeLegpiece_Legs");
+				// LegEquipTextureMale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_Legs", EquipType.Legs, this, "MoCostumeLegpiece_Legs");
 				LegEquipTextureFemale = EquipLoader.AddEquipTexture(Mod, (GetType().Namespace + "." + Name).Replace('.', '/') + "_FemaleLegs", EquipType.Legs, this, "MoCostumeLegpiece_FemaleLegs");
 			}
 		}
 		public override void SetMatch(bool male, ref int equipSlot, ref bool robes)
 		{
-			if (male) equipSlot = LegEquipTextureMale;
+			// if (male) equipSlot = LegEquipTextureMale;
 			if (!male) equipSlot = LegEquipTextureFemale;
 		}
 	}

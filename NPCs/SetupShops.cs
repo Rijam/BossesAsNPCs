@@ -369,16 +369,16 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimePetItem, 0.25), ShopConditions.Master); //Royal Delight
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10), // #145: KingSlime
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Gel, priceMulti: 10), ShopConditions.SellExtraItems);
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeStaff, priceMulti: 10), ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeStaff, priceMulti: 10), ShopConditions.SellExtraItems); // priceDiv: 0.033 == 60 gold. Going to keep it at 20 gold.
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PrinceUniform) { shopCustomPrice = 500000 }, Condition.NpcIsPresent(NPCID.Princess), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PrincePants) { shopCustomPrice = 500000 }, Condition.NpcIsPresent(NPCID.Princess), ShopConditions.SellExtraItems);
-				shop.Add(new Item(ItemID.PrinceCape) { shopCustomPrice = 500000 }, Condition.NpcIsPresent(NPCID.Princess), ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeCape>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeGloves>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSAltCostumeGloves>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 			}
@@ -461,14 +461,14 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1")
 			{
 				shop.Add(new Item(ItemID.SuspiciousLookingEye) { shopCustomPrice = 75000 }); //Made up value since it has no value
+				// In in Hardmode, after defeating EoW
+				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 }, Condition.Hardmode, Condition.DownedEowOrBoc);
+				// In in Pre-HardMode, after defeating EoW
+				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 * 2 }, Condition.PreHardmode, Condition.DownedEowOrBoc);
+				// In before defeating EoW
+				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 * 5 }, Condition.NotDownedEowOrBoc);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DemoniteOre, priceMulti: 5), ShopConditions.CorruptionOrHardmode);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.CorruptSeeds, priceMulti: 5), ShopConditions.CorruptionOrHardmode);
-				// In a Corruption World, in Hardmode, after defeating EoW
-				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 }, Condition.CorruptWorld, Condition.Hardmode, Condition.DownedEowOrBoc);
-				// In a Corruption World, in Pre-HardMode, after defeating EoW
-				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 * 2 }, Condition.CorruptWorld, Condition.PreHardmode, Condition.DownedEowOrBoc);
-				// In a Corruption World, before defeating EoW
-				shop.Add(new Item(ItemID.UnholyArrow) { shopCustomPrice = 40 * 5 }, ShopConditions.CorruptionOrHardmode, Condition.NotDownedEowOrBoc);
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrimtaneOre, priceMulti: 5), ShopConditions.CrimsonOrHardmode);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.CrimsonSeeds, priceMulti: 5), ShopConditions.CrimsonOrHardmode);
@@ -484,6 +484,8 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.AviatorSunglasses, priceMulti: 5), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeOfCthulhuPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.EyeofCthulhuMasterTrophy, priceMulti: 5), ShopConditions.Master);
+
+				// #145: Demon Altar and Crimson Altar?
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
@@ -575,7 +577,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterOfWorldsPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.EaterofWorldsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10), // #145: EaterOfWorlds
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -762,11 +764,13 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.BeeMask, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeeTrophy, 0.1));
 
+				// #145: Queen of Bees painting
+
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.HiveBackpack, priceMulti: 5), ShopConditions.Expert);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeePetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.QueenBeeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10), // #145: QueenBee
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -865,7 +869,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10), // #145: Skeletron
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -881,9 +885,16 @@ namespace BossesAsNPCs.NPCs
 						shop.Add(NPCHelper.ItemWithPrice(ItemID.LockBox, valueDiv: 1), Condition.NpcIsPresent(fisherman.Type));
 					}
 				}
+				
+				// #145: Chippy's Set
 
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
-				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, ShopConditions.IsNotNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, ShopConditions.IsNotNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkeletronsRedHat>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.IsNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkShimmeredCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.IsNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkShimmeredAltCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.IsNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkShimmeredCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.IsNpcShimmered);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Skeletron.SkShimmeredCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.IsNpcShimmered);
 			}
 			if (shopName == "Shop2")
 			{
@@ -1244,7 +1255,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DestroyerMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss3, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss3, priceMulti: 10), // #145: TheDestroyer
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -1336,7 +1347,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10), // #145: TheTwins
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -1433,7 +1444,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TwinsMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss2, priceMulti: 10), // #145: TheTwins
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -1531,7 +1542,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimePetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SkeletronPrimeMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss1, priceMulti: 10), // #145: SkeletronPrime
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -1630,6 +1641,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.PygmyStaff, 0.25));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ThornHook, 0.1));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TheAxe, 0.02));
+				// #145: Vulgar Display of Flower 12.5% chance
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Seedling, 0.05));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.PlanteraMask, 0.14));
@@ -1911,6 +1923,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.TempestStaff, 0.2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Tsunami, 0.2));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.FishronWings, 0.07));
+				// #145: Eletric Eel 16.67%
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronMask, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronTrophy, 0.1));
@@ -2143,7 +2156,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunaticCultistPetItem, 0.25), ShopConditions.Master);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunaticCultistMasterTrophy, priceMulti: 5), ShopConditions.Master);
 
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss4, priceMulti: 10),
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss4, priceMulti: 10), // #145: LunaticCultist
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
@@ -2259,6 +2272,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.PortalGun, priceMulti: 5));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.LunarOre, priceMulti: 5));
 				// Even though Moon Lord now drops two of these items, I've left the chances at 0.22
+				// #145: now 20%
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Meowmere, 0.22));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Terrarian, 0.22));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.StarWrath, 0.22));
@@ -2268,6 +2282,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.RainbowCrystalStaff, 0.22));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonlordTurretStaff, 0.22)); // Lunar Portal Staff
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Celeb2, 0.22)); // Celebration Mk2
+				// #145: Possession 20%
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MeowmereMinecart, 0.1));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.BossMaskMoonlord, 0.14));
@@ -3070,6 +3085,7 @@ namespace BossesAsNPCs.NPCs
 			shop.Add(NPCHelper.ItemWithPrice(ItemID.GoldRing, 0.067), ShopConditions.PirateSellInvasionItems);
 			shop.Add(NPCHelper.ItemWithPrice(ItemID.PirateMinecart, 0.05), ShopConditions.PirateSellInvasionItems);
 			shop.Add(NPCHelper.ItemWithPrice(ItemID.Cutlass, 0.1), ShopConditions.PirateSellInvasionItems);
+			// #145: Barrel Launcher 10%
 			shop.Add(NPCHelper.ItemWithPrice(ItemID.FlyingDutchmanTrophy, 0.1), ShopConditions.PirateSellInvasionItems);
 
 			shop.Add(NPCHelper.ItemWithPrice(ItemID.PirateShipMountItem, 0.25), ShopConditions.Master, ShopConditions.PirateSellInvasionItems); //Black Spot
