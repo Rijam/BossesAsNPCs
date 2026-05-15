@@ -1,9 +1,14 @@
 using System;
+using System.Linq;
+using System.Reflection;
+using MonoMod.RuntimeDetour;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
-using BossesAsNPCs.NPCs.TownNPCs;
 using BossesAsNPCs.NPCs;
+using BossesAsNPCs.NPCs.TownNPCs;
 
 namespace BossesAsNPCs
 {
@@ -155,46 +160,102 @@ namespace BossesAsNPCs
 			{
 				foreach (Item item in items)
 				{
-					if (item is not null)
-					{
-						//item.GetStoreValue() is just `item.shopCustomPrice ?? item.value`
-						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
-					}
+					//item.GetStoreValue() is just `item.shopCustomPrice ?? item.value`
+					item?.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
 				}
 			}
 			if (npc.type == NPCID.GoblinTinkerer)
 			{
-				foreach (Item item in items)
+				if (shopName == "Terraria/GoblinTinkerer/Shop")
 				{
-					// Only change the price of the items that were added by this mod. Vanilla and other mods won't be affected (unless they add the same items).
-					// (I tried to store the Item instead of the type and compare that, but it was never true.)
-					if (item is not null && SetupShops.GoblinTinkererShopCopy.Contains(item.type))
+					foreach (Item item in items)
 					{
-						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
+						// Only change the price of the items that were added by this mod. Vanilla and other mods won't be affected (unless they add the same items).
+						// (I tried to store the Item instead of the type and compare that, but it was never true.)
+						if (item is not null && SetupShops.GoblinTinkererShopCopy.Contains(item.type))
+						{
+							item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
+						}
+					}
+				}
+				if (shopName == "Terraria/GoblinTinkerer/Shop2")
+				{
+					foreach (Item item in items)
+					{
+						//item.GetStoreValue() is just `item.shopCustomPrice ?? item.value`
+						item?.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
 					}
 				}
 			}
 			if (npc.type == NPCID.Pirate)
 			{
-				foreach (Item item in items)
+				if (shopName == "Terraria/Pirate/Shop")
 				{
-					if (item is not null && SetupShops.PirateShopCopy.Contains(item.type))
+					foreach (Item item in items)
 					{
-						item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
+						if (item is not null && SetupShops.PirateShopCopy.Contains(item.type))
+						{
+							item.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
+						}
+					}
+				}
+				if (shopName == "Terraria/Pirate/Shop2")
+				{
+					foreach (Item item in items)
+					{
+						//item.GetStoreValue() is just `item.shopCustomPrice ?? item.value`
+						item?.shopCustomPrice = (int?)Math.Round(item.GetStoreValue() * shopMulti);
 					}
 				}
 			}
 		}
 
+		// Create the Shop 2 for the Goblin Tinkerer and Pirate right after the vanilla shops are created.
+		private delegate void orig_RegisterGoblinTinkerer();
+		private static Hook Hook_NPCShopDatabase_RegisterGoblinTinkerer;
+		private delegate void orig_RegisterPirate();
+		private static Hook Hook_NPCShopDatabase_RegisterPirate;
+
+		public override void Load()
+		{
+			MethodInfo NPCShopDatabase_RegisterGoblinTinkerer = typeof(NPCShopDatabase).GetMethod("RegisterGoblinTinkerer", BindingFlags.Static | BindingFlags.NonPublic);
+			// MonoModHooks.Modify()
+			Hook_NPCShopDatabase_RegisterGoblinTinkerer = new Hook(NPCShopDatabase_RegisterGoblinTinkerer, On_NPCShopDatabase_RegisterGoblinTinkerer);
+			MethodInfo NPCShopDatabase_RegisterPirate = typeof(NPCShopDatabase).GetMethod("RegisterPirate", BindingFlags.Static | BindingFlags.NonPublic);
+			Hook_NPCShopDatabase_RegisterPirate = new Hook(NPCShopDatabase_RegisterPirate, On_NPCShopDatabase_RegisterPirate);
+		}
+
+		public override void Unload()
+		{
+			Hook_NPCShopDatabase_RegisterGoblinTinkerer.Undo();
+			Hook_NPCShopDatabase_RegisterPirate.Undo();
+		}
+
+		private void On_NPCShopDatabase_RegisterGoblinTinkerer(orig_RegisterGoblinTinkerer orig)
+		{
+			orig();
+			var npcShop2 = new NPCShop(NPCID.GoblinTinkerer, "Shop2");
+			SetupShops.GoblinTinkerer(npcShop2, "Shop2");
+			npcShop2.Register();
+		}
+
+		private void On_NPCShopDatabase_RegisterPirate(orig_RegisterPirate orig)
+		{
+			orig();
+			var npcShop2 = new NPCShop(NPCID.Pirate, "Shop2");
+			SetupShops.Pirate(npcShop2, "Shop2");
+			npcShop2.Register();
+		}
+
 		public override void ModifyShop(NPCShop shop)
 		{
-			if (shop.NpcType == NPCID.Pirate)
+			if (shop.NpcType == NPCID.Pirate && shop.FullName == "Terraria/Pirate/Shop")
 			{
-				NPCs.SetupShops.Pirate(shop);
+				NPCs.SetupShops.Pirate(shop, "Shop");
 			}
-			if (shop.NpcType == NPCID.GoblinTinkerer)
+			if (shop.NpcType == NPCID.GoblinTinkerer && shop.FullName == "Terraria/GoblinTinkerer/Shop")
 			{
-				NPCs.SetupShops.GoblinTinkerer(shop);
+				NPCs.SetupShops.GoblinTinkerer(shop, "Shop");
 			}
 
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
@@ -204,6 +265,34 @@ namespace BossesAsNPCs
 					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
 					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeBodypiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
 					shop.Add(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeLegpiece>(), Condition.NpcIsPresent(ModContent.NPCType<TorchGod>()));
+				}
+			}
+		}
+
+		public override void RegisterChatButtons(NPC npc, NPCInteractionList interactions)
+		{
+			if (npc.type == NPCID.GoblinTinkerer)
+			{
+				NPCInteraction openShop = interactions.Interactions.OfType<NPCInteractions.Actions.OpenShop>().FirstOrDefault();
+				if (openShop is not null)
+				{
+					interactions.InsertAfter(new NPCHelper.OpenShopCrossModSupport("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
+				}
+				else
+				{
+					Mod.Logger.Warn($"Unable to find the original Shop button for the Goblin Tinkerer to insert the Shop 2 button!");
+				}
+			}
+			if (npc.type == NPCID.Pirate)
+			{
+				NPCInteraction openShop = interactions.Interactions.OfType<NPCInteractions.Actions.OpenShop>().FirstOrDefault();
+				if (openShop is not null)
+				{
+					interactions.InsertAfter(new NPCHelper.OpenShopCrossModSupport("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
+				}
+				else
+				{
+					Mod.Logger.Warn($"Unable to find the original Shop button for the Pirate to insert the Shop 2 button!");
 				}
 			}
 		}

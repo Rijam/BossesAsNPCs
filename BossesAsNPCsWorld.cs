@@ -1,5 +1,7 @@
 using System.IO;
+using System.Reflection;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -180,6 +182,33 @@ namespace BossesAsNPCs
 					break;
 				default:
 					break;
+			}
+			
+		}
+	}
+	public class BossesAsNPCsTiles : GlobalTile
+	{
+		/// <summary>
+		/// Get the private method WorldGen.TrySpawningTownNPC()
+		/// </summary>
+		private static readonly MethodInfo Method_WorldGen_TrySpawningTownNPC = typeof(Terraria.WorldGen).GetMethod("TrySpawningTownNPC", BindingFlags.NonPublic | BindingFlags.Static)!;
+
+		/// <summary>
+		/// Invokes the method WorldGen.TrySpawningTownNPC(int x, int y)
+		/// </summary>
+		internal static void Invoke_WordGen_TrySpawningTownNPC(int x, int y)
+		{
+			Method_WorldGen_TrySpawningTownNPC.Invoke(Main.instance, [x, y]);
+		}
+
+		public override void RandomUpdate(int i, int j, int type)
+		{
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().BoostTownNPCRates != BossesAsNPCsConfigServer.BoostSpawnRatesOptions.Off)
+			{
+				if (Main.checkForSpawns >= 7200 / WorldGen.GetWorldUpdateRate())
+				{
+					Invoke_WordGen_TrySpawningTownNPC(i, j);
+				}
 			}
 		}
 	}

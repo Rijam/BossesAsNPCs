@@ -37,11 +37,11 @@ namespace BossesAsNPCs.Projectiles
 			}
 			Color dustColor = Color.Lerp(Color.Orange, Color.Blue, Projectile.ai[0] / 300f);
 			int dust = Dust.NewDust(Projectile.position, Projectile.width / 2, Projectile.height / 2, DustID.WhiteTorch, 0, 0, 100, dustColor, 1f);
-			Main.dust[dust].noLightEmittence = true;
+			Main.dust[dust].noLightEmittance = true;
 			Lighting.AddLight(Projectile.Center, dustColor.ToVector3());
 		}
 
-		public override bool PreDraw(ref Color lightColor)
+		public override bool PreDraw(Player player, ref Color lightColor)
 		{
 			// SpriteEffects change which direction the sprite is drawn.
 			SpriteEffects spriteEffects = SpriteEffects.FlipHorizontally;
@@ -106,7 +106,7 @@ namespace BossesAsNPCs.Projectiles
 			{
 				Color dustColor = Color.Lerp(Color.Orange, Color.Blue, i / 30f);
 				int dust = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, DustID.WhiteTorch, 0, 0, 100, dustColor, 1f);
-				Main.dust[dust].noLightEmittence = true;
+				Main.dust[dust].noLightEmittance = true;
 				Lighting.AddLight(Projectile.Center, dustColor.ToVector3());
 			}
 		}

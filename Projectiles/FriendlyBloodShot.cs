@@ -22,7 +22,7 @@ namespace BossesAsNPCs.Projectiles
 		{
 			Projectile.width = 10;
 			Projectile.height = 10;
-			Projectile.aiStyle = 1;
+			Projectile.aiStyle = ProjAIStyleID.Arrow;
 			Projectile.friendly = true;
 			Projectile.hostile = false;
 			Projectile.penetrate = -1;
@@ -30,7 +30,7 @@ namespace BossesAsNPCs.Projectiles
 			AIType = ProjectileID.BloodShot;
 			Projectile.timeLeft = 300;
 		}
-		public override bool PreDraw(ref Color lightColor)
+		public override bool PreDraw(Player player, ref Color lightColor)
 		{
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
 			int frameHeight = TextureAssets.Projectile[Projectile.type].Height() / Main.projFrames[Projectile.type];

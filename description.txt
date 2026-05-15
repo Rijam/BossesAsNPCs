@@ -29,6 +29,7 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
+	- Skeletron & Skeletron Prime portraits: chimerass 
 
 Mod version: 0.2.13
 	- Updated manually setting the Bestiary stars for the boss NPCs.

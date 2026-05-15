@@ -164,25 +164,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			return chat;
 		}
-		public override void SetChatButtons(ref string button, ref string button2)
-		{
-			button = Language.GetTextValue("LegacyInterface.28");
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
-			{
-				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
-			}
-		}
 
-		public override void OnChatButtonClicked(bool firstButton, ref string shop)
+		public override void RegisterChatButtons(NPCInteractionList interactions)
 		{
-			if (firstButton)
-			{
-				shop = Shop1;
-			}
-			if (!firstButton)
-			{
-				shop = Shop2;
-			}
+			NPCHelper.RegisterShop1AndShop2(interactions, Shop1, Shop2);
 		}
 
 		public override void AddShops()

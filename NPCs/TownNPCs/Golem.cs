@@ -136,9 +136,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-			Color color = Color.White;
+			Color color = NPCHelper.GlowColor(NPC, Color.White);
 
-			spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+			spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 		}
 
 		public override string GetChat()
@@ -198,25 +198,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			return chat;
 		}
-		public override void SetChatButtons(ref string button, ref string button2)
-		{
-			button = Language.GetTextValue("LegacyInterface.28");
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
-			{
-				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
-			}
-		}
 
-		public override void OnChatButtonClicked(bool firstButton, ref string shop)
+		public override void RegisterChatButtons(NPCInteractionList interactions)
 		{
-			if (firstButton)
-			{
-				shop = Shop1;
-			}
-			if (!firstButton)
-			{
-				shop = Shop2;
-			}
+			NPCHelper.RegisterShop1AndShop2(interactions, Shop1, Shop2);
 		}
 
 		public override void AddShops()

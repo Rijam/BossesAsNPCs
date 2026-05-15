@@ -245,7 +245,7 @@ namespace BossesAsNPCs
 		/// <param name="orig"></param>
 		/// <param name="ignoreNPC"></param>
 		/// <param name="npcTypeAskingToScoreRoom"></param>
-		private void Detour_WorldGen_ScoreRoom(On_WorldGen.orig_ScoreRoom orig, int ignoreNPC, int npcTypeAskingToScoreRoom)
+		private void Detour_WorldGen_ScoreRoom(On_WorldGen.orig_ScoreRoom orig, int ignoreNPC, int npcTypeAskingToScoreRoom, Terraria.DataStructures.IRoomCheckFeedback feedback)
 		{
 			if (TownNPCLiveInBadBiomeSets.CanLiveInCorruption[npcTypeAskingToScoreRoom])
 			{
@@ -260,7 +260,7 @@ namespace BossesAsNPCs
 			//	HousingDungeonNPC = true;
 			// }
 
-			orig(ignoreNPC, npcTypeAskingToScoreRoom);
+			orig(ignoreNPC, npcTypeAskingToScoreRoom, feedback);
 
 			HousingCrimsonNPC = false;
 			HousingCorruptionNPC = false;
@@ -297,7 +297,7 @@ namespace BossesAsNPCs
 		}
 
 		/// <summary>
-		/// Get the private method field ShopHelper.AddHappinessReportText()
+		/// Get the private method ShopHelper.AddHappinessReportText()
 		/// </summary>
 		private static readonly MethodInfo Method_ShopHelper_AddHappinessReportText = typeof(Terraria.GameContent.ShopHelper).GetMethod("AddHappinessReportText", BindingFlags.NonPublic | BindingFlags.Instance)!;
 

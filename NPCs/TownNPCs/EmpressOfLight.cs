@@ -69,6 +69,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture), Texture + "_Party")
 			);
 
+			// Here we define which portrait to use for the Town NPC when the portrait style setting is set to detailed.
+			NPCID.Sets.NPCPortraits.Add(Type, NPCID.Sets.PrioritizedPortrait()
+				.With(NPCHelper.PartyPortraitCondition, NPCID.Sets.BasicPortrait($"{Texture}_Portrait_Party"))
+				.Default(NPCID.Sets.BasicPortrait($"{Texture}_Portrait")));
+			NPCID.Sets.NPCPortraitsCloseUpOffsets.Add(Type, new Vector2(-3f, 0f)); // Here we can change the offsets of Town NPC when the portrait style setting is set to profile.
+			NPCID.Sets.NPCPortraitsFullBodyRetroOffsets.Add(Type, new Vector2(0f, 0f)); // Here we can change the offsets of Town NPC when the portrait style setting is set to retro.
+
 			// Specify the debuffs it is immune to
 			NPCID.Sets.SpecificDebuffImmunity[Type][BuffID.Confused] = true;
 		}
@@ -151,10 +158,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-			Color colorMagenta = new(207, 0, 151, 100);
-			Color colorYellow = new(241, 240, 120, 100);
-			Color colorLBlue = new(0, 241, 255, 100);
-			Color colorDBlue = new(82, 123, 239, 100);
+			Color colorMagenta = NPCHelper.GlowColor(NPC, 207, 0, 151, 100);
+			Color colorYellow = NPCHelper.GlowColor(NPC, 241, 240, 120, 100);
+			Color colorLBlue = NPCHelper.GlowColor(NPC, 0, 241, 255, 100);
+			Color colorDBlue = NPCHelper.GlowColor(NPC, 82, 123, 239, 100);
 
 			if (colorIndex == 0)
 			{
@@ -181,13 +188,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			if (NPC.ai[0] == 14) // Attacking
 			{
-				color = Main.OurFavoriteColor; // Enraged color
+				color = NPCHelper.GlowColor(NPC, Main.OurFavoriteColor); // Enraged color
 				color.A = 100;
 			}
 
 			for (int i = 0; i < 2; i++)
 			{
-				DrawData glowData = new(glowmask.Value, vector + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				DrawData glowData = new(glowmask.Value, vector + NPCHelper.DrawingOffsets(NPC), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				GameShaders.Misc["HallowBoss"].Apply(glowData);
 				glowData.Draw(spriteBatch);
 
@@ -266,27 +273,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			return chat;
 		}
-		public override void SetChatButtons(ref string button, ref string button2)
-		{
-			button = Language.GetTextValue("LegacyInterface.28");
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
-			{
-				button2 = Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2");
-			}
-		}
 
-		public override void OnChatButtonClicked(bool firstButton, ref string shop)
+		public override void RegisterChatButtons(NPCInteractionList interactions)
 		{
-			if (firstButton)
-			{
-				shop = Shop1;
-			}
-			if (!firstButton)
-			{
-				shop = Shop2;
-			}
+			NPCHelper.RegisterShop1AndShop2(interactions, Shop1, Shop2);
 		}
-
 		public override void AddShops()
 		{
 			var npcShop1 = new NPCShop(Type, Shop1);

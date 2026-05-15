@@ -1,6 +1,5 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 using Terraria;
 using Terraria.ID;
@@ -213,21 +212,21 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
-			Color color = new(255, 255, 255, 100);
-			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC));
+			Color color = NPCHelper.GlowColor(NPC, 255, 255, 255, 100);
+
 			for (int i = 0; i < 5; i++)
 			{
 				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
 				float randomY = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
 
-				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + verticalOffset + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
-			Color color = new(255, 255, 255, 100);
+			Color color = NPCHelper.GlowColor(NPC, 255, 255, 255, 100);
 
 			if (NPC.frame.Y > 20 * NPC.frame.Height) // Only draw while attacking
 			{
@@ -236,7 +235,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					float randomX = Utils.RandomInt(ref seed, -50, 50) * 0.15f;
 					float randomY = Utils.RandomInt(ref seed, -20, 20) * 0.15f;
 
-					spriteBatch.Draw(background.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(background.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 			return true;
@@ -288,7 +287,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Plantera", Main.npc[plantera].GivenName), 0.25);
+				chat.Add(Language.GetTextValue(path + "Plantera", Main.npc[plantera].FullName), 0.25);
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
@@ -308,425 +307,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			}
 			return chat;
 		}
-		public override void SetChatButtons(ref string button, ref string button2)
-		{
-			button = NPCHelper.ShopCycler switch
-			{
-				0 => Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".NoShop"), // No shop selected
-				1 => Language.GetTextValue("NPCName.KingSlime"), // 1 = King Slime
-				2 => Language.GetTextValue("NPCName.KingSlime") + " 2", // 2 = King Slime 2
-				3 => Language.GetTextValue("NPCName.EyeofCthulhu"), // 3 = EoC
-				4 => Language.GetTextValue("NPCName.EyeofCthulhu") + " 2", // 4 = EoC 2
-				5 => Language.GetTextValue("NPCName.EaterofWorldsHead"), // 5 = EoW
-				6 => Language.GetTextValue("NPCName.EaterofWorldsHead") + " 2", // 6 = EoW 2
-				7 => Language.GetTextValue("NPCName.BrainofCthulhu"),
-				8 => Language.GetTextValue("NPCName.BrainofCthulhu") + " 2",
-				9 => Language.GetTextValue("NPCName.QueenBee"),
-				10 => Language.GetTextValue("NPCName.QueenBee") + " 2",
-				11 => Language.GetTextValue("NPCName.SkeletronHead"),
-				12 => Language.GetTextValue("NPCName.SkeletronHead") + " 2",
-				13 => Language.GetTextValue("NPCName.Deerclops"),
-				14 => Language.GetTextValue("NPCName.Deerclops") + " 2",
-				15 => Language.GetTextValue("NPCName.WallofFlesh"),
-				16 => Language.GetTextValue("NPCName.WallofFlesh") + " 2",
-				17 => Language.GetTextValue("NPCName.QueenSlimeBoss"),
-				18 => Language.GetTextValue("NPCName.QueenSlimeBoss") + " 2",
-				19 => Language.GetTextValue("NPCName.TheDestroyer"),
-				20 => Language.GetTextValue("NPCName.TheDestroyer") + " 2",
-				21 => Language.GetTextValue("NPCName.Retinazer"),
-				22 => Language.GetTextValue("NPCName.Retinazer") + " 2",
-				23 => Language.GetTextValue("NPCName.Spazmatism"),
-				24 => Language.GetTextValue("NPCName.Spazmatism") + " 2",
-				25 => Language.GetTextValue("NPCName.SkeletronPrime"),
-				26 => Language.GetTextValue("NPCName.SkeletronPrime") + " 2",
-				27 => Language.GetTextValue("NPCName.Plantera"),
-				28 => Language.GetTextValue("NPCName.Plantera") + " 2",
-				29 => Language.GetTextValue("NPCName.Golem"),
-				30 => Language.GetTextValue("NPCName.Golem") + " 2",
-				31 => Language.GetTextValue("NPCName.HallowBoss"),
-				32 => Language.GetTextValue("NPCName.HallowBoss") + " 2",
-				33 => Language.GetTextValue("NPCName.DukeFishron"),
-				34 => Language.GetTextValue("NPCName.DukeFishron") + " 2",
-				35 => Language.GetTextValue("NPCName.DD2Betsy"),
-				36 => Language.GetTextValue("NPCName.DD2Betsy") + " 2",
-				37 => Language.GetTextValue("NPCName.CultistBoss"),
-				38 => Language.GetTextValue("NPCName.CultistBoss") + " 2",
-				39 => Language.GetTextValue("NPCName.MoonLordHead"),
-				40 => Language.GetTextValue("NPCName.MoonLordHead") + " 2",
-				41 => Language.GetTextValue("NPCName.BloodNautilus"),
-				42 => Language.GetTextValue("NPCName.BloodNautilus") + " 2",
-				43 => Language.GetTextValue("NPCName.Mothron"),
-				44 => Language.GetTextValue("NPCName.Mothron") + " 2",
-				45 => Language.GetTextValue("NPCName.Pumpking"),
-				46 => Language.GetTextValue("NPCName.Pumpking") + " 2",
-				47 => Language.GetTextValue("NPCName.IceQueen"),
-				48 => Language.GetTextValue("NPCName.IceQueen") + " 2",
-				49 => Language.GetTextValue("NPCName.MartianSaucer"),
-				50 => Language.GetTextValue("NPCName.MartianSaucer") + " 2",
-				_ => Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".NoShop"), // No shop selected
-			};
 
-			button2 = Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".IncShop"); // Next Shop
-			if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift))
-			{
-				button2 = Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".DecShop"); // Previous Shop
-			}
-			if (Main.keyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftControl))
-			{
-				button2 = Language.GetTextValue("Mods." + Mod.Name + ".UI." + Name + ".FirstShop"); // First Shop
-			}
+		public override void RegisterChatButtons(NPCInteractionList interactions)
+		{
+			// Close, Happiness, and Housing are added first.
+			// Add Previous Page and Next Page buttons
+			interactions.Append(new NPCHelper.TorchGodPreviousPage());
+			interactions.Append(new NPCHelper.TorchGodNextPage());
+			// Add the shops for every other Boss NPC.
+			NPCHelper.TorchGodRegisterShopsMode0(interactions); // Mode 0 should technically never be seen. Torch God doesn't load while it is in mode 0.
+			NPCHelper.TorchGodRegisterShopsMode1(interactions);
+			NPCHelper.TorchGodRegisterShopsMode2(interactions);
 		}
 
-		private const string Shop1 = "Shop1";
-		private const string Shop2 = "Shop2";
-		private const string TorchGodShop1 = "TorchGodShop1", TorchGodShop2 = "TorchGodShop2", TorchGodShop3 = "TorchGodShop3";
-		private const string TorchGodShop4 = "TorchGodShop4", TorchGodShop5 = "TorchGodShop5", TorchGodShop6 = "TorchGodShop6";
-		private const string TorchGodShop7 = "TorchGodShop7", TorchGodShop8 = "TorchGodShop8", TorchGodShop9 = "TorchGodShop9";
-		private const string TorchGodShop10 = "TorchGodShop10", TorchGodShop11 = "TorchGodShop11", TorchGodShop12 = "TorchGodShop12";
-		private const string TorchGodShop13 = "TorchGodShop13", TorchGodShop14 = "TorchGodShop14", TorchGodShop15 = "TorchGodShop15";
-		private const string TorchGodShop16 = "TorchGodShop16", TorchGodShop17 = "TorchGodShop17", TorchGodShop18 = "TorchGodShop18";
-		private const string TorchGodShop19 = "TorchGodShop19", TorchGodShop20 = "TorchGodShop20", TorchGodShop21 = "TorchGodShop21";
-		private const string TorchGodShop22 = "TorchGodShop22", TorchGodShop23 = "TorchGodShop23", TorchGodShop24 = "TorchGodShop24";
-		private const string TorchGodShop25 = "TorchGodShop25", TorchGodShop26 = "TorchGodShop26", TorchGodShop27 = "TorchGodShop27";
-		private const string TorchGodShop28 = "TorchGodShop28", TorchGodShop29 = "TorchGodShop29", TorchGodShop30 = "TorchGodShop30";
-		private const string TorchGodShop31 = "TorchGodShop31", TorchGodShop32 = "TorchGodShop32", TorchGodShop33 = "TorchGodShop33";
-		private const string TorchGodShop34 = "TorchGodShop34", TorchGodShop35 = "TorchGodShop35", TorchGodShop36 = "TorchGodShop36";
-		private const string TorchGodShop37 = "TorchGodShop37", TorchGodShop38 = "TorchGodShop38", TorchGodShop39 = "TorchGodShop39";
-		private const string TorchGodShop40 = "TorchGodShop40", TorchGodShop41 = "TorchGodShop41", TorchGodShop42 = "TorchGodShop42";
-		private const string TorchGodShop43 = "TorchGodShop43", TorchGodShop44 = "TorchGodShop44", TorchGodShop45 = "TorchGodShop45";
-		private const string TorchGodShop46 = "TorchGodShop46", TorchGodShop47 = "TorchGodShop47", TorchGodShop48 = "TorchGodShop48";
-		private const string TorchGodShop49 = "TorchGodShop49", TorchGodShop50 = "TorchGodShop50";
-
-		public static string ChooseCorrectShop()
-		{
-			return NPCHelper.ShopCycler switch
-			{
-				0 => "", // No shop selected
-				1 => TorchGodShop1, // 1 = King Slime
-				2 => TorchGodShop2, // 2 = King Slime 2
-				3 => TorchGodShop3, // 3 = EoC
-				4 => TorchGodShop4, // 4 = EoC 2
-				5 => TorchGodShop5, // 5 = EoW
-				6 => TorchGodShop6, // 6 = EoW 2
-				7 => TorchGodShop7,
-				8 => TorchGodShop8,
-				9 => TorchGodShop9,
-				10 => TorchGodShop10,
-				11 => TorchGodShop11,
-				12 => TorchGodShop12,
-				13 => TorchGodShop13,
-				14 => TorchGodShop14,
-				15 => TorchGodShop15,
-				16 => TorchGodShop16,
-				17 => TorchGodShop17,
-				18 => TorchGodShop18,
-				19 => TorchGodShop19,
-				20 => TorchGodShop20,
-				21 => TorchGodShop21,
-				22 => TorchGodShop22,
-				23 => TorchGodShop23,
-				24 => TorchGodShop24,
-				25 => TorchGodShop25,
-				26 => TorchGodShop26,
-				27 => TorchGodShop27,
-				28 => TorchGodShop28,
-				29 => TorchGodShop29,
-				30 => TorchGodShop30,
-				31 => TorchGodShop31,
-				32 => TorchGodShop32,
-				33 => TorchGodShop33,
-				34 => TorchGodShop34,
-				35 => TorchGodShop35,
-				36 => TorchGodShop36,
-				37 => TorchGodShop37,
-				38 => TorchGodShop38,
-				39 => TorchGodShop39,
-				40 => TorchGodShop40,
-				41 => TorchGodShop41,
-				42 => TorchGodShop42,
-				43 => TorchGodShop43,
-				44 => TorchGodShop44,
-				45 => TorchGodShop45,
-				46 => TorchGodShop46,
-				47 => TorchGodShop47,
-				48 => TorchGodShop48,
-				49 => TorchGodShop49,
-				50 => TorchGodShop50,
-				_ => "", // No shop selected
-			};
-		}
-
-		public override void OnChatButtonClicked(bool firstButton, ref string shop)
-		{
-			if (firstButton)
-			{
-				if (NPCHelper.ShopCycler <= 0 || NPCHelper.ShopCycler >= 51)
-				{
-					Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath(Name) + "Common");
-				}
-				else
-				{
-					shop = ChooseCorrectShop();
-				}
-			}
-			if (!firstButton)
-			{
-				BossesAsNPCsConfigServer.AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
-				GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
-				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
-				{
-					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
-					{
-						NPCHelper.DecrementShopCycleMode0();
-					}
-					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
-					{
-						NPCHelper.ShopCycler = 0;
-						NPCHelper.IncrementShopCycleMode0();
-					}
-					else
-					{
-						NPCHelper.IncrementShopCycleMode0();
-					}
-				}
-				else if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
-				{
-					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
-					{
-						NPCHelper.DecrementShopCycleMode1();
-					}
-					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
-					{
-						NPCHelper.ShopCycler = 0;
-						NPCHelper.IncrementShopCycleMode1();
-					}
-					else
-					{
-						NPCHelper.IncrementShopCycleMode1();
-					}
-				}
-				else if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
-				{
-					if (Main.keyState.IsKeyDown(Keys.LeftShift) || (gamePadState.IsConnected && gamePadState.Buttons.RightStick == ButtonState.Pressed))
-					{
-						NPCHelper.DecrementShopCycleMode2();
-					}
-					else if (Main.keyState.IsKeyDown(Keys.LeftControl) || (gamePadState.IsConnected && gamePadState.Buttons.LeftStick == ButtonState.Pressed))
-					{
-						NPCHelper.ShopCycler = 0;
-						NPCHelper.IncrementShopCycleMode2();
-					}
-					else
-					{
-						NPCHelper.IncrementShopCycleMode2();
-					}
-				}
-			}
-			//Main.NewText("NPCHelper.StatusShopCycle() " + NPCHelper.StatusShopCycle());
-		}
-
-		public override void AddShops()
-		{
-			var npcTorchGodShop1 = new NPCShop(Type, TorchGodShop1);
-			SetupShops.KingSlime(npcTorchGodShop1, Shop1);
-			npcTorchGodShop1.Register();
-
-			var npcTorchGodShop2 = new NPCShop(Type, TorchGodShop2);
-			SetupShops.KingSlime(npcTorchGodShop2, Shop2);
-			npcTorchGodShop2.Register();
-
-			var npcTorchGodShop3 = new NPCShop(Type, TorchGodShop3);
-			SetupShops.EyeOfCthulhu(npcTorchGodShop3, Shop1);
-			npcTorchGodShop3.Register();
-
-			var npcTorchGodShop4 = new NPCShop(Type, TorchGodShop4);
-			SetupShops.EyeOfCthulhu(npcTorchGodShop4, Shop2);
-			npcTorchGodShop4.Register();
-
-			var npcTorchGodShop5 = new NPCShop(Type, TorchGodShop5);
-			SetupShops.EaterOfWorlds(npcTorchGodShop5, Shop1);
-			npcTorchGodShop5.Register();
-
-			var npcTorchGodShop6 = new NPCShop(Type, TorchGodShop6);
-			SetupShops.EaterOfWorlds(npcTorchGodShop6, Shop2);
-			npcTorchGodShop6.Register();
-
-			var npcTorchGodShop7 = new NPCShop(Type, TorchGodShop7);
-			SetupShops.BrainOfCthulhu(npcTorchGodShop7, Shop1);
-			npcTorchGodShop7.Register();
-
-			var npcTorchGodShop8 = new NPCShop(Type, TorchGodShop8);
-			SetupShops.BrainOfCthulhu(npcTorchGodShop8, Shop2);
-			npcTorchGodShop8.Register();
-
-			var npcTorchGodShop9 = new NPCShop(Type, TorchGodShop9);
-			SetupShops.QueenBee(npcTorchGodShop9, Shop1);
-			npcTorchGodShop9.Register();
-
-			var npcTorchGodShop10 = new NPCShop(Type, TorchGodShop10);
-			SetupShops.QueenBee(npcTorchGodShop10, Shop2);
-			npcTorchGodShop10.Register();
-
-			var npcTorchGodShop11 = new NPCShop(Type, TorchGodShop11);
-			SetupShops.Skeletron(npcTorchGodShop11, Shop1);
-			npcTorchGodShop11.Register();
-
-			var npcTorchGodShop12 = new NPCShop(Type, TorchGodShop12);
-			SetupShops.Skeletron(npcTorchGodShop12, Shop2);
-			npcTorchGodShop12.Register();
-
-			var npcTorchGodShop13 = new NPCShop(Type, TorchGodShop13);
-			SetupShops.Deerclops(npcTorchGodShop13, Shop1);
-			npcTorchGodShop13.Register();
-
-			var npcTorchGodShop14 = new NPCShop(Type, TorchGodShop14);
-			SetupShops.Deerclops(npcTorchGodShop14, Shop2);
-			npcTorchGodShop14.Register();
-
-			var npcTorchGodShop15 = new NPCShop(Type, TorchGodShop15);
-			SetupShops.WallOfFlesh(npcTorchGodShop15, Shop1);
-			npcTorchGodShop15.Register();
-
-			var npcTorchGodShop16 = new NPCShop(Type, TorchGodShop16);
-			SetupShops.WallOfFlesh(npcTorchGodShop16, Shop2);
-			npcTorchGodShop16.Register();
-
-			var npcTorchGodShop17 = new NPCShop(Type, TorchGodShop17);
-			SetupShops.QueenSlime(npcTorchGodShop17, Shop1);
-			npcTorchGodShop17.Register();
-
-			var npcTorchGodShop18 = new NPCShop(Type, TorchGodShop18);
-			SetupShops.QueenSlime(npcTorchGodShop18, Shop2);
-			npcTorchGodShop18.Register();
-
-			var npcTorchGodShop19 = new NPCShop(Type, TorchGodShop19);
-			SetupShops.TheDestroyer(npcTorchGodShop19, Shop1);
-			npcTorchGodShop19.Register();
-
-			var npcTorchGodShop20 = new NPCShop(Type, TorchGodShop20);
-			SetupShops.TheDestroyer(npcTorchGodShop20, Shop2);
-			npcTorchGodShop20.Register();
-
-			var npcTorchGodShop23 = new NPCShop(Type, TorchGodShop21);
-			SetupShops.Retinazer(npcTorchGodShop23, Shop1);
-			npcTorchGodShop23.Register();
-
-			var npcTorchGodShop24 = new NPCShop(Type, TorchGodShop22);
-			SetupShops.Retinazer(npcTorchGodShop24, Shop2);
-			npcTorchGodShop24.Register();
-
-			var npcTorchGodShop21 = new NPCShop(Type, TorchGodShop23);
-			SetupShops.Spazmatism(npcTorchGodShop21, Shop1);
-			npcTorchGodShop21.Register();
-
-			var npcTorchGodShop22 = new NPCShop(Type, TorchGodShop24);
-			SetupShops.Spazmatism(npcTorchGodShop22, Shop2);
-			npcTorchGodShop22.Register();
-
-			var npcTorchGodShop25 = new NPCShop(Type, TorchGodShop25);
-			SetupShops.SkeletronPrime(npcTorchGodShop25, Shop1);
-			npcTorchGodShop25.Register();
-
-			var npcTorchGodShop26 = new NPCShop(Type, TorchGodShop26);
-			SetupShops.SkeletronPrime(npcTorchGodShop26, Shop2);
-			npcTorchGodShop26.Register();
-
-			var npcTorchGodShop27 = new NPCShop(Type, TorchGodShop27);
-			SetupShops.Plantera(npcTorchGodShop27, Shop1);
-			npcTorchGodShop27.Register();
-
-			var npcTorchGodShop28 = new NPCShop(Type, TorchGodShop28);
-			SetupShops.Plantera(npcTorchGodShop28, Shop2);
-			npcTorchGodShop28.Register();
-
-			var npcTorchGodShop29 = new NPCShop(Type, TorchGodShop29);
-			SetupShops.Golem(npcTorchGodShop29, Shop1);
-			npcTorchGodShop29.Register();
-
-			var npcTorchGodShop30 = new NPCShop(Type, TorchGodShop30);
-			SetupShops.Golem(npcTorchGodShop30, Shop2);
-			npcTorchGodShop30.Register();
-
-			var npcTorchGodShop31 = new NPCShop(Type, TorchGodShop31);
-			SetupShops.EmpressOfLight(npcTorchGodShop31, Shop1);
-			npcTorchGodShop31.Register();
-
-			var npcTorchGodShop32 = new NPCShop(Type, TorchGodShop32);
-			SetupShops.EmpressOfLight(npcTorchGodShop32, Shop2);
-			npcTorchGodShop32.Register();
-
-			var npcTorchGodShop33 = new NPCShop(Type, TorchGodShop33);
-			SetupShops.DukeFishron(npcTorchGodShop33, Shop1);
-			npcTorchGodShop33.Register();
-
-			var npcTorchGodShop34 = new NPCShop(Type, TorchGodShop34);
-			SetupShops.DukeFishron(npcTorchGodShop34, Shop2);
-			npcTorchGodShop34.Register();
-
-			var npcTorchGodShop35 = new NPCShop(Type, TorchGodShop35);
-			SetupShops.Betsy(npcTorchGodShop35, Shop1);
-			npcTorchGodShop35.Register();
-
-			var npcTorchGodShop36 = new NPCShop(Type, TorchGodShop36);
-			SetupShops.Betsy(npcTorchGodShop36, Shop2);
-			npcTorchGodShop36.Register();
-
-			var npcTorchGodShop37 = new NPCShop(Type, TorchGodShop37);
-			SetupShops.LunaticCultist(npcTorchGodShop37, Shop1);
-			npcTorchGodShop37.Register();
-
-			var npcTorchGodShop38 = new NPCShop(Type, TorchGodShop38);
-			SetupShops.LunaticCultist(npcTorchGodShop38, Shop2);
-			npcTorchGodShop38.Register();
-
-			var npcTorchGodShop39 = new NPCShop(Type, TorchGodShop39);
-			SetupShops.MoonLord(npcTorchGodShop39, Shop1);
-			npcTorchGodShop39.Register();
-
-			var npcTorchGodShop40 = new NPCShop(Type, TorchGodShop40);
-			SetupShops.MoonLord(npcTorchGodShop40, Shop2);
-			npcTorchGodShop40.Register();
-
-			var npcTorchGodShop41 = new NPCShop(Type, TorchGodShop41);
-			SetupShops.Dreadnautilus(npcTorchGodShop41, Shop1);
-			npcTorchGodShop41.Register();
-
-			var npcTorchGodShop42 = new NPCShop(Type, TorchGodShop42);
-			SetupShops.Dreadnautilus(npcTorchGodShop42, Shop2);
-			npcTorchGodShop42.Register();
-
-			var npcTorchGodShop43 = new NPCShop(Type, TorchGodShop43);
-			SetupShops.Mothron(npcTorchGodShop43, Shop1);
-			npcTorchGodShop43.Register();
-
-			var npcTorchGodShop44 = new NPCShop(Type, TorchGodShop44);
-			SetupShops.Mothron(npcTorchGodShop44, Shop2);
-			npcTorchGodShop44.Register();
-
-			var npcTorchGodShop45 = new NPCShop(Type, TorchGodShop45);
-			SetupShops.Pumpking(npcTorchGodShop45, Shop1);
-			npcTorchGodShop45.Register();
-
-			var npcTorchGodShop46 = new NPCShop(Type, TorchGodShop46);
-			SetupShops.Pumpking(npcTorchGodShop46, Shop2);
-			npcTorchGodShop46.Register();
-
-			var npcTorchGodShop47 = new NPCShop(Type, TorchGodShop47);
-			SetupShops.IceQueen(npcTorchGodShop47, Shop1);
-			npcTorchGodShop47.Register();
-
-			var npcTorchGodShop48 = new NPCShop(Type, TorchGodShop48);
-			SetupShops.IceQueen(npcTorchGodShop48, Shop2);
-			npcTorchGodShop48.Register();
-
-			var npcTorchGodShop49 = new NPCShop(Type, TorchGodShop49);
-			SetupShops.MartianSaucer(npcTorchGodShop49, Shop1);
-			npcTorchGodShop49.Register();
-
-			var npcTorchGodShop50 = new NPCShop(Type, TorchGodShop50);
-			SetupShops.MartianSaucer(npcTorchGodShop50, Shop2);
-			npcTorchGodShop50.Register();
-		}
+		// Shops are registered in NPCHelper
 
 		public override bool CanGoToStatue(bool toKingStatue)
 		{

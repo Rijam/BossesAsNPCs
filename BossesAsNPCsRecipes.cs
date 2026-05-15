@@ -1,5 +1,6 @@
 using BossesAsNPCs.Items;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -121,9 +122,41 @@ namespace BossesAsNPCs
 
 		public override void AddRecipeGroups()
 		{
-			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs && RecipeGroup.recipeGroupIDs.TryGetValue("Fargowiltas:AnyCaughtNPC", out int anyCaughtNPCIndex))
+			RecipeGroup fargosMutantAnyCaughtNPC = RecipeGroup.recipeGroups.Where(rg => rg.Value.Key == "Fargowiltas:AnyCaughtNPC").FirstOrDefault().Value;
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs && fargosMutantAnyCaughtNPC is not null)
 			{
-				RecipeGroup fargosAnyCaughtNPCGroup = RecipeGroup.recipeGroups[anyCaughtNPCIndex];
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtKingSlime>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtEyeOfCthulhu>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtEaterOfWorlds>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtBrainOfCthulhu>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtQueenBee>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtSkeletron>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtDeerclops>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtWallOfFlesh>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtQueenSlime>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtTheDestroyer>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtSpazmatism>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtRetinazer>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtSkeletronPrime>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtPlantera>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtGolem>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtEmpressOfLight>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtDukeFishron>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtBetsy>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtLunaticCultist>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtMoonLord>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtDreadnautilus>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtMothron>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtPumpking>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtIceQueen>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtMartianSaucer>());
+				fargosMutantAnyCaughtNPC.Add(ModContent.ItemType<CaughtTorchGod>());
+			}
+
+			/* TODO: RecipeGroups are no longer named with strings.
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().CatchNPCs && RecipeGroup.recipeGroups.TryGetValue("Fargowiltas:AnyCaughtNPC", out RecipeGroup fargosAnyCaughtNPCGroup))
+			{
+				// RecipeGroup fargosAnyCaughtNPCGroup = RecipeGroup.recipeGroups[anyCaughtNPCIndex];
 				HashSet<int> validItems = fargosAnyCaughtNPCGroup.ValidItems;
 				validItems.Add(ModContent.ItemType<CaughtKingSlime>());
 				validItems.Add(ModContent.ItemType<CaughtEyeOfCthulhu>());
@@ -152,6 +185,7 @@ namespace BossesAsNPCs
 				validItems.Add(ModContent.ItemType<CaughtMartianSaucer>());
 				validItems.Add(ModContent.ItemType<CaughtTorchGod>());
 			}
+			*/
 		}
 	}
 }

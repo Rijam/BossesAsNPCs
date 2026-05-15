@@ -587,6 +587,8 @@ Mods: {
 				IncShop: Next shop
 				DecShop: Previous shop
 				FirstShop: First shop
+				NextPage: Next page
+				PreviousPage: Previous Page
 			}
 
 			Shop2: "{$LegacyInterface.28} 2"
@@ -630,6 +632,7 @@ Mods: {
 			WorldContagionS: In a world with The Contagion
 			MothronPaintingsS: Paintings are randomly sold
 			RandomVanityS: Vanity are randomly sold
+			NoAltars: When the world contains no altars
 		}
 
 		Items: {
@@ -2612,7 +2615,8 @@ Mods: {
 					Default7: You do know how to stop-drop-and-roll, right?
 					Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
 					Default9: Brew my special cocktail to convert nearby torches into the correct biome type!
-					Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
+					Common: So many shops to cycle through! Click Previous Page and Next Page to cycle between Pre-Hardmode, Hardmode, and event bosses.
+					NoShop: There are no shops for me to show you! Change the configuration settings to allow me to show you shops.
 					Rare: Haha! The fire IS shooting at you!
 					Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
 					BloodMoon: I love setting all of the zombies ablaze on nights like these!

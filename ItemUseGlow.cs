@@ -35,23 +35,25 @@ namespace BossesAsNPCs
 		{
 			return base.Clone(item, itemClone);
 		}
-		public override void PostDrawInWorld(Item item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
+		public override void PostDrawInWorld(WorldItem item, SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
-			if (glowTexture != null)
 			{
-				Texture2D texture = glowTexture;
+				if (glowTexture == null)
+				{
+					return;
+				}
 				spriteBatch.Draw
 				(
-					texture,
+					glowTexture,
 					new Vector2
 					(
 						item.position.X - Main.screenPosition.X + item.width * 0.5f,
-						item.position.Y - Main.screenPosition.Y + item.height - texture.Height * 0.5f
+						item.position.Y - Main.screenPosition.Y + item.height - glowTexture.Height * 0.5f
 					),
-					new Rectangle(0, 0, texture.Width, texture.Height),
+					new Rectangle(0, 0, glowTexture.Width, glowTexture.Height),
 					Color.White,
 					rotation,
-					texture.Size() * 0.5f,
+					glowTexture.Size() * 0.5f,
 					scale,
 					SpriteEffects.None,
 					0f
@@ -77,7 +79,7 @@ namespace BossesAsNPCs
 			{
 				return;
 			}
-			if (drawInfo.drawPlayer.heldProj >= 0 && drawInfo.shadow == 0f && !drawInfo.heldProjOverHand)
+			if (drawInfo.drawPlayer.heldProj >= 0 && drawInfo.shadow == 0f) // && !drawInfo.heldProjOverHand)
 			{
 				drawInfo.projectileDrawPosition = drawInfo.DrawDataCache.Count;
 			}

@@ -1,20 +1,24 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using System.Linq;
+using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameContent;
-using Terraria.ID;
+using Terraria.GameContent.UI.Elements;
+using Terraria.GameContent.UI.States;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace BossesAsNPCs.Items.Vanity.Mechdusa
 {
 	[AutoloadEquip(EquipType.Head)]
 	public class MdCostumeHeadpiece : VanityBase
 	{
-		public static Asset<Texture2D> RezEye;
-		public static Asset<Texture2D> SpazEye;
-		public static Asset<Texture2D> EyeTether;
+		internal static Asset<Texture2D> RezEye;
+		internal static Asset<Texture2D> SpazEye;
+		internal static Asset<Texture2D> EyeTether;
 
 		public override void Load()
 		{
@@ -23,6 +27,34 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			SpazEye = ModContent.Request<Texture2D>($"{GetType().Namespace.Replace('.', '/')}/SpazEye");
 			EyeTether = ModContent.Request<Texture2D>($"{GetType().Namespace.Replace('.', '/')}/EyeTether");
 		}
+
+		/*
+		private static readonly MethodInfo Method_UICharacter_GetPlayerPosition = typeof(Terraria.GameContent.UI.Elements.UICharacter).GetMethod("GetPlayerPosition", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+		internal static Vector2 Invoke_UICharacter_GetPlayerPosition(UICharacter instance, ref CalculatedStyle dimensions)
+		{
+			// MethodInfo Method_ShopHelper_AddHappinessReportText = instance.GetType().GetMethod("AddHappinessReportText", BindingFlags.NonPublic | BindingFlags.Instance);
+			return (Vector2)Method_UICharacter_GetPlayerPosition.Invoke(instance, [dimensions]);
+		}
+
+		public static UICharacterSelect Get_Main__characterSelectMenu()
+		{
+			FieldInfo field = typeof(Terraria.Main).GetField("_characterSelectMenu", BindingFlags.NonPublic | BindingFlags.Static);
+			return (UICharacterSelect)field.GetValue(Main.instance);
+		}
+
+		public static UIList Get_UICharacterSelect__playerList(UICharacterSelect instance)
+		{
+			FieldInfo field = typeof(Terraria.GameContent.UI.States.UICharacterSelect).GetField("_playerList", BindingFlags.NonPublic | BindingFlags.Instance);
+			return (UIList)field.GetValue(instance);
+		}
+
+		public static UICharacter Get_UICharacterListItem__playerPanel(UICharacterListItem instance)
+		{
+			FieldInfo field = typeof(Terraria.GameContent.UI.Elements.UICharacterListItem).GetField("_playerPanel", BindingFlags.NonPublic | BindingFlags.Instance);
+			return (UICharacter)field.GetValue(instance);
+		}
+		*/
 
 		/// <summary>
 		/// Creates the DrawData and adds them to the draw cache for one floating eye with a tether.
@@ -36,10 +68,27 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		{
 			Player player = drawInfo.drawPlayer;
 
-			if (player.miscCounter % 10 == 0) // Every 10 ticks, increase the frame counter.
+			// Every 10 ticks, increase the frame counter.
+			if (player.miscCounter % 10 == 0/* && !player.isDisplayDollOrInanimate && !player.isHatRackDoll*/)
 			{
 				frame = ++frame % 3; // Increase the frame with a range of 0 - 2.
 			}
+
+			/*
+			if (Main.menuMode == 888) // Character select menu.
+			{
+				UIList uiList = Get_UICharacterSelect__playerList(Get_Main__characterSelectMenu());
+				foreach (UICharacterListItem charListItem in uiList.Cast<UICharacterListItem>())
+				{
+					UICharacter uiCharacter = Get_UICharacterListItem__playerPanel(charListItem);
+					CalculatedStyle dim = uiCharacter.GetDimensions();
+					Vector2 dollPos = Invoke_UICharacter_GetPlayerPosition(uiCharacter, ref dim);
+					//Vector2 menuOffset = new(100, 100);
+					eyePos += dollPos;
+					socketPos += dollPos;
+				}
+			}
+			*/
 
 			Vector2 worldPos = eyePos - socketPos;
 			Vector2 tetherPos = Vector2.Lerp(eyePos, socketPos, 0.5f); // Get the midpoint between the eye position and socket position.
@@ -69,7 +118,8 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 				);
 			drawInfo.DrawDataCache.Add(EyeTetherDrawData);
 			drawInfo.DrawDataCache.Add(FrontEyeDrawData);
-			/* Debugging the locations
+			//Debugging the locations
+			/*
 			DrawData socketDraw = new(
 				TextureAssets.MagicPixel.Value,
 				socketPos - new Vector2(2, 2) - Main.screenPosition,
@@ -147,12 +197,12 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			float playerMountYOffset = (player.MountedCenter.Y - player.Center.Y);
 
 			// The position of the eye that is drawn in front of the player's head.
-			Vector2 frontEyePos = player.Center - new Vector2((12 - player.MountXOffset) * player.direction, 28 - player.gfxOffY - playerMountYOffset);
+			Vector2 frontEyePos = player.Center - new Vector2((12 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 			frontEyePos -= player.velocity; // Make the eye fall behind the player when the player is moving.
-			
+
 			// The position of the eye socket with a little bias towards the front and down.
 			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
-			Vector2 eyeSocketPos = player.Center - new Vector2((-3.5f - player.MountXOffset) * player.direction, 11 - player.gfxOffY - playerMountYOffset);
+			Vector2 eyeSocketPos = player.Center - new Vector2((-3.5f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.RezEye : MdCostumeHeadpiece.SpazEye;
@@ -181,12 +231,12 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			float playerMountYOffset = (player.MountedCenter.Y - player.Center.Y);
 
 			// The position of the eye that is drawn in behind of the player's head.
-			Vector2 backEyePos = player.Center - new Vector2((-6 - player.MountXOffset) * player.direction, 28 - player.gfxOffY - playerMountYOffset);
+			Vector2 backEyePos = player.Center - new Vector2((-6 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 			backEyePos -= player.velocity * 1.25f; // Make the eye fall behind the player when the player is moving.
-			
+
 			// The position of the eye socket with a little bias towards the front and down.
 			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
-			Vector2 eyeSocketPos = player.Center - new Vector2((-7f - player.MountXOffset) * player.direction, 11 - player.gfxOffY - playerMountYOffset);
+			Vector2 eyeSocketPos = player.Center - new Vector2((-7f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.SpazEye : MdCostumeHeadpiece.RezEye;

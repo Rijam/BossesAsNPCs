@@ -1,12 +1,12 @@
 using System;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using Terraria;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Terraria.Localization;
 using System.Linq;
-using static BossesAsNPCs.BossesAsNPCsConfigServer;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.GameContent;
+using Terraria.ID;
+using Terraria.Localization;
+using Terraria.ModLoader;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -72,10 +72,19 @@ namespace BossesAsNPCs.NPCs
 		/// Automatically gets the base path to the localized dialog. Add `+ "Key"` to get the dialog.
 		/// </summary>
 		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
-		/// <returns>string</returns>
 		public static string DialogPath(string npc)
 		{
-			return "Mods." + mod + ".NPCs." + npc + ".NPCDialog.";
+			return $"Mods.{mod}.NPCs.{npc}.NPCDialog.";
+		}
+
+		/// <summary>
+		/// Automatically gets the path to the localized dialog.
+		/// </summary>
+		/// <param name="npc">The NPC's (class) name. In most cases, just pass Name</param>
+		/// <param name="key">The dialog key.</param>
+		public static string DialogPath(string npc, string key)
+		{
+			return $"Mods.{mod}.NPCs.{npc}.NPCDialog.{key}";
 		}
 
 		/// <summary>
@@ -85,513 +94,6 @@ namespace BossesAsNPCs.NPCs
 		public static bool UnlockOWMusic()
 		{
 			return Main.Configuration.Get("UnlockMusicSwap", false);
-		}
-
-		/// <summary>
-		/// The current shop that is selected.
-		/// </summary>
-		internal static int ShopCycler { get; set; } = 0;
-		// 1 = King Slime
-		// 2 = King Slime 2
-		// 3 = EoC
-		// 4 = EoC 2
-		// 5 = EoW
-		// 6 = EoW 2
-		// 7 = BoC
-		// 8 = BoC 2
-		// 9 = Queen Bee
-		// 10 = Queen Bee 2
-		// 11 = Skeletron
-		// 12 = Skeletron 2
-		// 13 = Deerclops
-		// 14 = Deerclops 2
-		// 15 = WoF
-		// 16 = WoF 2
-		// 17 = Queen Slime
-		// 18 = Queen Slime 2
-		// 19 = The Destroyer
-		// 20 = The Destroyer 2
-		// 21 = Retinazer
-		// 22 = Retinazer 2
-		// 23 = Spazmatism
-		// 24 = Spazmatism 2
-		// 25 = Skeletron Prime
-		// 26 = Skeletron Prime 2
-		// 27 = Plantera
-		// 28 = Plantera 2
-		// 29 = Golem
-		// 30 = Golem 2
-		// 31 = EoL
-		// 32 = EoL 2
-		// 33 = Duke Fishron
-		// 34 = Duke Fishron 2
-		// 35 = Betsy
-		// 36 = Betsy 2
-		// 37 = Lunatic Culist
-		// 38 = Lunatic Culist 2
-		// 39 = Moon Lord
-		// 40 = Moon Lord 2
-		// 41 = Dreadnautilus
-		// 42 = Dreadnautilus 2
-		// 43 = Mothron
-		// 44 = Mothron 2
-		// 45 = Pumpking
-		// 46 = Pumpking 2
-		// 47 = Ice Queen
-		// 48 = Ice Queen 2
-		// 49 = Martian Saucer
-		// 50 = Martian Saucer 2
-
-		/// <summary>
-		/// Increments the shopCycler int. If it exceeds 50, it will be set to 1 again.
-		/// Will get every shop.
-		/// </summary>
-		public static void IncrementShopCycleMode0()
-		{
-			ShopCycler++;
-
-			if (ShopCycler > 50)
-			{
-				ShopCycler = 0;
-				IncrementShopCycleMode0();
-			}
-		}
-		/// <summary>
-		/// Decrements the shopCycler int. If it exceeds 50, it will be set to 1 again.
-		/// Will get every shop.
-		/// </summary>
-		public static void DecrementShopCycleMode0()
-		{
-			ShopCycler--;
-
-			if (ShopCycler <= 0)
-			{
-				ShopCycler = 50;
-			}
-		}
-
-		/// <summary>
-		/// Increments the shopCycler int. If it exceeds the calculated number of shops, it will be set to 1 again.
-		/// Will only select the shop if the config for that shop is disabled.
-		/// </summary>
-		public static void IncrementShopCycleMode1()
-		{
-			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-
-			// Bools true if the config is *off* and the boss has been defeated.
-			bool KS = !config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = !config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = !config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = !config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = !config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = !config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = !config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = !config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = !config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = !config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = !config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = !config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = !config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = !config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = !config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
-
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler++;
-			}
-				
-			if (!KS && ShopCycler == 1) // If the bool is false (not a valid shop), go to the next shop.
-				ShopCycler += 2;
-			if (!EoC && ShopCycler == 3)
-				ShopCycler += 2;
-			if (!EoW && ShopCycler == 5)
-				ShopCycler += 2;
-			if (!BoC && ShopCycler == 7)
-				ShopCycler += 2;
-			if (!QB && ShopCycler == 9)
-				ShopCycler += 2;
-			if (!Sk && ShopCycler == 11)
-				ShopCycler += 2;
-			if (!Dc && ShopCycler == 13)
-				ShopCycler += 2;
-			if (!WoF && ShopCycler == 15)
-				ShopCycler += 2;
-			if (!QS && ShopCycler == 17)
-				ShopCycler += 2;
-			if (!De && ShopCycler == 19)
-				ShopCycler += 2;
-			if (!Tw && ShopCycler == 21)
-				ShopCycler += 4;
-			if (!SP && ShopCycler == 25)
-				ShopCycler += 2;
-			if (!Pl && ShopCycler == 27)
-				ShopCycler += 2;
-			if (!Go && ShopCycler == 29)
-				ShopCycler += 2;
-			if (!EoL && ShopCycler == 31)
-				ShopCycler += 2;
-			if (!DF && ShopCycler == 33)
-				ShopCycler += 2;
-			if (!Be && ShopCycler == 35)
-				ShopCycler += 2;
-			if (!LC && ShopCycler == 37)
-				ShopCycler += 2;
-			if (!ML && ShopCycler == 39)
-				ShopCycler += 2;
-			if (!Dn && ShopCycler == 41)
-				ShopCycler += 2;
-			if (!Mo && ShopCycler == 43)
-				ShopCycler += 2;
-			if (!Pk && ShopCycler == 45)
-				ShopCycler += 2;
-			if (!IQ && ShopCycler == 47)
-				ShopCycler += 2;
-			if (!MS && ShopCycler == 49)
-				ShopCycler += 2;
-
-			if (ShopCycler > 50)
-			{
-				ShopCycler = 0;
-				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-				{
-					IncrementShopCycleMode1();
-				}
-			}
-		}
-		/// <summary>
-		/// Decrements the shopCycler int. If it exceeds the calculated number of shops, it will be set to 1 again.
-		/// Will only select the shop if the config for that shop is disabled.
-		/// </summary>
-		public static void DecrementShopCycleMode1()
-		{
-			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-
-			// Bools true if the config is *off* and the boss has been defeated.
-			bool KS = !config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = !config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = !config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = !config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = !config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = !config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = !config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = !config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = !config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = !config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = !config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = !config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = !config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = !config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = !config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
-
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler -= 2;
-			}
-
-			if (!MS && ShopCycler == 49) // If the bool is false (not a valid shop), go to the next shop.
-				ShopCycler -= 2;
-			if (!IQ && ShopCycler == 47)
-				ShopCycler -= 2;
-			if (!Pk && ShopCycler == 45)
-				ShopCycler -= 2;
-			if (!Mo && ShopCycler == 43)
-				ShopCycler -= 2;
-			if (!Dn && ShopCycler == 41)
-				ShopCycler -= 2;
-			if (!ML && ShopCycler == 39)
-				ShopCycler -= 2;
-			if (!LC && ShopCycler == 37)
-				ShopCycler -= 2;
-			if (!Be && ShopCycler == 35)
-				ShopCycler -= 2;
-			if (!DF && ShopCycler == 33)
-				ShopCycler -= 2;
-			if (!EoL && ShopCycler == 31)
-				ShopCycler -= 2;
-			if (!Go && ShopCycler == 29)
-				ShopCycler -= 2;
-			if (!Pl && ShopCycler == 27)
-				ShopCycler -= 2;
-			if (!SP && ShopCycler == 25)
-				ShopCycler -= 2;
-			if (!Tw && ShopCycler == 23)
-				ShopCycler -= 2;
-			if (!Tw && ShopCycler == 21)
-				ShopCycler -= 2;
-			if (!De && ShopCycler == 19)
-				ShopCycler -= 2;
-			if (!QS && ShopCycler == 17)
-				ShopCycler -= 2;
-			if (!WoF && ShopCycler == 15)
-				ShopCycler -= 2;
-			if (!Dc && ShopCycler == 13)
-				ShopCycler -= 2;
-			if (!Sk && ShopCycler == 11)
-				ShopCycler -= 2;
-			if (!QB && ShopCycler == 9)
-				ShopCycler -= 2;
-			if (!BoC && ShopCycler == 7)
-				ShopCycler -= 2;
-			if (!EoW && ShopCycler == 5)
-				ShopCycler -= 2;
-			if (!EoC && ShopCycler == 3)
-				ShopCycler -= 2;
-			if (!KS && ShopCycler == 1)
-				ShopCycler -= 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler++;
-			}
-
-			if (ShopCycler <= 0)
-			{
-				ShopCycler = 51;
-				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-				{
-					DecrementShopCycleMode1();
-				}
-			}
-			if (ShopCycler == 51)
-			{
-				ShopCycler = 0;
-			}
-		}
-
-		/// <summary>
-		/// Increments the shopCycler int. If it exceeds the calculated number of shops, it will be set to 1 again.
-		/// Will only select the shop if the config for that shop is enabled.
-		/// </summary>
-		public static void IncrementShopCycleMode2()
-		{
-			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			bool KS = config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
-
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler++;
-			}
-
-			if (!KS && ShopCycler == 1) // If disabled, go to the next shop.
-				ShopCycler += 2;
-			if (!EoC && ShopCycler == 3)
-				ShopCycler += 2;
-			if (!EoW && ShopCycler == 5)
-				ShopCycler += 2;
-			if (!BoC && ShopCycler == 7)
-				ShopCycler += 2;
-			if (!QB && ShopCycler == 9)
-				ShopCycler += 2;
-			if (!Sk && ShopCycler == 11)
-				ShopCycler += 2;
-			if (!Dc && ShopCycler == 13)
-				ShopCycler += 2;
-			if (!WoF && ShopCycler == 15)
-				ShopCycler += 2;
-			if (!QS && ShopCycler == 17)
-				ShopCycler += 2;
-			if (!De && ShopCycler == 19)
-				ShopCycler += 2;
-			if (!Tw && ShopCycler == 21)
-				ShopCycler += 4;
-			if (!SP && ShopCycler == 25)
-				ShopCycler += 2;
-			if (!Pl && ShopCycler == 27)
-				ShopCycler += 2;
-			if (!Go && ShopCycler == 29)
-				ShopCycler += 2;
-			if (!EoL && ShopCycler == 31)
-				ShopCycler += 2;
-			if (!DF && ShopCycler == 33)
-				ShopCycler += 2;
-			if (!Be && ShopCycler == 35)
-				ShopCycler += 2;
-			if (!LC && ShopCycler == 37)
-				ShopCycler += 2;
-			if (!ML && ShopCycler == 39)
-				ShopCycler += 2;
-			if (!Dn && ShopCycler == 41)
-				ShopCycler += 2;
-			if (!Mo && ShopCycler == 43)
-				ShopCycler += 2;
-			if (!Pk && ShopCycler == 45)
-				ShopCycler += 2;
-			if (!IQ && ShopCycler == 47)
-				ShopCycler += 2;
-			if (!MS && ShopCycler == 49)
-				ShopCycler += 2;
-
-			if (ShopCycler > 50)
-			{
-				ShopCycler = 0;
-				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-				{
-					IncrementShopCycleMode2();
-				}
-			}
-		}
-		/// <summary>
-		/// Decrements the shopCycler int. If it exceeds the calculated number of shops, it will be set to 1 again.
-		/// Will only select the shop if the config for that shop is enabled.
-		/// </summary>
-		public static void DecrementShopCycleMode2()
-		{
-			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			bool KS = config.CanSpawnKingSlime && NPC.downedSlimeKing;
-			bool EoC = config.CanSpawnEoC && NPC.downedBoss1;
-			bool EoW = config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
-			bool BoC = config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
-			bool QB = config.CanSpawnQueenBee && NPC.downedQueenBee;
-			bool Sk = config.CanSpawnSkeletron && NPC.downedBoss3;
-			bool Dc = config.CanSpawnDeerclops && NPC.downedDeerclops;
-			bool WoF = config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
-			bool QS = config.CanSpawnQueenSlime && NPC.downedQueenSlime;
-			bool De = config.CanSpawnDestroyer && NPC.downedMechBoss1;
-			bool Tw = config.CanSpawnTwins && NPC.downedMechBoss2;
-			bool SP = config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
-			bool Pl = config.CanSpawnPlantera && NPC.downedPlantBoss;
-			bool Go = config.CanSpawnGolem && NPC.downedGolemBoss;
-			bool EoL = config.CanSpawnEoL && NPC.downedEmpressOfLight;
-			bool DF = config.CanSpawnDukeFishron && NPC.downedFishron;
-			bool Be = config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
-			bool LC = config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
-			bool ML = config.CanSpawnMoonLord && NPC.downedMoonlord;
-			bool Dn = config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
-			bool Mo = config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
-			bool Pk = config.CanSpawnPumpking && NPC.downedHalloweenKing;
-			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
-			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
-
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler -= 2;
-			}
-
-			if (!MS && ShopCycler == 49) // If disabled, go to the next shop.
-				ShopCycler -= 2;
-			if (!IQ && ShopCycler == 47)
-				ShopCycler -= 2;
-			if (!Pk && ShopCycler == 45)
-				ShopCycler -= 2;
-			if (!Mo && ShopCycler == 43)
-				ShopCycler -= 2;
-			if (!Dn && ShopCycler == 41)
-				ShopCycler -= 2;
-			if (!ML && ShopCycler == 39)
-				ShopCycler -= 2;
-			if (!LC && ShopCycler == 37)
-				ShopCycler -= 2;
-			if (!Be && ShopCycler == 35)
-				ShopCycler -= 2;
-			if (!DF && ShopCycler == 33)
-				ShopCycler -= 2;
-			if (!EoL && ShopCycler == 31)
-				ShopCycler -= 2;
-			if (!Go && ShopCycler == 29)
-				ShopCycler -= 2;
-			if (!Pl && ShopCycler == 27)
-				ShopCycler -= 2;
-			if (!SP && ShopCycler == 25)
-				ShopCycler -= 2;
-			if (!Tw && ShopCycler == 23)
-				ShopCycler -= 2;
-			if (!Tw && ShopCycler == 21)
-				ShopCycler -= 2;
-			if (!De && ShopCycler == 19)
-				ShopCycler -= 2;
-			if (!QS && ShopCycler == 17)
-				ShopCycler -= 2;
-			if (!WoF && ShopCycler == 15)
-				ShopCycler -= 2;
-			if (!Dc && ShopCycler == 13)
-				ShopCycler -= 2;
-			if (!Sk && ShopCycler == 11)
-				ShopCycler -= 2;
-			if (!QB && ShopCycler == 9)
-				ShopCycler -= 2;
-			if (!BoC && ShopCycler == 7)
-				ShopCycler -= 2;
-			if (!EoW && ShopCycler == 5)
-				ShopCycler -= 2;
-			if (!EoC && ShopCycler == 3)
-				ShopCycler -= 2;
-			if (!KS && ShopCycler == 1)
-				ShopCycler -= 2;
-
-			if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-			{
-				ShopCycler++;
-			}
-
-			if (ShopCycler <= 0)
-			{
-				ShopCycler = 51;
-				if (numOfShops > 0) // Only call if at least one of the shops are enabled.
-				{
-					DecrementShopCycleMode2();
-				}
-			}
-			if (ShopCycler == 51)
-			{
-				ShopCycler = 0;
-			}
 		}
 
 		/// <summary>
@@ -692,7 +194,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool FindItemInShop(int[] shop, int item, out int? slotNumber)
 		{
 			slotNumber = null;
-			for (int i = 0; i < Chest.maxItems; i++)
+			for (int i = 0; i < shop.Length; i++)
 			{
 				if (shop[i] == item)
 				{
@@ -709,7 +211,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool FindItemInShop(Chest shop, int item, out int? slotNumber)
 		{
 			slotNumber = null;
-			for (int i = 0; i < Chest.maxItems; i++)
+			for (int i = 0; i < shop.maxItems; i++)
 			{
 				if (shop.item[i].type == item)
 				{
@@ -1037,16 +539,16 @@ namespace BossesAsNPCs.NPCs
 				return true;
 			}
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
-			AllInOneOptions mode = config.AllInOneNPCMode;
-			if (mode == AllInOneOptions.Off)
+			BossesAsNPCsConfigServer.AllInOneOptions mode = config.AllInOneNPCMode;
+			if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
 			{
 				return true;
 			}
-			if (mode == AllInOneOptions.OnlyOne)
+			if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 			{
 				return false;
 			}
-			if (mode == AllInOneOptions.Mixed)
+			if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 			{
 				if (npc == NPCString.KingSlime && !config.CanSpawnKingSlime) return false;
 				if (npc == NPCString.EyeOfCthulhu && !config.CanSpawnEoC) return false;
@@ -1076,6 +578,441 @@ namespace BossesAsNPCs.NPCs
 			}
 			return true;
 		}
+
+		/// <summary>
+		/// Inherits NPCInteractions.Actions.OpenShop and changes the Condition to check for the TownNPCsCrossModSupport config.
+		/// </summary>
+		public class OpenShopCrossModSupport(string shopName, string customTextKey = null) : NPCInteractions.Actions.OpenShop(shopName, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+		}
+
+		/// <summary>
+		/// Registers both the Shop and Shop2 at once. The custom name for shop 2 and the TownNPCsCrossModSupport condition is automatically set.
+		/// </summary>
+		/// <param name="shop1"></param>
+		/// <param name="shop2"></param>
+		public static void RegisterShop1AndShop2(NPCInteractionList interactions, string shop1, string shop2)
+		{
+			NPCInteractionList.Entry shop1Entry = interactions.Prepend(NPCInteractions.Shop(shop1));
+			interactions.InsertAfter(new OpenShopCrossModSupport(shop2, Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), shop1Entry);
+		}
+
+		/// <summary>
+		/// Which page are we looking at in the Torch God's menu.
+		/// </summary>
+		internal static int ShopPage { get; set; } = 1;
+		/// <summary>
+		/// Three total pages. Pre-HM, HM, and Event
+		/// </summary>
+		internal static int TotalShopPage = 3;
+
+		// This button transform into "No Shop Selected" if there are no shops.
+		public class TorchGodNextPage : NPCInteraction
+		{
+			private static BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+			private static BossesAsNPCsConfigServer.AllInOneOptions mode = config.AllInOneNPCMode;
+
+			public override string GetText()
+			{
+				string nextShop = Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.NextPage");
+				string noShop = Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.NoShop");
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
+				{
+					return nextShop;
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
+				{
+					if (HowManyShopsForMode1() > 0)
+					{
+						return nextShop;
+					}
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
+				{
+					if (HowManyShopsForMode2() > 0)
+					{
+						return nextShop;
+					}
+				}
+				return noShop;
+			}
+			public override bool Condition()
+			{
+				return TalkNPCType == ModContent.NPCType<TownNPCs.TorchGod>(); // Not necessary. Could just be true.
+			}
+			public override void Interact()
+			{
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
+				{
+					if (HowManyShopsForMode1() <= 0)
+					{
+						Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath("TorchGod", "NoShop"));
+						Main.DoNPCPortraitHop();
+						return;
+					}
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
+				{
+					if (HowManyShopsForMode2() <= 0)
+					{
+						Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath("TorchGod", "NoShop"));
+						Main.DoNPCPortraitHop();
+						return;
+					}
+				}
+				ShopPage++;
+				if (ShopPage > TotalShopPage)
+				{
+					ShopPage = 1;
+				}
+				// Main.NewText($"ShopPage {ShopPage}");
+			}
+		}
+
+		// This button will disappear is there are no shops.
+		public class TorchGodPreviousPage : NPCInteraction
+		{
+			private static BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+			private static BossesAsNPCsConfigServer.AllInOneOptions mode = config.AllInOneNPCMode;
+
+			public override string GetText()
+			{
+				string prevShop = Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.PreviousPage");
+				string noShop = Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.NoShop");
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
+				{
+					return prevShop;
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
+				{
+					if (HowManyShopsForMode1() > 0)
+					{
+						return prevShop;
+					}
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
+				{
+					if (HowManyShopsForMode2() > 0)
+					{
+						return prevShop;
+					}
+				}
+				return noShop;
+			}
+			public override bool Condition()
+			{
+				bool torchGod = TalkNPCType == ModContent.NPCType<TownNPCs.TorchGod>(); // Not necessary. Could just be true.
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
+				{
+					if (HowManyShopsForMode1() <= 0)
+					{
+						return false;
+					}
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
+				{
+					if (HowManyShopsForMode2() <= 0)
+					{
+						return false;
+					}
+				}
+				return torchGod;
+			}
+			public override void Interact()
+			{
+				ShopPage--;
+				if (ShopPage < 1)
+				{
+					ShopPage = TotalShopPage;
+				}
+				// Main.NewText($"ShopPage {ShopPage}");
+			}
+		}
+
+
+		public class TorchGodOpenShop1Mode0(string shopName, int pageNumber, string customTextKey = null) : NPCInteractions.Actions.OpenShop(shopName, customTextKey)
+		{
+			public override bool Condition()
+			{
+				BossesAsNPCsConfigServer.AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
+				return base.Condition() && mode == BossesAsNPCsConfigServer.AllInOneOptions.Off && ShopPage == pageNumber;
+			}
+		}
+
+		public class TorchGodOpenShop2Mode0(string shopName, int pageNumber, string customTextKey = null) : TorchGodOpenShop1Mode0(shopName, pageNumber, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+		}
+
+		public static void TorchGodRegisterShop1AndShop2Mode0(NPCInteractionList interactions, string shopFromWho, int pageNumber, string button)
+		{
+			interactions.Append(new TorchGodOpenShop1Mode0($"BossesAsNPCs/{shopFromWho}/Shop1", pageNumber, button));
+			interactions.Append(new TorchGodOpenShop1Mode0($"BossesAsNPCs/{shopFromWho}/Shop2", pageNumber, $"{button} 2"));
+		}
+
+		/// <summary>
+		/// Registers all of Torch God's shops when AllInOneNPCMode == Off
+		/// </summary>
+		/// <param name="interactions"></param>
+		public static void TorchGodRegisterShopsMode0(NPCInteractionList interactions)
+		{
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "KingSlime", 1, Language.GetTextValue("NPCName.KingSlime"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "EyeOfCthulhu", 1, Language.GetTextValue("NPCName.EyeofCthulhu"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "EaterOfWorlds", 1, Language.GetTextValue("NPCName.EaterofWorldsHead"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "BrainOfCthulhu", 1, Language.GetTextValue("NPCName.BrainofCthulhu"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "QueenBee", 1, Language.GetTextValue("NPCName.QueenBee"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Skeletron", 1, Language.GetTextValue("NPCName.SkeletronHead"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Deerclops", 1, Language.GetTextValue("NPCName.Deerclops"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "WallOfFlesh", 1, Language.GetTextValue("NPCName.WallofFlesh"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "QueenSlime", 2, Language.GetTextValue("NPCName.QueenSlimeBoss"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "TheDestroyer", 2, Language.GetTextValue("NPCName.TheDestroyer"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Retinazer", 2, Language.GetTextValue("NPCName.Retinazer"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Spazmatism", 2, Language.GetTextValue("NPCName.Spazmatism"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "SkeletronPrime", 2, Language.GetTextValue("NPCName.SkeletronPrime"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Plantera", 2, Language.GetTextValue("NPCName.Plantera"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Golem", 2, Language.GetTextValue("NPCName.Golem"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "EmpressOfLight", 2, Language.GetTextValue("NPCName.HallowBoss"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "DukeFishron", 2, Language.GetTextValue("NPCName.DukeFishron"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Betsy", 2, Language.GetTextValue("NPCName.DD2Betsy"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "LunaticCultist", 2, Language.GetTextValue("NPCName.CultistBoss"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "MoonLord", 2, Language.GetTextValue("NPCName.MoonLordHead"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Dreadnautilus", 3, Language.GetTextValue("NPCName.BloodNautilus"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Mothron", 3, Language.GetTextValue("NPCName.Mothron"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "Pumpking", 3, Language.GetTextValue("NPCName.Pumpking"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "IceQueen", 3, Language.GetTextValue("NPCName.IceQueen"));
+			TorchGodRegisterShop1AndShop2Mode0(interactions, "MartianSaucer", 3, Language.GetTextValue("NPCName.MartianSaucer"));
+		}
+
+		public class TorchGodOpenShop1Mode1(string shopName, int pageNumber, Func<bool> bossCondition, string customTextKey = null) : NPCInteractions.Actions.OpenShop(shopName, customTextKey)
+		{
+			public override bool Condition()
+			{
+				BossesAsNPCsConfigServer.AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
+				return base.Condition() && mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed && ShopPage == pageNumber && bossCondition.Invoke();
+			}
+		}
+
+		public class TorchGodOpenShop2Mode1(string shopName, int pageNumber, Func<bool> bossCondition, string customTextKey = null) : TorchGodOpenShop1Mode1(shopName, pageNumber, bossCondition, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+		}
+
+		public static void TorchGodRegisterShop1AndShop2Mode1(NPCInteractionList interactions, string shopFromWho, int pageNumber, string button, Func<bool> bossCondition)
+		{
+			interactions.Append(new TorchGodOpenShop1Mode1($"BossesAsNPCs/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
+			interactions.Append(new TorchGodOpenShop1Mode1($"BossesAsNPCs/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
+		}
+
+		/// <summary>
+		/// Registers all of Torch God's shops when AllInOneNPCMode == Mixed
+		/// </summary>
+		/// <param name="interactions"></param>
+		public static void TorchGodRegisterShopsMode1(NPCInteractionList interactions)
+		{
+			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "KingSlime", 1, Language.GetTextValue("NPCName.KingSlime"), () => !config.CanSpawnKingSlime && NPC.downedSlimeKing);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "EyeOfCthulhu", 1, Language.GetTextValue("NPCName.EyeofCthulhu"), () => !config.CanSpawnEoC && NPC.downedBoss1);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "EaterOfWorlds", 1, Language.GetTextValue("NPCName.EaterofWorldsHead"), () => !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "BrainOfCthulhu", 1, Language.GetTextValue("NPCName.BrainofCthulhu"), () => !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "QueenBee", 1, Language.GetTextValue("NPCName.QueenBee"), () => !config.CanSpawnQueenBee && NPC.downedQueenBee);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Skeletron", 1, Language.GetTextValue("NPCName.SkeletronHead"), () => !config.CanSpawnSkeletron && NPC.downedBoss3);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Deerclops", 1, Language.GetTextValue("NPCName.Deerclops"), () => !config.CanSpawnDeerclops && NPC.downedDeerclops);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "WallOfFlesh", 1, Language.GetTextValue("NPCName.WallofFlesh"), () => !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "QueenSlime", 2, Language.GetTextValue("NPCName.QueenSlimeBoss"), () => !config.CanSpawnQueenSlime && NPC.downedQueenSlime);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "TheDestroyer", 2, Language.GetTextValue("NPCName.TheDestroyer"), () => !config.CanSpawnDestroyer && NPC.downedMechBoss1);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Retinazer", 2, Language.GetTextValue("NPCName.Retinazer"), () => !config.CanSpawnTwins && NPC.downedMechBoss2);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Spazmatism", 2, Language.GetTextValue("NPCName.Spazmatism"), () => !config.CanSpawnTwins && NPC.downedMechBoss2);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "SkeletronPrime", 2, Language.GetTextValue("NPCName.SkeletronPrime"), () => !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Plantera", 2, Language.GetTextValue("NPCName.Plantera"), () => !config.CanSpawnPlantera && NPC.downedPlantBoss);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Golem", 2, Language.GetTextValue("NPCName.Golem"), () => !config.CanSpawnGolem && NPC.downedGolemBoss);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "EmpressOfLight", 2, Language.GetTextValue("NPCName.HallowBoss"), () => !config.CanSpawnEoL && NPC.downedEmpressOfLight);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "DukeFishron", 2, Language.GetTextValue("NPCName.DukeFishron"), () => !config.CanSpawnDukeFishron && NPC.downedFishron);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Betsy", 2, Language.GetTextValue("NPCName.DD2Betsy"), () => !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "LunaticCultist", 2, Language.GetTextValue("NPCName.CultistBoss"), () => !config.CanSpawnLunaticCultist && NPC.downedAncientCultist);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "MoonLord", 2, Language.GetTextValue("NPCName.MoonLordHead"), () => !config.CanSpawnMoonLord && NPC.downedMoonlord);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Dreadnautilus", 3, Language.GetTextValue("NPCName.BloodNautilus"), () => !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Mothron", 3, Language.GetTextValue("NPCName.Mothron"), () => !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "Pumpking", 3, Language.GetTextValue("NPCName.Pumpking"), () => !config.CanSpawnPumpking && NPC.downedHalloweenKing);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "IceQueen", 3, Language.GetTextValue("NPCName.IceQueen"), () => !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen);
+			TorchGodRegisterShop1AndShop2Mode1(interactions, "MartianSaucer", 3, Language.GetTextValue("NPCName.MartianSaucer"), () => !config.CanSpawnMartianSaucer && NPC.downedMartians);
+		}
+
+		public class TorchGodOpenShop1Mode2(string shopName, int pageNumber, Func<bool> bossCondition, string customTextKey = null) : NPCInteractions.Actions.OpenShop(shopName, customTextKey)
+		{
+			public override bool Condition()
+			{
+				BossesAsNPCsConfigServer.AllInOneOptions mode = ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode;
+				return base.Condition() && mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne && ShopPage == pageNumber && bossCondition.Invoke();
+			}
+		}
+
+		public class TorchGodOpenShop2Mode2(string shopName, int pageNumber, Func<bool> bossCondition, string customTextKey = null) : TorchGodOpenShop1Mode2(shopName, pageNumber, bossCondition, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
+		}
+
+		public static void TorchGodRegisterShop1AndShop2Mode2(NPCInteractionList interactions, string shopFromWho, int pageNumber, string button, Func<bool> bossCondition)
+		{
+			interactions.Append(new TorchGodOpenShop1Mode2($"BossesAsNPCs/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
+			interactions.Append(new TorchGodOpenShop1Mode2($"BossesAsNPCs/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
+		}
+
+		/// <summary>
+		/// Registers all of Torch God's shops when AllInOneNPCMode == Only One
+		/// </summary>
+		/// <param name="interactions"></param>
+		public static void TorchGodRegisterShopsMode2(NPCInteractionList interactions)
+		{
+			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "KingSlime", 1, Language.GetTextValue("NPCName.KingSlime"), () => config.CanSpawnKingSlime && NPC.downedSlimeKing);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "EyeOfCthulhu", 1, Language.GetTextValue("NPCName.EyeofCthulhu"), () => config.CanSpawnEoC && NPC.downedBoss1);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "EaterOfWorlds", 1, Language.GetTextValue("NPCName.EaterofWorldsHead"), () => config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "BrainOfCthulhu", 1, Language.GetTextValue("NPCName.BrainofCthulhu"), () => config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "QueenBee", 1, Language.GetTextValue("NPCName.QueenBee"), () => config.CanSpawnQueenBee && NPC.downedQueenBee);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Skeletron", 1, Language.GetTextValue("NPCName.SkeletronHead"), () => config.CanSpawnSkeletron && NPC.downedBoss3);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Deerclops", 1, Language.GetTextValue("NPCName.Deerclops"), () => config.CanSpawnDeerclops && NPC.downedDeerclops);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "WallOfFlesh", 1, Language.GetTextValue("NPCName.WallofFlesh"), () => config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "QueenSlime", 2, Language.GetTextValue("NPCName.QueenSlimeBoss"), () => config.CanSpawnQueenSlime && NPC.downedQueenSlime);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "TheDestroyer", 2, Language.GetTextValue("NPCName.TheDestroyer"), () => config.CanSpawnDestroyer && NPC.downedMechBoss1);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Retinazer", 2, Language.GetTextValue("NPCName.Retinazer"), () => config.CanSpawnTwins && NPC.downedMechBoss2);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Spazmatism", 2, Language.GetTextValue("NPCName.Spazmatism"), () => config.CanSpawnTwins && NPC.downedMechBoss2);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "SkeletronPrime", 2, Language.GetTextValue("NPCName.SkeletronPrime"), () => config.CanSpawnSkeletronPrime && NPC.downedMechBoss3);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Plantera", 2, Language.GetTextValue("NPCName.Plantera"), () => config.CanSpawnPlantera && NPC.downedPlantBoss);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Golem", 2, Language.GetTextValue("NPCName.Golem"), () => config.CanSpawnGolem && NPC.downedGolemBoss);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "EmpressOfLight", 2, Language.GetTextValue("NPCName.HallowBoss"), () => config.CanSpawnEoL && NPC.downedEmpressOfLight);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "DukeFishron", 2, Language.GetTextValue("NPCName.DukeFishron"), () => config.CanSpawnDukeFishron && NPC.downedFishron);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Betsy", 2, Language.GetTextValue("NPCName.DD2Betsy"), () => config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "LunaticCultist", 2, Language.GetTextValue("NPCName.CultistBoss"), () => config.CanSpawnLunaticCultist && NPC.downedAncientCultist);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "MoonLord", 2, Language.GetTextValue("NPCName.MoonLordHead"), () => config.CanSpawnMoonLord && NPC.downedMoonlord);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Dreadnautilus", 3, Language.GetTextValue("NPCName.BloodNautilus"), () => config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Mothron", 3, Language.GetTextValue("NPCName.Mothron"), () => config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "Pumpking", 3, Language.GetTextValue("NPCName.Pumpking"), () => config.CanSpawnPumpking && NPC.downedHalloweenKing);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "IceQueen", 3, Language.GetTextValue("NPCName.IceQueen"), () => config.CanSpawnIceQueen && NPC.downedChristmasIceQueen);
+			TorchGodRegisterShop1AndShop2Mode2(interactions, "MartianSaucer", 3, Language.GetTextValue("NPCName.MartianSaucer"), () => config.CanSpawnMartianSaucer && NPC.downedMartians);
+		}
+
+		public static int HowManyShopsForMode1()
+		{
+			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+
+			// Bools true if the config is *off* and the boss has been defeated.
+			bool KS = !config.CanSpawnKingSlime && NPC.downedSlimeKing;
+			bool EoC = !config.CanSpawnEoC && NPC.downedBoss1;
+			bool EoW = !config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
+			bool BoC = !config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
+			bool QB = !config.CanSpawnQueenBee && NPC.downedQueenBee;
+			bool Sk = !config.CanSpawnSkeletron && NPC.downedBoss3;
+			bool Dc = !config.CanSpawnDeerclops && NPC.downedDeerclops;
+			bool WoF = !config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
+			bool QS = !config.CanSpawnQueenSlime && NPC.downedQueenSlime;
+			bool De = !config.CanSpawnDestroyer && NPC.downedMechBoss1;
+			bool Tw = !config.CanSpawnTwins && NPC.downedMechBoss2;
+			bool SP = !config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
+			bool Pl = !config.CanSpawnPlantera && NPC.downedPlantBoss;
+			bool Go = !config.CanSpawnGolem && NPC.downedGolemBoss;
+			bool EoL = !config.CanSpawnEoL && NPC.downedEmpressOfLight;
+			bool DF = !config.CanSpawnDukeFishron && NPC.downedFishron;
+			bool Be = !config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
+			bool LC = !config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
+			bool ML = !config.CanSpawnMoonLord && NPC.downedMoonlord;
+			bool Dn = !config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
+			bool Mo = !config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
+			bool Pk = !config.CanSpawnPumpking && NPC.downedHalloweenKing;
+			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
+			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
+
+			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
+				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
+				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
+
+			// Main.NewText($"HowManyShopsForMode1 {numOfShops}");
+
+			return numOfShops;
+		}
+
+		public static int HowManyShopsForMode2()
+		{
+			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+
+			bool KS = config.CanSpawnKingSlime && NPC.downedSlimeKing;
+			bool EoC = config.CanSpawnEoC && NPC.downedBoss1;
+			bool EoW = config.CanSpawnEoW && BossesAsNPCsWorld.downedEoW;
+			bool BoC = config.CanSpawnBoC && BossesAsNPCsWorld.downedBoC;
+			bool QB = config.CanSpawnQueenBee && NPC.downedQueenBee;
+			bool Sk = config.CanSpawnSkeletron && NPC.downedBoss3;
+			bool Dc = config.CanSpawnDeerclops && NPC.downedDeerclops;
+			bool WoF = config.CanSpawnWoF && BossesAsNPCsWorld.downedWoF;
+			bool QS = config.CanSpawnQueenSlime && NPC.downedQueenSlime;
+			bool De = config.CanSpawnDestroyer && NPC.downedMechBoss1;
+			bool Tw = config.CanSpawnTwins && NPC.downedMechBoss2;
+			bool SP = config.CanSpawnSkeletronPrime && NPC.downedMechBoss3;
+			bool Pl = config.CanSpawnPlantera && NPC.downedPlantBoss;
+			bool Go = config.CanSpawnGolem && NPC.downedGolemBoss;
+			bool EoL = config.CanSpawnEoL && NPC.downedEmpressOfLight;
+			bool DF = config.CanSpawnDukeFishron && NPC.downedFishron;
+			bool Be = config.CanSpawnBetsy && BossesAsNPCsWorld.downedBetsy;
+			bool LC = config.CanSpawnLunaticCultist && NPC.downedAncientCultist;
+			bool ML = config.CanSpawnMoonLord && NPC.downedMoonlord;
+			bool Dn = config.CanSpawnDreadnautilus && BossesAsNPCsWorld.downedDreadnautilus;
+			bool Mo = config.CanSpawnMothron && BossesAsNPCsWorld.downedMothron;
+			bool Pk = config.CanSpawnPumpking && NPC.downedHalloweenKing;
+			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
+			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
+
+			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
+				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
+				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
+
+			// Main.NewText($"HowManyShopsForMode2 {numOfShops}");
+
+			return numOfShops;
+		}
+
+		public static bool PartyPortraitCondition()
+		{
+			int talkNPC = Main.LocalPlayer.talkNPC;
+			if (talkNPC < 0 || talkNPC >= Main.maxNPCs)
+				return false;
+
+			return Main.npc[talkNPC].altTexture == 1;
+		}
+
+		public static Vector2 DrawingOffsets(NPC npc)
+		{
+			// Move the position up by 4 pixels plus the gfxOffY value (that is for climbing half blocks).
+			// Main.NPCAddHeight() makes it so if the Town NPC is sitting, it also moves the glow mask up by 4 more pixels.
+			Vector2 verticalOffset = new(0, -4 + npc.gfxOffY + Main.NPCAddHeight(npc));
+
+			// If the NPC is actually a dummy for the Profile and Retro portrait:
+			if (npc.IsAPortraitDummy)
+			{
+				// The Profile dummy will have a scale of 3f. The Retro portrait will have a scale of 2f.
+				verticalOffset.Y += npc.scale == 2f ? -28 : -56; // Move our drawing up.
+
+				// The offsets from NPCID.Sets.NPCPortraitsCloseUpOffsets and NPCID.Sets.NPCPortraitsFullBodyRetroOffsets are already taken into account.
+
+				// A similar thing can be done with NPC.IsABestiaryIconDummy if the image in the bestiary doesn't line up.
+			}
+			return verticalOffset;
+		}
+
+		public static Color GlowColor(NPC npc, Color color, bool shimmerUsesDiscoColor = true, bool portraitUsesDiscoColor = false)
+		{
+			if (!npc.IsAPortraitDummy && npc.IsShimmerVariant && shimmerUsesDiscoColor)
+			{
+				color = Main.DiscoColor;
+			}
+			if (npc.IsAPortraitDummy && npc.IsShimmerVariant && portraitUsesDiscoColor)
+			{
+				color = Main.DiscoColor;
+			}
+			return npc.GetShimmerColor(color);
+		}
+		public static Color GlowColor(NPC npc, byte r, byte g, byte b, byte a, bool shimmerUsesDiscoColor = true, bool portraitUsesDiscoColor = false)
+		{
+			return GlowColor(npc, new Color(r, g, b, a), shimmerUsesDiscoColor, portraitUsesDiscoColor);
+		}
 	}
 	public static class ShopConditions
 	{
@@ -1095,6 +1032,8 @@ namespace BossesAsNPCs.NPCs
 		public static Condition Expert =				new("Mods.BossesAsNPCs.Conditions.Expert",				() => Condition.InExpertMode.IsMet() || SellExpertMode.IsMet());
 		public static Condition Master =				new("Mods.BossesAsNPCs.Conditions.Master",				() => Condition.InMasterMode.IsMet() || SellMasterMode.IsMet());
 		public static Condition Legendary =				new("Mods.BossesAsNPCs.Conditions.Legendary",			() => Master.IsMet() && (Condition.ForTheWorthyWorld.IsMet() || Condition.ZenithWorld.IsMet()));
+		
+		public static Condition NoAltars =				new("Mods.BossesAsNPCs.Conditions.NoAltars",			() => WorldGen.Skyblock.noAltars);
 
 		public static Condition DaytimeEoLDefated =		new("Mods.BossesAsNPCs.Conditions.DaytimeEoLDefated",		() => BossesAsNPCsWorld.daytimeEoLDefeated);
 		public static Condition DownedBetsy =			new("Mods.BossesAsNPCs.Conditions.DownedBetsy",				() => BossesAsNPCsWorld.downedBetsy);
