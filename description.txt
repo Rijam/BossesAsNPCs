@@ -29,7 +29,22 @@ https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
+	- Skeletron & Skeletron Prime portraits: chimerass
 
-Mod version: 0.2.13
-	- Updated manually setting the Bestiary stars for the boss NPCs.
-	- Added support Exxo Avalon Origins, Mod of Redemption, Consolaria, Secrets of the Shadows, Vitality Mod, The Confection Rebirth, and Crystilium Mod.
+Mod version: 0.2.14
+	- Fixed Skeletron's rare dialogue.
+	- Made it possible to have the Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist live in the Corruption, Crimson, and Dungeon.
+	- Added mod calls to add your Town NPC to be able to live in the Corruption, Crimson, or Dungeon.
+	- Updated the living preferences of Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist.
+	- Added shimmered variant of Skeletron.
+	- Added Shimmered Skeletron Costume Headpiece, Alternate Shimmered Skeletron Costume Headpiece, Shimmered Skeletron Costume Bodypiece, and Shimmered Skeletron Costume Legpiece.
+	- Added some more descriptions on the Boost Town NPC Spawn Rates and All in One NPC Mode config options.
+	- Added some more dialog.
+	- Updated King Slime's sprite.
+	- Added King Slime Costume Bodypiece, King Slime Costume Legpiece, and King Slime Costume Cape.
+	- King Slime no longer sells the Prince set.
+	- Improved the glow masks on the NPC who have them. They now properly fade out while the NPC is shimmer transforming and become rainbow while shimmered.
+	- Fixed armor glow masks drawing when the player was transformation mounts that should hide the player.
+	- Added Mechdusa vanity set.
+	- Added support for The Depths.
+	- Fixed an issue with the Wall of Flesh getting two sets of all of the modded items in their Shop 2 if the Torch God is present.

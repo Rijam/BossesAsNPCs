@@ -94,8 +94,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Jungle,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -136,9 +140,9 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-			Color color = Color.White;
+			Color color = NPCHelper.GlowColor(NPC, Color.White);
 
-			spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+			spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 		}
 
 		public override string GetChat()

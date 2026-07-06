@@ -102,8 +102,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Caverns,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -213,21 +217,20 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
-			Color color = new(255, 255, 255, 100);
-			Vector2 verticalOffset = new(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC));
+			Color color = NPCHelper.GlowColor(NPC, 255, 255, 255, 100);
 			for (int i = 0; i < 5; i++)
 			{
 				float randomX = Utils.RandomInt(ref seed, -11, 11) * 0.05f;
 				float randomY = Utils.RandomInt(ref seed, -5, 5) * 0.15f;
 
-				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + verticalOffset + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 			}
 		}
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			ulong seed = Main.TileFrameSeed ^ (ulong)(((long)NPC.position.Y << 32) | (uint)NPC.position.X);
-			Color color = new(255, 255, 255, 100);
+			Color color = NPCHelper.GlowColor(NPC, 255, 255, 255, 100);
 
 			if (NPC.frame.Y > 20 * NPC.frame.Height) // Only draw while attacking
 			{
@@ -236,7 +239,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 					float randomX = Utils.RandomInt(ref seed, -50, 50) * 0.15f;
 					float randomY = Utils.RandomInt(ref seed, -20, 20) * 0.15f;
 
-					spriteBatch.Draw(background.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(background.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) + new Vector2(randomX, randomY), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 			return true;
@@ -288,7 +291,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			int plantera = NPC.FindFirstNPC(ModContent.NPCType<Plantera>());
 			if (plantera >= 0)
 			{
-				chat.Add(Language.GetTextValue(path + "Plantera", Main.npc[plantera].GivenName), 0.25);
+				chat.Add(Language.GetTextValue(path + "Plantera", Main.npc[plantera].FullName), 0.25);
 			}
 			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && townNPCsCrossModSupport)
 			{
@@ -584,11 +587,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			npcTorchGodShop14.Register();
 
 			var npcTorchGodShop15 = new NPCShop(Type, TorchGodShop15);
-			SetupShops.WallOfFlesh(npcTorchGodShop15, Shop1);
+			SetupShops.WallOfFlesh(npcTorchGodShop15, Shop1, hackIsWoFAfterTorchGodHasRun: false);
 			npcTorchGodShop15.Register();
 
 			var npcTorchGodShop16 = new NPCShop(Type, TorchGodShop16);
-			SetupShops.WallOfFlesh(npcTorchGodShop16, Shop2);
+			SetupShops.WallOfFlesh(npcTorchGodShop16, Shop2, hackIsWoFAfterTorchGodHasRun: false);
 			npcTorchGodShop16.Register();
 
 			var npcTorchGodShop17 = new NPCShop(Type, TorchGodShop17);

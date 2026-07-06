@@ -90,8 +90,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Snow,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -142,7 +146,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-			Color color = new(255, 255, 255, 0);
+			Color color = NPCHelper.GlowColor(NPC, 255, 255, 255, 0);
 
 			if (NPC.frame.Y > 20 * NPC.frame.Height) //Only draw while attacking
             {
@@ -150,8 +154,8 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				float sinOffsetX = (float)Math.Cos((NPC.localAI[2] - 11) * Math.PI / 11.5f) * 2f;
 				for (int i = 0; i < 5; i++)
 				{
-					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) - new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
-					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)) + new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) - new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+					spriteBatch.Draw(glowmask.Value, NPC.Center - screenPos + NPCHelper.DrawingOffsets(NPC) + new Vector2(sinOffsetX, sinOffsetY), NPC.frame, color * 0.1f, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				}
 			}
 		}

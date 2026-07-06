@@ -79,6 +79,21 @@ namespace BossesAsNPCs.NPCs
 		}
 
 		/// <summary>
+		/// Checks if Happiness Listing mod has the automatic happiness info box enabled. If so, returns false.
+		/// </summary>
+		public static bool ShouldAddHappinessInfoBox()
+		{
+			if (ModLoader.TryGetMod("HappinessListing", out Mod happinessListing))
+			{
+				if ((string)happinessListing.Call("BestiaryFlavorTextEntryToString") != "None")
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		/// <summary>
 		/// Gets if the player has unlocked the Otherworldly music. Doesn't actually check for the player, but the shop runs client side so it doesn't matter.
 		/// </summary>
 		/// <returns>bool</returns>
@@ -1075,6 +1090,46 @@ namespace BossesAsNPCs.NPCs
 				if (npc == NPCString.MartianSaucer && !config.CanSpawnMartianSaucer) return false;
 			}
 			return true;
+		}
+
+		public static Vector2 DrawingOffsets(NPC npc)
+		{
+			// Move the position up by 4 pixels plus the gfxOffY value (that is for climbing half blocks).
+			// Main.NPCAddHeight() makes it so if the Town NPC is sitting, it also moves the glow mask up by 4 more pixels.
+			Vector2 verticalOffset = new(0, -4 + npc.gfxOffY + Main.NPCAddHeight(npc));
+
+			/*
+			// If the NPC is actually a dummy for the Profile and Retro portrait:
+			if (npc.IsAPortraitDummy)
+			{
+				// The Profile dummy will have a scale of 3f. The Retro portrait will have a scale of 2f.
+				verticalOffset.Y += npc.scale == 2f ? -28 : -56; // Move our drawing up.
+
+				// The offsets from NPCID.Sets.NPCPortraitsCloseUpOffsets and NPCID.Sets.NPCPortraitsFullBodyRetroOffsets are already taken into account.
+
+				// A similar thing can be done with NPC.IsABestiaryIconDummy if the image in the bestiary doesn't line up.
+			}
+			*/
+			return verticalOffset;
+		}
+
+		public static Color GlowColor(NPC npc, Color color, bool shimmerUsesDiscoColor = true, bool portraitUsesDiscoColor = false)
+		{
+			/*
+			if (!npc.IsAPortraitDummy && npc.IsShimmerVariant && shimmerUsesDiscoColor)
+			{
+				color = Main.DiscoColor;
+			}
+			if (npc.IsAPortraitDummy && npc.IsShimmerVariant && portraitUsesDiscoColor)
+			{
+				color = Main.DiscoColor;
+			}
+			*/
+			return npc.GetShimmerColor(color);
+		}
+		public static Color GlowColor(NPC npc, byte r, byte g, byte b, byte a, bool shimmerUsesDiscoColor = true, bool portraitUsesDiscoColor = false)
+		{
+			return GlowColor(npc, new Color(r, g, b, a), shimmerUsesDiscoColor, portraitUsesDiscoColor);
 		}
 	}
 	public static class ShopConditions

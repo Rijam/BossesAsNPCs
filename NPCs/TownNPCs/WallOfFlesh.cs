@@ -90,8 +90,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheUnderworld,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -207,11 +211,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void AddShops()
 		{
 			var npcShop1 = new NPCShop(Type, Shop1);
-			SetupShops.WallOfFlesh(npcShop1, Shop1);
+			SetupShops.WallOfFlesh(npcShop1, Shop1, hackIsWoFAfterTorchGodHasRun: true);
 			npcShop1.Register();
 
 			var npcShop2 = new NPCShop(Type, Shop2);
-			SetupShops.WallOfFlesh(npcShop2, Shop2);
+			SetupShops.WallOfFlesh(npcShop2, Shop2, hackIsWoFAfterTorchGodHasRun: true);
 			npcShop2.Register();
 		}
 

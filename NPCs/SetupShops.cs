@@ -340,6 +340,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool VitalityMod = true;
 		public static bool TheConfectionRebirth = true;
 		public static bool CrystiliumMod = true;
+		public static bool TheDepths = true;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 #pragma warning restore IDE0079 // Remove unnecessary suppression
 
@@ -1043,7 +1044,7 @@ namespace BossesAsNPCs.NPCs
 		/// </summary>
 		/// <param name="shop">The NPCShop shop of the Town NPC. Pass shop in most cases.</param>
 		/// <param name="shopName">The name of the shop.</param>
-		public static void WallOfFlesh(NPCShop shop, string shopName)
+		public static void WallOfFlesh(NPCShop shop, string shopName, bool hackIsWoFAfterTorchGodHasRun)
 		{
 			if (shopName == "Shop1")
 			{
@@ -1081,6 +1082,15 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2")
 			{
+				// It just so happens that every NPC is loaded before the Torch God, except for the Wall of Flesh.
+				// That means with All in One Town NPCs set to Mixed, Wall of Flesh gets two sets of all of the modded items because Torch God adds them to the customShops, then so does Wall of Flesh.
+				// That also means the opposite is true for the Torch God. He gets two sets of all modded items. But, that is not much of a problem because his shops are disabled if the Town NPC is loaded.
+				// This checks is for the Wall of Flesh to skip adding the modded items if the Torch God has already done it.
+				if (hackIsWoFAfterTorchGodHasRun && ModContent.NPCType<TorchGod>() > 0)
+				{
+					goto SkipRegisteringModdedStuffTwice;
+				}
+
 				string npcString = NPCString.WallOfFlesh;
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
@@ -1144,8 +1154,27 @@ namespace BossesAsNPCs.NPCs
 				{
 					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "GrandSlammer", npcString);
 				}
+				if (ModLoader.TryGetMod("TheDepths", out Mod theDepths) && TheDepths)
+				{
+					NPCHelper.SafelySetCrossModItem(theDepths, "HungryLeash", npcString, 1f, priceMulti: 5f, ShopConditions.Expert);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeTrophy", npcString, 0.1f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadowChasmeMask", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeSoulMask", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "POWHammer", npcString);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadeBlade", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "QuartzCannon", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadowClaw", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "StaffOfAThousandYears", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "Onyx", npcString, 0.06f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShalestoneShackle", npcString, 1f, priceMulti: 5f, ShopConditions.Expert);
+					NPCHelper.SafelySetCrossModItem(theDepths, "MidnightHorseshoe", npcString, 0.25f, ShopConditions.Master);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeRelic", npcString, 1f, priceMulti: 5f, ShopConditions.Master);
+				}
 
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.WallofFlesh, NPCString.WallOfFlesh, ModContent.NPCType<WallOfFlesh>());
+
+				SkipRegisteringModdedStuffTwice:
+
 				if (customShops.TryGetValue(NPCString.WallOfFlesh, out List<ShopItem> value))
 				{
 					foreach (ShopItem set in value)
@@ -1263,6 +1292,8 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
 			}
 			if (shopName == "Shop2")
 			{
@@ -1355,6 +1386,9 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Retinazer.RetCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Retinazer.RetCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EyeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
 			}
 			if (shopName == "Shop2")
 			{
@@ -1452,6 +1486,9 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.EyeOfCthulhu.EyeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
 			}
 			if (shopName == "Shop2")
 			{
@@ -1550,6 +1587,9 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Mechdusa.MdCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
+				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems, Condition.RemixWorld, Condition.ForTheWorthyWorld);
 			}
 			if (shopName == "Shop2")
 			{

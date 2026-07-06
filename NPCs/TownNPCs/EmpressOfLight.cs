@@ -97,8 +97,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.TheHallow,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)
@@ -151,10 +155,10 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			SpriteEffects spriteEffects = NPC.spriteDirection > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-			Color colorMagenta = new(207, 0, 151, 100);
-			Color colorYellow = new(241, 240, 120, 100);
-			Color colorLBlue = new(0, 241, 255, 100);
-			Color colorDBlue = new(82, 123, 239, 100);
+			Color colorMagenta = NPCHelper.GlowColor(NPC, 207, 0, 151, 100);
+			Color colorYellow = NPCHelper.GlowColor(NPC, 241, 240, 120, 100);
+			Color colorLBlue = NPCHelper.GlowColor(NPC, 0, 241, 255, 100);
+			Color colorDBlue = NPCHelper.GlowColor(NPC, 82, 123, 239, 100);
 
 			if (colorIndex == 0)
 			{
@@ -181,13 +185,13 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			if (NPC.ai[0] == 14) // Attacking
 			{
-				color = Main.OurFavoriteColor; // Enraged color
+				color = NPCHelper.GlowColor(NPC, Main.OurFavoriteColor); // Enraged color
 				color.A = 100;
 			}
 
 			for (int i = 0; i < 2; i++)
 			{
-				DrawData glowData = new(glowmask.Value, vector + new Vector2(0, -4 + NPC.gfxOffY + Main.NPCAddHeight(NPC)), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
+				DrawData glowData = new(glowmask.Value, vector + NPCHelper.DrawingOffsets(NPC), NPC.frame, color, NPC.rotation, NPC.frame.Size() / 2f, NPC.scale, spriteEffects, 1f);
 				GameShaders.Misc["HallowBoss"].Apply(glowData);
 				glowData.Draw(spriteBatch);
 

@@ -1,14 +1,8 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.IO;
-using System;
-using Terraria;
-using Terraria.ID;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.Graphics.Shaders;
-using ReLogic.Content;
 
 namespace BossesAsNPCs
 {
@@ -49,8 +43,12 @@ namespace BossesAsNPCs
 			{
 				return;
 			}
-			drawInfo.bodyGlowColor = color * drawInfo.drawPlayer.stealth;
-			drawInfo.armGlowColor = color * drawInfo.drawPlayer.stealth;
+			if (drawInfo.hideEntirePlayer || (drawInfo.drawPlayer.mount.Active && drawInfo.drawPlayer.mount.Type == MountID.Wolf))
+			{
+				return;
+			}
+			drawInfo.bodyGlowColor = drawInfo.drawPlayer.GetImmuneAlphaPure(color * drawInfo.drawPlayer.stealth, drawInfo.shadow);
+			drawInfo.armGlowColor = drawInfo.drawPlayer.GetImmuneAlphaPure(color * drawInfo.drawPlayer.stealth, drawInfo.shadow);
 		}
 	}
 }

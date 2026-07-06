@@ -12,9 +12,9 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 	[AutoloadEquip(EquipType.Head)]
 	public class MdCostumeHeadpiece : VanityBase
 	{
-		public static Asset<Texture2D> RezEye;
-		public static Asset<Texture2D> SpazEye;
-		public static Asset<Texture2D> EyeTether;
+		internal static Asset<Texture2D> RezEye;
+		internal static Asset<Texture2D> SpazEye;
+		internal static Asset<Texture2D> EyeTether;
 
 		public override void Load()
 		{
@@ -56,7 +56,10 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 				Vector2.Zero,
 				1f,
 				drawInfo.playerEffect
-				);
+				)
+			{
+				shader = drawInfo.cHead
+			};
 			DrawData EyeTetherDrawData = new(
 				EyeTether.Value,
 				tetherPos - Main.screenPosition,
@@ -66,7 +69,10 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 				EyeTether.Size() / 2f,
 				new Vector2(thickness, stretch),
 				drawInfo.playerEffect
-				);
+				)
+			{
+				shader = drawInfo.cHead
+			};
 			drawInfo.DrawDataCache.Add(EyeTetherDrawData);
 			drawInfo.DrawDataCache.Add(FrontEyeDrawData);
 			/* Debugging the locations
@@ -136,6 +142,15 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		}
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
+			Player drawPlayer = drawInfo.drawPlayer;
+			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			{
+				return false;
+			}
+			if (drawInfo.hideEntirePlayer || (drawPlayer.mount.Active && drawPlayer.mount.Type == MountID.Wolf))
+			{
+				return false;
+			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
 
@@ -147,12 +162,12 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			float playerMountYOffset = (player.MountedCenter.Y - player.Center.Y);
 
 			// The position of the eye that is drawn in front of the player's head.
-			Vector2 frontEyePos = player.Center - new Vector2((12 - player.MountXOffset) * player.direction, 28 - player.gfxOffY - playerMountYOffset);
+			Vector2 frontEyePos = player.Center - new Vector2((12 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 			frontEyePos -= player.velocity; // Make the eye fall behind the player when the player is moving.
 			
 			// The position of the eye socket with a little bias towards the front and down.
 			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
-			Vector2 eyeSocketPos = player.Center - new Vector2((-3.5f - player.MountXOffset) * player.direction, 11 - player.gfxOffY - playerMountYOffset);
+			Vector2 eyeSocketPos = player.Center - new Vector2((-3.5f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.RezEye : MdCostumeHeadpiece.SpazEye;
@@ -169,6 +184,15 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		}
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
+			Player drawPlayer = drawInfo.drawPlayer;
+			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			{
+				return false;
+			}
+			if (drawInfo.hideEntirePlayer || (drawPlayer.mount.Active && drawPlayer.mount.Type == MountID.Wolf))
+			{
+				return false;
+			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
 
@@ -181,12 +205,12 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			float playerMountYOffset = (player.MountedCenter.Y - player.Center.Y);
 
 			// The position of the eye that is drawn in behind of the player's head.
-			Vector2 backEyePos = player.Center - new Vector2((-6 - player.MountXOffset) * player.direction, 28 - player.gfxOffY - playerMountYOffset);
+			Vector2 backEyePos = player.Center - new Vector2((-6 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 			backEyePos -= player.velocity * 1.25f; // Make the eye fall behind the player when the player is moving.
 			
 			// The position of the eye socket with a little bias towards the front and down.
 			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
-			Vector2 eyeSocketPos = player.Center - new Vector2((-7f - player.MountXOffset) * player.direction, 11 - player.gfxOffY - playerMountYOffset);
+			Vector2 eyeSocketPos = player.Center - new Vector2((-7f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
 
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.SpazEye : MdCostumeHeadpiece.RezEye;

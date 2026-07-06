@@ -346,6 +346,7 @@ namespace BossesAsNPCs
 						"VitalityMod" => SetupShops.VitalityMod = false,
 						"TheConfectionRebirth" => SetupShops.TheConfectionRebirth = false,
 						"CrystiliumMod" => SetupShops.CrystiliumMod = false,
+						"TheDepths" => SetupShops.TheDepths = false,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				// Call("AddTownNPCCanLiveInCorruption", int npcType)

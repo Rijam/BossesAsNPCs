@@ -59,6 +59,10 @@ namespace BossesAsNPCs
 			{
 				return false;
 			}
+			if (drawInfo.hideEntirePlayer || (drawPlayer.mount.Active && drawPlayer.mount.Type == MountID.Wolf))
+			{
+				return false;
+			}
 
 			return true;
 		}
