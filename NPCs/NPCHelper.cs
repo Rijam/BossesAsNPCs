@@ -88,6 +88,21 @@ namespace BossesAsNPCs.NPCs
 		}
 
 		/// <summary>
+		/// Checks if Happiness Listing mod has the automatic happiness info box enabled. If so, returns false.
+		/// </summary>
+		public static bool ShouldAddHappinessInfoBox()
+		{
+			if (ModLoader.TryGetMod("HappinessListing", out Mod happinessListing))
+			{
+				if ((string)happinessListing.Call("BestiaryFlavorTextEntryToString") != "None")
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		/// <summary>
 		/// Gets if the player has unlocked the Otherworldly music. Doesn't actually check for the player, but the shop runs client side so it doesn't matter.
 		/// </summary>
 		/// <returns>bool</returns>

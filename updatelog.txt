@@ -247,3 +247,4 @@
 	* King Slime no longer sells the Prince set.
 	* Improved the glow masks on the NPC who have them. They now properly fade out while the NPC is shimmer transforming and become rainbow while shimmered.
 	* Added a second shop to the Goblin Tinkerer and Pirate for modded items.
+	* Fixed armor glow masks drawing when the player was transformation mounts that should hide the player.

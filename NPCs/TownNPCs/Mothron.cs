@@ -90,8 +90,12 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			[
 				BestiaryDatabaseNPCsPopulator.CommonTags.SpawnConditions.Biomes.Graveyard,
 				new FlavorTextBestiaryInfoElement(NPCHelper.BestiaryPath(Name)),
-				new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
+				// new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name))
 			]);
+			if (NPCHelper.ShouldAddHappinessInfoBox())
+			{
+				bestiaryEntry.Info.Add(new FlavorTextBestiaryInfoElement(NPCHelper.LoveText(Name) + NPCHelper.LikeText(Name) + NPCHelper.DislikeText(Name) + NPCHelper.HateText(Name)));
+			}
 		}
 
 		public override void HitEffect(NPC.HitInfo hitInfo)

@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.UI.States;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 
@@ -105,7 +106,10 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 				Vector2.Zero,
 				1f,
 				drawInfo.playerEffect
-				);
+				)
+			{
+				shader = drawInfo.cHead
+			};
 			DrawData EyeTetherDrawData = new(
 				EyeTether.Value,
 				tetherPos - Main.screenPosition,
@@ -115,7 +119,10 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 				EyeTether.Size() / 2f,
 				new Vector2(thickness, stretch),
 				drawInfo.playerEffect
-				);
+				)
+			{
+				shader = drawInfo.cHead
+			};
 			drawInfo.DrawDataCache.Add(EyeTetherDrawData);
 			drawInfo.DrawDataCache.Add(FrontEyeDrawData);
 			//Debugging the locations
@@ -186,6 +193,15 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		}
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
+			Player drawPlayer = drawInfo.drawPlayer;
+			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			{
+				return false;
+			}
+			if (drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type] || drawInfo.hideEntirePlayer)
+			{
+				return false;
+			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
 
@@ -219,6 +235,15 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		}
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
+			Player drawPlayer = drawInfo.drawPlayer;
+			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			{
+				return false;
+			}
+			if (drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type] || drawInfo.hideEntirePlayer)
+			{
+				return false;
+			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
 

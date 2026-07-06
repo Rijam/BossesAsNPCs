@@ -56,6 +56,10 @@ namespace BossesAsNPCs
 			{
 				return false;
 			}
+			if (drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type] || drawInfo.hideEntirePlayer)
+			{
+				return false;
+			}
 
 			return true;
 		}
