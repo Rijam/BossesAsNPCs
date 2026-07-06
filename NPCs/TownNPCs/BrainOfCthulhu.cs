@@ -43,7 +43,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 
 			NPC.Happiness
 				.SetBiomeAffection<CrimsonBiome>(AffectionLevel.Love)
-				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Love)
+				.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Like)
 				.SetBiomeAffection<CorruptionBiome>(AffectionLevel.Like)
 				.SetBiomeAffection<JungleBiome>(AffectionLevel.Dislike)
 				.SetBiomeAffection<HallowBiome>(AffectionLevel.Hate)

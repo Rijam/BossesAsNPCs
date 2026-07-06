@@ -198,7 +198,7 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			{
 				return false;
 			}
-			if (drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type] || drawInfo.hideEntirePlayer)
+			if (drawInfo.hideEntirePlayer || drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type])
 			{
 				return false;
 			}
@@ -240,7 +240,7 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			{
 				return false;
 			}
-			if (drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type] || drawInfo.hideEntirePlayer)
+			if (drawInfo.hideEntirePlayer || drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawPlayer.mount.Type])
 			{
 				return false;
 			}

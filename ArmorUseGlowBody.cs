@@ -49,8 +49,12 @@ namespace BossesAsNPCs
 			{
 				return;
 			}
-			drawInfo.bodyGlowColor = color * drawInfo.drawPlayer.stealth;
-			drawInfo.armGlowColor = color * drawInfo.drawPlayer.stealth;
+			if (drawInfo.hideEntirePlayer || (drawInfo.drawPlayer.mount.Active && MountID.Sets.PlayerIsHidden[drawInfo.drawPlayer.mount.Type]))
+			{
+				return;
+			}
+			drawInfo.bodyGlowColor = drawInfo.drawPlayer.GetImmuneAlphaPure(color * drawInfo.drawPlayer.stealth, drawInfo.shadow);
+			drawInfo.armGlowColor = drawInfo.drawPlayer.GetImmuneAlphaPure(color * drawInfo.drawPlayer.stealth, drawInfo.shadow);
 		}
 	}
 }

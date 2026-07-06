@@ -340,6 +340,7 @@ namespace BossesAsNPCs.NPCs
 		public static bool VitalityMod = true;
 		public static bool TheConfectionRebirth = true;
 		public static bool CrystiliumMod = true;
+		public static bool TheDepths = true;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 #pragma warning restore IDE0079 // Remove unnecessary suppression
 
@@ -1150,6 +1151,22 @@ namespace BossesAsNPCs.NPCs
 				if (ModLoader.TryGetMod("TheConfectionRebirth", out Mod theConfectionRebirth) && TheConfectionRebirth)
 				{
 					NPCHelper.SafelySetCrossModItem(theConfectionRebirth, "GrandSlammer", npcString);
+				}
+				if (ModLoader.TryGetMod("TheDepths", out Mod theDepths) && TheDepths)
+				{
+					NPCHelper.SafelySetCrossModItem(theDepths, "HungryLeash", npcString, 1f, priceMulti: 5f, ShopConditions.Expert);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeTrophy", npcString, 0.1f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadowChasmeMask", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeSoulMask", npcString, 0.14f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "POWHammer", npcString);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadeBlade", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "QuartzCannon", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShadowClaw", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "StaffOfAThousandYears", npcString, 0.25f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "Onyx", npcString, 0.06f);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ShalestoneShackle", npcString, 1f, priceMulti: 5f, ShopConditions.Expert);
+					NPCHelper.SafelySetCrossModItem(theDepths, "MidnightHorseshoe", npcString, 0.25f, ShopConditions.Master);
+					NPCHelper.SafelySetCrossModItem(theDepths, "ChasmeRelic", npcString, 1f, priceMulti: 5f, ShopConditions.Master);
 				}
 
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.WallofFlesh, NPCString.WallOfFlesh, ModContent.NPCType<WallOfFlesh>());
