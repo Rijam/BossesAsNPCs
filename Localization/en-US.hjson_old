@@ -587,10 +587,8 @@ Mods: {
 				IncShop: Next shop
 				DecShop: Previous shop
 				FirstShop: First shop
-				# 1.4.5
 				NextPage: Next page
-				PreviousPage: Previous page
-				NoShopsOnThisPage: No shops on this page
+				PreviousPage: Previous Page
 			}
 
 			Shop2: "{$LegacyInterface.28} 2"
@@ -634,7 +632,6 @@ Mods: {
 			WorldContagionS: In a world with The Contagion
 			MothronPaintingsS: Paintings are randomly sold
 			RandomVanityS: Vanity are randomly sold
-			# 1.4.5
 			NoAltars: When the world contains no altars
 		}
 
@@ -1506,18 +1503,16 @@ Mods: {
 					FarFromHome: Oh home, my dear home! Oh, wait, I can teleport, how silly of me.
 					DislikeCrowded: Oh, what a crowd! Who are you little people? Where do you keep coming from?!
 					HateCrowded: This castle is much too crowded for me!
-					LoveBiome: Ah {BiomeName}, so full of newbies and critters to prey- to conquer!
 					LikeBiome: If not for my darling, I doubt I could see how beautiful {BiomeName}.
+					LoveBiome: Ah {BiomeName}, so full of newbies and critters to prey- to conquer!
 					DislikeBiome: What an awful place to live, {BiomeName}! Snow just keeps falling on my head and it's not even tasty!
 					HateBiome: Oh my, what a place {BiomeName} is! As if I was not corrupted enough already!
-					LoveNPC: "{NPCName} is such a nice company to have!"
 					LikeNPC: "{NPCName} is fitting my style pretty nicely, too."
+					LikeNPC_Princess: "{NPCName} is such a well-behaved girl, she might even know good manners better than me!"
+					LoveNPC: "{NPCName} is such a nice company to have!"
 					DislikeNPC: "{NPCName} is like a serf to me."
 					HateNPC: "{NPCName} is the type of person I'd banish from my kingdom!"
-					LikeNPC_Princess: "{NPCName} is such a well-behaved girl, she might even know good manners better than me!"
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_BossesAsNPCs/QueenSlime: I love my beautiful wife {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				# {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
@@ -1566,22 +1561,22 @@ Mods: {
 				DisplayName: Eye of Cthulhu
 
 				TownNPCMood: {
-					Content: I'm here, aren't I?
-					NoHome: I've wondered the world for long enough. I want to have a home now.
-					LoveSpace: I enjoy having a lot of space to myself.
-					FarFromHome: I'm used to wondering, but I would like to return home.
-					DislikeCrowded: There are a few too many people living near me.
-					HateCrowded: I might have to find another place to live. It's too crowded here.
-					LoveBiome: The best place for most people to live is {BiomeName}.
-					LikeBiome: There is plenty of room in {BiomeName}.
-					DislikeBiome: Living in {BiomeName} is not for me.
-					HateBiome: I would like to live anywhere else but {BiomeName}.
-					LoveNPC: "{NPCName} and I are great friends!"
-					LikeNPC: I enjoy {NPCName}'s company.
-					DislikeNPC: I can only tolerate {NPCName} for so long.
-					HateNPC: I can't stand being near {NPCName}.
-					LikeNPC_Princess: "{NPCName} doesn't judge you based on your background. I like that."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1610,22 +1605,22 @@ Mods: {
 				DisplayName: Eater of Worlds
 
 				TownNPCMood: {
-					Content: I'm not feeling particularly vile right now.
-					NoHome: Everyone needs a place to call home. Myself included.
-					LoveSpace: There's plenty of space for me to dig around.
-					FarFromHome: I seem to have dug too far. I need to get back to my home.
-					DislikeCrowded: Why are there so many people around?
-					HateCrowded: It is much too crowded here. We might need to start a plague if you know what I'm talking about.
-					LoveBiome: Everyone should love {BiomeName} and embrace its influence!
-					LikeBiome: I quite like {BiomeName}.
-					DislikeBiome: I don't enjoy living {BiomeName}.
-					HateBiome: The cursed {BiomeName}! It gets in my way!
-					LoveNPC: "{NPCName} and I work together to spread our influences!"
-					LikeNPC: "{NPCName} is nice to be around."
-					DislikeNPC: "{NPCName} stands in my way."
-					HateNPC: Not even the Corruption would corrupt {NPCName}.
-					LikeNPC_Princess: "{NPCName} would look great in a purple dress."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1650,22 +1645,22 @@ Mods: {
 				DisplayName: Brain of Cthulhu
 
 				TownNPCMood: {
-					Content: There's not a lot on my mind currently.
-					NoHome: It doesn't take a genius to know I need a house.
-					LoveSpace: There is plenty of space for me to flex my mind.
-					FarFromHome: I am too far from my living quarters.
-					DislikeCrowded: The housing density has just gone over the recommended threshold.
-					HateCrowded: Is this some kind of mind trick? It is much too crowded here!
-					LoveBiome: Everyone should become one with the {BiomeName}!
-					LikeBiome: I am fond of living in {BiomeName}.
-					DislikeBiome: I don't appreciate {BiomeName}'s uncooperative behavior.
-					HateBiome: Living {BiomeName} is the worst kind of torture!
-					LoveNPC: "{NPCName} and I work together to spread our influences!"
-					LikeNPC: I don't mind being with {NPCName}.
-					DislikeNPC: "{NPCName} and I are not cordial."
-					HateNPC: I would use {NPCName} as scrap flesh.
-					LikeNPC_Princess: "{NPCName} has a good brain in her head."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1691,22 +1686,22 @@ Mods: {
 				DisplayName: Queen Bee
 
 				TownNPCMood: {
-					Content: There's not much for me to complain around right now.
-					NoHome: No bee can bee queen without a hive of her own.
-					LoveSpace: There is plenty of space for me here.
-					FarFromHome: I must return to my hive.
-					DislikeCrowded: This hive has reached maximum capacity.
-					HateCrowded: There are far too many workers in this hive!
-					LoveBiome: I love {BiomeName}. It's the perfect environment for me!
-					LikeBiome: I enjoy the protection of living in {BiomeName}.
-					DislikeBiome: I dislike {BiomeName}. Hardly any flowers can grow here.
-					HateBiome: I hate {BiomeName}. How could anyone live here?
-					LoveNPC: "{NPCName} is a lovely protector!"
-					LikeNPC: "{NPCName} is a nice worker."
-					DislikeNPC: "{NPCName} is far to dangerous around my hive."
-					HateNPC: I would exile {NPCName} if it were up to me.
-					LikeNPC_Princess: A fellow royal. I enjoy {NPCName}'s bright colors.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1731,22 +1726,22 @@ Mods: {
 				DisplayName: Skeletron
 
 				TownNPCMood: {
-					Content: I don't have any bones to pick.
-					NoHome: I've lost my city. Could you build me another?
-					LoveSpace: There is adequate space between each resident.
-					FarFromHome: I must return to my city.
-					DislikeCrowded: This city is starting to get crowded.
-					HateCrowded: Did we get locked in a cell together? Why are there so many people here?
-					LoveBiome: I love {BiomeName}. It's my city!
-					LikeBiome: A place like {BiomeName} is a fine place to live.
-					DislikeBiome: I don't enjoy {BiomeName}. It is much too happy.
-					HateBiome: There are some places, like {BiomeName}, that are best left alone.
-					LoveNPC: I would love to possess {NPCName}!
-					LikeNPC: I could see {NPCName} enjoying my city.
-					DislikeNPC: "{NPCName} would be better as a skeleton"
-					HateNPC: I want to send {NPCName} to my Dungeon's dungeon.
-					LikeNPC_Princess: I would never possess {NPCName}!
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: "{BiomeName} isn't suitable for housing."
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1775,22 +1770,22 @@ Mods: {
 				DisplayName: Deerclops
 
 				TownNPCMood: {
-					Content: I don't feel like smashing anything right now.
-					NoHome: I've seen those structures you've built. Could you build one for me?
-					LoveSpace: I enjoy the open space around here.
-					FarFromHome: I have traveled too far from my den.
-					DislikeCrowded: And people said I was loud. My neighbors are louder!
-					HateCrowded: There are too many people here. Do I have your permission to knock down some of these homes?
-					LoveBiome: It is perpetual winter in {BiomeName}. I love it!
-					LikeBiome: I like the trees in {BiomeName}.
-					DislikeBiome: I can't say I like {BiomeName}.
-					HateBiome: I just want to stomp all over {BiomeName}!
-					LoveNPC: Oh, {NPCName} is so dreamy!
-					LikeNPC: I like having {NPCName} as my neighbor.
-					DislikeNPC: Being around {NPCName} drains my sanity.
-					HateNPC: I might topple {NPCName}'s house when they're not looking.
-					LikeNPC_Princess: My sanity gets restored everytime I see {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1815,22 +1810,22 @@ Mods: {
 				DisplayName: Wall of Flesh
 
 				TownNPCMood: {
-					Content: I have no moving issues right now.
-					NoHome: Even demons need homes. Where is mine?
-					LoveSpace: I like how there's a lot of space for me to move around.
-					FarFromHome: I seemed to have moved too far from my home.
-					DislikeCrowded: I don't appreciate the housing density.
-					HateCrowded: A crowd like this makes me horrified!
-					LoveBiome: I really love {BiomeName}.
-					LikeBiome: Living in {BiomeName} is comforting.
-					DislikeBiome: It is much too calm in {BiomeName}.
-					HateBiome: Even a demon like me can't stand {BiomeName}.
-					LoveNPC: Oh, how I wish {NPCName} and I could be even closer!
-					LikeNPC: An ambassador of evil. I like {NPCName}'s style.
-					DislikeNPC: "{NPCName} is not a person I associate with."
-					HateNPC: I wouldn't mind sacrificing {NPCName}.
-					LikeNPC_Princess: I think the spirits of light have reached {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1850,8 +1845,8 @@ Mods: {
 					Guide2: "{0} is certainly no stranger to burns."
 					Calamity1: Can't you read? Smashing Altars won't give you new ores!
 					Calamity2: Confused about the Altars? Here's a tip: read the label on the Pwnhammer!
-					PwnCorruption: Use that Pwnhammer to smash those Demon Altars! Something good is bound to happen!
-					PwnCrimson: Use that Pwnhammer to smash those Crimson Altars! Something good is bound to happen!
+					PwnCorruption: Use that Pwnhammer to smash those Demon Alters! Something good is bound to happen!
+					PwnCrimson: Use that Pwnhammer to smash those Crimson Alters! Something good is bound to happen!
 				}
 
 				Census.SpawnCondition: Defeat the Wall of Flesh
@@ -1861,24 +1856,22 @@ Mods: {
 				DisplayName: Queen Slime
 
 				TownNPCMood: {
-					Content: I have to admit that I am content at the moment.
-					NoHome: Royalty deserves a castle. I demand that you build me one.
-					LoveSpace: I need a break from my subjects every so often. This is nice.
-					FarFromHome: My dear home! I don't suppose you would fly me home for me?
-					DislikeCrowded: There are too many subjects near my quarters.
-					HateCrowded: I suggest you build another castle to house these noisy neighbors!
-					LoveBiome: I love the beauty that {BiomeName} brings!
-					LikeBiome: My darling likes {BiomeName} much more than me. It is an acceptable place.
-					DislikeBiome: This place, {BiomeName}, is no place for me! I don't need snowfall at all times!
-					HateBiome: Is {BiomeName} exile? I do not wish to live here.
-					LoveNPC: "{NPCName} is such a lovely person."
-					LikeNPC: I like {NPCName}. I'd invite them to my castle.
-					DislikeNPC: Such peasant {NPCName} is to me.
-					HateNPC: Do I have your permission to exile {NPCName}?
-					LikeNPC_Princess: "{NPCName}'s pink dress suits my style quite well."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_BossesAsNPCs/KingSlime: I love my beautiful husband {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1907,24 +1900,22 @@ Mods: {
 				DisplayName: The Destroyer
 
 				TownNPCMood: {
-					Content: I feel no vibrations at this moment.
-					NoHome: I know my name is "The Destroyer", but if you build me a home I promise not to destroy it!
-					LoveSpace: Nothing here except me and my probes.
-					FarFromHome: I seem to have dug too far from my home.
-					DislikeCrowded: This crowd better flee by morning.
-					HateCrowded: I can't stand being this close to so many people!
-					LoveBiome: I love living in {BiomeName}.
-					LikeBiome: Living in {BiomeName} is as good of place as any.
-					DislikeBiome: I don't think {BiomeName} is a good place.
-					HateBiome: Normal people would certainly perish in {BiomeName}.
-					LoveNPC: My people! I love {NPCName}.
-					LikeNPC: "{NPCName} and I get along well."
-					DislikeNPC: I don't understand {NPCName}.
-					HateNPC: I'd rip out {NPCName}'s spine if I could.
-					LikeNPC_Princess: I think {NPCName} took one of my probes as a pet. I'll let her keep it.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_Mechanic: Of course I love {NPCName}. She created me!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1946,24 +1937,22 @@ Mods: {
 				DisplayName: Retinazer
 
 				TownNPCMood: {
-					Content: I don't foresee today being terrible.
-					NoHome: I expected my agreement to live with you to come with a dormitory. Can you provide one?
-					LoveSpace: I love the space. I tend to say back and observe my surroundings.
-					FarFromHome: I have wondered too far from my house.
-					DislikeCrowded: I'm starting to dislike all of the people around me.
-					HateCrowded: I have to close my eye. There's too many people here!
-					LoveBiome: Residence in {BiomeName} is the most ideal condition.
-					LikeBiome: A pretty standard environment {BiomeName} is.
-					DislikeBiome: In my opinion, {BiomeName} is a bad biome to live in.
-					HateBiome: No person should be forced to reside in {BiomeName}.
-					LoveNPC: I am overjoyed at {NPCName}'s presence!
-					LikeNPC: I couldn't see myself being mad at {NPCName}.
-					DislikeNPC: I recognize {NPCName}'s purpose, but their purpose doesn't help me.
-					HateNPC: "{NPCName} should find out what a laser to the face feels like."
-					LikeNPC_Princess: "{NPCName} hosts relaxing tea socials. I enjoy attending them."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_Mechanic: I have to thank {NPCName} for creating me!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -1972,7 +1961,6 @@ Mods: {
 					Default3: Spazmatism can be a little hyper sometimes.
 					Default4: Greetings, Terrarian.
 					Default5: Did you know that all the mechanical bosses shoot a red laser?
-					Default6: Do you need to impove your vision? I can give you laser eye surgery!
 					Party: Will this party include a laser rave?
 					BloodMoon: The red rain looks like a barrage of my red lasers.
 					Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
@@ -1988,25 +1976,22 @@ Mods: {
 				DisplayName: Spazmatism
 
 				TownNPCMood: {
-					Content: I can't complain. Well, I could complain. But I won't. I might change my mind later if you ask me again. So, how's your day going?
-					NoHome: Ret told me you would build me a house! Where is it at? Don't tell me you forgot? How could you forget? Could you get on that now?
-					LoveSpace: Ah plenty of space for me. Less risk of me burning everything down!
-					FarFromHome: I'm a little lost. No, a lot-a lost. Could you help me get home?
-					DislikeCrowded: People as far as my eye can see! Which isn't very far mind you. I have surprisingly poor vision.
-					HateCrowded: Ugh, so many people around! What to see if they are all flamible?
-					LoveBiome: I absolutely love {BiomeName}! I'm just saying that because I don't know anything about it.
-					LikeBiome: Well, {BiomeName} is just as good as any other place.
-					DislikeBiome: I'm not a huge fan of {BiomeName}. I'm more of a flamethrower, actually.
-					HateBiome: Who thought it was a good idea to build {BiomeName}? Oh it's nature? Still bad.
-					LoveNPC: "{NPCName} is just like me. I love that!"
-					LikeNPC: Everyone has their own opinions of {NPCName}, but if you don't like them, you're wrong.
-					DislikeNPC: Can {NPCName} do anything right? Sorry, that was rude of me.
-					HateNPC: UGH I want to melt {NPCName}'s face off!
-					LikeNPC_Princess: I like going to {NPCName}'s letter T parties! Yeah that's what I said, T. T-E-A? Never heard of it.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					HateBiome_Dungeon: Who thought it was a good idea to build {BiomeName}? Oh it was a thriving city once? Still bad.
-					LoveNPC_Mechanic: "{NPCName} is an amazing person for creating me!"
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2033,24 +2018,22 @@ Mods: {
 				DisplayName: Skeletron Prime
 
 				TownNPCMood: {
-					Content: The air temperature is just right.
-					NoHome: I don't have a huge city for myself, so I would like a home, please!
-					LoveSpace: All of the room around me is great!
-					FarFromHome: I must return home. I'm far from it right now.
-					DislikeCrowded: This building is starting to get crowded.
-					HateCrowded: I can't stand bing so closed to so many people!
-					LoveBiome: Yes, {BiomeName} is fantastic!
-					LikeBiome: A normal place like {BiomeName} is fine with me.
-					DislikeBiome: I wouldn't live in {BiomeName} for very long.
-					HateBiome: How is anyone supposed to enjoy {BiomeName}?
-					LoveNPC: "{NPCName} and I are so alike. I love them!"
-					LikeNPC: "{NPCName} is a great person to be around."
-					DislikeNPC: "{NPCName} really needs to keep their mouth shut."
-					HateNPC: I really want to launch {NPCName} out of my cannon.
-					LikeNPC_Princess: "{NPCName} is as tough as nails. I like her!"
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_Mechanic: "{NPCName} has great taste in weaponry, believe it or not!"
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2074,22 +2057,22 @@ Mods: {
 				DisplayName: Plantera
 
 				TownNPCMood: {
-					Content: I'm restful right now.
-					NoHome: Everyone needs to be rooted in a home. What's a plant without soil under their feet?
-					LoveSpace: I love all of the space around me. I can really stretch my roots!
-					FarFromHome: I seem to be transplanted. I need to get back to solid ground.
-					DislikeCrowded: All of the these people around are blocking my light. Get them out of here!
-					HateCrowded: Too many people nearby. Sooner or later, I'm going to trampled.
-					LoveBiome: How could anyone not love the vibrancy of {BiomeName}?
-					LikeBiome: The tunnels of {BiomeName} are a good defense against my bulbs.
-					DislikeBiome: Living in {BiomeName} is not good for my health.
-					HateBiome: Being in {BiomeName} makes me very enraged!
-					LoveNPC: "{NPCName} is a protector of the Jungle. I love that!"
-					LikeNPC: I get along with {NPCName} quite well.
-					DislikeNPC: "{NPCName} is the kind of person who would harvest the land for their benefit."
-					HateNPC: I'd like to destroy {NPCName}'s bulbs if you know what I mean.
-					LikeNPC_Princess: I respect {NPCName} for appreciating all flora and fauna.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2118,22 +2101,22 @@ Mods: {
 				DisplayName: Golem
 
 				TownNPCMood: {
-					Content: I don't feel like punching anything right now.
-					NoHome: You know I lived in a large temple, right? I need you to make me a new temple now.
-					LoveSpace: This temple is quite spacious!
-					FarFromHome: I have strayed too far from my temple.
-					DislikeCrowded: This temple to overcrowded. We need some more traps.
-					HateCrowded: This temple couldn't possibly have any more vacancy! Don't make me make more.
-					LoveBiome: I am the most familiar with {BiomeName} as that is where I was constructed.
-					LikeBiome: I'm not bothered by {BiomeName}. I glowing eyes to see in the dark, after all.
-					DislikeBiome: I tried to give {BiomeName} a chance, but I can't stand it here.
-					HateBiome: By the creators! I hate {BiomeName}!
-					LoveNPC: I have a instinctive duty to watch over {NPCName}.
-					LikeNPC: I like {NPCName}. They have a sturdy head on their shoulders.
-					DislikeNPC: Don't ask me if {NPCName} end up with their heads detached.
-					HateNPC: I want to punch {NPCName} with the fury of the sun!
-					LikeNPC_Princess: Seeing {NPCName} puts a smile on my face.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2162,22 +2145,22 @@ Mods: {
 				DisplayName: Empress of Light
 
 				TownNPCMood: {
-					Content: The light's pulse is steady.
-					NoHome: What's an empress without an empire? Build me an chamber from which I can rule from!
+					Content: I feel content.
+					NoHome: I would like a home.
 					LoveSpace: I love how there is so much space.
-					FarFromHome: I have traveled too far from my empire.
-					DislikeCrowded: This crowd is starting to block my light.
-					HateCrowded: This crowd is making me enraged!
-					LoveBiome: The beauty and righteousness of {BiomeName} should expand!
-					LikeBiome: The purity of {BiomeName} is brilliant.
-					DislikeBiome: Staying in {BiomeName} is quite dull.
-					HateBiome: By the light! This terrible place, {BiomeName}, is total darkness!
-					LoveNPC: "{NPCName} ignites a great love in me!"
-					LikeNPC: My day is brightened when I'm around {NPCName}.
-					DislikeNPC: You don't become an empress without making a few enemies. {NPCName} is one of them.
-					HateNPC: "{NPCName} should have their light extinguished."
-					LikeNPC_Princess: If I still had my empire, I would consider making {NPCName} the next heir!
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2185,7 +2168,7 @@ Mods: {
 					Default2: The Bestiary describes me as a vengeful fae goddess; I agree with it.
 					Default3: Don't you dare touch those butterflies!
 					Default4: If you want a real challenge, fight me during the day.
-					# quotes are important on this one
+					# quotes and backslashes are important on this one
 					Default5: '''"A beautiful bullet hell"? I don't use any firearms, but I am beautiful.'''
 					Default6: I bet you thought all fairies were small, didn't you?
 					Default7: My empire? That's a story for another time.
@@ -2216,24 +2199,22 @@ Mods: {
 				DisplayName: Duke Fishron
 
 				TownNPCMood: {
-					Content: Just me blowing some bubbles.
-					NoHome: From where I'm from, I'm royalty. So, get to work and build me a home!
-					LoveSpace: There's plenty of space to swim here.
-					FarFromHome: I just kept swimming and now I'm too far from my home.
-					DislikeCrowded: This place is starting to get crowded like a coral reef!
-					HateCrowded: I'm going to disperse this crowd with a sharknado!
-					LoveBiome: The refreshing waves of {BiomeName} are my favorite!
-					LikeBiome: The lesser pigrons and I enjoy {BiomeName}.
-					DislikeBiome: I can't say I like the waters in {BiomeName}.
-					HateBiome: I hate it here in {BiomeName}! How is anyone supposed to swim in these waters?
-					LoveNPC: "{NPCName} has a keen sense for adventure. I love that!"
-					LikeNPC: I like swimming with {NPCName}.
-					DislikeNPC: I get a tidal wave of distrust when I'm around {NPCName}.
-					HateNPC: A rip current should bring {NPCName} far away from here.
-					LikeNPC_Princess: "{NPCName} has been teaching me proper etiquette and manners."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_BossesAsNPCs/Betsy: I'm only part dragon, but do you think {NPCName} would go for a man like me?
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2263,22 +2244,22 @@ Mods: {
 				DisplayName: Betsy
 
 				TownNPCMood: {
-					Content: I'm content with living in this world.
-					NoHome: I'm stuck in your world now and I can't return home. The least you could do is make me a new home here.
-					LoveSpace: There's a lot of space for me to breath. Breath fire that is!
-					FarFromHome: I'm really far from my real home and the home you've made for me.
-					DislikeCrowded: This den is starting to get crowded.
-					HateCrowded: All these people around has incurred my wrath!
-					LoveBiome: I love the simplicity and peace of {BiomeName}!
-					LikeBiome: The forested nature of {BiomeName} works for me.
-					DislikeBiome: Staying deep in {BiomeName} is not for me.
-					HateBiome: Great, {BiomeName} is somehow worse than a necrotic temple I visited once.
-					LoveNPC: Traveling has its perks. I think I've fallen for {NPCName}!
-					LikeNPC: I would let {NPCName} join my brood.
-					DislikeNPC: With {NPCName} around, maybe entering this world was a bad idea.
-					HateNPC: I want to have my wyverns rip {NPCName} to shreds!
-					LikeNPC_Princess: With people like {NPCName}, living here is a lot more comforting.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2288,7 +2269,7 @@ Mods: {
 					Default4: Apply my curse to your enemies. It'll reduce their defense by 40 points!
 					Default5: So just because I'm a red dragon means I'm automatically chaotic evil?
 					Party: Stick around; we're going to see how many candles I can light with one breath of fire!
-					BloodMoon: Blood Moons are regular occurrences here? I guess that would explain why I saw {$NPCName.EyeofCthulhu} when one happened in my world.
+					BloodMoon: Blood Moons are regular occurrences here? I guess that would explain why I saw {0} when one happened in my world.
 					Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
 					Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: Where did {0} get his wings?
@@ -2302,22 +2283,22 @@ Mods: {
 				DisplayName: Lunatic Cultist
 
 				TownNPCMood: {
-					Content: I feel sane.
-					NoHome: Cultists need a place to do rituals! Could you build me a home?
-					LoveSpace: There's plenty of space here to perform my rituals.
-					FarFromHome: I have lost my way!... to my home.
-					DislikeCrowded: There's too many people around for me to focus on my rituals.
-					HateCrowded: With this many people around, I might have to start sacrificing people!
-					LoveBiome: The perfect place for scheming is {BiomeName}!
-					LikeBiome: I like how eerie the {BiomeName}.
-					DislikeBiome: Living in {BiomeName} does not suit my cult.
-					HateBiome: How could anyone stand to worship {BiomeName}?
-					LoveNPC: Every person should worship {NPCName}!
-					LikeNPC: I would like it if {NPCName} was in my cult.
-					DislikeNPC: I don't accept {NPCName} as a member of my cult.
-					HateNPC: I wish I could sacrifice {NPCName}.
-					LikeNPC_Princess: I'm more of a blue and gold person, but {NPCName}'s pink and silver is growing on me!
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2325,7 +2306,7 @@ Mods: {
 					Default2: My defeat will not stop my cult!
 					Default3: Every good cult needs some sort of hooded figure!
 					Default4: My magical abilities make me resistant to all seeking projectiles!
-					Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane?
+					Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane.
 					PreML: You may have defeated me, but soon you'll face of the wrath of Cthulhu!
 					PostML: Not even Cthulhu could stop you? I'm impressed.
 					Party: Is this a costume party? I'm already wearing a mask.
@@ -2344,24 +2325,22 @@ Mods: {
 				DisplayName: Moon Lord
 
 				TownNPCMood: {
-					Content: No doom approaches right now.
-					NoHome: I demand you build me a place to live. Looks like I'm invading your world after all!
-					LoveSpace: There is plenty of space around me to think of a new plan for conquering you!
-					FarFromHome: I am far from my home. That Dryad didn't banish me again, did she?
-					DislikeCrowded: Having followers is great, but there might be too many around me.
-					HateCrowded: There are far too many followers here!
-					LoveBiome: An exquisite place {BiomeName} is!
-					LikeBiome: I would enjoy conquering {BiomeName}.
-					DislikeBiome: There are not any redeeming qualities about {BiomeName}.
-					HateBiome: Being in {BiomeName} is worse than being on the dark side of the moon.
-					LoveNPC: I love my follower, {NPCName}.
-					LikeNPC: It's like looking at a small piece of me when I'm with {NPCName}.
-					DislikeNPC: "{NPCName} always tries to discredit me."
-					HateNPC: Get {NPCName} away from me! They are more evil than I am!
-					LikeNPC_Princess: Depsite trying to take over her world, {NPCName} still accepts me.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
-					# 1.4.5
-					LoveNPC_Mechanic: I commend {NPCName}'s effort, even if you put an end to that.
+					Content: I feel content.
+					NoHome: I would like a home.
+					LoveSpace: I love how there is so much space.
+					FarFromHome: I am far from my home.
+					DislikeCrowded: I dislike the crowd.
+					HateCrowded: I hate the crowd.
+					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
+					DislikeBiome: I dislike {BiomeName}.
+					HateBiome: I hate {BiomeName}.
+					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
+					DislikeNPC: I dislike {NPCName}.
+					HateNPC: I hate {NPCName}.
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2404,16 +2383,16 @@ Mods: {
 					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2448,16 +2427,16 @@ Mods: {
 					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2492,16 +2471,16 @@ Mods: {
 					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2531,16 +2510,16 @@ Mods: {
 					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2567,19 +2546,19 @@ Mods: {
 					Content: I feel content.
 					NoHome: I would like a home.
 					LoveSpace: I love how there is so much space.
-					FarFromHome: The distance between my location and my home is too far.
+					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: "{NPCName} is the best human I have ever met. No offense to you."
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2614,16 +2593,16 @@ Mods: {
 					FarFromHome: I am far from my home.
 					DislikeCrowded: I dislike the crowd.
 					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
 					LikeBiome: I like {BiomeName}.
+					LoveBiome: I love {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
 					LikeNPC: I like {NPCName}.
+					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I love {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
-					Princess_LovesNPC: I see the good in all people, even {NPCName}!
+					Princess_LovesNPC: I love {NPCName}.
 				}
 
 				NPCDialog: {
@@ -2636,13 +2615,8 @@ Mods: {
 					Default7: You do know how to stop-drop-and-roll, right?
 					Default8: Many beings have harnessed the ability to control flames. However, none control flames quite like I can.
 					Default9: Brew my special cocktail to convert nearby torches into the correct biome type!
-					# 1.4.4 {
-					# Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
-					# }
-					# 1.4.5 {
 					Common: So many shops to cycle through! Click Previous Page and Next Page to cycle between Pre-Hardmode, Hardmode, and event bosses.
 					NoShop: There are no shops for me to show you! Change the configuration settings to allow me to show you shops.
-					# }
 					Rare: Haha! The fire IS shooting at you!
 					Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
 					BloodMoon: I love setting all of the zombies ablaze on nights like these!
@@ -2711,4 +2685,33 @@ Mods: {
 			SantaNK1Emote.Command: banpcsantank1
 		}
 	}
+}
+
+TownNPCMood_Princess: {
+	LoveNPC_BossesAsNPCs/KingSlime: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/EyeOfCthulhu: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/EaterOfWorlds: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/BrainOfCthulhu: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/QueenBee: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Skeletron: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Deerclops: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/WallOfFlesh: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/QueenSlime: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/TheDestroyer: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Retinazer: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Spazmatism: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/SkeletronPrime: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Plantera: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Golem: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/EmpressOfLight: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/DukeFishron: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Betsy: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/LunaticCultist: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/MoonLord: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Dreadnautilus: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Mothron: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/Pumpking: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/IceQueen: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/MartianSaucer: I love {NPCName}.
+	LoveNPC_BossesAsNPCs/TorchGod: I love {NPCName}.
 }

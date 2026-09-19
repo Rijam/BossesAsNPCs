@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Reflection;
 using Terraria;
+using Terraria.GameContent;
+using Terraria.ModLoader;
 
 namespace BossesAsNPCs.NPCs
 {

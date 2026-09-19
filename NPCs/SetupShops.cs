@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs.TownNPCs;
+using BossesAsNPCs.Items;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -363,6 +364,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.NinjaPants, 0.33));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeHook, 0.33));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeGun, 0.67));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeStaff, 0.033, valueDiv: 10)); // 2g / 0.033 = 60g; valueDiv 10 instead of 5 to make the price 30g
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeMask, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.KingSlimeTrophy, 0.1));
 
@@ -375,7 +377,6 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss1, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.Gel, priceMulti: 10), ShopConditions.SellExtraItems);
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.SlimeStaff, priceMulti: 10), ShopConditions.SellExtraItems); // priceDiv: 0.033 == 60 gold. Going to keep it at 20 gold.
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.KingSlime.KSCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1051,7 +1052,7 @@ namespace BossesAsNPCs.NPCs
 		/// </summary>
 		/// <param name="shop">The NPCShop shop of the Town NPC. Pass shop in most cases.</param>
 		/// <param name="shopName">The name of the shop.</param>
-		public static void WallOfFlesh(NPCShop shop, string shopName)
+		public static void WallOfFlesh(NPCShop shop, string shopName, bool hackIsWoFAfterTorchGodHasRun)
 		{
 			if (shopName == "Shop1")
 			{
@@ -1089,6 +1090,17 @@ namespace BossesAsNPCs.NPCs
 			}
 			if (shopName == "Shop2")
 			{
+				/*
+				// It just so happens that every NPC is loaded before the Torch God, except for the Wall of Flesh.
+				// That means with All in One Town NPCs set to Mixed, Wall of Flesh gets two sets of all of the modded items because Torch God adds them to the customShops, then so does Wall of Flesh.
+				// That also means the opposite is true for the Torch God. He gets two sets of all modded items. But, that is not much of a problem because his shops are disabled if the Town NPC is loaded.
+				// This checks is for the Wall of Flesh to skip adding the modded items if the Torch God has already done it.
+				if (hackIsWoFAfterTorchGodHasRun && ModContent.NPCType<TorchGod>() > 0)
+				{
+					goto SkipRegisteringModdedStuffTwice;
+				}
+				*/
+
 				string npcString = NPCString.WallOfFlesh;
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
@@ -1170,6 +1182,9 @@ namespace BossesAsNPCs.NPCs
 				}
 
 				GenerateShops.GenerateDropsToAddToTheShops(NPCID.WallofFlesh, NPCString.WallOfFlesh, ModContent.NPCType<WallOfFlesh>());
+
+				// SkipRegisteringModdedStuffTwice:
+
 				if (customShops.TryGetValue(NPCString.WallOfFlesh, out List<ShopItem> value))
 				{
 					foreach (ShopItem set in value)
@@ -1283,6 +1298,8 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+					ShopConditions.RescuedWizard, Condition.RemixWorld, Condition.ForTheWorthyWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TheDestroyer.DeCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1377,6 +1394,8 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+					ShopConditions.RescuedWizard, Condition.RemixWorld, Condition.ForTheWorthyWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Retinazer.RetCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Retinazer.RetCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1477,6 +1496,8 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+					ShopConditions.RescuedWizard, Condition.RemixWorld, Condition.ForTheWorthyWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.Spazmatism.SpazCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1578,6 +1599,8 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxBoss5, priceMulti: 10),
+					ShopConditions.RescuedWizard, Condition.RemixWorld, Condition.ForTheWorthyWorld, ShopConditions.SellExtraItems);
 
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.SkeletronPrime.SPCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
@@ -1700,6 +1723,8 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop2")
 			{
 				string npcString = NPCString.Plantera;
+				SetShopItem(npcString, ModContent.ItemType<PlanterasAxe>(), [ShopConditions.SellExtraItems] );
+
 				if (ModLoader.TryGetMod("Fargowiltas", out Mod fargosMutant) && Fargowiltas)
 				{
 					NPCHelper.SafelySetCrossModItem(fargosMutant, "PlanterasFruit", npcString, 500000); //Match the Mutant's shop
@@ -1795,6 +1820,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.HeatRay, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.StaffofEarth, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemFist, 0.14));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MobiusStrip, 0.167));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemMask, 0.14));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.GolemTrophy, 0.1));
@@ -1951,13 +1977,14 @@ namespace BossesAsNPCs.NPCs
 			if (shopName == "Shop1")
 			{
 				shop.Add(new Item(ItemID.TruffleWorm) { shopCustomPrice = 400000 }); // Made up value
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.BubbleGun, 0.1667), Condition.NotRemixWorld);
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.AquaScepter, 0.1667), Condition.RemixWorld);
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.Flairon, 0.1667));
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.RazorbladeTyphoon, 0.1667));
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.TempestStaff, 0.1667));
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.Tsunami, 0.1667));
-				shop.Add(NPCHelper.ItemWithPrice(ItemID.EelWhip, 0.1667));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.BubbleGun, 0.1429), Condition.NotRemixWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.AquaScepter, 0.1429), Condition.RemixWorld);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Flairon, 0.1429));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.RazorbladeTyphoon, 0.1429));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.TempestStaff, 0.1429));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Tsunami, 0.1429));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.EelWhip, 0.1429));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.Kraken, 0.1429));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.FishronWings, 0.07));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.DukeFishronMask, 0.14));
@@ -2195,6 +2222,7 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWBoss2, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.LunaticCultist.LCCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 			}
@@ -2333,8 +2361,10 @@ namespace BossesAsNPCs.NPCs
 					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxOWMoonLord, priceMulti: 10),
 					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
+
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.MoonLord.MLCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordBody, priceMulti: 5), ShopConditions.SellExtraItems);
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MoonLordLegs, priceMulti: 5), ShopConditions.SellExtraItems);
 				
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);
@@ -2918,6 +2948,7 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.ElectrosphereLauncher, 0.167));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.InfluxWaver, 0.167));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.CosmicCarKey, 0.167));
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.ArcSurge, 0.02));
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MartianSaucerTrophy, 0.1));
 
 				shop.Add(NPCHelper.ItemWithPrice(ItemID.MartianPetItem, 0.25), ShopConditions.Master); //Cosmic Skateboard

@@ -15,6 +15,7 @@ using BossesAsNPCs.EmoteBubbles;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class TorchGod : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod)
@@ -318,13 +319,224 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 			// Add Previous Page and Next Page buttons
 			interactions.Append(new NPCHelper.TorchGodPreviousPage());
 			interactions.Append(new NPCHelper.TorchGodNextPage());
+			interactions.Append(new NPCHelper.TorchGodNothingOnThisPage());
 			// Add the shops for every other Boss NPC.
 			NPCHelper.TorchGodRegisterShopsMode0(interactions); // Mode 0 should technically never be seen. Torch God doesn't load while it is in mode 0.
 			NPCHelper.TorchGodRegisterShopsMode1(interactions);
 			NPCHelper.TorchGodRegisterShopsMode2(interactions);
 		}
 
-		// Shops are registered in NPCHelper
+		private const string Shop1 = "Shop1";
+		private const string Shop2 = "Shop2";
+
+		public override void AddShops()
+		{
+			// Mode 0 should technically never be seen. Torch God doesn't load while it is in mode 0.
+			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().AllInOneNPCMode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
+			{
+				return;
+			}
+
+			var torchGod_KingSlime_Shop1 = new NPCShop(Type, $"{NPCString.KingSlime}/{Shop1}"); // This will make the shop name BossesAsNPCs/TorchGod/KingSlime/Shop1
+			SetupShops.KingSlime(torchGod_KingSlime_Shop1, Shop1);
+			torchGod_KingSlime_Shop1.Register();
+
+			var torchGod_KingSlime_Shop2 = new NPCShop(Type, $"{NPCString.KingSlime}/{Shop2}");
+			SetupShops.KingSlime(torchGod_KingSlime_Shop2, Shop2);
+			torchGod_KingSlime_Shop2.Register();
+
+			var torchGod_EyeOfCthulhu_Shop1 = new NPCShop(Type, $"{NPCString.EyeOfCthulhu}/{Shop1}");
+			SetupShops.EyeOfCthulhu(torchGod_EyeOfCthulhu_Shop1, Shop1);
+			torchGod_EyeOfCthulhu_Shop1.Register();
+
+			var torchGod_EyeOfCthulhu_Shop2 = new NPCShop(Type, $"{NPCString.EyeOfCthulhu}/{Shop2}");
+			SetupShops.EyeOfCthulhu(torchGod_EyeOfCthulhu_Shop2, Shop2);
+			torchGod_EyeOfCthulhu_Shop2.Register();
+
+			var torchGod_EaterOfWorlds_Shop1 = new NPCShop(Type, $"{NPCString.EaterOfWorlds}/{Shop1}");
+			SetupShops.EaterOfWorlds(torchGod_EaterOfWorlds_Shop1, Shop1);
+			torchGod_EaterOfWorlds_Shop1.Register();
+
+			var torchGod_EaterOfWorlds_Shop2 = new NPCShop(Type, $"{NPCString.EaterOfWorlds}/{Shop2}");
+			SetupShops.EaterOfWorlds(torchGod_EaterOfWorlds_Shop2, Shop2);
+			torchGod_EaterOfWorlds_Shop2.Register();
+
+			var torchGod_BrainOfCthulhu_Shop1 = new NPCShop(Type, $"{NPCString.BrainOfCthulhu}/{Shop1}");
+			SetupShops.BrainOfCthulhu(torchGod_BrainOfCthulhu_Shop1, Shop1);
+			torchGod_BrainOfCthulhu_Shop1.Register();
+
+			var torchGod_BrainOfCthulhu_Shop2 = new NPCShop(Type, $"{NPCString.BrainOfCthulhu}/{Shop2}");
+			SetupShops.BrainOfCthulhu(torchGod_BrainOfCthulhu_Shop2, Shop2);
+			torchGod_BrainOfCthulhu_Shop2.Register();
+
+			var torchGod_QueenBee_Shop1 = new NPCShop(Type, $"{NPCString.QueenBee}/{Shop1}");
+			SetupShops.QueenBee(torchGod_QueenBee_Shop1, Shop1);
+			torchGod_QueenBee_Shop1.Register();
+
+			var torchGod_QueenBee_Shop2 = new NPCShop(Type, $"{NPCString.QueenBee}/{Shop2}");
+			SetupShops.QueenBee(torchGod_QueenBee_Shop2, Shop2);
+			torchGod_QueenBee_Shop2.Register();
+
+			var torchGod_Skeletron_Shop1 = new NPCShop(Type, $"{NPCString.Skeletron}/{Shop1}");
+			SetupShops.Skeletron(torchGod_Skeletron_Shop1, Shop1);
+			torchGod_Skeletron_Shop1.Register();
+
+			var torchGod_Skeletron_Shop2 = new NPCShop(Type, $"{NPCString.Skeletron}/{Shop2}");
+			SetupShops.Skeletron(torchGod_Skeletron_Shop2, Shop2);
+			torchGod_Skeletron_Shop2.Register();
+
+			var torchGod_Deerclops_Shop1 = new NPCShop(Type, $"{NPCString.Deerclops}/{Shop1}");
+			SetupShops.Deerclops(torchGod_Deerclops_Shop1, Shop1);
+			torchGod_Deerclops_Shop1.Register();
+
+			var torchGod_Deerclops_Shop2 = new NPCShop(Type, $"{NPCString.Deerclops}/{Shop2}");
+			SetupShops.Deerclops(torchGod_Deerclops_Shop2, Shop2);
+			torchGod_Deerclops_Shop2.Register();
+
+			var torchGod_WallOfFlesh_Shop1 = new NPCShop(Type, $"{NPCString.WallOfFlesh}/{Shop1}");
+			SetupShops.WallOfFlesh(torchGod_WallOfFlesh_Shop1, Shop1, hackIsWoFAfterTorchGodHasRun: false);
+			torchGod_WallOfFlesh_Shop1.Register();
+
+			var torchGod_WallOfFlesh_Shop2 = new NPCShop(Type, $"{NPCString.WallOfFlesh}/{Shop2}");
+			SetupShops.WallOfFlesh(torchGod_WallOfFlesh_Shop2, Shop2, hackIsWoFAfterTorchGodHasRun: false);
+			torchGod_WallOfFlesh_Shop2.Register();
+
+			var torchGod_QueenSlime_Shop1 = new NPCShop(Type, $"{NPCString.QueenSlime}/{Shop1}");
+			SetupShops.QueenSlime(torchGod_QueenSlime_Shop1, Shop1);
+			torchGod_QueenSlime_Shop1.Register();
+
+			var torchGod_QueenSlime_Shop2 = new NPCShop(Type, $"{NPCString.QueenSlime}/{Shop2}");
+			SetupShops.QueenSlime(torchGod_QueenSlime_Shop2, Shop2);
+			torchGod_QueenSlime_Shop2.Register();
+
+			var torchGod_TheDestroyer_Shop1 = new NPCShop(Type, $"{NPCString.TheDestroyer}/{Shop1}");
+			SetupShops.TheDestroyer(torchGod_TheDestroyer_Shop1, Shop1);
+			torchGod_TheDestroyer_Shop1.Register();
+
+			var torchGod_TheDestoryer_Shop2 = new NPCShop(Type, $"{NPCString.TheDestroyer}/{Shop2}");
+			SetupShops.TheDestroyer(torchGod_TheDestoryer_Shop2, Shop2);
+			torchGod_TheDestoryer_Shop2.Register();
+
+			var torchGod_Retinazer_Shop1 = new NPCShop(Type, $"{NPCString.Retinazer}/{Shop1}");
+			SetupShops.Retinazer(torchGod_Retinazer_Shop1, Shop1);
+			torchGod_Retinazer_Shop1.Register();
+
+			var torchGod_Retinazer_Shop2 = new NPCShop(Type, $"{NPCString.Retinazer}/{Shop2}");
+			SetupShops.Retinazer(torchGod_Retinazer_Shop2, Shop2);
+			torchGod_Retinazer_Shop2.Register();
+
+			var torchGod_Spazmatism_Shop1 = new NPCShop(Type, $"{NPCString.Spazmatism}/{Shop1}");
+			SetupShops.Spazmatism(torchGod_Spazmatism_Shop1, Shop1);
+			torchGod_Spazmatism_Shop1.Register();
+
+			var torchGod_Spazmatism_Shop2 = new NPCShop(Type, $"{NPCString.Spazmatism}/{Shop2}");
+			SetupShops.Spazmatism(torchGod_Spazmatism_Shop2, Shop2);
+			torchGod_Spazmatism_Shop2.Register();
+
+			var torchGod_SkeletronPrime_Shop1 = new NPCShop(Type, $"{NPCString.SkeletronPrime}/{Shop1}");
+			SetupShops.SkeletronPrime(torchGod_SkeletronPrime_Shop1, Shop1);
+			torchGod_SkeletronPrime_Shop1.Register();
+
+			var torchGod_SkeletronPrime_Shop2 = new NPCShop(Type, $"{NPCString.SkeletronPrime}/{Shop2}");
+			SetupShops.SkeletronPrime(torchGod_SkeletronPrime_Shop2, Shop2);
+			torchGod_SkeletronPrime_Shop2.Register();
+
+			var torchGod_Plantera_Shop1 = new NPCShop(Type, $"{NPCString.Plantera}/{Shop1}");
+			SetupShops.Plantera(torchGod_Plantera_Shop1, Shop1);
+			torchGod_Plantera_Shop1.Register();
+
+			var torchGod_Plantera_Shop2 = new NPCShop(Type, $"{NPCString.Plantera}/{Shop2}");
+			SetupShops.Plantera(torchGod_Plantera_Shop2, Shop2);
+			torchGod_Plantera_Shop2.Register();
+
+			var torchGod_Golem_Shop1 = new NPCShop(Type, $"{NPCString.Golem}/{Shop1}");
+			SetupShops.Golem(torchGod_Golem_Shop1, Shop1);
+			torchGod_Golem_Shop1.Register();
+
+			var torchGod_Golem_Shop2 = new NPCShop(Type, $"{NPCString.Golem}/{Shop2}");
+			SetupShops.Golem(torchGod_Golem_Shop2, Shop2);
+			torchGod_Golem_Shop2.Register();
+
+			var torchGod_EmpressOfLight_Shop1 = new NPCShop(Type, $"{NPCString.EmpressOfLight}/{Shop1}");
+			SetupShops.EmpressOfLight(torchGod_EmpressOfLight_Shop1, Shop1);
+			torchGod_EmpressOfLight_Shop1.Register();
+
+			var torchGod_EmpressOfLight_Shop2 = new NPCShop(Type, $"{NPCString.EmpressOfLight}/{Shop2}");
+			SetupShops.EmpressOfLight(torchGod_EmpressOfLight_Shop2, Shop2);
+			torchGod_EmpressOfLight_Shop2.Register();
+
+			var torchGod_DukeFishron_Shop1 = new NPCShop(Type, $"{NPCString.DukeFishron}/{Shop1}");
+			SetupShops.DukeFishron(torchGod_DukeFishron_Shop1, Shop1);
+			torchGod_DukeFishron_Shop1.Register();
+
+			var torchGod_DukeFishron_Shop2 = new NPCShop(Type, $"{NPCString.DukeFishron}/{Shop2}");
+			SetupShops.DukeFishron(torchGod_DukeFishron_Shop2, Shop2);
+			torchGod_DukeFishron_Shop2.Register();
+
+			var torchGod_Betsy_Shop1 = new NPCShop(Type, $"{NPCString.Betsy}/{Shop1}");
+			SetupShops.Betsy(torchGod_Betsy_Shop1, Shop1);
+			torchGod_Betsy_Shop1.Register();
+
+			var torchGod_Betsy_Shop2 = new NPCShop(Type, $"{NPCString.Betsy}/{Shop2}");
+			SetupShops.Betsy(torchGod_Betsy_Shop2, Shop2);
+			torchGod_Betsy_Shop2.Register();
+
+			var torchGod_LunaticCultist_Shop1 = new NPCShop(Type, $"{NPCString.LunaticCultist}/{Shop1}");
+			SetupShops.LunaticCultist(torchGod_LunaticCultist_Shop1, Shop1);
+			torchGod_LunaticCultist_Shop1.Register();
+
+			var torchGod_LunaticCultist_Shop2 = new NPCShop(Type, $"{NPCString.LunaticCultist}/{Shop2}");
+			SetupShops.LunaticCultist(torchGod_LunaticCultist_Shop2, Shop2);
+			torchGod_LunaticCultist_Shop2.Register();
+
+			var torchGod_MoonLord_Shop1 = new NPCShop(Type, $"{NPCString.MoonLord}/{Shop1}");
+			SetupShops.MoonLord(torchGod_MoonLord_Shop1, Shop1);
+			torchGod_MoonLord_Shop1.Register();
+
+			var torchGod_MoonLord_Shop2 = new NPCShop(Type, $"{NPCString.MoonLord}/{Shop2}");
+			SetupShops.MoonLord(torchGod_MoonLord_Shop2, Shop2);
+			torchGod_MoonLord_Shop2.Register();
+
+			var torchGod_Dreadnautilus_Shop1 = new NPCShop(Type, $"{NPCString.Dreadnautilus}/{Shop1}");
+			SetupShops.Dreadnautilus(torchGod_Dreadnautilus_Shop1, Shop1);
+			torchGod_Dreadnautilus_Shop1.Register();
+
+			var torchGod_Dreadnautilus_Shop2 = new NPCShop(Type, $"{NPCString.Dreadnautilus}/{Shop2}");
+			SetupShops.Dreadnautilus(torchGod_Dreadnautilus_Shop2, Shop2);
+			torchGod_Dreadnautilus_Shop2.Register();
+
+			var torchGod_Mothron_Shop1 = new NPCShop(Type, $"{NPCString.Mothron}/{Shop1}");
+			SetupShops.Mothron(torchGod_Mothron_Shop1, Shop1);
+			torchGod_Mothron_Shop1.Register();
+
+			var torchGod_Mothron_Shop2 = new NPCShop(Type, $"{NPCString.Mothron}/{Shop2}");
+			SetupShops.Mothron(torchGod_Mothron_Shop2, Shop2);
+			torchGod_Mothron_Shop2.Register();
+
+			var torchGod_Pumpking_Shop1 = new NPCShop(Type, $"{NPCString.Pumpking}/{Shop1}");
+			SetupShops.Pumpking(torchGod_Pumpking_Shop1, Shop1);
+			torchGod_Pumpking_Shop1.Register();
+
+			var torchGod_Pumpking_Shop2 = new NPCShop(Type, $"{NPCString.Pumpking}/{Shop2}");
+			SetupShops.Pumpking(torchGod_Pumpking_Shop2, Shop2);
+			torchGod_Pumpking_Shop2.Register();
+
+			var torchGod_IceQueen_Shop1 = new NPCShop(Type, $"{NPCString.IceQueen}/{Shop1}");
+			SetupShops.IceQueen(torchGod_IceQueen_Shop1, Shop1);
+			torchGod_IceQueen_Shop1.Register();
+
+			var torchGod_IceQueen_Shop2 = new NPCShop(Type, $"{NPCString.IceQueen}/{Shop2}");
+			SetupShops.IceQueen(torchGod_IceQueen_Shop2, Shop2);
+			torchGod_IceQueen_Shop2.Register();
+
+			var torchGod_MartianSaucer_Shop1 = new NPCShop(Type, $"{NPCString.MartianSaucer}/{Shop1}");
+			SetupShops.MartianSaucer(torchGod_MartianSaucer_Shop1, Shop1);
+			torchGod_MartianSaucer_Shop1.Register();
+
+			var torchGod_MartianSaucer_Shop2 = new NPCShop(Type, $"{NPCString.MartianSaucer}/{Shop2}");
+			SetupShops.MartianSaucer(torchGod_MartianSaucer_Shop2, Shop2);
+			torchGod_MartianSaucer_Shop2.Register();
+		}
 
 		public override bool CanGoToStatue(bool toKingStatue)
 		{

@@ -12,6 +12,7 @@ using BossesAsNPCs.EmoteBubbles;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class Retinazer : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
@@ -139,7 +140,7 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		{
 			string path = NPCHelper.DialogPath(Name);
 			WeightedRandom<string> chat = new ();
-			for (int i = 1; i <= 5; i++)
+			for (int i = 1; i <= 6; i++)
 			{
 				chat.Add(Language.GetTextValue(path + "Default" + i));
 			}

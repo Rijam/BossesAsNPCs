@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
@@ -602,6 +603,15 @@ namespace BossesAsNPCs.NPCs
 			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport;
 		}
 
+		public class OpenShopGoblinTinkererShop2(string shopName, string customTextKey = null) : OpenShopCrossModSupport(shopName, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().GoblinSellInvasionItems;
+		}
+		public class OpenShopPirateShop2(string shopName, string customTextKey = null) : OpenShopCrossModSupport(shopName, customTextKey)
+		{
+			public override bool Condition() => base.Condition() && ModContent.GetInstance<BossesAsNPCsConfigServer>().PirateSellInvasionItems;
+		}
+
 		/// <summary>
 		/// Registers both the Shop and Shop2 at once. The custom name for shop 2 and the TownNPCsCrossModSupport condition is automatically set.
 		/// </summary>
@@ -638,14 +648,14 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 				{
-					if (HowManyShopsForMode1() > 0)
+					if (HowManyShopsForMode1(out _, out _, out _) > 0)
 					{
 						return nextShop;
 					}
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 				{
-					if (HowManyShopsForMode2() > 0)
+					if (HowManyShopsForMode2(out _, out _, out _) > 0)
 					{
 						return nextShop;
 					}
@@ -660,7 +670,7 @@ namespace BossesAsNPCs.NPCs
 			{
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 				{
-					if (HowManyShopsForMode1() <= 0)
+					if (HowManyShopsForMode1(out _, out _, out _) <= 0)
 					{
 						Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath("TorchGod", "NoShop"));
 						Main.DoNPCPortraitHop();
@@ -669,7 +679,7 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 				{
-					if (HowManyShopsForMode2() <= 0)
+					if (HowManyShopsForMode2(out _, out _, out _) <= 0)
 					{
 						Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath("TorchGod", "NoShop"));
 						Main.DoNPCPortraitHop();
@@ -681,7 +691,18 @@ namespace BossesAsNPCs.NPCs
 				{
 					ShopPage = 1;
 				}
+				SoundEngine.PlaySound(SoundID.MenuTick);
 				// Main.NewText($"ShopPage {ShopPage}");
+			}
+			public override void TextColor(ref Color chatColor, ref Color chatColorShadow, bool hoveringOverButton)
+			{
+				if (GetText() == Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.NoShop"))
+				{
+					// Set the color to black and the shadow to light gray.
+					// Multiply the color by * (Main.mouseTextColor / 255f) to give it that pulsating effect that text in Terraria has.
+					chatColor = Color.LightGray * (Main.mouseTextColor / 255f);
+					chatColorShadow = Color.Black;
+				}
 			}
 		}
 
@@ -701,14 +722,14 @@ namespace BossesAsNPCs.NPCs
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 				{
-					if (HowManyShopsForMode1() > 0)
+					if (HowManyShopsForMode1(out _, out _, out _) > 0)
 					{
 						return prevShop;
 					}
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 				{
-					if (HowManyShopsForMode2() > 0)
+					if (HowManyShopsForMode2(out _, out _, out _) > 0)
 					{
 						return prevShop;
 					}
@@ -720,14 +741,14 @@ namespace BossesAsNPCs.NPCs
 				bool torchGod = TalkNPCType == ModContent.NPCType<TownNPCs.TorchGod>(); // Not necessary. Could just be true.
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
 				{
-					if (HowManyShopsForMode1() <= 0)
+					if (HowManyShopsForMode1(out _, out _, out _) <= 0)
 					{
 						return false;
 					}
 				}
 				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
 				{
-					if (HowManyShopsForMode2() <= 0)
+					if (HowManyShopsForMode2(out _, out _, out _) <= 0)
 					{
 						return false;
 					}
@@ -742,6 +763,82 @@ namespace BossesAsNPCs.NPCs
 					ShopPage = TotalShopPage;
 				}
 				// Main.NewText($"ShopPage {ShopPage}");
+				SoundEngine.PlaySound(SoundID.MenuTick);
+			}
+		}
+
+		public class TorchGodNothingOnThisPage : NPCInteraction
+		{
+			private static BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
+			private static BossesAsNPCsConfigServer.AllInOneOptions mode = config.AllInOneNPCMode;
+
+			public override string GetText()
+			{
+				return Language.GetTextValue("Mods.BossesAsNPCs.UI.TorchGod.NoShopsOnThisPage");
+			}
+			public override bool Condition()
+			{
+				bool torchGod = TalkNPCType == ModContent.NPCType<TownNPCs.TorchGod>(); // Not necessary. Could just be true.
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Off)
+				{
+					return false;
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.Mixed)
+				{
+					if (HowManyShopsForMode1(out int preHMShops, out int hMShops, out int eventShops) > 0)
+					{
+						if (ShopPage == 1 && preHMShops == 0)
+						{
+							return torchGod;
+						}
+						if (ShopPage == 2 && hMShops == 0)
+						{
+							return torchGod;
+						}
+						if (ShopPage == 3 && eventShops == 0)
+						{
+							return torchGod;
+						}
+					}
+				}
+				if (mode == BossesAsNPCsConfigServer.AllInOneOptions.OnlyOne)
+				{
+					if (HowManyShopsForMode2(out int preHMShops, out int hMShops, out int eventShops) > 0)
+					{
+						if (ShopPage == 1 && preHMShops == 0)
+						{
+							return torchGod;
+						}
+						if (ShopPage == 2 && hMShops == 0)
+						{
+							return torchGod;
+						}
+						if (ShopPage == 3 && eventShops == 0)
+						{
+							return torchGod;
+						}
+					}
+				}
+				return false;
+			}
+			public override void Interact()
+			{
+				Main.npcChatText = Language.GetTextValue(NPCHelper.DialogPath("TorchGod", "Common"));
+				Main.DoNPCPortraitHop();
+			}
+			public override void TextColor(ref Color chatColor, ref Color chatColorShadow, bool hoveringOverButton)
+			{
+				// Set the color to black and the shadow to light gray.
+				// Multiply the color by * (Main.mouseTextColor / 255f) to give it that pulsating effect that text in Terraria has.
+				chatColor = Color.LightGray * (Main.mouseTextColor / 255f);
+				chatColorShadow = Color.Black;
+
+				if (hoveringOverButton)
+				{
+					// Set the color to dark gray and the shadow to white when hovering over the button.
+					chatColor = Color.LightGray * (Main.mouseTextColor / 255f);
+					chatColorShadow = Color.Black;
+				}
 			}
 		}
 
@@ -815,8 +912,8 @@ namespace BossesAsNPCs.NPCs
 
 		public static void TorchGodRegisterShop1AndShop2Mode1(NPCInteractionList interactions, string shopFromWho, int pageNumber, string button, Func<bool> bossCondition)
 		{
-			interactions.Append(new TorchGodOpenShop1Mode1($"BossesAsNPCs/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
-			interactions.Append(new TorchGodOpenShop1Mode1($"BossesAsNPCs/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
+			interactions.Append(new TorchGodOpenShop1Mode1($"BossesAsNPCs/TorchGod/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
+			interactions.Append(new TorchGodOpenShop2Mode1($"BossesAsNPCs/TorchGod/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
 		}
 
 		/// <summary>
@@ -869,8 +966,8 @@ namespace BossesAsNPCs.NPCs
 
 		public static void TorchGodRegisterShop1AndShop2Mode2(NPCInteractionList interactions, string shopFromWho, int pageNumber, string button, Func<bool> bossCondition)
 		{
-			interactions.Append(new TorchGodOpenShop1Mode2($"BossesAsNPCs/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
-			interactions.Append(new TorchGodOpenShop1Mode2($"BossesAsNPCs/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
+			interactions.Append(new TorchGodOpenShop1Mode2($"BossesAsNPCs/TorchGod/{shopFromWho}/Shop1", pageNumber, bossCondition, button));
+			interactions.Append(new TorchGodOpenShop2Mode2($"BossesAsNPCs/TorchGod/{shopFromWho}/Shop2", pageNumber, bossCondition, $"{button} 2"));
 		}
 
 		/// <summary>
@@ -907,7 +1004,7 @@ namespace BossesAsNPCs.NPCs
 			TorchGodRegisterShop1AndShop2Mode2(interactions, "MartianSaucer", 3, Language.GetTextValue("NPCName.MartianSaucer"), () => config.CanSpawnMartianSaucer && NPC.downedMartians);
 		}
 
-		public static int HowManyShopsForMode1()
+		public static int HowManyShopsForMode1(out int preHMShops, out int hMShops, out int eventShops)
 		{
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
 
@@ -937,16 +1034,16 @@ namespace BossesAsNPCs.NPCs
 			bool IQ = !config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
 			bool MS = !config.CanSpawnMartianSaucer && NPC.downedMartians;
 
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
+			preHMShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()) * 2;
+			hMShops = (QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt() + LC.ToInt() + ML.ToInt()) * 2;
+			eventShops = (Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
+			
+			// Main.NewText($"HowManyShopsForMode1 {preHMShops + hMShops + eventShops}");
 
-			// Main.NewText($"HowManyShopsForMode1 {numOfShops}");
-
-			return numOfShops;
+			return preHMShops + hMShops + eventShops;
 		}
 
-		public static int HowManyShopsForMode2()
+		public static int HowManyShopsForMode2(out int preHMShops, out int hMShops, out int eventShops)
 		{
 			BossesAsNPCsConfigServer config = ModContent.GetInstance<BossesAsNPCsConfigServer>();
 
@@ -975,13 +1072,13 @@ namespace BossesAsNPCs.NPCs
 			bool IQ = config.CanSpawnIceQueen && NPC.downedChristmasIceQueen;
 			bool MS = config.CanSpawnMartianSaucer && NPC.downedMartians;
 
-			int numOfShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()
-				+ QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt()
-				+ LC.ToInt() + ML.ToInt() + Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
+			preHMShops = (KS.ToInt() + EoC.ToInt() + EoW.ToInt() + BoC.ToInt() + QB.ToInt() + Sk.ToInt() + Dc.ToInt() + WoF.ToInt()) * 2;
+			hMShops = (QS.ToInt() + De.ToInt() + (Tw.ToInt() * 2) + SP.ToInt() + Pl.ToInt() + Go.ToInt() + EoL.ToInt() + DF.ToInt() + Be.ToInt() + LC.ToInt() + ML.ToInt()) * 2;
+			eventShops = (Dn.ToInt() + Mo.ToInt() + Pk.ToInt() + IQ.ToInt() + MS.ToInt()) * 2;
 
-			// Main.NewText($"HowManyShopsForMode2 {numOfShops}");
+			// Main.NewText($"HowManyShopsForMode2 {preHMShops + hMShops + eventShops}");
 
-			return numOfShops;
+			return preHMShops + hMShops + eventShops;
 		}
 
 		public static bool PartyPortraitCondition()

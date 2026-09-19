@@ -16,6 +16,7 @@ using BossesAsNPCs.EmoteBubbles;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class EmpressOfLight : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);

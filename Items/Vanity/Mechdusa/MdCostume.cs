@@ -1,16 +1,10 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System.Linq;
-using System.Reflection;
 using Terraria;
 using Terraria.DataStructures;
-using Terraria.GameContent;
-using Terraria.GameContent.UI.Elements;
-using Terraria.GameContent.UI.States;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.UI;
 
 namespace BossesAsNPCs.Items.Vanity.Mechdusa
 {
@@ -27,6 +21,55 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			RezEye = ModContent.Request<Texture2D>($"{GetType().Namespace.Replace('.', '/')}/RezEye");
 			SpazEye = ModContent.Request<Texture2D>($"{GetType().Namespace.Replace('.', '/')}/SpazEye");
 			EyeTether = ModContent.Request<Texture2D>($"{GetType().Namespace.Replace('.', '/')}/EyeTether");
+		}
+
+		public override void Unload()
+		{
+			base.Unload();
+			RezEye.Dispose();
+			SpazEye.Dispose();
+			EyeTether.Dispose();
+		}
+
+		public override bool ModifyEquipTextureDraw(ref PlayerDrawSet drawInfo, ref DrawData drawData, EquipTexture equipTexture, string methodName)
+		{
+			Player player = drawInfo.drawPlayer;
+			float playerMountYOffset = (player.MountedCenter.Y - player.Center.Y);
+
+			// Back eye
+
+			// The position of the eye that is drawn in behind of the player's head.
+			Vector2 backEyePos = player.Center - new Vector2((-6 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
+			backEyePos -= player.velocity * 1.25f; // Make the eye fall behind the player when the player is moving.
+
+			// The position of the eye socket with a little bias towards the front and down.
+			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
+			Vector2 backEyeSocketPos = player.Center - new Vector2((-7f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
+
+			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
+			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.SpazEye : MdCostumeHeadpiece.RezEye;
+
+			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, frameTimerStart: 10, backEyePos, backEyeSocketPos, eyeToUse);
+
+			// Draw the normal headpiece
+			drawInfo.DrawDataCache.Add(drawData);
+
+			// Front eye
+
+			// The position of the eye that is drawn in front of the player's head.
+			Vector2 frontEyePos = player.Center - new Vector2((12 - player.MountXOffset) * player.direction, (28 * player.gravDir) - player.gfxOffY - playerMountYOffset);
+			frontEyePos -= player.velocity; // Make the eye fall behind the player when the player is moving.
+
+			// The position of the eye socket with a little bias towards the front and down.
+			// The tether will connect to the top left of this position, so pushing it down and forward makes it appear more centered in the eye socket.
+			Vector2 frontEyeSocketPos = player.Center - new Vector2((-3.5f - player.MountXOffset) * player.direction, (11 * player.gravDir) - player.gfxOffY - playerMountYOffset);
+
+			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
+			eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.RezEye : MdCostumeHeadpiece.SpazEye;
+
+			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, frameTimerStart: 0, frontEyePos, frontEyeSocketPos, eyeToUse);
+
+			return false; // Return false because we already drew the regular headpiece.
 		}
 
 		/*
@@ -61,19 +104,29 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		/// Creates the DrawData and adds them to the draw cache for one floating eye with a tether.
 		/// </summary>
 		/// <param name="drawInfo">PlayerDrawLayer.Draw drawInfo</param>
-		/// <param name="frame">The frame for the animation.</param>
+		/// <param name="frameTimerStart">The frame offset to give variation (so both eyes aren't on the same frame).</param>
 		/// <param name="eyePos">The position of the eye to draw.</param>
 		/// <param name="socketPos">The position of the socket on the player's face.</param>
 		/// <param name="eyeToDraw">The Asset Texture2D of the eye to draw.</param>
-		public static void DrawATetheredEye(ref PlayerDrawSet drawInfo, ref int frame, Vector2 eyePos, Vector2 socketPos, Asset<Texture2D> eyeToDraw)
+		public static void DrawATetheredEye(ref PlayerDrawSet drawInfo, int frameTimerStart, Vector2 eyePos, Vector2 socketPos, Asset<Texture2D> eyeToDraw)
 		{
 			Player player = drawInfo.drawPlayer;
 
+			// This works, but Mannequins and hat racks increase the frame in addition to the player.
+			// The framerate gets super fast with just a couple of mannequins around.
 			// Every 10 ticks, increase the frame counter.
-			if (player.miscCounter % 10 == 0/* && !player.isDisplayDollOrInanimate && !player.isHatRackDoll*/)
-			{
-				frame = ++frame % 3; // Increase the frame with a range of 0 - 2.
-			}
+			//if (player.miscCounter % 10 == 0/* && !player.isDisplayDollOrInanimate && !player.isHatRackDoll*/)
+			//{
+			//	frame = ++frame % 3; // Increase the frame with a range of 0 - 2.
+			//}
+
+			// Choose a frame directly from miscCounter.
+			// miscCounter counts from 0 to 299.
+			// Divide by ten to make the number increase every 10 frames.
+			// Modulo 3 to get 0, 1, or 2 for the frames.
+			// frameTimerStart is an offset to give variation (so both eyes aren't on the same frame).
+			// For some reason the hat racks animate faster than mannequins and players, but whatever.
+			Rectangle eyeFrame = eyeToDraw.Frame(1, 3, 0, (player.miscCounter + frameTimerStart) / 10 % 3);
 
 			/*
 			if (Main.menuMode == 888) // Character select menu.
@@ -100,7 +153,7 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			DrawData FrontEyeDrawData = new(
 				eyeToDraw.Value,
 				eyePos - new Vector2(eyeToDraw.Size().X / 2f, eyeToDraw.Size().Y / 8f) - Main.screenPosition, // Move the eye to draw in the center of the position instead of the top left.
-				eyeToDraw.Frame(1, 3, 0, frame),
+				eyeFrame,
 				drawInfo.colorArmorHead,
 				player.headRotation,
 				Vector2.Zero,
@@ -185,16 +238,18 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		}
 	}
 
+	// Superseded by ModItem.ModifyEquipTextureDraw
+	/*
 	public class MdCostumeHeadpiecePlayerDrawLayerFront : PlayerDrawLayer
 	{
 		public override Position GetDefaultPosition()
 		{
-			return new AfterParent(PlayerDrawLayers.FrontAccFront);
+			return new AfterParent(PlayerDrawLayers.FrontAccBack);
 		}
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
 			Player drawPlayer = drawInfo.drawPlayer;
-			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			if (drawPlayer.dead || (drawPlayer.invis && !drawPlayer.isHatRackDoll) || drawPlayer.head == -1)
 			{
 				return false;
 			}
@@ -204,8 +259,6 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
-
-		private int frame = 0;
 
 		protected override void Draw(ref PlayerDrawSet drawInfo)
 		{
@@ -223,7 +276,7 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.RezEye : MdCostumeHeadpiece.SpazEye;
 
-			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, ref frame, frontEyePos, eyeSocketPos, eyeToUse);
+			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, frameTimerStart: 0, frontEyePos, eyeSocketPos, eyeToUse);
 		}
 	}
 
@@ -236,7 +289,7 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
 		{
 			Player drawPlayer = drawInfo.drawPlayer;
-			if (drawPlayer.dead || drawPlayer.invis || drawPlayer.head == -1)
+			if (drawPlayer.dead || (drawPlayer.invis && !drawPlayer.isHatRackDoll) || drawPlayer.head == -1)
 			{
 				return false;
 			}
@@ -246,8 +299,6 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			}
 			return drawInfo.drawPlayer.head == EquipLoader.GetEquipSlot(Mod, "MdCostumeHeadpiece", EquipType.Head);
 		}
-
-		private int frame = 1;
 
 		protected override void Draw(ref PlayerDrawSet drawInfo)
 		{
@@ -266,7 +317,8 @@ namespace BossesAsNPCs.Items.Vanity.Mechdusa
 			// Make it so the Rez eye is always on the left side and the Spaz eye is always on the right side.
 			Asset<Texture2D> eyeToUse = player.direction == 1 ? MdCostumeHeadpiece.SpazEye : MdCostumeHeadpiece.RezEye;
 
-			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, ref frame, backEyePos, eyeSocketPos, eyeToUse);
+			MdCostumeHeadpiece.DrawATetheredEye(ref drawInfo, frameTimerStart: 10, backEyePos, eyeSocketPos, eyeToUse);
 		}
 	}
+	*/
 }

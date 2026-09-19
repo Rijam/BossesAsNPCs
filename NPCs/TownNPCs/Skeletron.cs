@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class Skeletron : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);

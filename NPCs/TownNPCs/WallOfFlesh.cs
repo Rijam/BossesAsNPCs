@@ -11,6 +11,7 @@ using BossesAsNPCs.EmoteBubbles;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class WallOfFlesh : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);
@@ -196,11 +197,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 		public override void AddShops()
 		{
 			var npcShop1 = new NPCShop(Type, Shop1);
-			SetupShops.WallOfFlesh(npcShop1, Shop1);
+			SetupShops.WallOfFlesh(npcShop1, Shop1, hackIsWoFAfterTorchGodHasRun: true);
 			npcShop1.Register();
 
 			var npcShop2 = new NPCShop(Type, Shop2);
-			SetupShops.WallOfFlesh(npcShop2, Shop2);
+			SetupShops.WallOfFlesh(npcShop2, Shop2, hackIsWoFAfterTorchGodHasRun: true);
 			npcShop2.Register();
 		}
 

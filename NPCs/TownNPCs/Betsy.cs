@@ -15,6 +15,7 @@ using System;
 namespace BossesAsNPCs.NPCs.TownNPCs
 {
 	[AutoloadHead]
+	[Autoload(false)]
 	public class Betsy : ModNPC
 	{
 		public override bool IsLoadingEnabled(Mod mod) => NPCHelper.ShouldLoad(Name);

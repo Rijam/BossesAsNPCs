@@ -22,6 +22,9 @@ namespace BossesAsNPCs
 		public override void Load()
 		{
 			Instance = this;
+
+			ManuallyLoadTownNPCs();
+
 			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
 			{
 				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/{}");
@@ -37,6 +40,62 @@ namespace BossesAsNPCs
 					ModContent.ItemType<CaughtPumpking>(), ModContent.ItemType<CaughtQueenBee>(), ModContent.ItemType<CaughtQueenSlime>(), ModContent.ItemType<CaughtRetinazer>(),
 					ModContent.ItemType<CaughtSkeletron>(), ModContent.ItemType<CaughtSkeletronPrime>(), ModContent.ItemType<CaughtSpazmatism>(), ModContent.ItemType<CaughtTheDestroyer>(),
 					ModContent.ItemType<CaughtTorchGod>(), ModContent.ItemType<CaughtWallOfFlesh>()});
+			}
+		}
+
+		/// <summary>
+		/// Manually load the Town NPCs so that I can load them in a specific order instead of alphabetically.
+		/// This makes it so they show up in order in the housing menu and also solves the Torch God being loaded before the Wall of Flesh.
+		/// </summary>
+		private void ManuallyLoadTownNPCs()
+		{
+			// Create all of the Town NPCs
+			List<ILoadable> allTownNPCs =
+			[
+				new KingSlime(),
+				new EyeOfCthulhu(),
+				new EaterOfWorlds(),
+				new BrainOfCthulhu(),
+				new QueenBee(),
+				new Skeletron(),
+				new Deerclops(),
+				new WallOfFlesh(),
+				new QueenSlime(),
+				new TheDestroyer(),
+				new Retinazer(),
+				new Spazmatism(),
+				new SkeletronPrime(),
+				new Plantera(),
+				new Golem(),
+				new EmpressOfLight(),
+				new DukeFishron(),
+				new Betsy(),
+				new LunaticCultist(),
+				new MoonLord(),
+				new Dreadnautilus(),
+				new Mothron(),
+				new Pumpking(),
+				new IceQueen(),
+				new MartianSaucer(),
+				new TorchGod(),
+			];
+			
+			List<ILoadable> townNPCsToLoad = [];
+
+			// Check to see if they should be loaded (based on the config)
+			// if so, add them to a different list.
+			foreach (ILoadable townNPC in allTownNPCs)
+			{
+				if (townNPC.IsLoadingEnabled(this))
+				{
+					townNPCsToLoad.Add(townNPC);
+				}
+			}
+			
+			// Load each Town NPC that should be loaded.
+			foreach (ILoadable townNPC in townNPCsToLoad)
+			{
+				this.AddContent(townNPC);
 			}
 		}
 

@@ -1,12 +1,8 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria.Audio;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System.Collections.Generic;
-using Terraria.DataStructures;
 
 namespace BossesAsNPCs.Projectiles
 {
@@ -24,7 +20,6 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.height = 28;
 			Projectile.aiStyle = -1;
 			Projectile.friendly = true;
-			AIType = 0;
 			Projectile.penetrate = 3;
 			Projectile.timeLeft = 180;
 		}

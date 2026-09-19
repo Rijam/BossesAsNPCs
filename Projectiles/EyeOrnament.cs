@@ -1,6 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria.Audio;
 using Terraria;
 using Terraria.ID;
@@ -27,7 +25,7 @@ namespace BossesAsNPCs.Projectiles
 			{
 				Projectile.penetrate = 3;
 			}
-			if (Main.hardMode)
+			else
 			{
 				Projectile.penetrate = 6;
 			}

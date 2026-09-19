@@ -1,6 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria.Audio;
 using Terraria;
 using Terraria.ID;
@@ -20,7 +18,7 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.arrow = false;
 			Projectile.width = 20;
 			Projectile.height = 20;
-			Projectile.aiStyle = 1;
+			Projectile.aiStyle = ProjAIStyleID.Arrow;
 			Projectile.friendly = true;
 			AIType = ProjectileID.OrnamentFriendly;
 			Projectile.timeLeft = 300;

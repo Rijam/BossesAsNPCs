@@ -1,6 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria.Audio;
 using Terraria;
 using Terraria.ID;
@@ -24,7 +22,6 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.aiStyle = -1;
 			Projectile.friendly = true;
 			Projectile.alpha = 100;
-			AIType = 0;
 			Projectile.penetrate = 6;
 			Projectile.timeLeft = 300;
 		}
@@ -120,7 +117,6 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.aiStyle = -1;
 			Projectile.friendly = true;
 			Projectile.alpha = 100;
-			AIType = 0;
 			Projectile.penetrate = 6;
 			Projectile.timeLeft = 300;
 		}

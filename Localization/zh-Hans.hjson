@@ -582,8 +582,10 @@ Mods: {
 				IncShop: 下个商店
 				DecShop: 上个商店
 				FirstShop: 首家商店
+				# 1.4.5
 				// NextPage: Next page
-				// PreviousPage: Previous Page
+				// PreviousPage: Previous page
+				// NoShopsOnThisPage: No shops on this page
 			}
 
 			// Shop2: "{$LegacyInterface.28} 2"
@@ -627,6 +629,7 @@ Mods: {
 			// WorldContagionS: In a world with The Contagion
 			// MothronPaintingsS: Paintings are randomly sold
 			// RandomVanityS: Vanity are randomly sold
+			# 1.4.5
 			// NoAltars: When the world contains no altars
 		}
 
@@ -1498,16 +1501,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}。
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}。
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_BossesAsNPCs/QueenSlime: I love my beautiful wife {NPCName}!
 				}
 
 				# {0} will be replaced with other text (usually the name of another NPC). It is important that you keep {0} somewhere in the string.
@@ -1562,15 +1567,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}。
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}。
 					DislikeBiome: 我不喜欢{BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1583,7 +1588,7 @@ Mods: {
 					Default5: 我在三个独立的宇宙中被打败了！这公平吗？
 					Default6: 你对眼睛的迷恋到底是什么？
 					// Default7: An evil presence watches you. The only cure is to purchase something from me!
-					// Default8: So, you're that scawny kid I heard about?
+					// Default8: So, you're that scrawny kid I heard about?
 					Party: 派对！当然是为了庆祝我作为最好眼球生物的地位！
 					// BloodMoon: See! Those Dripplers get it! We can combine our bodies into one amalgamation. You in?
 					// Graveyard: This graveyard makes me feel like I'm constantly being watched. It's my job to do that!
@@ -1606,15 +1611,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}。
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}。
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: "{BiomeName} 不适合住房子。"
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1646,15 +1651,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}。
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}。
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: "{BiomeName} 不适合住房子。"
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1687,15 +1692,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1727,15 +1732,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: "{BiomeName} 不适合住房子。"
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1747,7 +1752,7 @@ Mods: {
 					// Default5: You've come seeking my help with navigating the Dungeon? Drink a {$ItemName.TrapsightPotion} to highlight traps and blocked off areas.
 					Rare: 无呢？我不知道你在说什么。
 					Party: 我提出在地牢里举办这个派对，但似乎没有人感兴趣。
-					// BloodMoon: Zombies aren't that different from my Angry Bones. We could just disolve their flesh and you would not know the difference!
+					// BloodMoon: Zombies aren't that different from my Angry Bones. We could just dissolve their flesh and you would not know the difference!
 					// Graveyard: Scared of this place? Me? I'm not scared at all. Have you been in my Dungeon?
 					Dryad: 没有难{0}把我从克苏鲁扯出来的感觉。
 					# quotes are important on this one
@@ -1771,15 +1776,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1811,15 +1816,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -1857,16 +1862,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_BossesAsNPCs/KingSlime: I love my beautiful husband {NPCName}!
 				}
 
 				NPCDialog: {
@@ -1901,16 +1908,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_Mechanic: Of course I love {NPCName}. She created me!
 				}
 
 				NPCDialog: {
@@ -1938,16 +1947,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_Mechanic: I have to thank {NPCName} for creating me!
 				}
 
 				NPCDialog: {
@@ -1956,6 +1967,7 @@ Mods: {
 					Default3: 魔焰眼有时可能有点亢奋。
 					Default4: 恭喜，泰拉人。
 					Default5: 你知道所有的机械BOSS都发射红色激光吗？
+					// Default6: Do you need to impove your vision? I can give you laser eye surgery!
 					Party: 这个派对会包括激光狂欢吗？
 					// BloodMoon: The red rain looks like a barrage of my red lasers.
 					// Graveyard: I don't know what is worse: being dismantled for scrap metal or decomposing.
@@ -1977,16 +1989,19 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// HateBiome_Dungeon: Who thought it was a good idea to build {BiomeName}? Oh it was a thriving city once? Still bad.
+					// LoveNPC_Mechanic: "{NPCName} is an amazing person for creating me!"
 				}
 
 				NPCDialog: {
@@ -2019,16 +2034,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_Mechanic: "{NPCName} has great taste in weaponry, believe it or not!"
 				}
 
 				NPCDialog: {
@@ -2058,15 +2075,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2102,15 +2119,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2146,15 +2163,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2163,7 +2180,7 @@ Mods: {
 					Default2: 生物图鉴将我描述为一个复仇的女神;我同意这一点。
 					Default3: 你不敢碰那些蝴蝶吗！
 					Default4: 如果你想要一个真正的挑战，在白天和我战斗。
-					# quotes and backslashes are important on this one
+					# quotes are important on this one
 					Default5: '''"美丽的子弹炼狱"? 我不使用任何枪支，但我很漂亮。'''
 					Default6: 我敢打赌，你以为所有的仙女都很小，不是吗？
 					Default7: 我的帝国？这是另一个时代的故事。
@@ -2200,16 +2217,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_BossesAsNPCs/Betsy: I'm only part dragon, but do you think {NPCName} would go for a man like me?
 				}
 
 				NPCDialog: {
@@ -2240,15 +2259,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2259,7 +2278,7 @@ Mods: {
 					Default4: 把我的诅咒施在你的敌人身上。这将使他们的防御减少40！
 					// Default5: So just because I'm a red dragon means I'm automatically chaotic evil?
 					Party: 坚持下去;我们要看看我能用一口气点燃多少支蜡烛！
-					// BloodMoon: Blood Moons are regular occurences here? I guess that would explain why I saw {0} when one happened in my world.
+					// BloodMoon: Blood Moons are regular occurrences here? I guess that would explain why I saw {$NPCName.EyeofCthulhu} when one happened in my world.
 					// Graveyard: This place reminds me of a road from my home world. Far fewer skeletons here, though.
 					// Deerclops: I heard Deerclops is from another world, too.
 					FargosMutantMod: "{0}从哪里得到他的翅膀？"
@@ -2279,15 +2298,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2296,7 +2315,7 @@ Mods: {
 					// Default2: My defeat will not stop my cult!
 					Default3: 每个好的邪教徒都需要穿着这种连帽衫！
 					// Default4: My magical abilities make me resistant to all seeking projectiles!
-					// Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane.
+					// Default5: The {$ItemName.LunarCraftingStation} can be used to harness the magic of the celestial elements. We've only ever used it to create powerful weapons. How about you supprise me by making something mundane?
 					PreML: 你可能已经打败了我，但很快你就会面对克苏鲁的愤怒！
 					PostML: 连克苏鲁都无法阻止你吗？我印象深刻。
 					Party: 这是一个化装舞会吗？我已经戴上了口罩。
@@ -2321,16 +2340,18 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					# 1.4.5
+					// LoveNPC_Mechanic: I commend {NPCName}'s effort, even if you put an end to that.
 				}
 
 				NPCDialog: {
@@ -2349,7 +2370,7 @@ Mods: {
 						...Yes they did defeat me as well.
 						''' */
 					Party: 你在庆祝我的失败，不是吗？好吧，派对食物至少是好的。
-					// BloodMoon: Total lunar eclipses are simply a visual effect based on our viewing perspective. I would definitly never turn the moon to blood to mess with you!
+					// BloodMoon: Total lunar eclipses are simply a visual effect based on our viewing perspective. I would definitely never turn the moon to blood to mess with you!
 					// Graveyard: This is the area I was hoping I'd send you during our battle. No hard feelings!
 					Dryad: 我决定让{0}活着。无论如何，她是她同类中的最后一个。
 					LunaticCultist: 很高兴有人崇拜我，因为他们应该这样。
@@ -2373,15 +2394,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2417,15 +2438,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2461,15 +2482,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2478,7 +2499,7 @@ Mods: {
 					Default2: 不要站在我不好的一面！
 					Default3: 我不明白整个“南瓜香料”的热潮。
 					Default4: 他们是镰刀，不是镰刀！做对了！
-					// Default5: I can help you havest all of the grain you are growing. You don't grow crops? I thought you said you were a farmer? You always mention how you are farming.
+					// Default5: I can help you harvest all of the grain you are growing. You don't grow crops? I thought you said you were a farmer? You always mention how you are farming.
 					// Default6: You know, the goblins should've invested in explosive jack 'o lanterns.
 					Party: 这是涉及分发糖果的派对类型吗？我当然希望是这样！
 					// BloodMoon: Quite the spooky night tonight, eh? I quite like it.
@@ -2500,15 +2521,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2520,7 +2541,7 @@ Mods: {
 					// Default5: I had two faces when I fought you, did you even notice it?
 					// Default6: What do you do for leisure? Skating? Skiing? Snowboarding? Or do you just kill for fun?
 					Party: 我喜欢送礼。这是一个让每个人都聚在一起并表明他们关心彼此的时候，但是，我特别喜欢礼物接收部分！
-					// BloodMoon: I've employed zombies myself. They can sometimes be difficult to work with, but they don't ask for things like "raises" or "workers rights".
+					// BloodMoon: I've employed zombies myself. They can sometimes be difficult to work with, but they don't ask for things like "raises" or "workers' rights".
 					// Graveyard: The atmosphere of this graveyard is chilling!
 					Santa1: 你今年对圣诞老人很好吗？
 					Santa2: 今年你不会得到煤炭，而是受到我的殴打！
@@ -2539,15 +2560,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2583,15 +2604,15 @@ Mods: {
 					FarFromHome: 我离家很远。
 					DislikeCrowded: 我不喜欢这么多人。
 					HateCrowded: 我讨厌这么多人。
-					LikeBiome: 我喜欢 {BiomeName}.
 					LoveBiome: 我爱 {BiomeName}.
+					LikeBiome: 我喜欢 {BiomeName}.
 					DislikeBiome: 我不喜欢 {BiomeName}.
 					HateBiome: 我讨厌 {BiomeName}.
-					LikeNPC: 我喜欢 {NPCName}.
-					LikeNPC_Princess: 我喜欢 {NPCName}.
 					LoveNPC: 我爱 {NPCName}.
+					LikeNPC: 我喜欢 {NPCName}.
 					DislikeNPC: 我不喜欢 {NPCName}.
 					HateNPC: 我讨厌 {NPCName}.
+					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
 				}
 
@@ -2605,8 +2626,13 @@ Mods: {
 					Default7: 你知道如何停止下降和滚动，对吧？
 					Default8: 许多生物已经利用了控制火焰的能力。但是，没有人能像我一样控制火焰。
 					// Default9: Brew my special cocktail to convert nearby torches into the correct biome type!
+					# 1.4.4 {
+					# Common: So many shops to cycle through! Hold left shift to cycle backwards. Hold left control to jump to the first shop.
+					# }
+					# 1.4.5 {
 					Common: 这么多商店可以循环利用！按住左移向后循环。按住左侧控制以跳转到第一个商店。
 					// NoShop: There are no shops for me to show you! Change the configuration settings to allow me to show you shops.
+					# }
 					Rare: 哈哈！火在向你射击！
 					// Party: A few ceremonies and celebrations involve the use of a torch. Could these parties start that tradition, too?
 					// BloodMoon: I love setting all of the zombies ablaze on nights like these!
@@ -2675,33 +2701,4 @@ Mods: {
 			// SantaNK1Emote.Command: banpcsantank1
 		}
 	}
-}
-
-TownNPCMood_Princess: {
-	LoveNPC_BossesAsNPCs/KingSlime: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/EyeOfCthulhu: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/EaterOfWorlds: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/BrainOfCthulhu: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/QueenBee: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Skeletron: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Deerclops: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/WallOfFlesh: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/QueenSlime: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/TheDestroyer: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Retinazer: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Spazmatism: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/SkeletronPrime: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Plantera: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Golem: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/EmpressOfLight: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/DukeFishron: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Betsy: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/LunaticCultist: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/MoonLord: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Dreadnautilus: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Mothron: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/Pumpking: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/IceQueen: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/MartianSaucer: 我爱 {NPCName}.
-	LoveNPC_BossesAsNPCs/TorchGod: 我爱 {NPCName}.
 }

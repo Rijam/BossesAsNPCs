@@ -1,6 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -20,14 +18,14 @@ namespace BossesAsNPCs.Projectiles
 			Projectile.arrow = false;
 			Projectile.width = 10;
 			Projectile.height = 10;
-			Projectile.aiStyle = 1;
+			Projectile.aiStyle = ProjAIStyleID.Arrow;
 			Projectile.friendly = true;
 			AIType = ProjectileID.WoodenArrowFriendly;
 			if (!Main.hardMode)
 			{
 				Projectile.penetrate = 1;
 			}
-			if (Main.hardMode)
+			else
 			{
 				Projectile.penetrate = 2;
 			}

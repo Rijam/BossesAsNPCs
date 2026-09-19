@@ -252,5 +252,10 @@
 	* Fixed an issue with the Wall of Flesh getting two sets of all of the modded items in their Shop 2 if the Torch God is present.
 
 0.3.0 - Updated 30 1.4.5 update (? ?, 2026)
-	* Updated to 1.4.5
+	* Updated to 1.4.5 & 1.4.5.8
 	* Added a second shop to the Goblin Tinkerer and Pirate for modded items
+	* Improved the Plantera's Axe. Improved the note range to be a full two octaves. Added note names to the mouse cursor.
+	* Plantera's Axe is now sold by Plantera in her Shop 2.
+	* Updated Moon Lord's sprite.
+	* Updated mod icon with new Moon Lord sprite.
+	* Updated Moon Lord Costume Headpiece and Moon Lord Costume Bodypiece.

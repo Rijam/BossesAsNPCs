@@ -9,6 +9,8 @@ namespace BossesAsNPCs
 { 
 	public class BossesAsNPCsWorld : ModSystem
 	{
+		// If you want to access these bools in your mod, use the Mod.Calls for them.
+		// https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/Mod_calls#General
 		public static bool daytimeEoLDefeated = false;
 		public static bool downedBetsy = false;
 		public static bool downedDungeonGuardian = false;
@@ -201,7 +203,7 @@ namespace BossesAsNPCs
 			Method_WorldGen_TrySpawningTownNPC.Invoke(Main.instance, [x, y]);
 		}
 
-		public override void RandomUpdate(int i, int j, int type)
+		public override void RandomUpdate(int i, int j, int type, bool underground)
 		{
 			if (ModContent.GetInstance<BossesAsNPCsConfigServer>().BoostTownNPCRates != BossesAsNPCsConfigServer.BoostSpawnRatesOptions.Off)
 			{

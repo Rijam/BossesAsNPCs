@@ -9,6 +9,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs;
 using BossesAsNPCs.NPCs.TownNPCs;
+using System.Collections.Generic;
 
 namespace BossesAsNPCs
 {
@@ -143,7 +144,16 @@ namespace BossesAsNPCs
 					}
 				}
 			}
+			if (ModContent.TryFind<ModNPC>("TheDepths/ChasmeHeart", out ModNPC chasme) && npc.type == chasme.NPC.type)
+			{
+				BossesAsNPCsWorld.downedWoF = true;
+				if (Main.netMode == NetmodeID.Server)
+				{
+					NetMessage.SendData(MessageID.WorldData);
+				}
+			}
 		}
+
 		public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
 		{
 			int shopPriceScaling = ModContent.GetInstance<BossesAsNPCsConfigServer>().ShopPriceScaling;
@@ -276,7 +286,7 @@ namespace BossesAsNPCs
 				NPCInteraction openShop = interactions.Interactions.OfType<NPCInteractions.Actions.OpenShop>().FirstOrDefault();
 				if (openShop is not null)
 				{
-					interactions.InsertAfter(new NPCHelper.OpenShopCrossModSupport("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
+					interactions.InsertAfter(new NPCHelper.OpenShopGoblinTinkererShop2("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
 				}
 				else
 				{
@@ -288,7 +298,7 @@ namespace BossesAsNPCs
 				NPCInteraction openShop = interactions.Interactions.OfType<NPCInteractions.Actions.OpenShop>().FirstOrDefault();
 				if (openShop is not null)
 				{
-					interactions.InsertAfter(new NPCHelper.OpenShopCrossModSupport("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
+					interactions.InsertAfter(new NPCHelper.OpenShopPirateShop2("Shop2", Language.GetTextValue("Mods.BossesAsNPCs.UI.Shop2")), openShop);
 				}
 				else
 				{
