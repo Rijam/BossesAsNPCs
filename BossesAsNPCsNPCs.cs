@@ -9,7 +9,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs;
 using BossesAsNPCs.NPCs.TownNPCs;
-using System.Collections.Generic;
+using BossesAsNPCs.CrossMod;
 
 namespace BossesAsNPCs
 {
@@ -268,7 +268,7 @@ namespace BossesAsNPCs
 				NPCs.SetupShops.GoblinTinkerer(shop, "Shop");
 			}
 
-			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
+			if (ModLoader.TryGetMod("TorchMerchant", out Mod torchSeller) && InternalCrossModSupportList.TorchMerchant && ModContent.GetInstance<BossesAsNPCsConfigServer>().TownNPCsCrossModSupport)
 			{
 				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchMan) && shop.NpcType == torchMan.Type)
 				{
