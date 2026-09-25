@@ -19,7 +19,7 @@ Contains a config file to disable certain Town NPCs from spawning and other opti
 See a complete shop list and other information on this mod's wiki page!
 https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs
 
-—— boss成为npc ——
+—— Boss成为NPC ——
 你喜欢大量的城镇 NPC 吗？
  你喜欢管理 25 个额外城镇 NPC 的快乐吗？
  曾经被你击败的boss作为城镇 NPC 搬进来吗？
@@ -31,20 +31,15 @@ Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
 	- Skeletron & Skeletron Prime portraits: chimerass
 
-Mod version: 0.2.14
-	- Fixed Skeletron's rare dialogue.
-	- Made it possible to have the Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist live in the Corruption, Crimson, and Dungeon.
-	- Added mod calls to add your Town NPC to be able to live in the Corruption, Crimson, or Dungeon.
-	- Updated the living preferences of Eater of Worlds, Brain of Cthulhu, Skeletron, and Lunatic Cultist.
-	- Added shimmered variant of Skeletron.
-	- Added Shimmered Skeletron Costume Headpiece, Alternate Shimmered Skeletron Costume Headpiece, Shimmered Skeletron Costume Bodypiece, and Shimmered Skeletron Costume Legpiece.
-	- Added some more descriptions on the Boost Town NPC Spawn Rates and All in One NPC Mode config options.
-	- Added some more dialog.
-	- Updated King Slime's sprite.
-	- Added King Slime Costume Bodypiece, King Slime Costume Legpiece, and King Slime Costume Cape.
-	- King Slime no longer sells the Prince set.
-	- Improved the glow masks on the NPC who have them. They now properly fade out while the NPC is shimmer transforming and become rainbow while shimmered.
-	- Fixed armor glow masks drawing when the player was transformation mounts that should hide the player.
-	- Added Mechdusa vanity set.
-	- Added support for The Depths.
-	- Fixed an issue with the Wall of Flesh getting two sets of all of the modded items in their Shop 2 if the Torch God is present.
+Mod version: 0.2.15
+	- Added cross mod support for Wacky NPCs by Sora92
+	  - Allowed the Corruption Fangirl to live in the Corruption.
+	  - Allowed the Crimson Fangirl, Crimson Barkeep, and Flann the Lucky to live in the Crimson.
+	  - Allowed the Cyber Fangirl to live in the Dungeon.
+	  - Made the Gravedigger like the graveyard.
+	  - Made the Corruption Fangirl and Eater of Worlds like each other.
+	  - Made the Crimson Fangirl and Brain of Cthulhu like each other.
+	- Added cross mod support for Extra Townsfolk by Lurrae & Skulgan
+	  - Made the Occultist and Eater of Worlds like each other.
+	  - Made the Harvester and Brain of Cthulhu like each other.
+	- Added support for NPC Log by Diyllan is Withering (your mod calls are broken. I had to do it the hard way)

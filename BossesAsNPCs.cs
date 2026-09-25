@@ -1,8 +1,6 @@
-using BossesAsNPCs.Items;
+using BossesAsNPCs.CrossMod;
 using BossesAsNPCs.NPCs;
-using BossesAsNPCs.NPCs.TownNPCs;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,22 +20,6 @@ namespace BossesAsNPCs
 		public override void Load()
 		{
 			Instance = this;
-			if (ModLoader.TryGetMod("Wikithis", out Mod wikithis) && !Main.dedServ)
-			{
-				wikithis.Call("AddModURL", this, "https://terrariamods.wiki.gg/wiki/Bosses_As_NPCs/{}");
-				wikithis.Call("AddWikiTexture", this, ModContent.Request<Texture2D>("BossesAsNPCs/icon_small"));
-			}
-			if (ModLoader.TryGetMod("ItemCheckBlacklist", out Mod itemCheckBlacklist))
-			{
-				itemCheckBlacklist.Call("ItemCheckBlacklist", new List<int>() { ModContent.ItemType<TownNPCWeapon>(), ModContent.ItemType<DebugMethodTester>(), ModContent.ItemType<DebugMethodTester2>(),
-					ModContent.ItemType<CaughtBetsy>(), ModContent.ItemType<CaughtBrainOfCthulhu>(), ModContent.ItemType<CaughtDeerclops>(), ModContent.ItemType<CaughtDreadnautilus>(),
-					ModContent.ItemType<CaughtDukeFishron>(), ModContent.ItemType<CaughtEaterOfWorlds>(), ModContent.ItemType<CaughtEmpressOfLight>(), ModContent.ItemType<CaughtEyeOfCthulhu>(),
-					ModContent.ItemType<CaughtGolem>(), ModContent.ItemType<CaughtIceQueen>(), ModContent.ItemType<CaughtKingSlime>(), ModContent.ItemType<CaughtLunaticCultist>(),
-					ModContent.ItemType<CaughtMartianSaucer>(), ModContent.ItemType<CaughtMoonLord>(), ModContent.ItemType<CaughtMothron>(), ModContent.ItemType<CaughtPlantera>(),
-					ModContent.ItemType<CaughtPumpking>(), ModContent.ItemType<CaughtQueenBee>(), ModContent.ItemType<CaughtQueenSlime>(), ModContent.ItemType<CaughtRetinazer>(),
-					ModContent.ItemType<CaughtSkeletron>(), ModContent.ItemType<CaughtSkeletronPrime>(), ModContent.ItemType<CaughtSpazmatism>(), ModContent.ItemType<CaughtTheDestroyer>(),
-					ModContent.ItemType<CaughtTorchGod>(), ModContent.ItemType<CaughtWallOfFlesh>()});
-			}
 		}
 
 		public override void Unload()
@@ -48,113 +30,6 @@ namespace BossesAsNPCs
 			NPCs.SetupShops.GoblinTinkererShopCopy = null;
 			NPCs.SetupShops.PirateShopCopy = null;
 			// dialogueTweakUsingStaticOrBestiaryDrawSetting = false;
-		}
-
-		public override void PostSetupContent()
-		{
-			if (ModLoader.TryGetMod("DialogueTweak", out Mod dialogueTweak))
-			{
-				dialogueTweak.Call("ReplaceExtraButtonIcon",
-					ModContent.NPCType<TorchGod>(),
-					"BossesAsNPCs/NPCs/Icon_CycleShops");
-
-				dialogueTweak.Call("ReplaceExtraButtonIcon",
-					new List<int>
-					{
-						ModContent.NPCType<KingSlime>(),
-						ModContent.NPCType<EyeOfCthulhu>(),
-						ModContent.NPCType<EaterOfWorlds>(),
-						ModContent.NPCType<BrainOfCthulhu>(),
-						ModContent.NPCType<QueenBee>(),
-						ModContent.NPCType<Skeletron>(),
-						ModContent.NPCType<Deerclops>(),
-						ModContent.NPCType<WallOfFlesh>(),
-						ModContent.NPCType<QueenSlime>(),
-						ModContent.NPCType<TheDestroyer>(),
-						ModContent.NPCType<Retinazer>(),
-						ModContent.NPCType<Spazmatism>(),
-						ModContent.NPCType<SkeletronPrime>(),
-						ModContent.NPCType<Plantera>(),
-						ModContent.NPCType<Golem>(),
-						ModContent.NPCType<EmpressOfLight>(),
-						ModContent.NPCType<DukeFishron>(),
-						ModContent.NPCType<Betsy>(),
-						ModContent.NPCType<LunaticCultist>(),
-						ModContent.NPCType<MoonLord>(),
-						ModContent.NPCType<Dreadnautilus>(),
-						ModContent.NPCType<Mothron>(),
-						ModContent.NPCType<Pumpking>(),
-						ModContent.NPCType<IceQueen>(),
-						ModContent.NPCType<MartianSaucer>(),
-					},
-					"BossesAsNPCs/NPCs/Icon_Shop2");
-
-				/*
-				if (dialogueTweak.TryFind<ModConfig>("Configuration", out ModConfig dialogueTweakConfig))
-				{
-					// Trying to get the config value of PortraitDrawStyle to see if it is Static or Bestiary.
-					// If so, the glow masks and such for the Town NPCs need to be drawn higher up.
-					// https://github.com/Cyrillya/DialogueTweak/blob/1.4.4/Configuration.cs#L34
-
-					FieldInfo DialogueTweakConfigPortraitDrawStyle = dialogueTweakConfig.GetType().GetField("PortraitDrawStyle", BindingFlags.Public | BindingFlags.Instance );
-					Logger.DebugFormat("DialogueTweakConfigPortraitDrawStyle {0}", DialogueTweakConfigPortraitDrawStyle);
-					object value = DialogueTweakConfigPortraitDrawStyle.GetValue(dialogueTweakConfig);
-					Logger.DebugFormat("value {0}", value);
-					if (value?.ToString() == "Static" || value?.ToString() == "Bestiary")
-					{
-						dialogueTweakUsingStaticOrBestiaryDrawSetting = true;
-						Logger.Debug("Static or Bestiary draw style");
-					}
-					else
-					{
-						dialogueTweakUsingStaticOrBestiaryDrawSetting = false;
-					}
-				}
-				*/
-			}
-			/*
-			if (ModLoader.TryGetMod("BetterDialogue", out Mod dialect))
-			{
-				try
-				{
-					// Idk reflection
-					PropertyInfo supportedNPCs = dialect.GetType().GetProperty("SupportedNPCs", BindingFlags.Public | BindingFlags.Static);
-					List<int> list = (List<int>)supportedNPCs?.GetValue(dialect);
-					list.Add(ModContent.ItemType<CaughtKingSlime>());
-					list.Add(ModContent.ItemType<CaughtEyeOfCthulhu>());
-					list.Add(ModContent.ItemType<CaughtEaterOfWorlds>());
-					list.Add(ModContent.ItemType<CaughtBrainOfCthulhu>());
-					list.Add(ModContent.ItemType<CaughtQueenBee>());
-					list.Add(ModContent.ItemType<CaughtSkeletron>());
-					list.Add(ModContent.ItemType<CaughtDeerclops>());
-					list.Add(ModContent.ItemType<CaughtWallOfFlesh>());
-					list.Add(ModContent.ItemType<CaughtQueenSlime>());
-					list.Add(ModContent.ItemType<CaughtTheDestroyer>());
-					list.Add(ModContent.ItemType<CaughtSpazmatism>());
-					list.Add(ModContent.ItemType<CaughtRetinazer>());
-					list.Add(ModContent.ItemType<CaughtSkeletronPrime>());
-					list.Add(ModContent.ItemType<CaughtPlantera>());
-					list.Add(ModContent.ItemType<CaughtGolem>());
-					list.Add(ModContent.ItemType<CaughtEmpressOfLight>());
-					list.Add(ModContent.ItemType<CaughtDukeFishron>());
-					list.Add(ModContent.ItemType<CaughtBetsy>());
-					list.Add(ModContent.ItemType<CaughtLunaticCultist>());
-					list.Add(ModContent.ItemType<CaughtMoonLord>());
-					list.Add(ModContent.ItemType<CaughtDreadnautilus>());
-					list.Add(ModContent.ItemType<CaughtMothron>());
-					list.Add(ModContent.ItemType<CaughtPumpking>());
-					list.Add(ModContent.ItemType<CaughtIceQueen>());
-					list.Add(ModContent.ItemType<CaughtMartianSaucer>());
-					list.Add(ModContent.ItemType<CaughtTorchGod>());
-					supportedNPCs.SetValue(dialect, list);
-					Logger.Debug("Bosses as NPCs Dialect support added?");
-				}
-				catch
-				{
-					Logger.Warn("Bosses as NPCs Dialect support failed.");
-				}
-			}
-			*/
 		}
 
 		//Adapted from absoluteAquarian's GraphicsLib
@@ -323,30 +198,39 @@ namespace BossesAsNPCs
 					Logger.DebugFormat("Internal cross mod support for {0} has been disabled.", args[1].ToString());
 					return args[1].ToString() switch
 					{
-						"Fargowiltas" => SetupShops.Fargowiltas = false,
-						"FargowiltasSouls" => SetupShops.FargowiltasSouls = false,
-						"CalamityMod" => SetupShops.CalamityMod = false,
-						"OrchidMod" => SetupShops.OrchidMod = false,
-						"Polarities" => SetupShops.Polarities = false,
-						"ThoriumMod" => SetupShops.ThoriumMod = false,
-						"StormDiversMod" => SetupShops.StormDiversMod = false,
-						"AmuletOfManyMinions" => SetupShops.AmuletOfManyMinions = false,
-						"ClickerClass" => SetupShops.ClickerClass = false,
-						"QwertyMod" => SetupShops.QwertyMod = false,
-						"MagicStorage" => SetupShops.MagicStorage = false,
-						"ItReallyMustBe" => SetupShops.ItReallyMustBe = false,
-						"EchoesoftheAncients" => SetupShops.EchoesoftheAncients = false,
-						"StarsAbove" => SetupShops.StarsAbove = false,
-						"StarlightRiver" => SetupShops.StarlightRiver = false,
-						"PboneUtils" => SetupShops.PboneUtils = false,
-						"Avalon" => SetupShops.Avalon = false,
-						"Redeption" => SetupShops.Redeption = false,
-						"Consolaria" => SetupShops.Consolaria = false,
-						"SOTS" => SetupShops.SOTS = false,
-						"VitalityMod" => SetupShops.VitalityMod = false,
-						"TheConfectionRebirth" => SetupShops.TheConfectionRebirth = false,
-						"CrystiliumMod" => SetupShops.CrystiliumMod = false,
-						"TheDepths" => SetupShops.TheDepths = false,
+						// Items from these mods are added into the shops
+						"Fargowiltas" => InternalCrossModSupportList.Fargowiltas = false,
+						"FargowiltasSouls" => InternalCrossModSupportList.FargowiltasSouls = false,
+						"CalamityMod" => InternalCrossModSupportList.CalamityMod = false,
+						"OrchidMod" => InternalCrossModSupportList.OrchidMod = false,
+						"Polarities" => InternalCrossModSupportList.Polarities = false,
+						"ThoriumMod" => InternalCrossModSupportList.ThoriumMod = false,
+						"StormDiversMod" => InternalCrossModSupportList.StormDiversMod = false,
+						"AmuletOfManyMinions" => InternalCrossModSupportList.AmuletOfManyMinions = false,
+						"ClickerClass" => InternalCrossModSupportList.ClickerClass = false,
+						"QwertyMod" => InternalCrossModSupportList.QwertyMod = false,
+						"MagicStorage" => InternalCrossModSupportList.MagicStorage = false,
+						"ItReallyMustBe" => InternalCrossModSupportList.ItReallyMustBe = false,
+						"EchoesoftheAncients" => InternalCrossModSupportList.EchoesoftheAncients = false,
+						"StarsAbove" => InternalCrossModSupportList.StarsAbove = false,
+						"StarlightRiver" => InternalCrossModSupportList.StarlightRiver = false,
+						"PboneUtils" => InternalCrossModSupportList.PboneUtils = false,
+						"Avalon" => InternalCrossModSupportList.Avalon = false,
+						"Redeption" => InternalCrossModSupportList.Redeption = false,
+						"Consolaria" => InternalCrossModSupportList.Consolaria = false,
+						"SOTS" => InternalCrossModSupportList.SOTS = false,
+						"VitalityMod" => InternalCrossModSupportList.VitalityMod = false,
+						"TheConfectionRebirth" => InternalCrossModSupportList.TheConfectionRebirth = false,
+						"CrystiliumMod" => InternalCrossModSupportList.CrystiliumMod = false,
+						"TheDepths" => InternalCrossModSupportList.TheDepths = false,
+						// Other mods
+						"Wikithis" => InternalCrossModSupportList.Wikithis = false,
+						"ItemCheckBlacklist" => InternalCrossModSupportList.ItemCheckBlacklist = false,
+						"DialogueTweak" => InternalCrossModSupportList.DialogueTweak = false,
+						"NPCLog" => InternalCrossModSupportList.NPCLog = false,
+						"WackyNPCs" => InternalCrossModSupportList.WackyNPCs = false,
+						"MoreTownsfolk" => InternalCrossModSupportList.MoreTownsfolk = false,
+						"TorchMerchant" => InternalCrossModSupportList.TorchMerchant = false,
 						_ => throw new ArgumentException($"Argument \"{args[1]}\" of Function \"{function}\" is not defined by Bosses As NPCs"),
 					};
 				// Call("AddTownNPCCanLiveInCorruption", int npcType)

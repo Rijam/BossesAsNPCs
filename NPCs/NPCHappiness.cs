@@ -3,6 +3,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using BossesAsNPCs.NPCs.TownNPCs;
 using Terraria.GameContent.Personalities;
+using BossesAsNPCs.CrossMod;
 
 namespace BossesAsNPCs.NPCs
 {
@@ -235,12 +236,8 @@ namespace BossesAsNPCs.NPCs
 			{
 				if (fishermanNPC.TryFind<ModNPC>("Fisherman", out ModNPC fishermanModNPC))
 				{
-					var fishermanHappiness = NPCHappiness.Get(fishermanModNPC.Type);
-
-					var dreadnautilusHappiness = NPCHappiness.Get(dreadnautilus);
-
-					fishermanHappiness.SetNPCAffection(dreadnautilus, AffectionLevel.Like);
-					dreadnautilusHappiness.SetNPCAffection(fishermanModNPC.Type, AffectionLevel.Love);
+					NPCHappiness.Get(fishermanModNPC.Type).SetNPCAffection(dreadnautilus, AffectionLevel.Like);
+					NPCHappiness.Get(dreadnautilus).SetNPCAffection(fishermanModNPC.Type, AffectionLevel.Love);
 				}
 			}
 
@@ -248,17 +245,41 @@ namespace BossesAsNPCs.NPCs
 			{
 				if (torchSeller.TryFind<ModNPC>("TorchSellerNPC", out ModNPC torchSellerModNPC))
 				{
-					var torchManHappiness = NPCHappiness.Get(torchSellerModNPC.Type);
-
-					var mothronHappiness = NPCHappiness.Get(mothron);
-					mothronHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
-
-					var moonLordHappiness = NPCHappiness.Get(moonLord);
-					moonLordHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Dislike);
-
-					var torchGodHappiness = NPCHappiness.Get(torchGod);
-					torchGodHappiness.SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
-					torchManHappiness.SetNPCAffection(torchGod, AffectionLevel.Love);
+					NPCHappiness.Get(torchSellerModNPC.Type).SetNPCAffection(torchGod, AffectionLevel.Love);
+					NPCHappiness.Get(mothron).SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
+					NPCHappiness.Get(moonLord).SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Dislike);
+					NPCHappiness.Get(torchGod).SetNPCAffection(torchSellerModNPC.Type, AffectionLevel.Love);
+				}
+			}
+			if (ModLoader.TryGetMod("WackyNPCs", out Mod wackyNPCs) && InternalCrossModSupportList.WackyNPCs && townNPCsCrossModSupport)
+			{
+				if (wackyNPCs.TryFind<ModNPC>("Gravedigger", out ModNPC gravedigger)) // Gravedigger
+				{
+					NPCHappiness gravediggerHappiness = NPCHappiness.Get(gravedigger.Type);
+					gravediggerHappiness.SetBiomeAffection<GraveyardBiome>(AffectionLevel.Like);
+				}
+				if (wackyNPCs.TryFind<ModNPC>("Corru", out ModNPC corru)) // Corruption Fangirl
+				{
+					NPCHappiness.Get(corru.Type).SetNPCAffection(eaterOfWorlds, AffectionLevel.Like);
+					NPCHappiness.Get(eaterOfWorlds).SetNPCAffection(corru.Type, AffectionLevel.Like);
+				}
+				if (wackyNPCs.TryFind<ModNPC>("Crim", out ModNPC crim)) // Crimson Fangirl
+				{
+					NPCHappiness.Get(crim.Type).SetNPCAffection(brainOfCthulhu, AffectionLevel.Like);
+					NPCHappiness.Get(brainOfCthulhu).SetNPCAffection(crim.Type, AffectionLevel.Like);
+				}
+			}
+			if (ModLoader.TryGetMod("MoreTownsfolk", out Mod moreTownsfolk) && InternalCrossModSupportList.MoreTownsfolk && townNPCsCrossModSupport)
+			{
+				if (moreTownsfolk.TryFind<ModNPC>("Occultist", out ModNPC occultist)) // Occultist
+				{
+					NPCHappiness.Get(occultist.Type).SetNPCAffection(eaterOfWorlds, AffectionLevel.Like);
+					NPCHappiness.Get(eaterOfWorlds).SetNPCAffection(occultist.Type, AffectionLevel.Like);
+				}
+				if (moreTownsfolk.TryFind<ModNPC>("Harvester", out ModNPC harvester)) // Harvester
+				{
+					NPCHappiness.Get(harvester.Type).SetNPCAffection(brainOfCthulhu, AffectionLevel.Like);
+					NPCHappiness.Get(brainOfCthulhu).SetNPCAffection(harvester.Type, AffectionLevel.Like);
 				}
 			}
 		}
