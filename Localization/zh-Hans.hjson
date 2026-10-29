@@ -2404,6 +2404,7 @@ Mods: {
 					HateNPC: 我讨厌 {NPCName}.
 					LikeNPC_Princess: 我喜欢 {NPCName}.
 					Princess_LovesNPC: 我爱 {NPCName}.
+					// HateBiome_SnowBiome: I'm freezing in {BiomeName}. Get me out of here!
 				}
 
 				NPCDialog: {

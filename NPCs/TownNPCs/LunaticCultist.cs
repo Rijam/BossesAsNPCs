@@ -64,6 +64,11 @@ namespace BossesAsNPCs.NPCs.TownNPCs
 				new Profiles.DefaultNPCProfile(Texture, NPCHeadLoader.GetHeadSlot(HeadTexture))
 			);
 
+			// Here we define which portrait to use for the Town NPC when the portrait style setting is set to detailed.
+			NPCID.Sets.NPCPortraits.Add(Type, NPCID.Sets.BasicPortrait($"{Texture}_Portrait"));
+			// NPCID.Sets.NPCPortraitsCloseUpOffsets.Add(Type, new Vector2(-2f, 0f)); // Here we can change the offsets of Town NPC when the portrait style setting is set to profile.
+			// NPCID.Sets.NPCPortraitsFullBodyRetroOffsets.Add(Type, new Vector2(0f, 0f)); // Here we can change the offsets of Town NPC when the portrait style setting is set to retro.
+
 			// Specify the debuffs it is immune to
 			NPCID.Sets.ImmuneToRegularBuffs[Type] = true;
 

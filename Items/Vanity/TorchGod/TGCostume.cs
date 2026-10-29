@@ -12,7 +12,7 @@ namespace BossesAsNPCs.Items.Vanity.TorchGod
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			ArmorIDs.Head.Sets.DrawHead[Item.headSlot] = false;
+			ArmorIDs.Head.Sets.HidesHead[Item.headSlot] = true;
 			ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = false;
 			ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = false;
 			if (!Main.dedServ)
