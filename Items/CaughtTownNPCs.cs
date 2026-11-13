@@ -31,8 +31,6 @@ namespace BossesAsNPCs.Items
 
 		public override void SetDefaults()
 		{
-			Item.width = 20;
-			Item.height = 20;
 			Item.maxStack = 10;
 			Item.value = 0;
 			Item.rare = ItemRarityID.Blue;

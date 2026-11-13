@@ -18,7 +18,7 @@ namespace BossesAsNPCs.Items
 		}
 		public override void SetDefaults()
 		{
-			Item.DefaultToGuitar(24, 24);
+			Item.DefaultToGuitar();
 			Item.value = 100000;
 			Item.rare = ItemRarityID.Yellow;
 			Item.scale = 0.75f;

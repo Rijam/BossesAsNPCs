@@ -2341,6 +2341,11 @@ namespace BossesAsNPCs.NPCs
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeHeadpiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeBodypiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);
 				shop.Add(new Item(ModContent.ItemType<Items.Vanity.TorchGod.TGCostumeLegpiece>()) { shopCustomPrice = 50000 }, ShopConditions.UnlockedBiomeTorches, ShopConditions.SellExtraItems);
+
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxTorchGod, priceMulti: 10), ShopConditions.UnlockedBiomeTorches,
+					ShopConditions.RescuedWizard, ShopConditions.SellExtraItems);
+				shop.Add(NPCHelper.ItemWithPrice(ItemID.MusicBoxTorchGodAlt, priceMulti: 10), ShopConditions.UnlockedBiomeTorches,
+					ShopConditions.RescuedWizard, ShopConditions.UnlockOWMusicOrDrunkWorld, ShopConditions.SellExtraItems);
 			}
 			if (shopName == "Shop2")
 			{

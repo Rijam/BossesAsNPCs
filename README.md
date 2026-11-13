@@ -24,3 +24,4 @@ Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=268943454
 
 Additional credits:
 	- 中文翻译:不呆不是天辰 (Chinese Translation: TianChen)
+	- Skeletron & Skeletron Prime portraits: chimerass

@@ -25,8 +25,6 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.color = Color.RoyalBlue;
-			Item.width = 14;
-			Item.height = 14;
 			Item.maxStack = 999;
 			Item.rare = ItemRarityID.White;
 			Item.value = 0;

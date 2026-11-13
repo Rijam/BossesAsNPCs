@@ -2443,21 +2443,21 @@ Mods: {
 				DisplayName: Mothron
 
 				TownNPCMood: {
-					Content: I feel content.
-					NoHome: I would like a home.
-					LoveSpace: I love how there is so much space.
-					FarFromHome: I am far from my home.
-					DislikeCrowded: I dislike the crowd.
+					Content: Nothing is eclipsing my mood at the moment.
+					NoHome: I need my own space to raise my children! Construct me a home right away!
+					LoveSpace: Ah, a wide open space for flying.
+					FarFromHome: I need to fly back to my home.
+					DislikeCrowded: It is starting to get too crowded in this home.
 					HateCrowded: I'm so close to knocking down these buildings!
-					LoveBiome: I love {BiomeName}.
-					LikeBiome: I like {BiomeName}.
-					DislikeBiome: I dislike {BiomeName}.
-					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
-					LikeNPC: I like {NPCName}.
-					DislikeNPC: I dislike {NPCName}.
+					LoveBiome: I love the misty environment of {BiomeName}.
+					LikeBiome: An adequate place {BiomeName} is.
+					DislikeBiome: Living in {BiomeName} is far too deep for my tastes.
+					HateBiome: Not even I would live in {BiomeName}!
+					LoveNPC: "{NPCName} lights up my life greater than the sun!"
+					LikeNPC: People such as {NPCName} are fun to be around.
+					DislikeNPC: I'm wondering if I can feed {NPCName} to my children.
 					HateNPC: "{NPCName} must be the embodiment of war and hate!"
-					LikeNPC_Princess: I like {NPCName}.
+					LikeNPC_Princess: I love tea! Recently {NPCName} showed me you can turn it into a drink!
 					Princess_LovesNPC: I see the good in all people, even {NPCName}!
 				}
 
@@ -2487,21 +2487,21 @@ Mods: {
 				DisplayName: Pumpking
 
 				TownNPCMood: {
-					Content: I feel content.
-					NoHome: I would like a home.
-					LoveSpace: I love how there is so much space.
-					FarFromHome: I am far from my home.
-					DislikeCrowded: I dislike the crowd.
-					HateCrowded: I hate the crowd.
-					LoveBiome: I love {BiomeName}.
-					LikeBiome: I like {BiomeName}.
-					DislikeBiome: I dislike {BiomeName}.
+					Content: This is my neutral face.
+					NoHome: Any king will tell you they need a morgue! I demand one now!
+					LoveSpace: Plenty of space around to bury bodies!
+					FarFromHome: Where's my hearse? I need to travel back home.
+					DislikeCrowded: This morgue is starting to fill up.
+					HateCrowded: I'm about to turn this housing complex into a new graveyard!
+					LoveBiome: Relaxing mist, soothing cries, eternal slumber! I love {BiomeName}.
+					LikeBiome: A warm and baren place. I like {BiomeName}.
+					DislikeBiome: Residence in {BiomeName} is quite harsh on me.
 					HateBiome: I might be evil, but {BiomeName} is worse!
-					LoveNPC: I love {NPCName}.
-					LikeNPC: I like {NPCName}.
-					DislikeNPC: I dislike {NPCName}.
-					HateNPC: I hate {NPCName}.
-					LikeNPC_Princess: I like {NPCName}.
+					LoveNPC: I don't have a heart, but {NPCName} would set mine on fire if I did!
+					LikeNPC: "{NPCName} is adequately spooky. I'd hire them to work in a cheesy haunted house!"
+					DislikeNPC: Some people live too much. {NPCName}, for example.
+					HateNPC: I have a perfect spot in the graveyard for {NPCName} to go!
+					LikeNPC_Princess: I dressed {NPCName} in one of my cloaks and it fit her well! Well, not literally fit; it was way too big for her.
 					Princess_LovesNPC: I see the good in all people, even {NPCName}!
 				}
 
@@ -2536,7 +2536,7 @@ Mods: {
 					LikeBiome: I like {BiomeName}.
 					DislikeBiome: I dislike {BiomeName}.
 					HateBiome: I hate {BiomeName}.
-					LoveNPC: I love {NPCName}.
+					LoveNPC: Oh {NPCName}, they melt my heart!
 					LikeNPC: I like {NPCName}.
 					DislikeNPC: I dislike {NPCName}.
 					HateNPC: I hate {NPCName}.

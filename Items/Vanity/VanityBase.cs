@@ -16,8 +16,6 @@ namespace BossesAsNPCs.Items.Vanity
 		public override void SetDefaults()
 		{
 			base.SetDefaults();
-			Item.width = 20;
-			Item.height = 20;
 			Item.value = 10000;
 			Item.rare = ItemRarityID.Blue;
 			Item.vanity = true;

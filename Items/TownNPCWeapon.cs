@@ -21,8 +21,6 @@ namespace BossesAsNPCs.Items
 		public override void SetDefaults()
 		{
 			Item.damage = 99999;
-			Item.width = 20;
-			Item.height = 20;
 			Item.useTime = 20;
 			Item.knockBack = 5;
 			Item.useStyle = ItemUseStyleID.Swing;
